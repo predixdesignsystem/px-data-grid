@@ -1,0 +1,42 @@
+<!-- Common imports -->
+<link rel="import" href="../../px-demo/css/px-demo-styles.html">
+<link rel="import" href="../../px-demo/px-demo-collection.html">
+
+<!-- Import peer demo pages -->
+<link rel="import" href="px-data-grid-demo.html">
+
+<!-- Demo DOM module -->
+<dom-module id="local-element-demo">
+  <template>
+    <!-- Theme includes -->
+    <style include="px-demo-styles" is="custom-style"></style>
+
+    <!-- Demo list/view change entrypoint -->
+    <px-demo-collection demos="{{demos}}"></px-demo-collection>
+
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: 'local-element-demo',
+
+    properties: {
+
+      demos: {
+        type: Array,
+        value: function() {
+          return [
+            {
+              name: 'px-data-grid',
+              tagName: 'px-data-grid-demo'
+            }
+          ];
+        }
+      },
+
+      chosenDemoName: {
+        type: String
+      }
+    }
+  });
+</script>
