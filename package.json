@@ -1,0 +1,36 @@
+{
+  "name": "px-data-grid",
+  "version": "0.1.0",
+  "description": "Polymer 2 element that defines a data grid (data table)",
+  "main": "px-data-grid.html",
+  "repository": "vaadin/px-data-grid",
+  "author": "Vaadin Ltd",
+  "bugs": {
+    "url": "https://github.com/vaadin/px-data-grid/issues"
+  },
+  "homepage": "http://predix.io/",
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "eslint": "^4.0.0",
+    "eslint-config-vaadin": "^0.2.5",
+    "eslint-plugin-html": "^3.0.0",
+    "gulp": "^3.0.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-bump": "^2.4.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-eslint": "^4.0.0",
+    "gulp-html-extract": "^0.3.0",
+    "gulp-load-plugins": "^1.2.4",
+    "gulp-sass": "^2.3.2",
+    "gulp-sequence": "^0.4.5",
+    "gulp-style-modules": "^0.1.0",
+    "gulp-stylelint": "^5.0.0",
+    "node-sass-import-once": "^1.2.0",
+    "polymer-cli": "^1.2.0",
+    "stream-combiner2": "^1.1.1",
+    "stylelint": "^8.0.0",
+    "stylelint-config-vaadin": "^0.1.1",
+    "yargs": "^5.0.0"
+  }
+}
