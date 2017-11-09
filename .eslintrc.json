@@ -9,6 +9,8 @@
     "html"
   ],
   "globals": {
-    "Polymer": false
+    "Polymer": false,
+    "Predix": false,
+    "Vaadin": false
   }
 }
