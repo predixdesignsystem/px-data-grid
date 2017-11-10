@@ -1,13 +1,9 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid.html">
-<link rel="import" href="../iron-ajax/iron-ajax.html">
-
 
 <dom-module id="px-data-grid">
   <template>
-    <iron-ajax auto url="https://demo.vaadin.com/demo-data/1.0/people?count=200" handle-as="json" last-response="{{users}}"></iron-ajax>
-
-    <vaadin-grid aria-label="Basic Binding Example" items="[[users.result]]">
+    <vaadin-grid aria-label="Basic Binding Example" items="[[tableData]]">
 
       <vaadin-grid-column width="60px" flex-grow="0">
         <template class="header">#</template>
@@ -16,12 +12,17 @@
 
       <vaadin-grid-column>
         <template class="header">First Name</template>
-        <template>[[item.firstName]]</template>
+        <template>[[item.first]]</template>
       </vaadin-grid-column>
 
       <vaadin-grid-column>
         <template class="header">Last Name</template>
-        <template>[[item.lastName]]</template>
+        <template>[[item.last]]</template>
+      </vaadin-grid-column>
+
+      <vaadin-grid-column>
+        <template class="header">Email</template>
+        <template>[[item.email]]</template>
       </vaadin-grid-column>
 
     </vaadin-grid>
@@ -35,7 +36,40 @@
 
         static get properties() {
           return {
-            items: Array
+
+            /**
+            * Data for the table to display.
+            *
+            * Expected data format is just a JSON array.  Each object in the array represents a row in the table.
+            *
+            * Each item in an object will be displayed as a separate column, unless px-data-table-columns are
+            * defined to limit which columns are displayed.
+            * See also includeAllColumns.
+            *
+            *     Expected format:
+            *     [
+            *       {
+            *        "index": 0,
+            *        "name": "Liz Grimes",
+            *        "image": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+            *        "date": "Sun Aug 14 1994 03:27:03 GMT-0700 (PDT)"
+            *      },
+            *      {
+            *        "index": 1,
+            *        "name": "Frazier Lara",
+            *        "image": "https://s3.amazonaws.com/uifaces/faces/twitter/guillogo/73.jpg",
+            *        "date": "Tue May 24 1988 14:10:20 GMT-0700 (PDT)",
+            *      }
+            *    ]
+            */
+            tableData: {
+              type: Array,
+              value: function() {
+                return [];
+              },
+              notify: true
+            }
+
           };
         }
       }

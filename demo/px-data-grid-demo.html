@@ -78,98 +78,16 @@
        * Note that `value` for each property is the default that will be set
        * unless a config from `configs` is applied by default.
        *
-       * @example
-       *
-       * `demoProps` is an object containing multiple objects. Each sub-object has
-       * should have a key with the name of the configurable property, and a set
-       * of values that describe that property. At a high level, you might have:
-       *
-       * ```
-       *     {
-       *       preventRangeSelection: { ... },
-       *       displayMode: { ... },
-       *       blockDatesBefore: { ... }
-       *     }
-       * ```
-       *
-       * Each sub-object should contain information about the configurable property's
-       * `type` (a reference to the JavaScript literal), a default value, and a set
-       * of additional keys that describe the input it can be changed with.
-       * The following inputs types are currently available:
-       *
-       * - 'toggle' - A toggle switch input to set Boolean values
-       * - 'text' - A simple single-line text input to set String or stringified Array/Object values
-       * - 'dropdown' - A dropdown picker that can be used to select any kind of value from a list of available options
-       * - 'code:JSON' - A input field with edit button that opens up a code editor to edit the array or object
-       *
-       * Full examples for each input:
-       *
-       * ```
-       *     {
-       *       preventRangeSelection: {
-       *         type: Boolean,
-       *         value: false,
-       *         inputType: 'toggle'
-       *       },
-       *       displayMode: {
-       *         type: String,
-       *         value: 'day',
-       *         inputType: 'dropdown',
-       *         inputChoices: ['day', 'month', 'year']
-       *       },
-       *       blockDatesBefore: {
-       *         type: String,
-       *         value: '2016-10-10T00:00:00.000Z',
-       *         inputType: 'text',
-       *         inputPlaceholder: 'ISO 8601 String'
-       *       }
-       *       decks: {
-       *         type: Array,
-       *         defaultValue: [
-       *           {name: 'First Deck', url: '/deck1'},
-       *           {name: 'Second Deck', url: '/deck2'},
-       *           {name: 'Third Deck', url: '/deck3'}
-       *         ],
-       *         inputType: 'code:JSON'
-       *       },
-       *       blockDatesBefore:{
-       *         type: String,
-       *         defaultValue: '2017-02-05T00:00:00.000Z',
-       *         inputType: 'typeahead',
-       *         inputPlaceholder: 'ISO 8601 String',
-       *         inputLocalCandidates: ["2017-03-10T00:00:00.000Z","2017-04-10T00:00:00.000Z", "2017-05-10T00:00:00.000Z", "2017-06-10T00:00:00.000Z", "2017-07-10T00:00:00.000Z", "2017-08-10T00:00:00.000Z"],
-       *       },
-       *       otherAvailableKeys: {
-       *         inputLabel: 'property label you want displayed',
-       *         inputDisabled: true,
-       *         inputDebounce: 50,
-       *         inputHelpText: 'text you want to display beneath input'
-       *       }
-       *     }
-       * ```
-       *
-       * By default, the configurable property names are converted from camelCase
-       * to Title Case and used as input labels (e.g. 'displayMode' -> 'Display Mode').
-       * Labels can be set manually through the key `inputLabel`:
-       *
-       * ```
-       *     {
-       *       preventRangeSelection: {
-       *         type: Boolean,
-       *         value: false,
-       *         inputType: 'toggle',
-       *         inputLabel: "Stop range selection"
-       *       }
-       *     }
-       * ```
-       *
        * @property props
        * @type {Object}
        */
       props: {
         type: Object,
-        value: function(){ return this.demoProps; }
+        value: function() {
+          return this.demoProps;
+        }
       },
+
       /**
        * An array of pre-configured `props` that can be used to provide the user
        * with a set of common examples. These configs will be made available
@@ -184,26 +102,7 @@
        * optional keys:
        *
        * - `configName` - a String value that will be used for the title of the tab
-       * - `configReset` - a Boolean, if `true` resets all props (even those not specified in the config) when this config is selected. Defaults to `false`.
-       *
-       * Example of two configs:
-       *
-       * ```
-       *     [
-       *       {
-       *         configName: "Basic",
-       *         preventRangeSelection: true,
-       *         displayMode: 'year',
-       *         blockDatesBefore: '2016-10-10T00:00:00.000Z'
-       *       },
-       *       {
-       *         configName: "Advanced",
-       *         preventRangeSelection: false,
-       *         displayMode: 'day',
-       *         blockDatesBefore: '2010-10-10T00:00:00.000Z'
-       *       }
-       *     ]
-       * ```
+       * - `configReset` - a Boolean, if `true` resets all props. Defaults to `false`.
        *
        * @property configs
        * @type {Array}
@@ -228,7 +127,7 @@
               configName: 'Expandable rows',
               configReset: true
             }
-          ]
+          ];
         }
       }
     },
@@ -238,7 +137,33 @@
     demoProps: {
       tableData: {
         type: Object,
-        defaultValue: [{"first":"Valentine","last":"Meyer","email":"valentinemeyer@scentric.com"},{"first":"Silva","last":"Alexander","email":"silvaalexander@gmail.com"},{"first":"Hopkins","last":"Wong","email":"hopkinswong@hotmail.com"},{"first": "Joe","last": "Sherman","email": "joejoe@yahoo.com"},{"first": "Jane","last": "Bartlett","email": "jane@scentric.com"}],
+        defaultValue: [
+          {
+            first: 'Valentine',
+            last: 'Meyer',
+            email: 'valentinemeyer@scentric.com'
+          },
+          {
+            first: 'Silva',
+            last: 'Alexander',
+            email: 'silvaalexander@gmail.com'
+          },
+          {
+            first: 'Hopkins',
+            last: 'Wong',
+            email: 'hopkinswong@hotmail.com'
+          },
+          {
+            first: 'Joe',
+            last: 'Sherman',
+            email: 'joejoe@yahoo.com'
+          },
+          {
+            first: 'Jane',
+            last: 'Bartlett',
+            email: 'jane@scentric.com'
+          }
+        ],
         inputType: 'code:JSON'
       }
     }
