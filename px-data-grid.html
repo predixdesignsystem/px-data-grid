@@ -1,0 +1,51 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+
+<dom-module id="px-data-grid">
+  <template>
+    <iron-ajax auto url="https://demo.vaadin.com/demo-data/1.0/people?count=200" handle-as="json" last-response="{{users}}"></iron-ajax>
+
+    <vaadin-grid aria-label="Basic Binding Example" items="[[users.result]]">
+
+      <vaadin-grid-column width="60px" flex-grow="0">
+        <template class="header">#</template>
+        <template>[[index]]</template>
+      </vaadin-grid-column>
+
+      <vaadin-grid-column>
+        <template class="header">First Name</template>
+        <template>[[item.firstName]]</template>
+      </vaadin-grid-column>
+
+      <vaadin-grid-column>
+        <template class="header">Last Name</template>
+        <template>[[item.lastName]]</template>
+      </vaadin-grid-column>
+
+    </vaadin-grid>
+  </template>
+  <script>
+    {
+      class DataGridElement extends Polymer.Element {
+        static get is() {
+          return 'px-data-grid';
+        }
+
+        static get properties() {
+          return {
+            items: Array
+          };
+        }
+      }
+      customElements.define(DataGridElement.is, DataGridElement);
+
+      /**
+       * @namespace Predix
+       */
+      window.Predix = window.Predix || {};
+      Predix.DataGridElement = DataGridElement;
+    }
+  </script>
+</dom-module>
