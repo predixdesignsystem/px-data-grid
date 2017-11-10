@@ -18,7 +18,8 @@
     "iron-scroll-target-behavior": "^v2.0.0",
     "px-icon-set": "^2.0.0",
     "px-dropdown": "^4.0.0",
-    "vaadin-grid": "^4.0.0"
+    "vaadin-grid": "^4.0.0",
+    "px-dark-theme": "^2.0.20"
   },
   "devDependencies": {
     "px-button-group-design": "^2.0.0",
@@ -31,6 +32,8 @@
     "web-component-tester": "^6.0.0"
   },
   "resolutions": {
-    "px-dropdown": "^4.0.0"
+    "px-dropdown": "^4.0.0",
+    "polymer": "^2.0.0",
+    "webcomponentsjs": "^v1.0.2"
   }
 }
