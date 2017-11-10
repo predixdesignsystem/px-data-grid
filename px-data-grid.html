@@ -7,8 +7,10 @@
   <template>
     <vaadin-grid aria-label="Basic Binding Example" items="[[tableData]]" theme="row-stripes">
 
-      <vaadin-grid-selection-column auto-select>
-      </vaadin-grid-selection-column>
+      <template is="dom-if" if="[[selectable]]" restamp>
+        <vaadin-grid-selection-column auto-select>
+        </vaadin-grid-selection-column>
+      </template>
 
       <vaadin-grid-column width="60px" flex-grow="0" frozen>
         <template class="header">#</template>
@@ -73,6 +75,14 @@
                 return [];
               },
               notify: true
+            },
+
+            /**
+            * Use the selectable property if one or more rows within the table should be selectable. See also `singleSelect`.
+            */
+            selectable: {
+              type: Boolean,
+              value: false
             }
 
           };
