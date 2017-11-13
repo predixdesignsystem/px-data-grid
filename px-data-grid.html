@@ -14,29 +14,14 @@
         </vaadin-grid-selection-column>
       </template>
 
-      <px-data-grid-column width="60px" flex-grow="0" frozen>
-        <template class="header">#</template>
-        <template>[[index]]</template>
-      </px-data-grid-column>
-
-      <px-data-grid-column>
-        <template class="header">
-          <vaadin-grid-sorter path="first">First Name</vaadin-grid-sorter>
-        </template>
-        <template>[[item.first]]</template>
-      </px-data-grid-column>
-
-      <px-data-grid-column>
-        <template class="header">
-          <vaadin-grid-sorter path="last">Last Name</vaadin-grid-sorter>
-        </template>
-        <template>[[item.last]]</template>
-      </px-data-grid-column>
-
-      <px-data-grid-column>
-        <template class="header">Email</template>
-        <template>[[item.email]]</template>
-      </px-data-grid-column>
+      <template is="dom-repeat" items="[[_tableColumns]]" as="column">
+        <px-data-grid-column>
+          <template class="header">
+            <vaadin-grid-sorter path="[[column]]">[[column]]</vaadin-grid-sorter>
+          </template>
+          <template>[[get(column, item)]]</template>
+        </px-data-grid-column>
+      </template>
 
     </vaadin-grid>
   </template>
@@ -51,47 +36,53 @@
           return {
 
             /**
-            * Data for the table to display.
-            *
-            * Expected data format is just a JSON array.  Each object in the array represents a row in the table.
-            *
-            * Each item in an object will be displayed as a separate column, unless px-data-table-columns are
-            * defined to limit which columns are displayed.
-            * See also includeAllColumns.
-            *
-            *     Expected format:
-            *     [
-            *       {
-            *        "index": 0,
-            *        "name": "Liz Grimes",
-            *        "image": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
-            *        "date": "Sun Aug 14 1994 03:27:03 GMT-0700 (PDT)"
-            *      },
-            *      {
-            *        "index": 1,
-            *        "name": "Frazier Lara",
-            *        "image": "https://s3.amazonaws.com/uifaces/faces/twitter/guillogo/73.jpg",
-            *        "date": "Tue May 24 1988 14:10:20 GMT-0700 (PDT)",
-            *      }
-            *    ]
-            */
+             * Data for the table to display.
+             *
+             * Expected data format is a JSON array of objects. Each object in the array represents a row in the table.
+             *
+             * Each item in an object will be displayed as a separate column, unless px-data-table-columns are
+             * defined to limit which columns are displayed.
+             */
             tableData: {
               type: Array,
               value: function() {
                 return [];
               },
+              observer: '_tableDataChanged',
               notify: true
             },
 
             /**
-            * Use the selectable property if one or more rows within the table should be selectable. See also `singleSelect`.
-            */
+             * Use the selectable property if one or more rows within the table should be selectable. See also `singleSelect`.
+             */
             selectable: {
               type: Boolean,
               value: false
-            }
+            },
 
+            /**
+             * In case px-data-table-columns aren't provided, table columns will be generated automatically.
+             * They will be stamped via
+             *
+             * <template is="dom-repeat" items="[[_tableColumns]]">
+             *   ...
+             * </template>
+             *
+             * @private
+             */
+            _tableColumns: {
+              type: Array
+            }
           };
+        }
+
+        _tableDataChanged(tableData) {
+          if (tableData && tableData.length) {
+            this._tableColumns = [];
+            for (const key in tableData[0]) {
+              this._tableColumns.push(key);
+            }
+          }
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);
