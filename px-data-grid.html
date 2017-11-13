@@ -23,6 +23,7 @@
         </px-data-grid-column>
       </template>
 
+      <slot></slot>
     </vaadin-grid>
   </template>
   <script>
@@ -76,13 +77,33 @@
           };
         }
 
-        _tableDataChanged(tableData) {
-          if (tableData && tableData.length) {
+        ready() {
+          super.ready();
+          this._addColumnsObserver();
+        }
+
+        _tableDataChanged() {
+          this._populateTableColumns();
+        }
+
+        _populateTableColumns() {
+          if (this.tableData && this.tableData.length) {
             this._tableColumns = [];
-            for (const key in tableData[0]) {
+            for (const key in this.tableData[0]) {
               this._tableColumns.push(key);
             }
           }
+        }
+
+        _addColumnsObserver() {
+          this._observer = new Polymer.FlattenedNodesObserver(this, info => {
+            const manualColumns = this.querySelectorAll(Predix.DataGridColumnElement.is);
+            if (manualColumns.length) {
+              this._tableColumns = [];
+            } else {
+              this._populateTableColumns();
+            }
+          });
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);
