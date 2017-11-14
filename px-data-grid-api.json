@@ -1,0 +1,1701 @@
+{
+  "schema_version": "1.0.0",
+  "namespaces": [
+    {
+      "name": "Predix",
+      "description": "",
+      "summary": "",
+      "sourceRange": {
+        "file": "px-data-grid.html",
+        "start": {
+          "line": 259,
+          "column": 6
+        },
+        "end": {
+          "line": 259,
+          "column": 42
+        }
+      },
+      "elements": [
+        {
+          "description": "A `<px-data-grid-column>` is used to configure how a column in `<px-data-grid>`\nshould look like by using HTML templates.\nA column can have a template for each of the three table sections: header, body and footer.\n\nThe `class` attribute is used to differentiate header and footer templates from the body template.\n\n#### Example:\n```html\n<px-data-grid-column>\n  <template class=\"header\">I'm in the header</template>\n  <template>I'm in the body</template>\n  <template class=\"footer\">I'm in the footer</template>\n</px-data-grid-column>\n```",
+          "summary": "",
+          "path": "px-data-grid-column.html",
+          "properties": [
+            {
+              "name": "resizable",
+              "type": "boolean",
+              "description": "When set to true, the column is user-resizable.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 24,
+                  "column": 8
+                },
+                "end": {
+                  "line": 38,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "headerTemplate",
+              "type": "Object",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 43,
+                  "column": 8
+                },
+                "end": {
+                  "line": 45,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "footerTemplate",
+              "type": "Object",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 50,
+                  "column": 8
+                },
+                "end": {
+                  "line": 52,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "frozen",
+              "type": "boolean",
+              "description": "When true, the column is frozen. When a column inside of a column group is frozen,\nall of the sibling columns inside the group will get frozen also.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 58,
+                  "column": 8
+                },
+                "end": {
+                  "line": 61,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "false",
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "hidden",
+              "type": "boolean",
+              "description": "When set to true, the cells for this column are hidden.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 66,
+                  "column": 8
+                },
+                "end": {
+                  "line": 68,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_lastFrozen",
+              "type": "boolean",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 70,
+                  "column": 8
+                },
+                "end": {
+                  "line": 73,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "false",
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_order",
+              "type": "number",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 75,
+                  "column": 8
+                },
+                "end": {
+                  "line": 75,
+                  "column": 22
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_reorderStatus",
+              "type": "boolean",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 77,
+                  "column": 8
+                },
+                "end": {
+                  "line": 77,
+                  "column": 31
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_emptyCells",
+              "type": "Array",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 79,
+                  "column": 8
+                },
+                "end": {
+                  "line": 79,
+                  "column": 26
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_headerCell",
+              "type": "Object",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 81,
+                  "column": 8
+                },
+                "end": {
+                  "line": 81,
+                  "column": 27
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_footerCell",
+              "type": "Object",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 83,
+                  "column": 8
+                },
+                "end": {
+                  "line": 83,
+                  "column": 27
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_grid",
+              "type": "Object",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 85,
+                  "column": 8
+                },
+                "end": {
+                  "line": 85,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "width",
+              "type": "string",
+              "description": "Width of the cells for this column.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 382,
+                  "column": 10
+                },
+                "end": {
+                  "line": 385,
+                  "column": 11
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "\"100px\"",
+              "inheritedFrom": "Vaadin.GridColumnElement"
+            },
+            {
+              "name": "flexGrow",
+              "type": "number",
+              "description": "Flex grow ratio for the cell widths. When set to 0, cell width is fixed.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 390,
+                  "column": 10
+                },
+                "end": {
+                  "line": 393,
+                  "column": 11
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "1",
+              "inheritedFrom": "Vaadin.GridColumnElement"
+            },
+            {
+              "name": "template",
+              "type": "Object",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 398,
+                  "column": 10
+                },
+                "end": {
+                  "line": 400,
+                  "column": 11
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Vaadin.GridColumnElement"
+            },
+            {
+              "name": "_cells",
+              "type": "Array",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 402,
+                  "column": 10
+                },
+                "end": {
+                  "line": 402,
+                  "column": 23
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Vaadin.GridColumnElement"
+            }
+          ],
+          "methods": [
+            {
+              "name": "connectedCallback",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 106,
+                  "column": 4
+                },
+                "end": {
+                  "line": 126,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "disconnectedCallback",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 129,
+                  "column": 4
+                },
+                "end": {
+                  "line": 143,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_prepareHeaderTemplate",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 177,
+                  "column": 4
+                },
+                "end": {
+                  "line": 179,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_prepareFooterTemplate",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 181,
+                  "column": 4
+                },
+                "end": {
+                  "line": 183,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_prepareBodyTemplate",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 185,
+                  "column": 4
+                },
+                "end": {
+                  "line": 187,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_prepareTemplatizer",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 189,
+                  "column": 4
+                },
+                "end": {
+                  "line": 200,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "template"
+                },
+                {
+                  "name": "instanceProps"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_stampBodyTemplate",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 202,
+                  "column": 4
+                },
+                "end": {
+                  "line": 220,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "template"
+                },
+                {
+                  "name": "cells"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_stampHeaderTemplate",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "start": {
+                  "line": 30,
+                  "column": 8
+                },
+                "end": {
+                  "line": 44,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "headerTemplate"
+                },
+                {
+                  "name": "headerCell"
+                }
+              ]
+            },
+            {
+              "name": "_stampFooterTemplate",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 233,
+                  "column": 4
+                },
+                "end": {
+                  "line": 242,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "footerTemplate"
+                },
+                {
+                  "name": "footerCell"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_selectFirstTemplate",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 244,
+                  "column": 4
+                },
+                "end": {
+                  "line": 248,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "selector"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_findTemplate",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 250,
+                  "column": 4
+                },
+                "end": {
+                  "line": 259,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "selector"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_flexGrowChanged",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 261,
+                  "column": 4
+                },
+                "end": {
+                  "line": 267,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "flexGrow"
+                },
+                {
+                  "name": "headerCell"
+                },
+                {
+                  "name": "footerCell"
+                },
+                {
+                  "name": "cells"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_orderChanged",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 269,
+                  "column": 4
+                },
+                "end": {
+                  "line": 271,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "order"
+                },
+                {
+                  "name": "headerCell"
+                },
+                {
+                  "name": "footerCell"
+                },
+                {
+                  "name": "cells"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_widthChanged",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 273,
+                  "column": 4
+                },
+                "end": {
+                  "line": 279,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "width"
+                },
+                {
+                  "name": "headerCell"
+                },
+                {
+                  "name": "footerCell"
+                },
+                {
+                  "name": "cells"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_frozenChanged",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 281,
+                  "column": 4
+                },
+                "end": {
+                  "line": 289,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "frozen"
+                },
+                {
+                  "name": "headerCell"
+                },
+                {
+                  "name": "footerCell"
+                },
+                {
+                  "name": "cells"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_lastFrozenChanged",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 291,
+                  "column": 4
+                },
+                "end": {
+                  "line": 297,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "lastFrozen"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_toggleAttribute",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 299,
+                  "column": 4
+                },
+                "end": {
+                  "line": 305,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "name"
+                },
+                {
+                  "name": "on"
+                },
+                {
+                  "name": "element"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_reorderStatusChanged",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 307,
+                  "column": 4
+                },
+                "end": {
+                  "line": 309,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "reorderStatus"
+                },
+                {
+                  "name": "headerCell"
+                },
+                {
+                  "name": "footerCell"
+                },
+                {
+                  "name": "cells"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_resizableChanged",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 311,
+                  "column": 4
+                },
+                "end": {
+                  "line": 332,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "resizable"
+                },
+                {
+                  "name": "headerCell"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "_hiddenChanged",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 334,
+                  "column": 4
+                },
+                "end": {
+                  "line": 345,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "hidden"
+                },
+                {
+                  "name": "headerCell"
+                },
+                {
+                  "name": "footerCell"
+                },
+                {
+                  "name": "cells"
+                }
+              ],
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            }
+          ],
+          "staticMethods": [],
+          "demos": [],
+          "metadata": {},
+          "sourceRange": {
+            "start": {
+              "line": 25,
+              "column": 6
+            },
+            "end": {
+              "line": 45,
+              "column": 7
+            }
+          },
+          "privacy": "public",
+          "superclass": "HTMLElement",
+          "name": "Predix.DataGridColumnElement",
+          "attributes": [
+            {
+              "name": "resizable",
+              "description": "When set to true, the column is user-resizable.",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 24,
+                  "column": 8
+                },
+                "end": {
+                  "line": 38,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "type": "boolean",
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "frozen",
+              "description": "When true, the column is frozen. When a column inside of a column group is frozen,\nall of the sibling columns inside the group will get frozen also.",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 58,
+                  "column": 8
+                },
+                "end": {
+                  "line": 61,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "type": "boolean",
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "hidden",
+              "description": "When set to true, the cells for this column are hidden.",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 66,
+                  "column": 8
+                },
+                "end": {
+                  "line": 68,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "type": "boolean",
+              "inheritedFrom": "Vaadin.Grid.ColumnBaseMixin"
+            },
+            {
+              "name": "width",
+              "description": "Width of the cells for this column.",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 382,
+                  "column": 10
+                },
+                "end": {
+                  "line": 385,
+                  "column": 11
+                }
+              },
+              "metadata": {},
+              "type": "string",
+              "inheritedFrom": "Vaadin.GridColumnElement"
+            },
+            {
+              "name": "flex-grow",
+              "description": "Flex grow ratio for the cell widths. When set to 0, cell width is fixed.",
+              "sourceRange": {
+                "file": "bower_components/vaadin-grid/vaadin-grid-column.html",
+                "start": {
+                  "line": 390,
+                  "column": 10
+                },
+                "end": {
+                  "line": 393,
+                  "column": 11
+                }
+              },
+              "metadata": {},
+              "type": "number",
+              "inheritedFrom": "Vaadin.GridColumnElement"
+            }
+          ],
+          "events": [],
+          "styling": {
+            "cssVariables": [],
+            "selectors": []
+          },
+          "slots": [],
+          "tagname": "px-data-grid-column"
+        }
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "description": "",
+      "summary": "",
+      "path": "px-data-grid.html",
+      "properties": [
+        {
+          "name": "tableData",
+          "type": "Array",
+          "description": "Data for the table to display.\n\nExpected data format is a JSON array of objects. Each object in the array represents a row in the table.\n\nEach item in an object will be displayed as a separate column, unless px-data-table-columns are\ndefined to limit which columns are displayed.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 65,
+              "column": 12
+            },
+            "end": {
+              "line": 72,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "observer": "\"_tableDataChanged\""
+            }
+          },
+          "defaultValue": "[]"
+        },
+        {
+          "name": "selectable",
+          "type": "boolean",
+          "description": "Use the selectable property if one or more rows within the table should be selectable. See also `singleSelect`.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 77,
+              "column": 12
+            },
+            "end": {
+              "line": 80,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "selectedItems",
+          "type": "Object",
+          "description": "An array that contains the selected items.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 85,
+              "column": 12
+            },
+            "end": {
+              "line": 89,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true
+            }
+          }
+        },
+        {
+          "name": "size",
+          "type": "number",
+          "description": "The total number of items",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 94,
+              "column": 12
+            },
+            "end": {
+              "line": 97,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "dataProvider",
+          "type": "Object",
+          "description": "Function that provides items lazily. Receives arguments params, callback",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 102,
+              "column": 12
+            },
+            "end": {
+              "line": 105,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "pageSize",
+          "type": "number",
+          "description": "Number of items fetched at a time from the dataprovider.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 110,
+              "column": 12
+            },
+            "end": {
+              "line": 113,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "multiSort",
+          "type": "boolean",
+          "description": "When `true`, user can sort by multiple columns",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 118,
+              "column": 12
+            },
+            "end": {
+              "line": 121,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "activeItem",
+          "type": "Object",
+          "description": "The item user has last interacted with. Turns to `null` after user deactivates\nthe item by re-interacting with the currently active item.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 127,
+              "column": 12
+            },
+            "end": {
+              "line": 131,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true
+            }
+          },
+          "defaultValue": "null"
+        },
+        {
+          "name": "resizable",
+          "type": "boolean",
+          "description": "When `true`, user can resize columns",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 136,
+              "column": 12
+            },
+            "end": {
+              "line": 139,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "columnReorderingAllowed",
+          "type": "boolean",
+          "description": "Set to true to allow column reordering.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 144,
+              "column": 12
+            },
+            "end": {
+              "line": 147,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "expandedItems",
+          "type": "Array",
+          "description": "An array containing references to expanded items.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 152,
+              "column": 12
+            },
+            "end": {
+              "line": 155,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "[]"
+        },
+        {
+          "name": "actionMenu",
+          "type": "boolean",
+          "description": "Define if table action menu is shown or not",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 160,
+              "column": 12
+            },
+            "end": {
+              "line": 163,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "_tableColumns",
+          "type": "Array",
+          "description": "In case px-data-table-columns aren't provided, table columns will be generated automatically.\nThey will be stamped via\n\n<template is=\"dom-repeat\" items=\"[[_tableColumns]]\">\n  ...\n</template>",
+          "privacy": "private",
+          "sourceRange": {
+            "start": {
+              "line": 175,
+              "column": 12
+            },
+            "end": {
+              "line": 177,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "language",
+          "type": "string",
+          "description": "A valid IETF language tag as a string that `app-localize-behavior` will\nuse to localize this component.\n\nSee https://github.com/PolymerElements/app-localize-behavior for API\ndocumentation and more information.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 186,
+              "column": 12
+            },
+            "end": {
+              "line": 189,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "\"en\""
+        },
+        {
+          "name": "useKeyIfMissing",
+          "type": "boolean",
+          "description": "Use the key for localization if value for that language is missing.\nShould always be true for Predix components.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 195,
+              "column": 12
+            },
+            "end": {
+              "line": 198,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "true"
+        },
+        {
+          "name": "resources",
+          "type": "Object",
+          "description": "Library object of hardcoded strings used in this application.\nUsed by `app-localize-behavior` in conjunction with `language`.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 204,
+              "column": 12
+            },
+            "end": {
+              "line": 221,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "{\"en\":{\"Table Actions\":\"Table Actions\"},\"fr\":{\"Table Actions\":\"Actions de la table\"},\"fi\":{\"Table Actions\":\"Taulukkotoiminnot\"}}"
+        }
+      ],
+      "methods": [
+        {
+          "name": "ready",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 225,
+              "column": 8
+            },
+            "end": {
+              "line": 228,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_tableDataChanged",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 230,
+              "column": 8
+            },
+            "end": {
+              "line": 232,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_populateTableColumns",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 234,
+              "column": 8
+            },
+            "end": {
+              "line": 241,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_addColumnsObserver",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 243,
+              "column": 8
+            },
+            "end": {
+              "line": 252,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": []
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 48,
+          "column": 6
+        },
+        "end": {
+          "line": 253,
+          "column": 7
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "name": "DataGridElement",
+      "attributes": [
+        {
+          "name": "table-data",
+          "description": "Data for the table to display.\n\nExpected data format is a JSON array of objects. Each object in the array represents a row in the table.\n\nEach item in an object will be displayed as a separate column, unless px-data-table-columns are\ndefined to limit which columns are displayed.",
+          "sourceRange": {
+            "start": {
+              "line": 65,
+              "column": 12
+            },
+            "end": {
+              "line": 72,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "Array"
+        },
+        {
+          "name": "selectable",
+          "description": "Use the selectable property if one or more rows within the table should be selectable. See also `singleSelect`.",
+          "sourceRange": {
+            "start": {
+              "line": 77,
+              "column": 12
+            },
+            "end": {
+              "line": 80,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "selected-items",
+          "description": "An array that contains the selected items.",
+          "sourceRange": {
+            "start": {
+              "line": 85,
+              "column": 12
+            },
+            "end": {
+              "line": 89,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "Object"
+        },
+        {
+          "name": "size",
+          "description": "The total number of items",
+          "sourceRange": {
+            "start": {
+              "line": 94,
+              "column": 12
+            },
+            "end": {
+              "line": 97,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "number"
+        },
+        {
+          "name": "data-provider",
+          "description": "Function that provides items lazily. Receives arguments params, callback",
+          "sourceRange": {
+            "start": {
+              "line": 102,
+              "column": 12
+            },
+            "end": {
+              "line": 105,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "Object"
+        },
+        {
+          "name": "page-size",
+          "description": "Number of items fetched at a time from the dataprovider.",
+          "sourceRange": {
+            "start": {
+              "line": 110,
+              "column": 12
+            },
+            "end": {
+              "line": 113,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "number"
+        },
+        {
+          "name": "multi-sort",
+          "description": "When `true`, user can sort by multiple columns",
+          "sourceRange": {
+            "start": {
+              "line": 118,
+              "column": 12
+            },
+            "end": {
+              "line": 121,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "active-item",
+          "description": "The item user has last interacted with. Turns to `null` after user deactivates\nthe item by re-interacting with the currently active item.",
+          "sourceRange": {
+            "start": {
+              "line": 127,
+              "column": 12
+            },
+            "end": {
+              "line": 131,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "Object"
+        },
+        {
+          "name": "resizable",
+          "description": "When `true`, user can resize columns",
+          "sourceRange": {
+            "start": {
+              "line": 136,
+              "column": 12
+            },
+            "end": {
+              "line": 139,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "column-reordering-allowed",
+          "description": "Set to true to allow column reordering.",
+          "sourceRange": {
+            "start": {
+              "line": 144,
+              "column": 12
+            },
+            "end": {
+              "line": 147,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "expanded-items",
+          "description": "An array containing references to expanded items.",
+          "sourceRange": {
+            "start": {
+              "line": 152,
+              "column": 12
+            },
+            "end": {
+              "line": 155,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "Array"
+        },
+        {
+          "name": "action-menu",
+          "description": "Define if table action menu is shown or not",
+          "sourceRange": {
+            "start": {
+              "line": 160,
+              "column": 12
+            },
+            "end": {
+              "line": 163,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "language",
+          "description": "A valid IETF language tag as a string that `app-localize-behavior` will\nuse to localize this component.\n\nSee https://github.com/PolymerElements/app-localize-behavior for API\ndocumentation and more information.",
+          "sourceRange": {
+            "start": {
+              "line": 186,
+              "column": 12
+            },
+            "end": {
+              "line": 189,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "use-key-if-missing",
+          "description": "Use the key for localization if value for that language is missing.\nShould always be true for Predix components.",
+          "sourceRange": {
+            "start": {
+              "line": 195,
+              "column": 12
+            },
+            "end": {
+              "line": 198,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "resources",
+          "description": "Library object of hardcoded strings used in this application.\nUsed by `app-localize-behavior` in conjunction with `language`.",
+          "sourceRange": {
+            "start": {
+              "line": 204,
+              "column": 12
+            },
+            "end": {
+              "line": 221,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "Object"
+        }
+      ],
+      "events": [
+        {
+          "type": "CustomEvent",
+          "name": "table-data-changed",
+          "description": "Fired when the `tableData` property changes.",
+          "metadata": {}
+        },
+        {
+          "type": "CustomEvent",
+          "name": "selected-items-changed",
+          "description": "Fired when the `selectedItems` property changes.",
+          "metadata": {}
+        },
+        {
+          "type": "CustomEvent",
+          "name": "active-item-changed",
+          "description": "Fired when the `activeItem` property changes.",
+          "metadata": {}
+        }
+      ],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [
+        {
+          "description": "",
+          "name": "",
+          "range": {
+            "file": "px-data-grid.html",
+            "start": {
+              "line": 43,
+              "column": 6
+            },
+            "end": {
+              "line": 43,
+              "column": 19
+            }
+          }
+        }
+      ],
+      "tagname": "px-data-grid"
+    }
+  ]
+}
