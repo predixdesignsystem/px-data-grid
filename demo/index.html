@@ -12,31 +12,38 @@
     <style include="px-demo-styles" is="custom-style"></style>
 
     <!-- Demo list/view change entrypoint -->
-    <px-demo-collection demos="{{demos}}"></px-demo-collection>
+    <px-demo-collection demos="{{demos}}" chosen-demo-name="[[chosenDemoName]]"></px-demo-collection>
 
   </template>
 </dom-module>
 <script>
-  Polymer({
-    is: 'local-element-demo',
+  {
+    class LocalElementDemo extends Polymer.Element {
+      static get is() {
+        return 'local-element-demo';
+      }
 
-    properties: {
-
-      demos: {
-        type: Array,
-        value: function() {
-          return [
-            {
-              name: 'px-data-grid',
-              tagName: 'px-data-grid-demo'
+      static get properties() {
+        return {
+          demos: {
+            type: Array,
+            value: function() {
+              return [
+                {
+                  name: 'px-data-grid',
+                  tagName: 'px-data-grid-demo'
+                }
+              ];
             }
-          ];
-        }
-      },
+          },
 
-      chosenDemoName: {
-        type: String
+          chosenDemoName: {
+            type: String,
+            value: 'px-data-grid',
+          }
+        };
       }
     }
-  });
+    customElements.define(LocalElementDemo.is, LocalElementDemo);
+  }
 </script>
