@@ -4,10 +4,28 @@
 <link rel="import" href="../vaadin-grid/vaadin-grid-sorter.html">
 <link rel="import" href="px-data-grid-column.html">
 <link rel="import" href="px-data-grid-theme.html">
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 
 <dom-module id="px-data-grid">
   <template>
-    <vaadin-grid aria-label="Basic Binding Example" items="[[tableData]]" theme="row-stripes" multi-sort>
+
+    <template is="dom-if" if="[[actionMenu]]" restamp>
+        <px-dropdown
+          display-value="[[localize('Table Actions')]]"
+        >
+        </px-dropdown>
+    </template>
+
+    <vaadin-grid aria-label="Data Grid"
+                 items="[[tableData]]"
+                 size="[[size]]"
+                 data-provider="[[dataProvider]]"
+                 active-item="[[activeItem]]"
+                 column-reordering-allowed="[[columnReorderingAllowed]]"
+                 expanded-items="[[expandedItems]]"
+                 theme="row-stripes"
+                 selected-items="[[selectedItems]]"
+                 multi-sort="[[multiSort]]">
 
       <template is="dom-if" if="[[selectable]]" restamp>
         <vaadin-grid-selection-column auto-select>
@@ -28,7 +46,8 @@
   </template>
   <script>
     {
-      class DataGridElement extends Polymer.Element {
+      class DataGridElement extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element) {
+
         static get is() {
           return 'px-data-grid';
         }
@@ -62,6 +81,81 @@
             },
 
             /**
+             * An array that contains the selected items.
+             */
+            selectedItems: {
+              type: Object,
+              value: undefined,
+              notify: true
+            },
+
+            /**
+             * The total number of items
+             */
+            size: {
+              type: Number,
+              value: undefined
+            },
+
+            /**
+             * Function that provides items lazily. Receives arguments params, callback
+             */
+            dataProvider: {
+              type: Object,
+              value: undefined
+            },
+
+            /**
+             * Number of items fetched at a time from the dataprovider.
+             */
+            pageSize: {
+              type: Number,
+              value: undefined
+            },
+
+            /**
+             * When `true`, user can sort by multiple columns
+             */
+            multiSort: {
+              type: Boolean,
+              value: false
+            },
+
+            /**
+             * The item user has last interacted with. Turns to `null` after user deactivates
+             * the item by re-interacting with the currently active item.
+             */
+            activeItem: {
+              type: Object,
+              notify: true,
+              value: null
+            },
+
+            /**
+             * Set to true to allow column reordering.
+             */
+            columnReorderingAllowed: {
+              type: Boolean,
+              value: false
+            },
+
+            /**
+            * An array containing references to expanded items.
+            */
+            expandedItems: {
+              type: Array,
+              value: []
+            },
+
+            /**
+             * Define if table action menu is shown or not
+             */
+            actionMenu: {
+              type: Boolean,
+              value: false
+            },
+
+            /**
              * In case px-data-table-columns aren't provided, table columns will be generated automatically.
              * They will be stamped via
              *
@@ -73,7 +167,51 @@
              */
             _tableColumns: {
               type: Array
-            }
+            },
+
+            /**
+             * A valid IETF language tag as a string that `app-localize-behavior` will
+             * use to localize this component.
+             *
+             * See https://github.com/PolymerElements/app-localize-behavior for API
+             * documentation and more information.
+             */
+            language: {
+              type: String,
+              value: 'en'
+            },
+
+            /**
+             * Use the key for localization if value for that language is missing.
+             * Should always be true for Predix components.
+             */
+            useKeyIfMissing: {
+              type: Boolean,
+              value: true
+            },
+
+            /**
+             * Library object of hardcoded strings used in this application.
+             * Used by `app-localize-behavior` in conjunction with `language`.
+             */
+            resources: {
+              type: Object,
+              value: function() {
+                // can also load these from external file as shown here:
+                // https://www.polymer-project.org/2.0/toolbox/localize
+                return {
+                  'en': {
+                    'Table Actions': 'Table Actions'
+                  },
+                  'fr': {
+                    'Table Actions': 'Actions de la table'
+                  },
+                  'fi': {
+                    'Table Actions': 'Taulukkotoiminnot'
+                  }
+                };
+              }
+            },
           };
         }
 
