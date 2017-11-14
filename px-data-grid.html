@@ -33,7 +33,7 @@
       </template>
 
       <template is="dom-repeat" items="[[_tableColumns]]" as="column">
-        <px-data-grid-column>
+        <px-data-grid-column resizable="[[resizable]]">
           <template class="header">
             <vaadin-grid-sorter path="[[column]]">[[column]]</vaadin-grid-sorter>
           </template>
@@ -129,6 +129,14 @@
               type: Object,
               notify: true,
               value: null
+            },
+
+            /**
+             * When `true`, user can resize columns
+             */
+            resizable: {
+              type: Boolean,
+              value: false
             },
 
             /**
