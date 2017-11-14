@@ -10,10 +10,10 @@
   <template>
 
     <template is="dom-if" if="[[actionMenu]]" restamp>
-        <px-dropdown
-          display-value="[[localize('Table Actions')]]"
-        >
-        </px-dropdown>
+      <px-dropdown multi hide-selected
+        display-value="[[localize('Table Actions')]]"
+        items="[[_tableColumns]]">
+      </px-dropdown>
     </template>
 
     <vaadin-grid aria-label="Data Grid"
