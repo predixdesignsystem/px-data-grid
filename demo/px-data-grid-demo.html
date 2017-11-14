@@ -47,34 +47,6 @@
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
             action-menu="{{props.actionMenu.value}}"
             language="{{props.language.value}}">
-
-            <px-data-grid-column frozen="{{props.freezeFullName.value}}" hidden="{{props.hideFullName.value}}">
-              <template class="header">
-                  <vaadin-grid-sorter path="last">Full Name</vaadin-grid-sorter>
-              </template>
-              <template>[[item.first]] [[item.last]]</template>
-            </px-data-grid-column>
-
-            <px-data-grid-column>
-              <template class="header">
-                <vaadin-grid-sorter path="first">First Name</vaadin-grid-sorter>
-              </template>
-              <template>[[item.first]]</template>
-            </px-data-grid-column>
-
-            <px-data-grid-column frozen>
-              <template class="header">
-                  <vaadin-grid-sorter path="last">Last Name</vaadin-grid-sorter>
-              </template>
-              <template>[[item.last]]</template>
-            </px-data-grid-column>
-
-            <px-data-grid-column>
-              <template class="header">
-                  <vaadin-grid-sorter path="email">Email</vaadin-grid-sorter>
-              </template>
-              <template>[[item.email]]</template>
-            </px-data-grid-column>
         </px-data-grid>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
