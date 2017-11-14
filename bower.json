@@ -18,8 +18,7 @@
     "iron-scroll-target-behavior": "^v2.0.0",
     "px-icon-set": "^2.0.0",
     "px-dropdown": "^4.0.0",
-    "vaadin-grid": "^4.0.0",
-    "px-dark-theme": "^2.0.20"
+    "vaadin-grid": "^4.0.0"
   },
   "devDependencies": {
     "px-button-group-design": "^2.0.0",
@@ -29,7 +28,11 @@
     "px-starter-kit-design": "^1.0.0",
     "px-tables-design": "^2.0.0",
     "px-theme": "^3.0.0",
-    "web-component-tester": "^6.0.0"
+    "web-component-tester": "^6.0.0",
+    "px-colors-design": "^1.0.5",
+    "px-defaults-design": "^2.0.2",
+    "px-mixins-design": "^1.0.1",
+    "px-typography-design": "^2.0.3"
   },
   "resolutions": {
     "px-dropdown": "^4.0.0",
