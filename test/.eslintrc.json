@@ -1,0 +1,10 @@
+{
+  "globals": {
+    "WCT": false,
+    "fixture": false,
+    "describe": false,
+    "beforeEach": false,
+    "it": false,
+    "expect": false
+  }
+}
