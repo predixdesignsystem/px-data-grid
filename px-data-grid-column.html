@@ -28,6 +28,20 @@
           return 'px-data-grid-column';
         }
 
+
+        static get properties() {
+          return {
+
+            /**
+             * Name of column is used on table action menu to offer hide/show functionality. As headers are fully optional
+             * and might not even contain the name of column, this separate value is required if you use table action menu.
+             */
+            name: {
+              type: String
+            },
+          };
+        }
+
         _stampHeaderTemplate(headerTemplate, headerCell) {
           if (!headerTemplate || !headerCell || headerCell._instance) {
             return;

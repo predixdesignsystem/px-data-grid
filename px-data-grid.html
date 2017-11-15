@@ -9,10 +9,12 @@
 <dom-module id="px-data-grid">
   <template>
 
-    <template is="dom-if" if="[[actionMenu]]" restamp>
+    <template is="dom-if" if="[[actionMenu]]">
       <px-dropdown multi hide-selected
         display-value="[[localize('Table Actions')]]"
-        items="[[_tableColumns]]">
+        items="[[_actionMenuContent]]"
+        disable-clear
+        on-px-dropdown-click="_actionClicked">
       </px-dropdown>
     </template>
 
@@ -32,12 +34,12 @@
         </vaadin-grid-selection-column>
       </template>
 
-      <template is="dom-repeat" items="[[_tableColumns]]" as="column">
-        <px-data-grid-column resizable="[[resizable]]">
+      <template is="dom-repeat" items="[[_generatedColumns]]" as="column">
+        <px-data-grid-column resizable="[[resizable]]" name="[[column.name]]" hidden="[[column.hidden]]">
           <template class="header">
-            <vaadin-grid-sorter path="[[column]]">[[column]]</vaadin-grid-sorter>
+            <vaadin-grid-sorter path="[[column.name]]">[[column.name]]</vaadin-grid-sorter>
           </template>
-          <template>[[get(column, item)]]</template>
+          <template>[[get(column.name, item)]]</template>
         </px-data-grid-column>
       </template>
 
@@ -167,13 +169,20 @@
              * In case px-data-table-columns aren't provided, table columns will be generated automatically.
              * They will be stamped via
              *
-             * <template is="dom-repeat" items="[[_tableColumns]]">
+             * <template is="dom-repeat" items="[[_generatedColumns]]">
              *   ...
              * </template>
              *
              * @private
              */
-            _tableColumns: {
+            _generatedColumns: {
+              type: Array
+            },
+
+            /**
+            * Content of action menu
+            */
+            _actionMenuContent: {
               type: Array
             },
 
@@ -220,6 +229,14 @@
                 };
               }
             },
+
+            /**
+             * All custom table actions. Should return array of objects with 'name' (String) and 'action' (function).
+             */
+            tableActions: {
+              type: Array,
+              value: []
+            }
           };
         }
 
@@ -234,21 +251,103 @@
 
         _populateTableColumns() {
           if (this.tableData && this.tableData.length) {
-            this._tableColumns = [];
+            this._generatedColumns = [];
             for (const key in this.tableData[0]) {
-              this._tableColumns.push(key);
+              this._generatedColumns.push({
+                'name': key,
+                'hidden': false
+              });
             }
+
+            this._updateActionMenu();
           }
         }
 
+        /**
+         * Event handler for action menu clicks
+         */
+        _actionClicked(evt) {
+          const item = evt.detail.detail.item;
+          const key = item.key;
+
+          if (key.action) {
+            key.action();
+          }
+        }
+
+        /**
+         * Function to resolve columns on grid
+         */
+        _getColumns() {
+          const gridElement = this.shadowRoot.querySelector('vaadin-grid');
+
+          if (gridElement._columnTree) {
+            return gridElement._columnTree[0];
+          } else if (this._generatedColumns && this._generatedColumns.length) {
+            return this._generatedColumns;
+          } else {
+            return [];
+          }
+
+        }
+
+        /**
+         * Function called when action menu content needs to be updated
+         */
+        _updateActionMenu() {
+          const content = [];
+
+          // Application specific options
+
+          if (this.tableActions) {
+            this.tableActions.forEach(function(item) {
+              content.push({
+                key: {
+                  action: item.action
+                },
+                val: item.name,
+                selected: false,
+                disabled: true
+              });
+            });
+          }
+
+          // Add column hide/show selection
+
+          const defaultName = this.localize('Column #');
+          let counter = 0;
+
+          this._getColumns().forEach(function(columnElement) {
+            const index = ++counter;
+            const hidden = columnElement.hidden ? columnElement.hidden : false;
+            const name = columnElement.name ? columnElement.name : (defaultName + index);
+
+            content.push({
+              key: {
+                action: function() {
+                  columnElement.hidden = !(columnElement.hidden ? columnElement.hidden : false);
+                }
+              },
+              val: name,
+              selected: !hidden
+            });
+          });
+
+          this._actionMenuContent = content;
+        }
+
+        /**
+         * Observer for internal DOM changes
+         */
         _addColumnsObserver() {
           this._observer = new Polymer.FlattenedNodesObserver(this, info => {
             const manualColumns = this.querySelectorAll(Predix.DataGridColumnElement.is);
             if (manualColumns.length) {
-              this._tableColumns = [];
+              this._generatedColumns = [];
             } else {
               this._populateTableColumns();
             }
+            this._updateActionMenu();
           });
         }
       }

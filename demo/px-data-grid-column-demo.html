@@ -39,29 +39,35 @@
 
       <!-- Component ---------------------------------------------------------->
       <px-demo-component slot="px-demo-component">
-        <px-data-grid table-data="{{tableData}}">
-          <px-data-grid-column frozen>
+        <px-data-grid
+          table-data="{{tableData}}"
+          multi-sort="{{props.multiSort.value}}"
+          column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
+          action-menu="{{props.actionMenu.value}}"
+          language="{{props.language.value}}"
+          table-actions="{{props.tableActions.value}}">
+          <px-data-grid-column name="Full Name" hidden="{{props.hideFullName.value}}" frozen="{{props.freezeFullName.value}}">
             <template class="header">
                 <vaadin-grid-sorter path="last">Full Name</vaadin-grid-sorter>
             </template>
             <template>[[item.first]] [[item.last]]</template>
           </px-data-grid-column>
 
-          <px-data-grid-column>
+          <px-data-grid-column name="First Name">
             <template class="header">
               <vaadin-grid-sorter path="first">First Name</vaadin-grid-sorter>
             </template>
             <template>[[item.first]]</template>
           </px-data-grid-column>
 
-          <px-data-grid-column frozen>
+          <px-data-grid-column name="Last Name">
             <template class="header">
                 <vaadin-grid-sorter path="last">Last Name</vaadin-grid-sorter>
             </template>
             <template>[[item.last]]</template>
           </px-data-grid-column>
 
-          <px-data-grid-column>
+          <px-data-grid-column name="Email">
             <template class="header">
                 <vaadin-grid-sorter path="email">Email</vaadin-grid-sorter>
             </template>
@@ -189,6 +195,56 @@
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'
+      },
+
+      multiSort: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      actionMenu: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      columnReorderingAllowed: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      hideFullName: {
+        type: Boolean,
+        defaultValue: true,
+        inputType: 'toggle'
+      },
+
+      freezeFullName: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      language: {
+        type: String,
+        value: 'en',
+        inputType: 'dropdown',
+        inputChoices: ['en', 'fr', 'fi']
+      },
+
+      tableActions: {
+        type: Object,
+        defaultValue: [
+          {
+            name: 'Export CSV',
+            action: function() {
+              window.alert('TODO');
+            }
+          }
+        ],
+        inputType: 'code:JSON'
       }
     }
   });
