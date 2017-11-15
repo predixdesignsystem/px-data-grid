@@ -15,6 +15,10 @@
       px-dropdown[hidden] {
         visibility: hidden;
       }
+
+      ::slotted(vaadin-grid-sorter) {
+        align-items: center;
+      }
     </style>
     <slot></slot>
     <px-dropdown button-style="icon" icon="px-nav:menu" items='["Pin column", "Hide Column"]' opened="{{dropdownOpened}}" hidden="{{_dropdownHidden}}"></px-dropdown>
