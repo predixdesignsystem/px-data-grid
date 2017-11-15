@@ -29,7 +29,7 @@
       }
 
       [part~="cell"] {
-        min-height: 0px;
+        min-height: 0;
         padding-top: var(--px-data-grid-padding-top);
         padding-bottom: var(--px-data-grid-padding-bottom);
         padding-left: var(--px-data-grid-padding-left);
@@ -43,6 +43,8 @@
         background: var(--px-data-grid-header-background-color);
         color: var(--px-data-grid-header-text-color);
         text-transform: uppercase;
+        padding-top: 1px;
+        padding-bottom: 1px;
       }
 
       [part~="header-cell"] ::slotted(*),
@@ -114,7 +116,6 @@
       :host([theme~="row-stripes"]) [part~="row"]:not([odd])[selected] [part~="cell"] {
         background: var(--px-data-grid-background-color-striped--even--selected);
       }
-
     </style>
   </template>
 </dom-module>

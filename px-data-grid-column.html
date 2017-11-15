@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid-column.html">
+<link rel="import" href="px-data-grid-header-cell.html">
 
 <dom-module id="px-data-grid-column">
   <script>
@@ -49,11 +50,11 @@
 
           const inst = headerTemplate.templatizer.createInstance();
 
-          // put three-dots px-dropdox here
-          // var div = document.createElement("div");
-          // inst.root.appendChild(div)
+          const headerCellContentWrapper = document.createElement('px-data-grid-header-cell');
+          headerCellContentWrapper.appendChild(inst.root);
+          headerCellContentWrapper._column = this;
 
-          headerCell._content.appendChild(inst.root);
+          headerCell._content.appendChild(headerCellContentWrapper);
           headerCell._instance = inst;
           headerCell.parentElement.hidden = false;
         }

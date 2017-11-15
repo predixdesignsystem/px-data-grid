@@ -1,0 +1,88 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="px-data-grid-header-cell">
+  <template>
+    <style>
+      :host {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        --iron-icon-fill-color: var(--px-data-grid-cell-text-color--sorted);
+        --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted);
+        justify-content: space-between;
+      }
+
+      px-dropdown[hidden] {
+        visibility: hidden;
+      }
+    </style>
+    <slot></slot>
+    <px-dropdown button-style="icon" icon="px-nav:menu" items='["Pin column", "Hide Column"]' opened="{{dropdownOpened}}" hidden="{{_dropdownHidden}}"></px-dropdown>
+  </template>
+  <script>
+    {
+      class DataGridHeaderCellElement extends Polymer.Element {
+        static get is() {
+          return 'px-data-grid-header-cell';
+        }
+
+        static get properties() {
+          return {
+            /**
+             * If true, opens nested dropdown.
+             */
+            dropdownOpened: {
+              type: Boolean,
+              observer: '_dropdownOpenedChanged'
+            },
+
+            _dropdownHidden: {
+              type: Boolean,
+              value: true
+            },
+
+            _mouseover: {
+              type: Boolean,
+              value: false
+            },
+
+            _column: {
+              type: Object
+            }
+          };
+        }
+
+        ready() {
+          super.ready();
+
+          this.addEventListener('mouseenter', () => {
+            this._dropdownHidden = false;
+            this._mouseover = true;
+          });
+
+          this.addEventListener('mouseleave', () => {
+            this._mouseover = false;
+            if (!this.dropdownOpened) {
+              this._dropdownHidden = true;
+            }
+          });
+        }
+
+        _dropdownOpenedChanged(dropdownOpened) {
+          if (!dropdownOpened && !this._mouseover) {
+            this._dropdownHidden = true;
+          }
+        }
+
+      }
+
+      customElements.define(DataGridHeaderCellElement.is, DataGridHeaderCellElement);
+
+      /**
+       * @namespace Predix
+       */
+      window.Predix = window.Predix || {};
+      Predix.DataGridHeaderCellElement = DataGridHeaderCellElement;
+    }
+  </script>
+</dom-module>
