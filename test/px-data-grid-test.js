@@ -44,5 +44,16 @@ function runTests() {
         expect(grid._generatedColumns[2].name).to.be.eql('email');
       });
     });
+
+    describe('grid-with-columns tests', () => {
+      beforeEach(() => {
+        grid = fixture('grid-with-columns');
+        grid.tableData = data;
+      });
+
+      it('should set _generatedColumns to empty array', function() {
+        expect(grid._generatedColumns.length).to.be.eql(0);
+      });
+    });
   });
 }

@@ -19,6 +19,22 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="grid-with-columns">
+      <template>
+
+        <px-data-grid>
+          <px-data-grid-column name="First Name">
+            <template>[[first]]</template>
+          </px-data-grid-column>
+
+          <px-data-grid-column name="Last Name">
+            <template>[[last]]</template>
+          </px-data-grid-column>
+        </px-data-grid>
+
+      </template>
+    </test-fixture>
+
     <script src="px-data-grid-test.js"></script>
 
   </body>
