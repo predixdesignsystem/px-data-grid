@@ -1,0 +1,18 @@
+sudo: false
+dist: trusty
+language: node_js
+node_js: 8.1
+
+addons:
+  firefox: latest
+  google-chrome: latest
+
+install:
+  - yarn
+  - bower install
+
+before_script:
+  - gulp lint
+
+script:
+  - xvfb-run -s '-screen 0 1024x768x24' wct
