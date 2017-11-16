@@ -1,4 +1,4 @@
-# px-data-grid
+# px-data-grid [![Build Status](https://travis-ci.org/vaadin/px-data-grid.svg?branch=master)](https://travis-ci.org/vaadin/px-data-grid)
 
 ## Overview
 
@@ -32,7 +32,7 @@ Second, import the component to your application with the following tag in your 
 Finally, use the component in your application:
 
 ```html
-<px-data-grid items="{{data}}">
+<px-data-grid table-data="{{data}}">
 </px-data-grid>
 ```
 
