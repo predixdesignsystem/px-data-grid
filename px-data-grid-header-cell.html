@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 
 <dom-module id="px-data-grid-header-cell">
   <template>
@@ -21,11 +22,11 @@
       }
     </style>
     <slot></slot>
-    <px-dropdown button-style="icon" icon="px-nav:menu" items='["Pin column", "Hide Column"]' opened="{{dropdownOpened}}" hidden="{{_dropdownHidden}}"></px-dropdown>
+    <px-dropdown button-style="icon" icon="px-nav:menu" items="{{_dropdownItems}}" opened="{{dropdownOpened}}" hidden="{{_dropdownHidden}}" on-selected-changed="_dropdownSelectedChanged"></px-dropdown>
   </template>
   <script>
     {
-      class DataGridHeaderCellElement extends Polymer.Element {
+      class DataGridHeaderCellElement extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element) {
         static get is() {
           return 'px-data-grid-header-cell';
         }
@@ -52,8 +53,23 @@
 
             _column: {
               type: Object
-            }
+            },
+
+            _dropdownItems: {
+              type: Array
+            },
+
+            language: String,
+
+            resources: Object
+
           };
+        }
+
+        static get observers() {
+          return [
+            '_setDropdownItems(language, resources)'
+          ];
         }
 
         ready() {
@@ -72,9 +88,66 @@
           });
         }
 
+        _pinColumn() {
+          this._column.frozen = true;
+
+          this._setDropdownItems();
+        }
+
+        _unpinColumn() {
+          this._column.frozen = false;
+
+          this._setDropdownItems();
+        }
+
+        _hideColumn() {
+          this._column.hidden = true;
+        }
+
+        _setDropdownItems() {
+          if (this._column && this._column.frozen) {
+            this._dropdownItems = [
+              {
+                key: {
+                  action: () => this._unpinColumn()
+                },
+                val: this.localize('Unpin column')
+              },
+              {
+                key: {
+                  action: () => this._hideColumn()
+                },
+                val: this.localize('Hide column')
+              }
+            ];
+          } else {
+            this._dropdownItems = [
+              {
+                key: {
+                  action: () => this._pinColumn()
+                },
+                val: this.localize('Pin column')
+              },
+              {
+                key: {
+                  action: () => this._hideColumn()
+                },
+                val: this.localize('Hide column')
+              }
+            ];
+          }
+        }
+
         _dropdownOpenedChanged(dropdownOpened) {
           if (!dropdownOpened && !this._mouseover) {
             this._dropdownHidden = true;
+          }
+        }
+
+        _dropdownSelectedChanged(e) {
+          if (e.detail.value) {
+            e.detail.value.action();
+            e.target.selected = null;
           }
         }
 

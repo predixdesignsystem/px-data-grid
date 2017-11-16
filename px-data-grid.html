@@ -35,7 +35,7 @@
       </template>
 
       <template is="dom-repeat" items="[[_generatedColumns]]" as="column">
-        <px-data-grid-column resizable="[[resizable]]" name="[[column.name]]" hidden="[[column.hidden]]">
+        <px-data-grid-column resizable="[[resizable]]" name="[[column.name]]" hidden="[[column.hidden]]" language="[[language]]" resources="[[resources]]">
           <template class="header">
             <vaadin-grid-sorter path="[[column.name]]">[[column.name]]</vaadin-grid-sorter>
           </template>
@@ -218,7 +218,10 @@
                 // https://www.polymer-project.org/2.0/toolbox/localize
                 return {
                   'en': {
-                    'Table Actions': 'Table Actions'
+                    'Table Actions': 'Table Actions',
+                    'Pin column': 'Pin column',
+                    'Unpin column': 'Unpin column',
+                    'Hide column': 'Hide column'
                   },
                   'fr': {
                     'Table Actions': 'Actions de la table'

@@ -29,7 +29,6 @@
           return 'px-data-grid-column';
         }
 
-
         static get properties() {
           return {
 
@@ -40,7 +39,25 @@
             name: {
               type: String
             },
+
+            language: {
+              type: String
+            },
+
+            resources: {
+              type: Object
+            },
+
+            _headerCellContentWrapper: {
+              type: Element
+            }
           };
+        }
+
+        static get observers() {
+          return [
+            '_updateI18n(language, resources, _headerCellContentWrapper)'
+          ];
         }
 
         _stampHeaderTemplate(headerTemplate, headerCell) {
@@ -57,6 +74,17 @@
           headerCell._content.appendChild(headerCellContentWrapper);
           headerCell._instance = inst;
           headerCell.parentElement.hidden = false;
+
+          this._headerCellContentWrapper = headerCellContentWrapper;
+        }
+
+        _updateI18n(language, resources, _headerCellContentWrapper) {
+          if (!_headerCellContentWrapper) {
+            return;
+          }
+
+          _headerCellContentWrapper.language = language;
+          _headerCellContentWrapper.resources = resources;
         }
       }
 
