@@ -46,9 +46,12 @@ function runTests() {
     });
 
     describe('grid-with-columns tests', () => {
-      beforeEach(() => {
+      beforeEach((done) => {
         grid = fixture('grid-with-columns');
         grid.tableData = data;
+        Polymer.RenderStatus.afterNextRender(grid, () => {
+          done();
+        });
       });
 
       it('should set _generatedColumns to empty array', function() {
