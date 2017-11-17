@@ -345,6 +345,12 @@
         _addColumnsObserver() {
           this._observer = new Polymer.FlattenedNodesObserver(this, info => {
             const manualColumns = this.querySelectorAll(Predix.DataGridColumnElement.is);
+
+            manualColumns.forEach((column) => {
+              column.language = this.language;
+              column.resources = this.resources;
+            });
+
             if (manualColumns.length) {
               this._generatedColumns = [];
             } else {
