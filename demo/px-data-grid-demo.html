@@ -40,13 +40,15 @@
       <!-- Component ---------------------------------------------------------->
       <px-demo-component slot="px-demo-component">
         <px-data-grid
+            id="grid"
             table-data="{{props.tableData.value}}"
             selectable="{{props.selectable.value}}"
             resizable="{{props.resizable.value}}"
             multi-sort="{{props.multiSort.value}}"
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
             action-menu="{{props.actionMenu.value}}"
-            language="{{props.language.value}}">
+            language="{{props.language.value}}"
+            remote-data-provider="{{props.remoteDataProvider.value}}">
         </px-data-grid>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -360,6 +362,27 @@
                   email: 'rasaogu@tadiri.tc'
                 }
               ]
+            },
+            {
+              configName: 'Remote data provider',
+              tableData: null,
+              remoteDataProvider: (params, callback) => {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = () => {
+                  const remoteData = JSON.parse(xhr.responseText);
+                  this.$.grid._populateTableColumns(remoteData);
+                  this.$.grid.size = 500;
+                  callback(remoteData);
+                };
+                xhr.open(
+                  'GET',
+                  'https://px-data-grid-dummy-backend.herokuapp.com/contacts?' +
+                    '_page=' + (params.page + 1) + '&' +
+                    '_limit=' + params.pageSize,
+                  true
+                );
+                xhr.send();
+              }
             }
           ];
         }
@@ -436,6 +459,11 @@
         value: 'en',
         inputType: 'dropdown',
         inputChoices: ['en', 'fr', 'fi']
+      },
+
+      remoteDataProvider: {
+        type: Function,
+        value: null
       }
     }
   });

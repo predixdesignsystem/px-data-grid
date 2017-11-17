@@ -21,7 +21,7 @@
     <vaadin-grid aria-label="Data Grid"
                  items="[[tableData]]"
                  size="[[size]]"
-                 data-provider="[[dataProvider]]"
+                 data-provider="[[remoteDataProvider]]"
                  active-item="[[activeItem]]"
                  column-reordering-allowed="[[columnReorderingAllowed]]"
                  expanded-items="[[expandedItems]]"
@@ -96,14 +96,6 @@
              */
             size: {
               type: Number,
-              value: undefined
-            },
-
-            /**
-             * Function that provides items lazily. Receives arguments params, callback
-             */
-            dataProvider: {
-              type: Object,
               value: undefined
             },
 
@@ -239,6 +231,13 @@
             tableActions: {
               type: Array,
               value: []
+            },
+
+            /**
+             * Function that provides items lazily. Receives arguments params, callback
+             */
+            remoteDataProvider: {
+              type: Function
             }
           };
         }
@@ -248,14 +247,14 @@
           this._addColumnsObserver();
         }
 
-        _tableDataChanged() {
-          this._populateTableColumns();
+        _tableDataChanged(tableData) {
+          this._populateTableColumns(tableData);
         }
 
-        _populateTableColumns() {
-          if (this.tableData && this.tableData.length) {
+        _populateTableColumns(data) {
+          if (data && data.length) {
             this._generatedColumns = [];
-            for (const key in this.tableData[0]) {
+            for (const key in data[0]) {
               this._generatedColumns.push({
                 'name': key,
                 'hidden': false
