@@ -17,12 +17,12 @@
         visibility: hidden;
       }
 
-      ::slotted(vaadin-grid-sorter) {
+      :host ::slotted(vaadin-grid-sorter) {
         align-items: center;
       }
     </style>
     <slot></slot>
-    <px-dropdown button-style="icon" icon="px-nav:menu" items="{{_dropdownItems}}" opened="{{dropdownOpened}}" hidden="{{_dropdownHidden}}" on-selected-changed="_dropdownSelectedChanged"></px-dropdown>
+    <px-dropdown button-style="icon" icon="px-nav:menu" items="{{_dropdownItems}}" opened="{{dropdownOpened}}" hidden$="[[_dropdownHidden]]" on-selected-changed="_dropdownSelectedChanged"></px-dropdown>
   </template>
   <script>
     {
@@ -88,13 +88,13 @@
           });
         }
 
-        _pinColumn() {
+        _freezeColumn() {
           this._column.frozen = true;
 
           this._setDropdownItems();
         }
 
-        _unpinColumn() {
+        _unfreezeColumn() {
           this._column.frozen = false;
 
           this._setDropdownItems();
@@ -109,9 +109,9 @@
             this._dropdownItems = [
               {
                 key: {
-                  action: () => this._unpinColumn()
+                  action: () => this._unfreezeColumn()
                 },
-                val: this.localize('Unpin column')
+                val: this.localize('Unfreeze column')
               },
               {
                 key: {
@@ -124,9 +124,9 @@
             this._dropdownItems = [
               {
                 key: {
-                  action: () => this._pinColumn()
+                  action: () => this._freezeColumn()
                 },
-                val: this.localize('Pin column')
+                val: this.localize('Freeze column')
               },
               {
                 key: {
