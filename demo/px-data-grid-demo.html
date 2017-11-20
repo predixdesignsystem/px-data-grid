@@ -44,6 +44,7 @@
             table-data="{{props.tableData.value}}"
             selectable="{{props.selectable.value}}"
             resizable="{{props.resizable.value}}"
+            striped="{{props.striped.value}}"
             multi-sort="{{props.multiSort.value}}"
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
             action-menu="{{props.actionMenu.value}}"
@@ -452,6 +453,12 @@
       },
 
       resizable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      striped: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'

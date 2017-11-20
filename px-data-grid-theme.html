@@ -93,27 +93,27 @@
 
       /* Row stripes */
 
-      :host([theme~="row-stripes"]) [part~="row"][odd] {
+      :host([striped]) [part~="row"][odd] {
         background: var(--px-data-grid-background-color-striped--odd);
       }
 
-      :host([theme~="row-stripes"]) [part~="row"][odd][selected] {
+      :host([striped]) [part~="row"][odd][selected] {
         background: var(--px-data-grid-background-color-striped--odd--selected);
       }
 
-      :host([theme~="row-stripes"]) [part~="row"]:not([odd])[selected] {
+      :host([striped]) [part~="row"]:not([odd])[selected] {
         background: var(--px-data-grid-background-color-striped--even--selected);
       }
 
-      :host([theme~="row-stripes"]) [part~="row"][odd] [part~="cell"] {
+      :host([striped]) [part~="row"][odd] [part~="cell"] {
         background: var(--px-data-grid-background-color-striped--odd);
       }
 
-      :host([theme~="row-stripes"]) [part~="row"][odd][selected] [part~="cell"] {
+      :host([striped]) [part~="row"][odd][selected] [part~="cell"] {
         background: var(--px-data-grid-background-color-striped--odd--selected);
       }
 
-      :host([theme~="row-stripes"]) [part~="row"]:not([odd])[selected] [part~="cell"] {
+      :host([striped]) [part~="row"]:not([odd])[selected] [part~="cell"] {
         background: var(--px-data-grid-background-color-striped--even--selected);
       }
     </style>

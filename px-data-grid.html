@@ -24,7 +24,7 @@
                  active-item="[[activeItem]]"
                  column-reordering-allowed="[[columnReorderingAllowed]]"
                  expanded-items="[[expandedItems]]"
-                 theme="row-stripes"
+                 striped$="[[striped]]"
                  selected-items="[[selectedItems]]"
                  multi-sort="[[multiSort]]">
 
@@ -238,6 +238,14 @@
              */
             remoteDataProvider: {
               type: Function
+            },
+
+            /**
+             * If true, every other row in the table will appear with a background color to improve visual scanning.
+             */
+            striped: {
+              type: Boolean,
+              value: false
             }
           };
         }
