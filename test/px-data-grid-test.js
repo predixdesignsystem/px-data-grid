@@ -50,7 +50,9 @@ function runTests() {
         grid = fixture('grid-with-columns');
         grid.tableData = data;
         Polymer.RenderStatus.afterNextRender(grid, () => {
-          done();
+          setTimeout(() => { // IE11
+            done();
+          });
         });
       });
 
