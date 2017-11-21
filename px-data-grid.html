@@ -260,7 +260,9 @@
         }
 
         _populateTableColumns(data) {
-          if (data && data.length) {
+          const manualColumns = this.querySelectorAll(Predix.DataGridColumnElement.is);
+
+          if (!manualColumns.length && data && data.length) {
             this._generatedColumns = [];
             for (const key in data[0]) {
               this._generatedColumns.push({
@@ -352,19 +354,22 @@
         _addColumnsObserver() {
           this._observer = new Polymer.FlattenedNodesObserver(this, info => {
             const manualColumns = this.querySelectorAll(Predix.DataGridColumnElement.is);
-
-            manualColumns.forEach((column) => {
-              column.language = this.language;
-              column.resources = this.resources;
-            });
-
-            if (manualColumns.length) {
-              this._generatedColumns = [];
-            } else {
-              this._populateTableColumns();
-            }
-            this._updateActionMenu();
+            this._handleManualColumns(manualColumns);
           });
+        }
+
+        _handleManualColumns(manualColumns) {
+          manualColumns.forEach((column) => {
+            column.language = this.language;
+            column.resources = this.resources;
+          });
+
+          if (manualColumns.length) {
+            this._generatedColumns = [];
+          } else {
+            this._populateTableColumns();
+          }
+          this._updateActionMenu();
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);
