@@ -18,7 +18,8 @@
     "iron-scroll-target-behavior": "^v2.0.0",
     "px-icon-set": "^2.0.0",
     "px-dropdown": "^4.0.0",
-    "vaadin-grid": "^4.0.0"
+    "vaadin-grid": "^4.1.0",
+    "px-spinner": "^2.2.0"
   },
   "devDependencies": {
     "px-button-group-design": "^2.0.0",

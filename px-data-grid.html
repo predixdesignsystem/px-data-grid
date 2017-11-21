@@ -2,12 +2,33 @@
 <link rel="import" href="../vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid-selection-column.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="../px-spinner/px-spinner.html">
 <link rel="import" href="px-data-grid-column.html">
 <link rel="import" href="px-data-grid-theme.html">
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 
 <dom-module id="px-data-grid">
   <template>
+    <style>
+      :host {
+        position: relative;
+        display: block;
+      }
+
+      px-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 5px;
+        border-radius: 5px;
+      }
+
+      px-spinner[hidden] {
+        display: none;
+      }
+    </style>
 
     <template is="dom-if" if="[[actionMenu]]">
       <px-dropdown multi hide-selected
@@ -26,7 +47,8 @@
                  expanded-items="[[expandedItems]]"
                  striped$="[[striped]]"
                  selected-items="[[selectedItems]]"
-                 multi-sort="[[multiSort]]">
+                 multi-sort="[[multiSort]]"
+                 loading="{{_loading}}">
 
       <template is="dom-if" if="[[selectable]]" restamp>
         <vaadin-grid-selection-column auto-select>
@@ -44,6 +66,7 @@
 
       <slot></slot>
     </vaadin-grid>
+    <px-spinner size="40" hidden$="[[_spinnerHidden]]"></px-spinner>
   </template>
   <script>
     {
@@ -246,6 +269,25 @@
             striped: {
               type: Boolean,
               value: false
+            },
+
+            /**
+             * Shows if there is any pending request for remote data.
+             */
+            _loading: {
+              type: Boolean,
+              value: false,
+              observer: '_loadingChanged'
+            },
+
+            _spinnerHidden: {
+              type: Boolean,
+              value: true
+            },
+
+            loadingSpinnerDebounce: {
+              type: Number,
+              value: 500
             }
           };
         }
@@ -370,6 +412,16 @@
             this._populateTableColumns();
           }
           this._updateActionMenu();
+        }
+
+        _loadingChanged(loading) {
+          clearTimeout(this._spinnerHiddenTimeout);
+
+          if (loading) {
+            this._spinnerHiddenTimeout = setTimeout(() => this._spinnerHidden = false, this.loadingSpinnerDebounce);
+          } else {
+            this._spinnerHidden = true;
+          }
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);
