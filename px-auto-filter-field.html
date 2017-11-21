@@ -5,6 +5,7 @@
 <dom-module id="px-auto-filter-field">
   <template>
     <style>
+
       :host {
         position: relative;
         display: block;
@@ -16,7 +17,7 @@
         border-radius: 0;
         border-width: 0;
         border-style: solid;
-        border-color: var(--px-auto-filter-field-bottom-border-color,red);
+        border-color: var(--px-auto-filter-field-bottom-border-color, red);
         border-bottom-width: 1px;
         padding: 0 .33333rem;
         color: var(--px-auto-filter-field-text-color, black);
@@ -27,11 +28,13 @@
         padding-left: 20px;
         outline: 0;
       }
+
       .field:hover {
         color: var(--px-auto-filter-field-text-color--hover, black);
         border-color: var(--px-auto-filter-field-bottom-border-color--hover, red);
         background-color: var(--px-auto-filter-field-background-color--hover, red);
       }
+
       .field:focus {
         color: var(--px-auto-filter-field-text-color--focus, black);
         border-color: var(--px-auto-filter-field-bottom-border-color--focus, red);
