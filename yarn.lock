@@ -284,7 +284,7 @@ acorn@^3.0.4:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
 
-acorn@^5.1.1:
+acorn@^5.1.1, acorn@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.2.1.tgz#317ac7821826c22c702d66189ab8359675f135d7"
 
@@ -318,9 +318,18 @@ ajv@^4.9.1:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
-ajv@^5.1.0, ajv@^5.2.0, ajv@^5.2.3:
+ajv@^5.1.0, ajv@^5.2.3:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.3.0.tgz#4414ff74a50879c208ee5fdc826e32c303549eda"
+  dependencies:
+    co "^4.6.0"
+    fast-deep-equal "^1.0.0"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.3.0"
+
+ajv@^5.3.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.4.0.tgz#32d1cf08dbc80c432f426f12e10b2511f6b46474"
   dependencies:
     co "^4.6.0"
     fast-deep-equal "^1.0.0"
@@ -1382,10 +1391,6 @@ clean-css@^3.1.9:
     commander "2.8.x"
     source-map "0.4.x"
 
-cleankill@^1.0.0, cleankill@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/cleankill/-/cleankill-1.0.3.tgz#e7419bd24abc07f2d182d3a09a935c1bcdede6bd"
-
 cleankill@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/cleankill/-/cleankill-2.0.0.tgz#59830dfc8b411d53dc72ad09d45a78ea33161a91"
@@ -2192,10 +2197,10 @@ eslint-scope@^3.7.1:
     estraverse "^4.1.1"
 
 eslint@^4.0.0:
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.10.0.tgz#f25d0d7955c81968c2309aa5c9a229e045176bb7"
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.11.0.tgz#39a8c82bc0a3783adf5a39fa27fdd9d36fac9a34"
   dependencies:
-    ajv "^5.2.0"
+    ajv "^5.3.0"
     babel-code-frame "^6.22.0"
     chalk "^2.1.0"
     concat-stream "^1.6.0"
@@ -2203,7 +2208,7 @@ eslint@^4.0.0:
     debug "^3.0.1"
     doctrine "^2.0.0"
     eslint-scope "^3.7.1"
-    espree "^3.5.1"
+    espree "^3.5.2"
     esquery "^1.0.0"
     estraverse "^4.2.0"
     esutils "^2.0.2"
@@ -2216,7 +2221,7 @@ eslint@^4.0.0:
     inquirer "^3.0.6"
     is-resolvable "^1.0.0"
     js-yaml "^3.9.1"
-    json-stable-stringify "^1.0.1"
+    json-stable-stringify-without-jsonify "^1.0.1"
     levn "^0.3.0"
     lodash "^4.17.4"
     minimatch "^3.0.2"
@@ -2233,11 +2238,18 @@ eslint@^4.0.0:
     table "^4.0.1"
     text-table "~0.2.0"
 
-espree@^3.1.7, espree@^3.4.0, espree@^3.5.1:
+espree@^3.1.7, espree@^3.4.0:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/espree/-/espree-3.5.1.tgz#0c988b8ab46db53100a1954ae4ba995ddd27d87e"
   dependencies:
     acorn "^5.1.1"
+    acorn-jsx "^3.0.0"
+
+espree@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/espree/-/espree-3.5.2.tgz#756ada8b979e9dcfcdb30aad8d1a9304a905e1ca"
+  dependencies:
+    acorn "^5.2.1"
     acorn-jsx "^3.0.0"
 
 esprima@^3.1.3:
@@ -3830,6 +3842,10 @@ json-schema-traverse@^0.3.0:
 json-schema@0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/json-schema/-/json-schema-0.2.3.tgz#b480c892e59a2f05954ce727bd3f2a4e882f9e13"
+
+json-stable-stringify-without-jsonify@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
 
 json-stable-stringify@^1.0.0, json-stable-stringify@^1.0.1:
   version "1.0.1"
@@ -6337,8 +6353,8 @@ style-search@^0.1.0:
   resolved "https://registry.yarnpkg.com/style-search/-/style-search-0.1.0.tgz#7958c793e47e32e07d2b5cafe5c0bf8e12e77902"
 
 stylelint-config-vaadin@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/stylelint-config-vaadin/-/stylelint-config-vaadin-0.1.1.tgz#cfeadd0e831262afd39f627d7d15a553170c1f21"
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/stylelint-config-vaadin/-/stylelint-config-vaadin-0.1.2.tgz#349b86168f4912fff62d41b7e524d9bbd23dc4e8"
 
 stylelint@^8.0.0:
   version "8.2.0"
@@ -6981,9 +6997,9 @@ wbuf@^1.1.0, wbuf@^1.7.2:
   dependencies:
     minimalistic-assert "^1.0.0"
 
-wct-local@^2.0.15:
-  version "2.0.15"
-  resolved "https://registry.yarnpkg.com/wct-local/-/wct-local-2.0.15.tgz#b5e3758e32e5d70c54d129fd6571d7cc14cf31e2"
+wct-local@^2.0.16:
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/wct-local/-/wct-local-2.0.16.tgz#90fd680ec27e9264c0d3564f5ba03a8fa107213e"
   dependencies:
     "@types/chalk" "^0.4.28"
     "@types/express" "^4.0.30"
@@ -6992,19 +7008,19 @@ wct-local@^2.0.15:
     "@types/node" "^6.0.31"
     "@types/which" "^1.0.27"
     chalk "^1.1.1"
-    cleankill "^1.0.3"
+    cleankill "^2.0.0"
     freeport "^1.0.4"
     launchpad "^0.6.0"
     promisify-node "^0.4.0"
     selenium-standalone "^5.8.0"
     which "^1.0.8"
 
-wct-sauce@^2.0.0-pre.1:
-  version "2.0.0-pre.1"
-  resolved "https://registry.yarnpkg.com/wct-sauce/-/wct-sauce-2.0.0-pre.1.tgz#3b804607c550a0325de9137f3316be9562c06035"
+wct-sauce@^2.0.0-pre.2:
+  version "2.0.0-pre.2"
+  resolved "https://registry.yarnpkg.com/wct-sauce/-/wct-sauce-2.0.0-pre.2.tgz#fa4e42377da4b1f1b63dd1bdc9bf3809d5308a86"
   dependencies:
     chalk "^1.1.1"
-    cleankill "^1.0.0"
+    cleankill "^2.0.0"
     lodash "^3.0.1"
     request "^2.53.0"
     sauce-connect-launcher "^1.0.0"
@@ -7025,8 +7041,8 @@ wd@^1.2.0:
     vargs "0.1.0"
 
 web-component-tester@^6.0.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/web-component-tester/-/web-component-tester-6.4.0.tgz#1b37eb9b49dcfe847b06d4af1716516aaa32d063"
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/web-component-tester/-/web-component-tester-6.4.1.tgz#116735820c4bae330b880fdeba289c115a22a13c"
   dependencies:
     "@polymer/sinonjs" "^1.14.1"
     "@polymer/test-fixture" "^0.0.3"
@@ -7057,8 +7073,8 @@ web-component-tester@^6.0.0:
     wd "^1.2.0"
   optionalDependencies:
     update-notifier "^2.2.0"
-    wct-local "^2.0.15"
-    wct-sauce "^2.0.0-pre.1"
+    wct-local "^2.0.16"
+    wct-sauce "^2.0.0-pre.2"
 
 weinre@^2.0.0-pre-I0Z7U9OV:
   version "2.0.0-pre-I0Z7U9OV"
