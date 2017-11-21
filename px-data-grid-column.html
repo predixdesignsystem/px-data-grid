@@ -50,6 +50,20 @@
 
             _headerCellContentWrapper: {
               type: Element
+            },
+
+            /**
+             * Type of the column. Can be string, number or date.
+             */
+            type: {
+              type: String,
+              value: 'string',
+              observer: '_typeChanged'
+            },
+
+            _permittedTypes: {
+              type: Array,
+              value: ['string', 'number', 'date']
             }
           };
         }
@@ -85,6 +99,12 @@
 
           _headerCellContentWrapper.language = language;
           _headerCellContentWrapper.resources = resources;
+        }
+
+        _typeChanged(type) {
+          if (type && this._permittedTypes.indexOf(type.toLowerCase()) == -1) {
+            console.warn(`${type} is unsupported type for px-data-grid-column.`);
+          }
         }
       }
 
