@@ -4,6 +4,7 @@
 <link rel="import" href="../vaadin-grid/vaadin-grid-sorter.html">
 <link rel="import" href="../px-spinner/px-spinner.html">
 <link rel="import" href="px-data-grid-column.html">
+<link rel="import" href="px-auto-filter-field.html">
 <link rel="import" href="px-data-grid-theme.html">
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 
@@ -15,6 +16,17 @@
         display: block;
       }
 
+      .action-bar {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+      }
+
+      .action-bar > * {
+        flex-grow: 1;
+      }
+
       px-spinner {
         position: absolute;
         top: 50%;
@@ -23,6 +35,7 @@
         background: rgba(255, 255, 255, 0.9);
         padding: 5px;
         border-radius: 5px;
+        opacity: 0.5;
       }
 
       px-spinner[hidden] {
@@ -30,13 +43,27 @@
       }
     </style>
 
-    <template is="dom-if" if="[[actionMenu]]">
-      <px-dropdown multi hide-selected
-        display-value="[[localize('Table Actions')]]"
-        items="[[_actionMenuContent]]"
-        disable-clear
-        on-px-dropdown-click="_actionClicked">
-      </px-dropdown>
+    <template is="dom-if" if="{{_showActionBar(autoFilter, actionMenu)}}">
+
+      <div class="action-bar">
+        <template is="dom-if" if="[[autoFilter]]">
+          <px-auto-filter-field
+            placeholder="[[localize('Filter')]]"
+            on-filter-change="_autoFilterChanged"
+          >
+          </px-auto-filter-field>
+        </template>
+
+        <template is="dom-if" if="[[actionMenu]]">
+          <px-dropdown multi hide-selected
+            display-value="[[localize('Table Actions')]]"
+            items="[[_actionMenuContent]]"
+            disable-clear
+            on-px-dropdown-click="_actionClicked">
+          </px-dropdown>
+        </template>
+
+      </div>
     </template>
 
     <vaadin-grid items="[[tableData]]"
@@ -285,9 +312,20 @@
               value: true
             },
 
+            /**
+             * How many milliseconds before loading spinner will be shown
+             */
             loadingSpinnerDebounce: {
               type: Number,
               value: 500
+            },
+
+            /**
+             * To enable automatic filtering change property to true
+             */
+            autoFilter: {
+              type: Boolean,
+              value: false
             }
           };
         }
@@ -315,6 +353,7 @@
 
             this._updateActionMenu();
           }
+
         }
 
         /**
@@ -422,6 +461,25 @@
           } else {
             this._spinnerHidden = true;
           }
+        }
+
+        /**
+         * Simple method to check if action bar should be shown
+         */
+        _showActionBar(filterField, actionDropDown) {
+          return filterField || actionDropDown;
+        }
+
+        /**
+         * Listener for auto filter component
+         */
+        _autoFilterChanged(event) {
+          // Ignore if autofiltering not enabled
+          if (!this._autoFilter) {
+            return;
+          }
+          // TODO filter handling
+          // How to get value: console.log(event.detail.value);
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);

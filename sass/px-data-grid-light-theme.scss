@@ -46,5 +46,17 @@ html {
   --px-data-grid-highlight--medium                        :  rgba($status-yellow3,0.25);
   --px-data-grid-highlight--low                           :  rgba($status-blue3,0.25);
 
+  // Auto Filter Field
+  --px-auto-filter-field-text-color                       :  --px-base-text-color;
+  --px-auto-filter-field-text-color--hover                :  --px-base-text-color;
+  --px-auto-filter-field-text-color--focus                :  --px-base-text-color;
+  --px-auto-filter-field-background-color                 :  $white;
+  --px-auto-filter-field-background-color--hover          :  rgba($gray8,0.2);
+  --px-auto-filter-field-background-color--focus          :  rgba($status-blue3,0.1);
+  --px-auto-filter-field-background                       :  url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHRpdGxlPl88L3RpdGxlPjxjaXJjbGUgY3g9IjYiIGN5PSI2IiByPSI1LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzRjNjQ3MiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxsaW5lIHgxPSIxNS41IiB5MT0iMTUuNSIgeDI9IjEwIiB5Mj0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzRjNjQ3MiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==) no-repeat;
+  --px-auto-filter-field-bottom-border-color              :  $gray8;
+  --px-auto-filter-field-bottom-border-color--hover       :  $gray15;
+  --px-auto-filter-field-bottom-border-color--focus       :  rgba($status-blue3,0.25);
+
 }
 
