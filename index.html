@@ -64,16 +64,35 @@
     -->
     <link defer rel="import" href="../px-dark-theme/px-dark-theme-styles.html">
     <link defer rel="import" href="../px-dark-demo-theme/px-dark-demo-theme-styles.html">
-    <link defer rel="import" href="../px-demo/px-demo-theme-switcher.html">
+    <!-- <link defer rel="import" href="../px-demo/px-demo-theme-switcher.html">
     <px-demo-theme-switcher-frame id="themeMessenger" origin="https://www.predix-ui.com"></px-demo-theme-switcher-frame>
-    <px-demo-theme-switcher id="themeSwitcher"></px-demo-theme-switcher>
+    <px-demo-theme-switcher id="themeSwitcher"></px-demo-theme-switcher> -->
+
+    <label for="theme-switcher" class="theme-switcher-checkbox">
+      <input type="checkbox" id="theme-switcher">
+      Dark theme
+    </label>
+
     <script>
       (function() {
-        var messenger = document.getElementById('themeMessenger');
-        var switcher = document.getElementById('themeSwitcher');
-        messenger.addEventListener('is-dark-theme-changed', function(evt) {
-          switcher.isDarkTheme = evt.detail.value;
-        });
+        // var messenger = document.getElementById('themeMessenger');
+        // var switcher = document.getElementById('themeSwitcher');
+        // messenger.addEventListener('is-dark-theme-changed', function(evt) {
+        //   switcher.isDarkTheme = evt.detail.value;
+        // });
+        let dark = false;
+        let customStyle = document.getElementById('px-data-grid-theme-styles');
+        const themeSwitcher = document.getElementById('theme-switcher');
+        themeSwitcher.addEventListener('change', () => switchTheme());
+
+        function switchTheme() {
+          dark = !dark;
+          const newCustomStyle = document.createElement('custom-style');
+          newCustomStyle.innerHTML = `<style include="px-data-grid-${dark ? 'dark' : 'light'}-theme-styles" is="custom-style"></style>`;
+          document.head.appendChild(newCustomStyle);
+          customStyle.remove();
+          customStyle = newCustomStyle;
+        }
       })();
     </script>
 
@@ -100,6 +119,14 @@
       body {
         margin: 0;
         padding: 0;
+      }
+
+      .theme-switcher-checkbox {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        right: 15px;
+        top: 22px;
       }
     </style>
   </head>

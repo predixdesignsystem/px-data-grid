@@ -30,11 +30,6 @@
       <style include="px-demo-styles" is="custom-style"></style>
     </custom-style>
 
-    <div class="theme-switcher-checkbox">
-      <label for="themeSwitcher">Dark theme</label>
-      <input type="checkbox" id="themeSwitcher">
-    </div>
-
     <!-- Header -->
     <px-demo-header
         module-name="px-data-grid"
@@ -90,20 +85,6 @@
 <script>
   Polymer({
     is: 'px-data-grid-demo',
-
-    attached: function() {
-      this.customStyle = document.getElementById('px-data-grid-theme-styles');
-      this.$.themeSwitcher.addEventListener('change', () => this.switchTheme());
-    },
-
-    switchTheme: function() {
-      this.dark = !this.dark;
-      const newCustomStyle = document.createElement('custom-style');
-      newCustomStyle.innerHTML = `<style include="px-data-grid-${this.dark ? 'dark' : 'light'}-theme-styles" is="custom-style"></style>`;
-      document.head.appendChild(newCustomStyle);
-      this.customStyle.remove();
-      this.customStyle = newCustomStyle;
-    },
 
     properties: {
       /**
