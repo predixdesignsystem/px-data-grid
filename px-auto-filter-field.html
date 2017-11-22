@@ -1,0 +1,139 @@
+<link rel="import" href="../polymer/polymer-element.html"/>
+<link rel="import" href="px-data-grid-theme.html">
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
+
+<dom-module id="px-auto-filter-field">
+  <template>
+    <style>
+
+      :host {
+        position: relative;
+        display: block;
+      }
+
+      .field {
+        background-color: var(--px-auto-filter-field-background-color, red);
+      }
+
+      .field {
+        height: 2em;
+        border: none;
+        border-radius: 0;
+        border-width: 0;
+        border-style: solid;
+        border-color: var(--px-auto-filter-field-bottom-border-color, red);
+        border-bottom-width: 1px;
+        padding: 0 .33333rem;
+        color: var(--px-auto-filter-field-text-color, black);
+        background: var(--px-auto-filter-field-background, none);
+        background-size: auto 70%;
+        background-position: left center;
+        padding-left: 20px;
+        outline: 0;
+      }
+
+      .field:hover {
+        color: var(--px-auto-filter-field-text-color--hover, black);
+        border-color: var(--px-auto-filter-field-bottom-border-color--hover, red);
+        background-color: var(--px-auto-filter-field-background-color--hover, red);
+      }
+
+      .field:focus {
+        color: var(--px-auto-filter-field-text-color--focus, black);
+        border-color: var(--px-auto-filter-field-bottom-border-color--focus, red);
+        background-color: var(--px-auto-filter-field-background-color--focus, red);
+      }
+    </style>
+    <input
+      class="field"
+      type="text"
+      name="autofilter"
+      value="{{value::input}}"
+      placeholder="{{placeholder}}"
+    >
+    </input>
+  </template>
+  <script>
+    {
+      /**
+       * Auto filtering field used by px-data-grid
+       *
+       * @memberof Predix
+       * @extends Polymer.Element
+       */
+      class AutoFilterFieldElement extends Polymer.Element {
+        static get is() {
+          return 'px-auto-filter-field';
+        }
+
+        static get properties() {
+          return {
+
+            /**
+             * Placeholder text shown in field
+             */
+            placeholder: {
+              type: String
+            },
+
+            /**
+             * Timeout value in milliseconds
+             */
+            timeout: {
+              type: Number,
+              value: 400
+            },
+
+            value: {
+              type: String
+            }
+          };
+        }
+
+        ready() {
+          super.ready();
+          const input = this.shadowRoot.querySelector('input');
+          input.addEventListener('keypress', event => this._onKeyPress(event));
+          input.addEventListener('change', event => this._onChange(event));
+        }
+
+        _onChange(event) {
+          this._updateValue(true);
+        }
+
+        _onKeyPress(event) {
+          if (event.key === 'Enter' && !event.isComposing) {
+            this._updateValue(true);
+          } else {
+            this._updateValue(false);
+          }
+        }
+
+        _updateValue(ready) {
+          if (ready) {
+            this.dispatchEvent(new CustomEvent('filter-change', {
+              detail: {
+                value: this.value
+              },
+              bubbles: true
+            }));
+          } else {
+            this._renderDebouncer = Polymer.Debouncer.debounce(
+              this._renderDebouncer,
+              Polymer.Async.timeOut.after(this.timeout), () => {
+                this._updateValue(true);
+              });
+          }
+        }
+      }
+
+      customElements.define(AutoFilterFieldElement.is, AutoFilterFieldElement);
+
+      /**
+       * @namespace Predix
+       */
+      window.Predix = window.Predix || {};
+      Predix.AutoFilterFieldElement = AutoFilterFieldElement;
+    }
+  </script>
+</dom-module>

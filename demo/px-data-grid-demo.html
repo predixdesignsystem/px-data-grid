@@ -61,7 +61,8 @@
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
             action-menu="{{props.actionMenu.value}}"
             language="{{props.language.value}}"
-            remote-data-provider="{{props.remoteDataProvider.value}}">
+            remote-data-provider="{{props.remoteDataProvider.value}}"
+            auto-filter="{{props.autoFilter.value}}">
         </px-data-grid>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -466,6 +467,12 @@
       },
 
       actionMenu: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      autoFilter: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'
