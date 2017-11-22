@@ -15,6 +15,17 @@
 <!-- Demo DOM module -->
 <dom-module id="px-data-grid-demo">
   <template>
+    <style>
+      .theme-switcher-checkbox {
+        display: inline-flex;
+        float: right;
+        margin: 1rem 2rem;
+      }
+
+      .theme-switcher-checkbox input {
+        margin-left: 5px;
+      }
+    </style>
     <custom-style>
       <style include="px-demo-styles" is="custom-style"></style>
     </custom-style>
@@ -74,6 +85,7 @@
 <script>
   Polymer({
     is: 'px-data-grid-demo',
+
     properties: {
       /**
        * Note: The actual data/values for `props` are placed in `this.demoProps`
