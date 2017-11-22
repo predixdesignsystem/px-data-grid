@@ -31,8 +31,8 @@
     </custom-style>
 
     <div class="theme-switcher-checkbox">
-      <label for="theme-switcher">Dark theme</label>
-      <input type="checkbox" id="themeSwitcher"/>
+      <label for="themeSwitcher">Dark theme</label>
+      <input type="checkbox" id="themeSwitcher">
     </div>
 
     <!-- Header -->
@@ -92,47 +92,20 @@
     is: 'px-data-grid-demo',
 
     attached: function() {
-      this.customStyle = document.createElement('custom-style');
-      this.customStyle.innerHTML = this.lightThemeHtml;
-      document.head.appendChild(this.customStyle);
+      this.customStyle = document.getElementById('px-data-grid-theme-styles');
       this.$.themeSwitcher.addEventListener('change', () => this.switchTheme());
     },
 
     switchTheme: function() {
-      let theme;
-      if (this.dark) {
-        theme = this.lightThemeHtml;
-      } else {
-        theme = this.darkThemeHtml;
-      }
-
       this.dark = !this.dark;
       const newCustomStyle = document.createElement('custom-style');
-      newCustomStyle.innerHTML = theme;
+      newCustomStyle.innerHTML = `<style include="px-data-grid-${this.dark ? 'dark' : 'light'}-theme-styles" is="custom-style"></style>`;
       document.head.appendChild(newCustomStyle);
       this.customStyle.remove();
       this.customStyle = newCustomStyle;
     },
 
     properties: {
-      lightThemeHtml: {
-        type: String,
-        value: '<style include="px-data-grid-light-theme-styles" is="custom-style"></style>'
-      },
-
-      darkThemeHtml: {
-        type: String,
-        value: '<style include="px-data-grid-dark-theme-styles" is="custom-style"></style>'
-      },
-
-      dark: {
-        type: Boolean,
-        value: false
-      },
-
-      customStyle: {
-        type: Object
-      },
       /**
        * Note: The actual data/values for `props` are placed in `this.demoProps`
        * to create a static reference that Polymer shouldn't overwrite.
