@@ -32,7 +32,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: rgba(255, 255, 255, 0.9);
+        background-color: var(--px-data-grid-spinner-background-color);
         padding: 5px;
         border-radius: 5px;
         opacity: 0.5;
@@ -78,7 +78,7 @@
                  loading="{{_loading}}">
 
       <template is="dom-if" if="[[selectable]]" restamp>
-        <vaadin-grid-selection-column auto-select>
+        <vaadin-grid-selection-column auto-select hidden="[[hideSelectionColumn]]">
         </vaadin-grid-selection-column>
       </template>
 
@@ -127,6 +127,14 @@
              * Use the selectable property if one or more rows within the table should be selectable. See also `singleSelect`.
              */
             selectable: {
+              type: Boolean,
+              value: false
+            },
+
+            /**
+             * If true, hides the column with checkboxes.
+             */
+            hideSelectionColumn: {
               type: Boolean,
               value: false
             },

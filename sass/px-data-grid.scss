@@ -32,3 +32,11 @@ $inuit-enable-paddings--small     : true;
 @import "px-spacing-responsive-design/_trumps.spacing-responsive.scss";
 @import "px-widths-responsive-design/_trumps.widths-responsive.scss";
 
+// Font
+@import "px-typography-design/_base.typography.scss";
+$predix-font-family : "GE Inspira Sans", sans-serif !default;
+
+html {
+  font-family: $predix-font-family;
+  font-size: $inuit-base-font-size;
+}
