@@ -54,6 +54,7 @@
             id="grid"
             table-data="{{props.tableData.value}}"
             selectable="{{props.selectable.value}}"
+            hide-selection-column="{{props.hideSelectionColumn.value}}"
             resizable="{{props.resizable.value}}"
             striped="{{props.striped.value}}"
             multi-sort="{{props.multiSort.value}}"
@@ -441,6 +442,12 @@
       },
 
       selectable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      hideSelectionColumn: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'

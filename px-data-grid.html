@@ -51,7 +51,7 @@
                  loading="{{_loading}}">
 
       <template is="dom-if" if="[[selectable]]" restamp>
-        <vaadin-grid-selection-column auto-select>
+        <vaadin-grid-selection-column auto-select hidden="[[hideSelectionColumn]]">
         </vaadin-grid-selection-column>
       </template>
 
@@ -100,6 +100,14 @@
              * Use the selectable property if one or more rows within the table should be selectable. See also `singleSelect`.
              */
             selectable: {
+              type: Boolean,
+              value: false
+            },
+
+            /**
+             * If true, hides the column with checkboxes.
+             */
+            hideSelectionColumn: {
               type: Boolean,
               value: false
             },
