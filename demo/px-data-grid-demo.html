@@ -392,13 +392,22 @@
                   this.$.grid.size = 500;
                   callback(remoteData);
                 };
-                xhr.open(
-                  'GET',
-                  'https://px-data-grid-dummy-backend.herokuapp.com/contacts?' +
-                    '_page=' + (params.page + 1) + '&' +
-                    '_limit=' + params.pageSize,
-                  true
-                );
+                let url = 'https://px-data-grid-dummy-backend.herokuapp.com/contacts?' +
+                  '_page=' + (params.page + 1) + '&' +
+                  '_limit=' + params.pageSize;
+
+                // Add sorting to URL if defined
+                if (params.sortOrders.length) {
+                  const values = params.sortOrders.map(function(sort) {
+                    return sort.path;
+                  });
+                  const orders = params.sortOrders.map(function(sort) {
+                    return sort.direction;
+                  });
+                  url += '&_sort=' + values.join(',') + '&_order=' + orders.join(',');
+                }
+
+                xhr.open('GET', url, true);
                 xhr.send();
               }
             }
