@@ -82,6 +82,7 @@
         </vaadin-grid-selection-column>
       </template>
 
+      <!-- Automatically generated columns -->
       <template is="dom-repeat" items="[[_generatedColumns]]" as="column">
         <px-data-grid-column resizable="[[resizable]]" name="[[column.name]]" hidden="[[column.hidden]]" language="[[language]]" resources="[[resources]]">
           <template class="header">
@@ -91,7 +92,9 @@
         </px-data-grid-column>
       </template>
 
+      <!-- The slot for manually provided columns -->
       <slot></slot>
+
     </vaadin-grid>
     <px-spinner size="40" hidden$="[[_spinnerHidden]]"></px-spinner>
   </template>
