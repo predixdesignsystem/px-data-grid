@@ -51,7 +51,6 @@
       <!-- Component ---------------------------------------------------------->
       <px-demo-component slot="px-demo-component">
         <px-data-grid
-            id="grid"
             table-data="{{props.tableData.value}}"
             selectable="{{props.selectable.value}}"
             hide-selection-column="{{props.hideSelectionColumn.value}}"
@@ -61,7 +60,6 @@
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
             action-menu="{{props.actionMenu.value}}"
             language="{{props.language.value}}"
-            remote-data-provider="{{props.remoteDataProvider.value}}"
             auto-filter="{{props.autoFilter.value}}">
         </px-data-grid>
       </px-demo-component>
@@ -380,36 +378,6 @@
                   email: 'rasaogu@tadiri.tc'
                 }
               ]
-            },
-            {
-              configName: 'Remote data provider',
-              tableData: null,
-              remoteDataProvider: (params, callback) => {
-                const xhr = new XMLHttpRequest();
-                xhr.onload = () => {
-                  const remoteData = JSON.parse(xhr.responseText);
-                  this.$.grid._populateTableColumns(remoteData);
-                  this.$.grid.size = 500;
-                  callback(remoteData);
-                };
-                let url = 'https://px-data-grid-dummy-backend.herokuapp.com/contacts?' +
-                  '_page=' + (params.page + 1) + '&' +
-                  '_limit=' + params.pageSize;
-
-                // Add sorting to URL if defined
-                if (params.sortOrders.length) {
-                  const values = params.sortOrders.map(function(sort) {
-                    return sort.path;
-                  });
-                  const orders = params.sortOrders.map(function(sort) {
-                    return sort.direction;
-                  });
-                  url += '&_sort=' + values.join(',') + '&_order=' + orders.join(',');
-                }
-
-                xhr.open('GET', url, true);
-                xhr.send();
-              }
             }
           ];
         }
@@ -504,11 +472,6 @@
         value: 'en',
         inputType: 'dropdown',
         inputChoices: ['en', 'fr', 'fi']
-      },
-
-      remoteDataProvider: {
-        type: Function,
-        value: null
       }
     }
   });
