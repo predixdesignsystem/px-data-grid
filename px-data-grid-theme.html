@@ -28,12 +28,16 @@
 
       [part~="cell"] {
         min-height: 0;
+        background: var(--px-base-background-color);
+        align-items: center;
         padding-top: var(--px-data-grid-padding-top);
         padding-bottom: var(--px-data-grid-padding-bottom);
         padding-left: var(--px-data-grid-padding-left);
         padding-right: var(--px-data-grid-padding-right);
-        background: var(--px-base-background-color);
-        align-items: center;
+      }
+
+      :host([highlighted]) [part~="cell"] {
+        padding: 0;
       }
 
       [part~="header-cell"],

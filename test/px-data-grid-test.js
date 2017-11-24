@@ -42,9 +42,25 @@ function runTests() {
         return call.args;
       }
 
-      beforeEach(() => {
+      beforeEach((done) => {
         grid = fixture('simple-grid');
         grid.tableData = data;
+
+        const vaadinGrid = grid.shadowRoot.querySelector('vaadin-grid');
+        vaadinGrid._observer.flush();
+        grid._observer.flush();
+        if (vaadinGrid._debounceScrolling) {
+          vaadinGrid._debounceScrolling.flush();
+        }
+        if (vaadinGrid._debounceScrollPeriod) {
+          vaadinGrid._debounceScrollPeriod.flush();
+        }
+        Polymer.flush();
+        if (vaadinGrid._debouncerLoad) {
+          vaadinGrid._debouncerLoad.flush();
+        }
+
+        window.flush(done);
       });
 
       it('should properly populate _generatedColumns', () => {
@@ -79,7 +95,48 @@ function runTests() {
         expect(grid.shadowRoot.querySelector('px-spinner').hasAttribute('hidden')).to.be.false;
         timeoutSpy.restore();
       });
+
+      it('should highlight cell', () => {
+        grid.highlight = [{
+          type: 'cell',
+          color: 'red',
+          condition: (cellData) => {
+            return cellData === 'Alma';
+          }
+        }];
+
+        expect(grid._getCellStyle(data[2], grid._generatedColumns[0])).to.eql('background: red');
+      });
+
+      it('should highlight row', () => {
+        grid.highlight = [{
+          type: 'row',
+          color: 'yellow',
+          condition: (cellData) => {
+            return cellData === 'Saunders';
+          }
+        }];
+
+        expect(grid._getCellStyle(data[3], grid._generatedColumns[0])).to.eq('background: yellow');
+        expect(grid._getCellStyle(data[3], grid._generatedColumns[1])).to.eq('background: yellow');
+        expect(grid._getCellStyle(data[3], grid._generatedColumns[2])).to.eq('background: yellow');
+      });
+
+      it('should highlight column', () => {
+        grid.highlight = [{
+          type: 'column',
+          color: 'blue',
+          condition: (cellData) => {
+            return cellData === 'Alma';
+          }
+        }];
+
+        data.forEach((d) => {
+          expect(grid._getCellStyle(d, grid._generatedColumns[0])).to.eq('background: blue');
+        });
+      });
     });
+
 
     describe('grid-with-columns tests', () => {
       beforeEach((done) => {

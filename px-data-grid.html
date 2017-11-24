@@ -16,6 +16,13 @@
         display: block;
       }
 
+      :host([highlighted]) .cell-content-wrapper {
+        padding-top: var(--px-data-grid-padding-top);
+        padding-bottom: var(--px-data-grid-padding-bottom);
+        padding-left: var(--px-data-grid-padding-left);
+        padding-right: var(--px-data-grid-padding-right);
+      }
+
       .action-bar {
         display: flex;
         flex-direction: row;
@@ -88,7 +95,9 @@
           <template class="header">
             <vaadin-grid-sorter path="[[column.name]]">[[column.name]]</vaadin-grid-sorter>
           </template>
-          <template>[[get(column.name, item)]]</template>
+          <template>
+            <div class="cell-content-wrapper" style$="[[_getCellStyle(item, column)]]">[[get(column.name, item)]]</div>
+          </template>
         </px-data-grid-column>
       </template>
 
@@ -334,13 +343,83 @@
             autoFilter: {
               type: Boolean,
               value: false
+            },
+
+            /**
+             * Array of objects of conditions used to highlight specific columns.
+             * Format:
+             * ```javascript
+             * {
+             *   type: 'row|column|cell',
+             *   condition: (cellContent) => { return cellContent[0] == 'a' },
+             *   color: 'red|#fff|#a8a8a8'
+             * }
+             * ```
+             */
+            highlight: {
+              type: Array,
+              value: []
             }
           };
         }
 
         ready() {
           super.ready();
+          this._vaadinGrid = this.shadowRoot.querySelector('vaadin-grid');
+
           this._addColumnsObserver();
+
+          if (this.highlight.length) {
+            this._vaadinGrid.setAttribute('highlighted', '');
+            this.setAttribute('highlighted', '');
+          }
+        }
+
+        _getCellStyle(item, column) {
+          if (!this.highlight) {
+            return;
+          }
+
+          let cellColor;
+
+          this.highlight.forEach((highlightEntity) => {
+            switch (highlightEntity.type) {
+              case 'cell':
+                if (highlightEntity.condition(this.get(column.name, item))) {
+                  cellColor = `background: ${highlightEntity.color}`;
+                }
+                break;
+              case 'row':
+                if (this._isRowConditionApplied(item, highlightEntity.condition)) {
+                  cellColor = `background: ${highlightEntity.color}`;
+                }
+                break;
+              case 'column':
+                if (this._isColumnConditionApplied(column, highlightEntity.condition)) {
+                  cellColor = `background: ${highlightEntity.color}`;
+                }
+                break;
+            }
+          });
+
+          return cellColor;
+        }
+
+        _isRowConditionApplied(item, condition) {
+          return !!this._generatedColumns.filter(column => {
+            const cellText = this.get(column.name, item);
+            return condition(cellText);
+          }).length;
+        }
+
+        _isColumnConditionApplied(column, condition) {
+          const cachedItems = this._vaadinGrid._cache.items;
+          const itemsArray = Object.keys(cachedItems).map(key => cachedItems[key]);
+
+          return !!itemsArray.filter(item => {
+            const cellText = this.get(column.name, item);
+            return condition(cellText);
+          }).length;
         }
 
         _tableDataChanged(tableData) {
