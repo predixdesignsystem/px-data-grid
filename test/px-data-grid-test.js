@@ -100,7 +100,7 @@ function runTests() {
         grid.highlight = [{
           type: 'cell',
           color: 'red',
-          condition: (cellData) => {
+          condition: (cellData, column, item) => {
             return cellData === 'Alma';
           }
         }];
@@ -112,7 +112,7 @@ function runTests() {
         grid.highlight = [{
           type: 'row',
           color: 'yellow',
-          condition: (cellData) => {
+          condition: (cellData, item) => {
             return cellData === 'Saunders';
           }
         }];
@@ -126,8 +126,8 @@ function runTests() {
         grid.highlight = [{
           type: 'column',
           color: 'blue',
-          condition: (cellData) => {
-            return cellData === 'Alma';
+          condition: (column, item) => {
+            return column.name === 'first';
           }
         }];
 

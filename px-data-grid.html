@@ -350,9 +350,18 @@
              * Format:
              * ```javascript
              * {
-             *   type: 'row|column|cell',
-             *   condition: (cellContent) => { return cellContent[0] == 'a' },
-             *   color: 'red|#fff|#a8a8a8'
+             *   type: 'cell',
+             *   condition: (cellContent, column, item) => { return cellContent == 'John Doe' },
+             * },
+             * {
+             *   type: 'row',
+             *   condition: (cellContent, item) => { return cellContent[0] == 'a' },
+             *   color: '#a8a8a8'
+             * },
+             * {
+             *   type: 'column',
+             *   condition (column, item) => { return column.name == 'age' },
+             *   color: 'pink'
              * }
              * ```
              */
@@ -380,35 +389,55 @@
             return;
           }
 
+          let columnColor;
+          let rowColor;
           let cellColor;
 
           this.highlight.forEach((highlightEntity) => {
             switch (highlightEntity.type) {
               case 'cell':
-                if (highlightEntity.condition(this.get(column.name, item))) {
-                  cellColor = `background: ${highlightEntity.color}`;
+                if (highlightEntity.condition(this.get(column.name, item), column, item)) {
+                  if (highlightEntity.color) {
+                    cellColor = `background: ${highlightEntity.color}`;
+                  } else {
+                    cellColor = 'background: var(--px-data-grid-highlight--high, #DDD)';
+                  }
                 }
                 break;
               case 'row':
                 if (this._isRowConditionApplied(item, highlightEntity.condition)) {
-                  cellColor = `background: ${highlightEntity.color}`;
+                  if (highlightEntity.color) {
+                    rowColor = `background: ${highlightEntity.color}`;
+                  } else {
+                    rowColor = 'background: var(--px-data-grid-highlight--high, #DDD)';
+                  }
                 }
                 break;
               case 'column':
                 if (this._isColumnConditionApplied(column, highlightEntity.condition)) {
-                  cellColor = `background: ${highlightEntity.color}`;
+                  if (highlightEntity.color) {
+                    columnColor = `background: ${highlightEntity.color}`;
+                  } else {
+                    columnColor = 'background: var(--px-data-grid-highlight--high, #DDD)';
+                  }
                 }
                 break;
             }
           });
 
-          return cellColor;
+          if (cellColor) {
+            return cellColor;
+          } else if (rowColor) {
+            return rowColor;
+          } else {
+            return columnColor;
+          }
         }
 
         _isRowConditionApplied(item, condition) {
           return !!this._generatedColumns.filter(column => {
             const cellText = this.get(column.name, item);
-            return condition(cellText);
+            return condition(cellText, item);
           }).length;
         }
 
@@ -417,8 +446,7 @@
           const itemsArray = Object.keys(cachedItems).map(key => cachedItems[key]);
 
           return !!itemsArray.filter(item => {
-            const cellText = this.get(column.name, item);
-            return condition(cellText);
+            return condition(column, item);
           }).length;
         }
 

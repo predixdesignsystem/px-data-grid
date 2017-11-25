@@ -41,7 +41,8 @@
       <px-demo-component slot="px-demo-component">
         <px-data-grid
             table-data="{{props.tableData.value}}"
-            highlight="{{props.highlight.value}}">
+            highlight="{{props.highlight.value}}"
+            column-reordering-allowed="{{props.columnReorderingAllowed.value}}">
         </px-data-grid>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -163,26 +164,32 @@
         value: [
           {
             type: 'cell',
-            color: 'red',
-            condition: (cellContent) => {
-              return cellContent == 'Elizabeth';
+            // use default color
+            // color: 'red',
+            condition: (cellContent, column, item) => {
+              return cellContent == 'Dennis';
             }
           },
           {
             type: 'column',
             color: 'yellow',
-            condition: (cellContent) => {
-              return cellContent == 'Wong';
+            condition: (column, item) => {
+              return column.name == 'last';
             }
           },
           {
             type: 'row',
-            color: 'blue',
-            condition: (cellContent) => {
-              return cellContent == 'Dennis';
+            color: 'lightblue',
+            condition: (cellContent, item) => {
+              return item && (item.last == 'Dennis' || item.first == 'Carl');
             }
           }
         ]
+      },
+      columnReorderingAllowed: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
       }
     }
   });
