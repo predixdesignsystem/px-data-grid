@@ -84,7 +84,7 @@
                  column-reordering-allowed="[[columnReorderingAllowed]]"
                  expanded-items="[[expandedItems]]"
                  striped$="[[striped]]"
-                 selected-items="[[selectedItems]]"
+                 selected-items="{{selectedItems}}"
                  multi-sort="[[multiSort]]"
                  loading="{{_loading}}">
 
@@ -156,8 +156,8 @@
              * An array that contains the selected items.
              */
             selectedItems: {
-              type: Object,
-              value: undefined,
+              type: Array,
+              value: () => [],
               notify: true
             },
 

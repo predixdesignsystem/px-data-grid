@@ -32,7 +32,35 @@ function runTests() {
     let grid;
     let timeoutSpy;
 
+    function getRows() {
+      return grid._vaadinGrid.$.items.querySelectorAll('tr');
+    }
+
+    function getRowCells(row) {
+      return Array.prototype.slice.call(Polymer.dom(row).querySelectorAll('[part~="cell"]'));
+    }
+
+    beforeEach((done) => {
+      grid = fixture('simple-grid');
+      grid.tableData = data;
+
+      Polymer.RenderStatus.afterNextRender(grid, () => {
+        setTimeout(() => { // IE11
+          done();
+        });
+      });
+    });
+
     describe('simple-grid tests', () => {
+      it('should properly populate _generatedColumns', () => {
+        expect(grid._generatedColumns.length).to.be.eql(3);
+        expect(grid._generatedColumns[0].name).to.be.eql('first');
+        expect(grid._generatedColumns[1].name).to.be.eql('last');
+        expect(grid._generatedColumns[2].name).to.be.eql('email');
+      });
+    });
+
+    describe('spinner', () => {
       function createTimeoutSpy() {
         timeoutSpy = sinon.spy(window, 'setTimeout');
 
@@ -41,34 +69,6 @@ function runTests() {
         const call = timeoutSpy.getCalls().filter(call => call.returnValue === grid._spinnerHiddenTimeout)[0];
         return call.args;
       }
-
-      beforeEach((done) => {
-        grid = fixture('simple-grid');
-        grid.tableData = data;
-
-        const vaadinGrid = grid.shadowRoot.querySelector('vaadin-grid');
-        vaadinGrid._observer.flush();
-        grid._observer.flush();
-        if (vaadinGrid._debounceScrolling) {
-          vaadinGrid._debounceScrolling.flush();
-        }
-        if (vaadinGrid._debounceScrollPeriod) {
-          vaadinGrid._debounceScrollPeriod.flush();
-        }
-        Polymer.flush();
-        if (vaadinGrid._debouncerLoad) {
-          vaadinGrid._debouncerLoad.flush();
-        }
-
-        window.flush(done);
-      });
-
-      it('should properly populate _generatedColumns', () => {
-        expect(grid._generatedColumns.length).to.be.eql(3);
-        expect(grid._generatedColumns[0].name).to.be.eql('first');
-        expect(grid._generatedColumns[1].name).to.be.eql('last');
-        expect(grid._generatedColumns[2].name).to.be.eql('email');
-      });
 
       it('should set _spinnerHiddenTimeout when assigning remoteDataProvider', () => {
         grid.remoteDataProvider = (params, callback) => {};
@@ -94,6 +94,42 @@ function runTests() {
         timeoutCallback();
         expect(grid.shadowRoot.querySelector('px-spinner').hasAttribute('hidden')).to.be.false;
         timeoutSpy.restore();
+      });
+    });
+
+    describe('selection', () => {
+      it('should add the item to selectedItems when row is clicked', (done) => {
+        grid.selectable = true;
+        Polymer.RenderStatus.afterNextRender(grid, () => {
+          const rows = getRows();
+          const cell = getRowCells(rows[1])[0];
+          cell.click();
+          expect(grid.selectedItems).to.eql([data[1]]);
+          done();
+        });
+      });
+    });
+
+    describe('highlighting', () => {
+      function flushVaadinGrid() {
+        const vaadinGrid = grid.shadowRoot.querySelector('vaadin-grid');
+        vaadinGrid._observer.flush();
+        grid._observer.flush();
+        if (vaadinGrid._debounceScrolling) {
+          vaadinGrid._debounceScrolling.flush();
+        }
+        if (vaadinGrid._debounceScrollPeriod) {
+          vaadinGrid._debounceScrollPeriod.flush();
+        }
+        Polymer.flush();
+        if (vaadinGrid._debouncerLoad) {
+          vaadinGrid._debouncerLoad.flush();
+        }
+      }
+
+      beforeEach((done) => {
+        flushVaadinGrid();
+        window.flush(done);
       });
 
       it('should highlight cell', () => {
@@ -122,8 +158,7 @@ function runTests() {
         expect(grid._getCellStyle(data[3], grid._generatedColumns[2])).to.eq('background: yellow');
       });
 
-      // TODO: @limonte @Toshegg flaky test, investigate what's causing flakiness
-      /* it('should highlight column', () => {
+      it('should highlight column', () => {
         grid.highlight = [{
           type: 'column',
           color: 'blue',
@@ -135,7 +170,7 @@ function runTests() {
         data.forEach((d) => {
           expect(grid._getCellStyle(d, grid._generatedColumns[0])).to.eq('background: blue');
         });
-      }); */
+      });
     });
 
 

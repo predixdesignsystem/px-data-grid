@@ -11,9 +11,7 @@
 
       WCT.loadSuites([
         'px-data-grid-fixture.html'
-      ].reduce(function(suites, suite) {
-        return suites.concat([suite, suite + '?wc-shadydom=true']);
-      }, []));
+      ]);
     </script>
   </body>
 </html>
