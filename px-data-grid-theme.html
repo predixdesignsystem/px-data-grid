@@ -30,13 +30,6 @@
         min-height: 0;
         background: var(--px-base-background-color);
         align-items: center;
-        padding-top: var(--px-data-grid-padding-top);
-        padding-bottom: var(--px-data-grid-padding-bottom);
-        padding-left: var(--px-data-grid-padding-left);
-        padding-right: var(--px-data-grid-padding-right);
-      }
-
-      :host([highlighted]) [part~="cell"] {
         padding: 0;
       }
 
@@ -117,6 +110,15 @@
 
       :host([striped]) [part~="row"]:not([odd])[selected] [part~="cell"] {
         background: var(--px-data-grid-background-color-striped--even--selected);
+      }
+
+      [part~="cell"]:not([part~="details-cell"]) ::slotted(vaadin-grid-cell-content) {
+        overflow: visible;
+        padding-top: var(--px-data-grid-padding-top);
+        padding-bottom: var(--px-data-grid-padding-bottom);
+        padding-left: var(--px-data-grid-padding-left);
+        padding-right: var(--px-data-grid-padding-right);
+        white-space: normal;
       }
     </style>
   </template>

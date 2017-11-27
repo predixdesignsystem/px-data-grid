@@ -60,8 +60,15 @@
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
             action-menu="{{props.actionMenu.value}}"
             language="{{props.language.value}}"
-            auto-filter="{{props.autoFilter.value}}">
+            auto-filter="{{props.autoFilter.value}}"
+            on-cell-hover="cellHoverListener"
+            on-cell-unhover="cellUnhoverListener">
         </px-data-grid>
+        <label>
+          <input type="checkbox" checked="{{showHoveredCellData::change}}">
+          Show hovered cell data
+        </label>
+        <template is="dom-if" if="[[showHoveredCellData]]"><div>Hovered cell data: [[hoveredCellData]]</div></template>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
 
@@ -86,7 +93,25 @@
   Polymer({
     is: 'px-data-grid-demo',
 
+    cellHoverListener: function(evt) {
+      this.hoveredCellData = evt.detail.cellContent;
+    },
+
+    cellUnhoverListener: function(evt) {
+      if (this.hoveredCellData === evt.detail.cellContent) {
+        this.hoveredCellData = '';
+      }
+    },
+
     properties: {
+      showHoveredCellData: {
+        type: Boolean,
+        value: false,
+      },
+
+      hoveredCellData: {
+        type: String
+      },
       /**
        * Note: The actual data/values for `props` are placed in `this.demoProps`
        * to create a static reference that Polymer shouldn't overwrite.
