@@ -379,6 +379,7 @@
         ready() {
           super.ready();
           this._vaadinGrid = this.shadowRoot.querySelector('vaadin-grid');
+          this._vaadinGrid._filter = this._filter;
 
           this._addColumnsObserver();
 
@@ -519,10 +520,8 @@
          * Function to resolve columns on grid
          */
         _getColumns() {
-          const gridElement = this.shadowRoot.querySelector('vaadin-grid');
-
-          if (gridElement._columnTree) {
-            return gridElement._columnTree[0];
+          if (this._vaadinGrid._columnTree) {
+            return this._vaadinGrid._columnTree[0];
           } else if (this._generatedColumns && this._generatedColumns.length) {
             return this._generatedColumns;
           } else {
@@ -618,15 +617,45 @@
         }
 
         /**
+         * Overridden version of  default _filter method of vaadin-grid
+         */
+        _filter(items) {
+          return items.filter((item, index) => {
+            return this._filters.filter(filter => {
+              const filterValueLowercase = this._normalizeEmptyValue(filter.value).toString().toLowerCase();
+              if (item && filter.path === undefined) {
+                for (const key in item) {
+                  const value = this._normalizeEmptyValue(Polymer.Base.get(key, item));
+                  if (value.toString().toLowerCase().indexOf(filterValueLowercase) !== -1) {
+                    return false;
+                  }
+                }
+                return true;
+              } else {
+                const value = this._normalizeEmptyValue(Polymer.Base.get(filter.path, item));
+                return value.toString().toLowerCase().indexOf(filterValueLowercase) === -1;
+              }
+            }).length === 0;
+          });
+        }
+
+        /**
          * Listener for auto filter component
          */
         _autoFilterChanged(event) {
           // Ignore if autofiltering not enabled
-          if (!this._autoFilter) {
+          if (!this.autoFilter) {
             return;
+          } else {
+            const filters = [
+              {
+                value: event.detail.value
+              }
+            ];
+
+            this._vaadinGrid._filters = filters;
+            this._vaadinGrid.clearCache();
           }
-          // TODO filter handling
-          // How to get value: console.log(event.detail.value);
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);

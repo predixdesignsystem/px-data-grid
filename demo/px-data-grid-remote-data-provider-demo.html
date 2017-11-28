@@ -159,16 +159,21 @@
               .shadowRoot.querySelector('px-data-grid')._populateTableColumns(JSON.parse(xhr.responseText));
           };
           let url = 'https://px-data-grid-dummy-backend.herokuapp.com/contacts?' +
-            '_page=' + (params.page + 1) + '&' +
-            '_limit=' + params.pageSize;
+            '_page=' + encodeURIComponent(params.page + 1) + '&' +
+            '_limit=' + encodeURIComponent(params.pageSize);
+
+          // Add free text filtering
+          if (params.filters.length == 1 && params.filters[0].path == undefined) {
+            url += '&q=' + encodeURIComponent(params.filters[0].value);
+          }
 
           // Add sorting to URL if defined
           if (params.sortOrders.length) {
             const values = params.sortOrders.map(function(sort) {
-              return sort.path;
+              return encodeURIComponent(sort.path);
             });
             const orders = params.sortOrders.map(function(sort) {
-              return sort.direction;
+              return encodeURIComponent(sort.direction);
             });
             url += '&_sort=' + values.join(',') + '&_order=' + orders.join(',');
           }

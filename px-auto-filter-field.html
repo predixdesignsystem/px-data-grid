@@ -93,7 +93,7 @@
         ready() {
           super.ready();
           const input = this.shadowRoot.querySelector('input');
-          input.addEventListener('keypress', event => this._onKeyPress(event));
+          input.addEventListener('keyup', event => this._onKeyUp(event));
           input.addEventListener('change', event => this._onChange(event));
         }
 
@@ -101,7 +101,7 @@
           this._updateValue(true);
         }
 
-        _onKeyPress(event) {
+        _onKeyUp(event) {
           if (event.key === 'Enter' && !event.isComposing) {
             this._updateValue(true);
           } else {
