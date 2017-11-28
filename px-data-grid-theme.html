@@ -18,6 +18,9 @@
         --px-data-grid-header-text-color: #677e8c;
         --px-data-grid-header-font-size: 12px;
         --px-data-grid-cell-focused-color: #72b9dd;
+        --px-data-grid-header-text-color--hover: rgb(6, 87, 105);
+        --px-data-grid-reorder-ghost-outline-color: rgb(3, 44, 54);
+        --px-data-grid-reorder-ghost-box-shadow-color: #a8a8a8;
 
         background-color: var(--px-base-background-color);
         font-family: var(--px-data-grid-font-family);
@@ -43,6 +46,10 @@
       [part~="header-cell"] ::slotted(*),
       [part~="footer-cell"] ::slotted(*) {
         font-size: var(--px-data-grid-header-font-size);
+      }
+
+      [part~="header-cell"]:hover {
+        color: var(--px-data-grid-header-text-color--hover);
       }
 
       /* Header and footer divider between body rows */
@@ -125,6 +132,16 @@
         padding-bottom: 5px;
       }
 
+      [part~="reorder-ghost"] {
+        opacity: 0.65;
+        outline: 1px solid var(--px-data-grid-reorder-ghost-outline-color);
+        box-shadow: 0 0 0 1px var(--px-data-grid-reorder-ghost-box-shadow-color), 0 2px 8px 0 var(--px-data-grid-reorder-ghost-box-shadow-color);
+        padding-top: var(--px-data-grid-padding-top) !important;
+        padding-bottom: var(--px-data-grid-padding-bottom) !important;
+        padding-left: var(--px-data-grid-padding-left) !important;
+        padding-right: var(--px-data-grid-padding-right) !important;
+      }
+
     </style>
   </template>
 </dom-module>
@@ -154,6 +171,11 @@
       [part="order"],
       [part="content"] {
         color: var(--px-data-grid-cell-text-color--sorted);
+      }
+
+      [part="order"]:hover,
+      [part="content"]:hover {
+        color: var(--px-data-grid-header-text-color--hover);
       }
 
       :host(:not([direction])) [part="indicators"]::before {
