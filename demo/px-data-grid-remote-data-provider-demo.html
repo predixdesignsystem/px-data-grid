@@ -52,7 +52,6 @@
       <px-demo-component slot="px-demo-component">
         <px-data-grid
             remote-data-provider="{{props.remoteDataProvider.value}}"
-            size="{{props.size.value}}"
             selectable="{{props.selectable.value}}"
             hide-selection-column="{{props.hideSelectionColumn.value}}"
             resizable="{{props.resizable.value}}"
@@ -150,9 +149,10 @@
         value: (params, callback) => {
           const xhr = new XMLHttpRequest();
           xhr.onload = () => {
-            callback(JSON.parse(xhr.responseText));
+            const size = parseInt(xhr.getAllResponseHeaders().match(/x-total-count: (\d+)/)[1]);
+            callback(JSON.parse(xhr.responseText), size);
 
-            // TODO: @limonte this should be moved in internal functionality
+            // TODO: @limonte this should be moved to internal functionality
             document.querySelector('local-element-demo')
               .shadowRoot.querySelector('px-demo-collection')
               .shadowRoot.querySelector('px-data-grid-remote-data-provider-demo')
@@ -181,11 +181,6 @@
           xhr.open('GET', url, true);
           xhr.send();
         }
-      },
-
-      size: {
-        type: Number,
-        defaultValue: 500
       },
 
       selectable: {
