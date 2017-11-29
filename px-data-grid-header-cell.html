@@ -8,9 +8,16 @@
         display: flex;
         flex: 1;
         align-items: center;
+        --px-dropdown-toggle-icon-size: 12px;
+        margin-left: calc(0px - var(--px-dropdown-toggle-icon-size));
+      }
+
+      px-icon {
+        --iron-icon-height: var(--px-dropdown-toggle-icon-size);
+        --iron-icon-width: var(--px-dropdown-toggle-icon-size);
         --iron-icon-fill-color: var(--px-data-grid-cell-text-color--sorted);
         --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted);
-        justify-content: space-between;
+        cursor: pointer;
       }
 
       px-dropdown[hidden] {
@@ -21,8 +28,10 @@
         align-items: center;
       }
     </style>
+    <px-dropdown button-style="icon" icon="px-nav:menu" items="{{_dropdownItems}}" opened="{{dropdownOpened}}" hidden$="[[_dropdownHidden]]" on-selected-changed="_dropdownSelectedChanged">
+      <px-icon slot="trigger" icon="px-nav:menu"></px-icon>
+    </px-dropdown>
     <slot></slot>
-    <px-dropdown button-style="icon" icon="px-nav:menu" items="{{_dropdownItems}}" opened="{{dropdownOpened}}" hidden$="[[_dropdownHidden]]" on-selected-changed="_dropdownSelectedChanged"></px-dropdown>
   </template>
   <script>
     {

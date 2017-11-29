@@ -17,7 +17,7 @@
     "iron-a11y-announcer": "^v2.0.0",
     "iron-scroll-target-behavior": "^v2.0.0",
     "px-icon-set": "^2.0.0",
-    "px-dropdown": "^4.0.0",
+    "px-dropdown": "custom-trigger-slot",
     "vaadin-grid": "^4.1.0",
     "px-spinner": "^2.2.0"
   },
@@ -35,7 +35,7 @@
     "px-typography-design": "^2.0.3"
   },
   "resolutions": {
-    "px-dropdown": "^4.0.0",
+    "px-dropdown": "custom-trigger-slot",
     "polymer": "^2.0.0",
     "webcomponentsjs": "^v1.0.2"
   }
