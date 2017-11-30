@@ -18,8 +18,7 @@ html {
   --px-data-grid-header-text-color                        :  inherit;
   --px-data-grid-header-background-color                  :  $white;
   --px-data-grid-background-color-striped--odd            :  #F3F5F6;
-  --px-data-grid-background-color-striped--odd--selected  :  #DDE3E6;
-  --px-data-grid-background-color-striped--even--selected :  #E7EBED;
+  --px-data-grid-background-color-striped--selected       :  $gray3;
   --px-data-grid-cell-border-validation--failed           :  $status-red3;
   --px-data-grid-cell-border-color--edit                  :  $primary-default;
   --px-data-grid-cell-border-color--selected              :  rgba($gray8,0.2);

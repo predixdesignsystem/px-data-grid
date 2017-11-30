@@ -97,24 +97,16 @@
         background: var(--px-data-grid-background-color-striped--odd);
       }
 
-      :host([striped]) [part~="row"][odd][selected] {
-        background: var(--px-data-grid-background-color-striped--odd--selected);
-      }
-
-      :host([striped]) [part~="row"]:not([odd])[selected] {
-        background: var(--px-data-grid-background-color-striped--even--selected);
+      :host([striped]) [part~="row"][selected] {
+        background: var(--px-data-grid-background-color-striped--selected);
       }
 
       :host([striped]) [part~="row"][odd] [part~="cell"] {
         background: var(--px-data-grid-background-color-striped--odd);
       }
 
-      :host([striped]) [part~="row"][odd][selected] [part~="cell"] {
-        background: var(--px-data-grid-background-color-striped--odd--selected);
-      }
-
-      :host([striped]) [part~="row"]:not([odd])[selected] [part~="cell"] {
-        background: var(--px-data-grid-background-color-striped--even--selected);
+      :host([striped]) [part~="row"][selected] [part~="cell"] {
+        background: var(--px-data-grid-background-color-striped--selected);
       }
 
       [part~="cell"]:not([part~="details-cell"]) ::slotted(vaadin-grid-cell-content) {

@@ -20,13 +20,12 @@ html {
   --px-data-grid-header-text-color                        :  inherit;
   --px-data-grid-header-background-color                  :  $gray16;
   --px-data-grid-background-color-striped--odd            :  #31434D;
-  --px-data-grid-background-color-striped--odd--selected  :  #3D4F59;
-  --px-data-grid-background-color-striped--even--selected :  #31434E;
+  --px-data-grid-background-color-striped--selected       :  $gray15;
   --px-data-grid-cell-border-validation--failed           :  $status-red3;
   --px-data-grid-cell-border-color--edit                  :  $primary-default;
-  --px-data-grid-cell-border-color--selected              :  rgba($gray10,0.2);
+  --px-data-grid-cell-border-color--selected              :  rgba($gray10, 0.2);
   --px-data-grid-cell-border-validation--failed           :  $status-red3;
-  --px-data-grid-cell-background-color--selected          :  rgba($gray10,0.2);
+  --px-data-grid-cell-background-color--selected          :  rgba($gray10, 0.2);
   --px-data-grid-cell-background-color--edit              :  transparent;
   --px-data-grid-cell-text-color--selected                :  $gray5;
   --px-data-grid-cell-text-color-validation--failed       :  $status-red3;
