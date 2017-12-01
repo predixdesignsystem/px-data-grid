@@ -51,6 +51,22 @@ function runTests() {
       return Array.prototype.slice.call(Polymer.dom(row).querySelectorAll('[part~="cell"]'));
     }
 
+    function flushVaadinGrid() {
+      const vaadinGrid = grid.shadowRoot.querySelector('vaadin-grid');
+      Polymer.flush();
+      vaadinGrid._observer.flush();
+      Polymer.flush();
+      if (vaadinGrid._debounceScrolling) {
+        vaadinGrid._debounceScrolling.flush();
+      }
+      if (vaadinGrid._debounceScrollPeriod) {
+        vaadinGrid._debounceScrollPeriod.flush();
+      }
+      if (vaadinGrid._debouncerLoad) {
+        vaadinGrid._debouncerLoad.flush();
+      }
+    }
+
     function getCellContent(cell) {
       const slot = cell.querySelector('slot');
       const slotName = slot.getAttribute('name');
@@ -79,11 +95,11 @@ function runTests() {
     });
 
     describe('simple-grid tests', () => {
-      it('should properly populate _generatedColumns', () => {
-        expect(grid._generatedColumns.length).to.be.eql(3);
-        expect(grid._generatedColumns[0].name).to.be.eql('first');
-        expect(grid._generatedColumns[1].name).to.be.eql('last');
-        expect(grid._generatedColumns[2].name).to.be.eql('email');
+      it('should properly populate columns', () => {
+        expect(grid.columns.length).to.be.eql(3);
+        expect(grid.columns[0].name).to.be.eql('first');
+        expect(grid.columns[1].name).to.be.eql('last');
+        expect(grid.columns[2].name).to.be.eql('email');
       });
     });
 
@@ -138,22 +154,6 @@ function runTests() {
     });
 
     describe('highlighting', () => {
-      function flushVaadinGrid() {
-        const vaadinGrid = grid.shadowRoot.querySelector('vaadin-grid');
-        vaadinGrid._observer.flush();
-        grid._observer.flush();
-        if (vaadinGrid._debounceScrolling) {
-          vaadinGrid._debounceScrolling.flush();
-        }
-        if (vaadinGrid._debounceScrollPeriod) {
-          vaadinGrid._debounceScrollPeriod.flush();
-        }
-        Polymer.flush();
-        if (vaadinGrid._debouncerLoad) {
-          vaadinGrid._debouncerLoad.flush();
-        }
-      }
-
       beforeEach((done) => {
         flushVaadinGrid();
         window.flush(done);
@@ -168,7 +168,7 @@ function runTests() {
           }
         }];
 
-        expect(grid._getCellStyle(data[2], grid._generatedColumns[0])).to.eql('background: red');
+        expect(grid._getCellStyle(data[2], grid.columns[0])).to.eql('background: red');
       });
 
       it('should highlight row', () => {
@@ -180,9 +180,9 @@ function runTests() {
           }
         }];
 
-        expect(grid._getCellStyle(data[3], grid._generatedColumns[0])).to.eq('background: yellow');
-        expect(grid._getCellStyle(data[3], grid._generatedColumns[1])).to.eq('background: yellow');
-        expect(grid._getCellStyle(data[3], grid._generatedColumns[2])).to.eq('background: yellow');
+        expect(grid._getCellStyle(data[3], grid.columns[0])).to.eq('background: yellow');
+        expect(grid._getCellStyle(data[3], grid.columns[1])).to.eq('background: yellow');
+        expect(grid._getCellStyle(data[3], grid.columns[2])).to.eq('background: yellow');
       });
 
       it('should highlight column', () => {
@@ -195,11 +195,49 @@ function runTests() {
         }];
 
         data.forEach((d) => {
-          expect(grid._getCellStyle(d, grid._generatedColumns[0])).to.eq('background: blue');
+          expect(grid._getCellStyle(d, grid.columns[0])).to.eq('background: blue');
         });
       });
     });
 
+    describe('manually passed columns', () => {
+      const columns = [
+        {
+          name: 'first',
+          header: 'First Name',
+          value: (item) => {
+            return item.first;
+          }
+        },
+        {
+          name: 'last',
+          header: 'Last Name',
+          value: (item) => {
+            return item.last;
+          }
+        },
+        {
+          name: 'email',
+          header: 'Email',
+          value: (item) => {
+            return item.email;
+          }
+        },
+        {
+          header: 'Hidden column',
+          hidden: true,
+          value: (item) => {
+            return 'hidden data';
+          }
+        }
+      ];
+
+      it('should change generated column to manually passed', () => {
+        grid.columns = columns;
+        flushVaadinGrid();
+        expect(grid._vaadinGrid.querySelectorAll('px-data-grid-column').length).to.be.eq(4);
+      });
+    });
 
     describe('column dropdown menu', () => {
       let firstNameHeaderCell;
@@ -244,22 +282,6 @@ function runTests() {
       it('should hide the column', () => {
         getHeaderCellContent(firstNameHeaderCell)._hideColumn();
         expect(firstNameHeaderCell.hasAttribute('hidden')).to.be.true;
-      });
-    });
-
-    describe('grid-with-columns tests', () => {
-      beforeEach((done) => {
-        grid = fixture('grid-with-columns');
-        grid.tableData = data;
-        Polymer.RenderStatus.afterNextRender(grid, () => {
-          setTimeout(() => { // IE11
-            done();
-          });
-        });
-      });
-
-      it('should set _generatedColumns to empty array', () => {
-        expect(grid._generatedColumns.length).to.be.eql(0);
       });
     });
 

@@ -48,6 +48,15 @@
               type: Object
             },
 
+            /**
+             * Just a trick to map generated column instance to matching data object.
+             * Can be also used to update object when properties change.
+             */
+            _mappedObject: {
+              type: Object,
+              observer: '_mappedObjectChanged'
+            },
+
             _headerCellContentWrapper: {
               type: Element
             },
@@ -104,6 +113,12 @@
         _typeChanged(type) {
           if (type && this._permittedTypes.indexOf(type.toLowerCase()) == -1) {
             console.warn(`${type} is unsupported type for px-data-grid-column.`);
+          }
+        }
+
+        _mappedObjectChanged(obj) {
+          if (obj) {
+            obj.element = this;
           }
         }
       }

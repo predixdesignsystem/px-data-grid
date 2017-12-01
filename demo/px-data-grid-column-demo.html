@@ -21,8 +21,8 @@
 
     <!-- Header -->
     <px-demo-header
-        module-name="px-data-grid-column"
-        description="The optional Data Grid Column sub-component provides the ability to override and customize the behavior of individual columns."
+        module-name='px-data-grid columns="[{}, {}, ...]"'
+        description="The optional columns property provides the ability to override and customize the behavior of individual columns."
         mobile desktop tablet>
     </px-demo-header>
 
@@ -45,34 +45,10 @@
           column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
           action-menu="{{props.actionMenu.value}}"
           language="{{props.language.value}}"
-          table-actions="{{props.tableActions.value}}">
-          <px-data-grid-column name="Full Name" hidden="{{props.hideFullName.value}}" frozen="{{props.freezeFullName.value}}">
-            <template class="header">
-                <vaadin-grid-sorter path="last">Full Name</vaadin-grid-sorter>
-            </template>
-            <template>[[item.first]] [[item.last]]</template>
-          </px-data-grid-column>
-
-          <px-data-grid-column name="First Name">
-            <template class="header">
-              <vaadin-grid-sorter path="first">First Name</vaadin-grid-sorter>
-            </template>
-            <template>[[item.first]]</template>
-          </px-data-grid-column>
-
-          <px-data-grid-column name="Last Name">
-            <template class="header">
-                <vaadin-grid-sorter path="last">Last Name</vaadin-grid-sorter>
-            </template>
-            <template>[[item.last]]</template>
-          </px-data-grid-column>
-
-          <px-data-grid-column name="Email">
-            <template class="header">
-                <vaadin-grid-sorter path="email">Email</vaadin-grid-sorter>
-            </template>
-            <template>[[item.email]]</template>
-          </px-data-grid-column>
+          table-actions="{{props.tableActions.value}}"
+          columns="{{props.columns.value}}"
+          highlight="{{props.highlight.value}}"
+          auto-filter="{{props.autoFilter.value}}">
         </px-data-grid>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -80,13 +56,13 @@
       <px-demo-component-snippet
           slot="px-demo-component-snippet"
           element-properties="{{props}}"
-          element-name="px-data-grid-column"
+          element-name="px-data-grid"
           links-includes="[[linksIncludes]]">
       </px-demo-component-snippet>
     </px-demo-interactive>
 
     <!-- API Viewer -->
-    <px-demo-api-viewer api-source-file-path="px-data-grid-api.json" source="px-data-grid-column"></px-demo-api-viewer>
+    <px-demo-api-viewer api-source-file-path="px-data-grid-api.json" source="px-data-grid"></px-demo-api-viewer>
 
     <!-- Footer -->
     <px-demo-footer></px-demo-footer>
@@ -154,237 +130,284 @@
                 {
                   first: 'Elizabeth',
                   last: 'Wong',
-                  email: 'sika@iknulber.cl'
+                  email: 'sika@iknulber.cl',
+                  age: 32
                 },
                 {
                   first: 'Jeffrey',
                   last: 'Hamilton',
-                  email: 'cofok@rac.be'
+                  email: 'cofok@rac.be',
+                  age: 23
                 },
                 {
                   first: 'Alma',
                   last: 'Martin',
-                  email: 'dotta@behtam.la'
+                  email: 'dotta@behtam.la',
+                  age: 42
                 },
                 {
                   first: 'Carl',
                   last: 'Saunders',
-                  email: 'seh@bibapu.gy'
+                  email: 'seh@bibapu.gy',
+                  age: 12
                 },
                 {
                   first: 'Willie',
                   last: 'Dennis',
-                  email: 'izko@dahokwej.ci'
+                  email: 'izko@dahokwej.ci',
+                  age: 44
                 },
                 {
                   first: 'Angel',
                   last: 'Lewis',
-                  email: 'ma@et.nz'
+                  email: 'ma@et.nz',
+                  age: 89
                 },
                 {
                   first: 'Jessie',
                   last: 'Sherman',
-                  email: 'hunocnas@mosuraj.gi'
+                  email: 'hunocnas@mosuraj.gi',
+                  age: 27
                 },
                 {
                   first: 'Eric',
                   last: 'Brewer',
-                  email: 'tu@coajoul.de'
+                  email: 'tu@coajoul.de',
+                  age: 88
                 },
                 {
                   first: 'Cory',
                   last: 'Ramos',
-                  email: 'kilamja@oviafbek.ss'
+                  email: 'kilamja@oviafbek.ss',
+                  age: 9
                 },
                 {
                   first: 'Bertie',
                   last: 'Ross',
-                  email: 'ifuvu@getvi.my'
+                  email: 'ifuvu@getvi.my',
+                  age: 27
                 },
                 {
                   first: 'Oscar',
                   last: 'Estrada',
-                  email: 'minu@kerireg.gp'
+                  email: 'minu@kerireg.gp',
+                  age: 15
                 },
                 {
                   first: 'Estelle',
                   last: 'Patton',
-                  email: 'hudliami@lijihen.fi'
+                  email: 'hudliami@lijihen.fi',
+                  age: 11
                 },
                 {
                   first: 'Sallie',
                   last: 'George',
-                  email: 'wo@zof.bf'
+                  email: 'wo@zof.bf',
+                  age: 33
                 },
                 {
                   first: 'Harriett',
                   last: 'Wheeler',
-                  email: 'woguw@cibevo.pt'
+                  email: 'woguw@cibevo.pt',
+                  age: 52
                 },
                 {
                   first: 'Bryan',
                   last: 'Houston',
-                  email: 'tekkubom@gaahu.ge'
+                  email: 'tekkubom@gaahu.ge',
+                  age: 77
                 },
                 {
                   first: 'Leon',
                   last: 'Craig',
-                  email: 'wo@gurozo.gs'
+                  email: 'wo@gurozo.gs',
+                  age: 2
                 },
                 {
                   first: 'Mable',
                   last: 'Taylor',
-                  email: 'um@fegnocka.pg'
+                  email: 'um@fegnocka.pg',
+                  age: 11
                 },
                 {
                   first: 'Ida',
                   last: 'Hansen',
-                  email: 'lufahu@gewlaskoc.kh'
+                  email: 'lufahu@gewlaskoc.kh',
+                  age: 44
                 },
                 {
                   first: 'Adele',
                   last: 'Thornton',
-                  email: 'gugugo@nevigi.th'
+                  email: 'gugugo@nevigi.th',
+                  age: 41
                 },
                 {
                   first: 'Jerry',
                   last: 'Kelley',
-                  email: 'solef@zoose.as'
+                  email: 'solef@zoose.as',
+                  age: 67
                 },
                 {
                   first: 'Clara',
                   last: 'Delgado',
-                  email: 'fivticnuf@upkib.rw'
+                  email: 'fivticnuf@upkib.rw',
+                  age: 66
                 },
                 {
                   first: 'Joseph',
                   last: 'Stevenson',
-                  email: 'be@viijo.lk'
+                  email: 'be@viijo.lk',
+                  age: 22
                 },
                 {
                   first: 'Ellen',
                   last: 'Perry',
-                  email: 'ce@jewo.sv'
+                  email: 'ce@jewo.sv',
+                  age: 23
                 },
                 {
                   first: 'Ronnie',
                   last: 'Cummings',
-                  email: 'iro@wi.vn'
+                  email: 'iro@wi.vn',
+                  age: 17
                 },
                 {
                   first: 'Olive',
                   last: 'Santos',
-                  email: 'vo@nees.cn'
+                  email: 'vo@nees.cn',
+                  age: 99
                 },
                 {
                   first: 'Rena',
                   last: 'Tucker',
-                  email: 'uharoc@lohpol.gl'
+                  email: 'uharoc@lohpol.gl',
+                  age: 102
                 },
                 {
                   first: 'Nell',
                   last: 'Hicks',
-                  email: 'felaf@vo.sb'
+                  email: 'felaf@vo.sb',
+                  age: 76
                 },
                 {
                   first: 'Jesus',
                   last: 'Hawkins',
-                  email: 'wahgab@mu.mk'
+                  email: 'wahgab@mu.mk',
+                  age: 34
                 },
                 {
                   first: 'Duane',
                   last: 'Harris',
-                  email: 'kellanjob@daava.ph'
+                  email: 'kellanjob@daava.ph',
+                  age: 23
                 },
                 {
                   first: 'Jonathan',
                   last: 'Holmes',
-                  email: 'jir@bikuf.dj'
+                  email: 'jir@bikuf.dj',
+                  age: 49
                 },
                 {
                   first: 'Christine',
                   last: 'Collier',
-                  email: 'bocago@jerla.ba'
+                  email: 'bocago@jerla.ba',
+                  age: 48
                 },
                 {
                   first: 'Brandon',
                   last: 'Thompson',
-                  email: 'regoh@ji.kn'
+                  email: 'regoh@ji.kn',
+                  age: 43
                 },
                 {
                   first: 'Anne',
                   last: 'Dunn',
-                  email: 'samhof@are.sc'
+                  email: 'samhof@are.sc',
+                  age: 41
                 },
                 {
                   first: 'Viola',
                   last: 'Sherman',
-                  email: 'wep@kezori.lt'
+                  email: 'wep@kezori.lt',
+                  age: 44
                 },
                 {
                   first: 'Kathryn',
                   last: 'Harper',
-                  email: 'keotoci@je.mr'
+                  email: 'keotoci@je.mr',
+                  age: 77
                 },
                 {
                   first: 'Calvin',
                   last: 'Bates',
-                  email: 'bomeg@lip.bw'
+                  email: 'bomeg@lip.bw',
+                  age: 38
                 },
                 {
                   first: 'Maggie',
                   last: 'Collins',
-                  email: 'zonefto@ihihij.ke'
+                  email: 'zonefto@ihihij.ke',
+                  age: 35
                 },
                 {
                   first: 'Zachary',
                   last: 'Mitchell',
-                  email: 'wamez@cilvahbod.mk'
+                  email: 'wamez@cilvahbod.mk',
+                  age: 26
                 },
                 {
                   first: 'Raymond',
                   last: 'Kelley',
-                  email: 'wuz@napujos.tt'
+                  email: 'wuz@napujos.tt',
+                  age: 21
                 },
                 {
                   first: 'Augusta',
                   last: 'Torres',
-                  email: 'bum@ne.lt'
+                  email: 'bum@ne.lt',
+                  age: 54
                 },
                 {
                   first: 'Charlie',
                   last: 'Lindsey',
-                  email: 'ruhlu@tuobujen.ao'
+                  email: 'ruhlu@tuobujen.ao',
+                  age: 15
                 },
                 {
                   first: 'Jeremy',
                   last: 'Swanson',
-                  email: 'ed@ted.km'
+                  email: 'ed@ted.km',
+                  age: 21
                 },
                 {
                   first: 'Joel',
                   last: 'Gonzalez',
-                  email: 'ej@pot.bz'
+                  email: 'ej@pot.bz',
+                  age: 18
                 },
                 {
                   first: 'Lillie',
                   last: 'Hawkins',
-                  email: 'uguiv@mudbuve.pa'
+                  email: 'uguiv@mudbuve.pa',
+                  age: 43
                 },
                 {
                   first: 'Joel',
                   last: 'Watts',
-                  email: 'naafe@oli.bb'
+                  email: 'naafe@oli.bb',
+                  age: 1
                 },
                 {
                   first: 'Isabella',
                   last: 'Sandoval',
-                  email: 'asobu@wedef.af'
+                  email: 'asobu@wedef.af',
+                  age: 3
                 },
                 {
                   first: 'Roy',
                   last: 'Lyons',
-                  email: 'rasaogu@tadiri.tc'
+                  email: 'rasaogu@tadiri.tc',
+                  age: 88
                 }
               ]
             }
@@ -402,27 +425,76 @@
           {
             first: 'Elizabeth',
             last: 'Wong',
-            email: 'sika@iknulber.cl'
+            email: 'sika@iknulber.cl',
+            age: 23
           },
           {
             first: 'Jeffrey',
             last: 'Hamilton',
-            email: 'cofok@rac.be'
+            email: 'cofok@rac.be',
+            age: 32
           },
           {
             first: 'Alma',
             last: 'Martin',
-            email: 'dotta@behtam.la'
+            email: 'dotta@behtam.la',
+            age: 44
           },
           {
             first: 'Carl',
             last: 'Saunders',
-            email: 'seh@bibapu.gy'
+            email: 'seh@bibapu.gy',
+            age: 12
           },
           {
             first: 'Willie',
             last: 'Dennis',
-            email: 'izko@dahokwej.ci'
+            email: 'izko@dahokwej.ci',
+            age: 56
+          }
+        ],
+        inputType: 'code:JSON'
+      },
+
+      columns: {
+        type: Array,
+        defaultValue: [
+          {
+            name: 'Full Name',
+            hidden: true,
+            path: 'last',
+            value: (item) => {
+              return item.first + ' ' + item.last;
+            }
+          },
+          {
+            name: 'First Name',
+            path: 'first',
+            value: (item) => {
+              return item.first;
+            }
+          },
+          {
+            name: 'Last Name',
+            path: 'last',
+            value: (item) => {
+              return item.last;
+            }
+          },
+          {
+            name: 'Email',
+            path: 'email',
+            value: (item) => {
+              return item.email;
+            }
+          },
+          {
+            name: 'Age',
+            path: 'age',
+            type: 'number',
+            value: (item) => {
+              return item.age;
+            }
           }
         ],
         inputType: 'code:JSON'
@@ -441,6 +513,12 @@
       },
 
       actionMenu: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      autoFilter: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'
@@ -469,6 +547,18 @@
         value: 'en',
         inputType: 'dropdown',
         inputChoices: ['en', 'fr', 'fi']
+      },
+
+      highlight: {
+        type: Array,
+        value: [
+          {
+            type: 'cell',
+            condition: (cellContent, column, item) => {
+              return cellContent == 'Elizabeth';
+            }
+          }
+        ]
       },
 
       tableActions: {
