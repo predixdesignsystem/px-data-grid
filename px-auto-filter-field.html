@@ -85,45 +85,27 @@
             },
 
             value: {
-              type: String
+              type: String,
+              observer: '_onChange'
             }
           };
         }
 
         ready() {
           super.ready();
-          const input = this.shadowRoot.querySelector('input');
-          input.addEventListener('keyup', event => this._onKeyUp(event));
-          input.addEventListener('change', event => this._onChange(event));
         }
 
-        _onChange(event) {
-          this._updateValue(true);
-        }
-
-        _onKeyUp(event) {
-          if (event.key === 'Enter' && !event.isComposing) {
-            this._updateValue(true);
-          } else {
-            this._updateValue(false);
-          }
-        }
-
-        _updateValue(ready) {
-          if (ready) {
-            this.dispatchEvent(new CustomEvent('filter-change', {
-              detail: {
-                value: this.value
-              },
-              bubbles: true
-            }));
-          } else {
-            this._renderDebouncer = Polymer.Debouncer.debounce(
-              this._renderDebouncer,
-              Polymer.Async.timeOut.after(this.timeout), () => {
-                this._updateValue(true);
-              });
-          }
+        _onChange() {
+          this._renderDebouncer = Polymer.Debouncer.debounce(
+            this._renderDebouncer,
+            Polymer.Async.timeOut.after(this.timeout), () => {
+              this.dispatchEvent(new CustomEvent('filter-change', {
+                detail: {
+                  value: this.value
+                },
+                bubbles: true
+              }));
+            });
         }
       }
 
