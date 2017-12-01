@@ -62,7 +62,13 @@
       Load dark theme files for later use. Stamp dynamic theme switcher, which
       listens for theme update messages from the parent page and applies them.
     -->
+    <link defer rel="import" href="../px-theme/px-theme-styles.html">
     <link defer rel="import" href="../px-dark-theme/px-dark-theme-styles.html">
+
+    <custom-style id="px-theme-styles">
+      <style include="px-theme-styles" is="custom-style"></style>
+    </custom-style>
+
     <link defer rel="import" href="../px-dark-demo-theme/px-dark-demo-theme-styles.html">
     <!-- <link defer rel="import" href="../px-demo/px-demo-theme-switcher.html">
     <px-demo-theme-switcher-frame id="themeMessenger" origin="https://www.predix-ui.com"></px-demo-theme-switcher-frame>
@@ -82,16 +88,23 @@
         // });
         let dark = false;
         let customStyle = document.getElementById('px-data-grid-theme-styles');
+        let themeStyle = document.getElementById('px-theme-styles');
+
         const themeSwitcher = document.getElementById('theme-switcher');
         themeSwitcher.addEventListener('change', () => switchTheme());
 
         function switchTheme() {
           dark = !dark;
           const newCustomStyle = document.createElement('custom-style');
+          const newThemeStyle = document.createElement('custom-style');
           newCustomStyle.innerHTML = `<style include="px-data-grid-${dark ? 'dark' : 'light'}-theme-styles" is="custom-style"></style>`;
+          newThemeStyle.innerHTML = `<style include="px${dark ? '-dark' : ''}-theme-styles" is="custom-style"></style>`;
           document.head.appendChild(newCustomStyle);
+          document.head.appendChild(newThemeStyle);
           customStyle.remove();
+          themeStyle.remove();
           customStyle = newCustomStyle;
+          themeStyle = newThemeStyle;
         }
       })();
     </script>
