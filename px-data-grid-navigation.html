@@ -18,6 +18,7 @@
       .right {
         display: inline-block;
         position: absolute;
+        top: 4px; /* this is to vertically align with px-dropdown's height */
         right: 0;
         padding-right: var(--px-data-grid-padding-right, 12px);
       }
@@ -52,23 +53,32 @@
         cursor: pointer;
       }
 
-      .page-selection .arrow.disabled {
+      .page-selection .arrow:disabled {
         color: var(--px-data-grid-navigation-text-color--disabled, #CCC);
         cursor: default;
+      }
+
+      .page-selection .arrow:focus {
+        outline: none;
       }
 
       .page-selection .page-list {
         display: inline-block;
       }
 
-      .page-selection .page-list .page-button {
+      .page-selection .page-button {
+        color: var(--px-data-grid-navigation-text-color, #000);
         display: inline-block;
         cursor: pointer;
-        padding: 5px 7px;
+        padding: 2px 7px;
+        background: none;
+        margin: 0;
+        border: none;
       }
 
       .page-selection .page-list .page-button.selected {
         border: solid 1px var(--px-data-grid-navigation-page-number-border-color, #CCC);
+        border-radius: 0;
         color: var(--px-data-grid-navigation-text-color--selected, #000);
       }
     </style>
@@ -87,48 +97,38 @@
     <div class="right">
       <!-- row counts -->
       <div class="row-counts">
-        <span class="current-rows">[[_getItemsRangeStr()]]</span> of [[totalItemCount]]
+        <span class="current-rows">
+          [[_getItemsRangeStr(currentPage, pageSize, totalItemCount)]]
+        </span> of [[totalItemCount]]
       </div>
 
       <!-- page selection list -->
       <div class="page-selection">
         <!-- back arrow -->
-        <template is="dom-if" if="[[_isCurrentPage(1)]]">
-          <div class="arrow disabled">
-            <px-icon icon="px-nav:back"></px-icon>
-          </div>
-        </template>
-        <template is="dom-if" if="[[!_isCurrentPage(1)]]">
-          <div class="arrow" on-tap="_onBackTap">
-            <px-icon icon="px-nav:back"></px-icon>
-          </div>
-        </template>
+        <button class="page-button arrow" on-tap="_onBackTap"
+            disabled$="[[!_isBackArrowEnabled(currentPage, numberOfPages)]]">
+          <px-icon icon="px-nav:back"></px-icon>
+        </button>
         <!-- page number list -->
         <div class="page-list">
-          <template is="dom-repeat" items="[[_getPagesList()]]">
-            <template is="dom-if" if="[[_isCurrentPage(item)]]">
-              <div class="page-button selected" on-tap="_onPageTap">
+          <template is="dom-repeat" items="[[_getPagesList(currentPage, numberOfPages)]]">
+            <template is="dom-if" if="[[_isCurrentPage(item, currentPage)]]" restamp>
+              <div class="page-button page-number selected">
                 [[item]]
               </div>
             </template>
-            <template is="dom-if" if="[[!_isCurrentPage(item)]]">
-              <div class="page-button" on-tap="_onPageTap">
+            <template is="dom-if" if="[[!_isCurrentPage(item, currentPage)]]" restamp>
+              <div class="page-button page-number" on-tap="_onPageTap">
                 [[item]]
               </div>
             </template>
           </template>
         </div>
         <!-- next arrow -->
-        <template is="dom-if" if="[[_isCurrentPage(numberOfPages)]]">
-          <div class="arrow disabled">
-            <px-icon icon="px-nav:next"></px-icon>
-          </div>
-        </template>
-        <template is="dom-if" if="[[!_isCurrentPage(numberOfPages)]]">
-          <div class="arrow" on-tap="_onNextTap">
-            <px-icon icon="px-nav:next"></px-icon>
-          </div>
-        </template>
+        <button class="page-button arrow" on-tap="_onNextTap"
+            disabled$="[[!_isNextArrowEnabled(currentPage, numberOfPages)]]">
+          <px-icon icon="px-nav:next"></px-icon>
+        </button>
       </div>
     </div>
 
@@ -242,13 +242,18 @@
          */
         _onPageTap(event) {
           const pageNumber = Number.parseInt(event.path[0].innerText);
-          this._fireChangeEvent({
-            pageSize: this.pageSize,
-            currentPage: pageNumber
-          });
+          if (!isNaN(pageNumber)) {
+            this._fireChangeEvent({
+              pageSize: this.pageSize,
+              currentPage: pageNumber
+            });
+          }
         }
 
         _onBackTap(event) {
+          if (this.currentPage == 1) {
+            return;
+          }
           this._fireChangeEvent({
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1
@@ -256,6 +261,9 @@
         }
 
         _onNextTap(event) {
+          if (this.currentPage == this.numberOfPages) {
+            return;
+          }
           this._fireChangeEvent({
             pageSize: this.pageSize,
             currentPage: this.currentPage + 1
@@ -293,11 +301,13 @@
          * Returns string showing the min and max item numbers based on
          * the current page.
          */
-        _getItemsRangeStr() {
-          const min = this.currentPage * this.pageSize;
-          let max = (this.currentPage + 1) * this.pageSize;
-          // dont let max be greater than total item count
-          max = (this.totalItemCount > 0 && max > this.totalItemCount) ? this.totalItemCount : max;
+        _getItemsRangeStr(currentPage, pageSize, totalItemCount) {
+          // min can be no less than 1
+          let min = (currentPage - 1) * pageSize + 1;
+          min = (min < 1) ? 1 : min;
+          // max can be no more than totalItemCount
+          let max = currentPage * pageSize;
+          max = (totalItemCount > 0 && max > totalItemCount) ? totalItemCount : max;
           return min + ' - ' + max;
         }
 
@@ -305,7 +315,6 @@
          * Gets an array of page numbers based on the numberOfPages property.
          */
         _getPagesList() {
-
           // TODO: change ellipsis to use &hellip;
 
           const pageList = [];
@@ -354,6 +363,14 @@
          */
         _isCurrentPage(pageNumber) {
           return this.currentPage === pageNumber;
+        }
+
+        _isBackArrowEnabled(currentPage) {
+          return currentPage > 1;
+        }
+
+        _isNextArrowEnabled(currentPage) {
+          return currentPage < this.numberOfPages;
         }
 
       }

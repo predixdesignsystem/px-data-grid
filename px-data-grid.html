@@ -5,7 +5,6 @@
 <link rel="import" href="../px-spinner/px-spinner.html">
 <link rel="import" href="px-data-grid-column.html">
 <link rel="import" href="px-auto-filter-field.html">
-<link rel="import" href="px-data-grid-navigation.html">
 <link rel="import" href="px-data-grid-theme.html">
 <link rel="import" href="px-data-grid-selection-column.html">
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
@@ -177,15 +176,6 @@
 
     </vaadin-grid>
 
-    <!-- pagination component -->
-    <template is="dom-if" if="[[pagination]]">
-      <div class="action-bar">
-        <px-data-grid-navigation
-          on-navigation-change="_onNavigationChange">
-        </px-data-grid-navigation>
-      </div>
-    </template>
-
     <px-spinner size="40" hidden$="[[_spinnerHidden]]"></px-spinner>
   </template>
   <script>
@@ -333,14 +323,6 @@
             columns: {
               type: Array,
               value: []
-            },
-
-            /**
-             * Define if table uses paging to display data
-             */
-            pagination: {
-              type: Boolean,
-              value: false
             },
 
             /**
@@ -1147,13 +1129,6 @@
           this.set('_filterHighlights', filterHighlights);
 
           this._vaadinGrid.clearCache();
-        }
-
-        /**
-         * Listener for px-data-grid-navigation component
-         */
-        _onNavigationChange(event) {
-
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);
