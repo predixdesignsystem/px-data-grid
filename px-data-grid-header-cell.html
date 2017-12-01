@@ -102,11 +102,27 @@
         _freezeColumn() {
           this._column.frozen = true;
 
+          this.dispatchEvent(new CustomEvent('column-froze', {
+            bubbles: true,
+            composed: true,
+            detail: {
+              column: this._column
+            }
+          }));
+
           this._setDropdownItems();
         }
 
         _unfreezeColumn() {
           this._column.frozen = false;
+
+          this.dispatchEvent(new CustomEvent('column-unfroze', {
+            bubbles: true,
+            composed: true,
+            detail: {
+              column: this._column
+            }
+          }));
 
           this._setDropdownItems();
         }
@@ -152,6 +168,16 @@
         _dropdownOpenedChanged(dropdownOpened) {
           if (!dropdownOpened && !this._mouseover) {
             this._dropdownHidden = true;
+          }
+
+          // This hack is needed because each column has its own stacking context
+          // and when the drop-down of the pinned column opens,
+          // it is overlapped by the next pinned column.
+          const rowStyle = this.parentElement.assignedSlot.parentElement.style;
+          if (dropdownOpened) {
+            rowStyle.zIndex = '3';
+          } else {
+            rowStyle.zIndex = '';
           }
         }
 

@@ -377,6 +377,19 @@
           this._vaadinGrid = this.shadowRoot.querySelector('vaadin-grid');
           this._vaadinGrid._filter = this._filter;
 
+          this.addEventListener('column-froze', (event) => {
+            this._vaadinGrid.insertBefore(event.detail.column, this._vaadinGrid.firstElementChild);
+            this._vaadinGrid._observer.flush();
+          });
+
+          this.addEventListener('column-unfroze', (event) => {
+            const columnsRow = this._vaadinGrid._columnTree[this._vaadinGrid._columnTree.length - 1].slice(0);
+            const lastFrozen = columnsRow.filter((column) => column._lastFrozen)[0];
+            if (lastFrozen) {
+              this._vaadinGrid.insertBefore(event.detail.column, lastFrozen.nextSibling);
+            }
+          });
+
           this._addColumnsObserver();
 
           if (this.highlight.length) {
