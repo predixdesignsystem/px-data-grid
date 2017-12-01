@@ -63,7 +63,8 @@
             language="{{props.language.value}}"
             auto-filter="{{props.autoFilter.value}}"
             on-cell-hover="cellHoverListener"
-            on-cell-unhover="cellUnhoverListener">
+            on-cell-unhover="cellUnhoverListener"
+            pagination="{{props.pagination.value}}">
         </px-data-grid>
 
         <dom-if if="[[selectedItems.length]]">
@@ -492,6 +493,12 @@
       autoFilter: {
         type: Boolean,
         defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      pagination: {
+        type: Boolean,
+        value: false,
         inputType: 'toggle'
       },
 

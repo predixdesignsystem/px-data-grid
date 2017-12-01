@@ -52,5 +52,11 @@ html {
   --px-auto-filter-field-bottom-border-color--hover       :  $gray15;
   --px-auto-filter-field-bottom-border-color--focus       :  rgba($status-blue3,0.25);
 
+  // Navigation
+  --px-data-grid-navigation-text-color                    :  $gray10;
+  --px-data-grid-navigation-text-color--dark              :  $gray15;
+  --px-data-grid-navigation-text-color--selected          :  $select-default;
+  --px-data-grid-navigation-text-color--disabled          :  rgba($grey8,0.5);
+  --px-data-grid-navigation-page-number-border-color      :  $grey7;
 }
 

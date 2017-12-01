@@ -1,0 +1,370 @@
+<link rel="import" href="../polymer/polymer-element.html"/>
+<link rel="import" href="px-data-grid-theme.html">
+<link rel="import" href="../px-dropdown/px-dropdown.html">
+<link rel="import" href="../px-icon-set/px-icon-set-navigation.html">
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
+
+<dom-module id="px-data-grid-navigation">
+  <template>
+    <style>
+      :host {
+        position: relative;
+        display: block;
+        color: var(--px-data-grid-navigation-text-color, #000);
+        padding-top: var(--px-data-grid-navigation-padding-top, 2px);
+        padding-bottom: var(--px-data-grid-navigation-padding-bottom, 2px);
+      }
+
+      .right {
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        padding-right: var(--px-data-grid-padding-right, 12px);
+      }
+
+      .page-size-select {
+        display: inline-block;
+        padding-left: var(--px-data-grid-padding-left, 12px);
+      }
+
+      .page-size-select px-dropdown {
+        --px-btn-min-width: 30px;
+        display: inline-block;
+        margin-left: 2px;
+      }
+
+      .row-counts {
+        display: inline-block;
+        margin-right: 20px;
+        color: var(--px-data-grid-navigation-text-color--dark, #000);
+      }
+
+      .row-counts .current-rows {
+        font-weight: bold;
+      }
+
+      .page-selection {
+        display: inline-block;
+      }
+
+      .page-selection .arrow {
+        display: inline-block;
+        cursor: pointer;
+      }
+
+      .page-selection .arrow.disabled {
+        color: var(--px-data-grid-navigation-text-color--disabled, #CCC);
+        cursor: default;
+      }
+
+      .page-selection .page-list {
+        display: inline-block;
+      }
+
+      .page-selection .page-list .page-button {
+        display: inline-block;
+        cursor: pointer;
+        padding: 5px 7px;
+      }
+
+      .page-selection .page-list .page-button.selected {
+        border: solid 1px var(--px-data-grid-navigation-page-number-border-color, #CCC);
+        color: var(--px-data-grid-navigation-text-color--selected, #000);
+      }
+    </style>
+
+    <!-- page size select -->
+    <div class="page-size-select">
+      Rows per page
+      <px-dropdown
+        display-value="[[_numToStr(pageSize)]]"
+        items="[[_numArrayToStrArray(selectablePageSizes)]]"
+        on-selected-changed="_pageSizeChange"
+        button-style="bare--primary">
+      </px-dropdown>
+    </div>
+
+    <div class="right">
+      <!-- row counts -->
+      <div class="row-counts">
+        <span class="current-rows">[[_getItemsRangeStr()]]</span> of [[totalItemCount]]
+      </div>
+
+      <!-- page selection list -->
+      <div class="page-selection">
+        <!-- back arrow -->
+        <template is="dom-if" if="[[_isCurrentPage(1)]]">
+          <div class="arrow disabled">
+            <px-icon icon="px-nav:back"></px-icon>
+          </div>
+        </template>
+        <template is="dom-if" if="[[!_isCurrentPage(1)]]">
+          <div class="arrow" on-tap="_onBackTap">
+            <px-icon icon="px-nav:back"></px-icon>
+          </div>
+        </template>
+        <!-- page number list -->
+        <div class="page-list">
+          <template is="dom-repeat" items="[[_getPagesList()]]">
+            <template is="dom-if" if="[[_isCurrentPage(item)]]">
+              <div class="page-button selected" on-tap="_onPageTap">
+                [[item]]
+              </div>
+            </template>
+            <template is="dom-if" if="[[!_isCurrentPage(item)]]">
+              <div class="page-button" on-tap="_onPageTap">
+                [[item]]
+              </div>
+            </template>
+          </template>
+        </div>
+        <!-- next arrow -->
+        <template is="dom-if" if="[[_isCurrentPage(numberOfPages)]]">
+          <div class="arrow disabled">
+            <px-icon icon="px-nav:next"></px-icon>
+          </div>
+        </template>
+        <template is="dom-if" if="[[!_isCurrentPage(numberOfPages)]]">
+          <div class="arrow" on-tap="_onNextTap">
+            <px-icon icon="px-nav:next"></px-icon>
+          </div>
+        </template>
+      </div>
+    </div>
+
+  </template>
+  <script>
+    {
+      /**
+       * Navigation component that is the UI component for paging.
+       *
+       * #### Example:
+       * ```html
+       * <px-data-grid-navigation
+       *   on-navigation-change="_onNavigationChange"
+       *   selectable-page-sizes="[10, 20, 30]"
+       *   page-size="10"
+       *   total-item-count="300"
+       *   current-page="1"
+       *   number-of-pages="50">
+       * </px-data-grid-navigation>
+       * ```
+       *
+       * @memberof Predix
+       * @extends Polymer.Element
+       */
+      class DataGridNavigationElement extends Polymer.Element {
+        static get is() {
+          return 'px-data-grid-navigation';
+        }
+
+        static get properties() {
+          return {
+
+            /**
+             * Values selectable by user that dicatate how many items to show per page.
+             */
+            selectablePageSizes: {
+              type: Array,
+              value: [
+                10,
+                20,
+                30
+              ]
+            },
+
+            /**
+             * Current number of items/rows per page.
+             */
+            pageSize: {
+              type: Number,
+              value: 10
+            },
+
+            /**
+             * Currently displayed page number.
+             */
+            currentPage: {
+              type: Number,
+              value: 0
+            },
+
+            /**
+             * Total number of pages.
+             */
+            numberOfPages: {
+              type: Number,
+              value: 0
+            },
+
+            /**
+             * Total number of items in table.
+             */
+            totalItemCount: {
+              type: Number,
+              value: 0
+            },
+
+            /**
+             * Max number of page number items to show in the page list.
+             */
+            _pageListMaxCount: {
+              type: Number,
+              value: 9
+            }
+
+          };
+        }
+
+        ready() {
+          super.ready();
+        }
+
+        /**
+         * Fired when user selects a new page size.
+         */
+        _pageSizeChange(event) {
+          let pageSize = this.pageSize;
+          // px dropdown files event when initial values are set, but the value
+          // attribute in it's event is null
+          if (event.detail.value !== undefined
+              && event.detail.value !== null) {
+            pageSize = this.selectablePageSizes[event.detail.value];
+          }
+          this._fireChangeEvent({
+            pageSize: pageSize,
+            currentPage: this.currentPage
+          });
+        }
+
+        /**
+         * Fired when user clicks on a page number.
+         */
+        _onPageTap(event) {
+          const pageNumber = Number.parseInt(event.path[0].innerText);
+          this._fireChangeEvent({
+            pageSize: this.pageSize,
+            currentPage: pageNumber
+          });
+        }
+
+        _onBackTap(event) {
+          this._fireChangeEvent({
+            pageSize: this.pageSize,
+            currentPage: this.currentPage - 1
+          });
+        }
+
+        _onNextTap(event) {
+          this._fireChangeEvent({
+            pageSize: this.pageSize,
+            currentPage: this.currentPage + 1
+          });
+        }
+
+        /**
+         * Fires the general change event which includes all data
+         * that can be set by the user.
+         */
+        _fireChangeEvent(detail) {
+          this.dispatchEvent(new CustomEvent('navigation-change', {
+            detail: detail,
+            bubbles: true
+          }));
+        }
+
+        /**
+         * Converts array of Numbers to array of Strings.
+         */
+        _numArrayToStrArray(numArray) {
+          const strArray = [];
+          numArray.forEach(val => strArray.push(val.toString()));
+          return strArray;
+        }
+
+        /**
+         * Converts a Number to a String.
+         */
+        _numToStr(num) {
+          return num.toString();
+        }
+
+        /**
+         * Returns string showing the min and max item numbers based on
+         * the current page.
+         */
+        _getItemsRangeStr() {
+          const min = this.currentPage * this.pageSize;
+          let max = (this.currentPage + 1) * this.pageSize;
+          // dont let max be greater than total item count
+          max = (this.totalItemCount > 0 && max > this.totalItemCount) ? this.totalItemCount : max;
+          return min + ' - ' + max;
+        }
+
+        /**
+         * Gets an array of page numbers based on the numberOfPages property.
+         */
+        _getPagesList() {
+
+          // TODO: change ellipsis to use &hellip;
+
+          const pageList = [];
+
+          if (this.numberOfPages <= this._pageListMaxCount) {
+            // show all page numbers
+            for (let i = 1; i < this.numberOfPages + 1; i++) {
+              pageList.push(i);
+            }
+          } else {
+            // figure out what the min and max displayed page numbers are (besides page 1 and last page)
+            if (this.currentPage < 5) {
+              // only set ellipsis on left
+              const firstPage = 1;
+              for (let i = 0; i < this._pageListMaxCount; i++) {
+                pageList.push(firstPage + i);
+              }
+              pageList[pageList.length - 2] = '...';
+            } else if (this.numberOfPages - this.currentPage < 5) {
+              // only set ellipsis on right
+              const firstPage = this.numberOfPages - this._pageListMaxCount + 1;
+              for (let i = 0; i < this._pageListMaxCount; i++) {
+                pageList.push(firstPage + i);
+              }
+              pageList[1] = '...';
+            } else {
+              // set ellipsis on both left and right
+              const firstPage = this.currentPage - 4;
+              for (let i = 0; i < this._pageListMaxCount; i++) {
+                pageList.push(firstPage + i);
+              }
+              pageList[1] = '...';
+              pageList[pageList.length - 2] = '...';
+            }
+
+            // always show max and min pages
+            pageList[0] = 1;
+            pageList[pageList.length - 1] = this.numberOfPages;
+          }
+
+          return pageList;
+        }
+
+        /**
+         * Returns true if param pageNumber is equal to this.currentPage.
+         */
+        _isCurrentPage(pageNumber) {
+          return this.currentPage === pageNumber;
+        }
+
+      }
+
+      customElements.define(DataGridNavigationElement.is, DataGridNavigationElement);
+
+      /**
+       * @namespace Predix
+       */
+      window.Predix = window.Predix || {};
+      Predix.DataGridNavigationElement = DataGridNavigationElement;
+    }
+  </script>
+</dom-module>
