@@ -8,18 +8,25 @@
 
     <script src="../bower_components/web-component-tester/browser.js"></script>
     <link rel="import" href="../px-data-grid.html">
+    <link rel="import" href="helpers.html">
   </head>
 
   <body>
 
-    <test-fixture id="simple-grid">
+    <test-fixture id="px-data-grid-fixture">
       <template>
         <px-data-grid>
         </px-data-grid>
       </template>
     </test-fixture>
 
-    <script src="px-data-grid-test.js"></script>
+    <script src="generated-columns.js"></script>
+    <script src="local-data-provider.js"></script>
+    <script src="selection.js"></script>
+    <script src="remote-data-provider.js"></script>
+    <script src="highlighting.js"></script>
+    <script src="auto-filter.js"></script>
+    <script src="column-dropdown-menu.js"></script>
 
   </body>
 </html>

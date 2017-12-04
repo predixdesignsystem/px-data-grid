@@ -1,0 +1,74 @@
+<script>
+  const tableData = [{
+    'first': 'Elizabeth',
+    'last': 'Wong',
+    'email': 'sika@iknulber.cl'
+  }, {
+    'first': 'Jeffrey',
+    'last': 'Hamilton',
+    'email': 'cofok@rac.be'
+  }, {
+    'first': 'Alma',
+    'last': 'Martin',
+    'email': 'dotta@behtam.la'
+  }, {
+    'first': 'Carl',
+    'last': 'Saunders',
+    'email': 'seh@bibapu.gy'
+  }, {
+    'first': 'Willie',
+    'last': 'Dennis',
+    'email': 'izko@dahokwej.ci'
+  }];
+
+  function getRows(grid) {
+    return grid._vaadinGrid.$.items.querySelectorAll('tr');
+  }
+
+  function getVisibleRows(grid) {
+    // the following querySelector fails on safari for some reason
+    // return grid._vaadinGrid.$.items.querySelectorAll('tr:not([hidden]');
+    const rows = getRows(grid);
+    const visibleRows = Array.prototype.filter.call(rows, (row) => {
+      return row.getAttribute('hidden') !== ''
+          && row.getAttribute('hidden') !== true;
+    });
+    return visibleRows;
+  }
+
+  function getRowCells(row) {
+    return Array.prototype.slice.call(Polymer.dom(row).querySelectorAll('[part~="cell"]'));
+  }
+
+  function flushVaadinGrid(grid) {
+    const vaadinGrid = grid.shadowRoot.querySelector('vaadin-grid');
+    Polymer.flush();
+    vaadinGrid._observer.flush();
+    Polymer.flush();
+    if (vaadinGrid._debounceScrolling) {
+      vaadinGrid._debounceScrolling.flush();
+    }
+    if (vaadinGrid._debounceScrollPeriod) {
+      vaadinGrid._debounceScrollPeriod.flush();
+    }
+    if (vaadinGrid._debouncerLoad) {
+      vaadinGrid._debouncerLoad.flush();
+    }
+  }
+
+  function getCellContent(grid, cell) {
+    const slot = cell.querySelector('slot');
+    const slotName = slot.getAttribute('name');
+    const content = grid.shadowRoot.querySelector('[slot="' + slotName + '"]');
+    const wrapper = content.querySelector('div');
+    return wrapper.innerHTML;
+  }
+
+  function getHeaderCell(grid, index) {
+    return grid._vaadinGrid.$.header.querySelectorAll('[part~="cell"]')[index];
+  }
+
+  function getHeaderCellContent(cell) {
+    return cell ? cell.querySelector('slot').assignedNodes()[0].querySelector('px-data-grid-header-cell') : null;
+  }
+</script>
