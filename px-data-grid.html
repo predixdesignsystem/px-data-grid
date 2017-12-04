@@ -74,9 +74,8 @@
       </div>
     </template>
 
-    <vaadin-grid items="[[tableData]]"
-                 size="[[size]]"
-                 data-provider="[[remoteDataProvider]]"
+    <vaadin-grid size="[[size]]"
+                 data-provider="[[_currentDataProvider]]"
                  active-item="[[activeItem]]"
                  column-reordering-allowed="[[columnReorderingAllowed]]"
                  expanded-items="[[expandedItems]]"
@@ -306,7 +305,7 @@
              */
             resources: {
               type: Object,
-              value: function() {
+              value: () => {
                 // can also load these from external file as shown here:
                 // https://www.polymer-project.org/2.0/toolbox/localize
                 return {
@@ -339,6 +338,11 @@
              * Function that provides items lazily. Receives arguments params, callback
              */
             remoteDataProvider: {
+              type: Function,
+              observer: '_remoteDataProviderChanged'
+            },
+
+            _currentDataProvider: {
               type: Function
             },
 
@@ -410,7 +414,6 @@
         ready() {
           super.ready();
           this._vaadinGrid = this.shadowRoot.querySelector('vaadin-grid');
-          this._vaadinGrid._filter = this._filter;
 
           this.addEventListener('column-froze', (event) => {
             this._vaadinGrid.insertBefore(event.detail.column, this._vaadinGrid.firstElementChild);
@@ -531,7 +534,46 @@
         }
 
         _tableDataChanged(tableData) {
+          this._currentDataProvider = (params, callback) => {
+            this._localDataProvider(params, callback);
+          };
           this._populateTableColumns(tableData);
+        }
+
+        _localDataProvider(params, callback) {
+          let items = (Array.isArray(this.tableData) ? this.tableData : []).slice(0);
+
+          if (params.filters && params.filters.length && this._vaadinGrid._checkPaths(params.filters, 'filtering', items)) {
+            items = this._filter(items, params.filters);
+          }
+
+          this.size = items.length;
+
+          if (params.sortOrders.length && this._vaadinGrid._checkPaths(this._sorters, 'sorting', items)) {
+            const multiSort = (a, b) => {
+              return params.sortOrders.map(sort => {
+                if (sort.direction === 'asc') {
+                  return this._vaadinGrid._compare(Polymer.Base.get(sort.path, a), Polymer.Base.get(sort.path, b));
+                } else if (sort.direction === 'desc') {
+                  return this._vaadinGrid._compare(Polymer.Base.get(sort.path, b), Polymer.Base.get(sort.path, a));
+                }
+                return 0;
+              }).reduce((p, n) => {
+                return p ? p : n;
+              }, 0);
+            };
+
+            items = items.sort(multiSort);
+          }
+
+          const start = params.page * params.pageSize;
+          const end = start + params.pageSize;
+          const slice = items.slice(start, end);
+          callback(slice, items.length);
+        }
+
+        _remoteDataProviderChanged(provider) {
+          this._currentDataProvider = provider;
         }
 
         _resolveColumnPath(column) {
@@ -575,7 +617,7 @@
           if (this._vaadinGrid._columnTree) {
             return this._vaadinGrid._columnTree[0];
           } else if (this.columns && this.columns.length) {
-            return this.columns.map(function(c) {
+            return this.columns.map((c) => {
               return c.element ? c.element : c;
             });
           } else {
@@ -589,12 +631,11 @@
          */
         _updateActionMenu() {
           const content = [];
-          const that = this;
 
           // Application specific options
 
           if (this.tableActions) {
-            this.tableActions.forEach(function(item) {
+            this.tableActions.forEach((item) => {
               content.push({
                 key: {
                   action: item.action
@@ -611,15 +652,15 @@
           const defaultName = this.localize('Column #');
           let counter = 0;
 
-          this._getColumns().forEach(function(columnElement) {
+          this._getColumns().forEach((columnElement) => {
             const index = ++counter;
             const hidden = columnElement.hidden ? columnElement.hidden : false;
             const name = columnElement.name ? columnElement.name : (defaultName + index);
 
             content.push({
               key: {
-                action: function() {
-                  that._getColumnsWithName(name).forEach(function(c) {
+                action: () => {
+                  this._getColumnsWithName(name).forEach((c) => {
                     c.hidden = !(c.hidden ? c.hidden : false);
                   });
                 }
@@ -665,20 +706,20 @@
          * this will add workaround that allows to filter inmemory data given via
          * items parameter.
          */
-        _filter(items) {
+        _filter(items, filters) {
           return items.filter((item, index) => {
-            return this._filters.filter(filter => {
-              const filterValueLowercase = this._normalizeEmptyValue(filter.value).toString().toLowerCase();
+            return filters.filter(filter => {
+              const filterValueLowercase = this._vaadinGrid._normalizeEmptyValue(filter.value).toString().toLowerCase();
               if (item && filter.path === undefined) {
                 for (const key in item) {
-                  const value = this._normalizeEmptyValue(Polymer.Base.get(key, item));
+                  const value = this._vaadinGrid._normalizeEmptyValue(Polymer.Base.get(key, item));
                   if (value.toString().toLowerCase().indexOf(filterValueLowercase) !== -1) {
                     return false;
                   }
                 }
                 return true;
               } else {
-                const value = this._normalizeEmptyValue(Polymer.Base.get(filter.path, item));
+                const value = this._vaadinGrid._normalizeEmptyValue(Polymer.Base.get(filter.path, item));
                 return value.toString().toLowerCase().indexOf(filterValueLowercase) === -1;
               }
             }).length === 0;
