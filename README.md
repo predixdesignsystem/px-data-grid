@@ -56,10 +56,14 @@ The root of that server (e.g. http://localhost:8080/) will automatically open in
 
 `gulp serve` also runs `gulp watch` concurrently so that when you make a change to your source files and save them, your preview will be updated in any browsers you have opened and turned on in LiveReload.
 
+## Running tests from the browser
+
+http://localhost:8080/test
+
 ## Running tests from the command line
 
-In the `px-data-grid` directory, run `polymer test`
+In the `px-data-grid` directory, run `wct`
 
 ## Cross browser testing via [SauceLabs](https://saucelabs.com/)
 
-In the `px-data-grid` directory, run `polymer test --env=saucelabs`
+In the `px-data-grid` directory, run `wct --env=saucelabs`
