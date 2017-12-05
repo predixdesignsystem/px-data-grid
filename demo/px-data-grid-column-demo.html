@@ -472,32 +472,22 @@
           },
           {
             name: 'Full Name',
-            hidden: true,
-            path: 'last',
-            value: (item) => {
-              return item.first + ' ' + item.last;
-            }
+            path: '',
+            hidden: true
           },
           {
             name: 'First Name',
             path: 'first',
-            value: (item) => {
-              return item.first;
-            },
+            editable: true,
+            renderer: 'px-data-grid-string-renderer'
           },
           {
             name: 'Last Name',
-            path: 'last',
-            value: (item) => {
-              return item.last;
-            }
+            path: 'last'
           },
           {
             name: 'Email',
-            path: 'email',
-            value: (item) => {
-              return item.email;
-            }
+            path: 'email'
           }
         ],
         inputType: 'code:JSON'

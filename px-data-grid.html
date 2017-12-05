@@ -10,6 +10,9 @@
 <link rel="import" href="px-data-grid-selection-column.html">
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 
+<link rel="import" href="px-data-grid-string-renderer.html">
+<link rel="import" href="px-data-grid-cell-content-wrapper.html">
+
 <dom-module id="px-data-grid">
   <template>
     <style>
@@ -18,7 +21,7 @@
         display: block;
       }
 
-      .cell-content-wrapper {
+      px-data-grid-cell-content-wrapper {
         margin-top: calc(0px - var(--px-data-grid-padding-top));
         margin-bottom: calc(0px - var(--px-data-grid-padding-top));
         margin-left: calc(0px - var(--px-data-grid-padding-top));
@@ -107,7 +110,7 @@
             <vaadin-grid-sorter path="[[_resolveColumnPath(column)]]">[[_resolveColumnHeader(column)]]</vaadin-grid-sorter>
           </template>
           <template>
-            <div class="cell-content-wrapper" style$="[[_getCellStyle(item, column)]]" on-mouseover="_fireCellHoverEvent" on-mouseout="_fireCellUnhoverEvent">[[_getValue(column, item)]]</div>
+            <px-data-grid-cell-content-wrapper style$="[[_getCellStyle(item, column)]]" item="{{item}}" column="[[column]]"></px-data-grid-cell-content-wrapper>
           </template>
         </px-data-grid-column>
       </template>
@@ -492,37 +495,9 @@
           }
         }
 
-        _fireCellHoverEvent(event) {
-          this.dispatchEvent(
-            new CustomEvent('cell-hover', {
-              bubbles: true,
-              composed: true,
-              detail: {
-                item: event.model.item,
-                column: event.model.column,
-                cellContent: this.get(event.model.column.name, event.model.item)
-              }
-            })
-          );
-        }
-
-        _fireCellUnhoverEvent(event) {
-          this.dispatchEvent(
-            new CustomEvent('cell-unhover', {
-              bubbles: true,
-              composed: true,
-              detail: {
-                item: event.model.item,
-                column: event.model.column,
-                cellContent: this.get(event.model.column.name, event.model.item)
-              }
-            })
-          );
-        }
-
         _getValue(column, item) {
           if (column && item) {
-            return column.value ? column.value(item) : this.get(column.name, item);
+            return this.get(column.path, item);
           } else {
             return undefined;
           }
@@ -666,7 +641,10 @@
         }
 
         _resolveColumnPath(column) {
-          return column.path ? column.path : column.name;
+          if (typeof column.path === 'undefined') {
+            console.warn(`column.path for column ${column.name} should be initialized.`);
+          }
+          return column.path ? column.path : '';
         }
 
         _populateTableColumns(data) {
@@ -674,12 +652,10 @@
             this.columns = [];
             for (const key in data[0]) {
               this.columns.push({
-                'name': key,
-                'hidden': false,
-                'generated': true,
-                'value': (item) => {
-                  return this.get(key, item);
-                }
+                name: key,
+                hidden: false,
+                path: key,
+                generated: true
               });
             }
           }

@@ -60,8 +60,8 @@
     const slot = cell.querySelector('slot');
     const slotName = slot.getAttribute('name');
     const content = grid.shadowRoot.querySelector('[slot="' + slotName + '"]');
-    const wrapper = content.querySelector('div');
-    return wrapper.innerHTML;
+    const wrapper = content.querySelector('px-data-grid-cell-content-wrapper');
+    return wrapper.shadowRoot.innerHTML;
   }
 
   function getHeaderCell(grid, index) {
