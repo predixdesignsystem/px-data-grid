@@ -32,6 +32,10 @@
         padding-right: var(--px-data-grid-padding-right);
       }
 
+      px-data-grid-cell-content-wrapper.default-highlight {
+        background-color: var(--px-data-grid-highlight-background-color, #D8E0E5);
+      }
+
       .action-bar {
         display: flex;
         flex-direction: row;
@@ -110,7 +114,7 @@
             <vaadin-grid-sorter path="[[_resolveColumnPath(column)]]">[[_resolveColumnHeader(column)]]</vaadin-grid-sorter>
           </template>
           <template>
-            <px-data-grid-cell-content-wrapper style$="[[_getCellStyle(item, column)]]" item="{{item}}" column="[[column]]"></px-data-grid-cell-content-wrapper>
+            <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column)]]" item="{{item}}" column="[[column]]"></px-data-grid-cell-content-wrapper>
           </template>
         </px-data-grid-column>
       </template>
@@ -511,9 +515,9 @@
           return column.flexGrow === undefined ? this.defaultColumnFlex : column.flexGrow;
         }
 
-        _getCellStyle(item, column) {
+        _resolveCellColor(item, column) {
           if (!this.highlight || item === undefined) {
-            return;
+            return undefined;
           }
 
           let columnColor;
@@ -524,38 +528,33 @@
             if (highlightEntity.type === 'row') {
               if (this._isRowConditionApplied(item, highlightEntity.condition)) {
                 if (highlightEntity.color) {
-                  rowColor = `background: ${highlightEntity.color}`;
+                  rowColor = highlightEntity.color;
                 } else {
-                  rowColor = 'background: var(--px-data-grid-highlight--high, #DDD)';
+                  rowColor = 'default';
                 }
               }
             } else if (highlightEntity.type === 'column') {
               if (this._isColumnConditionApplied(column, highlightEntity.condition)) {
                 if (highlightEntity.color) {
-                  columnColor = `background: ${highlightEntity.color}`;
+                  columnColor = highlightEntity.color;
                 } else {
-                  columnColor = 'background: var(--px-data-grid-highlight--high, #DDD)';
+                  columnColor = 'default';
                 }
               }
             } else {
               const value = this._getValue(column, item);
               if (highlightEntity.condition(value, column, item)) {
                 if (highlightEntity.color) {
-                  cellColor = `background: ${highlightEntity.color}`;
+                  cellColor = highlightEntity.color;
                 } else {
-                  cellColor = 'background: var(--px-data-grid-highlight--high, #DDD)';
+                  cellColor = 'default';
                 }
               }
             }
           });
 
-          if (cellColor) {
-            return cellColor;
-          } else if (rowColor) {
-            return rowColor;
-          } else {
-            return columnColor;
-          }
+          const finalColor = cellColor ? cellColor : (rowColor ? rowColor : (columnColor ? columnColor : undefined));
+          return finalColor;
         }
 
         _isRowConditionApplied(item, condition) {

@@ -25,6 +25,13 @@
             column: {
               type: Object
             },
+            /**
+             * Color of cell, if 'default' will use default highlight color
+             */
+            cellColor: {
+              type: String,
+              observer: '_cellColorChanged'
+            },
             _valueElement: Element
           };
         }
@@ -82,6 +89,23 @@
           }
 
           this.set('item.' + this.column.path, event.detail.value);
+        }
+
+        _cellColorChanged(color) {
+          if (color) {
+            if (color == 'default') {
+              this.classList.add('default-highlight');
+              this.style = '';
+              return;
+            } else {
+              this.style = 'background-color: ' + color;
+              this.classList.remove('default-highlight');
+              return;
+            }
+          }
+
+          this.classList.remove('default-highlight');
+          this.style = '';
         }
 
         _render(renderer, path, editable, item) {
