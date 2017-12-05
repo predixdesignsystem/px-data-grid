@@ -25,9 +25,12 @@
             column: {
               type: Object
             },
-            useColor: {
+            /**
+             * Color of cell, if 'default' will use default highlight color
+             */
+            cellColor: {
               type: String,
-              observer: '_usedColorChanged'
+              observer: '_cellColorChanged'
             },
             _valueElement: Element
           };
@@ -88,7 +91,7 @@
           this.set('item.' + this.column.path, event.detail.value);
         }
 
-        _usedColorChanged(color) {
+        _cellColorChanged(color) {
           if (color) {
             if (color == 'default') {
               this.classList.add('default-highlight');
