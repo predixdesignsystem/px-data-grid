@@ -1,4 +1,7 @@
 {
+  "rules": {
+    "no-unused-vars": 0
+  },
   "globals": {
     "WCT": false,
     "fixture": false,
@@ -6,6 +9,14 @@
     "beforeEach": false,
     "it": false,
     "expect": false,
-    "sinon": false
+    "sinon": false,
+    "tableData": false,
+    "getRows": false,
+    "getVisibleRows": false,
+    "getRowCells": false,
+    "flushVaadinGrid": false,
+    "getCellContent": false,
+    "getHeaderCell": false,
+    "getHeaderCellContent": false
   }
 }
