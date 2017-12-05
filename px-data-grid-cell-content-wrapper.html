@@ -25,6 +25,10 @@
             column: {
               type: Object
             },
+            useColor: {
+              type: String,
+              observer: '_usedColorChanged'
+            },
             _valueElement: Element
           };
         }
@@ -82,6 +86,23 @@
           }
 
           this.set('item.' + this.column.path, event.detail.value);
+        }
+
+        _usedColorChanged(color) {
+          if (color) {
+            if (color == 'default') {
+              this.classList.add('default-highlight');
+              this.style = '';
+              return;
+            } else {
+              this.style = 'background-color: ' + color;
+              this.classList.remove('default-highlight');
+              return;
+            }
+          }
+
+          this.classList.remove('default-highlight');
+          this.style = '';
         }
 
         _render(renderer, path, editable, item) {

@@ -147,17 +147,17 @@
       [part="indicators"] {
         margin-left: 5px;
         user-select: none;
-        height: 13px;
-        font-size: 9px;
+        font-size: 1px;
       }
 
       [part="indicators"]::before {
         font-family: 'px-data-grid-icons';
+        font-size: var(--px-data-grid-header-font-size, 12px);
         color: var(--px-data-grid-cell-text-color--sorted);
       }
 
       [part="order"] {
-        font-size: 10px;
+        font-size: var(--px-data-grid-header-font-size, 12px);
         right: -6px;
       }
 

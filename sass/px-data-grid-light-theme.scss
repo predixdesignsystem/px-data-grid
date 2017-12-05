@@ -17,6 +17,7 @@ html {
   --px-data-grid-separator-color                          :  $gray5;
   --px-data-grid-header-text-color                        :  inherit;
   --px-data-grid-header-background-color                  :  $white;
+  --px-data-grid-header-font-size                         :  13px;
   --px-data-grid-background-color-striped--odd            :  #F3F5F6;
   --px-data-grid-background-color-striped--selected       :  $gray3;
   --px-data-grid-cell-border-validation--failed           :  $status-red3;
@@ -35,9 +36,7 @@ html {
   --px-data-grid-tr--filter                               :  $white;
   --px-data-grid-text-color--dragged                      :  $primary-default;
   --px-data-grid-text-color--hover                        :  $primary-hover;
-  --px-data-grid-highlight--high                          :  rgba($status-red3,0.25);
-  --px-data-grid-highlight--medium                        :  rgba($status-yellow3,0.25);
-  --px-data-grid-highlight--low                           :  rgba($status-blue3,0.25);
+  --px-data-grid-highlight-background-color               :  $gray3;
   --px-data-grid-spinner-background-color                 :  rgba($white, 0.9);
 
   // Auto Filter Field
