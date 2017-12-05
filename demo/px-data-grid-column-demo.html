@@ -41,6 +41,7 @@
       <px-demo-component slot="px-demo-component">
         <px-data-grid
           table-data="{{props.tableData.value}}"
+          selectable="{{props.selectable.value}}"
           multi-sort="{{props.multiSort.value}}"
           column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
           action-menu="{{props.actionMenu.value}}"
@@ -460,6 +461,16 @@
         type: Array,
         defaultValue: [
           {
+            name: 'Age',
+            path: 'age',
+            type: 'number',
+            width: '50px',
+            flexGrow: 0,
+            value: (item) => {
+              return item.age;
+            }
+          },
+          {
             name: 'Full Name',
             hidden: true,
             path: 'last',
@@ -472,7 +483,7 @@
             path: 'first',
             value: (item) => {
               return item.first;
-            }
+            },
           },
           {
             name: 'Last Name',
@@ -487,17 +498,15 @@
             value: (item) => {
               return item.email;
             }
-          },
-          {
-            name: 'Age',
-            path: 'age',
-            type: 'number',
-            value: (item) => {
-              return item.age;
-            }
           }
         ],
         inputType: 'code:JSON'
+      },
+
+      selectable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
       },
 
       resizable: {

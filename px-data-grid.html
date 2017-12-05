@@ -7,6 +7,7 @@
 <link rel="import" href="px-auto-filter-field.html">
 <link rel="import" href="px-data-grid-navigation.html">
 <link rel="import" href="px-data-grid-theme.html">
+<link rel="import" href="px-data-grid-selection-column.html">
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 
 <dom-module id="px-data-grid">
@@ -66,6 +67,7 @@
           <px-dropdown multi hide-selected
             display-value="[[localize('Table Actions')]]"
             items="[[_actionMenuContent]]"
+            selected-values="[[_selectedActionItems]]"
             disable-clear
             on-px-dropdown-click="_actionClicked">
           </px-dropdown>
@@ -85,8 +87,8 @@
                  loading="{{_loading}}">
 
       <template is="dom-if" if="[[selectable]]" restamp>
-        <vaadin-grid-selection-column auto-select hidden="[[hideSelectionColumn]]">
-        </vaadin-grid-selection-column>
+        <px-data-grid-selection-column auto-select hidden="[[hideSelectionColumn]]" multi-select="[[multiSelect]]">
+        </px-data-grid-selection-column>
       </template>
 
       <template is="dom-repeat" items="[[columns]]" as="column">
@@ -97,7 +99,10 @@
           language="[[language]]"
           resources="[[resources]]"
           type="[[column.type]]"
-          mapped-object="[[column]]">
+          mapped-object="[[column]]"
+          width="[[_getColumnWidth(column)]]"
+          flex-grow="[[_getColumnFlexGrow(column)]]"
+          on-column-change="_onColumnUpdate">
           <template class="header">
             <vaadin-grid-sorter path="[[_resolveColumnPath(column)]]">[[_resolveColumnHeader(column)]]</vaadin-grid-sorter>
           </template>
@@ -192,6 +197,14 @@
             multiSort: {
               type: Boolean,
               value: false
+            },
+
+            /**
+             * When `true`, selection mode will be multiselection when selectable
+             */
+            multiSelect: {
+              type: Boolean,
+              value: true
             },
 
             /**
@@ -407,6 +420,35 @@
             highlight: {
               type: Array,
               value: []
+            },
+
+            /**
+             * When true data provider is local, when false external (remote) and
+             * when undefined it defined yet.
+             */
+            _hasLocalDataProvider: {
+              type: Boolean
+            },
+
+            /**
+             * Default column width if not defined, eg. '100px'
+             */
+            defaultColumnWidth: {
+              type: String,
+              value: '100px'
+            },
+
+            /**
+             * Default column flex if not defined, eg. 1
+             */
+            defaultColumnFlex: {
+              type: Number,
+              value: 1
+            },
+
+            _selectedActionItems: {
+              type: Array,
+              value: []
             }
           };
         }
@@ -414,6 +456,10 @@
         ready() {
           super.ready();
           this._vaadinGrid = this.shadowRoot.querySelector('vaadin-grid');
+          this._vaadinGrid._pxDataGrid = this;
+
+          // Override selectItem method to allow easy single select handling
+          this._vaadinGrid.selectItem = (item) => this._handleSelectItem(item);
 
           this.addEventListener('column-froze', (event) => {
             this._vaadinGrid.insertBefore(event.detail.column, this._vaadinGrid.firstElementChild);
@@ -431,6 +477,18 @@
           if (this.highlight.length) {
             this._vaadinGrid.setAttribute('highlighted', '');
             this.setAttribute('highlighted', '');
+          }
+        }
+
+        /**
+         * Trick to prevent multiselection when in single select mode
+         */
+        _handleSelectItem(item) {
+          if (!this._vaadinGrid._isSelected(item)) {
+            if (!this.multiSelect) {
+              this._vaadinGrid.selectedItems = [];
+            }
+            this._vaadinGrid.push('selectedItems', item);
           }
         }
 
@@ -462,12 +520,20 @@
           );
         }
 
-        _readValue(column, item) {
+        _getValue(column, item) {
           if (column && item) {
             return column.value ? column.value(item) : this.get(column.name, item);
           } else {
             return undefined;
           }
+        }
+
+        _getColumnWidth(column) {
+          return column.width ? column.width : this.defaultColumnWidth;
+        }
+
+        _getColumnFlexGrow(column) {
+          return column.flexGrow === undefined ? this.defaultColumnFlex : column.flexGrow;
         }
 
         _getCellStyle(item, column) {
@@ -497,7 +563,7 @@
                 }
               }
             } else {
-              const value = this._readValue(column, item);
+              const value = this._getValue(column, item);
               if (highlightEntity.condition(value, column, item)) {
                 if (highlightEntity.color) {
                   cellColor = `background: ${highlightEntity.color}`;
@@ -534,22 +600,23 @@
         }
 
         _tableDataChanged(tableData) {
-          this._currentDataProvider = (params, callback) => {
-            this._localDataProvider(params, callback);
-          };
-          this._populateTableColumns(tableData);
+          if (tableData) {
+            this._currentDataProvider = (params, callback) => {
+              this._localDataProvider(params, callback);
+            };
+            this._hasLocalDataProvider = true;
+            this._populateTableColumns(tableData);
+          }
         }
 
-        _localDataProvider(params, callback) {
-          let items = (Array.isArray(this.tableData) ? this.tableData : []).slice(0);
-
+        _localDataResolver(params, items) {
           if (params.filters && params.filters.length && this._vaadinGrid._checkPaths(params.filters, 'filtering', items)) {
             items = this._filter(items, params.filters);
           }
 
           this.size = items.length;
 
-          if (params.sortOrders.length && this._vaadinGrid._checkPaths(this._sorters, 'sorting', items)) {
+          if (params.sortOrders && params.sortOrders.length && this._vaadinGrid._checkPaths(this._sorters, 'sorting', items)) {
             const multiSort = (a, b) => {
               return params.sortOrders.map(sort => {
                 if (sort.direction === 'asc') {
@@ -568,11 +635,33 @@
 
           const start = params.page * params.pageSize;
           const end = start + params.pageSize;
-          const slice = items.slice(start, end);
-          callback(slice, items.length);
+
+          return items.slice(start, end);
+        }
+
+        _localDataProvider(params, callback) {
+          let items = (Array.isArray(this.tableData) ? this.tableData : []).slice(0);
+          items = this._localDataResolver(params, items);
+          callback(items, items.length);
+        }
+
+        /**
+         * Will return all local items after filter (no ordering applied)
+         */
+        _getAllLocalItems() {
+          if (this._hasLocalDataProvider) {
+            const items = (Array.isArray(this.tableData) ? this.tableData : []).slice(0);
+            return this._localDataResolver({
+              page: 0,
+              pageSize: this.tableData.length
+            }, items);
+          } else {
+            return [];
+          }
         }
 
         _remoteDataProviderChanged(provider) {
+          this._hasLocalDataProvider = false;
           this._currentDataProvider = provider;
         }
 
@@ -605,8 +694,12 @@
           const item = evt.detail.detail.item;
           const key = item.key;
 
-          if (key.action) {
-            key.action();
+          // -column- is temporary work around to limitations of px-dropdown
+          if (key && key.startsWith('-column-')) {
+            const columnName = key.substr('-column-'.length);
+            this._getColumnsWithName(columnName).forEach((c) => {
+              c.hidden = c.hidden === undefined ? true : !c.hidden;
+            });
           }
         }
 
@@ -631,6 +724,7 @@
          */
         _updateActionMenu() {
           const content = [];
+          this._selectedActionItems = [];
 
           // Application specific options
 
@@ -651,30 +745,39 @@
 
           const defaultName = this.localize('Column #');
           let counter = 0;
+          const selected = [];
 
           this._getColumns().forEach((columnElement) => {
             const index = ++counter;
             const hidden = columnElement.hidden ? columnElement.hidden : false;
             const name = columnElement.name ? columnElement.name : (defaultName + index);
+            // -column- is temporary work around to limitations of px-dropdown
+            const key = '-column-' + name;
 
-            content.push({
-              key: {
-                action: () => {
-                  this._getColumnsWithName(name).forEach((c) => {
-                    c.hidden = !(c.hidden ? c.hidden : false);
-                  });
-                }
-              },
-              val: name,
-              selected: !hidden
-            });
+            const item = {
+              key: key,
+              val: name
+            };
+
+            if (!hidden) {
+              selected.push(key);
+            }
+
+            content.push(item);
           });
 
           this._actionMenuContent = content;
+          this._selectedActionItems = selected;
         }
 
         _getColumnsWithName(name) {
           return this._getColumns().filter(c => c.name == name);
+        }
+
+        _onColumnUpdate(event) {
+          if (event.detail.type == 'hidden') {
+            this._updateActionMenu();
+          }
         }
 
         _loadingChanged(loading) {
@@ -743,13 +846,6 @@
             this._vaadinGrid._filters = filters;
             this._vaadinGrid.clearCache();
           }
-        }
-
-        _getValue(column, item) {
-          if (!column || !item) {
-            return;
-          }
-          return column.value(item);
         }
 
         /**

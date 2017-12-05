@@ -121,6 +121,42 @@
             obj.element = this;
           }
         }
+
+        _checkIfValueChanged(value, propertyName) {
+          if (this.mappedObject && this.mappedObject[propertyName] != value) {
+            this.mappedObject[propertyName] = value;
+            this._fireStatusChange(this.mappedObject, propertyName);
+          }
+        }
+
+        _orderChanged(order, headerCell, footerCell, cells) {
+          this._checkIfValueChanged(order, 'order');
+          super._orderChanged(order, headerCell, footerCell, cells);
+        }
+
+        _frozenChanged(frozen, headerCell, footerCell, cells) {
+          this._checkIfValueChanged(frozen, 'frozen');
+          super._frozenChanged(frozen, headerCell, footerCell, cells);
+        }
+
+        _hiddenChanged(hidden, headerCell, footerCell, cells) {
+          this._checkIfValueChanged(hidden, 'hidden');
+          super._hiddenChanged(hidden, headerCell, footerCell, cells);
+        }
+
+        _fireStatusChange(mappedObject, value) {
+          this._renderDebouncer = Polymer.Debouncer.debounce(
+            this._renderDebouncer,
+            Polymer.Async.timeOut.after(this.timeout), () => {
+              this.dispatchEvent(new CustomEvent('column-change', {
+                detail: {
+                  column: mappedObject,
+                  type: value
+                },
+                bubbles: true
+              }));
+            });
+        }
       }
 
       customElements.define(DataGridColumnElement.is, DataGridColumnElement);
