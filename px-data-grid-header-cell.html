@@ -131,37 +131,56 @@
           this._column.hidden = true;
         }
 
+        _groupByColumn() {
+          this.dispatchEvent(new CustomEvent('group-by-column', {
+            bubbles: true,
+            composed: true,
+            detail: {
+              column: this._column
+            }
+          }));
+        }
+
         _setDropdownItems() {
-          if (this._column && this._column.frozen) {
-            this._dropdownItems = [
-              {
-                key: {
-                  action: () => this._unfreezeColumn()
-                },
-                val: this.localize('Unfreeze column')
-              },
+          if (this._column) {
+
+            if (this._column.frozen) {
+              this._dropdownItems = [
+                {
+                  key: {
+                    action: () => this._unfreezeColumn()
+                  },
+                  val: this.localize('Unfreeze column')
+                }
+              ];
+            } else {
+              this._dropdownItems = [
+                {
+                  key: {
+                    action: () => this._freezeColumn()
+                  },
+                  val: this.localize('Freeze column')
+                }
+              ];
+            }
+
+            this._dropdownItems.push(
               {
                 key: {
                   action: () => this._hideColumn()
                 },
                 val: this.localize('Hide column')
               }
-            ];
-          } else {
-            this._dropdownItems = [
+            );
+
+            this._dropdownItems.push(
               {
                 key: {
-                  action: () => this._freezeColumn()
+                  action: () => this._groupByColumn()
                 },
-                val: this.localize('Freeze column')
-              },
-              {
-                key: {
-                  action: () => this._hideColumn()
-                },
-                val: this.localize('Hide column')
+                val: this.localize('Group by column')
               }
-            ];
+            );
           }
         }
 
