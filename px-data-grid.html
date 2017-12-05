@@ -98,7 +98,9 @@
           language="[[language]]"
           resources="[[resources]]"
           type="[[column.type]]"
-          mapped-object="[[column]]">
+          mapped-object="[[column]]"
+          width="[[_getColumnWidth(column)]]"
+          flex-grow="[[_getColumnFlexGrow(column)]]">
           <template class="header">
             <vaadin-grid-sorter path="[[_resolveColumnPath(column)]]">[[_resolveColumnHeader(column)]]</vaadin-grid-sorter>
           </template>
@@ -424,6 +426,22 @@
              */
             _hasLocalDataProvider: {
               type: Boolean
+            },
+
+            /**
+             * Default column width if not defined, eg. '100px'
+             */
+            defaultColumnWidth: {
+              type: String,
+              value: '100px'
+            },
+
+            /**
+             * Default column flex if not defined, eg. 1
+             */
+            defaultColumnFlex: {
+              type: Number,
+              value: 1
             }
           };
         }
@@ -501,6 +519,14 @@
           } else {
             return undefined;
           }
+        }
+
+        _getColumnWidth(column) {
+          return column.width ? column.width : this.defaultColumnWidth;
+        }
+
+        _getColumnFlexGrow(column) {
+          return column.flexGrow === undefined ? this.defaultColumnFlex : column.flexGrow;
         }
 
         _getCellStyle(item, column) {
