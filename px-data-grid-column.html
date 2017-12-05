@@ -122,27 +122,25 @@
           }
         }
 
-        _orderChanged(order, headerCell, footerCell, cells) {
-          if (this.mappedObject && this.mappedObject.order != order) {
-            this.mappedObject.order = order;
-            this._fireStatusChange(this.mappedObject, 'order');
+        _checkIfValueChanged(value, propertyName) {
+          if (this.mappedObject && this.mappedObject[propertyName] != value) {
+            this.mappedObject[propertyName] = value;
+            this._fireStatusChange(this.mappedObject, propertyName);
           }
+        }
+
+        _orderChanged(order, headerCell, footerCell, cells) {
+          this._checkIfValueChanged(order, 'order');
           super._orderChanged(order, headerCell, footerCell, cells);
         }
 
         _frozenChanged(frozen, headerCell, footerCell, cells) {
-          if (this.mappedObject && this.mappedObject.frozen != frozen) {
-            this.mappedObject.frozen = frozen;
-            this._fireStatusChange(this.mappedObject, 'frozen');
-          }
+          this._checkIfValueChanged(frozen, 'frozen');
           super._frozenChanged(frozen, headerCell, footerCell, cells);
         }
 
         _hiddenChanged(hidden, headerCell, footerCell, cells) {
-          if (this.mappedObject && this.mappedObject.hidden != hidden) {
-            this.mappedObject.hidden = hidden;
-            this._fireStatusChange(this.mappedObject, 'hidden');
-          }
+          this._checkIfValueChanged(hidden, 'hidden');
           super._hiddenChanged(hidden, headerCell, footerCell, cells);
         }
 
