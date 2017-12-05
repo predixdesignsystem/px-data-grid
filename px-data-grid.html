@@ -67,6 +67,7 @@
           <px-dropdown multi hide-selected
             display-value="[[localize('Table Actions')]]"
             items="[[_actionMenuContent]]"
+            selected-values="[[_selectedActionItems]]"
             disable-clear
             on-px-dropdown-click="_actionClicked">
           </px-dropdown>
@@ -100,7 +101,8 @@
           type="[[column.type]]"
           mapped-object="[[column]]"
           width="[[_getColumnWidth(column)]]"
-          flex-grow="[[_getColumnFlexGrow(column)]]">
+          flex-grow="[[_getColumnFlexGrow(column)]]"
+          on-column-change="_onColumnUpdate">
           <template class="header">
             <vaadin-grid-sorter path="[[_resolveColumnPath(column)]]">[[_resolveColumnHeader(column)]]</vaadin-grid-sorter>
           </template>
@@ -442,6 +444,11 @@
             defaultColumnFlex: {
               type: Number,
               value: 1
+            },
+
+            _selectedActionItems: {
+              type: Array,
+              value: []
             }
           };
         }
@@ -687,8 +694,12 @@
           const item = evt.detail.detail.item;
           const key = item.key;
 
-          if (key.action) {
-            key.action();
+          // -column- is temporary work around to limitations of px-dropdown
+          if (key && key.startsWith('-column-')) {
+            const columnName = key.substr('-column-'.length);
+            this._getColumnsWithName(columnName).forEach((c) => {
+              c.hidden = c.hidden === undefined ? true : !c.hidden;
+            });
           }
         }
 
@@ -713,6 +724,7 @@
          */
         _updateActionMenu() {
           const content = [];
+          this._selectedActionItems = [];
 
           // Application specific options
 
@@ -733,30 +745,39 @@
 
           const defaultName = this.localize('Column #');
           let counter = 0;
+          const selected = [];
 
           this._getColumns().forEach((columnElement) => {
             const index = ++counter;
             const hidden = columnElement.hidden ? columnElement.hidden : false;
             const name = columnElement.name ? columnElement.name : (defaultName + index);
+            // -column- is temporary work around to limitations of px-dropdown
+            const key = '-column-' + name;
 
-            content.push({
-              key: {
-                action: () => {
-                  this._getColumnsWithName(name).forEach((c) => {
-                    c.hidden = !(c.hidden ? c.hidden : false);
-                  });
-                }
-              },
-              val: name,
-              selected: !hidden
-            });
+            const item = {
+              key: key,
+              val: name
+            };
+
+            if (!hidden) {
+              selected.push(key);
+            }
+
+            content.push(item);
           });
 
           this._actionMenuContent = content;
+          this._selectedActionItems = selected;
         }
 
         _getColumnsWithName(name) {
           return this._getColumns().filter(c => c.name == name);
+        }
+
+        _onColumnUpdate(event) {
+          if (event.detail.type == 'hidden') {
+            this._updateActionMenu();
+          }
         }
 
         _loadingChanged(loading) {

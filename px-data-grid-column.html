@@ -121,6 +121,44 @@
             obj.element = this;
           }
         }
+
+        _orderChanged(order, headerCell, footerCell, cells) {
+          if (this.mappedObject && this.mappedObject.order != order) {
+            this.mappedObject.order = order;
+            this._fireStatusChange(this.mappedObject, 'order');
+          }
+          super._orderChanged(order, headerCell, footerCell, cells);
+        }
+
+        _frozenChanged(frozen, headerCell, footerCell, cells) {
+          if (this.mappedObject && this.mappedObject.frozen != frozen) {
+            this.mappedObject.frozen = frozen;
+            this._fireStatusChange(this.mappedObject, 'frozen');
+          }
+          super._frozenChanged(frozen, headerCell, footerCell, cells);
+        }
+
+        _hiddenChanged(hidden, headerCell, footerCell, cells) {
+          if (this.mappedObject && this.mappedObject.hidden != hidden) {
+            this.mappedObject.hidden = hidden;
+            this._fireStatusChange(this.mappedObject, 'hidden');
+          }
+          super._hiddenChanged(hidden, headerCell, footerCell, cells);
+        }
+
+        _fireStatusChange(mappedObject, value) {
+          this._renderDebouncer = Polymer.Debouncer.debounce(
+            this._renderDebouncer,
+            Polymer.Async.timeOut.after(this.timeout), () => {
+              this.dispatchEvent(new CustomEvent('column-change', {
+                detail: {
+                  column: mappedObject,
+                  type: value
+                },
+                bubbles: true
+              }));
+            });
+        }
       }
 
       customElements.define(DataGridColumnElement.is, DataGridColumnElement);
