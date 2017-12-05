@@ -22,30 +22,22 @@ document.addEventListener('WebComponentsReady', () => {
         {
           name: 'first',
           header: 'First Name',
-          value: (item) => {
-            return item.first;
-          }
+          path: 'first'
         },
         {
           name: 'last',
           header: 'Last Name',
-          value: (item) => {
-            return item.last;
-          }
+          path: 'last'
         },
         {
           name: 'email',
           header: 'Email',
-          value: (item) => {
-            return item.email;
-          }
+          path: 'email'
         },
         {
           header: 'Hidden column',
           hidden: true,
-          value: (item) => {
-            return 'hidden data';
-          }
+          path: ''
         }
       ];
 

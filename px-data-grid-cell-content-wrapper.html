@@ -1,0 +1,125 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="px-data-grid-cell-content-wrapper">
+  <template>
+  </template>
+  <script>
+    {
+      /**
+       * A `<px-data-grid-cell-content-wrapper>` is used to wrap user
+       * or generated content in order to fire proper events and observe renderers.
+       *
+       * @memberof Predix
+       * @extends Polymer.Element
+       */
+      class DataGridCellContentWrapperElement extends Polymer.Element {
+        static get is() {
+          return 'px-data-grid-cell-content-wrapper';
+        }
+
+        static get properties() {
+          return {
+            item: {
+              type: Object
+            },
+            column: {
+              type: Object
+            },
+            _valueElement: Element
+          };
+        }
+
+        static get observers() {
+          return [
+            '_render(column.renderer, column.path, column.editable, item, item.*)'
+          ];
+        }
+
+        constructor() {
+          super();
+
+          this._boundValueChangedListener = this._valueChangedListener.bind(this);
+        }
+
+        ready() {
+          super.ready();
+
+          this.addEventListener('mouseover', this._fireCellHoverEvent);
+          this.addEventListener('mouseout', this._fireCellUnhoverEvent);
+        }
+
+        _fireCellHoverEvent(event) {
+          this.dispatchEvent(
+            new CustomEvent('cell-hover', {
+              bubbles: true,
+              composed: true,
+              detail: {
+                item: this.item,
+                column: this.column,
+                cellContent: this.get(this.column.name, this.item)
+              }
+            })
+          );
+        }
+
+        _fireCellUnhoverEvent(event) {
+          this.dispatchEvent(
+            new CustomEvent('cell-unhover', {
+              bubbles: true,
+              composed: true,
+              detail: {
+                item: this.item,
+                column: this.column,
+                cellContent: this.get(this.column.name, this.item)
+              }
+            })
+          );
+        }
+
+        _valueChangedListener(event) {
+          if (!this.column || !this.column.path) {
+            return;
+          }
+
+          this.set('item.' + this.column.path, event.detail.value);
+        }
+
+        _render(renderer, path, editable, item) {
+          if (path === undefined || item === undefined) {
+            return;
+          }
+
+          if (this._valueElement) {
+            this._valueElement.removeEventListener('value-changed', this._boundValueChangedListener);
+          }
+
+          let value;
+          if (path) {
+            value = this.get(path, item);
+          } else {
+            value = item;
+          }
+
+          if (renderer) {
+            this._valueElement = document.createElement(renderer);
+            this._valueElement.value = value;
+            this._valueElement.editable = editable;
+            this._valueElement.addEventListener('value-changed', this._boundValueChangedListener);
+            this.shadowRoot.textContent = '';
+            this.shadowRoot.appendChild(this._valueElement);
+          } else {
+            this.shadowRoot.textContent = value;
+          }
+        }
+      }
+
+      customElements.define(DataGridCellContentWrapperElement.is, DataGridCellContentWrapperElement);
+
+      /**
+       * @namespace Predix
+       */
+      window.Predix = window.Predix || {};
+      Predix.DataGridCellContentWrapperElement = DataGridCellContentWrapperElement;
+    }
+  </script>
+</dom-module>
