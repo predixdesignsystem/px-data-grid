@@ -73,6 +73,15 @@
             _permittedTypes: {
               type: Array,
               value: ['string', 'number', 'date']
+            },
+
+            /**
+             * Just to help to identify columns with data
+             */
+            isDataColumn: {
+              type: Boolean,
+              value: true,
+              readOnly: true
             }
           };
         }

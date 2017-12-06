@@ -95,6 +95,15 @@
           _selectAllHidden: {
             type: Boolean,
             value: true
+          },
+
+          /**
+           * Just to help to identify columns without data
+           */
+          isDataColumn: {
+            type: Boolean,
+            value: false,
+            readOnly: true
           }
         };
       }
