@@ -669,12 +669,17 @@
           const item = evt.detail.detail.item;
           const key = item.key;
 
-          // -column- is temporary work around to limitations of px-dropdown
-          if (key && key.startsWith('-column-')) {
-            const columnName = key.substr('-column-'.length);
-            this._getColumnsWithName(columnName).forEach((c) => {
-              c.hidden = c.hidden === undefined ? true : !c.hidden;
-            });
+          if (key) {
+            // -column- is temporary work around to limitations of px-dropdown
+            if (typeof key == 'string' && key.startsWith('-column-')) {
+              const columnName = key.substr('-column-'.length);
+              this._getColumnsWithName(columnName).forEach((c) => {
+                c.hidden = c.hidden === undefined ? true : !c.hidden;
+              });
+            // function callbacks are stored as object with action function
+            } else if (typeof key == 'object' && key.action && typeof key.action == 'function') {
+              key.action();
+            }
           }
         }
 
