@@ -113,8 +113,11 @@
             return;
           }
 
-          if (this._valueElement) {
-            this._valueElement.removeEventListener('value-changed', this._boundValueChangedListener);
+          if (!this._valueElement && renderer) {
+            this._valueElement = document.createElement(renderer);
+            this._valueElement.addEventListener('value-changed', this._boundValueChangedListener);
+            this.shadowRoot.textContent = '';
+            this.shadowRoot.appendChild(this._valueElement);
           }
 
           let value;
@@ -125,12 +128,8 @@
           }
 
           if (renderer) {
-            this._valueElement = document.createElement(renderer);
             this._valueElement.value = value;
             this._valueElement.editable = editable;
-            this._valueElement.addEventListener('value-changed', this._boundValueChangedListener);
-            this.shadowRoot.textContent = '';
-            this.shadowRoot.appendChild(this._valueElement);
           } else {
             this.shadowRoot.textContent = value;
           }

@@ -21,6 +21,10 @@
         value: {
           type: String,
           notify: true
+        },
+
+        _previousValue: {
+          type: String
         }
       };
     }
@@ -43,6 +47,7 @@
       super.ready();
 
       this._boundMouseDownListener = this._mouseDownListener.bind(this);
+      this._boundKeyupListener = this._keyupListener.bind(this);
 
       if (this.$.editingTemplate) {
         this._editingTemplateDisplay = window.getComputedStyle(this.$.editingTemplate).getPropertyValue('display');
@@ -69,18 +74,31 @@
       this._editing = false;
     }
 
+    _keyupListener(event) {
+      if (event.key === 'Escape' || event.key === 'Esc') {
+        this.set('value', this._previousValue);
+        this._editing = false;
+      }
+      if (event.key == 'Enter') {
+        this._editing = false;
+      }
+    }
+
     _editingChanged(editing, oldVal) {
       if (editing) {
         this.$.value.style.display = 'none';
         this.$.editingTemplate.style.display = this._editingTemplateDisplay;
 
+        this._previousValue = this.value;
         document.addEventListener('mousedown', this._boundMouseDownListener);
+        document.addEventListener('keyup', this._boundKeyupListener);
       } else {
         this.$.value.style.display = this._valueDisplay;
         this.$.editingTemplate.style.display = 'none';
 
         if (typeof oldVal !== 'undefined') {
           document.removeEventListener('mousedown', this._boundMouseDownListener);
+          document.removeEventListener('keyup', this._boundKeyupListener);
         }
       }
     }
