@@ -684,11 +684,11 @@
         }
 
         /**
-         * Function to resolve columns on grid
+         * Function to resolve (data) columns on grid
          */
         _getColumns() {
           if (this._vaadinGrid._columnTree) {
-            return this._vaadinGrid._columnTree[0];
+            return this._vaadinGrid._columnTree[0].filter(c => c.isDataColumn);
           } else if (this.columns && this.columns.length) {
             return this.columns.map((c) => {
               return c.element ? c.element : c;
