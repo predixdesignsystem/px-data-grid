@@ -57,6 +57,11 @@
       px-spinner[hidden] {
         display: none;
       }
+
+      vaadin-radio-button {
+        height: 12px;
+        width: 12px;
+      }
     </style>
 
     <template is="dom-if" if="{{_showActionBar(autoFilter, actionMenu)}}">
@@ -94,7 +99,7 @@
                  loading="{{_loading}}">
 
       <template is="dom-if" if="[[selectable]]" restamp>
-        <px-data-grid-selection-column auto-select hidden="[[hideSelectionColumn]]" multi-select="[[multiSelect]]">
+        <px-data-grid-selection-column frozen auto-select hidden="[[hideSelectionColumn]]" multi-select="[[multiSelect]]">
         </px-data-grid-selection-column>
       </template>
 
@@ -162,7 +167,8 @@
              */
             selectable: {
               type: Boolean,
-              value: false
+              value: false,
+              observer: '_selectableChanged'
             },
 
             /**
@@ -468,10 +474,7 @@
           // Override selectItem method to allow easy single select handling
           this._vaadinGrid.selectItem = (item) => this._handleSelectItem(item);
 
-          this.addEventListener('column-froze', (event) => {
-            this._vaadinGrid.insertBefore(event.detail.column, this._vaadinGrid.firstElementChild);
-            this._vaadinGrid._observer.flush();
-          });
+          this.addEventListener('column-froze', (event) => this._handleColumnFroze(event));
 
           this.addEventListener('column-unfroze', (event) => {
             const columnsRow = this._vaadinGrid._columnTree[this._vaadinGrid._columnTree.length - 1].slice(0);
@@ -480,10 +483,13 @@
               this._vaadinGrid.insertBefore(event.detail.column, lastFrozen.nextSibling);
             }
           });
+        }
 
-          if (this.highlight.length) {
-            this._vaadinGrid.setAttribute('highlighted', '');
-            this.setAttribute('highlighted', '');
+        _handleColumnFroze(event) {
+          const columnsRow = this._vaadinGrid._columnTree[this._vaadinGrid._columnTree.length - 1].slice(0);
+          const dataColumns = columnsRow.filter(c => c.isDataColumn);
+          if (dataColumns.length) {
+            this._vaadinGrid.insertBefore(event.detail.column, dataColumns[0]);
           }
         }
 
@@ -825,6 +831,32 @@
 
             this._vaadinGrid._filters = filters;
             this._vaadinGrid.clearCache();
+          }
+        }
+
+        /**
+         * Method forcing column order rules. To be run after any column order change
+         */
+        _columnOrderCleaner() {
+          const columnsRow = this._vaadinGrid._columnTree[this._vaadinGrid._columnTree.length - 1].slice(0);
+          const leftColumns = columnsRow.filter(c => !c.isDataColumn && c.frozen);
+          const rightColumns = columnsRow.filter(c => c.isDataColumn || !c.frozen);
+
+          if (leftColumns && leftColumns.length && rightColumns && rightColumns.length) {
+            const firstRight = rightColumns[0];
+            leftColumns.forEach(c => {
+              this._vaadinGrid.insertBefore(c, firstRight);
+            });
+          }
+        }
+
+        _selectableChanged(selectable) {
+          if (selectable) {
+            setTimeout(() => {
+              if (this.selectable) {
+                this._columnOrderCleaner();
+              }
+            });
           }
         }
 

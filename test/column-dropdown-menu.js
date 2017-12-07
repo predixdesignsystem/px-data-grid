@@ -19,16 +19,43 @@ document.addEventListener('WebComponentsReady', () => {
     });
 
     it('should move the first frozen column to the left side of the grid', () => {
+      expect(getHeaderCell(grid, 0)).to.equal(firstNameHeaderCell);
       getHeaderCellContent(lastNameHeaderCell)._freezeColumn();
+      flushVaadinGrid(grid);
       expect(getHeaderCell(grid, 0)).to.equal(lastNameHeaderCell);
       expect(getHeaderCell(grid, 1)).to.equal(firstNameHeaderCell);
     });
 
     it('should move the second frozen column to the left side of the grid, before the first frozen', () => {
-      getHeaderCellContent(lastNameHeaderCell)._freezeColumn();
-      getHeaderCellContent(firstNameHeaderCell)._freezeColumn();
       expect(getHeaderCell(grid, 0)).to.equal(firstNameHeaderCell);
       expect(getHeaderCell(grid, 1)).to.equal(lastNameHeaderCell);
+      getHeaderCellContent(lastNameHeaderCell)._freezeColumn();
+      flushVaadinGrid(grid);
+      getHeaderCellContent(firstNameHeaderCell)._freezeColumn();
+      flushVaadinGrid(grid);
+      expect(getHeaderCell(grid, 0)).to.equal(firstNameHeaderCell);
+      expect(getHeaderCell(grid, 1)).to.equal(lastNameHeaderCell);
+    });
+
+    it('should not move the frozen column before selection column', () => {
+      // Make selectable and check that columns are after selection column
+      grid.selectable = true;
+      grid.hideSelectionColumn = false;
+      flushVaadinGrid(grid);
+      expect(getHeaderCell(grid, 1)).to.equal(firstNameHeaderCell);
+      expect(getHeaderCell(grid, 2)).to.equal(lastNameHeaderCell);
+
+      // Free second data column, and check it's first after selection column
+      getHeaderCellContent(lastNameHeaderCell)._freezeColumn();
+      flushVaadinGrid(grid);
+      expect(getHeaderCell(grid, 1)).to.equal(lastNameHeaderCell);
+      expect(getHeaderCell(grid, 2)).to.equal(firstNameHeaderCell);
+
+      // Make unselectable, and check position of data columns
+      grid.selectable = false;
+      flushVaadinGrid(grid);
+      expect(getHeaderCell(grid, 0)).to.equal(lastNameHeaderCell);
+      expect(getHeaderCell(grid, 1)).to.equal(firstNameHeaderCell);
     });
 
     // TODO: @limonte investigate why 2 tests below don't work

@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid-column.html">
 <link rel="import" href="../vaadin-checkbox/vaadin-checkbox.html">
+<link rel="import" href="../vaadin-radio-button/vaadin-radio-button.html">
 
 <dom-module id="px-data-grid-selection-column">
   <template>
@@ -12,8 +13,14 @@
       </template>
     </template>
     <template id="defaultBodyTemplate">
-      <vaadin-checkbox aria-label="Select Row" aria-label="Select Row" checked="{{selected}}">
-      </vaadin-checkbox>
+      <template is="dom-if" if="[[multiSelect]]">
+        <vaadin-checkbox aria-label="Select Row" checked="{{selected}}">
+        </vaadin-checkbox>
+      </template>
+      <template is="dom-if" if="[[!multiSelect]]">
+        <vaadin-radio-button aria-label="Select Row" checked="{{selected}}">
+        </vaadin-radio-button>
+      </template>
     </template>
   </template>
 
