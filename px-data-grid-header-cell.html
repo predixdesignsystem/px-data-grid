@@ -131,37 +131,85 @@
           this._column.hidden = true;
         }
 
+        _groupByColumn() {
+          this._column.grouped = true;
+
+          this.dispatchEvent(new CustomEvent('group-by-column', {
+            bubbles: true,
+            composed: true,
+            detail: {
+              column: this._column
+            }
+          }));
+
+          this._setDropdownItems();
+        }
+
+        _ungroup() {
+          this._column.grouped = false;
+
+          this.dispatchEvent(new CustomEvent('ungroup', {
+            bubbles: true,
+            composed: true,
+            detail: {
+              column: this._column
+            }
+          }));
+
+          this._setDropdownItems();
+        }
+
         _setDropdownItems() {
-          if (this._column && this._column.frozen) {
-            this._dropdownItems = [
-              {
-                key: {
-                  action: () => this._unfreezeColumn()
-                },
-                val: this.localize('Unfreeze column')
-              },
+          if (this._column) {
+
+            if (this._column.frozen) {
+              this._dropdownItems = [
+                {
+                  key: {
+                    action: () => this._unfreezeColumn()
+                  },
+                  val: this.localize('Unfreeze column')
+                }
+              ];
+            } else {
+              this._dropdownItems = [
+                {
+                  key: {
+                    action: () => this._freezeColumn()
+                  },
+                  val: this.localize('Freeze column')
+                }
+              ];
+            }
+
+            this._dropdownItems.push(
               {
                 key: {
                   action: () => this._hideColumn()
                 },
                 val: this.localize('Hide column')
               }
-            ];
-          } else {
-            this._dropdownItems = [
-              {
-                key: {
-                  action: () => this._freezeColumn()
-                },
-                val: this.localize('Freeze column')
-              },
-              {
-                key: {
-                  action: () => this._hideColumn()
-                },
-                val: this.localize('Hide column')
-              }
-            ];
+            );
+
+            if (this._column.grouped) {
+              this._dropdownItems.push(
+                {
+                  key: {
+                    action: () => this._ungroup()
+                  },
+                  val: this.localize('Ungroup')
+                }
+              );
+            } else {
+              this._dropdownItems.push(
+                {
+                  key: {
+                    action: () => this._groupByColumn()
+                  },
+                  val: this.localize('Group by column')
+                }
+              );
+            }
           }
         }
 

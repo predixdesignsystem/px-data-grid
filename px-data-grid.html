@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid.html">
-<link rel="import" href="../vaadin-grid/vaadin-grid-selection-column.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="../vaadin-grid/vaadin-grid-tree-toggle.html">
 <link rel="import" href="../px-spinner/px-spinner.html">
 <link rel="import" href="px-data-grid-column.html">
 <link rel="import" href="px-auto-filter-field.html">
@@ -58,6 +58,10 @@
         display: none;
       }
 
+      vaadin-checkbox {
+        height: 15px;
+      }
+
       vaadin-radio-button {
         height: 12px;
         width: 12px;
@@ -99,7 +103,7 @@
                  loading="{{_loading}}">
 
       <template is="dom-if" if="[[selectable]]" restamp>
-        <px-data-grid-selection-column frozen auto-select hidden="[[hideSelectionColumn]]" multi-select="[[multiSelect]]">
+        <px-data-grid-selection-column frozen auto-select hidden="[[hideSelectionColumn]]" multi-select="[[multiSelect]]" tree-grid="[[_groupByColumn]]">
         </px-data-grid-selection-column>
       </template>
 
@@ -120,7 +124,21 @@
             <vaadin-grid-sorter path="[[_resolveColumnPath(column)]]">[[_resolveColumnHeader(column)]]</vaadin-grid-sorter>
           </template>
           <template>
-            <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column)]]" item="{{item}}" column="[[column]]"></px-data-grid-cell-content-wrapper>
+            <dom-if if="[[_isGroupedByColumn(column, _groupByColumn)]]">
+              <template>
+                <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
+                  <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column)]]" item="{{item}}" column="[[column]]">
+                  </px-data-grid-cell-content-wrapper>
+                </vaadin-grid-tree-toggle>
+              </template>
+            </dom-if>
+
+            <dom-if if="[[!_isGroupedByColumn(column, _groupByColumn)]]">
+              <template>
+                <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column)]]" item="{{item}}" column="[[column]]">
+                </px-data-grid-cell-content-wrapper>
+              </template>
+            </dom-if>
           </template>
         </px-data-grid-column>
       </template>
@@ -340,6 +358,8 @@
                     'Table Actions': 'Table Actions',
                     'Freeze column': 'Freeze column',
                     'Unfreeze column': 'Unfreeze column',
+                    'Group by column': 'Group by column',
+                    'Ungroup': 'Ungroup',
                     'Hide column': 'Hide column'
                   },
                   'fr': {
@@ -466,6 +486,11 @@
             _selectedActionItems: {
               type: Array,
               value: []
+            },
+
+            _groupByColumn: {
+              type: Object,
+              value: false
             }
           };
         }
@@ -497,6 +522,18 @@
             if (lastFrozen) {
               this._vaadinGrid.insertBefore(event.detail.column, lastFrozen.nextSibling);
             }
+          });
+
+          this.addEventListener('group-by-column', (event) => {
+            this._groupByColumn = event.detail.column;
+            this._vaadinGrid.clearCache();
+            this._vaadinGrid.setAttribute('tree-grid', true);
+          });
+
+          this.addEventListener('ungroup', (event) => {
+            this._groupByColumn = false;
+            this._vaadinGrid.clearCache();
+            this._vaadinGrid.removeAttribute('tree-grid');
           });
         }
 
@@ -609,8 +646,6 @@
             items = this._filter(items, params.filters);
           }
 
-          this.size = items.length;
-
           if (params.sortOrders && params.sortOrders.length && this._vaadinGrid._checkPaths(this._sorters, 'sorting', items)) {
             const multiSort = (a, b) => {
               return params.sortOrders.map(sort => {
@@ -635,7 +670,25 @@
         }
 
         _localDataProvider(params, callback) {
-          let items = (Array.isArray(this.tableData) ? this.tableData : []).slice(0);
+          let items = Array.isArray(this.tableData) ? this.tableData : [];
+          if (this._groupByColumn) {
+            if (!params.parentItem) {
+              const valuesMap = items.reduce((map, item) => {
+                const columnName = this._groupByColumn.name;
+                const value = item[columnName];
+                const groupItem = {
+                  hasChildren: true
+                };
+                groupItem[columnName] = value;
+                map.set(value, groupItem);
+                return map;
+              }, new Map());
+              items = [];
+              valuesMap.forEach((item) => items.push(item));
+            } else {
+              items = items.filter((item) => item[this._groupByColumn.name] === params.parentItem[this._groupByColumn.name]);
+            }
+          }
           items = this._localDataResolver(params, items);
           callback(items, items.length);
         }
@@ -850,6 +903,10 @@
             this._vaadinGrid._filters = filters;
             this._vaadinGrid.clearCache();
           }
+        }
+
+        _isGroupedByColumn(column, _groupByColum) {
+          return _groupByColum && _groupByColum.name === column.name;
         }
 
         /**

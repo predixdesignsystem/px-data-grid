@@ -76,6 +76,12 @@
         border-bottom: 1px solid var(--px-data-grid-cell-border-color--selected);
       }
 
+      /* Tree grid (group by column/value) */
+
+      :host([tree-grid]) [part~="row"][aria-level="1"] [part~="cell"] {
+        background: var(--px-data-grid-background-color-striped--selected);
+      }
+
       /* Frozen columns */
 
       [part~="cell"][last-frozen] {
