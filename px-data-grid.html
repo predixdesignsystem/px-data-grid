@@ -12,6 +12,7 @@
 
 <link rel="import" href="px-data-grid-string-renderer.html">
 <link rel="import" href="px-data-grid-cell-content-wrapper.html">
+<link rel="import" href="px-data-grid-filter.html">
 
 <dom-module id="px-data-grid">
   <template>
@@ -67,6 +68,10 @@
         width: 12px;
       }
     </style>
+
+    <template is="dom-if" if="{{filterable}}">
+      <px-data-grid-filter columns="[[columns]]" filter-entities="{{_filterEntities}}"></px-data-grid-filter>
+    </template>
 
     <template is="dom-if" if="{{_showActionBar(autoFilter, actionMenu)}}">
 
@@ -190,6 +195,10 @@
               observer: '_selectableChanged'
             },
 
+            filterable: {
+              type: Boolean,
+              value: false
+            },
             /**
              * If true, hides the column with checkboxes.
              */
@@ -491,8 +500,28 @@
             _groupByColumn: {
               type: Object,
               value: false
+            },
+
+            _filterEntities: {
+              type: Array,
+              value: function() {
+                return [{}];
+              }
+            },
+
+            _readyFilterEntities: {
+              type: Array,
+              value: function() {
+                return [];
+              }
             }
           };
+        }
+
+        static get observers() {
+          return [
+            '_filterEntitiesObserver(_filterEntities, _filterEntities.splices, _filterEntities.*)'
+          ];
         }
 
         updateColumns() {
@@ -643,7 +672,11 @@
 
         _localDataResolver(params, items) {
           if (params.filters && params.filters.length && this._vaadinGrid._checkPaths(params.filters, 'filtering', items)) {
-            items = this._filter(items, params.filters);
+            items = this._applyAutoFilter(items, params.filters);
+          }
+
+          if (this._readyFilterEntities && this._readyFilterEntities.length != 0) {
+            items = this._applyCustomFilter(items, this._readyFilterEntities);
           }
 
           if (params.sortOrders && params.sortOrders.length && this._vaadinGrid._checkPaths(this._sorters, 'sorting', items)) {
@@ -724,9 +757,10 @@
           if (!this.columns.length && data && data.length) {
             this.columns = [];
             for (const key in data[0]) {
-              this.columns.push({
+              this.push('columns', {
                 name: key,
                 hidden: false,
+                type: 'string',
                 path: key,
                 generated: true
               });
@@ -866,7 +900,7 @@
          * this will add workaround that allows to filter inmemory data given via
          * items parameter.
          */
-        _filter(items, filters) {
+        _applyAutoFilter(items, filters) {
           return items.filter((item, index) => {
             return filters.filter(filter => {
               const filterValueLowercase = this._vaadinGrid._normalizeEmptyValue(filter.value).toString().toLowerCase();
@@ -883,6 +917,42 @@
                 return value.toString().toLowerCase().indexOf(filterValueLowercase) === -1;
               }
             }).length === 0;
+          });
+        }
+
+        _escapeRegExp(str) {
+          return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+        }
+
+        _applyCustomFilter(items, filters) {
+          return items.filter((item) => {
+            return filters.some((filter) => {
+              const filteringValue = Polymer.Path.get(item, filter.column.path);
+              if (filter.column.type === 'string' || !filter.column.type) {
+                let regex;
+
+                switch (filter.pattern) {
+                  case 'equals':
+                    regex = new RegExp(`^${this._escapeRegExp(filter.query)}$`, 'i');
+                    break;
+                  case 'contains':
+                    regex = new RegExp(`${this._escapeRegExp(filter.query)}`, 'i');
+                    break;
+                  case 'starts_with':
+                    regex = new RegExp(`^${this._escapeRegExp(filter.query)}`, 'i');
+                    break;
+                  case 'ends_with':
+                    regex = new RegExp(`${this._escapeRegExp(filter.query)}$`, 'i');
+                    break;
+                  case 'wildcard':
+                    regex = new RegExp(`${filter.query.split('*').map(this._escapeRegExp).join('.*')}`, 'i');
+                    break;
+                }
+
+                const regexTest = regex.test(filteringValue);
+                return ((filter.action === 'show' && regexTest) || (filter.action === 'hide' && !regexTest));
+              }
+            });
           });
         }
 
@@ -933,6 +1003,18 @@
               }
             });
           }
+        }
+
+        _filterEntitiesObserver(filterEntities) {
+          if (!this._vaadinGrid) {
+            return;
+          }
+
+          this._readyFilterEntities = filterEntities.filter((entity) => {
+            return entity.active;
+          });
+
+          this._vaadinGrid.clearCache();
         }
 
         /**

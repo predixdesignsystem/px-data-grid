@@ -1,0 +1,158 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="px-data-grid-filter-entity">
+  <template>
+    <style>
+      :host {
+        display: flex;
+      }
+
+      px-dropdown + px-dropdown,
+      px-dropdown + input {
+        margin-left: 5px;
+      }
+    </style>
+    <px-dropdown items="[[_filterActions]]" selected="{{entity.action}}"></px-dropdown>
+    <px-dropdown items="[[_mappedColumns]]" selected="{{entity.column}}"></px-dropdown>
+    <template is="dom-if" if="{{_columnTypeIsString(entity.column)}}">
+      <px-dropdown items="[[_regexPatterns]]" selected="{{_regexPattern}}"></px-dropdown>
+      <input type="text" value="{{_regexQuery::input}}">
+    </template>
+    <template is="dom-if" if="{{_columnTypeIsDate(entity.column)}}"></template>
+    <template is="dom-if" if="{{_columnTypeIsNumber(entity.column)}}"></template>
+  </template>
+  <script>
+    {
+      /**
+       * @memberof Predix
+       * @extends Polymer.Element
+       */
+      class DataGridFilterEntityElement extends Polymer.Element {
+        static get is() {
+          return 'px-data-grid-filter-entity';
+        }
+
+        static get properties() {
+          return {
+            columns: Array,
+
+            tableData: Array,
+
+            entity: {
+              type: Object,
+              value: function() {
+                return {};
+              }
+            },
+
+            _regexPattern: {
+              type: String
+            },
+
+            _regexQuery: {
+              type: String
+            },
+
+            _mappedColumns: Array,
+
+            _filterActions: {
+              type: Array,
+              value: [
+                {
+                  key: 'show',
+                  val: 'Show'
+                },
+                {
+                  key: 'hide',
+                  val: 'Hide'
+                },
+                {
+                  key: 'highlight',
+                  val: 'Highlight'
+                }
+              ]
+            },
+
+            _regexPatterns: {
+              type: Array,
+              value: [
+                {
+                  key: 'equals',
+                  val: 'Equals'
+                },
+                {
+                  key: 'contains',
+                  val: 'Contains'
+                },
+                {
+                  key: 'starts_with',
+                  val: 'Starts With'
+                },
+                {
+                  key: 'ends_with',
+                  val: 'Ends With'
+                },
+                {
+                  key: 'wildcard',
+                  val: 'Wildcard'
+                }
+              ]
+            }
+          };
+        }
+
+        static get observers() {
+          return [
+            '_setMappedColumns(columns, columns.splices)',
+            '_regexChanged(_regexPattern, _regexQuery)',
+            '_filterActiveObservable(entity, entity.*)'
+          ];
+        }
+
+        _setMappedColumns(columns, columnsSplices) {
+          if (!columns && !columnsSplices) {
+            return;
+          }
+
+          this.set('entity.column', columns[0]);
+
+          this.set('_mappedColumns', []);
+
+          columns.forEach((col) => {
+            this.push('_mappedColumns', {key: col, val: col.path});
+          });
+        }
+
+        _columnTypeIsString(column) {
+          return column && column.type === 'string';
+        }
+
+        _columnTypeIsDate(column) {
+          return column && column.type === 'date';
+        }
+
+        _columnTypeIsNumber(column) {
+          return column && column.type === 'number';
+        }
+
+        _regexChanged(pattern, query) {
+          this.entity.pattern = pattern;
+          this.entity.query = query;
+          this.notifyPath('entity.query');
+        }
+
+        _filterActiveObservable(entity) {
+          this.set('entity.active', !!entity.pattern && !!entity.query && !!entity.column && !!entity.action);
+        }
+      }
+
+      customElements.define(DataGridFilterEntityElement.is, DataGridFilterEntityElement);
+
+      /**
+       * @namespace Predix
+       */
+      window.Predix = window.Predix || {};
+      Predix.DataGridFilterEntityElement = DataGridFilterEntityElement;
+    }
+  </script>
+</dom-module>

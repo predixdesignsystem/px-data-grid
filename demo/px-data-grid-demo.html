@@ -53,6 +53,7 @@
         <px-data-grid
             table-data="{{props.tableData.value}}"
             selectable="{{props.selectable.value}}"
+            filterable="{{props.filterable.value}}"
             multi-select="{{props.multiSelect.value}}"
             selected-items="{{selectedItems}}"
             hide-selection-column="{{props.hideSelectionColumn.value}}"
@@ -468,6 +469,12 @@
       },
 
       selectable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      filterable: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'
