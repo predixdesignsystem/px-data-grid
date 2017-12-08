@@ -520,11 +520,13 @@
           this.addEventListener('group-by-column', (event) => {
             this._groupByColumn = event.detail.column;
             this._vaadinGrid.clearCache();
+            this._vaadinGrid.setAttribute('tree-grid', true);
           });
 
           this.addEventListener('ungroup', (event) => {
             this._groupByColumn = false;
             this._vaadinGrid.clearCache();
+            this._vaadinGrid.removeAttribute('tree-grid');
           });
         }
 
