@@ -11,7 +11,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "~2.1.0",
+    "polymer": "^2.3.0",
     "app-localize-behavior": "^2.0.0",
     "iron-a11y-keys-behavior": "^v2.0.0",
     "iron-a11y-announcer": "^v2.0.0",
@@ -35,10 +35,11 @@
     "px-colors-design": "^1.0.5",
     "px-defaults-design": "^2.0.2",
     "px-mixins-design": "^1.0.1",
-    "px-typography-design": "^2.0.3"
+    "px-typography-design": "^2.0.3",
+    "px-view-header": "1.1.2"
   },
   "resolutions": {
-    "polymer": "~2.1.0",
-    "webcomponentsjs": "^v1.0.2"
+    "polymer": "^2.3.0",
+    "webcomponentsjs": "^1.0.2"
   }
 }
