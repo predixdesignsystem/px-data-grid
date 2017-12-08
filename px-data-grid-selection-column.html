@@ -230,7 +230,7 @@
         const activeItem = e.detail.value;
         if (this.autoSelect) {
           const item = activeItem || this._previousActiveItem;
-          if (item) {
+          if (item && !item.hasChildren) {
             this._grid._toggleItem(item);
           }
         }
