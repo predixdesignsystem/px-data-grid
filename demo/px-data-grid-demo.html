@@ -61,11 +61,13 @@
             multi-sort="{{props.multiSort.value}}"
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
             action-menu="{{props.actionMenu.value}}"
+            table-actions="{{props.tableActions.value}}"
             language="{{props.language.value}}"
             auto-filter="{{props.autoFilter.value}}"
             on-cell-hover="cellHoverListener"
             on-cell-unhover="cellUnhoverListener"
-            pagination="{{props.pagination.value}}">
+            pagination="{{props.pagination.value}}"
+            on-table-action="tableActionListener">
         </px-data-grid>
 
         <dom-if if="[[selectedItems.length]]">
@@ -116,6 +118,10 @@
       if (this.hoveredCellData === evt.detail.cellContent) {
         this.hoveredCellData = '';
       }
+    },
+
+    tableActionListener: function(evt) {
+      window.alert('Table Action ' + evt.detail.id);
     },
 
     properties: {
@@ -526,6 +532,17 @@
         value: 'en',
         inputType: 'dropdown',
         inputChoices: ['en', 'fr', 'fi']
+      },
+
+      tableActions: {
+        type: Object,
+        defaultValue: [
+          {
+            name: 'Export CSV',
+            id: 'CSV'
+          }
+        ],
+        inputType: 'code:JSON'
       }
     },
 

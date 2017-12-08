@@ -111,6 +111,7 @@
           language="[[language]]"
           resources="[[resources]]"
           type="[[column.type]]"
+          frozen="[[column.frozen]]"
           mapped-object="[[column]]"
           width="[[_getColumnWidth(column)]]"
           flex-grow="[[_getColumnFlexGrow(column)]]"
@@ -353,7 +354,10 @@
             },
 
             /**
-             * All custom table actions. Should return array of objects with 'name' (String) and 'action' (function).
+             * All custom table actions shown before columns. Arrays should contain objects
+             * with name (String, shown to user) and id (String, given back in event).
+             * When user selects these actions table-action event will be emitted, with id of
+             * action at event.detail.id
              */
             tableActions: {
               type: Array,
@@ -464,6 +468,17 @@
               value: []
             }
           };
+        }
+
+        updateColumns() {
+          const probs = ['hidden', 'name', 'frozen', 'width', 'flexGrow', 'path'];
+          for (let i = 0; i < this.columns.length; ++i) {
+            const prefix = 'columns.' + i + '.';
+            probs.forEach(prob => {
+              const path = prefix + prob;
+              this.notifyPath(path);
+            });
+          }
         }
 
         ready() {
@@ -675,16 +690,21 @@
           const item = evt.detail.detail.item;
           const key = item.key;
 
-          if (key) {
+          if (key && typeof key == 'string') {
             // -column- is temporary work around to limitations of px-dropdown
-            if (typeof key == 'string' && key.startsWith('-column-')) {
+            if (key.startsWith('-column-')) {
               const columnName = key.substr('-column-'.length);
               this._getColumnsWithName(columnName).forEach((c) => {
                 c.hidden = c.hidden === undefined ? true : !c.hidden;
               });
-            // function callbacks are stored as object with action function
-            } else if (typeof key == 'object' && key.action && typeof key.action == 'function') {
-              key.action();
+            } else if (key.startsWith('-action-')) {
+              const actionId = key.substr('-action-'.length);
+              this.dispatchEvent(new CustomEvent('table-action', {
+                detail: {
+                  id: actionId
+                },
+                bubbles: true
+              }));
             }
           }
         }
@@ -717,9 +737,7 @@
           if (this.tableActions) {
             this.tableActions.forEach((item) => {
               content.push({
-                key: {
-                  action: item.action
-                },
+                key: '-action-' + item.id,
                 val: item.name,
                 selected: false,
                 disabled: true
