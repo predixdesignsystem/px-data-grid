@@ -13,13 +13,15 @@
       </template>
     </template>
     <template id="defaultBodyTemplate">
-      <template is="dom-if" if="[[multiSelect]]">
-        <vaadin-checkbox aria-label="Select Row" checked="{{selected}}">
-        </vaadin-checkbox>
-      </template>
-      <template is="dom-if" if="[[!multiSelect]]">
-        <vaadin-radio-button aria-label="Select Row" checked="{{selected}}">
-        </vaadin-radio-button>
+      <template is="dom-if" if="[[!_isGroupItem(item)]]">
+        <template is="dom-if" if="[[multiSelect]]">
+          <vaadin-checkbox aria-label="Select Row" checked="{{selected}}">
+          </vaadin-checkbox>
+        </template>
+        <template is="dom-if" if="[[!multiSelect]]">
+          <vaadin-radio-button aria-label="Select Row" checked="{{selected}}">
+          </vaadin-radio-button>
+        </template>
       </template>
     </template>
   </template>
@@ -79,6 +81,13 @@
           multiSelect: {
             type: Boolean,
             value: true
+          },
+
+          /**
+           * When true, the grid is in tree-grid mode (group by column/value)
+           */
+          treeGrid: {
+            type: Boolean
           },
 
           /**
@@ -192,6 +201,10 @@
             this._selectAllHidden = !this._grid._pxDataGrid._hasLocalDataProvider;
           }
         }
+      }
+
+      _isGroupItem(item) {
+        return this.treeGrid && item.hasChildren;
       }
 
       _onSelectAllChanged(selectAll) {

@@ -58,6 +58,10 @@
         display: none;
       }
 
+      vaadin-checkbox {
+        height: 15px;
+      }
+
       vaadin-radio-button {
         height: 12px;
         width: 12px;
@@ -99,7 +103,7 @@
                  loading="{{_loading}}">
 
       <template is="dom-if" if="[[selectable]]" restamp>
-        <px-data-grid-selection-column frozen auto-select hidden="[[hideSelectionColumn]]" multi-select="[[multiSelect]]">
+        <px-data-grid-selection-column frozen auto-select hidden="[[hideSelectionColumn]]" multi-select="[[multiSelect]]" tree-grid="[[_groupByColumn]]">
         </px-data-grid-selection-column>
       </template>
 
@@ -484,7 +488,10 @@
               value: []
             },
 
-            _groupByColumn: Object
+            _groupByColumn: {
+              type: Object,
+              value: false
+            }
           };
         }
 
