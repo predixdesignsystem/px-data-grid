@@ -355,6 +355,7 @@
                     'Freeze column': 'Freeze column',
                     'Unfreeze column': 'Unfreeze column',
                     'Group by column': 'Group by column',
+                    'Ungroup': 'Ungroup',
                     'Hide column': 'Hide column'
                   },
                   'fr': {
@@ -518,6 +519,11 @@
 
           this.addEventListener('group-by-column', (event) => {
             this._groupByColumn = event.detail.column;
+            this._vaadinGrid.clearCache();
+          });
+
+          this.addEventListener('ungroup', (event) => {
+            this._groupByColumn = false;
             this._vaadinGrid.clearCache();
           });
         }

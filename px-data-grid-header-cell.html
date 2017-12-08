@@ -132,6 +132,8 @@
         }
 
         _groupByColumn() {
+          this._column.grouped = true;
+
           this.dispatchEvent(new CustomEvent('group-by-column', {
             bubbles: true,
             composed: true,
@@ -139,6 +141,22 @@
               column: this._column
             }
           }));
+
+          this._setDropdownItems();
+        }
+
+        _ungroup() {
+          this._column.grouped = false;
+
+          this.dispatchEvent(new CustomEvent('ungroup', {
+            bubbles: true,
+            composed: true,
+            detail: {
+              column: this._column
+            }
+          }));
+
+          this._setDropdownItems();
         }
 
         _setDropdownItems() {
@@ -173,14 +191,25 @@
               }
             );
 
-            this._dropdownItems.push(
-              {
-                key: {
-                  action: () => this._groupByColumn()
-                },
-                val: this.localize('Group by column')
-              }
-            );
+            if (this._column.grouped) {
+              this._dropdownItems.push(
+                {
+                  key: {
+                    action: () => this._ungroup()
+                  },
+                  val: this.localize('Ungroup')
+                }
+              );
+            } else {
+              this._dropdownItems.push(
+                {
+                  key: {
+                    action: () => this._groupByColumn()
+                  },
+                  val: this.localize('Group by column')
+                }
+              );
+            }
           }
         }
 
