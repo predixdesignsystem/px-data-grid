@@ -191,24 +191,26 @@
               }
             );
 
-            if (this._column.grouped) {
-              this._dropdownItems.push(
-                {
-                  key: {
-                    action: () => this._ungroup()
-                  },
-                  val: this.localize('Ungroup')
-                }
-              );
-            } else {
-              this._dropdownItems.push(
-                {
-                  key: {
-                    action: () => this._groupByColumn()
-                  },
-                  val: this.localize('Group by column')
-                }
-              );
+            if (!this.isRemoteDataProvider) {
+              if (this._column.grouped) {
+                this._dropdownItems.push(
+                  {
+                    key: {
+                      action: () => this._ungroup()
+                    },
+                    val: this.localize('Ungroup')
+                  }
+                );
+              } else {
+                this._dropdownItems.push(
+                  {
+                    key: {
+                      action: () => this._groupByColumn()
+                    },
+                    val: this.localize('Group by column')
+                  }
+                );
+              }
             }
           }
         }
