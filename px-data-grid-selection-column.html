@@ -163,8 +163,6 @@
 
       /** @private */
       disconnectedCallback() {
-        super.disconnectedCallback();
-
         if (this._grid) {
           this._grid.removeEventListener('active-item-changed', this._boundOnActiveItemChanged);
           this._grid.removeEventListener('data-provider-changed', this._boundOnDataProviderChanged);
@@ -186,6 +184,8 @@
           }
 
         }
+
+        super.disconnectedCallback();
       }
 
       /** @private */
