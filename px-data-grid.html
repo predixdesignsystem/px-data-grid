@@ -295,22 +295,13 @@
              * Format:
              * ```javascript
              * {
-             *   name: 'first',
+             *   name: 'First Name',
+             *   path: 'first',
              *   hidden: false,
-             *   header: 'First name',
-             *   value: (item) => {
-             *     return item.first;
-             *   }
-             * },
+             *   frozen: false,
+             *   flexGrow: 1
+             * }
              * ```
-             * In case px-data-table-columns aren't provided, table columns will be generated automatically.
-             * They will be stamped via
-             *
-             * <template is="dom-repeat" items="[[_generatedColumns]]">
-             *   ...
-             * </template>
-             *
-             * @private
              */
             columns: {
               type: Array,
@@ -809,7 +800,6 @@
           } else {
             return [];
           }
-
         }
 
         /**
@@ -998,9 +988,7 @@
         _selectableChanged(selectable) {
           if (selectable) {
             setTimeout(() => {
-              if (this.selectable) {
-                this._columnOrderCleaner();
-              }
+              this._columnOrderCleaner();
             });
           }
         }
