@@ -86,8 +86,12 @@
 
     _editingChanged(editing, oldVal) {
       if (editing) {
+        this._computedHeight = window.getComputedStyle(this).height;
+
         this.$.value.style.display = 'none';
         this.$.editingTemplate.style.display = this._editingTemplateDisplay;
+
+        this.style.height = this._computedHeight;
 
         this._previousValue = this.value;
         document.addEventListener('mousedown', this._boundMouseDownListener);

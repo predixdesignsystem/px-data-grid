@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="px-data-grid-renderer-mixin.html">
 
-<dom-module id="px-data-grid-string-renderer">
+<dom-module id="px-data-grid-number-renderer">
   <template>
     <style>
       :host {
@@ -11,13 +11,13 @@
     </style>
     <div id="value">[[value]]</div>
     <div id="editingTemplate">
-      <input type="text" value="{{value::change}}">
+      <input type="number" value="{{value::change}}">
     </div>
   </template>
   <script>
     {
       /**
-       * A `<px-data-grid-string-renderer>` is standard renderer for string cell content.
+       * A `<px-data-grid-number-renderer>` is standard renderer for number cell content.
        * This element shows how to implement custom renderer in order to display uncommon data.
        * Each renderer that is needed for displaying content should have element with id="value",
        * which is rendered in non-editable state of the cell.
@@ -27,19 +27,19 @@
        * @extends Polymer.Element
        * @mixes Predix.DataGridRendererMixin
        */
-      class DataGridStringRenderer extends Predix.DataGridRendererMixin(Polymer.Element) {
+      class DataGridNumberRenderer extends Predix.DataGridRendererMixin(Polymer.Element) {
         static get is() {
-          return 'px-data-grid-string-renderer';
+          return 'px-data-grid-number-renderer';
         }
       }
 
-      customElements.define(DataGridStringRenderer.is, DataGridStringRenderer);
+      customElements.define(DataGridNumberRenderer.is, DataGridNumberRenderer);
 
       /**
        * @namespace Predix
        */
       window.Predix = window.Predix || {};
-      Predix.DataGridStringRenderer = DataGridStringRenderer;
+      Predix.DataGridNumberRenderer = DataGridNumberRenderer;
     }
   </script>
 </dom-module>

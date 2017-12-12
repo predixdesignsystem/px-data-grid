@@ -11,6 +11,8 @@
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 
 <link rel="import" href="px-data-grid-string-renderer.html">
+<link rel="import" href="px-data-grid-date-renderer.html">
+<link rel="import" href="px-data-grid-number-renderer.html">
 <link rel="import" href="px-data-grid-cell-content-wrapper.html">
 <link rel="import" href="px-data-grid-filter.html">
 
@@ -31,6 +33,9 @@
         padding-bottom: var(--px-data-grid-padding-bottom);
         padding-left: var(--px-data-grid-padding-left);
         padding-right: var(--px-data-grid-padding-right);
+        height: 100%;
+        display: flex;
+        align-items: center;
       }
 
       px-data-grid-cell-content-wrapper.default-highlight {
@@ -134,7 +139,7 @@
             <dom-if if="[[_isGroupedByColumn(column, _groupByColumn)]]">
               <template>
                 <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
-                  <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column)]]" item="{{item}}" column="[[column]]">
+                  <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column, _highlightEntities.*)]]" item="{{item}}" column="[[column]]">
                   </px-data-grid-cell-content-wrapper>
                 </vaadin-grid-tree-toggle>
               </template>
@@ -142,7 +147,7 @@
 
             <dom-if if="[[!_isGroupedByColumn(column, _groupByColumn)]]">
               <template>
-                <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column)]]" item="{{item}}" column="[[column]]">
+                <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column, _highlightEntities.*)]]" item="{{item}}" column="[[column]]">
                 </px-data-grid-cell-content-wrapper>
               </template>
             </dom-if>
@@ -458,7 +463,23 @@
              */
             highlight: {
               type: Array,
-              value: []
+              value: () => []
+            },
+
+            /**
+             * Concatenated array from user's highlights and filter's
+             */
+            _highlightEntities: {
+              type: Array,
+              value: () => []
+            },
+
+            /**
+             * Array of highlights from px-data-grid-filter component
+             */
+            _filterHighlights: {
+              type: Array,
+              value: () => []
             },
 
             /**
@@ -495,6 +516,9 @@
               value: false
             },
 
+            /**
+             * Array of filters from px-data-grid-filter component
+             */
             _filterEntities: {
               type: Array,
               value: function() {
@@ -502,6 +526,9 @@
               }
             },
 
+            /**
+             * Filters from px-data-grid-filter component, that are completely filled
+             */
             _readyFilterEntities: {
               type: Array,
               value: function() {
@@ -513,7 +540,8 @@
 
         static get observers() {
           return [
-            '_filterEntitiesObserver(_filterEntities, _filterEntities.splices, _filterEntities.*)'
+            '_filterEntitiesObserver(_filterEntities, _filterEntities.*)',
+            '_highlightsObserver(highlight, _filterHighlights, highlight.*, _filterHightlights.*)'
           ];
         }
 
@@ -596,7 +624,7 @@
         }
 
         _resolveCellColor(item, column) {
-          if (!this.highlight || item === undefined) {
+          if (!this._highlightEntities || item === undefined) {
             return undefined;
           }
 
@@ -604,7 +632,7 @@
           let rowColor;
           let cellColor;
 
-          this.highlight.forEach((highlightEntity) => {
+          this._highlightEntities.forEach((highlightEntity) => {
             if (highlightEntity.type === 'row') {
               if (this._isRowConditionApplied(item, highlightEntity.condition)) {
                 if (highlightEntity.color) {
@@ -809,6 +837,7 @@
           } else {
             return [];
           }
+
         }
 
         /**
@@ -923,36 +952,79 @@
           return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
         }
 
+        _isStringMatches(filter, value) {
+          let regex;
+
+          switch (filter.pattern) {
+            case 'equals':
+              regex = new RegExp(`^${this._escapeRegExp(filter.query)}$`, 'i');
+              break;
+            case 'contains':
+              regex = new RegExp(`${this._escapeRegExp(filter.query)}`, 'i');
+              break;
+            case 'starts_with':
+              regex = new RegExp(`^${this._escapeRegExp(filter.query)}`, 'i');
+              break;
+            case 'ends_with':
+              regex = new RegExp(`${this._escapeRegExp(filter.query)}$`, 'i');
+              break;
+            case 'wildcard':
+              regex = new RegExp(`${filter.query.split('*').map(this._escapeRegExp).join('.*')}`, 'i');
+              break;
+          }
+
+          return regex.test(value);
+        }
+
+        _isDateMatches(filter, value) {
+          let result = true;
+          const comparingDate = new Date(value);
+          if (filter.dateFrom) {
+            const dateFrom = new Date(filter.dateFrom);
+            result = result && dateFrom < comparingDate;
+          }
+          if (filter.dateTo) {
+            const dateTo = new Date(filter.dateTo);
+            result = result && dateTo > comparingDate;
+          }
+          return result;
+        }
+
+        _isNumberMatches(filter, value) {
+          let result = true;
+          const comparingNumber = window.parseInt(value);
+          if (filter.leftBound) {
+            const leftBound = window.parseInt(filter.leftBound);
+            result = result && leftBound <= comparingNumber;
+          }
+          if (filter.rightBound) {
+            const rightBound = window.parseInt(filter.rightBound);
+            result = result && rightBound >= comparingNumber;
+          }
+          return result;
+        }
+
         _applyCustomFilter(items, filters) {
-          return items.filter((item) => {
-            return filters.some((filter) => {
+          const filteredItems = items.filter((item) => {
+            const isEveryFilterApplied = filters.every((filter) => {
               const filteringValue = Polymer.Path.get(item, filter.column.path);
-              if (filter.column.type === 'string' || !filter.column.type) {
-                let regex;
 
-                switch (filter.pattern) {
-                  case 'equals':
-                    regex = new RegExp(`^${this._escapeRegExp(filter.query)}$`, 'i');
-                    break;
-                  case 'contains':
-                    regex = new RegExp(`${this._escapeRegExp(filter.query)}`, 'i');
-                    break;
-                  case 'starts_with':
-                    regex = new RegExp(`^${this._escapeRegExp(filter.query)}`, 'i');
-                    break;
-                  case 'ends_with':
-                    regex = new RegExp(`${this._escapeRegExp(filter.query)}$`, 'i');
-                    break;
-                  case 'wildcard':
-                    regex = new RegExp(`${filter.query.split('*').map(this._escapeRegExp).join('.*')}`, 'i');
-                    break;
-                }
-
-                const regexTest = regex.test(filteringValue);
+              if (filter.column.type === 'date') {
+                const dateTest = this._isDateMatches(filter, filteringValue);
+                return ((filter.action === 'show' && dateTest) || (filter.action === 'hide' && !dateTest));
+              } else if (filter.column.type === 'number') {
+                const numberTest = this._isNumberMatches(filter, filteringValue);
+                return ((filter.action === 'show' && numberTest) || (filter.action === 'hide' && !numberTest));
+              } else {
+                const regexTest = this._isStringMatches(filter, filteringValue);
                 return ((filter.action === 'show' && regexTest) || (filter.action === 'hide' && !regexTest));
               }
             });
+
+            return isEveryFilterApplied;
           });
+
+          return filteredItems;
         }
 
         /**
@@ -974,8 +1046,8 @@
           }
         }
 
-        _isGroupedByColumn(column, _groupByColum) {
-          return _groupByColum && _groupByColum.name === column.name;
+        _isGroupedByColumn(column, _groupByColumn) {
+          return _groupByColumn && _groupByColumn.name === column.name;
         }
 
         /**
@@ -997,9 +1069,15 @@
         _selectableChanged(selectable) {
           if (selectable) {
             setTimeout(() => {
-              this._columnOrderCleaner();
+              if (this.selectable) {
+                this._columnOrderCleaner();
+              }
             });
           }
+        }
+
+        _highlightsObserver(highlight, filterHighlights) {
+          this.set('_highlightEntities', highlight.concat(filterHighlights));
         }
 
         _filterEntitiesObserver(filterEntities) {
@@ -1008,8 +1086,45 @@
           }
 
           this._readyFilterEntities = filterEntities.filter((entity) => {
-            return entity.active;
+            return entity.active && ['show', 'hide'].includes(entity.action);
           });
+
+          const filterHighlights = filterEntities.filter((entity) => {
+            return entity.active && entity.action === 'highlight';
+          }).map((filter) => {
+            let highlightEntity;
+            if (filter.column.type === 'date') {
+              highlightEntity = {
+                type: 'row',
+                color: 'red',
+                condition: (cellContent, item) => {
+                  return this._isDateMatches(filter, Polymer.Path.get(item, filter.column.path));
+                }
+              };
+            } else if (filter.column.type === 'number') {
+              highlightEntity = {
+                type: 'row',
+                color: 'red',
+                condition: (cellContent, item) => {
+                  return this._isNumberMatches(filter, Polymer.Path.get(item, filter.column.path));
+                }
+              };
+            } else {
+              // assume that content has type 'string'
+              highlightEntity = {
+                type: 'row',
+                color: 'red',
+                condition: (cellContent, item) => {
+                  return this._isStringMatches(filter, Polymer.Path.get(item, filter.column.path));
+                }
+              };
+            }
+
+
+            return highlightEntity;
+          });
+
+          this.set('_filterHighlights', filterHighlights);
 
           this._vaadinGrid.clearCache();
         }

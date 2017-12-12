@@ -51,6 +51,7 @@
           columns="{{props.columns.value}}"
           highlight="{{props.highlight.value}}"
           auto-filter="{{props.autoFilter.value}}"
+          filterable="{{props.filterable.value}}"
           on-table-action="tableActionListener">
         </px-data-grid>
       </px-demo-component>
@@ -432,31 +433,36 @@
             last: 'Wong',
             full: 'Elizabeth Wong',
             email: 'sika@iknulber.cl',
-            age: 23
+            age: 23,
+            birth_date: '1994-04-12'
           },
           {
             first: 'Jeffrey',
             last: 'Hamilton',
             email: 'cofok@rac.be',
-            age: 32
+            age: 32,
+            birth_date: '1985-03-11'
           },
           {
             first: 'Alma',
             last: 'Martin',
             email: 'dotta@behtam.la',
-            age: 44
+            age: 44,
+            birth_date: '1973-01-31'
           },
           {
             first: 'Carl',
             last: 'Saunders',
             email: 'seh@bibapu.gy',
-            age: 12
+            age: 12,
+            birth_date: '2005-05-17'
           },
           {
             first: 'Willie',
             last: 'Dennis',
             email: 'izko@dahokwej.ci',
-            age: 56
+            age: 56,
+            birth_date: '1961-09-01'
           }
         ],
         inputType: 'code:JSON'
@@ -469,9 +475,11 @@
             name: 'Age',
             path: 'age',
             type: 'number',
-            width: '50px',
+            width: '150px',
             flexGrow: 0,
-            hidden: false
+            hidden: false,
+            editable: true,
+            renderer: 'px-data-grid-number-renderer'
           },
           {
             name: 'Full Name',
@@ -491,12 +499,25 @@
           {
             name: 'Email',
             path: 'email'
+          },
+          {
+            name: 'Birth Date',
+            path: 'birth_date',
+            type: 'date',
+            editable: true,
+            renderer: 'px-data-grid-date-renderer'
           }
         ],
         inputType: 'code:JSON'
       },
 
       selectable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      filterable: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'

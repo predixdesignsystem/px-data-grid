@@ -11,6 +11,10 @@
       px-dropdown + input {
         margin-left: 5px;
       }
+
+      input {
+        margin-left: 5px;
+      }
     </style>
     <px-dropdown items="[[_filterActions]]" selected="{{entity.action}}"></px-dropdown>
     <px-dropdown items="[[_mappedColumns]]" selected="{{entity.column}}"></px-dropdown>
@@ -18,8 +22,14 @@
       <px-dropdown items="[[_regexPatterns]]" selected="{{_regexPattern}}"></px-dropdown>
       <input type="text" value="{{_regexQuery::input}}">
     </template>
-    <template is="dom-if" if="{{_columnTypeIsDate(entity.column)}}"></template>
-    <template is="dom-if" if="{{_columnTypeIsNumber(entity.column)}}"></template>
+    <template is="dom-if" if="{{_columnTypeIsDate(entity.column)}}">
+      <input type="date" value="{{entity.dateFrom::change}}" placeholder="Date From">
+      <input type="date" value="{{entity.dateTo::change}}" placeholder="Date To">
+    </template>
+    <template is="dom-if" if="{{_columnTypeIsNumber(entity.column)}}">
+      <input type="number" value="{{entity.leftBound::input}}" placeholder="Left bound">
+      <input type="number" value="{{entity.rightBound::input}}" placeholder="Right bound">
+    </template>
   </template>
   <script>
     {
@@ -114,8 +124,6 @@
             return;
           }
 
-          this.set('entity.column', columns[0]);
-
           this.set('_mappedColumns', []);
 
           columns.forEach((col) => {
@@ -124,7 +132,7 @@
         }
 
         _columnTypeIsString(column) {
-          return column && column.type === 'string';
+          return column && !['date', 'number'].includes(column.type);
         }
 
         _columnTypeIsDate(column) {
@@ -142,7 +150,15 @@
         }
 
         _filterActiveObservable(entity) {
-          this.set('entity.active', !!entity.pattern && !!entity.query && !!entity.column && !!entity.action);
+          if (entity.column) {
+            if (this._columnTypeIsString(entity.column)) {
+              this.set('entity.active', !!entity.pattern && !!entity.query && !!entity.column && !!entity.action);
+            } else if (this._columnTypeIsDate(entity.column)) {
+              this.set('entity.active', !!entity.column && !!entity.action && (!!entity.dateFrom || !!entity.dateTo));
+            } else if (this._columnTypeIsNumber(entity.column)) {
+              this.set('entity.active', !!entity.column && !!entity.action && (!!entity.leftBound || !!entity.rightBound));
+            }
+          }
         }
       }
 
