@@ -151,13 +151,8 @@
           xhr.onload = () => {
             const size = parseInt(xhr.getAllResponseHeaders().match(/x-total-count: (\d+)/)[1]);
             callback(JSON.parse(xhr.responseText), size);
-
-            // TODO: @limonte this should be moved to internal functionality
-            document.querySelector('local-element-demo')
-              .shadowRoot.querySelector('px-demo-collection')
-              .shadowRoot.querySelector('px-data-grid-remote-data-provider-demo')
-              .shadowRoot.querySelector('px-data-grid')._populateTableColumns(JSON.parse(xhr.responseText));
           };
+
           let url = 'https://px-data-grid-dummy-backend.herokuapp.com/contacts?' +
             '_page=' + encodeURIComponent(params.page + 1) + '&' +
             '_limit=' + encodeURIComponent(params.pageSize);

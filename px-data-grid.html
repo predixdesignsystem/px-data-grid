@@ -656,10 +656,12 @@
         _tableDataChanged(tableData) {
           if (tableData) {
             this._currentDataProvider = (params, callback) => {
-              this._localDataProvider(params, callback);
+              this._localDataProvider(params, (items, size) => {
+                callback(items, size);
+                this._populateTableColumns(items);
+              });
             };
             this._hasLocalDataProvider = true;
-            this._populateTableColumns(tableData);
           }
         }
 
@@ -736,7 +738,12 @@
 
         _remoteDataProviderChanged(provider) {
           this._hasLocalDataProvider = false;
-          this._currentDataProvider = provider;
+          this._currentDataProvider = (params, callback) => {
+            provider(params, (items, size) => {
+              callback(items, size);
+              this._populateTableColumns(items);
+            });
+          };
         }
 
         _resolveColumnPath(column) {
