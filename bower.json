@@ -11,20 +11,20 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "^2.3.0",
+    "polymer": "^2.0.0",
     "app-localize-behavior": "^2.0.0",
-    "iron-a11y-keys-behavior": "^v2.0.0",
-    "iron-a11y-announcer": "^v2.0.0",
-    "iron-scroll-target-behavior": "^v2.0.0",
+    "iron-a11y-keys-behavior": "^2.0.0",
+    "iron-a11y-announcer": "^2.0.0",
+    "iron-scroll-target-behavior": "^2.0.0",
     "px-icon-set": "^2.0.0",
     "px-dropdown": "^4.0.0",
     "vaadin-grid": "^4.1.0",
     "vaadin-radio-button": "^1.0.0",
-    "px-spinner": "^2.2.0",
-    "px-theme": "^3.1.4",
-    "px-dark-theme": "^2.1.0"
+    "px-spinner": "^2.2.0"
   },
   "devDependencies": {
+    "px-theme": "^3.1.4",
+    "px-dark-theme": "^2.1.0",
     "px-button-group-design": "^2.0.0",
     "px-demo": "^3.0.0",
     "px-forms-design": "^2.0.0",
@@ -38,7 +38,6 @@
     "px-typography-design": "^2.0.3"
   },
   "resolutions": {
-    "polymer": "^2.3.0",
-    "webcomponentsjs": "^1.0.2"
+    "webcomponentsjs": "^1.0.0"
   }
 }

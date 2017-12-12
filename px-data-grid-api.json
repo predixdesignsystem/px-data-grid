@@ -3595,7 +3595,10 @@
                   "description": "Path to array."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to push onto array"
                 }
               ],
               "return": {
@@ -3666,7 +3669,10 @@
                   "description": "Number of items to remove."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to insert into array."
                 }
               ],
               "return": {
@@ -3727,7 +3733,10 @@
                   "description": "Path to array."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to insert info array"
                 }
               ],
               "return": {
@@ -7354,7 +7363,10 @@
                   "description": "Path to array."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to push onto array"
                 }
               ],
               "return": {
@@ -7425,7 +7437,10 @@
                   "description": "Number of items to remove."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to insert into array."
                 }
               ],
               "return": {
@@ -7486,7 +7501,10 @@
                   "description": "Path to array."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to insert info array"
                 }
               ],
               "return": {
@@ -12701,7 +12719,10 @@
                   "description": "Path to array."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to push onto array"
                 }
               ],
               "return": {
@@ -12772,7 +12793,10 @@
                   "description": "Number of items to remove."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to insert into array."
                 }
               ],
               "return": {
@@ -12833,7 +12857,10 @@
                   "description": "Path to array."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to insert info array"
                 }
               ],
               "return": {
@@ -16487,7 +16514,10 @@
                   "description": "Path to array."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to push onto array"
                 }
               ],
               "return": {
@@ -16558,7 +16588,10 @@
                   "description": "Number of items to remove."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to insert into array."
                 }
               ],
               "return": {
@@ -16619,7 +16652,10 @@
                   "description": "Path to array."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to insert info array"
                 }
               ],
               "return": {
@@ -20380,7 +20416,10 @@
                   "description": "Path to array."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to push onto array"
                 }
               ],
               "return": {
@@ -20451,7 +20490,10 @@
                   "description": "Number of items to remove."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to insert into array."
                 }
               ],
               "return": {
@@ -20512,7 +20554,10 @@
                   "description": "Path to array."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to insert info array"
                 }
               ],
               "return": {
@@ -24174,7 +24219,10 @@
                   "description": "Path to array."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to push onto array"
                 }
               ],
               "return": {
@@ -24245,7 +24293,10 @@
                   "description": "Number of items to remove."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to insert into array."
                 }
               ],
               "return": {
@@ -24306,7 +24357,10 @@
                   "description": "Path to array."
                 },
                 {
-                  "name": "...items"
+                  "name": "items",
+                  "type": "...*",
+                  "rest": true,
+                  "description": "Items to insert info array"
                 }
               ],
               "return": {
