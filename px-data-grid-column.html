@@ -82,6 +82,14 @@
               type: Boolean,
               value: true,
               readOnly: true
+            },
+
+            /**
+             * If true, the grid is in the remote-data-provider mode
+             */
+            isRemoteDataProvider: {
+              type: Boolean,
+              value: false
             }
           };
         }
@@ -101,6 +109,7 @@
 
           const headerCellContentWrapper = document.createElement('px-data-grid-header-cell');
           headerCellContentWrapper.appendChild(inst.root);
+          headerCellContentWrapper.isRemoteDataProvider = this.isRemoteDataProvider;
           headerCellContentWrapper._column = this;
 
           headerCell._content.appendChild(headerCellContentWrapper);

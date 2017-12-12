@@ -124,7 +124,8 @@
           mapped-object="[[column]]"
           width="[[_getColumnWidth(column)]]"
           flex-grow="[[_getColumnFlexGrow(column)]]"
-          on-column-change="_onColumnUpdate">
+          on-column-change="_onColumnUpdate"
+          is-remote-data-provider="[[!_hasLocalDataProvider]]">
           <template class="header">
             <vaadin-grid-sorter path="[[_resolveColumnPath(column)]]">[[_resolveColumnHeader(column)]]</vaadin-grid-sorter>
           </template>
