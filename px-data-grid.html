@@ -116,6 +116,7 @@
         <px-data-grid-column
           resizable="[[resizable]]"
           name="[[column.name]]"
+          path="[[column.path]]"
           hidden="[[column.hidden]]"
           language="[[language]]"
           resources="[[resources]]"
@@ -697,21 +698,21 @@
         _localDataProvider(params, callback) {
           let items = Array.isArray(this.tableData) ? this.tableData : [];
           if (this._groupByColumn) {
+            const columnPath = this._groupByColumn.path;
             if (!params.parentItem) {
               const valuesMap = items.reduce((map, item) => {
-                const columnName = this._groupByColumn.name;
-                const value = item[columnName];
+                const value = item[columnPath];
                 const groupItem = {
                   hasChildren: true
                 };
-                groupItem[columnName] = value;
+                groupItem[columnPath] = value;
                 map.set(value, groupItem);
                 return map;
               }, new Map());
               items = [];
               valuesMap.forEach((item) => items.push(item));
             } else {
-              items = items.filter((item) => item[this._groupByColumn.name] === params.parentItem[this._groupByColumn.name]);
+              items = items.filter((item) => item[columnPath] === params.parentItem[columnPath]);
             }
           }
           items = this._localDataResolver(params, items);
