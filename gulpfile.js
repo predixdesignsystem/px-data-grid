@@ -106,11 +106,11 @@ gulp.task('sass', function() {
 });
 
 
-gulp.task('generate-api', function (cb) {
+gulp.task('generate-api', function(cb) {
 
-  exec(`node_modules/.bin/polymer analyze ${pkg.name}.html > ${pkg.name}-api.json`, function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
+  exec(`node_modules/.bin/polymer analyze ${pkg.name}.html > ${pkg.name}-api.json`, function(err, stdout, stderr) {
+    stdout && console.log(stdout); // eslint-disable-line
+    stderr && console.log(stderr); // eslint-disable-line
     cb(err);
   });
 
@@ -154,5 +154,5 @@ gulp.task('bump:major', function() {
 });
 
 gulp.task('default', function(callback) {
-  gulpSequence('clean', 'sass', 'generate-api')(callback);
+  gulpSequence('clean', 'sass', 'lint', 'generate-api')(callback);
 });
