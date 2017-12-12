@@ -7,9 +7,10 @@
   <template>
     <template class="header" id="defaultHeaderTemplate">
       <template is="dom-if" if="[[multiSelect]]">
-        <vaadin-checkbox aria-label="Select All" hidden$="[[_selectAllHidden]]" on-checked-changed="_onSelectAllCheckedChanged"
+        <vaadin-checkbox class="select-all-checkbox" aria-label="Select All" hidden$="[[_selectAllHidden]]" on-checked-changed="_onSelectAllCheckedChanged"
           checked="[[_isChecked(selectAll, _indeterminate)]]" indeterminate="[[_indeterminate]]">
         </vaadin-checkbox>
+        <div class="selection-count">[[_selectionCount]]</div>
       </template>
     </template>
     <template id="defaultBodyTemplate">
@@ -120,6 +121,14 @@
             type: Boolean,
             value: false,
             readOnly: true
+          },
+
+          /**
+           * Current selection count
+           */
+          _selectionCount: {
+            type: Number,
+            value: 0
           }
         };
       }
@@ -266,6 +275,8 @@
           }
         }
         this._selectAllChangeLock = false;
+
+        this._selectionCount = this._grid.selectedItems.length;
       }
 
       _onDataProviderChanged(e) {

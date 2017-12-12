@@ -66,11 +66,31 @@
 
       vaadin-checkbox {
         height: 15px;
+        margin-top: -3px;
       }
 
       vaadin-radio-button {
         height: 12px;
         width: 12px;
+      }
+
+      .selection-count {
+        color: var(--px-data-grid-header-text-color);
+        font-size: var(--px-data-grid-header-font-size);
+        position: absolute;
+        left: calc(var(--px-data-grid-padding-left) + 20px);
+        bottom: 5px;
+        pointer-events: none;
+      }
+
+      .selection-count::before {
+        content: "(";
+        display: inline;
+      }
+
+      .selection-count::after {
+        content: ")";
+        display: inline;
       }
     </style>
 
