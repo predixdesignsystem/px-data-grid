@@ -848,7 +848,7 @@
          * Function to resolve (data) columns on grid
          */
         _getColumns() {
-          if (this._vaadinGrid._columnTree) {
+          if (this._vaadinGrid && this._vaadinGrid._columnTree) {
             return this._vaadinGrid._columnTree[0].filter(c => c.isDataColumn);
           } else if (this.columns && this.columns.length) {
             return this.columns.map((c) => {
