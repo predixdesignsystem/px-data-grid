@@ -523,7 +523,7 @@
         _calcNumPages(numItems, pageSize) {
           let numPages = 1;
           if (pageSize) {
-            numPages = Math.round(numItems / pageSize);
+            numPages = Math.ceil(numItems / pageSize);
           }
           return numPages;
         }
