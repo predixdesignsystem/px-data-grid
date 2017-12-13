@@ -66,6 +66,7 @@
             auto-filter="{{props.autoFilter.value}}"
             on-cell-hover="cellHoverListener"
             on-cell-unhover="cellUnhoverListener"
+            auto-height="{{props.autoHeight.value}}"
             on-table-action="tableActionListener">
         </px-data-grid>
 
@@ -510,6 +511,12 @@
       },
 
       resizable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      autoHeight: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'
