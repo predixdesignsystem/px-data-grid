@@ -25,7 +25,7 @@ html {
   --px-data-grid-cell-border-color--edit                  :  $primary-default;
   --px-data-grid-cell-border-color--selected              :  rgba($gray10, 0.2);
   --px-data-grid-cell-border-validation--failed           :  $status-red3;
-  --px-data-grid-cell-background-color--selected          :  rgba($gray10, 0.2);
+  --px-data-grid-cell-background-color--selected          :  $gray15;
   --px-data-grid-cell-background-color--edit              :  transparent;
   --px-data-grid-cell-text-color--selected                :  $gray5;
   --px-data-grid-cell-text-color-validation--failed       :  $status-red3;
