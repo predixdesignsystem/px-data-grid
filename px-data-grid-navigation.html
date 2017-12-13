@@ -241,7 +241,7 @@
          * Fired when user clicks on a page number.
          */
         _onPageTap(event) {
-          const pageNumber = Number.parseInt(event.path[0].innerText);
+          const pageNumber = event.model.item;
           if (!isNaN(pageNumber)) {
             this._fireChangeEvent({
               pageSize: this.pageSize,
