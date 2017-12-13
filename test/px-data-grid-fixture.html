@@ -8,6 +8,8 @@
 
     <script src="../bower_components/web-component-tester/browser.js"></script>
     <link rel="import" href="../px-data-grid.html">
+    <link rel="import" href="../px-data-grid-paginated.html">
+    <link rel="import" href="../px-data-grid-navigation.html">
     <link rel="import" href="helpers.html">
   </head>
 
@@ -20,6 +22,26 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="simple-navigation">
+      <template>
+        <px-data-grid-navigation
+          selectable-page-sizes="[10, 20, 30]"
+          page-size="10"
+          total-item-count="300"
+          current-page="1"
+          number-of-pages="50">
+        </px-data-grid-navigation>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="px-data-grid-paginated-fixture">
+      <template>
+        <px-data-grid-paginated>
+        </px-data-grid-paginated>
+      </template>
+    </test-fixture>
+
+
     <script src="generated-columns.js"></script>
     <script src="local-data-provider.js"></script>
     <script src="selection.js"></script>
@@ -28,6 +50,8 @@
     <script src="auto-filter.js"></script>
     <script src="columns-api.js"></script>
     <script src="column-dropdown-menu.js"></script>
+    <script src="px-data-grid-navigation-test.js"></script>
+    <script src="px-data-grid-paginated-test.js"></script>
 
   </body>
 </html>

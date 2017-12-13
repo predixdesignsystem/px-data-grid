@@ -1,0 +1,529 @@
+<!-- Common demo imports -->
+<link rel="import" href="../../px-demo/px-demo-header.html" />
+<link rel="import" href="../../px-demo/px-demo-api-viewer.html" />
+<link rel="import" href="../../px-demo/px-demo-footer.html" />
+<link rel="import" href="../../px-demo/px-demo-configs.html" />
+<link rel="import" href="../../px-demo/px-demo-props.html" />
+<link rel="import" href="../../px-demo/px-demo-interactive.html" />
+<link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
+<link rel="import" href="../../px-demo/px-demo-code-editor.html" />
+
+<!-- Imports for this component -->
+<link rel="import" href="../css/px-demo-styles.html" />
+<link rel="import" href="../px-data-grid-paginated.html" />
+
+<!-- Demo DOM module -->
+<dom-module id="px-data-grid-paginated-demo">
+  <template>
+    <style>
+      .theme-switcher-checkbox {
+        display: inline-flex;
+        float: right;
+        margin: 1rem 2rem;
+      }
+
+      .theme-switcher-checkbox input {
+        margin-left: 5px;
+      }
+    </style>
+    <custom-style>
+      <style include="px-demo-styles" is="custom-style"></style>
+    </custom-style>
+
+    <!-- Header -->
+    <px-demo-header
+        module-name="px-data-grid"
+        description="The Data Grid component is useful for displaying tabular data, and provides more functionality than a simple table."
+        mobile desktop tablet>
+    </px-demo-header>
+
+    <!-- Interactive -->
+    <px-demo-interactive>
+      <!-- Configs -->
+      <px-demo-configs slot="px-demo-configs" configs="[[configs]]" props="{{props}}" chosen-config="{{chosenConfig}}"></px-demo-configs>
+
+      <!-- Props -->
+      <px-demo-props slot="px-demo-props" props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
+
+      <!-- Code Editor -->
+      <px-demo-code-editor slot="px-demo-code-editor" props="{{props}}" config="[[chosenConfig]]"></px-demo-code-editor>
+
+      <!-- Component ---------------------------------------------------------->
+      <px-demo-component slot="px-demo-component">
+        <px-data-grid-paginated
+            table-data="{{props.tableData.value}}"
+            selectable="{{props.selectable.value}}"
+            multi-select="{{props.multiSelect.value}}"
+            selected-items="{{selectedItems}}"
+            hide-selection-column="{{props.hideSelectionColumn.value}}"
+            resizable="{{props.resizable.value}}"
+            striped="{{props.striped.value}}"
+            multi-sort="{{props.multiSort.value}}"
+            column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
+            action-menu="{{props.actionMenu.value}}"
+            language="{{props.language.value}}"
+            auto-filter="{{props.autoFilter.value}}"
+            on-cell-hover="cellHoverListener"
+            on-cell-unhover="cellUnhoverListener">
+        </px-data-grid-paginated>
+
+        <dom-if if="[[selectedItems.length]]">
+          <template>
+            Selected items:
+            <ul>
+              <template is="dom-repeat" items="{{selectedItems}}">
+                <li>[[_stringify(item)]]</li>
+              </template>
+            </ul>
+          </template>
+        </dom-if>
+
+        <label>
+          <input type="checkbox" checked="{{showHoveredCellData::change}}">
+          Show hovered cell data
+        </label>
+        <template is="dom-if" if="[[showHoveredCellData]]"><div>Hovered cell data: [[hoveredCellData]]</div></template>
+      </px-demo-component>
+      <!-- END Component ------------------------------------------------------>
+
+      <px-demo-component-snippet
+          slot="px-demo-component-snippet"
+          element-properties="{{props}}"
+          element-name="px-data-grid"
+          links-includes="[[linksIncludes]]">
+      </px-demo-component-snippet>
+    </px-demo-interactive>
+
+    <!-- API Viewer -->
+    <px-demo-api-viewer source="px-data-grid" api-source-file-path="px-data-grid-api.json"></px-demo-api-viewer>
+
+    <!-- Footer -->
+    <px-demo-footer></px-demo-footer>
+
+  </template>
+
+</dom-module>
+<script>
+  Polymer({
+    is: 'px-data-grid-paginated-demo',
+
+    cellHoverListener: function(evt) {
+      this.hoveredCellData = evt.detail.cellContent;
+    },
+
+    cellUnhoverListener: function(evt) {
+      if (this.hoveredCellData === evt.detail.cellContent) {
+        this.hoveredCellData = '';
+      }
+    },
+
+    properties: {
+      showHoveredCellData: {
+        type: Boolean,
+        value: false,
+      },
+
+      hoveredCellData: {
+        type: String
+      },
+      /**
+       * Note: The actual data/values for `props` are placed in `this.demoProps`
+       * to create a static reference that Polymer shouldn't overwrite.
+       *
+       * On object containing all the properties the user can configure for this
+       * demo. Usually a pretty similar copy of the component's `properties` block
+       * with some additional sugar added to describe what kind of input the
+       * user will be shown and how that input should be configured.
+       *
+       * Note that `value` for each property is the default that will be set
+       * unless a config from `configs` is applied by default.
+       *
+       * @property props
+       * @type {Object}
+       */
+      props: {
+        type: Object,
+        value: function() {
+          return this.demoProps;
+        }
+      },
+
+      /**
+       * An array of pre-configured `props` that can be used to provide the user
+       * with a set of common examples. These configs will be made available
+       * as a set of tabs the user can click that will automatically change
+       * the `props` to specific values.
+       *
+       * @example
+       *
+       * Each config is an object. Its keys should be the names of the configurable
+       * properties defined in your `demoProps` above. Each key's value should
+       * be the new prop value for the configuration. You can also include these
+       * optional keys:
+       *
+       * - `configName` - a String value that will be used for the title of the tab
+       * - `configReset` - a Boolean, if `true` resets all props. Defaults to `false`.
+       *
+       * @property configs
+       * @type {Array}
+       */
+      configs: {
+        type: Array,
+        value: function() {
+          return [
+            {
+              configName: 'Default',
+              configReset: true
+            },
+            {
+              configName: 'More rows (scrollable)',
+              configReset: true,
+              tableData: [
+                {
+                  first: 'Elizabeth',
+                  last: 'Wong',
+                  email: 'sika@iknulber.cl'
+                },
+                {
+                  first: 'Jeffrey',
+                  last: 'Hamilton',
+                  email: 'cofok@rac.be'
+                },
+                {
+                  first: 'Alma',
+                  last: 'Martin',
+                  email: 'dotta@behtam.la'
+                },
+                {
+                  first: 'Carl',
+                  last: 'Saunders',
+                  email: 'seh@bibapu.gy'
+                },
+                {
+                  first: 'Willie',
+                  last: 'Dennis',
+                  email: 'izko@dahokwej.ci'
+                },
+                {
+                  first: 'Angel',
+                  last: 'Lewis',
+                  email: 'ma@et.nz'
+                },
+                {
+                  first: 'Jessie',
+                  last: 'Sherman',
+                  email: 'hunocnas@mosuraj.gi'
+                },
+                {
+                  first: 'Eric',
+                  last: 'Brewer',
+                  email: 'tu@coajoul.de'
+                },
+                {
+                  first: 'Cory',
+                  last: 'Ramos',
+                  email: 'kilamja@oviafbek.ss'
+                },
+                {
+                  first: 'Bertie',
+                  last: 'Ross',
+                  email: 'ifuvu@getvi.my'
+                },
+                {
+                  first: 'Oscar',
+                  last: 'Estrada',
+                  email: 'minu@kerireg.gp'
+                },
+                {
+                  first: 'Estelle',
+                  last: 'Patton',
+                  email: 'hudliami@lijihen.fi'
+                },
+                {
+                  first: 'Sallie',
+                  last: 'George',
+                  email: 'wo@zof.bf'
+                },
+                {
+                  first: 'Harriett',
+                  last: 'Wheeler',
+                  email: 'woguw@cibevo.pt'
+                },
+                {
+                  first: 'Bryan',
+                  last: 'Houston',
+                  email: 'tekkubom@gaahu.ge'
+                },
+                {
+                  first: 'Leon',
+                  last: 'Craig',
+                  email: 'wo@gurozo.gs'
+                },
+                {
+                  first: 'Mable',
+                  last: 'Taylor',
+                  email: 'um@fegnocka.pg'
+                },
+                {
+                  first: 'Ida',
+                  last: 'Hansen',
+                  email: 'lufahu@gewlaskoc.kh'
+                },
+                {
+                  first: 'Adele',
+                  last: 'Thornton',
+                  email: 'gugugo@nevigi.th'
+                },
+                {
+                  first: 'Jerry',
+                  last: 'Kelley',
+                  email: 'solef@zoose.as'
+                },
+                {
+                  first: 'Clara',
+                  last: 'Delgado',
+                  email: 'fivticnuf@upkib.rw'
+                },
+                {
+                  first: 'Joseph',
+                  last: 'Stevenson',
+                  email: 'be@viijo.lk'
+                },
+                {
+                  first: 'Ellen',
+                  last: 'Perry',
+                  email: 'ce@jewo.sv'
+                },
+                {
+                  first: 'Ronnie',
+                  last: 'Cummings',
+                  email: 'iro@wi.vn'
+                },
+                {
+                  first: 'Olive',
+                  last: 'Santos',
+                  email: 'vo@nees.cn'
+                },
+                {
+                  first: 'Rena',
+                  last: 'Tucker',
+                  email: 'uharoc@lohpol.gl'
+                },
+                {
+                  first: 'Nell',
+                  last: 'Hicks',
+                  email: 'felaf@vo.sb'
+                },
+                {
+                  first: 'Jesus',
+                  last: 'Hawkins',
+                  email: 'wahgab@mu.mk'
+                },
+                {
+                  first: 'Duane',
+                  last: 'Harris',
+                  email: 'kellanjob@daava.ph'
+                },
+                {
+                  first: 'Jonathan',
+                  last: 'Holmes',
+                  email: 'jir@bikuf.dj'
+                },
+                {
+                  first: 'Christine',
+                  last: 'Collier',
+                  email: 'bocago@jerla.ba'
+                },
+                {
+                  first: 'Brandon',
+                  last: 'Thompson',
+                  email: 'regoh@ji.kn'
+                },
+                {
+                  first: 'Anne',
+                  last: 'Dunn',
+                  email: 'samhof@are.sc'
+                },
+                {
+                  first: 'Viola',
+                  last: 'Sherman',
+                  email: 'wep@kezori.lt'
+                },
+                {
+                  first: 'Kathryn',
+                  last: 'Harper',
+                  email: 'keotoci@je.mr'
+                },
+                {
+                  first: 'Calvin',
+                  last: 'Bates',
+                  email: 'bomeg@lip.bw'
+                },
+                {
+                  first: 'Maggie',
+                  last: 'Collins',
+                  email: 'zonefto@ihihij.ke'
+                },
+                {
+                  first: 'Zachary',
+                  last: 'Mitchell',
+                  email: 'wamez@cilvahbod.mk'
+                },
+                {
+                  first: 'Raymond',
+                  last: 'Kelley',
+                  email: 'wuz@napujos.tt'
+                },
+                {
+                  first: 'Augusta',
+                  last: 'Torres',
+                  email: 'bum@ne.lt'
+                },
+                {
+                  first: 'Charlie',
+                  last: 'Lindsey',
+                  email: 'ruhlu@tuobujen.ao'
+                },
+                {
+                  first: 'Jeremy',
+                  last: 'Swanson',
+                  email: 'ed@ted.km'
+                },
+                {
+                  first: 'Joel',
+                  last: 'Gonzalez',
+                  email: 'ej@pot.bz'
+                },
+                {
+                  first: 'Lillie',
+                  last: 'Hawkins',
+                  email: 'uguiv@mudbuve.pa'
+                },
+                {
+                  first: 'Joel',
+                  last: 'Watts',
+                  email: 'naafe@oli.bb'
+                },
+                {
+                  first: 'Isabella',
+                  last: 'Sandoval',
+                  email: 'asobu@wedef.af'
+                },
+                {
+                  first: 'Roy',
+                  last: 'Lyons',
+                  email: 'rasaogu@tadiri.tc'
+                }
+              ]
+            }
+          ];
+        }
+      },
+
+      selectedItems: {
+        type: Array,
+      }
+    },
+    /**
+     * A reference for `this.props`. Read the documentation there.
+     */
+    demoProps: {
+      tableData: {
+        type: Object,
+        defaultValue: [
+          {
+            first: 'Elizabeth',
+            last: 'Wong',
+            email: 'sika@iknulber.cl'
+          },
+          {
+            first: 'Jeffrey',
+            last: 'Hamilton',
+            email: 'cofok@rac.be'
+          },
+          {
+            first: 'Alma',
+            last: 'Martin',
+            email: 'dotta@behtam.la'
+          },
+          {
+            first: 'Carl',
+            last: 'Saunders',
+            email: 'seh@bibapu.gy'
+          },
+          {
+            first: 'Willie',
+            last: 'Dennis',
+            email: 'izko@dahokwej.ci'
+          }
+        ],
+        inputType: 'code:JSON'
+      },
+
+      selectable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      multiSelect: {
+        type: Boolean,
+        defaultValue: true,
+        inputType: 'toggle'
+      },
+
+      hideSelectionColumn: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      multiSort: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      columnReorderingAllowed: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      actionMenu: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      autoFilter: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      resizable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      striped: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      language: {
+        type: String,
+        value: 'en',
+        inputType: 'dropdown',
+        inputChoices: ['en', 'fr', 'fi']
+      }
+    },
+
+    _stringify: function(item) {
+      return JSON.stringify(item);
+    }
+  });
+</script>
