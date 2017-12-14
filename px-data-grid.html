@@ -93,6 +93,10 @@
         content: ")";
         display: inline;
       }
+
+      :host([auto-height]) vaadin-grid {
+        height: auto;
+      }
     </style>
 
     <template is="dom-if" if="{{filterable}}">
@@ -529,6 +533,16 @@
               value: function() {
                 return [];
               }
+            },
+
+            /**
+             * Grid auto resize height to match number of rows.
+             */
+            autoHeight: {
+              type: Boolean,
+              value: false,
+              reflectToAttribute: true,
+              observer: '_autoHeightChanged'
             }
           };
         }
@@ -1158,6 +1172,14 @@
           this.set('_filterHighlights', filterHighlights);
 
           this._vaadinGrid.clearCache();
+        }
+
+        _autoHeightChanged(autoHeight) {
+          if (!this._vaadinGrid) {
+            return;
+          }
+
+          Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._vaadinGrid.notifyResize());
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);
