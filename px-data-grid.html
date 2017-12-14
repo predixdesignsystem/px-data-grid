@@ -94,7 +94,7 @@
         display: inline;
       }
 
-      vaadin-grid.auto-height {
+      :host([auto-height]) vaadin-grid {
         height: auto;
       }
     </style>
@@ -541,13 +541,8 @@
             autoHeight: {
               type: Boolean,
               value: false,
+              reflectToAttribute: true,
               observer: '_autoHeightChanged'
-            },
-
-            _autoHeightClass: {
-              type: String,
-              value: 'auto-height',
-              readOnly: true
             }
           };
         }
@@ -1183,14 +1178,8 @@
           if (!this._vaadinGrid) {
             return;
           }
-          if (autoHeight) {
-            this._vaadinGrid.classList.add(this._autoHeightClass);
-          } else {
-            this._vaadinGrid.classList.remove(this._autoHeightClass);
-          }
-          if (this._vaadinGrid) {
-            Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._vaadinGrid.notifyResize());
-          }
+
+          Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._vaadinGrid.notifyResize());
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);
