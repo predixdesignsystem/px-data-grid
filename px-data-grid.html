@@ -133,8 +133,8 @@
                  multi-sort="[[multiSort]]"
                  loading="{{_loading}}">
 
-      <template is="dom-if" if="[[selectable]]" restamp>
-        <px-data-grid-selection-column frozen auto-select hidden="[[hideSelectionColumn]]" multi-select="[[multiSelect]]" tree-grid="[[_groupByColumn]]">
+      <template is="dom-if" if="[[_isSelectable(selectionMode)]]" restamp>
+        <px-data-grid-selection-column frozen auto-select hidden="[[hideSelectionColumn]]" multi-select="[[_isMultiSelect(selectionMode)]]" tree-grid="[[_groupByColumn]]">
         </px-data-grid-selection-column>
       </template>
 
@@ -205,15 +205,6 @@
               notify: true
             },
 
-            /**
-             * Use the selectable property if one or more rows within the table should be selectable. See also `singleSelect`.
-             */
-            selectable: {
-              type: Boolean,
-              value: false,
-              observer: '_selectableChanged'
-            },
-
             filterable: {
               type: Boolean,
               value: false
@@ -260,11 +251,12 @@
             },
 
             /**
-             * When `true`, selection mode will be multiselection when selectable
+             * Current selection mode of grid. Accepts values 'none', 'single' and 'multi'.
              */
-            multiSelect: {
-              type: Boolean,
-              value: true
+            seletionMode: {
+              type: String,
+              value: 'none',
+              observer: '_selectionModeChanged'
             },
 
             /**
@@ -604,7 +596,7 @@
          */
         _handleSelectItem(item) {
           if (!this._vaadinGrid._isSelected(item)) {
-            if (!this.multiSelect) {
+            if (!this._isMultiSelect()) {
               this._vaadinGrid.selectedItems = [];
             }
             this._vaadinGrid.push('selectedItems', item);
@@ -1070,7 +1062,28 @@
           }
         }
 
-        _selectableChanged(selectable) {
+        /**
+         * Check if selections are allowed
+         */
+        _isSelectable() {
+          return this.selectionMode == 'single' || this.selectionMode == 'multi';
+        }
+
+        /**
+         * Check if grid is in multi selection mode
+         */
+        _isMultiSelect() {
+          return this._isSelectable() && this.selectionMode == 'multi';
+        }
+
+        _selectionModeChanged(mode) {
+          if (mode != 'none' && mode != 'single' && mode != 'multi') {
+            console.warn('Invalid selection-mode value \'' + mode + '\', use \'none\', \'single\' or \'multi\'');
+            return;
+          }
+
+          const selectable = mode != 'none';
+
           if (selectable) {
             setTimeout(() => {
               if (this.selectable) {

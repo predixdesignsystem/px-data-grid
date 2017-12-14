@@ -52,8 +52,7 @@
       <px-demo-component slot="px-demo-component">
         <px-data-grid-paginated
             table-data="{{props.tableData.value}}"
-            selectable="{{props.selectable.value}}"
-            multi-select="{{props.multiSelect.value}}"
+            selection-mode="{{props.selectionMode.value}}"
             selected-items="{{selectedItems}}"
             hide-selection-column="{{props.hideSelectionColumn.value}}"
             resizable="{{props.resizable.value}}"
@@ -460,16 +459,11 @@
         inputType: 'code:JSON'
       },
 
-      selectable: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      multiSelect: {
-        type: Boolean,
-        defaultValue: true,
-        inputType: 'toggle'
+      selectionMode: {
+        type: String,
+        value: 'none',
+        inputType: 'dropdown',
+        inputChoices: ['none', 'single', 'multi']
       },
 
       hideSelectionColumn: {

@@ -28,8 +28,7 @@
 
     <px-data-grid
       remote-data-provider="{{_currentDataProvider}}"
-      selectable="{{selectable}}"
-      multi-select="{{multiSelect}}"
+      selection-mode="{{selectionMode}}"
       selected-items="{{selectedItems}}"
       hide-selection-column="{{hideSelectionColumn}}"
       resizable="{{resizable}}"
@@ -77,11 +76,12 @@
             },
 
             /**
-             * Use the selectable property if one or more rows within the table should be selectable. See also `singleSelect`.
+             * Current selection mode of grid. Accepts values 'none', 'single' and 'multi'.
              */
-            selectable: {
-              type: Boolean,
-              value: false
+            seletionMode: {
+              type: String,
+              value: 'none',
+              observer: '_selectionModeChanged'
             },
 
             /**
@@ -139,14 +139,6 @@
             multiSort: {
               type: Boolean,
               value: false
-            },
-
-            /**
-             * When `true`, selection mode will be multiselection when selectable
-             */
-            multiSelect: {
-              type: Boolean,
-              value: true
             },
 
             /**

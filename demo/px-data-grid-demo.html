@@ -52,9 +52,8 @@
       <px-demo-component slot="px-demo-component">
         <px-data-grid
             table-data="{{props.tableData.value}}"
-            selectable="{{props.selectable.value}}"
+            selection-mode="{{props.selectionMode.value}}"
             filterable="{{props.filterable.value}}"
-            multi-select="{{props.multiSelect.value}}"
             selected-items="{{selectedItems}}"
             hide-selection-column="{{props.hideSelectionColumn.value}}"
             resizable="{{props.resizable.value}}"
@@ -67,7 +66,6 @@
             auto-filter="{{props.autoFilter.value}}"
             on-cell-hover="cellHoverListener"
             on-cell-unhover="cellUnhoverListener"
-            pagination="{{props.pagination.value}}"
             on-table-action="tableActionListener">
         </px-data-grid>
 
@@ -468,21 +466,16 @@
         inputType: 'code:JSON'
       },
 
-      selectable: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
+      selectionMode: {
+        type: String,
+        value: 'none',
+        inputType: 'dropdown',
+        inputChoices: ['none', 'single', 'multi']
       },
 
       filterable: {
         type: Boolean,
         defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      multiSelect: {
-        type: Boolean,
-        defaultValue: true,
         inputType: 'toggle'
       },
 
@@ -513,12 +506,6 @@
       autoFilter: {
         type: Boolean,
         defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      pagination: {
-        type: Boolean,
-        value: false,
         inputType: 'toggle'
       },
 

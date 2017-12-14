@@ -39,7 +39,7 @@ document.addEventListener('WebComponentsReady', () => {
 
     it('should not move the frozen column before selection column', () => {
       // Make selectable and check that columns are after selection column
-      grid.selectable = true;
+      grid.selectionMode = 'multi';
       grid.hideSelectionColumn = false;
       flushVaadinGrid(grid);
       expect(getHeaderCell(grid, 1)).to.equal(firstNameHeaderCell);
@@ -52,7 +52,7 @@ document.addEventListener('WebComponentsReady', () => {
       expect(getHeaderCell(grid, 2)).to.equal(firstNameHeaderCell);
 
       // Make unselectable, and check position of data columns
-      grid.selectable = false;
+      grid.selectionMode = 'none';
       flushVaadinGrid(grid);
       expect(getHeaderCell(grid, 0)).to.equal(lastNameHeaderCell);
       expect(getHeaderCell(grid, 1)).to.equal(firstNameHeaderCell);
