@@ -19,7 +19,7 @@
     "px-icon-set": "^2.0.0",
     "px-dropdown": "^4.0.0",
     "vaadin-grid": "^4.1.0",
-    "vaadin-radio-button": "^1.0.0",
+    "vaadin-radio-button": "1.0.0-alpha8",
     "px-spinner": "^2.2.0"
   },
   "devDependencies": {
