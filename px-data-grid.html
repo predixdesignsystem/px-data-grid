@@ -1076,7 +1076,7 @@
 
         _selectionModeChanged(mode) {
           if (mode != 'none' && mode != 'single' && mode != 'multi') {
-            this.selectionMode = 'none';
+            console.warn('Invalid selection-mode value \'' + mode + '\', use \'none\', \'single\' or \'multi\'');
             return;
           }
 
