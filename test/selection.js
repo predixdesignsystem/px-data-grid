@@ -15,8 +15,7 @@ document.addEventListener('WebComponentsReady', () => {
 
     describe('multi selection', () => {
       it('should add the item to selectedItems when row is clicked', (done) => {
-        grid.selectable = true;
-        grid.multiSelect = true;
+        grid.selectionMode = 'multi';
         Polymer.RenderStatus.afterNextRender(grid, () => {
           expect(grid.selectedItems).to.eql([]);
           const rows = getRows(grid);
@@ -38,8 +37,7 @@ document.addEventListener('WebComponentsReady', () => {
     describe('single selection', () => {
       it('should only have one item in selectedItems when rows have been clicked', (done) => {
         expect(grid.selectedItems).to.eql([]);
-        grid.selectable = true;
-        grid.multiSelect = false;
+        grid.selectionMode = 'single';
         Polymer.RenderStatus.afterNextRender(grid, () => {
           const rows = getRows(grid);
           let cell = getRowCells(rows[1])[1];

@@ -52,7 +52,7 @@
       <px-demo-component slot="px-demo-component">
         <px-data-grid
             remote-data-provider="{{props.remoteDataProvider.value}}"
-            selectable="{{props.selectable.value}}"
+            selection-mode="{{props.selectionMode.value}}"
             hide-selection-column="{{props.hideSelectionColumn.value}}"
             resizable="{{props.resizable.value}}"
             striped="{{props.striped.value}}"
@@ -178,10 +178,11 @@
         }
       },
 
-      selectable: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
+      selectionMode: {
+        type: String,
+        value: 'none',
+        inputType: 'dropdown',
+        inputChoices: ['none', 'single', 'multi']
       },
 
       hideSelectionColumn: {
