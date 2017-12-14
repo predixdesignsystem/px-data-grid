@@ -27,6 +27,7 @@
     "px-dark-theme": "^2.1.0",
     "px-button-group-design": "^2.0.0",
     "px-demo": "^3.0.0",
+    "px-demo-snippet": "vaadin/px-demo-snippet#master",
     "px-forms-design": "^2.0.0",
     "px-layout-design": "^1.0.0",
     "px-starter-kit-design": "^1.0.0",
@@ -38,6 +39,7 @@
     "px-typography-design": "^2.0.3"
   },
   "resolutions": {
-    "webcomponentsjs": "^1.0.0"
+    "webcomponentsjs": "^1.0.0",
+    "px-demo-snippet": "master"
   }
 }
