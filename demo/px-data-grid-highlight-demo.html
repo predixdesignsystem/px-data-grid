@@ -175,14 +175,14 @@
           },
           {
             type: 'column',
-            color: 'yellow',
+            color: 'var(  --px-data-grid-yellow-status-background-color, yellow)',
             condition: (column, item) => {
               return column.name == 'last';
             }
           },
           {
             type: 'row',
-            color: 'lightblue',
+            color: 'var(--px-data-grid-red-status-background-color, red)',
             condition: (cellContent, item) => {
               return item && (item.last == 'Dennis' || item.first == 'Carl');
             }

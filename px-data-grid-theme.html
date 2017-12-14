@@ -139,6 +139,10 @@
         padding-right: var(--px-data-grid-padding-right) !important;
       }
 
+      [part~="cell"][reorder-status="dragging"] {
+        background: var(--px-data-grid-dragged-column-background-color);
+        --px-data-grid-cell-dragging-color: transparent;
+      }
     </style>
   </template>
 </dom-module>

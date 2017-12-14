@@ -93,19 +93,14 @@
 
         _cellColorChanged(color) {
           if (color) {
-            if (color == 'default') {
-              this.classList.add('default-highlight');
-              this.style = '';
-              return;
+            if (color === 'default') {
+              this.updateStyles({'--px-data-grid-highlight-background-color': 'var( --px-data-grid-default-highlight-background-color)'});
             } else {
-              this.style = 'background-color: ' + color;
-              this.classList.remove('default-highlight');
-              return;
+              this.updateStyles({'--px-data-grid-highlight-background-color': color});
             }
+          } else {
+            this.updateStyles({'--px-data-grid-highlight-background-color': undefined});
           }
-
-          this.classList.remove('default-highlight');
-          this.style = '';
         }
 
         _render(renderer, path, editable, item) {
