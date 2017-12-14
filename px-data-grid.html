@@ -45,12 +45,12 @@
 
       .action-bar {
         display: flex;
-        flex-direction: row;
+        flex-direction: row-reverse;
         flex-wrap: nowrap;
         justify-content: space-between;
       }
 
-      .action-bar > * {
+      .action-bar > px-auto-filter-field {
         flex-grow: 1;
       }
 
@@ -102,17 +102,9 @@
     <template is="dom-if" if="{{_showActionBar(autoFilter, actionMenu)}}">
 
       <div class="action-bar">
-        <template is="dom-if" if="[[autoFilter]]">
-          <px-auto-filter-field
-            placeholder="[[localize('Filter')]]"
-            on-filter-change="_autoFilterChanged"
-          >
-          </px-auto-filter-field>
-        </template>
-
         <template is="dom-if" if="[[actionMenu]]">
           <px-dropdown multi hide-selected
-            display-value="[[localize('Table Actions')]]"
+            display-value="[[localize('Actions')]]"
             items="[[_actionMenuContent]]"
             selected-values="[[_selectedActionItems]]"
             disable-clear
@@ -120,6 +112,13 @@
           </px-dropdown>
         </template>
 
+        <template is="dom-if" if="[[autoFilter]]">
+          <px-auto-filter-field
+            placeholder="[[localize('Filter')]]"
+            on-filter-change="_autoFilterChanged"
+          >
+          </px-auto-filter-field>
+        </template>
       </div>
     </template>
 
@@ -358,7 +357,7 @@
                 // https://www.polymer-project.org/2.0/toolbox/localize
                 return {
                   'en': {
-                    'Table Actions': 'Table Actions',
+                    'Actions': 'Actions',
                     'Freeze column': 'Freeze column',
                     'Unfreeze column': 'Unfreeze column',
                     'Group by column': 'Group by column',
@@ -366,10 +365,10 @@
                     'Hide column': 'Hide column'
                   },
                   'fr': {
-                    'Table Actions': 'Actions de la table'
+                    'Actions': 'Actions'
                   },
                   'fi': {
-                    'Table Actions': 'Taulukkotoiminnot',
+                    'Actions': 'Toiminnot',
                     'Hide column': 'Piilota sarake'
                   }
                 };
@@ -577,10 +576,14 @@
           });
 
           this.addEventListener('ungroup', (event) => {
-            this._groupByColumn = false;
-            this._vaadinGrid.clearCache();
-            this._vaadinGrid.removeAttribute('tree-grid');
+            this._ungroup();
           });
+        }
+
+        _ungroup() {
+          this._groupByColumn = false;
+          this._vaadinGrid.clearCache();
+          this._vaadinGrid.removeAttribute('tree-grid');
         }
 
         _handleColumnFroze(event) {
@@ -816,6 +819,8 @@
                 },
                 bubbles: true
               }));
+            } else if (key.startsWith('-internal-ungroup-')) {
+              this._ungroup();
             }
           }
         }
@@ -853,6 +858,15 @@
                 selected: false,
                 disabled: true
               });
+            });
+          }
+
+          if (this._groupByColumn) {
+            content.push({
+              key: '-internal-ungroup-',
+              val: this.localize('Clear Grouping'),
+              selected: false,
+              disabled: true
             });
           }
 
