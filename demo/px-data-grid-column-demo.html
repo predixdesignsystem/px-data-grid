@@ -54,6 +54,21 @@
           filterable="{{props.filterable.value}}"
           on-table-action="tableActionListener">
         </px-data-grid>
+
+        <p>
+          <div>
+            <label for="show-fullname">
+              <input id="show-fullname" type="checkbox" name="fullname" value="show" on-change="_fullNameChanged"/>
+              Show Full Name column
+          </label>
+          </div>
+          <div>
+            <label for="freeze-fullname">
+              <input id="freeze-fullname" type="checkbox" name="fullname" value="freeze" on-change="_fullNameChanged"/>
+              Freeze Full Name column
+            </label>
+          </div>
+        </p>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
 
@@ -554,18 +569,6 @@
         inputType: 'toggle'
       },
 
-      hideFullName: {
-        type: Boolean,
-        defaultValue: true,
-        inputType: 'toggle'
-      },
-
-      freezeFullName: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
       language: {
         type: String,
         value: 'en',
@@ -606,9 +609,10 @@
 
     _fullNameChanged() {
       const grid = this.shadowRoot.querySelector('px-data-grid');
+      const hidden = !this.shadowRoot.querySelector('#show-fullname').checked;
+      const frozen = this.shadowRoot.querySelector('#freeze-fullname').checked;
+
       if (grid && grid.columns) {
-        const hidden = this.props.hideFullName.value;
-        const frozen = this.props.freezeFullName.value;
         grid.columns.filter(c => c.name == 'Full Name').forEach(c => {
           c.hidden = hidden;
           c.frozen = frozen;
