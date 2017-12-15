@@ -19,7 +19,7 @@ document.addEventListener('WebComponentsReady', () => {
     it('should show only 1 row after filtering', (done) => {
       const autoFilter = grid.shadowRoot.querySelector('px-auto-filter-field');
       autoFilter.addEventListener('filter-change', (event) => {
-        expect(getVisibleRows(grid).length).to.be.eql(1);
+        expect(getVisibleRows(grid).length).to.be.eql(2);
         done();
       });
       autoFilter.value = 'Elizabeth';

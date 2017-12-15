@@ -12,7 +12,7 @@
     'last': 'Martin',
     'email': 'dotta@behtam.la'
   }, {
-    'first': 'Carl',
+    'first': 'Elizabeth',
     'last': 'Saunders',
     'email': 'seh@bibapu.gy'
   }, {
@@ -56,11 +56,15 @@
     }
   }
 
-  function getCellContent(grid, cell) {
+  function getCell(grid, cell) {
     const slot = cell.querySelector('slot');
     const slotName = slot.getAttribute('name');
-    const content = grid.shadowRoot.querySelector('[slot="' + slotName + '"]');
-    const wrapper = content.querySelector('px-data-grid-cell-content-wrapper');
+    return grid.shadowRoot.querySelector('[slot="' + slotName + '"]');
+  }
+
+  function getCellContent(grid, cell) {
+    cell = getCell(grid, cell);
+    const wrapper = cell.querySelector('px-data-grid-cell-content-wrapper');
     return wrapper.shadowRoot.innerHTML;
   }
 

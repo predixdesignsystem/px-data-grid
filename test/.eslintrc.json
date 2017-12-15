@@ -15,6 +15,7 @@
     "getVisibleRows": false,
     "getRowCells": false,
     "flushVaadinGrid": false,
+    "getCell": false,
     "getCellContent": false,
     "getHeaderCell": false,
     "getHeaderCellContent": false
