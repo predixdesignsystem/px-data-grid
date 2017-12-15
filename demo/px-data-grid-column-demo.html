@@ -46,6 +46,7 @@
           column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
           action-menu="{{props.actionMenu.value}}"
           language="{{props.language.value}}"
+          striped="{{props.striped.value}}"
           table-actions="{{props.tableActions.value}}"
           action-menu="{{props.actionMenu.value}}"
           columns="{{props.columns.value}}"
@@ -546,6 +547,12 @@
       },
 
       multiSort: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      striped: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'
