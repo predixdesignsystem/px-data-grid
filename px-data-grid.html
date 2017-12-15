@@ -124,7 +124,6 @@
         </template>
       </div>
     </template>
-
     <vaadin-grid size="[[size]]"
                  data-provider="[[_currentDataProvider]]"
                  active-item="[[activeItem]]"
@@ -159,6 +158,7 @@
             <vaadin-grid-sorter path="[[_resolveColumnPath(column)]]">[[_resolveColumnHeader(column)]]</vaadin-grid-sorter>
           </template>
           <template>
+            <vaadin-checkbox checked="{{ detailsOpened }}"></vaadin-checkbox>
             <dom-if if="[[_isGroupedByColumn(column, _groupByColumn)]]">
               <template>
                 <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
@@ -601,6 +601,26 @@
               const path = prefix + prob;
               this.notifyPath(path);
             });
+          }
+        }
+
+        constructor() {
+          super();
+          this._observer = new Polymer.FlattenedNodesObserver(this, info => {
+            this._checkRowDetailsTemplate(info.addedNodes);
+          });
+        }
+
+        _checkRowDetailsTemplate(nodes) {
+          const rowDetailsTemplate = nodes.filter(node => node.localName && node.localName === 'template' && node.className === 'row-details');
+          if (rowDetailsTemplate.length) {
+            this._vaadinGrid._rowDetailsTemplate = rowDetailsTemplate[0];
+
+            const templatizer = new Vaadin.Grid.Templatizer();
+            templatizer._grid = this._vaadinGrid;
+            templatizer.dataHost = this._vaadinGrid.dataHost;
+            templatizer.template = this._vaadinGrid._rowDetailsTemplate;
+            this._vaadinGrid._rowDetailsTemplate.templatizer = templatizer;
           }
         }
 
