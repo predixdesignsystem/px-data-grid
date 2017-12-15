@@ -47,6 +47,7 @@
           action-menu="{{props.actionMenu.value}}"
           language="{{props.language.value}}"
           striped="{{props.striped.value}}"
+          auto-height="{{props.autoHeight.value}}"
           table-actions="{{props.tableActions.value}}"
           action-menu="{{props.actionMenu.value}}"
           columns="{{props.columns.value}}"
@@ -553,6 +554,12 @@
       },
 
       striped: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      autoHeight: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'

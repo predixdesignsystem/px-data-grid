@@ -45,6 +45,7 @@
             selection-mode="{{props.selectionMode.value}}"
             multi-selected="{{props.multiSelect.value}}"
             highlight="{{props.highlight.value}}"
+            auto-height="{{props.autoHeight.value}}"
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}">
         </px-data-grid>
       </px-demo-component>
@@ -195,6 +196,11 @@
         inputType: 'toggle'
       },
       striped: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+      autoHeight: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'
