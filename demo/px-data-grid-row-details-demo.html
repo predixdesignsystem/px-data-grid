@@ -67,10 +67,13 @@
             on-cell-hover="cellHoverListener"
             on-cell-unhover="cellUnhoverListener"
             auto-height="{{props.autoHeight.value}}"
-            on-table-action="tableActionListener">
+            on-table-action="tableActionListener"
+            row-details="{{props.rowDetails.value}}">
 
           <template class="row-details">
-            Hi! My name is [[item.first]]
+            <div>
+                Hi! My name is [[item.first]]
+            </div>
           </template>
 
         </px-data-grid>
@@ -229,6 +232,12 @@
           }
         ],
         inputType: 'code:JSON'
+      },
+
+      rowDetails: {
+        type: Boolean,
+        defaultValue: true,
+        inputType: 'toggle'
       },
 
       selectionMode: {

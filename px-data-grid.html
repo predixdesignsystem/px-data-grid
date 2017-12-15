@@ -7,6 +7,7 @@
 <link rel="import" href="px-auto-filter-field.html">
 <link rel="import" href="px-data-grid-theme.html">
 <link rel="import" href="px-data-grid-selection-column.html">
+<link rel="import" href="px-data-grid-toggle-details-column.html">
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 
 <link rel="import" href="px-data-grid-string-renderer.html">
@@ -139,6 +140,11 @@
         </px-data-grid-selection-column>
       </template>
 
+      <template is="dom-if" if="[[rowDetails]]" restamp>
+        <px-data-grid-toggle-details-column>
+        </px-data-grid-toggle-details-column>
+      </template>
+
       <template is="dom-repeat" items="[[columns]]" as="column">
         <px-data-grid-column
           resizable="[[resizable]]"
@@ -154,11 +160,13 @@
           flex-grow="[[_getColumnFlexGrow(column)]]"
           on-column-change="_onColumnUpdate"
           is-remote-data-provider="[[!_hasLocalDataProvider]]">
+
           <template class="header">
             <vaadin-grid-sorter path="[[_resolveColumnPath(column)]]">[[_resolveColumnHeader(column)]]</vaadin-grid-sorter>
           </template>
+
           <template>
-            <vaadin-checkbox checked="{{ detailsOpened }}"></vaadin-checkbox>
+
             <dom-if if="[[_isGroupedByColumn(column, _groupByColumn)]]">
               <template>
                 <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
@@ -296,6 +304,12 @@
             expandedItems: {
               type: Array,
               value: []
+            },
+
+            rowDetails: {
+              type: Boolean,
+              value: false,
+              observer: '_onRowDetailsChange'
             },
 
             /**
@@ -1239,6 +1253,24 @@
           }
 
           Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._vaadinGrid.notifyResize());
+        }
+
+        /**
+         * Expand or collapse the details container for any item's row.
+         */
+        showRowDetails(item, isShowing) {
+          const index = this._vaadinGrid.detailsOpenedItems.indexOf(item);
+          if (isShowing && index < 0) {
+            this._vaadinGrid.push('detailsOpenedItems', item);
+          } else if (index >= 0) {
+            this._vaadinGrid.splice('detailsOpenedItems', index, 1);
+          }
+        }
+
+        _onRowDetailsChange(rowDetails) {
+          if (this._vaadinGrid && !rowDetails) {
+            this._vaadinGrid.detailsOpenedItems = [];
+          }
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);
