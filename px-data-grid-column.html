@@ -103,7 +103,9 @@
 
         static get observers() {
           return [
-            '_updateI18n(language, resources, _headerCellContentWrapper)'
+            '_updateI18n(language, resources, _headerCellContentWrapper)',
+            '_columnHiddenChanged(hidden)',
+            '_columnFrozenChanged(frozen)'
           ];
         }
 
@@ -154,19 +156,12 @@
           }
         }
 
-        _orderChanged(order, headerCell, footerCell, cells) {
-          this._checkIfValueChanged(order, 'order');
-          super._orderChanged(order, headerCell, footerCell, cells);
-        }
-
-        _frozenChanged(frozen, headerCell, footerCell, cells) {
-          this._checkIfValueChanged(frozen, 'frozen');
-          super._frozenChanged(frozen, headerCell, footerCell, cells);
-        }
-
-        _hiddenChanged(hidden, headerCell, footerCell, cells) {
+        _columnHiddenChanged(hidden) {
           this._checkIfValueChanged(hidden, 'hidden');
-          super._hiddenChanged(hidden, headerCell, footerCell, cells);
+        }
+
+        _columnFrozenChanged(frozen) {
+          this._checkIfValueChanged(frozen, 'frozen');
         }
 
         _fireStatusChange(mappedObject, value) {
