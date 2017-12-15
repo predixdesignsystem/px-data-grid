@@ -4,48 +4,24 @@
 
 <dom-module id="px-auto-filter-field">
   <template>
-    <style>
+    <style include="px-data-grid-styles">
 
       :host {
         position: relative;
         display: block;
       }
 
-      .field {
-        background-color: var(--px-auto-filter-field-background-color, white);
-      }
-
-      .field {
-        height: 2em;
-        border: none;
-        border-radius: 0;
-        border-width: 0;
-        border-style: solid;
-        border-color: var(--px-auto-filter-field-bottom-border-color, red);
-        border-bottom-width: 1px;
-        padding: 0 .33333rem;
-        color: var(--px-auto-filter-field-text-color, black);
+      .text-input {
         background: var(--px-auto-filter-field-background, none);
         background-size: auto 70%;
         background-position: right center;
         padding-right: 20px;
-        outline: 0;
       }
 
-      .field:hover {
-        color: var(--px-auto-filter-field-text-color--hover, black);
-        border-color: var(--px-auto-filter-field-bottom-border-color--hover, red);
-        background-color: var(--px-auto-filter-field-background-color--hover, red);
-      }
-
-      .field:focus {
-        color: var(--px-auto-filter-field-text-color--focus, black);
-        border-color: var(--px-auto-filter-field-bottom-border-color--focus, red);
-        background-color: var(--px-auto-filter-field-background-color--focus, red);
-      }
     </style>
     <input
-      class="field"
+      id="search-field"
+      class="text-input input--tiny"
       type="text"
       name="autofilter"
       value="{{value::input}}"
