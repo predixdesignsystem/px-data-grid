@@ -784,10 +784,13 @@
             if (!params.parentItem) {
               const valuesMap = items.reduce((map, item) => {
                 const value = item[columnPath];
-                const groupItem = {
-                  hasChildren: true
-                };
-                groupItem[columnPath] = value;
+                const groupItem = Object.assign({}, item);
+                for (const i in groupItem) { // px-data-grid/issues/160
+                  if (i !== columnPath) {
+                    groupItem[i] = '';
+                  }
+                }
+                groupItem.hasChildren = true;
                 map.set(value, groupItem);
                 return map;
               }, new Map());

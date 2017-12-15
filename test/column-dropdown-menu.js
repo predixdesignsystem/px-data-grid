@@ -80,5 +80,30 @@ document.addEventListener('WebComponentsReady', () => {
       getHeaderCellContent(firstNameHeaderCell)._hideColumn();
       expect(firstNameHeaderCell.hasAttribute('hidden')).to.be.true;
     });
+
+    it('should properly generate hierarchical data after grouping by column', (done) => {
+      getHeaderCellContent(firstNameHeaderCell)._groupByColumn();
+      Polymer.RenderStatus.afterNextRender(grid, () => {
+        expect(grid._vaadinGrid.hasAttribute('tree-grid')).to.be.true;
+        expect(getVisibleRows(grid).length).to.equal(4);
+        expect(grid._vaadinGrid._cache.items[0].hasChildren).to.be.true;
+        done();
+      });
+    });
+
+    it('should properly expand group', (done) => {
+      getHeaderCellContent(firstNameHeaderCell)._groupByColumn();
+      Polymer.RenderStatus.afterNextRender(grid, () => {
+        const firstCell = getRows(grid)[0].firstChild;
+        expect(getCellContent(grid, firstCell)).to.equal('Elizabeth');
+        const treeToggle = getCell(grid, firstCell).querySelector('vaadin-grid-tree-toggle');
+        treeToggle.expanded = true;
+        Polymer.RenderStatus.afterNextRender(grid, () => {
+          expect(grid._vaadinGrid.expandedItems[0].first).to.equal('Elizabeth');
+          expect(getVisibleRows(grid).length).to.equal(6);
+          done();
+        });
+      });
+    });
   });
 });
