@@ -99,7 +99,7 @@
     </style>
 
     <template is="dom-if" if="{{filterable}}">
-      <px-data-grid-filter columns="[[columns]]" filter-entities="{{_filterEntities}}"></px-data-grid-filter>
+      <px-data-grid-filter columns="[[columns]]" filter-entities="{{filterEntities}}"></px-data-grid-filter>
     </template>
 
     <template is="dom-if" if="{{_showActionBar(autoFilter, actionMenu)}}">
@@ -207,6 +207,9 @@
               notify: true
             },
 
+            /**
+             * If true, turns on advanced filtering feature.
+             */
             filterable: {
               type: Boolean,
               value: false
@@ -515,9 +518,46 @@
             },
 
             /**
-             * Array of filters from px-data-grid-filter component
+             * Array of filters from px-data-grid-filter component.
+             * Format for string column.type:
+             * ```
+             * {
+             *   action: 'show',
+             *   column: {
+             *     type: 'string',
+             *     path: 'last'
+             *   },
+             *   pattern: 'equals',
+             *   query: 'Wong',
+             * }
+             * ```
+             * Pattern can be one of `['equals', 'contains', 'starts_with', 'ends_with', 'wildcard']`.
+             * Format for date column.type:
+             * ```
+             * {
+             *   action: 'hide',
+             *   column: {
+             *     type: 'date',
+             *     path: 'birth_date'
+             *   },
+             *   dateFrom: '1994-11-12',
+             *   dateTo: '1994-11-12'
+             * }
+             * ```
+             * Format for number column.type:
+             * ```
+             * {
+             *   action: 'highlight',
+             *   column: {
+             *     type: 'number',
+             *     path: 'age'
+             *   },
+             *   leftBound: 11,
+             *   rightBound: 12
+             * }
+             * ```
              */
-            _filterEntities: {
+            filterEntities: {
               type: Array,
               value: function() {
                 return [{}];
@@ -548,7 +588,7 @@
 
         static get observers() {
           return [
-            '_filterEntitiesObserver(_filterEntities, _filterEntities.*)',
+            '_filterEntitiesObserver(filterEntities, filterEntities.*)',
             '_highlightsObserver(highlight, _filterHighlights, highlight.*, _filterHightlights.*)'
           ];
         }
@@ -1140,7 +1180,6 @@
             if (filter.column.type === 'date') {
               highlightEntity = {
                 type: 'row',
-                color: 'red',
                 condition: (cellContent, item) => {
                   return this._isDateMatches(filter, Polymer.Path.get(item, filter.column.path));
                 }
@@ -1148,7 +1187,6 @@
             } else if (filter.column.type === 'number') {
               highlightEntity = {
                 type: 'row',
-                color: 'red',
                 condition: (cellContent, item) => {
                   return this._isNumberMatches(filter, Polymer.Path.get(item, filter.column.path));
                 }
@@ -1157,7 +1195,6 @@
               // assume that content has type 'string'
               highlightEntity = {
                 type: 'row',
-                color: 'red',
                 condition: (cellContent, item) => {
                   return this._isStringMatches(filter, Polymer.Path.get(item, filter.column.path));
                 }
