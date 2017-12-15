@@ -63,7 +63,8 @@
             language="{{props.language.value}}"
             auto-filter="{{props.autoFilter.value}}"
             on-cell-hover="cellHoverListener"
-            on-cell-unhover="cellUnhoverListener">
+            on-cell-unhover="cellUnhoverListener"
+            auto-height="{{props.autoHeight.value}}">
         </px-data-grid-paginated>
 
         <dom-if if="[[selectedItems.length]]">
@@ -499,6 +500,12 @@
       resizable: {
         type: Boolean,
         defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      autoHeight: {
+        type: Boolean,
+        defaultValue: true,
         inputType: 'toggle'
       },
 

@@ -37,7 +37,8 @@
       column-reordering-allowed="{{columnReorderingAllowed}}"
       action-menu="{{actionMenu}}"
       language="{{language}}"
-      auto-filter="{{autoFilter}}">
+      auto-filter="{{autoFilter}}"
+      auto-height="{{autoHeight}}">
     </px-data-grid>
 
     <px-data-grid-navigation
@@ -332,6 +333,14 @@
             defaultColumnFlex: {
               type: Number,
               value: 1
+            },
+
+            /**
+             * Grid auto resize height to match number of rows.
+             */
+            autoHeight: {
+              type: Boolean,
+              value: true
             }
 
           };
