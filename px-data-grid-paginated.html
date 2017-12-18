@@ -38,7 +38,8 @@
       action-menu="{{actionMenu}}"
       language="{{language}}"
       auto-filter="{{autoFilter}}"
-      auto-height="{{autoHeight}}">
+      auto-height="{{autoHeight}}"
+      item-id-path="{{itemIdPath}">
     </px-data-grid>
 
     <px-data-grid-navigation
@@ -81,8 +82,7 @@
              */
             seletionMode: {
               type: String,
-              value: 'none',
-              observer: '_selectionModeChanged'
+              value: 'none'
             },
 
             /**
@@ -341,6 +341,14 @@
             autoHeight: {
               type: Boolean,
               value: true
+            },
+
+            /**
+             * Path to an item sub-property that identifies the item.
+             */
+            itemIdPath: {
+              type: String,
+              value: null
             }
 
           };
