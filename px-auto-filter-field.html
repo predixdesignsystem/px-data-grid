@@ -11,23 +11,39 @@
         display: block;
       }
 
+      .search__form {
+        position: relative;
+        display: inline-block;
+      }
+
+      .search__icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: block;
+        padding: 4px;
+        pointer-events: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
       .text-input {
-        background: var(--px-auto-filter-field-background, none);
-        background-size: auto 70%;
-        background-position: right center;
-        padding-right: 20px;
+        padding-right: 22px;
       }
 
     </style>
-    <input
-      id="search-field"
-      class="text-input input--tiny"
-      type="text"
-      name="autofilter"
-      value="{{value::input}}"
-      placeholder="{{placeholder}}"
-    >
-    </input>
+    <div class="search__form">
+      <input
+        id="search-field"
+        class="text-input input--tiny search__box"
+        type="text"
+        name="autofilter"
+        value="{{value::input}}"
+        placeholder="{{placeholder}}"
+      >
+      </input>
+      <px-icon class="search__icon" icon="px-utl:search"></px-icon>
+    </div>
   </template>
   <script>
     {
