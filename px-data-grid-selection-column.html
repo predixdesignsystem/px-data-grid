@@ -3,14 +3,30 @@
 <link rel="import" href="../vaadin-checkbox/vaadin-checkbox.html">
 <link rel="import" href="../vaadin-radio-button/vaadin-radio-button.html">
 
+<dom-module id="vaadin-checkbox-styles" theme-for="vaadin-checkbox">
+  <template>
+    <style>
+      [part=wrapper] {
+        display: flex;
+        align-items: center;
+        outline: none;
+      }
+
+      #nativeCheckbox {
+        margin: 0;
+      }
+    </style>
+  </template>
+</dom-module>
+
 <dom-module id="px-data-grid-selection-column">
   <template>
     <template class="header" id="defaultHeaderTemplate">
       <template is="dom-if" if="[[multiSelect]]">
         <vaadin-checkbox class="select-all-checkbox" aria-label="Select All" hidden$="[[_selectAllHidden]]" on-checked-changed="_onSelectAllCheckedChanged"
           checked="[[_isChecked(selectAll, _indeterminate)]]" indeterminate="[[_indeterminate]]">
+          ([[_selectionCount]])
         </vaadin-checkbox>
-        <div class="selection-count">[[_selectionCount]]</div>
       </template>
     </template>
     <template id="defaultBodyTemplate">
