@@ -1,0 +1,119 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../vaadin-grid/vaadin-grid-column.html">
+<link rel="import" href="../vaadin-checkbox/vaadin-checkbox.html">
+
+<dom-module id="px-data-grid-toggle-details-column">
+  <template>
+    <template class="header">
+      <!-- empty header -->
+    </template>
+
+    <template id="defaultBodyTemplate">
+      <style>
+        .toggle-details {
+          margin: 0;
+          padding: 0;
+          width: auto;
+          background: none;
+          border: none;
+        }
+
+        .toggle-details:focus {
+          outline: none;
+        }
+
+        .toggle-details > px-icon {
+          padding: 0;
+          margin: 0;
+        }
+      </style>
+      <button class="toggle-details" on-tap="_onToggleTap">
+        <px-icon icon="[[_getChevronIcon(detailsOpened)]]"></px-icon>
+      </button>
+    </template>
+
+  </template>
+
+  <script>
+  {
+    /**
+     * `<px-data-grid-toggle-details-column>` is a helper element for the `<px-data-grid>`
+     * to be used to toggle row expansion (row details) column behavior.
+     * @memberof Predix
+     * @mixes Vaadin.GridColumnElement
+     */
+    class DataGridToggleDetailsColumnElement extends Vaadin.GridColumnElement {
+
+      static get is() {
+        return 'px-data-grid-toggle-details-column';
+      }
+
+      static get properties() {
+        return {
+          /**
+           * Width of the cells for this column.
+           */
+          width: {
+            type: String,
+            value: '56px'
+          },
+
+          /**
+           * Flex grow ratio for the cell widths. When set to 0, cell width is fixed.
+           */
+          flexGrow: {
+            type: Number,
+            value: 0
+          },
+
+          /**
+           * Identify column as non-data column
+           */
+          isDataColumn: {
+            type: Boolean,
+            value: false,
+            readOnly: true
+          },
+
+          /**
+          * @private
+          */
+          template: Object,
+
+          _indeterminate: Boolean,
+
+        };
+      }
+
+      _prepareBodyTemplate() {
+        const template = this._prepareTemplatizer(this._findTemplate('template:not(.header):not(.footer)') || this.$.defaultBodyTemplate);
+        // needed to override the dataHost correctly in case internal template is used.
+        template.templatizer.dataHost = template === this.$.defaultBodyTemplate ? this : this.dataHost;
+
+        return template;
+      }
+
+      ready() {
+        super.ready();
+      }
+
+      _onToggleTap(e) {
+        e.model.detailsOpened = !e.model.detailsOpened;
+      }
+
+      _getChevronIcon(detailsOpened) {
+        return detailsOpened ? 'px-utl:chevron' : 'px-utl:chevron-right';
+      }
+
+    }
+
+    customElements.define(DataGridToggleDetailsColumnElement.is, DataGridToggleDetailsColumnElement);
+
+    /**
+     * @namespace Predix
+     */
+    window.Predix = window.Predix || {};
+    Predix.DataGridToggleDetailsColumnElement = DataGridToggleDetailsColumnElement;
+  }
+  </script>
+</dom-module>

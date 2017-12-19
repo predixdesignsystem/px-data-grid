@@ -1,0 +1,327 @@
+<!-- Common demo imports -->
+<link rel="import" href="../../px-demo/px-demo-header.html" />
+<link rel="import" href="../../px-demo/px-demo-api-viewer.html" />
+<link rel="import" href="../../px-demo/px-demo-footer.html" />
+<link rel="import" href="../../px-demo/px-demo-configs.html" />
+<link rel="import" href="../../px-demo/px-demo-props.html" />
+<link rel="import" href="../../px-demo/px-demo-interactive.html" />
+<link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
+<link rel="import" href="../../px-demo/px-demo-code-editor.html" />
+
+<!-- Imports for this component -->
+<link rel="import" href="../../px-demo/css/px-demo-styles.html" />
+<link rel="import" href="../px-data-grid.html" />
+
+<!-- Demo DOM module -->
+<dom-module id="px-data-grid-row-details-demo">
+  <template>
+    <style>
+      .theme-switcher-checkbox {
+        display: inline-flex;
+        float: right;
+        margin: 1rem 2rem;
+      }
+
+      .theme-switcher-checkbox input {
+        margin-left: 5px;
+      }
+    </style>
+    <custom-style>
+      <style include="px-demo-styles" is="custom-style"></style>
+    </custom-style>
+
+    <!-- Header -->
+    <px-demo-header
+        module-name="px-data-grid"
+        description="The Data Grid component is useful for displaying tabular data, and provides more functionality than a simple table."
+        mobile desktop tablet>
+    </px-demo-header>
+
+    <!-- Interactive -->
+    <px-demo-interactive>
+      <!-- Configs -->
+      <px-demo-configs slot="px-demo-configs" configs="[[configs]]" props="{{props}}" chosen-config="{{chosenConfig}}"></px-demo-configs>
+
+      <!-- Props -->
+      <px-demo-props slot="px-demo-props" props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
+
+      <!-- Code Editor -->
+      <px-demo-code-editor slot="px-demo-code-editor" props="{{props}}" config="[[chosenConfig]]"></px-demo-code-editor>
+
+      <!-- Component ---------------------------------------------------------->
+      <px-demo-component slot="px-demo-component">
+        <px-data-grid
+            table-data="{{props.tableData.value}}"
+            selection-mode="{{props.selectionMode.value}}"
+            filterable="{{props.filterable.value}}"
+            selected-items="{{selectedItems}}"
+            hide-selection-column="{{props.hideSelectionColumn.value}}"
+            resizable="{{props.resizable.value}}"
+            striped="{{props.striped.value}}"
+            multi-sort="{{props.multiSort.value}}"
+            column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
+            action-menu="{{props.actionMenu.value}}"
+            table-actions="{{props.tableActions.value}}"
+            language="{{props.language.value}}"
+            auto-filter="{{props.autoFilter.value}}"
+            on-cell-hover="cellHoverListener"
+            on-cell-unhover="cellUnhoverListener"
+            auto-height="{{props.autoHeight.value}}"
+            on-table-action="tableActionListener"
+            row-details="{{props.rowDetails.value}}">
+
+          <template class="row-details">
+            <div>
+                Hi! My name is [[item.first]]
+            </div>
+          </template>
+
+        </px-data-grid>
+
+        <dom-if if="[[selectedItems.length]]">
+          <template>
+            Selected items:
+            <ul>
+              <template is="dom-repeat" items="{{selectedItems}}">
+                <li>[[_stringify(item)]]</li>
+              </template>
+            </ul>
+          </template>
+        </dom-if>
+
+        <label>
+          <input type="checkbox" checked="{{showHoveredCellData::change}}">
+          Show hovered cell data
+        </label>
+        <template is="dom-if" if="[[showHoveredCellData]]"><div>Hovered cell data: [[hoveredCellData]]</div></template>
+      </px-demo-component>
+      <!-- END Component ------------------------------------------------------>
+
+      <px-demo-component-snippet
+          slot="px-demo-component-snippet"
+          element-properties="{{props}}"
+          element-name="px-data-grid"
+          links-includes="[[linksIncludes]]">
+      </px-demo-component-snippet>
+    </px-demo-interactive>
+
+    <!-- API Viewer -->
+    <px-demo-api-viewer source="px-data-grid" api-source-file-path="px-data-grid-api.json"></px-demo-api-viewer>
+
+    <!-- Footer -->
+    <px-demo-footer></px-demo-footer>
+
+  </template>
+
+</dom-module>
+<script>
+  Polymer({
+    is: 'px-data-grid-row-details-demo',
+
+    cellHoverListener: function(evt) {
+      this.hoveredCellData = evt.detail.cellContent;
+    },
+
+    cellUnhoverListener: function(evt) {
+      if (this.hoveredCellData === evt.detail.cellContent) {
+        this.hoveredCellData = '';
+      }
+    },
+
+    tableActionListener: function(evt) {
+      window.alert('Table Action ' + evt.detail.id);
+    },
+
+    properties: {
+      showHoveredCellData: {
+        type: Boolean,
+        value: false,
+      },
+
+      hoveredCellData: {
+        type: String
+      },
+      /**
+       * Note: The actual data/values for `props` are placed in `this.demoProps`
+       * to create a static reference that Polymer shouldn't overwrite.
+       *
+       * On object containing all the properties the user can configure for this
+       * demo. Usually a pretty similar copy of the component's `properties` block
+       * with some additional sugar added to describe what kind of input the
+       * user will be shown and how that input should be configured.
+       *
+       * Note that `value` for each property is the default that will be set
+       * unless a config from `configs` is applied by default.
+       *
+       * @property props
+       * @type {Object}
+       */
+      props: {
+        type: Object,
+        value: function() {
+          return this.demoProps;
+        }
+      },
+
+      /**
+       * An array of pre-configured `props` that can be used to provide the user
+       * with a set of common examples. These configs will be made available
+       * as a set of tabs the user can click that will automatically change
+       * the `props` to specific values.
+       *
+       * @example
+       *
+       * Each config is an object. Its keys should be the names of the configurable
+       * properties defined in your `demoProps` above. Each key's value should
+       * be the new prop value for the configuration. You can also include these
+       * optional keys:
+       *
+       * - `configName` - a String value that will be used for the title of the tab
+       * - `configReset` - a Boolean, if `true` resets all props. Defaults to `false`.
+       *
+       * @property configs
+       * @type {Array}
+       */
+      configs: {
+        type: Array,
+        value: function() {
+          return [
+            {
+              configName: 'Default',
+              configReset: true
+            }
+          ];
+        }
+      },
+
+      selectedItems: {
+        type: Array,
+      }
+    },
+    /**
+     * A reference for `this.props`. Read the documentation there.
+     */
+    demoProps: {
+      tableData: {
+        type: Object,
+        defaultValue: [
+          {
+            first: 'Elizabeth',
+            last: 'Wong',
+            email: 'sika@iknulber.cl'
+          },
+          {
+            first: 'Jeffrey',
+            last: 'Wong',
+            email: 'cofok@rac.be'
+          },
+          {
+            first: 'Alma',
+            last: 'Martin',
+            email: 'dotta@behtam.la'
+          },
+          {
+            first: 'Elizabeth',
+            last: 'Saunders',
+            email: 'seh@bibapu.gy'
+          },
+          {
+            first: 'Willie',
+            last: 'Dennis',
+            email: 'izko@dahokwej.ci'
+          }
+        ],
+        inputType: 'code:JSON'
+      },
+
+      rowDetails: {
+        type: Boolean,
+        defaultValue: true,
+        inputType: 'toggle'
+      },
+
+      selectionMode: {
+        type: String,
+        value: 'none',
+        inputType: 'dropdown',
+        inputChoices: ['none', 'single', 'multi']
+      },
+
+      filterable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      hideSelectionColumn: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      multiSort: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      columnReorderingAllowed: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      actionMenu: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      autoFilter: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      resizable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      autoHeight: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      striped: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      language: {
+        type: String,
+        value: 'en',
+        inputType: 'dropdown',
+        inputChoices: ['en', 'fr', 'fi']
+      },
+
+      tableActions: {
+        type: Object,
+        defaultValue: [
+          {
+            name: 'Export CSV',
+            id: 'CSV'
+          }
+        ],
+        inputType: 'code:JSON'
+      }
+    },
+
+    _stringify: function(item) {
+      return JSON.stringify(item);
+    }
+  });
+</script>
