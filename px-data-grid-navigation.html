@@ -48,11 +48,6 @@
         display: inline-block;
       }
 
-      .page-selection .arrow {
-        display: inline-block;
-        cursor: pointer;
-      }
-
       .page-selection .arrow:disabled {
         color: var(--px-data-grid-navigation-text-color--disabled, #CCC);
         cursor: default;
@@ -70,16 +65,32 @@
         color: var(--px-data-grid-navigation-text-color, #000);
         display: inline-block;
         cursor: pointer;
-        padding: 2px 7px;
-        background: none;
+        padding: 0;
         margin: 0;
+        margin-right: 6px;
+        height: 20px;
+        width: 20px;
+        line-height: 18px;
+        text-align: center;
+        background: none;
         border: none;
       }
 
-      .page-selection .page-list .page-button.selected {
+      .page-selection .page-button:last-child {
+        margin-right: 0;
+      }
+
+      .page-selection .page-button.selected {
+        height: 18px;
+        width: 18px;
         border: solid 1px var(--px-data-grid-navigation-page-number-border-color, #CCC);
         border-radius: 0;
         color: var(--px-data-grid-navigation-text-color--selected, #000);
+      }
+
+      .page-selection .page-button px-icon {
+        --px-icon-default-width: 20px;
+        --px-icon-default-height: 20px;
       }
     </style>
 
@@ -105,7 +116,7 @@
       <!-- page selection list -->
       <div class="page-selection">
         <!-- back arrow -->
-        <button class="page-button arrow" on-tap="_onBackTap"
+        <button class="page-button arrow back" on-tap="_onBackTap"
             disabled$="[[!_isBackArrowEnabled(currentPage, numberOfPages)]]">
           <px-icon icon="px-nav:back"></px-icon>
         </button>
@@ -125,7 +136,7 @@
           </template>
         </div>
         <!-- next arrow -->
-        <button class="page-button arrow" on-tap="_onNextTap"
+        <button class="page-button arrow next" on-tap="_onNextTap"
             disabled$="[[!_isNextArrowEnabled(currentPage, numberOfPages)]]">
           <px-icon icon="px-nav:next"></px-icon>
         </button>

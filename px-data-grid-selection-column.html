@@ -176,7 +176,7 @@
           this._grid.removeEventListener('active-item-changed', this._boundOnActiveItemChanged);
           this._grid.removeEventListener('data-provider-changed', this._boundOnDataProviderChanged);
           this._grid.removeEventListener('filter-changed', this._boundOnSelectedItemsChanged);
-          this._grid.removeEventListener('selected-items-changed', this._boundOnSelectedItemsChanged);
+          this._grid._pxDataGrid.removeEventListener('selected-items-changed', this._boundOnSelectedItemsChanged);
 
           const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
           if (isSafari && window.ShadyDOM && this.parentElement) {
@@ -204,7 +204,7 @@
           this._grid.addEventListener('active-item-changed', this._boundOnActiveItemChanged);
           this._grid.addEventListener('data-provider-changed', this._boundOnDataProviderChanged);
           this._grid.addEventListener('filter-changed', this._boundOnSelectedItemsChanged);
-          this._grid.addEventListener('selected-items-changed', this._boundOnSelectedItemsChanged);
+          this._grid._pxDataGrid.addEventListener('selected-items-changed', this._boundOnSelectedItemsChanged);
 
           if (this._grid._pxDataGrid) {
             this._selectAllHidden = !this._grid._pxDataGrid._hasLocalDataProvider;

@@ -19,7 +19,7 @@ function runTests() {
     });
 
     function getSelectedPageSize() {
-      return Number.parseInt(
+      return parseInt(
         navigation.shadowRoot.querySelector('.page-size-select px-dropdown')
           .shadowRoot.querySelector('#label').innerText);
     }
@@ -28,7 +28,7 @@ function runTests() {
       // wrap return in array since querySelectorAll returns node list not an arrays
       const options = [...navigation.shadowRoot.querySelector('px-dropdown')
         .shadowRoot.querySelectorAll('.dropdown-option__item')];
-      return options.map((el) => Number.parseInt(el.innerText));
+      return options.map((el) => parseInt(el.innerText));
     }
 
     function getDisplayedRowRange() {
@@ -53,11 +53,11 @@ function runTests() {
 
     function getPageNumbers() {
       const pageNumberEls = [...navigation.shadowRoot.querySelectorAll('.page-number')];
-      return pageNumberEls.map((el) => Number.parseInt(el.innerText));
+      return pageNumberEls.map((el) => parseInt(el.innerText));
     }
 
     function getSelectedPageNumber() {
-      return Number.parseInt(navigation.shadowRoot.querySelector('.page-number.selected').innerText);
+      return parseInt(navigation.shadowRoot.querySelector('.page-number.selected').innerText);
     }
 
     it('should display proper page size', (done) => {

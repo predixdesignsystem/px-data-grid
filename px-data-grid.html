@@ -40,6 +40,7 @@
         display: flex;
         align-items: center;
         background-color: var(--px-data-grid-cell-dragging-color, var(--px-data-grid-highlight-background-color, transparent));
+        line-height: 16px;
       }
 
       .action-bar {
@@ -133,6 +134,7 @@
                  striped$="[[striped]]"
                  selected-items="{{selectedItems}}"
                  multi-sort="[[multiSort]]"
+                 item-id-path="[[itemIdPath]]"
                  loading="{{_loading}}">
 
       <template is="dom-if" if="[[_isSelectable(selectionMode)]]" restamp>
@@ -596,7 +598,15 @@
               value: false,
               reflectToAttribute: true,
               observer: '_autoHeightChanged'
-            }
+            },
+
+            /**
+             * Path to an item sub-property that identifies the item.
+             */
+            itemIdPath: {
+              type: String,
+              value: null
+            },
           };
         }
 

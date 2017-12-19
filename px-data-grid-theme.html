@@ -143,6 +143,10 @@
         background: var(--px-data-grid-dragged-column-background-color);
         --px-data-grid-cell-dragging-color: transparent;
       }
+      
+      [part~="cell"][reorder-status="dragging"] ::slotted(vaadin-grid-cell-content) {
+        background: var(--px-data-grid-dragged-column-background-color);
+      }
 
       [part~="details-cell"] {
         background-color: var(--px-data-grid-cell-details-background-color);
