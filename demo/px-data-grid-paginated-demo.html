@@ -52,6 +52,7 @@
       <px-demo-component slot="px-demo-component">
         <px-data-grid-paginated
             table-data="{{props.tableData.value}}"
+            auto-hide-page-list="{{props.autoHidePageList.value}}"
             selection-mode="{{props.selectionMode.value}}"
             selected-items="{{selectedItems}}"
             hide-selection-column="{{props.hideSelectionColumn.value}}"
@@ -465,6 +466,12 @@
         value: 'none',
         inputType: 'dropdown',
         inputChoices: ['none', 'single', 'multi']
+      },
+
+      autoHidePageList: {
+        type: Boolean,
+        defaultValue: true,
+        inputType: 'toggle'
       },
 
       hideSelectionColumn: {

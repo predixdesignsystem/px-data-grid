@@ -105,43 +105,47 @@
       </px-dropdown>
     </div>
 
-    <div class="right">
-      <!-- row counts -->
-      <div class="row-counts">
-        <span class="current-rows">
-          [[_getItemsRangeStr(currentPage, pageSize, totalItemCount)]]
-        </span> of [[totalItemCount]]
-      </div>
+    <dom-if if="[[!hidePageList]]">
+      <template>
+        <div class="right">
+          <!-- row counts -->
+          <div class="row-counts">
+            <span class="current-rows">
+              [[_getItemsRangeStr(currentPage, pageSize, totalItemCount)]]
+            </span> of [[totalItemCount]]
+          </div>
 
-      <!-- page selection list -->
-      <div class="page-selection">
-        <!-- back arrow -->
-        <button class="page-button arrow back" on-tap="_onBackTap"
-            disabled$="[[!_isBackArrowEnabled(currentPage, numberOfPages)]]">
-          <px-icon icon="px-nav:back"></px-icon>
-        </button>
-        <!-- page number list -->
-        <div class="page-list">
-          <template is="dom-repeat" items="[[_getPagesList(currentPage, numberOfPages)]]">
-            <template is="dom-if" if="[[_isCurrentPage(item, currentPage)]]" restamp>
-              <div class="page-button page-number selected">
-                [[item]]
-              </div>
-            </template>
-            <template is="dom-if" if="[[!_isCurrentPage(item, currentPage)]]" restamp>
-              <div class="page-button page-number" on-tap="_onPageTap">
-                [[item]]
-              </div>
-            </template>
-          </template>
+          <!-- page selection list -->
+          <div class="page-selection">
+            <!-- back arrow -->
+            <button class="page-button arrow back" on-tap="_onBackTap"
+                disabled$="[[!_isBackArrowEnabled(currentPage, numberOfPages)]]">
+              <px-icon icon="px-nav:back"></px-icon>
+            </button>
+            <!-- page number list -->
+            <div class="page-list">
+              <template is="dom-repeat" items="[[_getPagesList(currentPage, numberOfPages)]]">
+                <template is="dom-if" if="[[_isCurrentPage(item, currentPage)]]" restamp>
+                  <div class="page-button page-number selected">
+                    [[item]]
+                  </div>
+                </template>
+                <template is="dom-if" if="[[!_isCurrentPage(item, currentPage)]]" restamp>
+                  <div class="page-button page-number" on-tap="_onPageTap">
+                    [[item]]
+                  </div>
+                </template>
+              </template>
+            </div>
+            <!-- next arrow -->
+            <button class="page-button arrow next" on-tap="_onNextTap"
+                disabled$="[[!_isNextArrowEnabled(currentPage, numberOfPages)]]">
+              <px-icon icon="px-nav:next"></px-icon>
+            </button>
+          </div>
         </div>
-        <!-- next arrow -->
-        <button class="page-button arrow next" on-tap="_onNextTap"
-            disabled$="[[!_isNextArrowEnabled(currentPage, numberOfPages)]]">
-          <px-icon icon="px-nav:next"></px-icon>
-        </button>
-      </div>
-    </div>
+      </template>
+    </dom-if>
 
   </template>
   <script>
@@ -214,6 +218,14 @@
             totalItemCount: {
               type: Number,
               value: 0
+            },
+
+            /**
+             * If true, the page numbers list is not shown.
+             */
+            hidePageList: {
+              type: Boolean,
+              value: false
             },
 
             /**

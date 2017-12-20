@@ -48,7 +48,8 @@
       selectable-page-sizes="[[selectablePageSizes]]"
       page-size="[[pageSize]]"
       current-page="[[page]]"
-      number-of-pages="[[_calcNumPages(size, pageSize)]]">
+      number-of-pages="[[_calcNumPages(size, pageSize)]]"
+      hide-page-list="[[_hidePageList(autoHidePageList, size, pageSize)]]">
     </px-data-grid-navigation>
 
   </template>
@@ -349,6 +350,15 @@
             itemIdPath: {
               type: String,
               value: null
+            },
+
+            /**
+             * If true, automatically hides the page numbers list when there is only
+             * 1 page available.
+             */
+            autoHidePageList: {
+              type: Boolean,
+              value: true
             }
 
           };
@@ -517,6 +527,10 @@
             numPages = Math.ceil(numItems / pageSize);
           }
           return numPages;
+        }
+
+        _hidePageList(autoHidePageList, size, pageSize) {
+          return autoHidePageList && this._calcNumPages(size, pageSize) === 1;
         }
       }
       customElements.define(DataGridPaginatedElement.is, DataGridPaginatedElement);
