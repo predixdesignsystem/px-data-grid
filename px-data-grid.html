@@ -15,6 +15,7 @@
 <link rel="import" href="px-data-grid-number-renderer.html">
 <link rel="import" href="px-data-grid-cell-content-wrapper.html">
 <link rel="import" href="px-data-grid-filter.html">
+<link rel="import" href="px-data-grid-sorter.html">
 
 <link rel="import" href="css/px-data-grid-styles.html">
 
@@ -144,7 +145,7 @@
           is-remote-data-provider="[[!_hasLocalDataProvider]]">
 
           <template class="header">
-            <vaadin-grid-sorter path="[[_resolveColumnPath(column)]]">[[_resolveColumnHeader(column)]]</vaadin-grid-sorter>
+            <px-data-grid-sorter path="[[_resolveColumnPath(column)]]">[[_resolveColumnHeader(column)]]</px-data-grid-sorter>
           </template>
 
           <template>
