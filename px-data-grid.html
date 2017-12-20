@@ -626,7 +626,9 @@
         }
 
         _checkRowDetailsTemplate(nodes) {
-          const rowDetailsTemplate = nodes.filter(node => node.localName && node.localName === 'template' && node.className === 'row-details');
+          const rowDetailsTemplate = nodes.filter(node => {
+            node.localName && node.localName === 'template' && node.className.indexOf('row-details') !== 1;
+          });
           if (rowDetailsTemplate.length) {
             this._vaadinGrid._rowDetailsTemplate = rowDetailsTemplate[0];
 

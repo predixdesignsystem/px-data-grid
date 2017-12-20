@@ -12,12 +12,12 @@
       <style>
         .toggle-details {
           color: var(--px-base-text-color, #000);
-          margin: 0;
-          padding: 0;
-          width: auto;
-          background: none;
-          border: none;
+          margin: -10px;
           cursor: pointer;
+          display: flex;
+          flex-grow: 1;
+          align-items: center;
+          justify-content: center;
         }
 
         .toggle-details:focus {
@@ -29,9 +29,9 @@
           margin: 0;
         }
       </style>
-      <button class="toggle-details" on-tap="_onToggleTap">
+      <div class="toggle-details" on-click="_onToggleClick">
         <px-icon icon="[[_getChevronIcon(detailsOpened)]]"></px-icon>
-      </button>
+      </div>
     </template>
 
   </template>
@@ -99,7 +99,7 @@
         super.ready();
       }
 
-      _onToggleTap(e) {
+      _onToggleClick(e) {
         e.model.detailsOpened = !e.model.detailsOpened;
       }
 
