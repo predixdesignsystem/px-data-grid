@@ -71,8 +71,6 @@
         width: 20px;
         line-height: 18px;
         text-align: center;
-        background: none;
-        border: none;
       }
 
       .page-selection .page-button:last-child {
@@ -118,10 +116,10 @@
           <!-- page selection list -->
           <div class="page-selection">
             <!-- back arrow -->
-            <button class="page-button arrow back" on-tap="_onBackTap"
+            <div class="page-button arrow back" on-click="_onBackClick"
                 disabled$="[[!_isBackArrowEnabled(currentPage, numberOfPages)]]">
               <px-icon icon="px-nav:back"></px-icon>
-            </button>
+            </div>
             <!-- page number list -->
             <div class="page-list">
               <template is="dom-repeat" items="[[_getPagesList(currentPage, numberOfPages)]]">
@@ -131,17 +129,17 @@
                   </div>
                 </template>
                 <template is="dom-if" if="[[!_isCurrentPage(item, currentPage)]]" restamp>
-                  <div class="page-button page-number" on-tap="_onPageTap">
+                  <div class="page-button page-number" on-click="_onPageClick">
                     [[item]]
                   </div>
                 </template>
               </template>
             </div>
             <!-- next arrow -->
-            <button class="page-button arrow next" on-tap="_onNextTap"
+            <div class="page-button arrow next" on-click="_onNextClick"
                 disabled$="[[!_isNextArrowEnabled(currentPage, numberOfPages)]]">
               <px-icon icon="px-nav:next"></px-icon>
-            </button>
+            </div>
           </div>
         </div>
       </template>
@@ -263,7 +261,7 @@
         /**
          * Fired when user clicks on a page number.
          */
-        _onPageTap(event) {
+        _onPageClick(event) {
           const pageNumber = event.model.item;
           if (!isNaN(pageNumber)) {
             this._fireChangeEvent({
@@ -273,7 +271,7 @@
           }
         }
 
-        _onBackTap(event) {
+        _onBackClick(event) {
           if (this.currentPage == 1) {
             return;
           }
@@ -283,7 +281,7 @@
           });
         }
 
-        _onNextTap(event) {
+        _onNextClick(event) {
           if (this.currentPage == this.numberOfPages) {
             return;
           }
