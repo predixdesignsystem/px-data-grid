@@ -42,6 +42,7 @@
         <px-data-grid
           table-data="{{props.tableData.value}}"
           selection-mode="{{props.selectionMode.value}}"
+          editable="[[props.editable.value]]"
           multi-sort="{{props.multiSort.value}}"
           column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
           action-menu="{{props.actionMenu.value}}"
@@ -496,6 +497,7 @@
             flexGrow: 0,
             hidden: false,
             editable: true,
+            required: true,
             renderer: 'px-data-grid-number-renderer'
           },
           {
@@ -507,6 +509,7 @@
             name: 'First Name',
             path: 'first',
             editable: true,
+            required: true,
             renderer: 'px-data-grid-string-renderer'
           },
           {
@@ -536,6 +539,12 @@
       },
 
       filterable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      editable: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'

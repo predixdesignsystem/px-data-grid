@@ -1,17 +1,34 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../px-tooltip/px-tooltip.html">
 <link rel="import" href="px-data-grid-renderer-mixin.html">
+<link rel="import" href="px-data-grid-theme.html">
 
 <dom-module id="px-data-grid-number-renderer">
   <template>
-    <style>
+    <style include="px-data-grid-styles">
       :host {
         display: flex;
         align-items: center;
+        flex-grow: 1;
+      }
+
+      #editingTemplate {
+        width: 100%;
+      }
+
+      input {
+        box-sizing: border-box;
       }
     </style>
     <div id="value">[[value]]</div>
     <div id="editingTemplate">
-      <input type="number" value="{{value::change}}">
+      <input id="editingTemplateInput" class$="{{getClasses(validationResult)}}" type="number" value="{{value::change}}">
+      <px-tooltip
+        for="editingTemplateInput"
+        orientation="top"
+        tooltip-message="[[validationResult.message]]"
+        opened="[[!validationResult.valid]]"
+        ignore-target-events>
     </div>
   </template>
   <script>
@@ -30,6 +47,17 @@
       class DataGridNumberRenderer extends Predix.DataGridRendererMixin(Polymer.Element) {
         static get is() {
           return 'px-data-grid-number-renderer';
+        }
+
+        validate() {
+          return {
+            valid: !this.column.required || this.value.toString().length > 0,
+            message: this.localize('Value is required')
+          };
+        }
+
+        getClasses(result) {
+          return !result || result.valid ? 'text-input' : 'text-input validation-error';
         }
       }
 

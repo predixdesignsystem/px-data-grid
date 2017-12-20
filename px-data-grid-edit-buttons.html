@@ -1,0 +1,55 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../px-icon-set/px-icon.html"/>
+
+<dom-module id="px-data-grid-edit-buttons">
+  <template>
+    <style>
+      :host {
+        display: flex;
+      }
+
+      px-icon {
+        border-radius: 50%;
+        border: 1px solid var(--px-data-grid-cell-text-color--sorted);
+        --iron-icon-width: 12px;
+        --iron-icon-height: 12px;
+        --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted);
+        padding: 2px;
+      }
+
+      px-icon + px-icon {
+        margin-left: 5px;
+      }
+    </style>
+
+    <px-icon icon="px-utl:check" on-click="save">Save</px-icon>
+    <px-icon icon="px-utl:close" on-click="cancel">Cancel</px-icon>
+  </template>
+
+  <script>
+    {
+      class DataGridEditButtonsElement extends Polymer.Element {
+        static get is() {
+          return 'px-data-grid-edit-buttons';
+        }
+
+        static get properties() {
+          return {
+            save: Function,
+            cancel: Function
+          };
+        }
+      }
+
+      window.customElements.define(DataGridEditButtonsElement.is, DataGridEditButtonsElement);
+
+      /**
+       * @namespace Predix
+       */
+      window.Predix = window.Predix || {};
+      Predix.DataGridEditButtonsElement = DataGridEditButtonsElement;
+    }
+  </script>
+
+
+</dom-module>

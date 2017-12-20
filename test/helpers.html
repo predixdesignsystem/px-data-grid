@@ -62,8 +62,8 @@
     return grid.shadowRoot.querySelector('[slot="' + slotName + '"]');
   }
 
-  function getCellContent(grid, cell) {
-    cell = getCell(grid, cell);
+  function getCellContent(grid, _cell) {
+    const cell = getCell(grid, _cell);
     const wrapper = cell.querySelector('px-data-grid-cell-content-wrapper');
     return wrapper.shadowRoot.innerHTML;
   }

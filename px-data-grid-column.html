@@ -48,14 +48,6 @@
               type: String
             },
 
-            language: {
-              type: String
-            },
-
-            resources: {
-              type: Object
-            },
-
             /**
              * Just a trick to map generated column instance to matching data object.
              * Can be also used to update object when properties change.
@@ -88,8 +80,7 @@
              */
             isDataColumn: {
               type: Boolean,
-              value: true,
-              readOnly: true
+              value: false
             },
 
             /**
@@ -98,13 +89,15 @@
             isRemoteDataProvider: {
               type: Boolean,
               value: false
-            }
+            },
+
+            localize: Function
           };
         }
 
         static get observers() {
           return [
-            '_updateI18n(language, resources, _headerCellContentWrapper)',
+            '_updateI18n(localize, _headerCellContentWrapper)',
             '_columnHiddenChanged(hidden)',
             '_columnFrozenChanged(frozen)'
           ];
@@ -129,13 +122,12 @@
           this._headerCellContentWrapper = headerCellContentWrapper;
         }
 
-        _updateI18n(language, resources, _headerCellContentWrapper) {
+        _updateI18n(localize, _headerCellContentWrapper) {
           if (!_headerCellContentWrapper) {
             return;
           }
 
-          _headerCellContentWrapper.language = language;
-          _headerCellContentWrapper.resources = resources;
+          _headerCellContentWrapper.localize = localize;
         }
 
         _typeChanged(type) {

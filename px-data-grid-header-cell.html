@@ -1,5 +1,4 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 <link rel="import" href="../px-dropdown/px-dropdown.html"/>
 <link rel="import" href="../px-icon-set/px-icon.html"/>
 
@@ -39,7 +38,7 @@
   </template>
   <script>
     {
-      class DataGridHeaderCellElement extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element) {
+      class DataGridHeaderCellElement extends Polymer.Element {
         static get is() {
           return 'px-data-grid-header-cell';
         }
@@ -72,16 +71,13 @@
               type: Array
             },
 
-            language: String,
-
-            resources: Object
-
+            localize: Function
           };
         }
 
         static get observers() {
           return [
-            '_setDropdownItems(language, resources)'
+            '_setDropdownItems(localize)'
           ];
         }
 

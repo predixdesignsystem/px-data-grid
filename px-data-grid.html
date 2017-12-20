@@ -3,6 +3,7 @@
 <link rel="import" href="../vaadin-grid/vaadin-grid-sorter.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid-tree-toggle.html">
 <link rel="import" href="../px-spinner/px-spinner.html">
+<link rel="import" href="../px-icon-set/px-icon.html"/>
 <link rel="import" href="px-data-grid-column.html">
 <link rel="import" href="px-auto-filter-field.html">
 <link rel="import" href="px-data-grid-theme.html">
@@ -16,6 +17,7 @@
 <link rel="import" href="px-data-grid-cell-content-wrapper.html">
 <link rel="import" href="px-data-grid-filter.html">
 <link rel="import" href="px-data-grid-sorter.html">
+<link rel="import" href="px-data-grid-edit-buttons.html">
 
 <link rel="import" href="css/px-data-grid-styles.html">
 
@@ -80,8 +82,13 @@
         width: 12px;
       }
 
-      :host([auto-height]) vaadin-grid {
+      vaadin-grid[auto-height] {
         height: auto;
+      }
+
+      px-icon {
+        --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted);
+        cursor: pointer;
       }
     </style>
 
@@ -120,6 +127,7 @@
                  selected-items="{{selectedItems}}"
                  multi-sort="[[multiSort]]"
                  item-id-path="[[itemIdPath]]"
+                 auto-height$="[[autoHeight]]"
                  loading="{{_loading}}">
 
       <template is="dom-if" if="[[_isSelectable(selectionMode)]]" restamp>
@@ -138,16 +146,15 @@
           name="[[column.name]]"
           path="[[column.path]]"
           hidden="[[column.hidden]]"
-          language="[[language]]"
-          resources="[[resources]]"
+          localize="[[_boundedLocalize]]"
           type="[[column.type]]"
           frozen="[[column.frozen]]"
           mapped-object="[[column]]"
           width="[[_getColumnWidth(column)]]"
           flex-grow="[[_getColumnFlexGrow(column)]]"
           on-column-change="_onColumnUpdate"
-          is-remote-data-provider="[[!_hasLocalDataProvider]]">
-
+          is-remote-data-provider="[[!_hasLocalDataProvider]]"
+          is-data-column="true">
           <template class="header">
             <px-data-grid-sorter path="[[_resolveColumnPath(column)]]">[[_resolveColumnHeader(column)]]</px-data-grid-sorter>
           </template>
@@ -157,7 +164,7 @@
             <dom-if if="[[_isGroupedByColumn(column, _groupByColumn)]]">
               <template>
                 <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
-                  <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column, _highlightEntities.*)]]" item="{{item}}" column="[[column]]">
+                  <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column, _highlightEntities.*)]]" item="{{item}}" column="[[column]]" localize="[[_boundedLocalize]]">
                   </px-data-grid-cell-content-wrapper>
                 </vaadin-grid-tree-toggle>
               </template>
@@ -165,7 +172,7 @@
 
             <dom-if if="[[!_isGroupedByColumn(column, _groupByColumn)]]">
               <template>
-                <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column, _highlightEntities.*)]]" item="{{item}}" column="[[column]]">
+                <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column, _highlightEntities.*)]]" item="{{item}}" column="[[column]]" localize="[[_boundedLocalize]]">
                 </px-data-grid-cell-content-wrapper>
               </template>
             </dom-if>
@@ -173,6 +180,23 @@
         </px-data-grid-column>
       </template>
 
+      <template is="dom-if" if="[[editable]]" restamp>
+        <px-data-grid-column
+          flex-grow="0">
+          <template>
+            <dom-if if="[[!_isAnyItemEditing(_editingItem)]]">
+              <template>
+                <px-icon icon="px-utl:edit" on-click="_setEditingItem"></px-icon>
+              </template>
+            </dom-if>
+            <dom-if if="[[_isItemEditing(item, _editingItem)]]">
+              <template>
+                <px-data-grid-edit-buttons save="[[_boundedSaveItem]]" cancel="[[_boundedCancelEdit]]"></px-data-grid-edit-buttons>
+              </template>
+            </dom-if>
+          </template>
+        </px-data-grid-column>
+      </template>
     </vaadin-grid>
 
     <px-spinner size="40" hidden$="[[_spinnerHidden]]"></px-spinner>
@@ -278,6 +302,14 @@
             },
 
             /**
+             * When `true`, user can edit data
+             */
+            editable: {
+              type: Boolean,
+              value: false
+            },
+
+            /**
              * Set to true to allow column reordering.
              */
             columnReorderingAllowed: {
@@ -321,6 +353,7 @@
              *   path: 'first',
              *   hidden: false,
              *   frozen: false,
+             *   required: false,
              *   flexGrow: 1
              * }
              * ```
@@ -377,7 +410,8 @@
                     'Hide column': 'Hide column'
                   },
                   'fr': {
-                    'Actions': 'Actions'
+                    'Actions': 'Actions',
+                    'Value is required': 'Pakollinen arvo'
                   },
                   'fi': {
                     'Actions': 'Toiminnot',
@@ -597,13 +631,33 @@
               type: String,
               value: null
             },
+
+            /**
+             * Stores item, that is currently in edit mode.
+             */
+            _editingItem: {
+              type: Object,
+              value: null,
+              observer: '_editingItemObserver'
+            },
+
+            /**
+             * Stores all renderer elements for item, that is currently in edit mode.
+             */
+            _editingRenderers: {
+              type: Array,
+              value: () => []
+            },
+
+            _boundedLocalize: Function
           };
         }
 
         static get observers() {
           return [
             '_filterEntitiesObserver(filterEntities, filterEntities.*)',
-            '_highlightsObserver(highlight, _filterHighlights, highlight.*, _filterHightlights.*)'
+            '_highlightsObserver(highlight, _filterHighlights, highlight.*, _filterHightlights.*)',
+            '_localizeChanged(localize)'
           ];
         }
 
@@ -666,6 +720,18 @@
 
           this.addEventListener('ungroup', (event) => {
             this._ungroup();
+          });
+
+          this._boundedCancelEdit = this._cancelEdit.bind(this);
+          this._boundedSaveItem = this._saveItem.bind(this);
+
+          document.addEventListener('renderer-editing-changed', (event) => {
+            const renderer = event.detail.renderer;
+            if (renderer._editing) {
+              this._editingRenderers.push(renderer);
+            } else {
+              this._editingRenderers.splice(this._editingRenderers.indexOf(renderer), 1);
+            }
           });
         }
 
@@ -1273,6 +1339,48 @@
           if (this._vaadinGrid && !rowDetails) {
             this._vaadinGrid.detailsOpenedItems = [];
           }
+        }
+
+        _editingItemObserver(editingItem, oldV) {
+          if (typeof oldV === 'undefined') {
+            return;
+          }
+
+          this.dispatchEvent(new CustomEvent('editing-item-changed', {
+            bubbles: true,
+            composed: true,
+            detail: {
+              item: editingItem
+            }
+          }));
+        }
+
+        _setEditingItem(event) {
+          this._editingItem = event.model.item;
+        }
+
+        _cancelEdit(event) {
+          this._editingRenderers.forEach((renderer) => renderer.restoreInitial());
+          this._editingItem = null;
+        }
+
+        _isItemEditing(item, editingItem) {
+          return item === editingItem;
+        }
+
+        _isAnyItemEditing(editingItem) {
+          return !!editingItem;
+        }
+
+        _saveItem() {
+          if (this._editingRenderers.every((renderer) => renderer._performValidation().valid)) {
+            this._editingRenderers.forEach((renderer) => renderer.applyValue());
+            this._editingItem = null;
+          }
+        }
+
+        _localizeChanged(localize) {
+          this._boundedLocalize = localize.bind(this);
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);

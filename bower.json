@@ -20,7 +20,8 @@
     "px-dropdown": "^4.0.0",
     "vaadin-grid": "^4.1.0",
     "vaadin-radio-button": "1.0.0-alpha8",
-    "px-spinner": "^2.2.0"
+    "px-spinner": "^2.2.0",
+    "px-tooltip": "^1.2.3"
   },
   "devDependencies": {
     "px-theme": "^3.1.4",

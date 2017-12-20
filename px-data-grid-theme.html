@@ -65,6 +65,10 @@
         border-bottom: 1px solid var(--px-data-grid-separator-color);
       }
 
+      :host([auto-height]) tr:last-child [part~="body-cell"] {
+        border-bottom: 0;
+      }
+
       [part~="row"][loading] [part~="body-cell"] ::slotted(vaadin-grid-cell-content) {
         opacity: 0;
       }

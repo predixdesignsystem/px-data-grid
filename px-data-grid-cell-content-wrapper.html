@@ -32,13 +32,16 @@
               type: String,
               observer: '_cellColorChanged'
             },
+
+            localize: Function,
+
             _valueElement: Element
           };
         }
 
         static get observers() {
           return [
-            '_render(column.renderer, column.path, column.editable, item, item.*)'
+            '_render(column.renderer, column.path, column.editable, item,  localize, item.*)'
           ];
         }
 
@@ -53,6 +56,17 @@
 
           this.addEventListener('mouseover', this._fireCellHoverEvent);
           this.addEventListener('mouseout', this._fireCellUnhoverEvent);
+          document.addEventListener('editing-item-changed', (event) => {
+            if (!this._valueElement) {
+              return;
+            }
+
+            if (event.detail.item === this.item && this.column.editable) {
+              this._valueElement._editing = true;
+            } else if (this._valueElement._editing && event.detail.item !== this.item) {
+              this._valueElement._editing = false;
+            }
+          });
         }
 
         _fireCellHoverEvent(event) {
@@ -103,7 +117,7 @@
           }
         }
 
-        _render(renderer, path, editable, item) {
+        _render(renderer, path, editable, item, localize) {
           if (path === undefined || item === undefined) {
             return;
           }
@@ -111,6 +125,7 @@
           if (!this._valueElement && renderer) {
             this._valueElement = document.createElement(renderer);
             this._valueElement.addEventListener('value-changed', this._boundValueChangedListener);
+            this._valueElement.column = this.column;
             this.shadowRoot.textContent = '';
             this.shadowRoot.appendChild(this._valueElement);
           }
@@ -123,8 +138,9 @@
           }
 
           if (renderer) {
-            this._valueElement.value = value;
+            this._valueElement.initialValue = value;
             this._valueElement.editable = editable;
+            this._valueElement.localize = localize;
           } else {
             this.shadowRoot.textContent = value;
           }

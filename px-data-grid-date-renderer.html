@@ -1,17 +1,35 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../px-tooltip/px-tooltip.html">
 <link rel="import" href="px-data-grid-renderer-mixin.html">
+<link rel="import" href="px-data-grid-theme.html">
 
 <dom-module id="px-data-grid-date-renderer">
   <template>
-    <style>
+    <style include="px-data-grid-styles">
       :host {
         display: flex;
         align-items: center;
+        flex-grow: 1;
+      }
+
+      #editingTemplate {
+        width: 100%;
+      }
+
+      input {
+        box-sizing: border-box;
       }
     </style>
     <div id="value">[[_getFormattedDate(value)]]</div>
     <div id="editingTemplate">
-      <input type="date" value="{{value::change}}">
+      <input id="editingTemplateInput" class$="{{getClasses(validationResult)}}" type="date" value="{{value::change}}">
+      <px-tooltip
+        for="editingTemplateInput"
+        orientation="top"
+        tooltip-message="[[validationResult.message]]"
+        opened="[[!validationResult.valid]]"
+        ignore-target-events>
+      </px-tooltip>
     </div>
   </template>
   <script>
@@ -33,7 +51,18 @@
         }
 
         _getFormattedDate(value) {
-          return (new Date(value)).toString();
+          return (this.value && this.value.length > 0) ? (new Date(value)).toString() : '';
+        }
+
+        validate() {
+          return {
+            valid: (!this.column.required && this.value && this.value.length == 0) || !!Date.parse(this.value),
+            message: this.localize('Date is invalid')
+          };
+        }
+
+        getClasses(result) {
+          return !result || result.valid ? 'text-input' : 'text-input validation-error';
         }
       }
 
