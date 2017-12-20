@@ -22,6 +22,9 @@
         --px-data-grid-reorder-ghost-outline-color: rgb(3, 44, 54);
         --px-data-grid-reorder-ghost-box-shadow-color: #a8a8a8;
 
+        /* should be --px-data-grid-padding-left + width of px-data-grid-toggle-details-column */
+        --px-data-grid-details-padding-left: 42px;
+
         background-color: var(--px-base-background-color);
         color: var(--px-base-text-color);
         border: 0;
@@ -147,11 +150,24 @@
         background: var(--px-data-grid-dragged-column-background-color);
       }
 
+      /* Details (Expanded) Row */
+
+      [part~="body-cell"][aria-expanded="true"] {
+        border-bottom: none;
+        background-color: var(--px-data-grid-cell-details-background-color);
+      }
+
+      /* make sure we don't add a border even if selected while expanded */
+      :host(:not([reordering])) [part~="row"][selected] [part~="body-cell"][aria-expanded="true"] {
+        border-bottom: none;
+      }
+
       [part~="details-cell"] {
         background-color: var(--px-data-grid-cell-details-background-color);
+        border-bottom: 1px solid var(--px-data-grid-separator-color);
         padding-top: var(--px-data-grid-padding-top);
         padding-bottom: var(--px-data-grid-padding-bottom);
-        padding-left: var(--px-data-grid-padding-left);
+        padding-left: var(--px-data-grid-details-padding-left);
         padding-right: var(--px-data-grid-padding-right);
         white-space: normal;
       }

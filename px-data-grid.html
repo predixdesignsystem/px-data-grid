@@ -289,6 +289,11 @@
               value: []
             },
 
+            /**
+             * Set to true to enable a togglable row details container. This container
+             * is hidden by default, but can be opened by clicking the chevron icon to left
+             * of the row.
+             */
             rowDetails: {
               type: Boolean,
               value: false,
@@ -1249,7 +1254,7 @@
         /**
          * Expand or collapse the details container for any item's row.
          */
-        showRowDetails(item, isShowing) {
+        setRowDetailsVisible(item, isShowing) {
           const index = this._vaadinGrid.detailsOpenedItems.indexOf(item);
           if (isShowing && index < 0) {
             this._vaadinGrid.push('detailsOpenedItems', item);

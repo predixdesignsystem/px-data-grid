@@ -53,4 +53,7 @@ html {
   --px-data-grid-navigation-text-color--selected          :  $select-default;
   --px-data-grid-navigation-text-color--disabled          :  rgba($grey10,0.5);
   --px-data-grid-navigation-page-number-border-color      :  $grey12;
+
+  // Row Details
+  --px-data-grid-cell-details-background-color            :  $gray14;
 }
