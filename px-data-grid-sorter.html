@@ -13,10 +13,13 @@
         cursor: pointer;
       }
 
+      :host([direction]) [part="content"] {
+        color: var(--px-data-grid-cell-text-color--sorted);
+      }
+
       [part="content"] {
         overflow: hidden;
         text-overflow: ellipsis;
-        color: var(--px-data-grid-cell-text-color--sorted);
       }
 
       [part="indicators"] {
