@@ -938,7 +938,7 @@
 
         _resolveColumnPath(column) {
           if (typeof column.path === 'undefined') {
-            console.warn(`column.path for column ${column.name} should be initialized.`);
+            console.warn(`column.path for column ${JSON.stringify(column)} should be initialized.`);
           }
           return column.path ? column.path : '';
         }
