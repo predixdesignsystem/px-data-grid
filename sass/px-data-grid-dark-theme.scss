@@ -19,8 +19,8 @@ html {
   --px-data-grid-separator-color                          :  $gray15;
   --px-data-grid-header-text-color                        :  inherit;
   --px-data-grid-header-background-color                  :  $gray16;
-  --px-data-grid-background-color-striped--odd            :  #31434D;
-  --px-data-grid-background-color-striped--selected       :  $gray15;
+  --px-data-grid-background-color-striped--odd            :  $gray15;
+  --px-data-grid-background-color-striped--selected       :  $gray13;
   --px-data-grid-cell-border-validation--failed           :  $status-red3;
   --px-data-grid-cell-border-color--edit                  :  $primary-default;
   --px-data-grid-cell-border-color--selected              :  rgba($gray10, 0.2);
