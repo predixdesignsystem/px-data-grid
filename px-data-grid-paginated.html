@@ -49,13 +49,15 @@
       page-size="[[pageSize]]"
       current-page="[[page]]"
       number-of-pages="[[_calcNumPages(size, pageSize)]]"
-      hide-page-list="[[_hidePageList(autoHidePageList, size, pageSize)]]">
+      hide-page-list="[[_hidePageList(autoHidePageList, size, pageSize)]]"
+      language="[[language]]"
+      resources="[[resources]]">
     </px-data-grid-navigation>
 
   </template>
   <script>
     {
-      class DataGridPaginatedElement extends Polymer.Element {
+      class DataGridPaginatedElement extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element) {
 
         static get is() {
           return 'px-data-grid-paginated';
@@ -239,7 +241,22 @@
              */
             resources: {
               type: Object,
-              value: undefined
+              value: () => {
+                return {
+                  'en': {
+                    'Rows per page': 'Rows per page',
+                    'of {total}': 'of {total}'
+                  },
+                  'fr': {
+                    'Rows per page': 'Lignes par page',
+                    'of {total}': 'sur {total}'
+                  },
+                  'fi': {
+                    'Rows per page': 'Riviä / sivu',
+                    'of {total}': '/ {total}'
+                  }
+                };
+              }
             },
 
             /**

@@ -94,7 +94,7 @@
 
     <!-- page size select -->
     <div class="page-size-select">
-      Rows per page
+      [[localize('Rows per page')]]
       <px-dropdown
         display-value="[[_numToStr(pageSize)]]"
         items="[[_numArrayToStrArray(selectablePageSizes)]]"
@@ -110,7 +110,7 @@
           <div class="row-counts">
             <span class="current-rows">
               [[_getItemsRangeStr(currentPage, pageSize, totalItemCount)]]
-            </span> of [[totalItemCount]]
+            </span> [[_getOfStr(totalItemCount)]]
           </div>
 
           <!-- page selection list -->
@@ -166,7 +166,7 @@
        * @memberof Predix
        * @extends Polymer.Element
        */
-      class DataGridNavigationElement extends Polymer.Element {
+      class DataGridNavigationElement extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element) {
         static get is() {
           return 'px-data-grid-navigation';
         }
@@ -330,6 +330,10 @@
           let max = currentPage * pageSize;
           max = (totalItemCount > 0 && max > totalItemCount) ? totalItemCount : max;
           return min + ' - ' + max;
+        }
+
+        _getOfStr(totalItemCount) {
+          return this.localize('of {total}', 'total', totalItemCount);
         }
 
         /**
