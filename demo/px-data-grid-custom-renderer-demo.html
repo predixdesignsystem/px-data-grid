@@ -1,0 +1,251 @@
+<!-- Common demo imports -->
+<link rel="import" href="../../px-demo/px-demo-header.html" />
+<link rel="import" href="../../px-demo/px-demo-api-viewer.html" />
+<link rel="import" href="../../px-demo/px-demo-footer.html" />
+<link rel="import" href="../../px-demo/px-demo-configs.html" />
+<link rel="import" href="../../px-demo/px-demo-props.html" />
+<link rel="import" href="../../px-demo/px-demo-interactive.html" />
+<link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
+<link rel="import" href="../../px-demo/px-demo-code-editor.html" />
+
+<!-- Imports for this component -->
+<link rel="import" href="../../px-demo/css/px-demo-styles.html" />
+<link rel="import" href="../px-data-grid.html" />
+
+<link rel="import" href="../px-data-grid-renderer-mixin.html">
+<link rel="import" href="../px-icon-set/px-icon.html">
+
+<dom-module id="px-data-grid-icon-renderer">
+  <template>
+    <style>
+      :host {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+      }
+    </style>
+
+    <px-icon icon="[[value]]"></px-icon>
+  </template>
+  <script>
+    {
+      class DataGridIconRenderer extends Predix.DataGridRendererMixin(Polymer.Element) {
+        static get is() {
+          return 'px-data-grid-icon-renderer';
+        }
+      }
+
+      customElements.define(DataGridIconRenderer.is, DataGridIconRenderer);
+
+      /**
+       * @namespace Predix
+       */
+      window.Predix = window.Predix || {};
+      Predix.DataGridIconRenderer = DataGridIconRenderer;
+    }
+  </script>
+</dom-module>
+
+<!-- Demo DOM module -->
+<dom-module id="px-data-grid-custom-renderer-demo">
+  <template>
+    <custom-style>
+      <style include="px-demo-styles" is="custom-style"></style>
+    </custom-style>
+
+    <!-- Header -->
+    <px-demo-header
+        module-name='Custom renderer'
+        description="px-data-grid supports custom data renderer, that can be passed to a column. Example can be found in source of this demo and in the sample renderers, e.g. px-data-grid-string-renderer."
+        mobile desktop tablet>
+    </px-demo-header>
+
+    <!-- Interactive -->
+    <px-demo-interactive>
+      <!-- Configs -->
+      <px-demo-configs slot="px-demo-configs" configs="[[configs]]" props="{{props}}" chosen-config="{{chosenConfig}}"></px-demo-configs>
+
+      <!-- Props -->
+      <px-demo-props slot="px-demo-props" props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
+
+      <!-- Code Editor -->
+      <px-demo-code-editor slot="px-demo-code-editor" props="{{props}}" config="[[chosenConfig]]"></px-demo-code-editor>
+
+      <!-- Component ---------------------------------------------------------->
+      <px-demo-component slot="px-demo-component">
+        <px-data-grid
+            table-data="{{props.tableData.value}}"
+            striped="{{props.striped.value}}"
+            selection-mode="{{props.selectionMode.value}}"
+            multi-selected="{{props.multiSelect.value}}"
+            columns="{{props.columns.value}}"
+            auto-height="{{props.autoHeight.value}}"
+            column-reordering-allowed="{{props.columnReorderingAllowed.value}}">
+        </px-data-grid>
+      </px-demo-component>
+      <!-- END Component ------------------------------------------------------>
+
+      <px-demo-component-snippet
+          slot="px-demo-component-snippet"
+          element-properties="{{props}}"
+          element-name="px-data-grid"
+          links-includes="[[linksIncludes]]">
+      </px-demo-component-snippet>
+    </px-demo-interactive>
+
+    <!-- API Viewer -->
+    <px-demo-api-viewer source="px-data-grid" api-source-file-path="px-data-grid-api.json"></px-demo-api-viewer>
+
+    <!-- Footer -->
+    <px-demo-footer></px-demo-footer>
+
+  </template>
+
+</dom-module>
+<script>
+  Polymer({
+    is: 'px-data-grid-custom-renderer-demo',
+    properties: {
+      /**
+       * Note: The actual data/values for `props` are placed in `this.demoProps`
+       * to create a static reference that Polymer shouldn't overwrite.
+       *
+       * On object containing all the properties the user can configure for this
+       * demo. Usually a pretty similar copy of the component's `properties` block
+       * with some additional sugar added to describe what kind of input the
+       * user will be shown and how that input should be configured.
+       *
+       * Note that `value` for each property is the default that will be set
+       * unless a config from `configs` is applied by default.
+       *
+       * @property props
+       * @type {Object}
+       */
+      props: {
+        type: Object,
+        value: function() {
+          return this.demoProps;
+        }
+      },
+
+      /**
+       * An array of pre-configured `props` that can be used to provide the user
+       * with a set of common examples. These configs will be made available
+       * as a set of tabs the user can click that will automatically change
+       * the `props` to specific values.
+       *
+       * @example
+       *
+       * Each config is an object. Its keys should be the names of the configurable
+       * properties defined in your `demoProps` above. Each key's value should
+       * be the new prop value for the configuration. You can also include these
+       * optional keys:
+       *
+       * - `configName` - a String value that will be used for the title of the tab
+       * - `configReset` - a Boolean, if `true` resets all props. Defaults to `false`.
+       *
+       * @property configs
+       * @type {Array}
+       */
+
+      configs: {
+        type: Array,
+        value: function() {
+          return [
+            {
+              configName: 'Default',
+              configReset: true,
+              remoteDataProvider: null
+            }
+          ];
+        }
+      }
+    },
+
+    /**
+     * A reference for `this.props`. Read the documentation there.
+     */
+    demoProps: {
+      tableData: {
+        type: Object,
+        defaultValue: [
+          {
+            first: 'Elizabeth',
+            last: 'Wong',
+            email: 'sika@iknulber.cl',
+            icon: 'px-utl:map'
+          },
+          {
+            first: 'Jeffrey',
+            last: 'Hamilton',
+            email: 'cofok@rac.be',
+            icon: 'px-utl:calendar'
+          },
+          {
+            first: 'Alma',
+            last: 'Martin',
+            email: 'dotta@behtam.la',
+            icon: 'px-utl:flag'
+          },
+          {
+            first: 'Carl',
+            last: 'Saunders',
+            email: 'seh@bibapu.gy',
+            icon: 'px-utl:help'
+          },
+          {
+            first: 'Willie',
+            last: 'Dennis',
+            email: 'izko@dahokwej.ci',
+            icon: 'px-utl:tag'
+          }
+        ],
+        inputType: 'code:JSON'
+      },
+      columnReorderingAllowed: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+      striped: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+      autoHeight: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+      selectionMode: {
+        type: String,
+        value: 'none',
+        inputType: 'dropdown',
+        inputChoices: ['none', 'single', 'multi']
+      },
+      columns: {
+        type: Array,
+        defaultValue: [
+          {
+            name: 'First Name',
+            path: 'first',
+          },
+          {
+            name: 'Last Name',
+            path: 'last'
+          },
+          {
+            name: 'Email',
+            path: 'email'
+          },
+          {
+            name: 'Icon',
+            path: 'icon',
+            renderer: 'px-data-grid-icon-renderer'
+          }
+        ],
+        inputType: 'code:JSON'
+      }
+    }
+  });
+</script>
