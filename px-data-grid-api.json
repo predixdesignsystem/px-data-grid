@@ -8,11 +8,11 @@
       "sourceRange": {
         "file": "px-data-grid.html",
         "start": {
-          "line": 1390,
+          "line": 1441,
           "column": 6
         },
         "end": {
-          "line": 1390,
+          "line": 1441,
           "column": 42
         }
       },
@@ -1227,7 +1227,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Vaadin.GridColumnElement",
           "name": "Predix.DataGridColumnElement",
           "attributes": [
             {
@@ -5073,7 +5073,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.AutoFilterFieldElement",
           "attributes": [
             {
@@ -6366,7 +6366,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Vaadin.GridColumnElement",
           "name": "Predix.DataGridSelectionColumnElement",
           "attributes": [
             {
@@ -7476,7 +7476,7 @@
                   "column": 6
                 },
                 "end": {
-                  "line": 103,
+                  "line": 104,
                   "column": 7
                 }
               },
@@ -7493,11 +7493,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 105,
+                  "line": 106,
                   "column": 6
                 },
                 "end": {
-                  "line": 107,
+                  "line": 108,
                   "column": 7
                 }
               },
@@ -7518,12 +7518,12 @@
               "column": 4
             },
             "end": {
-              "line": 109,
+              "line": 110,
               "column": 5
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Vaadin.GridColumnElement",
           "name": "Predix.DataGridToggleDetailsColumnElement",
           "attributes": [
             {
@@ -11485,7 +11485,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridStringRenderer",
           "attributes": [
             {
@@ -15456,7 +15456,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridDateRenderer",
           "attributes": [
             {
@@ -19406,7 +19406,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridNumberRenderer",
           "attributes": [
             {
@@ -23296,7 +23296,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridCellContentWrapperElement",
           "attributes": [
             {
@@ -27232,7 +27232,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFilterEntityElement",
           "attributes": [
             {
@@ -30920,7 +30920,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFilterElement",
           "attributes": [
             {
@@ -35161,7 +35161,7 @@
         }
       },
       "privacy": "public",
-      "superclass": "HTMLElement",
+      "superclass": "Polymer.Element",
       "name": "DataGridHeaderCellElement",
       "attributes": [
         {
@@ -35370,7 +35370,7 @@
               "column": 8
             },
             "end": {
-              "line": 120,
+              "line": 121,
               "column": 9
             }
           },
@@ -35393,11 +35393,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 122,
+              "line": 123,
               "column": 8
             },
             "end": {
-              "line": 124,
+              "line": 125,
               "column": 9
             }
           },
@@ -35414,11 +35414,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 126,
+              "line": 127,
               "column": 8
             },
             "end": {
-              "line": 134,
+              "line": 135,
               "column": 9
             }
           },
@@ -35435,11 +35435,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 136,
+              "line": 137,
               "column": 8
             },
             "end": {
-              "line": 138,
+              "line": 139,
               "column": 9
             }
           },
@@ -35452,11 +35452,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 140,
+              "line": 141,
               "column": 8
             },
             "end": {
-              "line": 155,
+              "line": 156,
               "column": 9
             }
           },
@@ -35473,11 +35473,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 157,
+              "line": 158,
               "column": 8
             },
             "end": {
-              "line": 171,
+              "line": 172,
               "column": 9
             }
           },
@@ -35501,7 +35501,7 @@
           "column": 6
         },
         "end": {
-          "line": 172,
+          "line": 173,
           "column": 7
         }
       },
@@ -39184,7 +39184,7 @@
         }
       },
       "privacy": "public",
-      "superclass": "HTMLElement",
+      "superclass": "Polymer.Element",
       "name": "DataGridEditButtonsElement",
       "attributes": [
         {
@@ -39376,7 +39376,7 @@
           "defaultValue": "false"
         },
         {
-          "name": "seletionMode",
+          "name": "selectionMode",
           "type": "string",
           "description": "Current selection mode of grid. Accepts values 'none', 'single' and 'multi'.",
           "privacy": "public",
@@ -40154,7 +40154,7 @@
               "column": 8
             },
             "end": {
-              "line": 735,
+              "line": 740,
               "column": 9
             }
           },
@@ -40167,11 +40167,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 737,
+              "line": 742,
               "column": 8
             },
             "end": {
-              "line": 741,
+              "line": 746,
               "column": 9
             }
           },
@@ -40184,11 +40184,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 743,
+              "line": 748,
               "column": 8
             },
             "end": {
-              "line": 749,
+              "line": 754,
               "column": 9
             }
           },
@@ -40205,11 +40205,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 754,
+              "line": 759,
               "column": 8
             },
             "end": {
-              "line": 761,
+              "line": 766,
               "column": 9
             }
           },
@@ -40226,11 +40226,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 763,
+              "line": 768,
               "column": 8
             },
             "end": {
-              "line": 769,
+              "line": 774,
               "column": 9
             }
           },
@@ -40250,11 +40250,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 771,
+              "line": 776,
               "column": 8
             },
             "end": {
-              "line": 773,
+              "line": 778,
               "column": 9
             }
           },
@@ -40271,11 +40271,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 775,
+              "line": 780,
               "column": 8
             },
             "end": {
-              "line": 777,
+              "line": 782,
               "column": 9
             }
           },
@@ -40292,11 +40292,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 779,
+              "line": 784,
               "column": 8
             },
             "end": {
-              "line": 819,
+              "line": 824,
               "column": 9
             }
           },
@@ -40316,11 +40316,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 821,
+              "line": 826,
               "column": 8
             },
             "end": {
-              "line": 826,
+              "line": 831,
               "column": 9
             }
           },
@@ -40340,11 +40340,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 828,
+              "line": 833,
               "column": 8
             },
             "end": {
-              "line": 835,
+              "line": 840,
               "column": 9
             }
           },
@@ -40364,11 +40364,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 837,
+              "line": 842,
               "column": 8
             },
             "end": {
-              "line": 847,
+              "line": 852,
               "column": 9
             }
           },
@@ -40385,11 +40385,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 849,
+              "line": 854,
               "column": 8
             },
             "end": {
-              "line": 879,
+              "line": 884,
               "column": 9
             }
           },
@@ -40409,11 +40409,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 881,
+              "line": 886,
               "column": 8
             },
             "end": {
-              "line": 906,
+              "line": 911,
               "column": 9
             }
           },
@@ -40433,11 +40433,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 911,
+              "line": 916,
               "column": 8
             },
             "end": {
-              "line": 921,
+              "line": 926,
               "column": 9
             }
           },
@@ -40450,11 +40450,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 923,
+              "line": 928,
               "column": 8
             },
             "end": {
-              "line": 931,
+              "line": 936,
               "column": 9
             }
           },
@@ -40471,11 +40471,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 933,
+              "line": 938,
               "column": 8
             },
             "end": {
-              "line": 938,
+              "line": 943,
               "column": 9
             }
           },
@@ -40492,11 +40492,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 940,
+              "line": 945,
               "column": 8
             },
             "end": {
-              "line": 955,
+              "line": 960,
               "column": 9
             }
           },
@@ -40513,11 +40513,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 960,
+              "line": 965,
               "column": 8
             },
             "end": {
-              "line": 983,
+              "line": 988,
               "column": 9
             }
           },
@@ -40534,11 +40534,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 988,
+              "line": 993,
               "column": 8
             },
             "end": {
-              "line": 999,
+              "line": 1004,
               "column": 9
             }
           },
@@ -40551,11 +40551,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1004,
+              "line": 1009,
               "column": 8
             },
             "end": {
-              "line": 1057,
+              "line": 1062,
               "column": 9
             }
           },
@@ -40568,11 +40568,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1059,
+              "line": 1064,
               "column": 8
             },
             "end": {
-              "line": 1061,
+              "line": 1066,
               "column": 9
             }
           },
@@ -40589,11 +40589,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1063,
+              "line": 1068,
               "column": 8
             },
             "end": {
-              "line": 1067,
+              "line": 1072,
               "column": 9
             }
           },
@@ -40610,11 +40610,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1069,
+              "line": 1074,
               "column": 8
             },
             "end": {
-              "line": 1077,
+              "line": 1082,
               "column": 9
             }
           },
@@ -40631,11 +40631,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1082,
+              "line": 1087,
               "column": 8
             },
             "end": {
-              "line": 1084,
+              "line": 1089,
               "column": 9
             }
           },
@@ -40655,11 +40655,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1089,
+              "line": 1094,
               "column": 8
             },
             "end": {
-              "line": 1091,
+              "line": 1096,
               "column": 9
             }
           },
@@ -40676,11 +40676,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1098,
+              "line": 1103,
               "column": 8
             },
             "end": {
-              "line": 1116,
+              "line": 1121,
               "column": 9
             }
           },
@@ -40700,11 +40700,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1118,
+              "line": 1123,
               "column": 8
             },
             "end": {
-              "line": 1120,
+              "line": 1125,
               "column": 9
             }
           },
@@ -40721,11 +40721,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1122,
+              "line": 1127,
               "column": 8
             },
             "end": {
-              "line": 1144,
+              "line": 1149,
               "column": 9
             }
           },
@@ -40745,11 +40745,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1146,
+              "line": 1151,
               "column": 8
             },
             "end": {
-              "line": 1158,
+              "line": 1163,
               "column": 9
             }
           },
@@ -40769,11 +40769,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1160,
+              "line": 1165,
               "column": 8
             },
             "end": {
-              "line": 1172,
+              "line": 1177,
               "column": 9
             }
           },
@@ -40793,11 +40793,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1174,
+              "line": 1179,
               "column": 8
             },
             "end": {
-              "line": 1195,
+              "line": 1200,
               "column": 9
             }
           },
@@ -40817,11 +40817,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1200,
+              "line": 1205,
               "column": 8
             },
             "end": {
-              "line": 1214,
+              "line": 1219,
               "column": 9
             }
           },
@@ -40838,11 +40838,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1216,
+              "line": 1221,
               "column": 8
             },
             "end": {
-              "line": 1218,
+              "line": 1223,
               "column": 9
             }
           },
@@ -40862,11 +40862,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1223,
+              "line": 1228,
               "column": 8
             },
             "end": {
-              "line": 1234,
+              "line": 1239,
               "column": 9
             }
           },
@@ -40879,11 +40879,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1239,
+              "line": 1244,
               "column": 8
             },
             "end": {
-              "line": 1241,
+              "line": 1246,
               "column": 9
             }
           },
@@ -40896,11 +40896,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1246,
+              "line": 1251,
               "column": 8
             },
             "end": {
-              "line": 1248,
+              "line": 1253,
               "column": 9
             }
           },
@@ -40913,11 +40913,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1250,
+              "line": 1255,
               "column": 8
             },
             "end": {
-              "line": 1265,
+              "line": 1277,
               "column": 9
             }
           },
@@ -40934,11 +40934,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1267,
+              "line": 1279,
               "column": 8
             },
             "end": {
-              "line": 1269,
+              "line": 1281,
               "column": 9
             }
           },
@@ -40958,11 +40958,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1271,
+              "line": 1283,
               "column": 8
             },
             "end": {
-              "line": 1315,
+              "line": 1327,
               "column": 9
             }
           },
@@ -40979,28 +40979,7 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1317,
-              "column": 8
-            },
-            "end": {
-              "line": 1323,
-              "column": 9
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "autoHeight"
-            }
-          ]
-        },
-        {
-          "name": "setRowDetailsVisible",
-          "description": "Expand or collapse the details container for any item's row.",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 1328,
+              "line": 1329,
               "column": 8
             },
             "end": {
@@ -41011,10 +40990,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "item"
-            },
-            {
-              "name": "isShowing"
+              "name": "autoHeight"
             }
           ]
         },
@@ -41187,6 +41163,48 @@
               "name": "localize"
             }
           ]
+        },
+        {
+          "name": "_scrollListener",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1385,
+              "column": 8
+            },
+            "end": {
+              "line": 1391,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "name": "_onPxSorterChanged",
+          "description": "Overridden version of _onSorterChanged in vaadin-grid-sort-mixin. Is mapped to custom event\npx-sorter-changed emitted by px-data-grid-sorter. Only difference is to use push, not\nunshift, when adding sort rule to _sorters. If errors in this method, update to match with\ncurrent version in vaadin-grid-sort-mixin, and replace unshift with push.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1399,
+              "column": 8
+            },
+            "end": {
+              "line": 1433,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ]
         }
       ],
       "staticMethods": [],
@@ -41198,7 +41216,7 @@
           "column": 6
         },
         "end": {
-          "line": 1384,
+          "line": 1435,
           "column": 7
         }
       },
@@ -41319,7 +41337,7 @@
           "type": "boolean"
         },
         {
-          "name": "seletion-mode",
+          "name": "selection-mode",
           "description": "Current selection mode of grid. Accepts values 'none', 'single' and 'multi'.",
           "sourceRange": {
             "start": {

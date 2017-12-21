@@ -116,7 +116,8 @@
           }
 
           if (isConnected) {
-            this.dispatchEvent(new CustomEvent('sorter-changed', {bubbles: true, composed: true}));
+            // Fire custom event that is handled differently than default sorter-changed
+            this.dispatchEvent(new CustomEvent('px-sorter-changed', {bubbles: true, composed: true}));
           }
         }
 

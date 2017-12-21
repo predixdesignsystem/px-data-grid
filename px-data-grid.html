@@ -698,6 +698,7 @@
           super.ready();
           this._vaadinGrid = this.shadowRoot.querySelector('vaadin-grid');
           this._vaadinGrid._pxDataGrid = this;
+          this._vaadinGrid.addEventListener('px-sorter-changed', this._onPxSorterChanged);
 
           // Attach scroll listener for styling
           this._boundedScrollListener = this._scrollListener.bind(this);
@@ -1389,6 +1390,49 @@
             this._vaadinGrid.removeAttribute('horizontal-offset');
           }
         }
+
+        /**
+         * Overridden version of _onSorterChanged in vaadin-grid-sort-mixin. Is mapped to custom event
+         * px-sorter-changed emitted by px-data-grid-sorter. Only difference is to use push, not
+         * unshift, when adding sort rule to _sorters. If errors in this method, update to match with
+         * current version in vaadin-grid-sort-mixin, and replace unshift with push.
+         */
+        _onPxSorterChanged(e) {
+          const sorter = e.target;
+
+          this._removeArrayItem(this._sorters, sorter);
+          sorter._order = null;
+
+          if (this.multiSort) {
+            if (sorter.direction) {
+              this._sorters.push(sorter);
+            }
+
+            this._sorters.forEach((sorter, index) => sorter._order = this._sorters.length > 1 ? index : null, this);
+          } else {
+            this._sorters.forEach(sorter => {
+              sorter._order = null;
+              sorter.direction = null;
+            });
+
+            if (sorter.direction) {
+              this._sorters = [sorter];
+            }
+          }
+
+          e.stopPropagation();
+
+          if (this.dataProvider &&
+            // No need to clear cache if sorters didn't change
+            JSON.stringify(this._previousSorters) !== JSON.stringify(this._mapSorters())) {
+            this.clearCache();
+          }
+
+          this._a11yUpdateSorters();
+
+          this._previousSorters = this._mapSorters();
+        }
+
       }
       customElements.define(DataGridElement.is, DataGridElement);
 
