@@ -11,7 +11,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "^2.0.0",
+    "polymer": "^2.4.0",
     "app-localize-behavior": "^2.0.0",
     "iron-a11y-keys-behavior": "^2.0.0",
     "iron-a11y-announcer": "^2.0.0",
