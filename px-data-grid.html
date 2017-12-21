@@ -691,6 +691,13 @@
             templatizer.dataHost = this._vaadinGrid.dataHost;
             templatizer.template = this._vaadinGrid._rowDetailsTemplate;
             this._vaadinGrid._rowDetailsTemplate.templatizer = templatizer;
+
+            Array.from(this._vaadinGrid.$.items.children).forEach(row => {
+              this._vaadinGrid._updateRow(
+                row,
+                this._vaadinGrid._columnTree[this._vaadinGrid._columnTree.length - 1]
+              );
+            });
           }
         }
 
