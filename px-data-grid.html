@@ -360,7 +360,7 @@
              */
             columns: {
               type: Array,
-              value: []
+              value: () => []
             },
 
             /**
@@ -1438,6 +1438,54 @@
           this._previousSorters = this._mapSorters();
         }
 
+        _getVisibleColumns() {
+          return this._vaadinGrid
+            ._columnTree[this._vaadinGrid._columnTree.length - 1]
+            .slice(0)
+            .sort((a, b) => a._order - b._order)
+            .map((col) => col.mappedObject)
+            .filter((col) => !col.hidden);
+        }
+
+        /**
+         * Returns currently visible data if `true` parameter is passed or all cached data if no parameter is passed.
+         */
+        getData(visibleOnly) {
+          let items = [];
+
+          if (visibleOnly) {
+            items = Array.from(this._vaadinGrid.querySelectorAll('px-data-grid-cell-content-wrapper'));
+
+            const gridRect = this._vaadinGrid.getBoundingClientRect();
+            const headerRect = this._vaadinGrid
+              .querySelector('px-data-grid-header-cell')
+              .getBoundingClientRect();
+
+            items = items.filter((wrapper) => {
+              const wrapperRect = wrapper.getBoundingClientRect();
+              return wrapperRect.top < gridRect.bottom && wrapperRect.bottom > headerRect.bottom;
+            }).map((wrapper) => {
+              return wrapper.item;
+            }).filter((v, i, a) => {
+              return a.indexOf(v) === i && v;
+            });
+          } else {
+            const cachedItems = this._vaadinGrid._cache.items;
+            Object.keys(cachedItems).forEach((key) => {
+              items.push(cachedItems[key]);
+            });
+          }
+
+          return items.map((item) => {
+            const sortedObject = {};
+
+            this._getVisibleColumns().forEach((col) => {
+              sortedObject[col.path] = item[col.path];
+            });
+
+            return sortedObject;
+          });
+        }
       }
       customElements.define(DataGridElement.is, DataGridElement);
 

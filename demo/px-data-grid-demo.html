@@ -120,8 +120,30 @@
       }
     },
 
+    exportToCsv: function() {
+      const grid = this.shadowRoot.querySelector('px-data-grid');
+      const data = grid.getData();
+      const columns = grid._getVisibleColumns();
+      let csvContent = 'data:text/csv;charset=utf-8,';
+
+      csvContent += columns.map((column) => grid._resolveColumnHeader(column)).join(',') + '\r\n';
+      data.forEach((item) => {
+        csvContent += Object.keys(item).map((key) => item[key]).join(',') + '\r\n';
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'table_data.csv');
+      document.body.appendChild(link);
+
+      link.click();
+    },
+
     tableActionListener: function(evt) {
-      window.alert('Table Action ' + evt.detail.id);
+      if (evt.detail.id === 'CSV') {
+        this.exportToCsv();
+      }
     },
 
     properties: {
