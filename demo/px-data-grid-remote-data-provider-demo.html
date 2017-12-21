@@ -151,7 +151,7 @@
         value: (params, callback) => {
           const xhr = new XMLHttpRequest();
           xhr.onload = () => {
-            const size = parseInt(xhr.getAllResponseHeaders().match(/x-total-count: (\d+)/)[1]);
+            const size = parseInt(xhr.getAllResponseHeaders().match(/x-total-count: (\d+)/i)[1]);
             callback(JSON.parse(xhr.responseText), size);
           };
 
