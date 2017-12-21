@@ -277,7 +277,7 @@
             /**
              * Current selection mode of grid. Accepts values 'none', 'single' and 'multi'.
              */
-            seletionMode: {
+            selectionMode: {
               type: String,
               value: 'none',
               observer: '_selectionModeChanged'
@@ -1256,6 +1256,11 @@
 
           const selectable = mode != 'none';
 
+          // clear selections if mode is none
+          if (!selectable && this._vaadinGrid) {
+            this._vaadinGrid.selectedItems = [];
+          }
+
           if (selectable) {
             setTimeout(() => {
               if (this.selectable) {
@@ -1263,6 +1268,8 @@
               }
             });
           }
+
+          Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._vaadinGrid.notifyResize());
         }
 
         _highlightsObserver(highlight, filterHighlights) {
@@ -1321,18 +1328,6 @@
           }
 
           Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._vaadinGrid.notifyResize());
-        }
-
-        /**
-         * Expand or collapse the details container for any item's row.
-         */
-        setRowDetailsVisible(item, isShowing) {
-          const index = this._vaadinGrid.detailsOpenedItems.indexOf(item);
-          if (isShowing && index < 0) {
-            this._vaadinGrid.push('detailsOpenedItems', item);
-          } else if (index >= 0) {
-            this._vaadinGrid.splice('detailsOpenedItems', index, 1);
-          }
         }
 
         _onRowDetailsChange(rowDetails) {
