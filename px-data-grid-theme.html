@@ -88,8 +88,13 @@
 
       /* Frozen columns */
 
-      [part~="cell"][last-frozen] {
+      :host([horizontal-offset]) [part~="cell"][last-frozen] {
         border-right: 1px solid var(--px-data-grid-separator-color);
+      }
+
+      [part~="cell"][last-frozen] {
+        border-right: 0px solid transparent;
+        transition: border 0.3s ease-out;
       }
 
       /* Keyboard navigation */

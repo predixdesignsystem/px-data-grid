@@ -699,6 +699,10 @@
           this._vaadinGrid = this.shadowRoot.querySelector('vaadin-grid');
           this._vaadinGrid._pxDataGrid = this;
 
+          // Attach scroll listener for styling
+          this._boundedScrollListener = this._scrollListener.bind(this);
+          this._vaadinGrid.$.outerscroller.addEventListener('scroll', this._boundedScrollListener);
+
           // Override selectItem method to allow easy single select handling
           this._vaadinGrid.selectItem = (item) => this._handleSelectItem(item);
 
@@ -1376,6 +1380,14 @@
 
         _localizeChanged(localize) {
           this._boundedLocalize = localize.bind(this);
+        }
+
+        _scrollListener(e) {
+          if (e.target.scrollLeft != 0) {
+            this._vaadinGrid.setAttribute('horizontal-offset', 'true');
+          } else {
+            this._vaadinGrid.removeAttribute('horizontal-offset');
+          }
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);
