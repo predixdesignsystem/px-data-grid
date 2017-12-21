@@ -1261,8 +1261,13 @@
 
           const selectable = mode != 'none';
 
-          // clear selections if mode is none
-          if (!selectable && this._vaadinGrid) {
+          // clear selections if mode is 'none'
+          if (mode === 'none' && this._vaadinGrid) {
+            this._vaadinGrid.selectedItems = [];
+          }
+
+          // clear selections if mode is 'single' and there are more than 1 selected items
+          if (mode === 'single' && this._vaadinGrid && this._vaadinGrid.selectedItems.length > 1) {
             this._vaadinGrid.selectedItems = [];
           }
 
