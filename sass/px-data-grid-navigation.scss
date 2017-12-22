@@ -1,0 +1,83 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  color: var(--px-data-grid-navigation-text-color, #000);
+  background-color: var(--px-data-grid-navigation-background-color, transparent);
+  padding: 5px 0;
+}
+
+.right {
+  display: inline-block;
+  padding-right: var(--px-data-grid-padding-right, 12px);
+}
+
+.page-size-select {
+  display: inline-block;
+  padding-left: var(--px-data-grid-padding-left, 12px);
+  flex-grow: 1;
+}
+
+.page-size-select px-dropdown {
+  --px-btn-min-width: 30px;
+  display: inline-block;
+  margin-left: 2px;
+}
+
+.row-counts {
+  display: inline-block;
+  margin-right: 20px;
+  color: var(--px-data-grid-navigation-text-color--dark, #000);
+}
+
+.row-counts .current-rows {
+  font-weight: bold;
+}
+
+.page-selection {
+  display: inline-block;
+}
+
+.page-selection .arrow:disabled {
+  color: var(--px-data-grid-navigation-text-color--disabled, #CCC);
+  cursor: default;
+}
+
+.page-selection .arrow:focus {
+  outline: none;
+}
+
+.page-selection .page-list {
+  display: inline-block;
+}
+
+.page-selection .page-button {
+  color: var(--px-data-grid-navigation-text-color, #000);
+  display: inline-block;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  margin-right: 6px;
+  height: 20px;
+  width: 20px;
+  line-height: 18px;
+  text-align: center;
+}
+
+.page-selection .page-button:last-child {
+  margin-right: 0;
+}
+
+.page-selection .page-button.selected {
+  cursor: auto;
+  height: 18px;
+  width: 18px;
+  border: solid 1px var(--px-data-grid-navigation-page-number-border-color, #CCC);
+  border-radius: 0;
+  color: var(--px-data-grid-navigation-text-color--selected, #000);
+}
+
+.page-selection .page-button px-icon {
+  --px-icon-default-width: 20px;
+  --px-icon-default-height: 20px;
+}
