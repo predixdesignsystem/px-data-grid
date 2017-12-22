@@ -4,18 +4,6 @@ document.addEventListener('WebComponentsReady', function() {
 
 function runTests() {
 
-  function generateTableData(numRows) {
-    const data = [];
-    for (let i = 0; i < numRows; i++) {
-      data.push({
-        first: 'first-' + i,
-        last: 'last-' + i,
-        email: 'email-' + i + '@stuff.com'
-      });
-    }
-    return data;
-  }
-
   describe('px-data-grid-paginated component tests', () => {
 
     let

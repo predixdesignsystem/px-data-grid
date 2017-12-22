@@ -21,6 +21,18 @@
     'email': 'izko@dahokwej.ci'
   }];
 
+  function generateTableData(numRows) {
+    const data = [];
+    for (let i = 0; i < numRows; i++) {
+      data.push({
+        first: 'first-' + i,
+        last: 'last-' + i,
+        email: 'email-' + i + '@stuff.com'
+      });
+    }
+    return data;
+  }
+
   function getRows(grid) {
     return grid._vaadinGrid.$.items.querySelectorAll('tr');
   }
