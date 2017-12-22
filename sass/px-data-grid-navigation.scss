@@ -1,7 +1,7 @@
 :host {
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: flex-start;
   color: var(--px-data-grid-navigation-text-color, #000);
   background-color: var(--px-data-grid-navigation-background-color, transparent);
   padding: 5px 0;
@@ -13,7 +13,9 @@
 }
 
 .page-size-select {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   padding-left: var(--px-data-grid-padding-left, 12px);
   flex-grow: 1;
 }
