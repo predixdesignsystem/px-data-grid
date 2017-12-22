@@ -8,31 +8,18 @@
  * under which the software has been supplied.
  */
 
-// Settings
-
 // Generic
 @import "px-normalize-design/_generic.normalize.scss";
-@import "px-helpers-design/_generic.helpers.scss";
-
-// Base
-@import "px-flexbox-design/_base.flexbox.scss";
-@import "px-viewport-design/_base.viewport.scss";
 
 $inuit-enable-input--tiny : true;
 $inuit-enable-validation-states : true;
 @import "px-forms-design/_base.forms.scss";
 
-@import "px-layout-design/_objects.layout.scss";
-
 $fa-font-path : "../../font-awesome/fonts";
 $inuit-enable-btn--bare           : true;
-@import "px-button-group-design/_objects.button-group.scss";
-@import "px-button-group-design/_objects.button-group.scss";
 
 // Trumps
 $inuit-enable-paddings--small     : true;
-@import "px-spacing-responsive-design/_trumps.spacing-responsive.scss";
-@import "px-widths-responsive-design/_trumps.widths-responsive.scss";
 
 // Font
 @import "px-typography-design/_base.typography.scss";
