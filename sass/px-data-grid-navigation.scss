@@ -30,7 +30,7 @@
   color: var(--px-data-grid-navigation-text-color--dark, #000);
 }
 
-.row-counts .current-rows {
+.current-rows {
   font-weight: bold;
 }
 
@@ -38,20 +38,20 @@
   display: inline-block;
 }
 
-.page-selection .arrow:disabled {
+.arrow:disabled {
   color: var(--px-data-grid-navigation-text-color--disabled, #CCC);
   cursor: default;
 }
 
-.page-selection .arrow:focus {
+.arrow:focus {
   outline: none;
 }
 
-.page-selection .page-list {
+.page-list {
   display: inline-block;
 }
 
-.page-selection .page-button {
+.page-button {
   color: var(--px-data-grid-navigation-text-color, #000);
   display: inline-block;
   cursor: pointer;
@@ -64,11 +64,11 @@
   text-align: center;
 }
 
-.page-selection .page-button:last-child {
+.page-button:last-child {
   margin-right: 0;
 }
 
-.page-selection .page-button.selected {
+.page-button.selected {
   cursor: auto;
   height: 18px;
   width: 18px;
@@ -77,7 +77,7 @@
   color: var(--px-data-grid-navigation-text-color--selected, #000);
 }
 
-.page-selection .page-button px-icon {
+.page-button px-icon {
   --px-icon-default-width: 20px;
   --px-icon-default-height: 20px;
 }
