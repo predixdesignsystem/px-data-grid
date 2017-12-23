@@ -1353,6 +1353,23 @@
           }
         }
 
+        /**
+         * Set visibility of the details container for any item's corresponding row.
+         */
+        setRowDetailsVisible(item, isVisible) {
+          if (!item) {
+            return;
+          }
+          const index = this._vaadinGrid.detailsOpenedItems.indexOf(item);
+          if (isVisible && index < 0) {
+            this._vaadinGrid.detailsOpenedItems.push(item);
+            Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._vaadinGrid.notifyResize());
+          } else if (!isVisible && index >= 0) {
+            this._vaadinGrid.detailsOpenedItems.splice(index, 1);
+            Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._vaadinGrid.notifyResize());
+          }
+        }
+
         _editingItemObserver(editingItem, oldV) {
           if (typeof oldV === 'undefined') {
             return;
