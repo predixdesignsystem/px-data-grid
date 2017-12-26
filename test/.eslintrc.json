@@ -13,6 +13,7 @@
     "tableData": false,
     "getRows": false,
     "getVisibleRows": false,
+    "generateTableData": false,
     "getRowCells": false,
     "flushVaadinGrid": false,
     "getCell": false,
