@@ -71,6 +71,9 @@
               Freeze Full Name column
             </label>
           </div>
+          <div>
+            <button type="button" on-click="_restoreLayout">Restore layout</button>
+          </div>
         </p>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -643,6 +646,11 @@
         });
         grid.updateColumns();
       }
+    },
+
+    _restoreLayout(e) {
+      const grid = this.shadowRoot.querySelector('px-data-grid');
+      grid.restoreLayout();
     },
 
     tableActionListener: function(evt) {

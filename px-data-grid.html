@@ -293,6 +293,15 @@
              */
             columns: {
               type: Array,
+              value: () => [],
+              observer: '_columnsChanged'
+            },
+
+            /**
+             * Copy of last columns value received, to be used with reset layout
+             */
+            _lastColumnsReceived: {
+              type: Array,
               value: () => []
             },
 
@@ -936,12 +945,11 @@
             return this._vaadinGrid._columnTree[0].filter(c => c.isDataColumn);
           } else if (this.columns && this.columns.length) {
             return this.columns.map((c) => {
-              return c.element ? c.element : c;
+              return c._element ? c._element : c;
             });
           } else {
             return [];
           }
-
         }
 
         /**
@@ -1442,6 +1450,50 @@
 
             return sortedObject;
           });
+        }
+
+        /**
+         * Make JSON friendly version out of columns array
+         */
+        _cleanColumns(columns) {
+          if (!columns) {
+            return [];
+          }
+          return columns.map(c => {
+            const copy = {};
+            for (const key in c) {
+              // Do not copy key starting with _ (eg. current element), this is ugly because IE11
+              if (c.hasOwnProperty(key) && key.indexOf('_') !== 0) {
+                copy[key] = c[key];
+              }
+            }
+            // Make sure outcome can be JSON'fied.
+            return JSON.parse(JSON.stringify(copy));
+          });
+        }
+
+        /**
+         * Columns property change observer
+         */
+        _columnsChanged(columns) {
+          // Store cleaned version of current columns
+          this._lastColumnsReceived = this._cleanColumns(columns);
+        }
+
+        /**
+         * Restore layout (columns) to state those were given
+         */
+        restoreLayout() {
+          if (!this._lastColumnsReceived) {
+            console.warn('No layout defined where to return');
+            return;
+          }
+          // Store last columns received before clearing columns
+          const revertTo = JSON.parse(JSON.stringify(this._lastColumnsReceived));
+          // First clear all columns
+          this.columns = [];
+          // After empty columns has been rendered return to wanted state
+          Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this.columns = revertTo);
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);
