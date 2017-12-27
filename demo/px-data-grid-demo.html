@@ -25,6 +25,10 @@
       .theme-switcher-checkbox input {
         margin-left: 5px;
       }
+
+      .button-row {
+        padding: 5px 0;
+      }
     </style>
     <custom-style>
       <style include="px-demo-styles" is="custom-style"></style>
@@ -69,6 +73,11 @@
             auto-height="{{props.autoHeight.value}}"
             on-table-action="tableActionListener">
         </px-data-grid>
+
+        <div class="button-row">
+            <button type="button" on-click="_saveState">Save State</button>
+            <button type="button" on-click="_readState">Apply Saved State</button>
+        </div>
 
         <dom-if if="[[selectedItems.length]]">
           <template>
@@ -572,6 +581,20 @@
 
     _stringify: function(item) {
       return JSON.stringify(item);
-    }
+    },
+
+    _saveState(e) {
+      const grid = this.shadowRoot.querySelector('px-data-grid');
+      this._savedState = grid.getState();
+    },
+
+    _readState(e) {
+      if (!this._savedState) {
+        window.alert('No state saved yet');
+        return;
+      }
+      const grid = this.shadowRoot.querySelector('px-data-grid');
+      grid.setState(this._savedState);
+    },
   });
 </script>

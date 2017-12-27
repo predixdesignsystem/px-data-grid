@@ -73,6 +73,8 @@
           </div>
           <div>
             <button type="button" on-click="_restoreLayout">Restore layout</button>
+            <button type="button" on-click="_saveState">Save State</button>
+            <button type="button" on-click="_readState">Apply Saved State</button>
           </div>
         </p>
       </px-demo-component>
@@ -651,6 +653,21 @@
     _restoreLayout(e) {
       const grid = this.shadowRoot.querySelector('px-data-grid');
       grid.restoreLayout();
+    },
+
+
+    _saveState(e) {
+      const grid = this.shadowRoot.querySelector('px-data-grid');
+      this._savedState = grid.getState();
+    },
+
+    _readState(e) {
+      if (!this._savedState) {
+        window.alert('No state saved yet');
+        return;
+      }
+      const grid = this.shadowRoot.querySelector('px-data-grid');
+      grid.setState(this._savedState);
     },
 
     tableActionListener: function(evt) {

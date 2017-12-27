@@ -113,7 +113,7 @@
 
         static get observers() {
           return [
-            '_setMappedColumns(columns, columns.splices)',
+            '_setMappedColumns(columns, columns.*)',
             '_regexChanged(_regexPattern, _regexQuery)',
             '_filterActiveObservable(entity, entity.*)'
           ];

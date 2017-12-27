@@ -46,6 +46,7 @@
           <px-auto-filter-field
             placeholder="[[localize('Filter')]]"
             on-filter-change="_autoFilterChanged"
+            value="{{_autoFilterValue}}"
           >
           </px-auto-filter-field>
         </template>
@@ -591,7 +592,11 @@
               value: () => []
             },
 
-            _boundedLocalize: Function
+            _boundedLocalize: Function,
+
+            _autoFilterValue: {
+              type: String
+            }
           };
         }
 
@@ -1403,6 +1408,14 @@
           this._previousSorters = this._mapSorters();
         }
 
+        _getOrderedColumns() {
+          return this._vaadinGrid
+            ._columnTree[this._vaadinGrid._columnTree.length - 1]
+            .slice(0)
+            .sort((a, b) => a._order - b._order)
+            .map((col) => col.mappedObject);
+        }
+
         _getVisibleColumns() {
           return this._vaadinGrid
             ._columnTree[this._vaadinGrid._columnTree.length - 1]
@@ -1459,7 +1472,7 @@
           if (!columns) {
             return [];
           }
-          return JSON.parse(JSON.stringify(columns));
+          return this._copyArray(columns);
         }
 
         /**
@@ -1479,11 +1492,41 @@
             return;
           }
           // Store last columns received before clearing columns
-          const revertTo = JSON.parse(JSON.stringify(this._lastColumnsReceived));
+          const revertTo = this._copyArray(this._lastColumnsReceived);
+          this._revertColumns(revertTo);
+        }
+
+        _revertColumns(revertTo) {
           // First clear all columns
           this.columns = [];
+
           // After empty columns has been rendered return to wanted state
           Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this.columns = revertTo);
+        }
+
+        _copyArray(arr) {
+          return JSON.parse(JSON.stringify(arr));
+        }
+
+        getState() {
+          return {
+            columns: this._copyArray(this._getOrderedColumns()),
+            highlight: this.highlight.map(entity => Object.assign({}, entity)),
+            filter: this._copyArray(this.filterEntities),
+            autoFilter: this._autoFilterValue
+          };
+        }
+
+        setState(state) {
+          this.columns = [];
+
+          Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => {
+            this.columns = this._copyArray(state.columns);
+
+            this.filterEntities = state.filter;
+            this._autoFilterValue = state.autoFilter;
+            this.highlight = state.highlight;
+          });
         }
       }
       customElements.define(DataGridElement.is, DataGridElement);
