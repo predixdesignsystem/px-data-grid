@@ -909,12 +909,12 @@
 
           if (key && typeof key == 'string') {
             // -column- is temporary work around to limitations of px-dropdown
-            if (key.startsWith('-column-')) {
+            if (key.indexOf('-column-') === 0) {
               const columnName = key.substr('-column-'.length);
               this._getColumnsWithName(columnName).forEach((c) => {
                 c.hidden = c.hidden === undefined ? true : !c.hidden;
               });
-            } else if (key.startsWith('-action-')) {
+            } else if (key.indexOf('-action-') === 0) {
               const actionId = key.substr('-action-'.length);
               this.dispatchEvent(new CustomEvent('table-action', {
                 detail: {
@@ -922,7 +922,7 @@
                 },
                 bubbles: true
               }));
-            } else if (key.startsWith('-internal-ungroup-')) {
+            } else if (key.indexOf('-internal-ungroup-') === 0) {
               this._ungroup();
             }
           }
