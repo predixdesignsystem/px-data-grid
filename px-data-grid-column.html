@@ -138,7 +138,11 @@
 
         _mappedObjectChanged(obj) {
           if (obj) {
-            obj._element = this;
+            Object.defineProperty(obj, '_element', {
+              value: this,
+              writable: false,
+              enumerable: false
+            });
           }
         }
 

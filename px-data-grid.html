@@ -1459,17 +1459,7 @@
           if (!columns) {
             return [];
           }
-          return columns.map(c => {
-            const copy = {};
-            for (const key in c) {
-              // Do not copy key starting with _ (eg. current element), this is ugly because IE11
-              if (c.hasOwnProperty(key) && key.indexOf('_') !== 0) {
-                copy[key] = c[key];
-              }
-            }
-            // Make sure outcome can be JSON'fied.
-            return JSON.parse(JSON.stringify(copy));
-          });
+          return JSON.parse(JSON.stringify(columns));
         }
 
         /**
