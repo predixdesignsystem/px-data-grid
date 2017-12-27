@@ -2,26 +2,13 @@
 <link rel="import" href="../px-tooltip/px-tooltip.html">
 <link rel="import" href="px-data-grid-renderer-mixin.html">
 <link rel="import" href="px-data-grid-theme.html">
+<link rel="import" href="css/px-data-grid-date-renderer-styles.html">
 
 <dom-module id="px-data-grid-date-renderer">
   <template>
-    <style include="px-data-grid-styles">
-      :host {
-        display: flex;
-        align-items: center;
-        flex-grow: 1;
-      }
-
-      #editingTemplate {
-        width: 100%;
-      }
-
-      input {
-        box-sizing: border-box;
-      }
-    </style>
+    <style include="px-data-grid-date-renderer-styles"></style>
     <div id="value">[[_getFormattedDate(value)]]</div>
-    <div id="editingTemplate">
+    <div id="editingTemplate" class="input-container">
       <input id="editingTemplateInput" class$="{{getClasses(validationResult)}}" type="date" value="{{value::change}}">
       <px-tooltip
         for="editingTemplateInput"

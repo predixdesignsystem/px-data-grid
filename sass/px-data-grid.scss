@@ -1,31 +1,68 @@
-/*
- * Copyright (c) 2014 GE Global Research. All rights reserved.
- *
- * The copyright to the computer software herein is the property of
- * GE Global Research. The software may be used and/or copied only
- * with the written permission of GE Global Research or in accordance
- * with the terms and conditions stipulated in the agreement/contract
- * under which the software has been supplied.
- */
+@import 'px-data-grid-shared';
 
-// Generic
-@import "px-normalize-design/_generic.normalize.scss";
+:host {
+  position: relative;
+  display: block;
+  background: var(--px-base-background-color);
+}
 
-$inuit-enable-input--tiny : true;
-$inuit-enable-validation-states : true;
-@import "px-forms-design/_base.forms.scss";
+px-data-grid-cell-content-wrapper {
+  margin-top: calc(0px - var(--px-data-grid-padding-top));
+  margin-bottom: calc(0px - var(--px-data-grid-padding-top));
+  margin-left: calc(0px - var(--px-data-grid-padding-top));
+  margin-right: calc(0px - var(--px-data-grid-padding-top));
+  padding-top: var(--px-data-grid-padding-top);
+  padding-bottom: var(--px-data-grid-padding-bottom);
+  padding-left: var(--px-data-grid-padding-left);
+  padding-right: var(--px-data-grid-padding-right);
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: var(--px-data-grid-cell-dragging-color, var(--px-data-grid-highlight-background-color, transparent));
+  line-height: 16px;
+}
 
-$fa-font-path : "../../font-awesome/fonts";
-$inuit-enable-btn--bare           : true;
+.action-bar {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
 
-// Trumps
-$inuit-enable-paddings--small     : true;
+.action-bar > px-auto-filter-field {
+  flex-grow: 1;
+}
 
-// Font
-@import "px-typography-design/_base.typography.scss";
-$predix-font-family : "GE Inspira Sans", sans-serif !default;
+px-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-html {
-  font-family: $predix-font-family;
-  font-size: $inuit-base-font-size;
+px-spinner[hidden] {
+  display: none;
+}
+
+vaadin-checkbox {
+  height: 15px;
+}
+
+vaadin-checkbox.select-all-checkbox {
+  margin-top: 8px;
+}
+
+vaadin-radio-button {
+  height: 12px;
+  width: 12px;
+}
+
+vaadin-grid[auto-height] {
+  height: auto;
+}
+
+px-icon {
+  --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted);
+  cursor: pointer;
 }

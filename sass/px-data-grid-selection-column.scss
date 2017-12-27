@@ -1,0 +1,9 @@
+[part=wrapper] {
+  display: flex;
+  align-items: center;
+  outline: none;
+}
+
+[part=native-checkbox], [part=native-radio] {
+  margin: 0;
+}

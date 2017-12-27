@@ -1,13 +1,10 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="px-data-grid-filter-entity.html">
+<link rel="import" href="css/px-data-grid-filter-styles.html">
 
 <dom-module id="px-data-grid-filter">
   <template>
-    <style>
-      px-data-grid-filter-entity + px-data-grid-filter-entity {
-        margin-top: 5px;
-      }
-    </style>
+    <style include="px-data-grid-filter-styles"></style>
     <template is="dom-repeat" items="{{filterEntities}}" as="entity">
       <px-data-grid-filter-entity entity="{{entity}}" columns="[[columns]]" input-data="[[inputData]]" output-data="{{outputData}}"></px-data-grid-filter-entity>
     </template>

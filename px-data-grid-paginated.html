@@ -12,19 +12,11 @@
 
 <link rel="import" href="px-data-grid-string-renderer.html">
 <link rel="import" href="px-data-grid-cell-content-wrapper.html">
+<link rel="import" href="css/px-data-grid-paginated-styles.html">
 
 <dom-module id="px-data-grid-paginated">
   <template>
-    <style>
-      :host {
-        position: relative;
-        display: block;
-      }
-
-      px-data-grid-navigation {
-        width: 100%;
-      }
-    </style>
+    <style include="px-data-grid-paginated-styles"></style>
 
     <px-data-grid
       remote-data-provider="{{_currentDataProvider}}"

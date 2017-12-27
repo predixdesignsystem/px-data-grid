@@ -1,0 +1,31 @@
+/*
+ * Copyright (c) 2014 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+
+// Generic
+@import "px-normalize-design/_generic.normalize.scss";
+
+$inuit-enable-input--tiny : true;
+$inuit-enable-validation-states : true;
+@import "px-forms-design/_base.forms.scss";
+
+$fa-font-path : "../../font-awesome/fonts";
+$inuit-enable-btn--bare           : true;
+
+// Trumps
+$inuit-enable-paddings--small     : true;
+
+// Font
+@import "px-typography-design/_base.typography.scss";
+$predix-font-family : "GE Inspira Sans", sans-serif !default;
+
+html {
+  font-family: $predix-font-family;
+  font-size: $inuit-base-font-size;
+}

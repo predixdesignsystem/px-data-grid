@@ -1,0 +1,15 @@
+@import 'px-data-grid-shared';
+
+:host {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.input-container {
+  width: 100%;
+}
+
+input {
+  box-sizing: border-box;
+}

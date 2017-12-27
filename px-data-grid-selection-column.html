@@ -2,36 +2,17 @@
 <link rel="import" href="../vaadin-grid/vaadin-grid-column.html">
 <link rel="import" href="../vaadin-checkbox/vaadin-checkbox.html">
 <link rel="import" href="../vaadin-radio-button/vaadin-radio-button.html">
+<link rel="import" href="css/px-data-grid-selection-column-styles.html">
 
 <dom-module id="vaadin-checkbox-styles" theme-for="vaadin-checkbox">
   <template>
-    <style>
-      [part=wrapper] {
-        display: flex;
-        align-items: center;
-        outline: none;
-      }
-
-      #nativeCheckbox {
-        margin: 0;
-      }
-    </style>
+    <style include="px-data-grid-selection-column-styles"></style>
   </template>
 </dom-module>
 
 <dom-module id="vaadin-radio-button-styles" theme-for="vaadin-radio-button">
   <template>
-    <style>
-      [part=wrapper] {
-        display: flex;
-        align-items: center;
-        outline: none;
-      }
-
-      [part=native-radio] {
-        margin: 0;
-      }
-    </style>
+    <style include="px-data-grid-selection-column-styles"></style>
   </template>
 </dom-module>
 

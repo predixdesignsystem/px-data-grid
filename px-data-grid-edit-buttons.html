@@ -1,26 +1,10 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../px-icon-set/px-icon.html"/>
+<link rel="import" href="../px-icon-set/px-icon.html">
+<link rel="import" href="css/px-data-grid-edit-buttons-styles.html">
 
 <dom-module id="px-data-grid-edit-buttons">
   <template>
-    <style>
-      :host {
-        display: flex;
-      }
-
-      px-icon {
-        border-radius: 50%;
-        border: 1px solid var(--px-data-grid-cell-text-color--sorted);
-        --iron-icon-width: 12px;
-        --iron-icon-height: 12px;
-        --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted);
-        padding: 2px;
-      }
-
-      px-icon + px-icon {
-        margin-left: 5px;
-      }
-    </style>
+    <style include="px-data-grid-edit-buttons-styles"></style>
 
     <px-icon icon="px-utl:check" on-click="save">Save</px-icon>
     <px-icon icon="px-utl:close" on-click="cancel">Cancel</px-icon>

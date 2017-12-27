@@ -10,7 +10,7 @@
     <div part="content">
       <slot></slot>
     </div>
-    <div part="indicators"><px-icon id="order-icon" icon="[[_getDirectionIcon(direction)]]" hidden="[[!_isOrdered(_order, direction)]]"></px-icon>[[_getDisplayOrder(_order)]]</div>
+    <div part="indicators"><px-icon id="order-icon" class="order-icon" icon="[[_getDirectionIcon(direction)]]" hidden="[[!_isOrdered(_order, direction)]]"></px-icon>[[_getDisplayOrder(_order)]]</div>
 
   </template>
   <script>

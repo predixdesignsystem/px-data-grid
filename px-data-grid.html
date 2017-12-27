@@ -23,74 +23,7 @@
 
 <dom-module id="px-data-grid">
   <template>
-    <style include="px-data-grid-styles">
-      :host {
-        position: relative;
-        display: block;
-        background: var(--px-base-background-color);
-      }
-
-      px-data-grid-cell-content-wrapper {
-        margin-top: calc(0px - var(--px-data-grid-padding-top));
-        margin-bottom: calc(0px - var(--px-data-grid-padding-top));
-        margin-left: calc(0px - var(--px-data-grid-padding-top));
-        margin-right: calc(0px - var(--px-data-grid-padding-top));
-        padding-top: var(--px-data-grid-padding-top);
-        padding-bottom: var(--px-data-grid-padding-bottom);
-        padding-left: var(--px-data-grid-padding-left);
-        padding-right: var(--px-data-grid-padding-right);
-        min-height: 100%;
-        display: flex;
-        align-items: center;
-        background-color: var(--px-data-grid-cell-dragging-color, var(--px-data-grid-highlight-background-color, transparent));
-        line-height: 16px;
-      }
-
-      .action-bar {
-        display: flex;
-        flex-direction: row-reverse;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        margin-bottom: 20px;
-      }
-
-      .action-bar > px-auto-filter-field {
-        flex-grow: 1;
-      }
-
-      px-spinner {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-
-      px-spinner[hidden] {
-        display: none;
-      }
-
-      vaadin-checkbox {
-        height: 15px;
-      }
-
-      vaadin-checkbox.select-all-checkbox {
-        margin-top: 8px;
-      }
-
-      vaadin-radio-button {
-        height: 12px;
-        width: 12px;
-      }
-
-      vaadin-grid[auto-height] {
-        height: auto;
-      }
-
-      px-icon {
-        --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted);
-        cursor: pointer;
-      }
-    </style>
+    <style include="px-data-grid-styles"></style>
 
     <template is="dom-if" if="{{filterable}}">
       <px-data-grid-filter columns="[[columns]]" filter-entities="{{filterEntities}}"></px-data-grid-filter>
