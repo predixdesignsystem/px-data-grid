@@ -7,16 +7,18 @@
 <dom-module id="px-data-grid-number-renderer">
   <template>
     <style include="px-data-grid-number-renderer-styles"></style>
-    <div id="value">[[value]]</div>
-    <div id="editingTemplate" class="input-container">
-      <input id="editingTemplateInput" class$="{{getClasses(validationResult)}}" type="number" value="{{value::change}}">
-      <px-tooltip
-        for="editingTemplateInput"
-        orientation="top"
-        tooltip-message="[[validationResult.message]]"
-        opened="[[_showValidationError]]"
-        ignore-target-events>
-    </div>
+    <template is="dom-if" if="[[!_editing]]">[[value]]</template>
+    <template is="dom-if" if="[[_editing]]" restamp>
+      <div id="editingTemplate" class="input-container">
+        <input id="editingTemplateInput" class$="{{getClasses(validationResult)}}" type="number" value="{{value::change}}">
+        <px-tooltip
+          for="editingTemplateInput"
+          orientation="top"
+          tooltip-message="[[validationResult.message]]"
+          opened="[[_showValidationError]]"
+          ignore-target-events>
+      </div>
+    </template>
   </template>
   <script>
     {

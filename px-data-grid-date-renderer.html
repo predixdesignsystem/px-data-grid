@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../px-tooltip/px-tooltip.html">
+<link rel="import" href="../px-datetime-picker/px-datetime-picker.html">
 <link rel="import" href="px-data-grid-renderer-mixin.html">
 <link rel="import" href="px-data-grid-theme.html">
 <link rel="import" href="css/px-data-grid-date-renderer-styles.html">
@@ -7,17 +8,24 @@
 <dom-module id="px-data-grid-date-renderer">
   <template>
     <style include="px-data-grid-date-renderer-styles"></style>
-    <div id="value">[[_getFormattedDate(value)]]</div>
-    <div id="editingTemplate" class="input-container">
-      <input id="editingTemplateInput" class$="{{getClasses(validationResult)}}" type="date" value="{{value::change}}">
-      <px-tooltip
-        for="editingTemplateInput"
-        orientation="top"
-        tooltip-message="[[validationResult.message]]"
-        opened="[[_showValidationError]]"
-        ignore-target-events>
-      </px-tooltip>
-    </div>
+    <template is="dom-if" if="[[!_editing]]">[[_getFormattedDate(value)]]</template>
+    <template is="dom-if" if="[[_editing]]" restamp>
+      <div class="input-container">
+        <px-datetime-picker
+          id="editingTemplateInput"
+          moment-obj="{{momentObj}}"
+          hide-time
+          >
+        </px-datetime-picker>
+        <px-tooltip
+          for="editingTemplateInput"
+          orientation="top"
+          tooltip-message="[[validationResult.message]]"
+          opened="[[_showValidationError]]"
+          ignore-target-events>
+        </px-tooltip>
+      </div>
+    </template>
   </template>
   <script>
     {
@@ -37,6 +45,21 @@
           return 'px-data-grid-date-renderer';
         }
 
+        static get properties() {
+          return {
+            momentObj: {
+              type: Object
+            }
+          };
+        }
+
+        static get observers() {
+          return [
+            '_valueObserver(value)',
+            '_momentObjChanged(momentObj, momentObj.*)'
+          ];
+        }
+
         _getFormattedDate(value) {
           return (this.value && this.value.length > 0) ? (new Date(value)).toString() : '';
         }
@@ -48,8 +71,18 @@
           };
         }
 
-        getClasses(result) {
-          return !result || result.valid ? 'text-input' : 'text-input validation-error';
+        _valueObserver(value) {
+          this.momentObj = window.moment(Date.parse(value));
+        }
+
+        _momentObjChanged(momentObj) {
+          if (!momentObj) {
+            return;
+          }
+          const newDate = momentObj.format('YYYY-MM-DD');
+          if (newDate !== this.value) {
+            this.value = newDate;
+          }
         }
       }
 
