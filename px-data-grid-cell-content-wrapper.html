@@ -33,6 +33,11 @@
               observer: '_cellColorChanged'
             },
 
+            _itemWas: {
+              type: Object,
+              value: undefined
+            },
+
             localize: Function,
 
             _valueElement: Element
@@ -122,7 +127,10 @@
             return;
           }
 
-          if (!this._valueElement && renderer) {
+          const newItem = this._itemWas && item !== this._itemWas;
+          this._itemWas = item;
+
+          if ((!this._valueElement || newItem) && renderer) {
             this._valueElement = document.createElement(renderer);
             this._valueElement.addEventListener('value-changed', this._boundValueChangedListener);
             this._valueElement.column = this.column;
