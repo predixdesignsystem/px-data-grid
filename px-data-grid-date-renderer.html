@@ -8,22 +8,24 @@
 <dom-module id="px-data-grid-date-renderer">
   <template>
     <style include="px-data-grid-date-renderer-styles"></style>
-    <div id="value">[[_getFormattedDate(value)]]</div>
-    <div id="editingTemplate" class="input-container">
-      <px-datetime-picker
-        id="editingTemplateInput"
-        moment-obj="{{momentObj}}"
-        hide-time
-        >
-      </px-datetime-picker>
-      <px-tooltip
-        for="editingTemplateInput"
-        orientation="top"
-        tooltip-message="[[validationResult.message]]"
-        opened="[[_showValidationError]]"
-        ignore-target-events>
-      </px-tooltip>
-    </div>
+    <template is="dom-if" if="[[!_editing]]">[[_getFormattedDate(value)]]</template>
+    <template is="dom-if" if="[[_editing]]">
+      <div class="input-container">
+        <px-datetime-picker
+          id="editingTemplateInput"
+          moment-obj="{{momentObj}}"
+          hide-time
+          >
+        </px-datetime-picker>
+        <px-tooltip
+          for="editingTemplateInput"
+          orientation="top"
+          tooltip-message="[[validationResult.message]]"
+          opened="[[_showValidationError]]"
+          ignore-target-events>
+        </px-tooltip>
+      </div>
+    </template>
   </template>
   <script>
     {

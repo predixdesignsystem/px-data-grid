@@ -11,6 +11,7 @@
       return {
         _editing: {
           type: Boolean,
+          value: false,
           observer: '_editingChanged'
         },
 
@@ -48,19 +49,6 @@
       ];
     }
 
-    ready() {
-      super.ready();
-
-      if (this.$.editingTemplate) {
-        this._editingTemplateDisplay = window.getComputedStyle(this.$.editingTemplate).getPropertyValue('display');
-        this.$.editingTemplate.style.display = 'none';
-      }
-
-      if (this.$.value) {
-        this._valueDisplay = window.getComputedStyle(this.$.value).getPropertyValue('display');
-      }
-    }
-
     _editingChanged(editing, oldVal) {
 
       this.dispatchEvent(new CustomEvent('renderer-editing-changed', {
@@ -73,17 +61,9 @@
 
       if (editing) {
         this._performValidation();
-        this._computedHeight = window.getComputedStyle(this).height;
-
-        this.$.value.style.display = 'none';
-        this.$.editingTemplate.style.display = this._editingTemplateDisplay;
-
-        this.style.height = this._computedHeight;
-
+        this.style.height = window.getComputedStyle(this).height;
       } else {
         this._showValidationError = false;
-        this.$.value.style.display = this._valueDisplay;
-        this.$.editingTemplate.style.display = 'none';
       }
     }
 
