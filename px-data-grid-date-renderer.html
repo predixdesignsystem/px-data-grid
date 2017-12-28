@@ -9,7 +9,7 @@
   <template>
     <style include="px-data-grid-date-renderer-styles"></style>
     <template is="dom-if" if="[[!_editing]]">[[_getFormattedDate(value)]]</template>
-    <template is="dom-if" if="[[_editing]]">
+    <template is="dom-if" if="[[_editing]]" restamp>
       <div class="input-container">
         <px-datetime-picker
           id="editingTemplateInput"

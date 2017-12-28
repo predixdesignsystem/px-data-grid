@@ -8,7 +8,7 @@
   <template>
     <style include="px-data-grid-number-renderer-styles"></style>
     <template is="dom-if" if="[[!_editing]]">[[value]]</template>
-    <template is="dom-if" if="[[_editing]]">
+    <template is="dom-if" if="[[_editing]]" restamp>
       <div id="editingTemplate" class="input-container">
         <input id="editingTemplateInput" class$="{{getClasses(validationResult)}}" type="number" value="{{value::change}}">
         <px-tooltip
