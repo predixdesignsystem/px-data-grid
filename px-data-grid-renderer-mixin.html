@@ -30,6 +30,14 @@
           type: Object
         },
 
+        /**
+         * Boolean to pair with validation error element visibility
+         */
+        _showValidationError: {
+          type: Boolean,
+          value: false
+        },
+
         localize: Function
       };
     }
@@ -62,9 +70,9 @@
           renderer: this
         }
       }));
-      this._performValidation();
 
       if (editing) {
+        this._performValidation();
         this._computedHeight = window.getComputedStyle(this).height;
 
         this.$.value.style.display = 'none';
@@ -73,6 +81,7 @@
         this.style.height = this._computedHeight;
 
       } else {
+        this._showValidationError = false;
         this.$.value.style.display = this._valueDisplay;
         this.$.editingTemplate.style.display = 'none';
       }
@@ -88,6 +97,7 @@
 
     _performValidation() {
       this.validationResult = this.validate();
+      this._showValidationError = this._editing && this.validationResult && !this.validationResult.valid;
 
       return this.validationResult;
     }
