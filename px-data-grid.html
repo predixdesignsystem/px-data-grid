@@ -1373,6 +1373,9 @@
          * current version in vaadin-grid-sort-mixin, and replace unshift with push.
          */
         _onPxSorterChanged(e) {
+
+          this._pxDataGrid._editingItem = null;
+
           const sorter = e.target;
 
           this._removeArrayItem(this._sorters, sorter);
