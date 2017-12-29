@@ -84,6 +84,11 @@
       _onToggleClick(e) {
         e.stopPropagation();
         e.model.detailsOpened = !e.model.detailsOpened;
+        // tell vaadin grid of a resize so the height gets recalculated
+        if (e.model.detailsOpened && e.model.parentModel && e.model.parentModel._gridValue) {
+          const vaadinGrid = e.model.parentModel._gridValue;
+          Polymer.RenderStatus.afterNextRender(vaadinGrid, () => vaadinGrid.notifyResize());
+        }
       }
 
       _getChevronIcon(detailsOpened) {
