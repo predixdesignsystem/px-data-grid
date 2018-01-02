@@ -7,7 +7,7 @@
 }
 
 :host([direction]) [part="content"] {
-  color: var(--px-data-grid-cell-text-color--sorted);
+  color: var(--px-data-grid-cell-text-color--sorted, rgb(129,129,129));
 }
 
 [part="content"] {
@@ -18,11 +18,11 @@
 [part="indicators"] {
   white-space: nowrap;
   flex: 0;
-  color: var(--px-data-grid-cell-text-color--sorted);
+  color: var(--px-data-grid-cell-text-color--sorted,  rgb(129,129,129));
 }
 
 [part="indicators"]:hover {
-  color: var(--px-data-grid-header-text-color--hover);
+  color: var(--px-data-grid-text-color--hover, rgb(92,92,92));
 }
 
 .order-icon {

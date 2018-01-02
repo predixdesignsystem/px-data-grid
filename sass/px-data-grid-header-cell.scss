@@ -10,8 +10,8 @@
 px-icon {
   --iron-icon-height: var(--px-dropdown-toggle-icon-size);
   --iron-icon-width: var(--px-dropdown-toggle-icon-size);
-  --iron-icon-fill-color: var(--px-data-grid-cell-text-color--sorted);
-  --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted);
+  --iron-icon-fill-color: var(--px-data-grid-cell-text-color--sorted, rgb(129,129,129));
+  --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted, rgb(129,129,129));
   cursor: pointer;
   padding-bottom: 3px;
 }
