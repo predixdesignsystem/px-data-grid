@@ -1,12 +1,3 @@
-<style>
-  @font-face {
-    font-family: 'px-data-grid-icons';
-    src: url("data:application/x-font-ttf;charset=utf-8;base64,d09GRgABAAAAAAVQAAsAAAAABQQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABPUy8yAAABCAAAAGAAAABgDxIFgGNtYXAAAAFoAAAAVAAAAFQXVtKIZ2FzcAAAAbwAAAAIAAAACAAAABBnbHlmAAABxAAAALwAAAC8FcCY/GhlYWQAAAKAAAAANgAAADYO40qbaGhlYQAAArgAAAAkAAAAJAbqA8dobXR4AAAC3AAAABgAAAAYDgAB5mxvY2EAAAL0AAAADgAAAA4AhgBUbWF4cAAAAwQAAAAgAAAAIAAIABJuYW1lAAADJAAAAgoAAAIKJ768ZXBvc3QAAAUwAAAAIAAAACAAAwAAAAMDVQGQAAUAAAKZAswAAACPApkCzAAAAesAMwEJAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAA6QEDwP/AAEADwABAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAwAAAAMAAAAcAAEAAwAAABwAAwABAAAAHAAEADgAAAAKAAgAAgACAAEAIOkB//3//wAAAAAAIOkA//3//wAB/+MXBAADAAEAAAAAAAAAAAAAAAEAAf//AA8AAQAAAAAAAAAAAAIAADc5AQAAAAABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQDf/9cDAAOpAA8AAAEHJwE+ATMeARcBBycRIxEB2NghAQEEBAgEBwUBACHYLwNZ2CEBAQMDAQIE/wAh2Px+A4IAAAABAQf/3QMoA6kADAAAJTcXAQYmJwE3FxEzEQIv2CH+/gcRB/8AIdgvJ9gh/v8GAQYBACHYA4L8fgAAAAABAAAAAQAALakgD18PPPUACwQAAAAAANZOAw8AAAAA1k4DDwAA/9cDKAOpAAAACAACAAAAAAAAAAEAAAPA/8AAAAQAAAAAAAMoAAEAAAAAAAAAAAAAAAAAAAAGBAAAAAAAAAAAAAAAAgAAAAQAAN8EAAEHAAAAAAAKABQAHgBAAF4AAAABAAAABgAQAAEAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAADgCuAAEAAAAAAAEAEgAAAAEAAAAAAAIABwDDAAEAAAAAAAMAEgBXAAEAAAAAAAQAEgDYAAEAAAAAAAUACwA2AAEAAAAAAAYAEgCNAAEAAAAAAAoAGgEOAAMAAQQJAAEAJAASAAMAAQQJAAIADgDKAAMAAQQJAAMAJABpAAMAAQQJAAQAJADqAAMAAQQJAAUAFgBBAAMAAQQJAAYAJACfAAMAAQQJAAoANAEocHgtZGF0YS1ncmlkLWljb25zAHAAeAAtAGQAYQB0AGEALQBnAHIAaQBkAC0AaQBjAG8AbgBzVmVyc2lvbiAxLjAAVgBlAHIAcwBpAG8AbgAgADEALgAwcHgtZGF0YS1ncmlkLWljb25zAHAAeAAtAGQAYQB0AGEALQBnAHIAaQBkAC0AaQBjAG8AbgBzcHgtZGF0YS1ncmlkLWljb25zAHAAeAAtAGQAYQB0AGEALQBnAHIAaQBkAC0AaQBjAG8AbgBzUmVndWxhcgBSAGUAZwB1AGwAYQBycHgtZGF0YS1ncmlkLWljb25zAHAAeAAtAGQAYQB0AGEALQBnAHIAaQBkAC0AaQBjAG8AbgBzRm9udCBnZW5lcmF0ZWQgYnkgSWNvTW9vbi4ARgBvAG4AdAAgAGcAZQBuAGUAcgBhAHQAZQBkACAAYgB5ACAASQBjAG8ATQBvAG8AbgAuAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==") format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
-</style>
-
 <dom-module id="px-data-grid-theme" theme-for="vaadin-grid">
   <template>
     <style>
@@ -179,57 +170,6 @@
         padding-left: var(--px-data-grid-details-padding-left);
         padding-right: var(--px-data-grid-padding-right);
         white-space: normal;
-      }
-    </style>
-  </template>
-</dom-module>
-
-<dom-module id="px-data-grid-sorter-theme" theme-for="vaadin-grid-sorter">
-  <template>
-    <style>
-      /* Ordering */
-
-      [part="indicators"] {
-        margin-left: 5px;
-        user-select: none;
-        font-size: 1px;
-      }
-
-      [part="indicators"]::before {
-        font-family: 'px-data-grid-icons';
-        font-size: var(--px-data-grid-header-font-size, 12px);
-        color: var(--px-data-grid-cell-text-color--sorted);
-      }
-
-      [part="order"] {
-        font-size: var(--px-data-grid-header-font-size, 12px);
-        right: -6px;
-      }
-
-      [part="order"],
-      [part="content"] {
-        color: var(--px-data-grid-cell-text-color--sorted);
-      }
-
-      [part="order"]:hover,
-      [part="content"]:hover {
-        color: var(--px-data-grid-header-text-color--hover);
-      }
-
-      :host(:not([direction])) [part="indicators"]::before {
-        content: '';
-      }
-
-      :host([direction=asc]) [part="indicators"]::before {
-        content: '\e900';
-        font-size: 10px;
-        line-height: 15px;
-      }
-
-      :host([direction=desc]) [part="indicators"]::before {
-        content: '\e901';
-        font-size: 10px;
-        line-height: 15px;
       }
     </style>
   </template>
