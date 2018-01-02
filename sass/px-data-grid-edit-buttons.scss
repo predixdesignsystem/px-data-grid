@@ -4,10 +4,10 @@
 
 px-icon {
   border-radius: 50%;
-  border: 1px solid var(--px-data-grid-cell-text-color--sorted);
+  border: 1px solid var(--px-data-grid-cell-text-color--sorted),  rgb(129,129,129);
   --iron-icon-width: 12px;
   --iron-icon-height: 12px;
-  --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted);
+  --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted, rgb(129,129,129));
   padding: 2px;
 }
 
