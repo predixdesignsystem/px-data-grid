@@ -176,14 +176,14 @@
           },
           {
             type: 'column',
-            color: 'var(  --px-data-grid-yellow-status-background-color, yellow)',
+            color: '#FFE070',
             condition: (column, item) => {
               return column.name == 'last';
             }
           },
           {
             type: 'row',
-            color: 'var(--px-data-grid-red-status-background-color, red)',
+            color: '#F9A59F',
             condition: (cellContent, item) => {
               return item && (item.last == 'Dennis' || item.first == 'Carl');
             }
