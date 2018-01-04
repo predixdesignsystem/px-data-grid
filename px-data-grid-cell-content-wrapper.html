@@ -113,12 +113,12 @@
         _cellColorChanged(color) {
           if (color) {
             if (color === 'default') {
-              this.updateStyles({'--px-data-grid-highlight-background-color': 'var( --px-data-grid-default-highlight-background-color)'});
+              this.style.backgroundColor = '#FFE070';
             } else {
-              this.updateStyles({'--px-data-grid-highlight-background-color': color});
+              this.style.backgroundColor = color;
             }
           } else {
-            this.updateStyles({'--px-data-grid-highlight-background-color': undefined});
+            this.style.removeProperty('backgroundColor');
           }
         }
 
