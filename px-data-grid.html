@@ -707,6 +707,7 @@
           const dataColumns = columnsRow.filter(c => c.isDataColumn);
           if (dataColumns.length) {
             this._vaadinGrid.insertBefore(event.detail.column, dataColumns[0]);
+            Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._vaadinGrid.notifyResize());
           }
         }
 
