@@ -61,7 +61,7 @@
         }
 
         _getFormattedDate(value) {
-          return (this.value && this.value.length > 0) ? (new Date(value)).toString() : '';
+          return (this.value && this.value.length > 0) ? value : '';
         }
 
         validate() {
@@ -72,7 +72,7 @@
         }
 
         _valueObserver(value) {
-          this.momentObj = window.moment(Date.parse(value));
+          this.momentObj = window.moment(value, 'YYYY-MM-DD');
         }
 
         _momentObjChanged(momentObj) {
