@@ -1,34 +1,70 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../px-datetime-picker/px-datetime-picker.html">
+<link rel="import" href="../px-slider/px-slider.html">
+<link rel="import" href="../px-rangepicker/px-rangepicker.html">
+<link rel="import" href="css/px-data-grid-filter-entity-styles.html">
 
 <dom-module id="px-data-grid-filter-entity">
   <template>
-    <style>
-      :host {
-        display: flex;
-      }
+    <style include="px-data-grid-filter-entity-styles"></style>
 
-      px-dropdown + px-dropdown,
-      px-dropdown + input {
-        margin-left: 5px;
-      }
+    <div class="labeled-text">
+      <label for="column-dropdown">
+        Attribute
+      </label>
+      <px-dropdown id="column-dropdown" items="[[_mappedColumns]]" selected="{{entity.column}}"></px-dropdown>
+    </div>
 
-      input {
-        margin-left: 5px;
-      }
-    </style>
-    <px-dropdown items="[[_filterActions]]" selected="{{entity.action}}"></px-dropdown>
-    <px-dropdown items="[[_mappedColumns]]" selected="{{entity.column}}"></px-dropdown>
     <template is="dom-if" if="{{_columnTypeIsString(entity.column)}}">
-      <px-dropdown items="[[_regexPatterns]]" selected="{{_regexPattern}}"></px-dropdown>
-      <input type="text" value="{{_regexQuery::input}}">
+      <div class="labeled-text">
+        <label for="condition-dropdown">
+          Condition
+        </label>
+        <px-dropdown id="condition-dropdown" items="[[_regexPatterns]]" selected="{{entity.pattern}}"></px-dropdown>
+      </div>
+
+      <div class="labeled-text">
+        <label for="value-input">
+          Value
+        </label>
+        <input id="value-input" type="text" class="text-input" value="{{entity.query::input}}">
+      </div>
     </template>
+
     <template is="dom-if" if="{{_columnTypeIsDate(entity.column)}}">
-      <input type="date" value="{{entity.dateFrom::change}}" placeholder="Date From">
-      <input type="date" value="{{entity.dateTo::change}}" placeholder="Date To">
+      <div class="labeled-text" extended>
+        <label for="date-rangepicker">
+          Date Range
+        </label>
+        <px-rangepicker
+          id="date-rangepicker"
+          hide-presets
+          show-buttons
+          date-format="YYYY/MM/DD"
+          time-format="HH:mm:ss"
+          time-zone="UTC"
+          show-time-zone="abbreviatedText"
+          from-moment="{{_dateFrom}}"
+          to-moment="{{_dateTo}}">
+        </px-rangepicker>
+      </div>
     </template>
+
     <template is="dom-if" if="{{_columnTypeIsNumber(entity.column)}}">
-      <input type="number" value="{{entity.leftBound::input}}" placeholder="Left bound">
-      <input type="number" value="{{entity.rightBound::input}}" placeholder="Right bound">
+      <div class="labeled-text" extended>
+        <label for="range-input">
+          Range
+        </label>
+        <px-slider
+          id="range-input"
+          min="1"
+          max="100"
+          value="{{entity.leftBound}}"
+          end-value="{{entity.rightBound}}"
+          step="1"
+          is-range>
+        </px-slider>
+      </div>
     </template>
   </template>
   <script>
@@ -49,39 +85,10 @@
             tableData: Array,
 
             entity: {
-              type: Object,
-              value: function() {
-                return {};
-              }
-            },
-
-            _regexPattern: {
-              type: String
-            },
-
-            _regexQuery: {
-              type: String
+              type: Object
             },
 
             _mappedColumns: Array,
-
-            _filterActions: {
-              type: Array,
-              value: [
-                {
-                  key: 'show',
-                  val: 'Show'
-                },
-                {
-                  key: 'hide',
-                  val: 'Hide'
-                },
-                {
-                  key: 'highlight',
-                  val: 'Highlight'
-                }
-              ]
-            },
 
             _regexPatterns: {
               type: Array,
@@ -107,6 +114,14 @@
                   val: 'Wildcard'
                 }
               ]
+            },
+
+            _dateFrom: {
+              type: Object
+            },
+
+            _dateTo: {
+              type: Object
             }
           };
         }
@@ -114,8 +129,9 @@
         static get observers() {
           return [
             '_setMappedColumns(columns, columns.*)',
-            '_regexChanged(_regexPattern, _regexQuery)',
-            '_filterActiveObservable(entity, entity.*)'
+            '_filterActiveObservable(entity, entity.*)',
+            '_momentDatesObserver(_dateFrom, _dateTo, _dateFrom.*, _dateTo.*)',
+            '_entityDatesObserver(entity, entity.dateFrom, entity.dateTo)'
           ];
         }
 
@@ -143,21 +159,33 @@
           return column && column.type === 'number';
         }
 
-        _regexChanged(pattern, query) {
-          this.entity.pattern = pattern;
-          this.entity.query = query;
-          this.notifyPath('entity.query');
-        }
-
         _filterActiveObservable(entity) {
           if (entity.column) {
             if (this._columnTypeIsString(entity.column)) {
-              this.set('entity.active', !!entity.pattern && !!entity.query && !!entity.column && !!entity.action);
+              this.set('entity.active', !!entity.pattern && !!entity.query && !!entity.column);
             } else if (this._columnTypeIsDate(entity.column)) {
-              this.set('entity.active', !!entity.column && !!entity.action && (!!entity.dateFrom || !!entity.dateTo));
+              this.set('entity.active', !!entity.column && (!!entity.dateFrom || !!entity.dateTo));
             } else if (this._columnTypeIsNumber(entity.column)) {
-              this.set('entity.active', !!entity.column && !!entity.action && (!!entity.leftBound || !!entity.rightBound));
+              this.set('entity.active', !!entity.column && (!!entity.leftBound || !!entity.rightBound));
             }
+          }
+        }
+
+        _momentDatesObserver(dateFrom, dateTo) {
+          if (dateFrom && window.moment(this.entity.dateFrom).format() !== dateFrom.format()) {
+            this.set('entity.dateFrom', dateFrom.format());
+          }
+          if (dateTo && window.moment(this.entity.dateTo).format() !== dateTo.format()) {
+            this.set('entity.dateTo', dateTo.format());
+          }
+        }
+
+        _entityDatesObserver(entity) {
+          if (entity.dateFrom && (!this._dateFrom || window.moment(this.entity.dateFrom).format() !== this._dateFrom.format())) {
+            this.set('_dateFrom', window.moment(this.entity.dateFrom));
+          }
+          if (entity.dateTo && (!this._dateTo || window.moment(this.entity.dateTo).format() !== this._dateTo.format())) {
+            this.set('_dateTo', window.moment(this.entity.dateTo));
           }
         }
       }
