@@ -1,0 +1,27 @@
+@import 'px-data-grid-shared';
+
+:host {
+  position: relative;
+  display: block;
+}
+
+.search__form {
+  position: relative;
+  display: inline-block;
+}
+
+.search__icon {
+  --iron-icon-stroke-color: var(--px-base-text-color);
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  padding: 4px;
+  pointer-events: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.text-input {
+  padding-right: 22px;
+}

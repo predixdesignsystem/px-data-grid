@@ -1,39 +1,11 @@
 <link rel="import" href="../polymer/polymer-element.html"/>
-<link rel="import" href="px-data-grid-theme.html">
+<link rel="import" href="css/px-auto-filter-field-styles.html">
 <link rel="import" href="../px-icon-set/px-icon.html">
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 
 <dom-module id="px-auto-filter-field">
   <template>
-    <style include="px-data-grid-styles">
-
-      :host {
-        position: relative;
-        display: block;
-      }
-
-      .search__form {
-        position: relative;
-        display: inline-block;
-      }
-
-      .search__icon {
-        --iron-icon-stroke-color: var(--px-base-text-color);
-        position: absolute;
-        top: 0;
-        right: 0;
-        display: block;
-        padding: 4px;
-        pointer-events: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      .text-input {
-        padding-right: 22px;
-      }
-
-    </style>
+    <style include="px-auto-filter-field-styles"></style>
     <div class="search__form">
       <input
         id="search-field"
