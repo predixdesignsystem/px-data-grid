@@ -1,0 +1,24 @@
+@import 'px-data-grid-shared';
+
+:host {
+  display: block;
+}
+
+px-dropdown {
+  --px-btn-min-width: 0;
+}
+
+.action-select {
+  display: flex;
+  align-items: center;
+}
+
+.action-select > * + * {
+  margin-left: 5px;
+}
+
+.filter-entity {
+  display: flex;
+  align-items: center;
+  margin-top: 7px;
+}
