@@ -1,3 +1,8 @@
-px-data-grid-filter-entity + px-data-grid-filter-entity {
-  margin-top: 5px;
+@import 'px-data-grid-shared';
+
+:host {
+  min-height: 200px;
+  min-width: 729px;
+  display: block;
+  padding: 0 $inuit-base-spacing-unit--large;
 }

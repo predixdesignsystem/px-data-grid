@@ -1,14 +1,19 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="px-data-grid-filter-entity.html">
+<link rel="import" href="px-data-grid-filter-section.html">
+<link rel="import" href="../px-icon-set/px-icon.html">
 <link rel="import" href="css/px-data-grid-filter-styles.html">
 
 <dom-module id="px-data-grid-filter">
   <template>
     <style include="px-data-grid-filter-styles"></style>
-    <template is="dom-repeat" items="{{filterEntities}}" as="entity">
-      <px-data-grid-filter-entity entity="{{entity}}" columns="[[columns]]" input-data="[[inputData]]" output-data="{{outputData}}"></px-data-grid-filter-entity>
+
+    <template is="dom-repeat" items="{{filters}}" as="section">
+      <px-data-grid-filter-section section="{{section}}" columns="[[columns]]"></px-data-grid-filter-section>
     </template>
-    <button on-click="_addFilterEntity">+</button>
+
+    <button class="btn btn--bare--primary" on-click="_addGroup">
+      <px-icon style="--iron-icon-height:16px" icon="px-utl:add"></px-icon> Add filter section
+    </button>
   </template>
   <script>
     {
@@ -26,14 +31,16 @@
             columns: {
               type: Array
             },
-            filterEntities: {
-              type: Array
+
+            filters: {
+              type: Array,
+              notify: true
             }
           };
         }
 
-        _addFilterEntity() {
-          this.push('filterEntities', {});
+        _addGroup() {
+          this.push('filters', {entities: [{}], action: 'show', operationType: 'all'});
         }
       }
 
