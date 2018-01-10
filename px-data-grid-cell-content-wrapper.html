@@ -140,7 +140,7 @@
 
           let value;
           if (path) {
-            value = this.get(path, item);
+            value = this.get(path, item) || '';
           } else {
             value = item;
           }
