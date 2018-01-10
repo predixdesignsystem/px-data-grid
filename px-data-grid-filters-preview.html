@@ -1,0 +1,143 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../px-chip/px-chip.html">
+<link rel="import" href="../px-icon-set/px-icon.html">
+<link rel="import" href="../px-tooltip/px-tooltip.html">
+<link rel="import" href="../px-popover/px-popover.html">
+<link rel="import" href="px-data-grid-filters-preview-tooltip.html">
+<link rel="import" href="css/px-data-grid-filters-preview-styles.html">
+
+<dom-module id="px-data-grid-filters-preview">
+  <template>
+    <style include="px-data-grid-filters-preview-styles"></style>
+
+    <template is="dom-if" if="[[!_filtersGrouped(flattenFilterEntities)]]">
+      <template is="dom-repeat" items="[[filters]]" as="section">
+        <template is="dom-repeat" items="[[section.entities]]" as="entity">
+          <template is="dom-if" if="[[entity.active]]">
+            <px-tooltip
+              for="chip-[[index]]"
+              orientation="top"
+              tooltip-message="[[_getTooltipMessage(entity, section, filters.*)]]">
+            </px-tooltip>
+            <px-chip
+              id="chip-[[index]]"
+              content="[[_getChipTitle(entity, entity.*)]]"
+              icon="px-utl:close"
+              entity="[[entity]]"
+              section="[[section]]"
+              not-selectable
+              show-icon>
+            </px-chip>
+          </template>
+        </template>
+      </template>
+    </template>
+
+    <template is="dom-if" if="[[_filtersGrouped(flattenFilterEntities)]]">
+      <px-popover
+        for="filter-group-chip"
+        orientation="right"
+        enhanced>
+        <px-data-grid-filters-preview-tooltip filters="[[filters]]"></px-data-grid-filters-preview-tooltip>
+      </px-popover>
+      <px-chip
+        id="filter-group-chip"
+        not-selectable
+        content="[[flattenFilterEntities.length]] filters applied">
+      </px-chip>
+    </template>
+  </template>
+
+  <script>
+    {
+      /**
+       * @memberof Predix
+       * @extends Polymer.Element
+       */
+      class DataGridFiltersPreviewElement extends Polymer.Element {
+        static get is() {
+          return 'px-data-grid-filters-preview';
+        }
+
+        static get properties() {
+          return {
+            filters: {
+              type: Array
+            },
+
+            flattenFilterEntities: {
+              type: Array,
+              computed: '_getFlattenFilterEntities(filters, filters.*)'
+            },
+
+            filtersLimit: {
+              type: Number,
+              value: 5
+            }
+          };
+        }
+
+        ready() {
+          super.ready();
+
+          this.addEventListener('px-chip-tapped', (ev) => {
+            if (ev.path[0].entity) {
+              this.dispatchEvent(new CustomEvent('remove-filter',
+                {
+                  detail: {
+                    section: ev.path[0].section,
+                    entity: ev.path[0].entity
+                  },
+                  bubbles: true,
+                  composed: true
+                }
+              ));
+            }
+          });
+        }
+
+        _getFlattenFilterEntities(filters) {
+          return filters
+            .map((section) => section.entities)
+            .reduce((a, b) => a.concat(b), [])
+            .filter((entity) => entity.active);
+        }
+
+        _getTooltipMessage(entity, section) {
+          switch (entity.column.type) {
+            case 'number':
+              return `${section.action} ${section.operationType} / ${entity.column.path} / Between`;
+            case 'date':
+              return `${section.action} ${section.operationType} / ${entity.column.path} / Between`;
+            default:
+              return `${section.action} ${section.operationType} / ${entity.column.path} / ${entity.pattern}`;
+          }
+        }
+
+        _getChipTitle(entity) {
+          switch (entity.column.type) {
+            case 'number':
+              return `${entity.leftBound}, ${entity.rightBound}`;
+            case 'date':
+              return `${window.moment(entity.dateFrom).format('YYYY/MM/DD HH:mm')}, ${window.moment(entity.dateTo).format('YYYY/MM/DD HH:mm')}`;
+            default:
+              return entity.query;
+          }
+        }
+
+        _filtersGrouped(flattenFilterEntities) {
+          return flattenFilterEntities.length > this.filtersLimit;
+        }
+      }
+
+      customElements.define(DataGridFiltersPreviewElement.is, DataGridFiltersPreviewElement);
+
+      /**
+       * @namespace Predix
+       */
+      window.Predix = window.Predix || {};
+      Predix.DataGridFiltersPreviewElement = DataGridFiltersPreviewElement;
+    }
+  </script>
+
+</dom-module>
