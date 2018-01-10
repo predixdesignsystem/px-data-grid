@@ -3,6 +3,7 @@
 <link rel="import" href="../vaadin-grid/vaadin-grid-sorter.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid-tree-toggle.html">
 <link rel="import" href="../px-spinner/px-spinner.html">
+<link rel="import" href="../px-modal/px-modal.html">
 <link rel="import" href="../px-icon-set/px-icon.html"/>
 <link rel="import" href="px-data-grid-column.html">
 <link rel="import" href="px-auto-filter-field.html">
@@ -16,6 +17,7 @@
 <link rel="import" href="px-data-grid-number-renderer.html">
 <link rel="import" href="px-data-grid-cell-content-wrapper.html">
 <link rel="import" href="px-data-grid-filter.html">
+<link rel="import" href="px-data-grid-filters-preview.html">
 <link rel="import" href="px-data-grid-sorter.html">
 <link rel="import" href="px-data-grid-edit-buttons.html">
 
@@ -25,23 +27,22 @@
   <template>
     <style include="px-data-grid-styles"></style>
 
-    <template is="dom-if" if="{{filterable}}">
-      <px-data-grid-filter columns="[[columns]]" filter-entities="{{filterEntities}}"></px-data-grid-filter>
-    </template>
+    <px-modal
+      header-text="Filter Columns"
+      accept-text="Accept"
+      reject-text="Cancel"
+      open-trigger="[[filtersModalTrigger]]"
+      >
+      <div slot="body">
+        <px-data-grid-filter columns="[[columns]]" filters="{{filters}}"></px-data-grid-filter>
+      </div>
+    </px-modal>
 
-    <template is="dom-if" if="{{_showActionBar(autoFilter, actionMenu)}}">
+    <px-data-grid-filters-preview filters="[[filters]]"></px-data-grid-filters-preview>
+
+    <template is="dom-if" if="{{_showActionBar(autoFilter, actionMenu, filterable)}}">
 
       <div class="action-bar">
-        <template is="dom-if" if="[[actionMenu]]">
-          <px-dropdown multi hide-selected
-            display-value="[[localize('Actions')]]"
-            items="[[_actionMenuContent]]"
-            selected-values="[[_selectedActionItems]]"
-            disable-clear
-            on-px-dropdown-click="_actionClicked">
-          </px-dropdown>
-        </template>
-
         <template is="dom-if" if="[[autoFilter]]">
           <px-auto-filter-field
             placeholder="[[localize('Filter')]]"
@@ -50,6 +51,27 @@
           >
           </px-auto-filter-field>
         </template>
+
+        <div class="action-bar__right">
+          <template is="dom-if" if="[[filterable]]">
+            <px-modal-trigger trigger="{{filtersModalTrigger}}">
+              <button class="btn">
+                <px-icon style="--iron-icon-height:16px" icon="px-utl:filter"></px-icon> [[localize('Table Filters')]]
+              </button>
+            </px-modal-trigger>
+          </template>
+
+          <template is="dom-if" if="[[actionMenu]]">
+            <px-dropdown multi hide-selected
+              display-value="[[localize('Actions')]]"
+              items="[[_actionMenuContent]]"
+              selected-values="[[_selectedActionItems]]"
+              disable-clear
+              on-px-dropdown-click="_actionClicked">
+            </px-dropdown>
+          </template>
+        </div>
+
       </div>
     </template>
     <vaadin-grid size="[[size]]"
@@ -174,6 +196,7 @@
               type: Boolean,
               value: false
             },
+
             /**
              * If true, hides the column with checkboxes.
              */
@@ -259,8 +282,8 @@
             },
 
             /**
-            * An array containing references to expanded items.
-            */
+             * An array containing references to expanded items.
+             */
             expandedItems: {
               type: Array,
               value: []
@@ -547,21 +570,9 @@
              * }
              * ```
              */
-            filterEntities: {
+            filters: {
               type: Array,
-              value: function() {
-                return [{}];
-              }
-            },
-
-            /**
-             * Filters from px-data-grid-filter component, that are completely filled
-             */
-            _readyFilterEntities: {
-              type: Array,
-              value: function() {
-                return [];
-              }
+              value: () => [{entities: [{}], action: 'show', operationType: 'all'}]
             },
 
             /**
@@ -609,7 +620,7 @@
 
         static get observers() {
           return [
-            '_filterEntitiesObserver(filterEntities, filterEntities.*)',
+            '_filtersObserver(filters, filters.*)',
             '_highlightsObserver(highlight, _filterHighlights, highlight.*, _filterHightlights.*)',
             '_localizeChanged(localize)',
             '_tableDataChanged(tableData, isAttached)',
@@ -661,6 +672,7 @@
 
         ready() {
           super.ready();
+
           this._vaadinGrid = this.shadowRoot.querySelector('vaadin-grid');
           this._vaadinGrid._pxDataGrid = this;
           this._vaadinGrid.addEventListener('px-sorter-changed', this._onPxSorterChanged);
@@ -690,6 +702,17 @@
 
           this.addEventListener('ungroup', (event) => {
             this._ungroup();
+          });
+
+          this.addEventListener('trigger-filters-modal', (event) => {
+            this.filtersModalTrigger.click();
+          });
+
+          this.addEventListener('remove-filter', (event) => {
+            const entity = event.detail.entity;
+            const section = event.detail.section;
+            const sectionIndex = this.filters.indexOf(section);
+            this.splice(`filters.${sectionIndex}.entities`, section.entities.indexOf(entity), 1);
           });
 
           this._boundedCancelEdit = this._cancelEdit.bind(this);
@@ -828,8 +851,8 @@
             items = this._applyAutoFilter(items, params.filters);
           }
 
-          if (this._readyFilterEntities && this._readyFilterEntities.length != 0) {
-            items = this._applyCustomFilter(items, this._readyFilterEntities);
+          if (this.filters && this.filters.length != 0) {
+            items = this._applyCustomFilter(items, this.filters);
           }
 
           if (params.sortOrders && params.sortOrders.length && this._vaadinGrid._checkPaths(this._sorters, 'sorting', items)) {
@@ -1055,8 +1078,8 @@
         /**
          * Simple method to check if action bar should be shown
          */
-        _showActionBar(filterField, actionDropDown) {
-          return filterField || actionDropDown;
+        _showActionBar(filterField, actionDropDown, filterable) {
+          return filterField || actionDropDown || filterable;
         }
 
         /**
@@ -1148,23 +1171,36 @@
         }
 
         _applyCustomFilter(items, filters) {
+          const appliableFilters = filters
+            .filter((section) => ['show', 'hide'].indexOf(section.action) !== -1)
+            .filter((section) => section.entities.filter((entity) => entity.active).length > 0);
+
           const filteredItems = items.filter((item) => {
-            const isEveryFilterApplied = filters.every((filter) => {
-              const filteringValue = Polymer.Path.get(item, filter.column.path);
+            if (appliableFilters.length === 0) {
+              return true;
+            }
 
-              if (filter.column.type === 'date') {
-                const dateTest = this._isDateMatches(filter, filteringValue);
-                return ((filter.action === 'show' && dateTest) || (filter.action === 'hide' && !dateTest));
-              } else if (filter.column.type === 'number') {
-                const numberTest = this._isNumberMatches(filter, filteringValue);
-                return ((filter.action === 'show' && numberTest) || (filter.action === 'hide' && !numberTest));
-              } else {
-                const regexTest = this._isStringMatches(filter, filteringValue);
-                return ((filter.action === 'show' && regexTest) || (filter.action === 'hide' && !regexTest));
-              }
-            });
+            const isAnySectionApplied = appliableFilters
+              .some((section) => {
+                const activeEntities = section.entities.filter((entity) => entity.active);
 
-            return isEveryFilterApplied;
+                return activeEntities[section.operationType === 'any' ? 'some' : 'every']((entity) => {
+                  const filteringValue = Polymer.Path.get(item, entity.column.path);
+
+                  if (entity.column.type === 'date') {
+                    const dateTest = this._isDateMatches(entity, filteringValue);
+                    return ((section.action === 'show' && dateTest) || (section.action === 'hide' && !dateTest));
+                  } else if (entity.column.type === 'number') {
+                    const numberTest = this._isNumberMatches(entity, filteringValue);
+                    return ((section.action === 'show' && numberTest) || (section.action === 'hide' && !numberTest));
+                  } else {
+                    const regexTest = this._isStringMatches(entity, filteringValue);
+                    return ((section.action === 'show' && regexTest) || (section.action === 'hide' && !regexTest));
+                  }
+                });
+              });
+
+            return isAnySectionApplied;
           });
 
           return filteredItems;
@@ -1256,48 +1292,40 @@
           this.set('_highlightEntities', highlight.concat(filterHighlights));
         }
 
-        _filterEntitiesObserver(filterEntities) {
+        _filtersObserver(filters) {
           if (!this._vaadinGrid) {
             return;
           }
 
-          this._readyFilterEntities = filterEntities.filter((entity) => {
-            return entity.active && ['show', 'hide'].includes(entity.action);
-          });
+          const appliableFilters = filters
+            .filter((section) => section.action === 'highlight' && section.entities.filter((entity) => entity.active).length > 0);
 
-          const filterHighlights = filterEntities.filter((entity) => {
-            return entity.active && entity.action === 'highlight';
-          }).map((filter) => {
-            let highlightEntity;
-            if (filter.column.type === 'date') {
-              highlightEntity = {
+          if (appliableFilters.length > 0) {
+            const condition = (cellContent, item) => {
+              return appliableFilters.some((section) => {
+                const activeEntities = section.entities.filter((entity) => entity.active);
+
+                return activeEntities[section.operationType === 'any' ? 'some' : 'every']((entity) => {
+                  const filteringValue = Polymer.Path.get(item, entity.column.path);
+
+                  if (entity.column.type === 'date') {
+                    return this._isDateMatches(entity, filteringValue);
+                  } else if (entity.column.type === 'number') {
+                    return this._isNumberMatches(entity, filteringValue);
+                  } else {
+                    return this._isStringMatches(entity, filteringValue);
+                  }
+                });
+              });
+            };
+
+            this.set('_filterHighlights', [
+              {
                 type: 'row',
-                condition: (cellContent, item) => {
-                  return this._isDateMatches(filter, Polymer.Path.get(item, filter.column.path));
-                }
-              };
-            } else if (filter.column.type === 'number') {
-              highlightEntity = {
-                type: 'row',
-                condition: (cellContent, item) => {
-                  return this._isNumberMatches(filter, Polymer.Path.get(item, filter.column.path));
-                }
-              };
-            } else {
-              // assume that content has type 'string'
-              highlightEntity = {
-                type: 'row',
-                condition: (cellContent, item) => {
-                  return this._isStringMatches(filter, Polymer.Path.get(item, filter.column.path));
-                }
-              };
-            }
-
-
-            return highlightEntity;
-          });
-
-          this.set('_filterHighlights', filterHighlights);
+                condition: condition
+              }
+            ]);
+          }
 
           this._vaadinGrid.clearCache();
         }
@@ -1561,7 +1589,7 @@
           return {
             columns: this._copyArray(this._getOrderedColumns()),
             highlight: this.highlight.map(entity => Object.assign({}, entity)),
-            filter: this._copyArray(this.filterEntities),
+            filters: this._copyArray(this.filters),
             autoFilter: this._autoFilterValue
           };
         }
@@ -1572,7 +1600,7 @@
           Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => {
             this.columns = this._copyArray(state.columns);
 
-            this.filterEntities = state.filter;
+            this.filters = state.filters;
             this._autoFilterValue = state.autoFilter;
             this.highlight = state.highlight;
           });
