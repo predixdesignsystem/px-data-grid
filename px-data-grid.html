@@ -28,14 +28,21 @@
     <style include="px-data-grid-styles"></style>
 
     <px-modal
+      id="filtersModal"
       header-text="Filter Columns"
-      accept-text="Accept"
-      reject-text="Cancel"
-      open-trigger="[[filtersModalTrigger]]"
-      >
+      open-trigger="[[filtersModalTrigger]]">
       <div slot="body">
-        <px-data-grid-filter columns="[[columns]]" filters="{{filters}}"></px-data-grid-filter>
+        <px-data-grid-filter id="filters" columns="[[columns]]" filters="{{filters}}"></px-data-grid-filter>
+        <div class="filter-modal-buttons-container">
+          <button class="btn" on-click="_resetFilters">Reject</button>
+          <div class="filter-modal-buttons-container__right">
+            <button class="btn" on-click="_cancelFilterChanges">Cancel</button>
+            <button class="btn btn--call-to-action" on-click="_applyFilters">Accept</button>
+          </div>
+        </div>
       </div>
+      <div slot="reject-trigger"></div>
+      <div slot="accept-trigger"></div>
     </px-modal>
 
     <px-data-grid-filters-preview filters="[[filters]]"></px-data-grid-filters-preview>
@@ -705,7 +712,7 @@
           });
 
           this.addEventListener('trigger-filters-modal', (event) => {
-            this.filtersModalTrigger.click();
+            this.$.filtersModal.opened = true;
           });
 
           this.addEventListener('remove-filter', (event) => {
@@ -726,6 +733,21 @@
               this._editingRenderers.splice(this._editingRenderers.indexOf(renderer), 1);
             }
           });
+        }
+
+        _applyFilters() {
+          this.$.filters.applyFilters();
+          this.$.filtersModal.opened = false;
+        }
+
+        _cancelFilterChanges() {
+          this.$.filters.cancelChanges();
+          this.$.filtersModal.opened = false;
+        }
+
+        _resetFilters() {
+          this.$.filters.resetFilters();
+          this.$.filtersModal.opened = false;
         }
 
         _ungroup() {

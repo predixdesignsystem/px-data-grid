@@ -7,13 +7,15 @@
   <template>
     <style include="px-data-grid-filter-styles"></style>
 
-    <template is="dom-repeat" items="{{filters}}" as="section">
+    <template is="dom-repeat" items="{{_tempFilters}}" as="section">
       <px-data-grid-filter-section section="{{section}}" columns="[[columns]]"></px-data-grid-filter-section>
     </template>
 
+    <!--
     <button class="btn btn--bare--primary" on-click="_addGroup">
       <px-icon style="--iron-icon-height:16px" icon="px-utl:add"></px-icon> Add filter section
     </button>
+    -->
   </template>
   <script>
     {
@@ -35,12 +37,46 @@
             filters: {
               type: Array,
               notify: true
+            },
+
+            _tempFilters: {
+              type: Array
             }
           };
         }
 
+        static get observers() {
+          return [
+            '_filtersObserver(filters, filters.*)'
+          ];
+        }
+
         _addGroup() {
           this.push('filters', {entities: [{}], action: 'show', operationType: 'all'});
+        }
+
+        _filtersObserver(filters) {
+          if (!filters) {
+            return;
+          }
+
+          this._restoreTempFilters();
+        }
+
+        applyFilters() {
+          this.filters = this._tempFilters;
+        }
+
+        cancelChanges() {
+          this._restoreTempFilters();
+        }
+
+        resetFilters() {
+          this.filters = [{entities: [{}], action: 'show', operationType: 'all'}];
+        }
+
+        _restoreTempFilters() {
+          this._tempFilters = JSON.parse(JSON.stringify(this.filters));
         }
       }
 
