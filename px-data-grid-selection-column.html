@@ -207,14 +207,16 @@
       connectedCallback() {
         super.connectedCallback();
         if (this._grid) {
-          this._grid.addEventListener('active-item-changed', this._boundOnActiveItemChanged);
-          this._grid.addEventListener('data-provider-changed', this._boundOnDataProviderChanged);
-          this._grid.addEventListener('filter-changed', this._boundOnSelectedItemsChanged);
-          this._grid._pxDataGrid.addEventListener('selected-items-changed', this._boundOnSelectedItemsChanged);
+          const _grid = this._grid;
 
-          if (this._grid._pxDataGrid) {
-            this._selectAllHidden = !this._grid._pxDataGrid._hasLocalDataProvider;
-          }
+          _grid.addEventListener('active-item-changed', this._boundOnActiveItemChanged);
+          _grid.addEventListener('data-provider-changed', this._boundOnDataProviderChanged);
+          _grid.addEventListener('filter-changed', this._boundOnSelectedItemsChanged);
+
+          Polymer.RenderStatus.afterNextRender(_grid, () => {
+            _grid._pxDataGrid.addEventListener('selected-items-changed', this._boundOnSelectedItemsChanged);
+            this._selectAllHidden = !_grid._pxDataGrid._hasLocalDataProvider;
+          });
         }
       }
 
