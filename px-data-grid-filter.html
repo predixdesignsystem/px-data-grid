@@ -11,6 +11,9 @@
       <px-data-grid-filter-section section="{{section}}" columns="[[columns]]"></px-data-grid-filter-section>
     </template>
 
+    <input id="saveFilterSet" type="checkbox">
+    <label class="label--inline" for="saveFilterSet">Save this filter set</label>
+
     <!--
     <button class="btn btn--bare--primary" on-click="_addGroup">
       <px-icon style="--iron-icon-height:16px" icon="px-utl:add"></px-icon> Add filter section
@@ -65,6 +68,20 @@
 
         applyFilters() {
           this.filters = this._tempFilters;
+
+          if (this.$.saveFilterSet.checked) {
+            this.dispatchEvent(
+              new CustomEvent('filters-changed',
+                {
+                  bubbles: true,
+                  composed: true,
+                  detail: {
+                    filters: this.filters
+                  }
+                }
+              )
+            );
+          }
         }
 
         cancelChanges() {

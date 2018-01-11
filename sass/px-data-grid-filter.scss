@@ -2,6 +2,12 @@
 
 :host {
   min-width: 729px;
+  overflow: auto;
+  max-height: 80vh;
   display: block;
   padding: 0 $inuit-base-spacing-unit--large;
+}
+
+input[type="checkbox"] {
+  margin-top: 30px;
 }
