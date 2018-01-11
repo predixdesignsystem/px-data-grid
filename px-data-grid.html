@@ -156,7 +156,6 @@
              */
             tableData: {
               type: Array,
-              observer: '_tableDataChanged',
               notify: true
             },
 
@@ -604,7 +603,8 @@
           return [
             '_filterEntitiesObserver(filterEntities, filterEntities.*)',
             '_highlightsObserver(highlight, _filterHighlights, highlight.*, _filterHightlights.*)',
-            '_localizeChanged(localize)'
+            '_localizeChanged(localize)',
+            '_tableDataChanged(tableData, isAttached)'
           ];
         }
 
@@ -797,7 +797,11 @@
           }).length;
         }
 
-        _tableDataChanged(tableData) {
+        _tableDataChanged(tableData, isAttached) {
+          if (!isAttached) {
+            return;
+          }
+
           if (tableData) {
             this._currentDataProvider = (params, callback) => {
               this._localDataProvider(params, (items, size) => {
