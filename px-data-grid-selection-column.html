@@ -176,13 +176,6 @@
         this._boundOnSelectedItemsChanged = this._onSelectedItemsChanged.bind(this);
       }
 
-      ready() {
-        super.ready();
-        if (this._grid && this._grid._pxDataGrid) {
-          this._selectAllHidden = !this._grid._pxDataGrid._hasLocalDataProvider;
-        }
-      }
-
       /** @private */
       disconnectedCallback() {
         if (this._grid) {
