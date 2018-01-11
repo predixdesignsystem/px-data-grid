@@ -58,10 +58,6 @@
           };
         }
 
-        ready() {
-          super.ready();
-        }
-
         _onChange() {
           this._renderDebouncer = Polymer.Debouncer.debounce(
             this._renderDebouncer,
