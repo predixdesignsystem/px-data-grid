@@ -823,6 +823,8 @@
             items = this._applyCustomFilter(items, this._readyFilterEntities);
           }
 
+          let sorted = items;
+
           if (params.sortOrders && params.sortOrders.length && this._vaadinGrid._checkPaths(this._sorters, 'sorting', items)) {
             const multiSort = (a, b) => {
               return params.sortOrders.map(sort => {
@@ -837,13 +839,13 @@
               }, 0);
             };
 
-            items = items.sort(multiSort);
+            sorted = items.slice(0).sort(multiSort);
           }
 
           const start = params.page * params.pageSize;
           const end = start + params.pageSize;
 
-          return items.slice(start, end);
+          return sorted.slice(start, end);
         }
 
         _localDataProvider(params, callback) {
