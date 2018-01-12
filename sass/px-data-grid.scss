@@ -26,6 +26,10 @@ px-data-grid-cell-content-wrapper {
   line-height: 16px;
 }
 
+vaadin-grid-tree-toggle[leaf] > px-data-grid-cell-content-wrapper {
+  padding-left: 0;
+}
+
 .action-bar {
   display: flex;
   flex-direction: row-reverse;

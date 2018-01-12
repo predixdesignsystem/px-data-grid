@@ -98,6 +98,14 @@
             <dom-if if="[[_isGroupedByColumn(column, _groupByColumn)]]">
               <template>
                 <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
+                  <template is="dom-if" if="[[item.hasChildren]]">
+                    <template is="dom-if" if="[[!expanded]]">
+                      <px-icon icon="px-utl:chevron-right"></px-icon>
+                    </template>
+                    <template is="dom-if" if="[[expanded]]">
+                      <px-icon icon="px-utl:chevron"></px-icon>
+                    </template>
+                  </template>
                   <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column, _highlightEntities.*)]]" item="{{item}}" column="[[column]]" localize="[[_boundedLocalize]]">
                   </px-data-grid-cell-content-wrapper>
                 </vaadin-grid-tree-toggle>
