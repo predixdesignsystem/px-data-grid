@@ -18,6 +18,36 @@ document.addEventListener('WebComponentsReady', () => {
     });
 
     describe('manually passed columns', () => {
+      const columns = [
+        {
+          name: 'first',
+          header: 'First Name',
+          path: 'first'
+        },
+        {
+          name: 'last',
+          header: 'Last Name',
+          path: 'last',
+          type: 'custom'
+        },
+        {
+          header: 'Hidden column',
+          hidden: true,
+          path: ''
+        }
+      ];
+
+      it('should set column.id properly', () => {
+        grid.columns = columns;
+        flushVaadinGrid(grid);
+        expect(grid.columns[0].id).to.be.eq('first[string]');
+        expect(grid.columns[1].id).to.be.eq('last[custom]');
+        expect(grid.columns[2].id).to.be.eq('[string]');
+      });
+
+    });
+
+    describe('manually passed columns', () => {
       const columnsA = [
         {
           name: 'first',
@@ -69,6 +99,7 @@ document.addEventListener('WebComponentsReady', () => {
         expect(currentColumns.length).to.be.eq(3);
         expect(currentColumns[0].name).to.be.eq('last');
       });
+
     });
 
     it('should be handle column data update with updateColumns', () => {
