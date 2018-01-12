@@ -173,3 +173,23 @@
     </style>
   </template>
 </dom-module>
+
+<dom-module id="vaadin-grid-tree-toggle-theme" theme-for="vaadin-grid-tree-toggle">
+  <template>
+    <style>
+      :host {
+        display: flex;
+        align-items: center;
+      }
+
+      [part="toggle"] {
+        display: none;
+      }
+
+      :host ::slotted(px-icon) {
+        margin-right: 10px;
+        --px-data-grid-cell-text-color--sorted: var(--px-base-text-color);
+      }
+    </style>
+  </template>
+</dom-module>
