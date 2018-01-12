@@ -80,6 +80,13 @@
     return wrapper.shadowRoot.innerHTML;
   }
 
+  function getBodyCellContent(grid, row, col) {
+    const rows = getRows(grid);
+    const cells = getRowCells(rows[row]);
+    const cell = cells[col];
+    return cell.querySelector('slot').assignedNodes()[0].querySelector('px-data-grid-cell-content-wrapper').shadowRoot.textContent;
+  }
+
   function getHeaderCell(grid, index) {
     return grid._vaadinGrid.$.header.querySelectorAll('[part~="cell"]')[index];
   }

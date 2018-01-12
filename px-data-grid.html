@@ -837,7 +837,7 @@
               }, 0);
             };
 
-            items = items.sort(multiSort);
+            items = items.slice(0).sort(multiSort);
           }
 
           const start = params.page * params.pageSize;

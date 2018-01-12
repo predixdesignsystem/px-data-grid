@@ -18,6 +18,7 @@
     "flushVaadinGrid": false,
     "getCell": false,
     "getCellContent": false,
+    "getBodyCellContent": false,
     "getHeaderCell": false,
     "getHeaderCellContent": false
   }
