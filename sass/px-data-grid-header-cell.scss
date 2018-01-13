@@ -16,6 +16,10 @@ px-icon {
   padding-bottom: 3px;
 }
 
+px-dropdown {
+  text-transform: capitalize;
+}
+
 px-dropdown[hidden] {
   visibility: hidden;
   display: inline-block !important;
