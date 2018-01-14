@@ -82,7 +82,7 @@
           hidden="[[column.hidden]]"
           localize="[[_boundedLocalize]]"
           type="[[column.type]]"
-          frozen="[[column.frozen]]"
+          frozen="[[_undefinedToFalse(column.frozen)]]"
           mapped-object="[[column]]"
           width="[[_getColumnWidth(column)]]"
           flex-grow="[[_getColumnFlexGrow(column)]]"
@@ -1521,6 +1521,18 @@
 
           // After empty columns has been rendered return to wanted state
           Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this.columns = revertTo);
+        }
+
+        /**
+         * Just to make sure only true or false is given (undefined converted to false).
+         * In some cases undefined value breaks functionality,
+         */
+        _undefinedToFalse(value) {
+          if (value === undefined) {
+            return false;
+          } else {
+            return value;
+          }
         }
 
         _copyArray(arr) {
