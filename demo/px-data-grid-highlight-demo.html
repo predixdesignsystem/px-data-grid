@@ -45,7 +45,7 @@
             selection-mode="{{props.selectionMode.value}}"
             multi-selected="{{props.multiSelect.value}}"
             highlight="{{props.highlight.value}}"
-            auto-height="{{props.autoHeight.value}}"
+            grid-height="{{props.gridHeight.value}}"
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}">
         </px-data-grid>
       </px-demo-component>
@@ -201,10 +201,11 @@
         defaultValue: false,
         inputType: 'toggle'
       },
-      autoHeight: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
+      gridHeight: {
+        type: String,
+        defaultValue: 'default',
+        inputType: 'dropdown',
+        inputChoices: ['default', 'auto', '300px', '600px', '900px']
       },
       selectionMode: {
         type: String,

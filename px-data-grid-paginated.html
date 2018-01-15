@@ -30,7 +30,7 @@
       action-menu="{{actionMenu}}"
       language="{{language}}"
       auto-filter="{{autoFilter}}"
-      auto-height="{{autoHeight}}"
+      grid-height="{{gridHeight}}"
       item-id-path="{{itemIdPath}}">
     </px-data-grid>
 
@@ -348,9 +348,9 @@
             /**
              * Grid auto resize height to match number of rows.
              */
-            autoHeight: {
-              type: Boolean,
-              value: true
+            gridHeight: {
+              type: String,
+              value: 'auto'
             },
 
             /**

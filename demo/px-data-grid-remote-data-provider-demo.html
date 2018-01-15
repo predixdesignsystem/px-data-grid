@@ -56,7 +56,7 @@
             hide-selection-column="{{props.hideSelectionColumn.value}}"
             resizable="{{props.resizable.value}}"
             striped="{{props.striped.value}}"
-            auto-height="{{props.autoHeight.value}}"
+            grid-height="{{props.gridHeight.value}}"
             multi-sort="{{props.multiSort.value}}"
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
             action-menu="{{props.actionMenu.value}}"
@@ -236,10 +236,11 @@
         inputType: 'toggle'
       },
 
-      autoHeight: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
+      gridHeight: {
+        type: String,
+        defaultValue: 'default',
+        inputType: 'dropdown',
+        inputChoices: ['default', 'auto', '300px', '600px', '900px']
       },
 
       language: {
