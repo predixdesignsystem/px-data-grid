@@ -20,5 +20,12 @@ document.addEventListener('WebComponentsReady', () => {
       expect(grid.columns[2].name).to.be.eql('email');
     });
 
+    it('should set proper column.id', () => {
+      expect(grid.columns.length).to.be.eql(3);
+      expect(grid.columns[0].id).to.be.eql('first[string]');
+      expect(grid.columns[1].id).to.be.eql('last[string]');
+      expect(grid.columns[2].id).to.be.eql('email[string]');
+    });
+
   });
 });

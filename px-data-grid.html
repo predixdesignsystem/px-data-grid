@@ -612,7 +612,8 @@
             '_filterEntitiesObserver(filterEntities, filterEntities.*)',
             '_highlightsObserver(highlight, _filterHighlights, highlight.*, _filterHightlights.*)',
             '_localizeChanged(localize)',
-            '_tableDataChanged(tableData, isAttached)'
+            '_tableDataChanged(tableData, isAttached)',
+            '_setColumnId(columns, columns.*)'
           ];
         }
 
@@ -1500,6 +1501,23 @@
         _columnsChanged(columns) {
           // Store cleaned version of current columns
           this._lastColumnsReceived = this._cleanColumns(columns);
+        }
+
+        _setColumnId(columns) {
+          if (!columns) {
+            return;
+          }
+
+          columns.forEach((column) => {
+            if (!column.id) {
+              column.id = `${column.path}[${column.type || 'string'}]`;
+
+              if (columns.filter((col) => col.id === column.id).length > 1) {
+                console.warn(`Warning! There are multiple columns with '${column.path}' path ` +
+                  `and '${column.type || 'string'}' type, please provide column.id for those columns`);
+              }
+            }
+          });
         }
 
         /**
