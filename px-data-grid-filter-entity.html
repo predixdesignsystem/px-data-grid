@@ -12,10 +12,10 @@
       <label for="column-dropdown">
         Attribute
       </label>
-      <px-dropdown id="column-dropdown" items="[[_mappedColumns]]" selected="{{entity.column}}"></px-dropdown>
+      <px-dropdown id="column-dropdown" items="[[_mappedColumns]]" selected="{{entity.columnId}}"></px-dropdown>
     </div>
 
-    <template is="dom-if" if="{{_columnTypeIsString(entity.column)}}">
+    <template is="dom-if" if="{{_columnTypeIsString(entity.columnId)}}">
       <div class="labeled-text">
         <label for="condition-dropdown">
           Condition
@@ -31,7 +31,7 @@
       </div>
     </template>
 
-    <template is="dom-if" if="{{_columnTypeIsDate(entity.column)}}">
+    <template is="dom-if" if="{{_columnTypeIsDate(entity.columnId)}}">
       <div class="labeled-text" extended>
         <label for="date-rangepicker">
           Date Range
@@ -50,7 +50,7 @@
       </div>
     </template>
 
-    <template is="dom-if" if="{{_columnTypeIsNumber(entity.column)}}">
+    <template is="dom-if" if="{{_columnTypeIsNumber(entity.columnId)}}">
       <div class="labeled-text" extended>
         <label for="range-input">
           Range
@@ -122,6 +122,10 @@
 
             _dateTo: {
               type: Object
+            },
+
+            _selectedColumnId: {
+              type: String
             }
           };
         }
@@ -131,7 +135,8 @@
             '_setMappedColumns(columns, columns.*)',
             '_filterActiveObservable(entity, entity.*)',
             '_momentDatesObserver(_dateFrom, _dateTo, _dateFrom.*, _dateTo.*)',
-            '_entityDatesObserver(entity, entity.dateFrom, entity.dateTo)'
+            '_entityDatesObserver(entity, entity.dateFrom, entity.dateTo)',
+            '_selectedColumnChanged(_selectedColumnId)'
           ];
         }
 
@@ -143,30 +148,43 @@
           this.set('_mappedColumns', []);
 
           columns.forEach((col) => {
-            this.push('_mappedColumns', {key: col, val: col.path});
+            this.push('_mappedColumns', {key: col.id, val: col.path});
           });
         }
 
-        _columnTypeIsString(column) {
+        _columnTypeIsString(columnId) {
+          const column = this._getColumnById(columnId);
+
           return column && !['date', 'number'].includes(column.type);
         }
 
-        _columnTypeIsDate(column) {
+        _columnTypeIsDate(columnId) {
+          const column = this._getColumnById(columnId);
+
           return column && column.type === 'date';
         }
 
-        _columnTypeIsNumber(column) {
+        _columnTypeIsNumber(columnId) {
+          const column = this._getColumnById(columnId);
+
           return column && column.type === 'number';
         }
 
+        _getColumnById(columnId) {
+          if (!this.columns) {
+            return;
+          }
+          return this.columns.filter((column) => column.id === columnId)[0];
+        }
+
         _filterActiveObservable(entity) {
-          if (entity.column) {
-            if (this._columnTypeIsString(entity.column)) {
-              this.set('entity.active', !!entity.pattern && !!entity.query && !!entity.column);
-            } else if (this._columnTypeIsDate(entity.column)) {
-              this.set('entity.active', !!entity.column && (!!entity.dateFrom || !!entity.dateTo));
-            } else if (this._columnTypeIsNumber(entity.column)) {
-              this.set('entity.active', !!entity.column && (!!entity.leftBound || !!entity.rightBound));
+          if (entity.columnId) {
+            if (this._columnTypeIsString(entity.columnId)) {
+              this.set('entity.active', !!entity.pattern && !!entity.query && !!entity.columnId);
+            } else if (this._columnTypeIsDate(entity.columnId)) {
+              this.set('entity.active', !!entity.columnId && (!!entity.dateFrom || !!entity.dateTo));
+            } else if (this._columnTypeIsNumber(entity.columnId)) {
+              this.set('entity.active', !!entity.columnId && (!!entity.leftBound || !!entity.rightBound));
             }
           }
         }

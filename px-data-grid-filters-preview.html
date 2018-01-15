@@ -38,7 +38,7 @@
         for="filter-group-chip"
         orientation="right"
         enhanced>
-        <px-data-grid-filters-preview-tooltip filters="[[filters]]"></px-data-grid-filters-preview-tooltip>
+        <px-data-grid-filters-preview-tooltip filters="[[filters]]" columns="[[columns]]"></px-data-grid-filters-preview-tooltip>
       </px-popover>
       <px-chip
         id="filter-group-chip"
@@ -73,6 +73,10 @@
             filtersLimit: {
               type: Number,
               value: 5
+            },
+
+            columns: {
+              type: Array
             }
           };
         }
@@ -96,6 +100,10 @@
           });
         }
 
+        _getColumnById(columnId) {
+          return this.columns.filter((column) => column.id === columnId)[0];
+        }
+
         _getFlattenFilterEntities(filters) {
           return filters
             .map((section) => section.entities)
@@ -104,18 +112,22 @@
         }
 
         _getTooltipMessage(entity, section) {
-          switch (entity.column.type) {
+          const column = this._getColumnById(entity.columnId);
+
+          switch (column.type) {
             case 'number':
-              return `${section.action} ${section.operationType} / ${entity.column.path} / Between`;
+              return `${section.action} ${section.operationType} / ${column.path} / Between`;
             case 'date':
-              return `${section.action} ${section.operationType} / ${entity.column.path} / Between`;
+              return `${section.action} ${section.operationType} / ${column.path} / Between`;
             default:
-              return `${section.action} ${section.operationType} / ${entity.column.path} / ${entity.pattern}`;
+              return `${section.action} ${section.operationType} / ${column.path} / ${entity.pattern}`;
           }
         }
 
         _getChipTitle(entity) {
-          switch (entity.column.type) {
+          const column = this._getColumnById(entity.columnId);
+
+          switch (column.type) {
             case 'number':
               return `${entity.leftBound}, ${entity.rightBound}`;
             case 'date':
