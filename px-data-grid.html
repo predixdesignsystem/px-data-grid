@@ -1560,13 +1560,14 @@
         }
 
         _setColumnId(columns) {
-          if (!columns) {
+          if (!columns || this._columnIdSetting) {
             return;
           }
 
-          columns.forEach((column) => {
+          this._columnIdSetting = true;
+          columns.forEach((column, index) => {
             if (!column.id) {
-              column.id = `${column.path}[${column.type || 'string'}]`;
+              this.set(`columns.${index}.id`, `${column.path}[${column.type || 'string'}]`);
 
               if (columns.filter((col) => col.id === column.id).length > 1) {
                 console.warn(`Warning! There are multiple columns with '${column.path}' path ` +
@@ -1574,6 +1575,7 @@
               }
             }
           });
+          this._columnIdSetting = false;
         }
 
         /**
