@@ -32,14 +32,18 @@ vaadin-grid-tree-toggle[leaf] > px-data-grid-cell-content-wrapper {
 
 .action-bar {
   display: flex;
-  flex-direction: row-reverse;
   flex-wrap: nowrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 20px;
 }
 
-.action-bar > px-auto-filter-field {
-  flex-grow: 1;
+.action-bar__right {
+  margin-left: auto;
+  display: flex;
+}
+
+.action-bar__right > px-dropdown {
+  margin-left: 15px;
 }
 
 px-spinner {
@@ -73,4 +77,15 @@ vaadin-grid[auto-height] {
 px-icon {
   --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted);
   cursor: pointer;
+}
+
+.filter-modal-buttons-container {
+  padding: $inuit-base-spacing-unit--large;
+  padding-bottom: 0;
+  margin-bottom: calc(0px - #{$inuit-base-spacing-unit--large});
+  display: flex;
+}
+
+.filter-modal-buttons-container__right {
+  margin-left: auto;
 }

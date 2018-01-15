@@ -1,0 +1,120 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../px-icon-set/px-icon.html">
+<link rel="import" href="../px-dropdown/px-dropdown.html">
+<link rel="import" href="css/px-data-grid-filter-section-styles.html">
+<link rel="import" href="px-data-grid-filter-entity.html">
+
+<dom-module id="px-data-grid-filter-section">
+  <template>
+    <style include="px-data-grid-filter-section-styles"></style>
+
+    <div class="action-select">
+      <px-dropdown
+        items='[[_actions]]'
+        button-style="bare--primary"
+        disable-clear
+        selected="{{section.action}}">
+      </px-dropdown>
+      <span>items that match</span>
+      <px-dropdown
+        items='[[_operationTypes]]'
+        button-style="bare--primary"
+        disable-clear
+        selected="{{section.operationType}}">
+      </px-dropdown>
+    </div>
+
+    <template is="dom-repeat" items="{{section.entities}}" as="entity">
+      <div class="filter-entity">
+        <px-data-grid-filter-entity entity="{{entity}}" columns="[[columns]]"></px-data-grid-filter-entity>
+        <button class="btn btn--bare btn--icon" on-click="_removeEntity">
+          <px-icon style="--iron-icon-height:20px" icon="px-nav:close"></px-icon>
+        </button>
+      </div>
+    </template>
+
+    <button class="btn btn--bare--primary" on-click="_addEntity">
+      <px-icon style="--iron-icon-height:16px" icon="px-utl:add"></px-icon> Add filter
+    </button>
+  </template>
+
+  <script>
+    {
+      /**
+       * @memberof Predix
+       * @extends Polymer.Element
+       */
+      class DataGridFilterSectionElement extends Polymer.Element {
+        static get is() {
+          return 'px-data-grid-filter-section';
+        }
+
+        static get properties() {
+          return {
+            section: {
+              type: Object
+            },
+
+            _actions: {
+              type: Array,
+              value: [
+                {
+                  key: 'show',
+                  val: 'Show'
+                },
+                {
+                  key: 'hide',
+                  val: 'Hide'
+                },
+                {
+                  key: 'highlight',
+                  val: 'Highlight'
+                }
+              ]
+            },
+
+            _operationTypes: {
+              type: Array,
+              value: [
+                {
+                  key: 'all',
+                  val: 'all'
+                },
+                {
+                  key: 'any',
+                  val: 'any'
+                }
+              ]
+            },
+
+            columns: {
+              type: Array
+            }
+          };
+        }
+
+        ready() {
+          super.ready();
+          this._boundedRemoveEntity = this._removeEntity.bind(this);
+        }
+
+        _addEntity() {
+          this.push('section.entities', {});
+        }
+
+        _removeEntity(event) {
+          this.splice('section.entities', this.section.entities.indexOf(event.model.entity), 1);
+        }
+      }
+
+      customElements.define(DataGridFilterSectionElement.is, DataGridFilterSectionElement);
+
+      /**
+       * @namespace Predix
+       */
+      window.Predix = window.Predix || {};
+      Predix.DataGridFilterSectionElement = DataGridFilterSectionElement;
+    }
+  </script>
+
+</dom-module>

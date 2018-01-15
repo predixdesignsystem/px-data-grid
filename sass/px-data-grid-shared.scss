@@ -12,11 +12,21 @@
 @import "px-normalize-design/_generic.normalize.scss";
 
 $inuit-enable-input--tiny : true;
+$inuit-enable-input--regular : true;
 $inuit-enable-validation-states : true;
 @import "px-forms-design/_base.forms.scss";
 
 $fa-font-path : "../../font-awesome/fonts";
 $inuit-enable-btn--bare           : true;
+$inuit-enable-btn--icon : true;
+$inuit-enable-btn--bare--primary : true;
+$inuit-enable-btn--call-to-action : true;
+@import 'px-buttons-design/_objects.buttons.scss';
+@import "px-actionable-design/_objects.actionable.scss";
+
+.text-input {
+  box-sizing: border-box;
+}
 
 // Trumps
 $inuit-enable-paddings--small     : true;

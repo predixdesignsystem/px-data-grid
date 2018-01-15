@@ -1,0 +1,21 @@
+@import 'px-data-grid-shared';
+
+:host {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.labeled-text {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.labeled-text[extended] {
+  flex-grow: 2;
+}
+
+.labeled-text px-dropdown {
+  width: calc(100% - 2px);
+}
