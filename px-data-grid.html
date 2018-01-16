@@ -1627,8 +1627,8 @@
           return JSON.parse(JSON.stringify(arr));
         }
 
-        _isAutoHeight() {
-          return this.gridHeight === 'auto';
+        _isAutoHeight(gridHeight) {
+          return gridHeight === 'auto';
         }
 
         getState() {
