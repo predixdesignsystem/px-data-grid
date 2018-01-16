@@ -17,6 +17,7 @@
 <link rel="import" href="px-data-grid-number-renderer.html">
 <link rel="import" href="px-data-grid-cell-content-wrapper.html">
 <link rel="import" href="px-data-grid-filter.html">
+<link rel="import" href="px-data-grid-filters-modal.html">
 <link rel="import" href="px-data-grid-filters-preview.html">
 <link rel="import" href="px-data-grid-sorter.html">
 <link rel="import" href="px-data-grid-edit-buttons.html">
@@ -26,24 +27,6 @@
 <dom-module id="px-data-grid">
   <template>
     <style include="px-data-grid-styles"></style>
-
-    <px-modal
-      id="filtersModal"
-      header-text="Filter Columns"
-      open-trigger="[[filtersModalTrigger]]">
-      <div slot="body">
-        <px-data-grid-filter id="filters" columns="[[columns]]" filters="{{filters}}"></px-data-grid-filter>
-        <div class="filter-modal-buttons-container">
-          <button class="btn" on-click="_resetFilters">Reject</button>
-          <div class="filter-modal-buttons-container__right">
-            <button class="btn" on-click="_cancelFilterChanges">Cancel</button>
-            <button class="btn btn--call-to-action" on-click="_applyFilters">Accept</button>
-          </div>
-        </div>
-      </div>
-      <div slot="reject-trigger"></div>
-      <div slot="accept-trigger"></div>
-    </px-modal>
 
     <px-data-grid-filters-preview filters="[[filters]]" columns="[[columns]]"></px-data-grid-filters-preview>
 
@@ -61,11 +44,7 @@
 
         <div class="action-bar__right">
           <template is="dom-if" if="[[filterable]]">
-            <px-modal-trigger trigger="{{filtersModalTrigger}}">
-              <button class="btn">
-                <px-icon style="--iron-icon-height:16px" icon="px-utl:filter"></px-icon> [[localize('Table Filters')]]
-              </button>
-            </px-modal-trigger>
+            <px-data-grid-filters-modal filters="{{filters}}" columns="[[columns]]" localize="[[_boundedLocalize]]"></px-data-grid-filters-modal>
           </template>
 
           <template is="dom-if" if="[[actionMenu]]">
@@ -736,21 +715,6 @@
               this._editingRenderers.splice(this._editingRenderers.indexOf(renderer), 1);
             }
           });
-        }
-
-        _applyFilters() {
-          this.$.filters.applyFilters();
-          this.$.filtersModal.opened = false;
-        }
-
-        _cancelFilterChanges() {
-          this.$.filters.cancelChanges();
-          this.$.filtersModal.opened = false;
-        }
-
-        _resetFilters() {
-          this.$.filters.resetFilters();
-          this.$.filtersModal.opened = false;
         }
 
         _ungroup() {

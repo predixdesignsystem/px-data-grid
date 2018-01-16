@@ -78,14 +78,3 @@ px-icon {
   --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted);
   cursor: pointer;
 }
-
-.filter-modal-buttons-container {
-  padding: $inuit-base-spacing-unit--large;
-  padding-bottom: 0;
-  margin-bottom: calc(0px - #{$inuit-base-spacing-unit--large});
-  display: flex;
-}
-
-.filter-modal-buttons-container__right {
-  margin-left: auto;
-}
