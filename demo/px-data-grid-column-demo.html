@@ -48,7 +48,7 @@
           action-menu="{{props.actionMenu.value}}"
           language="{{props.language.value}}"
           striped="{{props.striped.value}}"
-          auto-height="{{props.autoHeight.value}}"
+          grid-height="{{props.gridHeight.value}}"
           table-actions="{{props.tableActions.value}}"
           action-menu="{{props.actionMenu.value}}"
           columns="{{props.columns.value}}"
@@ -620,10 +620,11 @@
         inputType: 'toggle'
       },
 
-      autoHeight: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
+      gridHeight: {
+        type: String,
+        defaultValue: 'default',
+        inputType: 'dropdown',
+        inputChoices: ['default', 'auto', '300px', '600px', '900px']
       },
 
       actionMenu: {

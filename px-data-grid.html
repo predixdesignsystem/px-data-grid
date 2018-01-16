@@ -90,8 +90,8 @@
                  selected-items="{{selectedItems}}"
                  multi-sort="[[multiSort]]"
                  item-id-path="[[itemIdPath]]"
-                 auto-height$="[[autoHeight]]"
                  page-size="{{pageSize}}"
+                 auto-height$="[[_isAutoHeight(gridHeight)]]"
                  loading="{{_loading}}">
 
       <template is="dom-if" if="[[_isSelectable(selectionMode)]]" restamp>
@@ -584,13 +584,15 @@
             },
 
             /**
-             * Grid auto resize height to match number of rows.
+             * Define height of grid. If 'auto' the height of grid will match with
+             * match with number of rows in grid. Undefined value and 'default'
+             * will use default height. Any other value (eg. '400px') is given as
+             * CSS height value to the actual grid component inside px-data-grid.
              */
-            autoHeight: {
-              type: Boolean,
-              value: false,
+            gridHeight: {
+              type: String,
               reflectToAttribute: true,
-              observer: '_autoHeightChanged'
+              observer: '_gridHeightChanged'
             },
 
             /**
@@ -1359,9 +1361,18 @@
           this._vaadinGrid.clearCache();
         }
 
-        _autoHeightChanged(autoHeight) {
+        _gridHeightChanged(gridHeight) {
           if (!this._vaadinGrid) {
             return;
+          }
+
+          // In case of real undefined (or 'default' string, for demo cases)
+          // and 'auto' the CSS height of vaadin-grid is set to undefined. Other
+          // values are set as CSS height value to vaadin-grid.
+          if (!this.gridHeight || this.gridHeight == 'default' || this.gridHeight == 'auto') {
+            this._vaadinGrid.style.height = null;
+          } else {
+            this._vaadinGrid.style.height = this.gridHeight;
           }
 
           Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._vaadinGrid.notifyResize());
@@ -1614,6 +1625,10 @@
 
         _copyArray(arr) {
           return JSON.parse(JSON.stringify(arr));
+        }
+
+        _isAutoHeight(gridHeight) {
+          return gridHeight === 'auto';
         }
 
         getState() {

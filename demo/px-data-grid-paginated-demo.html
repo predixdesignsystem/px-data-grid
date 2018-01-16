@@ -65,7 +65,7 @@
             auto-filter="{{props.autoFilter.value}}"
             on-cell-hover="cellHoverListener"
             on-cell-unhover="cellUnhoverListener"
-            auto-height="{{props.autoHeight.value}}">
+            grid-height="{{props.gridHeight.value}}">
         </px-data-grid-paginated>
 
         <dom-if if="[[selectedItems.length]]">
@@ -479,10 +479,11 @@
         inputType: 'toggle'
       },
 
-      autoHeight: {
-        type: Boolean,
-        defaultValue: true,
-        inputType: 'toggle'
+      gridHeight: {
+        type: String,
+        defaultValue: 'default',
+        inputType: 'dropdown',
+        inputChoices: ['default', 'auto', '300px', '600px', '900px']
       },
 
       striped: {
