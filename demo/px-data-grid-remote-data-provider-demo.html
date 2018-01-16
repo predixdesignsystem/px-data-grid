@@ -62,7 +62,8 @@
             action-menu="{{props.actionMenu.value}}"
             language="{{props.language.value}}"
             auto-filter="{{props.autoFilter.value}}"
-            item-id-path="index">
+            item-id-path="index"
+            page-size="{{props.pageSize.value}}">
         </px-data-grid>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -159,6 +160,8 @@
             '_page=' + encodeURIComponent(params.page + 1) + '&' +
             '_limit=' + encodeURIComponent(params.pageSize);
 
+          console.info('Asking data from ' + url);
+
           // Add free text filtering
           if (params.filters.length == 1 && params.filters[0].path == undefined) {
             url += '&q=' + encodeURIComponent(params.filters[0].value);
@@ -178,6 +181,12 @@
           xhr.open('GET', url, true);
           xhr.send();
         }
+      },
+
+      pageSize: {
+        type: Number,
+        value: 50,
+        inputType: 'text'
       },
 
       selectionMode: {
