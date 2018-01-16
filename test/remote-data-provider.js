@@ -58,9 +58,13 @@ document.addEventListener('WebComponentsReady', () => {
       grid.remoteDataProvider = (params, callback) => {
         if (!doneCalled) {
           expect(params.pageSize).to.be.equal(100);
-          var response = Array(params.pageSize).fill({
-            name: 'foobar'
-          });
+          const response = [];
+          for (let i = 0; i < params.pageSize; ++i) {
+            response.push({
+              id: params.page * params.pageSize + i,
+              name: 'foobar'
+            });
+          }
           callback(response, 100);
           doneCalled = true;
           done();
