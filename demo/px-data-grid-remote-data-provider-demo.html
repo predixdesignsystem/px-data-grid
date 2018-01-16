@@ -62,7 +62,8 @@
             action-menu="{{props.actionMenu.value}}"
             language="{{props.language.value}}"
             auto-filter="{{props.autoFilter.value}}"
-            item-id-path="index">
+            item-id-path="index"
+            page-size="{{props.pageSize.value}}">
         </px-data-grid>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -178,6 +179,12 @@
           xhr.open('GET', url, true);
           xhr.send();
         }
+      },
+
+      pageSize: {
+        type: Number,
+        value: 50,
+        inputType: 'text'
       },
 
       selectionMode: {
