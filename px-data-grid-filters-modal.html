@@ -59,6 +59,14 @@
           };
         }
 
+        ready() {
+          super.ready();
+
+          document.addEventListener('trigger-filters-modal', (event) => {
+            this.$.filtersModal.opened = true;
+          });
+        }
+
         _apply() {
           this.$.filters.applyFilters();
           this.$.filtersModal.opened = false;

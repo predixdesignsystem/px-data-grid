@@ -693,10 +693,6 @@
             this._ungroup();
           });
 
-          this.addEventListener('trigger-filters-modal', (event) => {
-            this.$.filtersModal.opened = true;
-          });
-
           this.addEventListener('remove-filter', (event) => {
             const entity = event.detail.entity;
             const section = event.detail.section;
