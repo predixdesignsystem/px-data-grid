@@ -448,7 +448,7 @@
               }, 0);
             };
 
-            items = items.sort(multiSort);
+            items = items.slice(0).sort(multiSort);
           }
 
           const total = items.length;
