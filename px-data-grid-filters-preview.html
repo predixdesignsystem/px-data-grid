@@ -17,7 +17,7 @@
             <px-tooltip
               for="chip-[[index]]"
               orientation="top"
-              tooltip-message="[[_getTooltipMessage(entity, section, filters.*)]]">
+              tooltip-message="[[_getTooltipMessage(entity, section, filters.*, localize)]]">
             </px-tooltip>
             <px-chip
               id="chip-[[index]]"
@@ -38,12 +38,12 @@
         for="filter-group-chip"
         orientation="right"
         enhanced>
-        <px-data-grid-filters-preview-tooltip filters="[[filters]]" columns="[[columns]]"></px-data-grid-filters-preview-tooltip>
+        <px-data-grid-filters-preview-tooltip filters="[[filters]]" columns="[[columns]]" localize="[[localize]]"></px-data-grid-filters-preview-tooltip>
       </px-popover>
       <px-chip
         id="filter-group-chip"
         not-selectable
-        content="[[flattenFilterEntities.length]] filters applied">
+        content="[[flattenFilterEntities.length]] [[localize('filters applied')]]">
       </px-chip>
     </template>
   </template>
@@ -77,7 +77,9 @@
 
             columns: {
               type: Array
-            }
+            },
+
+            localize: Function
           };
         }
 
@@ -116,9 +118,9 @@
 
           switch (column.type) {
             case 'number':
-              return `${section.action} ${section.operationType} / ${column.path} / Between`;
+              return `${section.action} ${section.operationType} / ${column.path} / ${this.localize('Between')}`;
             case 'date':
-              return `${section.action} ${section.operationType} / ${column.path} / Between`;
+              return `${section.action} ${section.operationType} / ${column.path} / ${this.localize('Between')}`;
             default:
               return `${section.action} ${section.operationType} / ${column.path} / ${entity.pattern}`;
           }
