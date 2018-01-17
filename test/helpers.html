@@ -77,14 +77,20 @@
   function getCellContent(grid, _cell) {
     const cell = getCell(grid, _cell);
     const wrapper = cell.querySelector('px-data-grid-cell-content-wrapper');
-    return wrapper.shadowRoot.innerHTML;
+    return wrapper.shadowRoot.firstElementChild.value;
   }
 
   function getBodyCellContent(grid, row, col) {
     const rows = getRows(grid);
     const cells = getRowCells(rows[row]);
     const cell = cells[col];
-    return cell.querySelector('slot').assignedNodes()[0].querySelector('px-data-grid-cell-content-wrapper').shadowRoot.textContent;
+    return cell
+      .querySelector('slot')
+      .assignedNodes()[0]
+      .querySelector('px-data-grid-cell-content-wrapper')
+      .shadowRoot
+      .firstElementChild
+      .value;
   }
 
   function getHeaderCell(grid, index) {
