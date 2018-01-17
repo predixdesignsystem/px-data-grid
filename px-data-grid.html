@@ -1378,6 +1378,8 @@
         }
 
         _setEditingItem(event) {
+          // To prevent selections
+          event.stopPropagation();
           this._editingItem = event.model.item;
         }
 
