@@ -453,6 +453,11 @@
                   email: 'rasaogu@tadiri.tc'
                 }
               ]
+            },
+            {
+              configName: 'More rows (250 generated)',
+              configReset: true,
+              tableData: this._generateData(250)
             }
           ];
         }
@@ -597,5 +602,17 @@
       const grid = this.shadowRoot.querySelector('px-data-grid');
       grid.setState(this._savedState);
     },
+
+    _generateData(amount) {
+      const data = [];
+      for (let i = 0; i < amount; ++i) {
+        data.push({
+          first: 'First ' + (i + 1),
+          last: 'Last ' + (i + 1),
+          email: 'user' + (i + 1) + '@example.com'
+        });
+      }
+      return data;
+    }
   });
 </script>
