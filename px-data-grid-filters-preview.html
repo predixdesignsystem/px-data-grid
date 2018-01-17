@@ -131,7 +131,7 @@
             case 'number':
               return `${entity.leftBound}, ${entity.rightBound}`;
             case 'date':
-              return `${window.moment(entity.dateFrom).format('YYYY/MM/DD HH:mm')}, ${window.moment(entity.dateTo).format('YYYY/MM/DD HH:mm')}`;
+              return `${window.moment(entity.dateFrom).format('YYYY/MM/DD')}, ${window.moment(entity.dateTo).format('YYYY/MM/DD')}`;
             default:
               return entity.query;
           }

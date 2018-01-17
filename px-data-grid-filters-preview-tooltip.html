@@ -117,7 +117,7 @@
               return `${section.action} ${section.operationType} /
                 ${column.path} /
                 Between /
-                ${window.moment(entity.dateFrom).format('YYYY/MM/DD HH:mm')}, ${window.moment(entity.dateTo).format('YYYY/MM/DD HH:mm')}`;
+                ${window.moment(entity.dateFrom).format('YYYY/MM/DD')}, ${window.moment(entity.dateTo).format('YYYY/MM/DD')}`;
             default:
               return `${section.action} ${section.operationType} / ${column.path} / ${entity.pattern} / ${entity.query}`;
           }
