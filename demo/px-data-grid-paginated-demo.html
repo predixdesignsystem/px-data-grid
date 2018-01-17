@@ -65,6 +65,7 @@
             auto-filter="{{props.autoFilter.value}}"
             on-cell-hover="cellHoverListener"
             on-cell-unhover="cellUnhoverListener"
+            selectable-page-sizes="{{props.selectablePageSizes.value}}"
             grid-height="{{props.gridHeight.value}}">
         </px-data-grid-paginated>
 
@@ -490,6 +491,12 @@
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'
+      },
+
+      selectablePageSizes: {
+        type: Array,
+        value: [10, 20, 30],
+        inputType: 'code:JSON'
       },
 
       language: {
