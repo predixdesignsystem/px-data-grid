@@ -15,7 +15,7 @@
         disable-clear
         selected="{{section.action}}">
       </px-dropdown>
-      <span>items that match</span>
+      <span>[[localize('items that match')]]</span>
       <px-dropdown
         items='[[_operationTypes]]'
         button-style="bare--primary"
@@ -26,7 +26,7 @@
 
     <template is="dom-repeat" items="{{section.entities}}" as="entity">
       <div class="filter-entity">
-        <px-data-grid-filter-entity entity="{{entity}}" columns="[[columns]]"></px-data-grid-filter-entity>
+        <px-data-grid-filter-entity entity="{{entity}}" columns="[[columns]]" localize="[[localize]]"></px-data-grid-filter-entity>
         <button class="btn btn--bare btn--icon" on-click="_removeEntity">
           <px-icon style="--iron-icon-height:20px" icon="px-nav:close"></px-icon>
         </button>
@@ -34,7 +34,7 @@
     </template>
 
     <button class="btn btn--bare--primary" on-click="_addEntity">
-      <px-icon style="--iron-icon-height:16px" icon="px-utl:add"></px-icon> Add filter
+      <px-icon style="--iron-icon-height:16px" icon="px-utl:add"></px-icon> [[localize('Add filter')]]
     </button>
   </template>
 
@@ -89,13 +89,35 @@
 
             columns: {
               type: Array
-            }
+            },
+
+            localize: Function
           };
+        }
+
+        static get observers() {
+          return [
+            '_localizeChanged(localize)'
+          ];
         }
 
         ready() {
           super.ready();
           this._boundedRemoveEntity = this._removeEntity.bind(this);
+        }
+
+        _localizeChanged(localize) {
+          if (!localize) {
+            return;
+          }
+
+          this._actions.forEach((action, index) => {
+            this.set(`_actions.${index}.val`, localize(action.val));
+          });
+
+          this._operationTypes.forEach((type, index) => {
+            this.set(`_operationTypes.${index}.val`, localize(type.val));
+          });
         }
 
         _addEntity() {
