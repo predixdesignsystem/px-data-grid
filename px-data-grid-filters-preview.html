@@ -35,6 +35,7 @@
 
     <template is="dom-if" if="[[_filtersGrouped(flattenFilterEntities)]]">
       <px-popover
+        id="filtersPreviewPopover"
         for="filter-group-chip"
         orientation="right"
         enhanced>
@@ -99,6 +100,10 @@
                 }
               ));
             }
+          });
+
+          this.addEventListener('trigger-filters-modal', (event) => {
+            this.shadowRoot.querySelector('#filtersPreviewPopover').hide();
           });
         }
 
