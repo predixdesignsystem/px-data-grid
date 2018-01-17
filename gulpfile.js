@@ -111,9 +111,13 @@ gulp.task('generate-api', function(cb) {
   exec(`node_modules/.bin/polymer analyze ${pkg.name}.html > ${pkg.name}-api.json`, function(err, stdout, stderr) {
     stdout && console.log(stdout); // eslint-disable-line
     stderr && console.log(stderr); // eslint-disable-line
-    cb(err);
-  });
 
+    exec(`node_modules/.bin/polymer analyze px-data-grid-paginated.html > px-data-grid-paginated-api.json`, function(err, stdout, stderr) {
+      stdout && console.log(stdout); // eslint-disable-line
+      stderr && console.log(stderr); // eslint-disable-line
+      cb(err);
+    });
+  });
 });
 
 gulp.task('watch', function() {

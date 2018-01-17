@@ -10,9 +10,9 @@
 
     <div class="footer">
       <span class="remaining-amount">
-        +[[_getRemainigAmount(flattenFilterEntities, filtersLimit, filters.*)]] more
+        +[[_getRemainigAmount(flattenFilterEntities, filtersLimit, filters.*)]] [[localize('more')]]
       </span>
-      <a class="actionable" on-click="_dispatchFiltersModalTrigger">See all</a>
+      <a class="actionable" on-click="_dispatchFiltersModalTrigger">[[localize('See all')]]</a>
     </div>
   </template>
 
@@ -45,13 +45,15 @@
 
             columns: {
               type: Array
-            }
+            },
+
+            localize: Function
           };
         }
 
         static get observers() {
           return [
-            'render(filters, filters.*)'
+            'render(filters, filters.*, localize)'
           ];
         }
 
@@ -112,11 +114,13 @@
 
           switch (column.type) {
             case 'number':
-              return `${section.action} ${section.operationType} / ${column.path} / Between / ${entity.leftBound}, ${entity.rightBound}`;
+              return `${section.action} ${section.operationType} / ` +
+                `${column.path} / ${this.localize('Between')} / ` +
+                `${entity.leftBound}, ${entity.rightBound}`;
             case 'date':
               return `${section.action} ${section.operationType} /
                 ${column.path} /
-                Between /
+                 `${this.localize('Between')} / ` +
                 ${window.moment(entity.dateFrom).format('YYYY/MM/DD')}, ${window.moment(entity.dateTo).format('YYYY/MM/DD')}`;
             default:
               return `${section.action} ${section.operationType} / ${column.path} / ${entity.pattern} / ${entity.query}`;

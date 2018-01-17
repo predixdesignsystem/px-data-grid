@@ -10,7 +10,7 @@
 
     <div class="labeled-text">
       <label for="column-dropdown">
-        Attribute
+        [[localize('Attribute')]]
       </label>
       <px-dropdown id="column-dropdown" items="[[_mappedColumns]]" selected="{{entity.columnId}}"></px-dropdown>
     </div>
@@ -18,14 +18,14 @@
     <template is="dom-if" if="{{_columnTypeIsString(entity.columnId)}}">
       <div class="labeled-text">
         <label for="condition-dropdown">
-          Condition
+          [[localize('Condition')]]
         </label>
         <px-dropdown id="condition-dropdown" items="[[_regexPatterns]]" selected="{{entity.pattern}}"></px-dropdown>
       </div>
 
       <div class="labeled-text">
         <label for="value-input">
-          Value
+          [[localize('Value')]]
         </label>
         <input id="value-input" type="text" class="text-input" value="{{entity.query::input}}">
       </div>
@@ -34,7 +34,7 @@
     <template is="dom-if" if="{{_columnTypeIsDate(entity.columnId)}}">
       <div class="labeled-text" extended>
         <label for="date-rangepicker">
-          Date Range
+          [[localize('Date Range')]]
         </label>
         <px-rangepicker
           id="date-rangepicker"
@@ -54,7 +54,7 @@
     <template is="dom-if" if="{{_columnTypeIsNumber(entity.columnId)}}">
       <div class="labeled-text" extended>
         <label for="range-input">
-          Range
+          [[localize('Range')]]
         </label>
         <px-slider
           id="range-input"
@@ -127,7 +127,9 @@
 
             _selectedColumnId: {
               type: String
-            }
+            },
+
+            localize: Function
           };
         }
 
@@ -137,8 +139,19 @@
             '_filterActiveObservable(entity, entity.*)',
             '_momentDatesObserver(_dateFrom, _dateTo, _dateFrom.*, _dateTo.*)',
             '_entityDatesObserver(entity, entity.dateFrom, entity.dateTo)',
-            '_selectedColumnChanged(_selectedColumnId)'
+            '_selectedColumnChanged(_selectedColumnId)',
+            '_localizeChanged(localize)'
           ];
+        }
+
+        _localizeChanged(localize) {
+          if (!localize) {
+            return;
+          }
+
+          this._regexPatterns.forEach((pattern, index) => {
+            this.set(`_regexPatterns.${index}.val`, localize(pattern.val));
+          });
         }
 
         _setMappedColumns(columns, columnsSplices) {

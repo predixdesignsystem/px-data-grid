@@ -28,7 +28,7 @@
   <template>
     <style include="px-data-grid-styles"></style>
 
-    <px-data-grid-filters-preview filters="[[filters]]" columns="[[columns]]"></px-data-grid-filters-preview>
+    <px-data-grid-filters-preview filters="[[filters]]" columns="[[columns]]" localize="[[_boundedLocalize]]"></px-data-grid-filters-preview>
 
     <template is="dom-if" if="{{_showActionBar(autoFilter, actionMenu, filterable)}}">
 
@@ -691,10 +691,6 @@
 
           this.addEventListener('ungroup', (event) => {
             this._ungroup();
-          });
-
-          this.addEventListener('trigger-filters-modal', (event) => {
-            this.$.filtersModal.opened = true;
           });
 
           this.addEventListener('remove-filter', (event) => {

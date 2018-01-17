@@ -8,11 +8,11 @@
     <style include="px-data-grid-filter-styles"></style>
 
     <template is="dom-repeat" items="{{_tempFilters}}" as="section">
-      <px-data-grid-filter-section section="{{section}}" columns="[[columns]]"></px-data-grid-filter-section>
+      <px-data-grid-filter-section section="{{section}}" columns="[[columns]]" localize="[[localize]]"></px-data-grid-filter-section>
     </template>
 
     <input id="saveFilterSet" type="checkbox">
-    <label class="label--inline" for="saveFilterSet">Save this filter set</label>
+    <label class="label--inline" for="saveFilterSet">[[localize('Save this filter set')]]</label>
 
     <!--
     <button class="btn btn--bare--primary" on-click="_addGroup">
@@ -44,7 +44,9 @@
 
             _tempFilters: {
               type: Array
-            }
+            },
+
+            localize: Function
           };
         }
 

@@ -32,7 +32,7 @@
 
     <!-- Header -->
     <px-demo-header
-        module-name="px-data-grid"
+        module-name="px-data-grid-paginated"
         description="The Data Grid component is useful for displaying tabular data, and provides more functionality than a simple table."
         mobile desktop tablet>
     </px-demo-header>
@@ -65,6 +65,7 @@
             auto-filter="{{props.autoFilter.value}}"
             on-cell-hover="cellHoverListener"
             on-cell-unhover="cellUnhoverListener"
+            selectable-page-sizes="{{props.selectablePageSizes.value}}"
             grid-height="{{props.gridHeight.value}}">
         </px-data-grid-paginated>
 
@@ -90,13 +91,13 @@
       <px-demo-component-snippet
           slot="px-demo-component-snippet"
           element-properties="{{props}}"
-          element-name="px-data-grid"
+          element-name="px-data-grid-paginated"
           links-includes="[[linksIncludes]]">
       </px-demo-component-snippet>
     </px-demo-interactive>
 
     <!-- API Viewer -->
-    <px-demo-api-viewer source="px-data-grid" api-source-file-path="px-data-grid-api.json"></px-demo-api-viewer>
+    <px-demo-api-viewer source="px-data-grid-paginated" api-source-file-path="px-data-grid-paginated-api.json"></px-demo-api-viewer>
 
     <!-- Footer -->
     <px-demo-footer></px-demo-footer>
@@ -490,6 +491,12 @@
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'
+      },
+
+      selectablePageSizes: {
+        type: Array,
+        value: [10, 20, 30],
+        inputType: 'code:JSON'
       },
 
       language: {
