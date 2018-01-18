@@ -59,7 +59,7 @@
             grid-height="{{props.gridHeight.value}}"
             multi-sort="{{props.multiSort.value}}"
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
-            action-menu="{{props.actionMenu.value}}"
+            hide-action-menu="{{props.hideActionMenu.value}}"
             language="{{props.language.value}}"
             auto-filter="{{props.autoFilter.value}}"
             item-id-path="index"
@@ -212,7 +212,7 @@
         inputType: 'toggle'
       },
 
-      actionMenu: {
+      hideActionMenu: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'

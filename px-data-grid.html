@@ -30,7 +30,7 @@
 
     <px-data-grid-filters-preview filters="[[filters]]" columns="[[columns]]" localize="[[_boundedLocalize]]"></px-data-grid-filters-preview>
 
-    <template is="dom-if" if="{{_showActionBar(autoFilter, actionMenu, filterable)}}">
+    <template is="dom-if" if="{{_showActionBar(autoFilter, hideActionMenu, filterable)}}">
 
       <div class="action-bar">
         <template is="dom-if" if="[[autoFilter]]">
@@ -47,7 +47,7 @@
             <px-data-grid-filters-modal filters="{{filters}}" columns="[[columns]]" localize="[[_boundedLocalize]]"></px-data-grid-filters-modal>
           </template>
 
-          <template is="dom-if" if="[[actionMenu]]">
+          <template is="dom-if" if="[[!hideActionMenu]]">
             <px-dropdown multi hide-selected
               display-value="[[localize('Actions')]]"
               items="[[_actionMenuContent]]"
@@ -288,9 +288,9 @@
             },
 
             /**
-             * Define if table action menu is shown or not
+             * Define if table action menu should be hidden.
              */
-            actionMenu: {
+            hideActionMenu: {
               type: Boolean,
               value: false
             },
@@ -1078,8 +1078,8 @@
         /**
          * Simple method to check if action bar should be shown
          */
-        _showActionBar(filterField, actionDropDown, filterable) {
-          return filterField || actionDropDown || filterable;
+        _showActionBar(filterField, hideActionMenu, filterable) {
+          return filterField || !hideActionMenu || filterable;
         }
 
         /**
