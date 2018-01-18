@@ -135,27 +135,31 @@
         _setDropdownItems() {
           if (this._column) {
 
+            // First construct all items, only then apply to dropdownItems
+            // px-dropdown has issues noticing changes inside array
+            const newItems = [];
+
             if (this._column.frozen) {
-              this._dropdownItems = [
+              newItems.push(
                 {
                   key: {
                     action: () => this._unfreezeColumn()
                   },
                   val: this.localize('Unfreeze column')
                 }
-              ];
+              );
             } else {
-              this._dropdownItems = [
+              newItems.push(
                 {
                   key: {
                     action: () => this._freezeColumn()
                   },
                   val: this.localize('Freeze column')
                 }
-              ];
+              );
             }
 
-            this._dropdownItems.push(
+            newItems.push(
               {
                 key: {
                   action: () => this._hideColumn()
@@ -166,7 +170,7 @@
 
             if (!this.isRemoteDataProvider) {
               if (this._column.grouped) {
-                this._dropdownItems.push(
+                newItems.push(
                   {
                     key: {
                       action: () => this._ungroup()
@@ -175,7 +179,7 @@
                   }
                 );
               } else {
-                this._dropdownItems.push(
+                newItems.push(
                   {
                     key: {
                       action: () => this._groupByColumn()
@@ -185,6 +189,8 @@
                 );
               }
             }
+
+            this._dropdownItems = newItems;
           }
         }
 
