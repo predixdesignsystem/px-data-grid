@@ -89,12 +89,18 @@
     }
 
     applyValue() {
-      this.dispatchEvent(new CustomEvent('value-changed', {
-        bubbles: true,
-        detail: {
-          value: this.value
-        }
-      }));
+      if (this.value !== this.initialValue) {
+        this.dispatchEvent(new CustomEvent('value-changed', {
+          bubbles: true,
+          detail: {
+            value: this.value
+          }
+        }));
+
+        return true;
+      }
+
+      return false;
     }
 
   };
