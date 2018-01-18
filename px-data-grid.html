@@ -85,13 +85,13 @@
 
       <template is="dom-repeat" items="[[columns]]" as="column">
         <px-data-grid-column
-          resizable="[[resizable]]"
           name="[[column.name]]"
           path="[[column.path]]"
           hidden="[[column.hidden]]"
           localize="[[_boundedLocalize]]"
           type="[[column.type]]"
           frozen="[[_undefinedToFalse(column.frozen)]]"
+          resizable="[[_checkColumnResizable(resizable, column.resizable)]]"
           mapped-object="[[column]]"
           width="[[_getColumnWidth(column)]]"
           flex-grow="[[_getColumnFlexGrow(column)]]"
@@ -1602,6 +1602,10 @@
 
         _isAutoHeight(gridHeight) {
           return gridHeight === 'auto';
+        }
+
+        _checkColumnResizable(gridResizable, columnResizable) {
+          return gridResizable ? (columnResizable === undefined ? true : columnResizable) : false;
         }
 
         getState() {
