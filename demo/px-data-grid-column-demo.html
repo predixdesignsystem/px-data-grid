@@ -56,7 +56,9 @@
           highlight="{{props.highlight.value}}"
           auto-filter="{{props.autoFilter.value}}"
           filterable="{{props.filterable.value}}"
-          on-table-action="tableActionListener">
+          on-table-action="tableActionListener"
+          on-cell-hover="cellHoverListener"
+          on-cell-unhover="cellUnhoverListener">
         </px-data-grid>
 
         <p>
@@ -76,6 +78,13 @@
             <button type="button" on-click="_restoreLayout">Restore layout</button>
             <button type="button" on-click="_saveState">Save State</button>
             <button type="button" on-click="_readState">Apply Saved State</button>
+          </div>
+          <div>
+            <label>
+              <input type="checkbox" checked="{{showHoveredCellData::change}}">
+              Show hovered cell data
+            </label>
+            <template is="dom-if" if="[[showHoveredCellData]]"><div>Hovered cell data: [[hoveredCellData]]</div></template>
           </div>
         </p>
       </px-demo-component>
@@ -721,6 +730,16 @@
 
     tableActionListener: function(evt) {
       window.alert('Table Action ' + evt.detail.id);
+    },
+
+    cellHoverListener: function(evt) {
+      this.hoveredCellData = evt.detail.cellContent;
+    },
+
+    cellUnhoverListener: function(evt) {
+      if (this.hoveredCellData === evt.detail.cellContent) {
+        this.hoveredCellData = '';
+      }
     },
 
     observers: [
