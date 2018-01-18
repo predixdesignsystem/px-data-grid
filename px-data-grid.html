@@ -839,6 +839,7 @@
             items = this._applyAutoFilter(items, params.filters);
           }
 
+          // TODO: these values should be in params!
           if (this.filters && this.filters.length != 0) {
             items = this._applyCustomFilter(items, this.filters);
           }

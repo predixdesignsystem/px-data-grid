@@ -435,8 +435,14 @@
         }
 
         _localDataResolver(params, items) {
+
           if (params.filters && params.filters.length && this._pxDataGrid._vaadinGrid._checkPaths(params.filters, 'filtering', items)) {
-            items = this._pxDataGrid._filter(items, params.filters);
+            items = this._pxDataGrid._applyAutoFilter(items, params.filters);
+          }
+
+          // TODO: these values should be in params!
+          if (this._pxDataGrid.filters && this._pxDataGrid.filters.length != 0) {
+            items = this._pxDataGrid._applyCustomFilter(items, this._pxDataGrid.filters);
           }
 
           if (params.sortOrders
