@@ -379,7 +379,14 @@
 
         ready() {
           super.ready();
-          this._pxDataGrid = this.shadowRoot.querySelector('px-data-grid');
+          this._resolvePxDataGrid();
+        }
+
+        _resolvePxDataGrid() {
+          if (this._pxDataGrid === undefined) {
+            this._pxDataGrid = this.shadowRoot.querySelector('px-data-grid');
+          }
+          return this._pxDataGrid;
         }
 
         _tableDataChanged(tableData) {
@@ -414,7 +421,7 @@
               // vaadin grid only displays this many items at a time (aka a single page of rows)
               const numDisplayedRows = (items.length > params.pageSize) ? params.pageSize : items.length;
               callback(items, numDisplayedRows);
-              this._pxDataGrid._populateTableColumns(items);
+              this._resolvePxDataGrid()._populateTableColumns(items);
             }.bind(this));
           }.bind(this);
 
