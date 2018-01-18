@@ -3,6 +3,7 @@
 :host {
   overflow: auto;
   max-height: 80vh;
+  max-width: 100%;
   display: block;
   padding: 0 $inuit-base-spacing-unit--large;
 }

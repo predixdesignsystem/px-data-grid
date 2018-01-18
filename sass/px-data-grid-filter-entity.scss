@@ -1,22 +1,23 @@
 @import 'px-data-grid-shared';
 
 :host {
-  display: flex;
-  justify-content: space-between;
-  flex-grow: 1;
+  display: block;
   width: 100%;
+  white-space: nowrap;
 }
 
 .labeled-text {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  flex-grow: 1;
+  width: 33%;
+  padding: 0px 2px;
+  box-sizing: border-box;
 }
 
 .labeled-text[extended] {
-  flex-grow: 2;
+  width: 66%;
 }
 
-.labeled-text px-dropdown {
-  width: calc(100% - 2px);
+.labeled-text > * {
+  width: 100%;
 }
