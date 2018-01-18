@@ -140,7 +140,11 @@
 
           let value;
           if (path) {
-            value = this.get(path, item) || '';
+            value = this.get(path, item);
+
+            if (value === undefined) {
+              value = '';
+            }
           } else {
             value = item;
           }
