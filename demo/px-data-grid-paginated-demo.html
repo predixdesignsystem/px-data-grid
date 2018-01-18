@@ -66,6 +66,7 @@
             on-cell-hover="cellHoverListener"
             on-cell-unhover="cellUnhoverListener"
             selectable-page-sizes="{{props.selectablePageSizes.value}}"
+            columns="{{props.columns.value}}"
             grid-height="{{props.gridHeight.value}}">
         </px-data-grid-paginated>
 
@@ -85,6 +86,10 @@
           Show hovered cell data
         </label>
         <template is="dom-if" if="[[showHoveredCellData]]"><div>Hovered cell data: [[hoveredCellData]]</div></template>
+
+        <div>
+          <button type="button" on-click="_clearColumns">Reset Columns</button>
+        </div>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
 
@@ -504,11 +509,51 @@
         value: 'en',
         inputType: 'dropdown',
         inputChoices: ['en', 'fr', 'fi']
+      },
+
+      columns: {
+        type: Array,
+        value: [
+          {
+            path: 'first',
+            name: 'First Name'
+          },
+          {
+            path: 'last',
+            name: 'Last Name'
+          },
+          {
+            path: 'email',
+            name: 'Email'
+          }
+        ],
+        inputType: 'code:JSON'
       }
     },
 
     _stringify: function(item) {
       return JSON.stringify(item);
+    },
+
+    _getDefaultColumns() {
+      return [
+        {
+          path: 'first',
+          name: 'First Name'
+        },
+        {
+          path: 'last',
+          name: 'Last Name'
+        },
+        {
+          path: 'email',
+          name: 'Email'
+        }
+      ];
+    },
+
+    _clearColumns(event) {
+      this.props.columns.value = this._getDefaultColumns();
     }
   });
 </script>
