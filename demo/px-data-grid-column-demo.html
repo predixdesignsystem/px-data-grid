@@ -46,12 +46,11 @@
           editable="[[props.editable.value]]"
           multi-sort="{{props.multiSort.value}}"
           column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
-          action-menu="{{props.actionMenu.value}}"
+          hide-action-menu="{{props.hideActionMenu.value}}"
           language="{{props.language.value}}"
           striped="{{props.striped.value}}"
           grid-height="{{props.gridHeight.value}}"
           table-actions="{{props.tableActions.value}}"
-          action-menu="{{props.actionMenu.value}}"
           columns="{{props.columns.value}}"
           highlight="{{props.highlight.value}}"
           auto-filter="{{props.autoFilter.value}}"
@@ -637,7 +636,7 @@
         inputChoices: ['default', 'auto', '300px', '600px', '900px']
       },
 
-      actionMenu: {
+      hideActionMenu: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'

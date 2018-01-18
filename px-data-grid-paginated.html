@@ -29,7 +29,7 @@
       multi-sort="{{multiSort}}"
       columns="{{columns}}"
       column-reordering-allowed="{{columnReorderingAllowed}}"
-      action-menu="{{actionMenu}}"
+      hide-action-menu="{{hideActionMenu}}"
       language="{{language}}"
       auto-filter="{{autoFilter}}"
       grid-height="{{gridHeight}}"
@@ -177,9 +177,9 @@
             },
 
             /**
-             * Define if table action menu is shown or not
+             * Define if table action menu should be hidden.
              */
-            actionMenu: {
+            hideActionMenu: {
               type: Boolean,
               value: false
             },
