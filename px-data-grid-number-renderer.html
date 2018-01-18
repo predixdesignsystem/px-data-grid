@@ -38,11 +38,35 @@
           return 'px-data-grid-number-renderer';
         }
 
+        static get properties() {
+          return {
+            value: {
+              type: Number
+            },
+
+            initialValue: {
+              type: Number
+            }
+          };
+        }
+
+        static get observers() {
+          return [
+            '_valueObserver(value)'
+          ];
+        }
+
         validate() {
           return {
             valid: !this.column.required || this.value.toString().length > 0,
             message: this.localize('Value is required')
           };
+        }
+
+        _valueObserver(value) {
+          if (typeof value === 'string') {
+            this.value = parseInt(value);
+          }
         }
 
         getClasses(result) {

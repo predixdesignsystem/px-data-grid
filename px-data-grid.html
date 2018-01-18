@@ -1407,7 +1407,23 @@
 
         _saveItem() {
           if (this._editingRenderers.every((renderer) => renderer._performValidation().valid)) {
-            this._editingRenderers.forEach((renderer) => renderer.applyValue());
+            const changedPaths = this._editingRenderers
+              .filter((renderer) => renderer.applyValue())
+              .map((renderer) => renderer.column.path);
+
+            if (changedPaths.length > 0) {
+              this.dispatchEvent(new CustomEvent('item-edited',
+                {
+                  bubbles: true,
+                  composed: true,
+                  detail: {
+                    item: this._editingItem,
+                    paths: changedPaths
+                  }
+                }
+              ));
+            }
+
             this._editingItem = null;
           }
         }
