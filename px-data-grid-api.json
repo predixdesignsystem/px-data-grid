@@ -8,11 +8,11 @@
       "sourceRange": {
         "file": "px-data-grid.html",
         "start": {
-          "line": 1630,
+          "line": 1652,
           "column": 6
         },
         "end": {
-          "line": 1630,
+          "line": 1652,
           "column": 42
         }
       },
@@ -10639,7 +10639,7 @@
                   "column": 4
                 },
                 "end": {
-                  "line": 97,
+                  "line": 103,
                   "column": 5
                 }
               },
@@ -14688,7 +14688,7 @@
                   "column": 4
                 },
                 "end": {
-                  "line": 97,
+                  "line": 103,
                   "column": 5
                 }
               },
@@ -16432,45 +16432,41 @@
             },
             {
               "name": "value",
-              "type": "string",
+              "type": "number",
               "description": "",
               "privacy": "public",
               "sourceRange": {
-                "file": "px-data-grid-renderer-mixin.html",
                 "start": {
-                  "line": 17,
-                  "column": 8
+                  "line": 42,
+                  "column": 12
                 },
                 "end": {
-                  "line": 19,
-                  "column": 9
+                  "line": 44,
+                  "column": 13
                 }
               },
               "metadata": {
                 "polymer": {}
-              },
-              "inheritedFrom": "Predix.DataGridRendererMixin"
+              }
             },
             {
               "name": "initialValue",
-              "type": "string",
+              "type": "number",
               "description": "",
               "privacy": "public",
               "sourceRange": {
-                "file": "px-data-grid-renderer-mixin.html",
                 "start": {
-                  "line": 21,
-                  "column": 8
+                  "line": 46,
+                  "column": 12
                 },
                 "end": {
-                  "line": 23,
-                  "column": 9
+                  "line": 48,
+                  "column": 13
                 }
               },
               "metadata": {
                 "polymer": {}
-              },
-              "inheritedFrom": "Predix.DataGridRendererMixin"
+              }
             },
             {
               "name": "validationResult",
@@ -18754,11 +18750,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 40,
+                  "line": 58,
                   "column": 8
                 },
                 "end": {
-                  "line": 45,
+                  "line": 63,
                   "column": 9
                 }
               },
@@ -18776,7 +18772,7 @@
                   "column": 4
                 },
                 "end": {
-                  "line": 97,
+                  "line": 103,
                   "column": 5
                 }
               },
@@ -18785,16 +18781,37 @@
               "inheritedFrom": "Predix.DataGridRendererMixin"
             },
             {
+              "name": "_valueObserver",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "start": {
+                  "line": 65,
+                  "column": 8
+                },
+                "end": {
+                  "line": 69,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "value"
+                }
+              ]
+            },
+            {
               "name": "getClasses",
               "description": "",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 47,
+                  "line": 71,
                   "column": 8
                 },
                 "end": {
-                  "line": 49,
+                  "line": 73,
                   "column": 9
                 }
               },
@@ -19746,7 +19763,7 @@
               "column": 6
             },
             "end": {
-              "line": 50,
+              "line": 74,
               "column": 7
             }
           },
@@ -19758,37 +19775,33 @@
               "name": "value",
               "description": "",
               "sourceRange": {
-                "file": "px-data-grid-renderer-mixin.html",
                 "start": {
-                  "line": 17,
-                  "column": 8
+                  "line": 42,
+                  "column": 12
                 },
                 "end": {
-                  "line": 19,
-                  "column": 9
+                  "line": 44,
+                  "column": 13
                 }
               },
               "metadata": {},
-              "type": "string",
-              "inheritedFrom": "Predix.DataGridRendererMixin"
+              "type": "number"
             },
             {
               "name": "initial-value",
               "description": "",
               "sourceRange": {
-                "file": "px-data-grid-renderer-mixin.html",
                 "start": {
-                  "line": 21,
-                  "column": 8
+                  "line": 46,
+                  "column": 12
                 },
                 "end": {
-                  "line": 23,
-                  "column": 9
+                  "line": 48,
+                  "column": 13
                 }
               },
               "metadata": {},
-              "type": "string",
-              "inheritedFrom": "Predix.DataGridRendererMixin"
+              "type": "number"
             },
             {
               "name": "validation-result",
@@ -22745,7 +22758,7 @@
                   "column": 8
                 },
                 "end": {
-                  "line": 154,
+                  "line": 158,
                   "column": 9
                 }
               },
@@ -23709,7 +23722,7 @@
               "column": 6
             },
             "end": {
-              "line": 155,
+              "line": 159,
               "column": 7
             }
           },
@@ -24541,6 +24554,46 @@
               "metadata": {
                 "polymer": {}
               }
+            },
+            {
+              "name": "_minNumberBound",
+              "type": "number",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "start": {
+                  "line": 133,
+                  "column": 12
+                },
+                "end": {
+                  "line": 136,
+                  "column": 13
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "0"
+            },
+            {
+              "name": "_maxNumberBound",
+              "type": "number",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "start": {
+                  "line": 138,
+                  "column": 12
+                },
+                "end": {
+                  "line": 141,
+                  "column": 13
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "100"
             }
           ],
           "methods": [
@@ -26652,11 +26705,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 146,
+                  "line": 157,
                   "column": 8
                 },
                 "end": {
-                  "line": 154,
+                  "line": 165,
                   "column": 9
                 }
               },
@@ -26668,16 +26721,37 @@
               ]
             },
             {
+              "name": "_entityObserver",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "start": {
+                  "line": 167,
+                  "column": 8
+                },
+                "end": {
+                  "line": 182,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "entity"
+                }
+              ]
+            },
+            {
               "name": "_setMappedColumns",
               "description": "",
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 156,
+                  "line": 184,
                   "column": 8
                 },
                 "end": {
-                  "line": 166,
+                  "line": 194,
                   "column": 9
                 }
               },
@@ -26697,11 +26771,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 168,
+                  "line": 196,
                   "column": 8
                 },
                 "end": {
-                  "line": 172,
+                  "line": 200,
                   "column": 9
                 }
               },
@@ -26718,11 +26792,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 174,
+                  "line": 202,
                   "column": 8
                 },
                 "end": {
-                  "line": 178,
+                  "line": 206,
                   "column": 9
                 }
               },
@@ -26739,11 +26813,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 180,
+                  "line": 208,
                   "column": 8
                 },
                 "end": {
-                  "line": 184,
+                  "line": 212,
                   "column": 9
                 }
               },
@@ -26760,11 +26834,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 186,
+                  "line": 214,
                   "column": 8
                 },
                 "end": {
-                  "line": 191,
+                  "line": 219,
                   "column": 9
                 }
               },
@@ -26781,11 +26855,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 193,
+                  "line": 221,
                   "column": 8
                 },
                 "end": {
-                  "line": 203,
+                  "line": 231,
                   "column": 9
                 }
               },
@@ -26802,11 +26876,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 205,
+                  "line": 233,
                   "column": 8
                 },
                 "end": {
-                  "line": 212,
+                  "line": 240,
                   "column": 9
                 }
               },
@@ -26826,11 +26900,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 214,
+                  "line": 242,
                   "column": 8
                 },
                 "end": {
-                  "line": 221,
+                  "line": 249,
                   "column": 9
                 }
               },
@@ -27782,7 +27856,7 @@
               "column": 6
             },
             "end": {
-              "line": 222,
+              "line": 250,
               "column": 7
             }
           },
@@ -47526,7 +47600,7 @@
                   "column": 4
                 },
                 "end": {
-                  "line": 97,
+                  "line": 103,
                   "column": 5
                 }
               },
@@ -47543,7 +47617,7 @@
               "column": 2
             },
             "end": {
-              "line": 99,
+              "line": 105,
               "column": 3
             }
           },
@@ -54662,6 +54736,48 @@
             "desc": "Rewritten URL relative to base"
           },
           "inheritedFrom": "Polymer.ElementMixin"
+        },
+        {
+          "name": "_handleSave",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 26,
+              "column": 8
+            },
+            "end": {
+              "line": 30,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "name": "_handleCancel",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 32,
+              "column": 8
+            },
+            "end": {
+              "line": 36,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ]
         }
       ],
       "staticMethods": [
@@ -55604,7 +55720,7 @@
           "column": 6
         },
         "end": {
-          "line": 25,
+          "line": 37,
           "column": 7
         }
       },
@@ -57544,7 +57660,7 @@
               "column": 8
             },
             "end": {
-              "line": 1390,
+              "line": 1392,
               "column": 9
             }
           },
@@ -57561,11 +57677,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1392,
+              "line": 1394,
               "column": 8
             },
             "end": {
-              "line": 1395,
+              "line": 1397,
               "column": 9
             }
           },
@@ -57582,11 +57698,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1397,
+              "line": 1399,
               "column": 8
             },
             "end": {
-              "line": 1399,
+              "line": 1401,
               "column": 9
             }
           },
@@ -57606,11 +57722,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1401,
+              "line": 1403,
               "column": 8
             },
             "end": {
-              "line": 1403,
+              "line": 1405,
               "column": 9
             }
           },
@@ -57627,11 +57743,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1405,
+              "line": 1407,
               "column": 8
             },
             "end": {
-              "line": 1410,
+              "line": 1428,
               "column": 9
             }
           },
@@ -57644,11 +57760,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1412,
+              "line": 1430,
               "column": 8
             },
             "end": {
-              "line": 1414,
+              "line": 1432,
               "column": 9
             }
           },
@@ -57665,11 +57781,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1416,
+              "line": 1434,
               "column": 8
             },
             "end": {
-              "line": 1422,
+              "line": 1440,
               "column": 9
             }
           },
@@ -57686,11 +57802,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1430,
+              "line": 1448,
               "column": 8
             },
             "end": {
-              "line": 1467,
+              "line": 1485,
               "column": 9
             }
           },
@@ -57707,11 +57823,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1469,
+              "line": 1487,
               "column": 8
             },
             "end": {
-              "line": 1475,
+              "line": 1493,
               "column": 9
             }
           },
@@ -57724,11 +57840,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1477,
+              "line": 1495,
               "column": 8
             },
             "end": {
-              "line": 1484,
+              "line": 1502,
               "column": 9
             }
           },
@@ -57741,11 +57857,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1489,
+              "line": 1507,
               "column": 8
             },
             "end": {
-              "line": 1524,
+              "line": 1542,
               "column": 9
             }
           },
@@ -57762,11 +57878,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1529,
+              "line": 1547,
               "column": 8
             },
             "end": {
-              "line": 1534,
+              "line": 1552,
               "column": 9
             }
           },
@@ -57783,11 +57899,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1539,
+              "line": 1557,
               "column": 8
             },
             "end": {
-              "line": 1542,
+              "line": 1560,
               "column": 9
             }
           },
@@ -57804,11 +57920,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1544,
+              "line": 1562,
               "column": 8
             },
             "end": {
-              "line": 1561,
+              "line": 1579,
               "column": 9
             }
           },
@@ -57825,11 +57941,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1566,
+              "line": 1584,
               "column": 8
             },
             "end": {
-              "line": 1574,
+              "line": 1592,
               "column": 9
             }
           },
@@ -57842,11 +57958,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1576,
+              "line": 1594,
               "column": 8
             },
             "end": {
-              "line": 1582,
+              "line": 1600,
               "column": 9
             }
           },
@@ -57863,11 +57979,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1588,
+              "line": 1606,
               "column": 8
             },
             "end": {
-              "line": 1594,
+              "line": 1612,
               "column": 9
             }
           },
@@ -57884,11 +58000,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1596,
+              "line": 1614,
               "column": 8
             },
             "end": {
-              "line": 1598,
+              "line": 1616,
               "column": 9
             }
           },
@@ -57905,11 +58021,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1600,
+              "line": 1618,
               "column": 8
             },
             "end": {
-              "line": 1602,
+              "line": 1620,
               "column": 9
             }
           },
@@ -57921,16 +58037,40 @@
           ]
         },
         {
+          "name": "_checkColumnResizable",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1622,
+              "column": 8
+            },
+            "end": {
+              "line": 1624,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "gridResizable"
+            },
+            {
+              "name": "columnResizable"
+            }
+          ]
+        },
+        {
           "name": "getState",
           "description": "",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1604,
+              "line": 1626,
               "column": 8
             },
             "end": {
-              "line": 1611,
+              "line": 1633,
               "column": 9
             }
           },
@@ -57943,11 +58083,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1613,
+              "line": 1635,
               "column": 8
             },
             "end": {
-              "line": 1623,
+              "line": 1645,
               "column": 9
             }
           },
@@ -57968,7 +58108,7 @@
           "column": 6
         },
         "end": {
-          "line": 1624,
+          "line": 1646,
           "column": 7
         }
       },
