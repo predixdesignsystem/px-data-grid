@@ -11,6 +11,8 @@ px-dropdown {
 .action-select {
   display: flex;
   align-items: center;
+  width: 800px;
+  max-width: 100%;
 }
 
 .action-select > * + * {
