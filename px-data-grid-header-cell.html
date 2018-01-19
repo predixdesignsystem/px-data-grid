@@ -6,7 +6,7 @@
 <dom-module id="px-data-grid-header-cell">
   <template>
     <style include="px-data-grid-header-cell-styles"></style>
-    <px-dropdown button-style="icon" icon="px-nav:menu" items="{{_dropdownItems}}" opened="{{dropdownOpened}}" hidden$="[[_dropdownHidden]]" on-selected-changed="_dropdownSelectedChanged">
+    <px-dropdown button-style="icon" icon="px-nav:menu" items="{{_dropdownItems}}" opened="{{dropdownOpened}}" hidden$="[[_dropdownHidden]]" on-px-dropdown-click="_dropdownClick">
       <px-icon slot="trigger" icon="px-nav:menu"></px-icon>
     </px-dropdown>
     <slot></slot>
@@ -145,7 +145,8 @@
                   key: {
                     action: () => this._unfreezeColumn()
                   },
-                  val: this.localize('Unfreeze column')
+                  val: this.localize('Unfreeze column'),
+                  disableSelect: true
                 }
               );
             } else {
@@ -154,7 +155,8 @@
                   key: {
                     action: () => this._freezeColumn()
                   },
-                  val: this.localize('Freeze column')
+                  val: this.localize('Freeze column'),
+                  disableSelect: true
                 }
               );
             }
@@ -164,7 +166,8 @@
                 key: {
                   action: () => this._hideColumn()
                 },
-                val: this.localize('Hide column')
+                val: this.localize('Hide column'),
+                disableSelect: true
               }
             );
 
@@ -175,7 +178,8 @@
                     key: {
                       action: () => this._ungroup()
                     },
-                    val: this.localize('Ungroup')
+                    val: this.localize('Ungroup'),
+                    disableSelect: true
                   }
                 );
               } else {
@@ -184,7 +188,8 @@
                     key: {
                       action: () => this._groupByColumn()
                     },
-                    val: this.localize('Group by column')
+                    val: this.localize('Group by column'),
+                    disableSelect: true
                   }
                 );
               }
@@ -210,10 +215,11 @@
           }
         }
 
-        _dropdownSelectedChanged(e) {
-          if (e.detail.value) {
-            e.detail.value.action();
-            e.target.selected = null;
+        _dropdownClick(e) {
+          const item = e.detail.detail.item;
+
+          if (item && item.key) {
+            item.key.action();
           }
         }
 
