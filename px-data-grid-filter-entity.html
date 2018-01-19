@@ -167,7 +167,7 @@
 
         _entityObserver(entity) {
           if (!entity.columnId) {
-            this.set('entity.columnId', this.columns[0].id);
+            this.set('entity.columnId', '-any-');
 
             if (this._columnTypeIsString(this.entity.columnId)) {
               this.set('entity.pattern', this._regexPatterns[0].key);
