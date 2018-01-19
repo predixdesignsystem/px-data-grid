@@ -189,6 +189,8 @@
 
           this.set('_mappedColumns', []);
 
+          this.push('_mappedColumns', {key: '-any-', val: 'Any column'});
+
           columns.forEach((col) => {
             this.push('_mappedColumns', {key: col.id, val: col.path});
           });
@@ -216,6 +218,14 @@
           if (!this.columns) {
             return;
           }
+
+          if (columnId === '-any-') {
+            return {
+              id: '-any-',
+              type: 'string'
+            };
+          }
+
           return this.columns.filter((column) => column.id === columnId)[0];
         }
 

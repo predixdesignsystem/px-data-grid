@@ -108,6 +108,14 @@
         }
 
         _getColumnById(columnId) {
+          if (columnId === '-any-') {
+            return {
+              id: '-any-',
+              type: 'string',
+              path: 'any'
+            };
+          }
+
           return this.columns.filter((column) => column.id === columnId)[0];
         }
 
