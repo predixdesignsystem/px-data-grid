@@ -89,8 +89,8 @@
       this.addEventListener('remove-filter', (event) => {
         const entity = event.detail.entity;
         const section = event.detail.section;
-        const sectionIndex = this.filters.indexOf(section);
-        this.splice(`filters.${sectionIndex}.entities`, section.entities.indexOf(entity), 1);
+        const sectionIndex = this._filters.indexOf(section);
+        this.splice(`_filters.${sectionIndex}.entities`, section.entities.indexOf(entity), 1);
       });
     }
 
