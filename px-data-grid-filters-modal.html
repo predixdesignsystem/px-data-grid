@@ -55,6 +55,10 @@
               notify: true
             },
 
+            initialFilterState: {
+              type: Array,
+            },
+
             localize: Function
           };
         }
@@ -79,7 +83,7 @@
 
         _reset() {
           this.$.filters.resetFilters();
-          this.$.filtersModal.opened = false;
+          this.set('filters', this.initialFilterState);
         }
       }
 

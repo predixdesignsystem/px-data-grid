@@ -256,7 +256,7 @@
 
         _entityObserver(entity) {
           if (!entity.columnId) {
-            this.set('entity.columnId', this.columns[0].id);
+            this.set('entity.columnId', '-any-');
 
             if (this._columnTypeIsString(this.entity.columnId)) {
               this.set('entity.pattern', this._regexPatterns[0].key);
@@ -270,6 +270,8 @@
           }
 
           this.set('_mappedColumns', []);
+
+          this.push('_mappedColumns', {key: '-any-', val: 'Any column'});
 
           columns.forEach((col) => {
             this.push('_mappedColumns', {key: col.id, val: col.path});
@@ -298,6 +300,14 @@
           if (!this.columns) {
             return;
           }
+
+          if (columnId === '-any-') {
+            return {
+              id: '-any-',
+              type: 'string'
+            };
+          }
+
           return this.columns.filter((column) => column.id === columnId)[0];
         }
 

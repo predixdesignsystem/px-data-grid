@@ -1,0 +1,262 @@
+<script>
+  window.Predix = window.Predix || {};
+  /**
+   * Mixin, that provides advanced filter functionality for px-data-grid.
+   *
+   * @polymerMixin
+   */
+  Predix.DataGridFilterableMixin = superClass => class DataGridFilterableMixin extends superClass {
+    static get properties() {
+      return {
+        /**
+         * If true, turns on advanced filtering feature.
+         */
+        filterable: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Array of filters from px-data-grid-filter component.
+         * Format for string column.type:
+         * ```
+         * {
+         *   action: 'show',
+         *   column: {
+         *     type: 'string',
+         *     path: 'last'
+         *   },
+         *   pattern: 'equals',
+         *   query: 'Wong',
+         * }
+         * ```
+         * Pattern can be one of `['equals', 'contains', 'starts_with', 'ends_with', 'wildcard']`.
+         * Format for date column.type:
+         * ```
+         * {
+         *   action: 'hide',
+         *   column: {
+         *     type: 'date',
+         *     path: 'birth_date'
+         *   },
+         *   dateFrom: '1994-11-12',
+         *   dateTo: '1994-11-12'
+         * }
+         * ```
+         * Format for number column.type:
+         * ```
+         * {
+         *   action: 'highlight',
+         *   column: {
+         *     type: 'number',
+         *     path: 'age'
+         *   },
+         *   leftBound: 11,
+         *   rightBound: 12
+         * }
+         * ```
+         */
+        _filters: {
+          type: Array
+        },
+
+        _initialFilterState: {
+          type: Array,
+          value: () => [{entities: [{}], action: 'show', operationType: 'all'}]
+        },
+
+        /**
+         * Array of highlights from px-data-grid-filter component
+         */
+        _filterHighlights: {
+          type: Array,
+          value: () => []
+        }
+      };
+    }
+
+    static get observers() {
+      return [
+        '_filtersObserver(_filters, _filters.*)'
+      ];
+    }
+
+    ready() {
+      super.ready();
+
+      this.set('_filters', this._initialFilterState);
+
+      this.addEventListener('remove-filter', (event) => {
+        const entity = event.detail.entity;
+        const section = event.detail.section;
+        const sectionIndex = this.filters.indexOf(section);
+        this.splice(`filters.${sectionIndex}.entities`, section.entities.indexOf(entity), 1);
+      });
+    }
+
+    _escapeRegExp(str) {
+      return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+    }
+
+    _isStringMatches(filter, value) {
+      let regex;
+
+      switch (filter.pattern) {
+        case 'equals':
+          regex = new RegExp(`^${this._escapeRegExp(filter.query)}$`, 'i');
+          break;
+        case 'contains':
+          regex = new RegExp(`${this._escapeRegExp(filter.query)}`, 'i');
+          break;
+        case 'starts_with':
+          regex = new RegExp(`^${this._escapeRegExp(filter.query)}`, 'i');
+          break;
+        case 'ends_with':
+          regex = new RegExp(`${this._escapeRegExp(filter.query)}$`, 'i');
+          break;
+        case 'wildcard':
+          regex = new RegExp(`${filter.query.split('*').map(this._escapeRegExp).join('.*')}`, 'i');
+          break;
+      }
+
+      return regex.test(value);
+    }
+
+    _isDateMatches(filter, value) {
+      let result = true;
+      const comparingDate = new Date(value);
+      if (filter.dateFrom) {
+        const dateFrom = new Date(filter.dateFrom);
+        result = result && dateFrom < comparingDate;
+      }
+      if (filter.dateTo) {
+        const dateTo = new Date(filter.dateTo);
+        result = result && dateTo > comparingDate;
+      }
+      return result;
+    }
+
+    _isNumberMatches(filter, value) {
+      let result = true;
+      const comparingNumber = window.parseInt(value);
+      if (filter.leftBound) {
+        const leftBound = window.parseInt(filter.leftBound);
+        result = result && leftBound <= comparingNumber;
+      }
+      if (filter.rightBound) {
+        const rightBound = window.parseInt(filter.rightBound);
+        result = result && rightBound >= comparingNumber;
+      }
+      return result;
+    }
+
+    _matchesFilter(item, column, entity) {
+      const filteringValue = Polymer.Path.get(item, column.path);
+
+      if (column.type === 'date') {
+        return this._isDateMatches(entity, filteringValue);
+      } else if (column.type === 'number') {
+        return this._isNumberMatches(entity, filteringValue);
+      } else {
+        return this._isStringMatches(entity, filteringValue);
+      }
+    }
+
+    _applyCustomFilter(items, filters) {
+      const appliableFilters = filters
+        .filter((section) => ['show', 'hide'].indexOf(section.action) !== -1)
+        .filter((section) => section.entities.filter((entity) => entity.active).length > 0);
+
+      const filteredItems = items.filter((item) => {
+        if (appliableFilters.length === 0) {
+          return true;
+        }
+
+        const isAnySectionApplied = appliableFilters
+          .some((section) => {
+            const activeEntities = section.entities.filter((entity) => entity.active);
+
+            return activeEntities[section.operationType === 'any' ? 'some' : 'every']((entity) => {
+              if (entity.columnId === '-any-') {
+                return this.columns.some((column) => {
+                  const matches = this._matchesFilter(item, {
+                    type: 'string',
+                    path: column.path
+                  }, entity);
+
+                  return ((section.action === 'show' && matches) || (section.action === 'hide' && !matches));
+                });
+              } else {
+                const column = this._getColumnById(entity.columnId);
+
+                const matches = this._matchesFilter(item, column, entity);
+                return ((section.action === 'show' && matches) || (section.action === 'hide' && !matches));
+              }
+            });
+          });
+
+        return isAnySectionApplied;
+      });
+
+      return filteredItems;
+    }
+
+    _constructHighilightCondition(appliableFilters) {
+      return (cellContent, item) => {
+        return appliableFilters.some((section) => {
+          const activeEntities = section.entities.filter((entity) => entity.active);
+
+          return activeEntities[section.operationType === 'any' ? 'some' : 'every']((entity) => {
+            if (entity.columnId === '-any-') {
+              return this.columns.some((column) => {
+                const matches = this._matchesFilter(item, {
+                  type: 'string',
+                  path: column.path
+                }, entity);
+
+                return matches;
+              });
+            } else {
+              const column = this._getColumnById(entity.columnId);
+
+              return this._matchesFilter(item, column, entity);
+            }
+          });
+        });
+      };
+    }
+
+    _filtersObserver(filters) {
+      if (!this._vaadinGrid) {
+        return;
+      }
+
+      const appliableFilters = filters
+        .filter((section) => section.action === 'highlight' && section.entities.filter((entity) => entity.active).length > 0);
+
+      if (appliableFilters.length > 0) {
+
+        this.set('_filterHighlights', [
+          {
+            type: 'row',
+            condition: this._constructHighilightCondition(appliableFilters)
+          }
+        ]);
+      } else {
+        this.set('_filterHighlights', []);
+      }
+
+      this._vaadinGrid.clearCache();
+    }
+
+    /**
+     * This method allows to pass filters and save them as default filter state.
+     * This means that after clicking "Reset" in filters modal filters will return to this state.
+     */
+    applyFilters(filters) {
+      this.set('_initialFilterState', filters);
+      this.set('_filters', filters);
+    }
+
+  };
+</script>
