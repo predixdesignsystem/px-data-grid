@@ -114,9 +114,15 @@
 
           switch (column.type) {
             case 'number':
-              return `${section.action} ${section.operationType} / ` +
-                `${column.path} / ${this.localize('Between')} / ` +
-                `${entity.leftBound}, ${entity.rightBound}`;
+              if (entity.leftBound !== undefined && entity.rightBound === undefined) {
+                return `${section.action} ${section.operationType} / ${column.path} / ${this.localize('Greater Than')} / ${entity.leftBound}`;
+              } else if (entity.leftBound === undefined && entity.rightBound !== undefined) {
+                return `${section.action} ${section.operationType} / ${column.path} / ${this.localize('Less Than')} / ${entity.rightBound}`;
+              } else if (entity.leftBound !== undefined && entity.rightBound !== undefined) {
+                return `${section.action} ${section.operationType} / ${column.path} / ` +
+                  `${this.localize('Between')} / ${entity.leftBound}, ${entity.rightBound}`;
+              }
+              break;
             case 'date':
               return `${section.action} ${section.operationType} / ` +
                 `${column.path} / ` +
