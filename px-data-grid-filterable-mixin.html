@@ -56,7 +56,11 @@
          * }
          * ```
          */
-        filters: {
+        _filters: {
+          type: Array
+        },
+
+        _initialFilterState: {
           type: Array,
           value: () => [{entities: [{}], action: 'show', operationType: 'all'}]
         },
@@ -73,12 +77,14 @@
 
     static get observers() {
       return [
-        '_filtersObserver(filters, filters.*)'
+        '_filtersObserver(_filters, _filters.*)'
       ];
     }
 
     ready() {
       super.ready();
+
+      this.set('_filters', this._initialFilterState);
 
       this.addEventListener('remove-filter', (event) => {
         const entity = event.detail.entity;
@@ -241,6 +247,15 @@
       }
 
       this._vaadinGrid.clearCache();
+    }
+
+    /**
+     * This method allows to pass filters and save them as default filter state.
+     * This means that after clicking "Reset" in filters modal filters will return to this state.
+     */
+    applyFilters(filters) {
+      this.set('_initialFilterState', filters);
+      this.set('_filters', filters);
     }
 
   };

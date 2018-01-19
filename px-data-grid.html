@@ -30,7 +30,7 @@
   <template>
     <style include="px-data-grid-styles"></style>
 
-    <px-data-grid-filters-preview filters="[[filters]]" columns="[[columns]]" localize="[[_boundedLocalize]]"></px-data-grid-filters-preview>
+    <px-data-grid-filters-preview filters="[[_filters]]" columns="[[columns]]" localize="[[_boundedLocalize]]"></px-data-grid-filters-preview>
 
     <template is="dom-if" if="{{_showActionBar(autoFilter, hideActionMenu, filterable)}}">
 
@@ -46,7 +46,7 @@
 
         <div class="action-bar__right">
           <template is="dom-if" if="[[filterable]]">
-            <px-data-grid-filters-modal filters="{{filters}}" columns="[[columns]]" localize="[[_boundedLocalize]]"></px-data-grid-filters-modal>
+            <px-data-grid-filters-modal filters="{{_filters}}" columns="[[columns]]" localize="[[_boundedLocalize]]" initial-filter-state="[[_initialFilterState]]"></px-data-grid-filters-modal>
           </template>
 
           <template is="dom-if" if="[[!hideActionMenu]]">
@@ -775,8 +775,8 @@
           }
 
           // TODO: these values should be in params!
-          if (this.filters && this.filters.length != 0) {
-            items = this._applyCustomFilter(items, this.filters);
+          if (this._filters && this._filters.length != 0) {
+            items = this._applyCustomFilter(items, this._filters);
           }
 
           if (params.sortOrders && params.sortOrders.length && this._vaadinGrid._checkPaths(this._sorters, 'sorting', items)) {
@@ -1432,7 +1432,7 @@
           return {
             columns: this._copyArray(this._getOrderedColumns()),
             highlight: this.highlight.map(entity => Object.assign({}, entity)),
-            filters: this._copyArray(this.filters),
+            filters: this._copyArray(this._filters),
             autoFilter: this._autoFilterValue
           };
         }
@@ -1443,7 +1443,7 @@
           Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => {
             this.columns = this._copyArray(state.columns);
 
-            this.filters = state.filters;
+            this._filters = state.filters;
             this._autoFilterValue = state.autoFilter;
             this.highlight = state.highlight;
           });
