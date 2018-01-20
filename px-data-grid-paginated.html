@@ -436,6 +436,9 @@
 
         _localDataResolver(params, items) {
 
+          // Just to make sure _pxDataGrid has been resolved
+          this._resolvePxDataGrid();
+
           if (params.filters && params.filters.length && this._pxDataGrid._vaadinGrid._checkPaths(params.filters, 'filtering', items)) {
             items = this._pxDataGrid._applyAutoFilter(items, params.filters);
           }
