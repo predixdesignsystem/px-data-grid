@@ -67,7 +67,7 @@
                  active-item="[[activeItem]]"
                  column-reordering-allowed="[[columnReorderingAllowed]]"
                  expanded-items="[[expandedItems]]"
-                 striped$="[[striped]]"
+                 striped$="[[_isStriped(striped,_groupByColumn)]]"
                  selected-items="{{selectedItems}}"
                  multi-sort="[[multiSort]]"
                  item-id-path="[[itemIdPath]]"
@@ -402,6 +402,7 @@
 
             /**
              * If true, every other row in the table will appear with a background color to improve visual scanning.
+             * When grouped by column striping will be disabled.
              */
             striped: {
               type: Boolean,
@@ -1426,6 +1427,10 @@
 
         _checkColumnResizable(gridResizable, columnResizable) {
           return gridResizable ? (columnResizable === undefined ? true : columnResizable) : false;
+        }
+
+        _isStriped(striped, groupByColumn) {
+          return striped && !groupByColumn;
         }
 
         getState() {
