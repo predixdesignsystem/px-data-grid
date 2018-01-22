@@ -9,53 +9,13 @@
     static get properties() {
       return {
         /**
-         * If true, turns on advanced filtering feature.
+         * If true, turns on advanced filtering.
          */
         filterable: {
           type: Boolean,
           value: false
         },
 
-        /**
-         * Array of filters from px-data-grid-filter component.
-         * Format for string column.type:
-         * ```
-         * {
-         *   action: 'show',
-         *   column: {
-         *     type: 'string',
-         *     path: 'last'
-         *   },
-         *   pattern: 'equals',
-         *   query: 'Wong',
-         * }
-         * ```
-         * Pattern can be one of `['equals', 'contains', 'starts_with', 'ends_with', 'wildcard']`.
-         * Format for date column.type:
-         * ```
-         * {
-         *   action: 'hide',
-         *   column: {
-         *     type: 'date',
-         *     path: 'birth_date'
-         *   },
-         *   dateFrom: '1994-11-12',
-         *   dateTo: '1994-11-12'
-         * }
-         * ```
-         * Format for number column.type:
-         * ```
-         * {
-         *   action: 'highlight',
-         *   column: {
-         *     type: 'number',
-         *     path: 'age'
-         *   },
-         *   leftBound: 11,
-         *   rightBound: 12
-         * }
-         * ```
-         */
         _filters: {
           type: Array
         },
@@ -66,7 +26,7 @@
         },
 
         /**
-         * Array of highlights from px-data-grid-filter component
+         * Array of highlights from px-data-grid-filter component.
          */
         _filterHighlights: {
           type: Array,
@@ -252,6 +212,54 @@
     /**
      * This method allows to pass filters and save them as default filter state.
      * This means that after clicking "Reset" in filters modal filters will return to this state.
+     * Format of input parameter for column.type === 'string':
+     * ```
+     * [{
+     *   action: 'show',
+     *   operationType: 'all',
+     *   entities: [
+     *     {
+     *        columnId: 'first[string]',
+     *        active: true,
+     *        pattern: 'equals',
+     *        query: 'Wong'
+     *     }
+     *   ]
+     * }]
+     * ```
+     * Pattern can be one of `['equals', 'contains', 'starts_with', 'ends_with', 'wildcard']`.
+     *
+     * Format for column.type === 'date':
+     * ```
+     * [{
+     *   action: 'show',
+     *   operationType: 'all',
+     *   entities: [
+     *     {
+     *        columnId: 'birth_date[date]',
+     *        active: true,
+     *        dateFrom: '1994-11-12',
+     *        dateTo: '1994-11-12'
+     *     }
+     *   ]
+     * }]
+     * ```
+     *
+     * Format for column.type === 'number':
+     * ```
+     * [{
+     *   action: 'show',
+     *   operationType: 'all',
+     *   entities: [
+     *     {
+     *        columnId: 'age[number]',
+     *        active: true,
+     *        leftBound: 1,
+     *        rightBound: 3
+     *     }
+     *   ]
+     * }]
+     * ```
      */
     applyFilters(filters) {
       this.set('_initialFilterState', filters);

@@ -156,6 +156,9 @@
   </template>
   <script>
     {
+      /**
+       * @mixes Predix.DataGridFilterableMixin
+       */
       class DataGridElement extends Predix.DataGridFilterableMixin(
         Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element)
       ) {
@@ -296,14 +299,72 @@
              * Format:
              * ```javascript
              * {
+             *   id: 'first[string]',
              *   name: 'First Name',
              *   path: 'first',
+             *   type: 'string',
+             *   renderer: 'px-data-grid-string-renderer',
+             *   minBound: 1,
+             *   maxBound: 10,
              *   hidden: false,
              *   frozen: false,
              *   required: false,
              *   flexGrow: 1
              * }
              * ```
+             *
+             * ** column.id **
+             *
+             * Note, that if `column.id` is not manually passed, the grid will automatically generate it
+             * from `column.path` and `column.type`. In that case `column.id` will be equal `column.path[column.type]`.
+             * There can't be 2 columns with the same id.
+             * Also, note, that `-any-` is reserved keyword for `column.id`, you should not use it.
+             *
+             * ** column.name **
+             *
+             * Name, that is displayed in column header.
+             *
+             * ** column.path **
+             *
+             * Column's path indicates a key, which is used to get data from data object.
+             *
+             * ** column.type **
+             *
+             * Type of column influences on advanced filter's UI. Different selectors will be displayed for different types.
+             *
+             * ** column.renderer **
+             *
+             * You can define your own renderer element to display and edit cell data in your own way.
+             * For more information, please check sample renderers, e.g. `px-data-grid-number-renderer`, `px-data-grid-date-renderer`.
+             *
+             * ** column.minBound **
+             *
+             * Used to define minimum bound of a number in advanced filter's slider.
+             * Note, that this property works with `column.type === 'number'` only.
+             *
+             * ** column.maxBound **
+             *
+             * Used to define maximum bound of a number in advanced filter's slider.
+             * Note, that this property works with `column.type === 'number'` only.
+             *
+             * If both minBound and maxBound properties are defined, advanced filter will display slider instead of dropdown.
+             *
+             * ** column.hidden **
+             *
+             * Indicates whether a column is hidden.
+             *
+             * ** column.frozen **
+             *
+             * Indicates whether a column is frozen.
+             *
+             * ** column.required **
+             *
+             * This property is used in renderers to validate data when user edits it.
+             *
+             * ** column.flexGrow **
+             *
+             * Indicates whether a column should grow.
+             *
              */
             columns: {
               type: Array,
