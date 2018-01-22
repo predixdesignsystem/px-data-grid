@@ -53,7 +53,7 @@
 
     <template is="dom-if" if="{{_columnTypeIsNumber(entity.columnId)}}">
       <template is="dom-if" if="{{!_showSlider(_minNumberBound, _maxNumberBound, columns.*)}}">
-        <div class="labeled-text" extended>
+        <div class="labeled-text">
           <label for="range-input">
             [[localize('Condition')]]
           </label>
