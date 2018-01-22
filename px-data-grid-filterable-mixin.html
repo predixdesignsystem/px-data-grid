@@ -101,11 +101,11 @@
       const comparingNumber = window.parseInt(value);
       if (filter.leftBound) {
         const leftBound = window.parseInt(filter.leftBound);
-        result = result && leftBound <= comparingNumber;
+        result = result && leftBound < comparingNumber;
       }
       if (filter.rightBound) {
         const rightBound = window.parseInt(filter.rightBound);
-        result = result && rightBound >= comparingNumber;
+        result = result && rightBound > comparingNumber;
       }
       return result;
     }
