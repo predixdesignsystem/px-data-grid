@@ -101,7 +101,7 @@
           is-remote-data-provider="[[!_hasLocalDataProvider]]"
           is-data-column="true">
           <template class="header">
-            <px-data-grid-sorter path="[[_resolveColumnPath(column)]]">[[_resolveColumnHeader(column)]]</px-data-grid-sorter>
+            <px-data-grid-sorter path="[[_resolveColumnPath(column)]]">[[resolveColumnHeader(column)]]</px-data-grid-sorter>
           </template>
 
           <template>
@@ -1083,7 +1083,7 @@
         /**
          * Helper method to check if header is defined, if not use name
          */
-        _resolveColumnHeader(column) {
+        resolveColumnHeader(column) {
           return column.header ? column.header : column.name;
         }
 
@@ -1359,7 +1359,10 @@
             .map((col) => col.mappedObject);
         }
 
-        _getVisibleColumns() {
+        /**
+         * Get current visible columns in grid
+         */
+        getVisibleColumns() {
           return this._vaadinGrid
             ._columnTree[this._vaadinGrid._columnTree.length - 1]
             .slice(0)
@@ -1400,7 +1403,7 @@
           return items.map((item) => {
             const sortedObject = {};
 
-            this._getVisibleColumns().forEach((col) => {
+            this.getVisibleColumns().forEach((col) => {
               sortedObject[col.path] = item[col.path];
             });
 

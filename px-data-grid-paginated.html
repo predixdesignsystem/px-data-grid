@@ -33,7 +33,9 @@
       language="{{language}}"
       auto-filter="{{autoFilter}}"
       grid-height="{{gridHeight}}"
-      item-id-path="{{itemIdPath}}">
+      item-id-path="{{itemIdPath}}"
+      table-actions="{{tableActions}}"
+      on-table-action="_tableActionListener">
     </px-data-grid>
 
     <px-data-grid-navigation
@@ -260,7 +262,6 @@
              */
             tableActions: {
               type: Array,
-              value: []
             },
 
             /**
@@ -561,6 +562,37 @@
 
         _hidePageList(autoHidePageList, size, pageSize) {
           return autoHidePageList && this._calcNumPages(size, pageSize) === 1;
+        }
+
+        // Reemit event from px-data-grid
+        _tableActionListener(event) {
+          this.dispatchEvent(new CustomEvent('table-action', {
+            detail: {
+              id: event.detail.id
+            },
+            bubbles: true
+          }));
+        }
+
+        /**
+         * Get data current shown on grid
+         */
+        getData(visibleOnly) {
+          return this._pxDataGrid.getData(visibleOnly);
+        }
+
+        /**
+         * Get current visible columns in grid
+         */
+        getVisibleColumns() {
+          return this._pxDataGrid.getVisibleColumns();
+        }
+
+        /**
+         * Helper method to check if header is defined, if not use name
+         */
+        resolveColumnHeader(column) {
+          return this._pxDataGrid.resolveColumnHeader(column);
         }
       }
       customElements.define(DataGridPaginatedElement.is, DataGridPaginatedElement);

@@ -67,7 +67,9 @@
             on-cell-unhover="cellUnhoverListener"
             selectable-page-sizes="{{props.selectablePageSizes.value}}"
             columns="{{props.columns.value}}"
-            grid-height="{{props.gridHeight.value}}">
+            grid-height="{{props.gridHeight.value}}"
+            table-actions="{{props.tableActions.value}}"
+            on-table-action="tableActionListener">
         </px-data-grid-paginated>
 
         <dom-if if="[[selectedItems.length]]">
@@ -528,6 +530,18 @@
           }
         ],
         inputType: 'code:JSON'
+      },
+
+      tableActions: {
+        type: Object,
+        defaultValue: [
+          {
+            name: 'Export CSV',
+            id: 'CSV'
+          }
+        ],
+        inputType: 'code:JSON',
+        _visibleForConfig: false
       }
     },
 
@@ -554,6 +568,32 @@
 
     _clearColumns(event) {
       this.props.columns.value = this._getDefaultColumns();
+    },
+
+    tableActionListener: function(evt) {
+      if (evt.detail.id === 'CSV') {
+        this.exportToCsv();
+      }
+    },
+
+    exportToCsv: function() {
+      const grid = this.shadowRoot.querySelector('px-data-grid-paginated');
+      const data = grid.getData();
+      const columns = grid.getVisibleColumns();
+      let csvContent = 'data:text/csv;charset=utf-8,';
+
+      csvContent += columns.map((column) => grid.resolveColumnHeader(column)).join(',') + '\r\n';
+      data.forEach((item) => {
+        csvContent += Object.keys(item).map((key) => item[key]).join(',') + '\r\n';
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'table_data.csv');
+      document.body.appendChild(link);
+
+      link.click();
     }
   });
 </script>
