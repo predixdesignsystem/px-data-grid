@@ -13,6 +13,7 @@
 [part="content"] {
   overflow: hidden;
   text-overflow: ellipsis;
+  pointer-events: none;
 }
 
 [part="indicators"] {
