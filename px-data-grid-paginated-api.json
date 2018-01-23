@@ -8,11 +8,11 @@
       "sourceRange": {
         "file": "px-data-grid-paginated.html",
         "start": {
-          "line": 570,
+          "line": 602,
           "column": 6
         },
         "end": {
-          "line": 570,
+          "line": 602,
           "column": 42
         }
       },
@@ -1227,7 +1227,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Vaadin.GridColumnElement",
           "name": "Predix.DataGridColumnElement",
           "attributes": [
             {
@@ -5149,7 +5149,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.AutoFilterFieldElement",
           "attributes": [
             {
@@ -6432,7 +6432,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Vaadin.GridColumnElement",
           "name": "Predix.DataGridSelectionColumnElement",
           "attributes": [
             {
@@ -7572,7 +7572,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Vaadin.GridColumnElement",
           "name": "Predix.DataGridToggleDetailsColumnElement",
           "attributes": [
             {
@@ -11614,7 +11614,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridStringRenderer",
           "attributes": [
             {
@@ -14727,7 +14727,7 @@
                   "column": 8
                 },
                 "end": {
-                  "line": 75,
+                  "line": 77,
                   "column": 9
                 }
               },
@@ -14744,11 +14744,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 77,
+                  "line": 79,
                   "column": 8
                 },
                 "end": {
-                  "line": 85,
+                  "line": 87,
                   "column": 9
                 }
               },
@@ -15700,12 +15700,12 @@
               "column": 6
             },
             "end": {
-              "line": 86,
+              "line": 88,
               "column": 7
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridDateRenderer",
           "attributes": [
             {
@@ -19768,7 +19768,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridNumberRenderer",
           "attributes": [
             {
@@ -23727,7 +23727,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridCellContentWrapperElement",
           "attributes": [
             {
@@ -24634,7 +24634,7 @@
             },
             {
               "name": "_numberValue",
-              "type": "number",
+              "type": "string",
               "description": "",
               "privacy": "protected",
               "sourceRange": {
@@ -28007,7 +28007,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFilterEntityElement",
           "attributes": [
             {
@@ -31864,7 +31864,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFilterSectionElement",
           "attributes": [
             {
@@ -35738,7 +35738,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFilterElement",
           "attributes": [
             {
@@ -39559,7 +39559,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFiltersModalElement",
           "attributes": [
             {
@@ -43514,7 +43514,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFiltersPreviewTooltipElement",
           "attributes": [
             {
@@ -47437,7 +47437,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFiltersPreviewElement",
           "attributes": [
             {
@@ -48116,11 +48116,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 96,
+                  "line": 97,
                   "column": 12
                 },
                 "end": {
-                  "line": 103,
+                  "line": 104,
                   "column": 13
                 }
               },
@@ -48136,11 +48136,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 108,
+                  "line": 109,
                   "column": 12
                 },
                 "end": {
-                  "line": 111,
+                  "line": 112,
                   "column": 13
                 }
               },
@@ -48156,11 +48156,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 116,
+                  "line": 117,
                   "column": 12
                 },
                 "end": {
-                  "line": 119,
+                  "line": 120,
                   "column": 13
                 }
               },
@@ -48176,11 +48176,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 124,
+                  "line": 125,
                   "column": 12
                 },
                 "end": {
-                  "line": 127,
+                  "line": 128,
                   "column": 13
                 }
               },
@@ -48196,11 +48196,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 132,
+                  "line": 133,
                   "column": 12
                 },
                 "end": {
-                  "line": 135,
+                  "line": 136,
                   "column": 13
                 }
               },
@@ -48216,11 +48216,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 140,
+                  "line": 141,
                   "column": 12
                 },
                 "end": {
-                  "line": 143,
+                  "line": 144,
                   "column": 13
                 }
               },
@@ -48236,11 +48236,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 148,
+                  "line": 149,
                   "column": 12
                 },
                 "end": {
-                  "line": 151,
+                  "line": 152,
                   "column": 13
                 }
               },
@@ -50359,11 +50359,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 159,
+                  "line": 160,
                   "column": 8
                 },
                 "end": {
-                  "line": 171,
+                  "line": 172,
                   "column": 9
                 }
               },
@@ -50380,11 +50380,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 176,
+                  "line": 177,
                   "column": 8
                 },
                 "end": {
-                  "line": 184,
+                  "line": 185,
                   "column": 9
                 }
               },
@@ -50401,11 +50401,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 186,
+                  "line": 187,
                   "column": 8
                 },
                 "end": {
-                  "line": 194,
+                  "line": 195,
                   "column": 9
                 }
               },
@@ -50422,11 +50422,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 196,
+                  "line": 197,
                   "column": 8
                 },
                 "end": {
-                  "line": 204,
+                  "line": 205,
                   "column": 9
                 }
               },
@@ -50443,11 +50443,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 210,
+                  "line": 211,
                   "column": 8
                 },
                 "end": {
-                  "line": 215,
+                  "line": 216,
                   "column": 9
                 }
               },
@@ -50464,11 +50464,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 220,
+                  "line": 221,
                   "column": 8
                 },
                 "end": {
-                  "line": 224,
+                  "line": 225,
                   "column": 9
                 }
               },
@@ -50485,11 +50485,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 229,
+                  "line": 230,
                   "column": 8
                 },
                 "end": {
-                  "line": 231,
+                  "line": 232,
                   "column": 9
                 }
               },
@@ -50506,11 +50506,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 237,
+                  "line": 238,
                   "column": 8
                 },
                 "end": {
-                  "line": 245,
+                  "line": 246,
                   "column": 9
                 }
               },
@@ -50533,11 +50533,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 247,
+                  "line": 248,
                   "column": 8
                 },
                 "end": {
-                  "line": 249,
+                  "line": 250,
                   "column": 9
                 }
               },
@@ -50554,11 +50554,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 254,
+                  "line": 255,
                   "column": 8
                 },
                 "end": {
-                  "line": 296,
+                  "line": 297,
                   "column": 9
                 }
               },
@@ -50571,11 +50571,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 301,
+                  "line": 302,
                   "column": 8
                 },
                 "end": {
-                  "line": 303,
+                  "line": 304,
                   "column": 9
                 }
               },
@@ -50592,11 +50592,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 305,
+                  "line": 306,
                   "column": 8
                 },
                 "end": {
-                  "line": 307,
+                  "line": 308,
                   "column": 9
                 }
               },
@@ -50613,11 +50613,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 309,
+                  "line": 310,
                   "column": 8
                 },
                 "end": {
-                  "line": 311,
+                  "line": 312,
                   "column": 9
                 }
               },
@@ -51565,16 +51565,16 @@
           "metadata": {},
           "sourceRange": {
             "start": {
-              "line": 85,
+              "line": 86,
               "column": 6
             },
             "end": {
-              "line": 313,
+              "line": 314,
               "column": 7
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridNavigationElement",
           "attributes": [
             {
@@ -51582,11 +51582,11 @@
               "description": "Values selectable by user that dicatate how many items to show per page.",
               "sourceRange": {
                 "start": {
-                  "line": 96,
+                  "line": 97,
                   "column": 12
                 },
                 "end": {
-                  "line": 103,
+                  "line": 104,
                   "column": 13
                 }
               },
@@ -51598,11 +51598,11 @@
               "description": "Current number of items/rows per page.",
               "sourceRange": {
                 "start": {
-                  "line": 108,
+                  "line": 109,
                   "column": 12
                 },
                 "end": {
-                  "line": 111,
+                  "line": 112,
                   "column": 13
                 }
               },
@@ -51614,11 +51614,11 @@
               "description": "Currently displayed page number.",
               "sourceRange": {
                 "start": {
-                  "line": 116,
+                  "line": 117,
                   "column": 12
                 },
                 "end": {
-                  "line": 119,
+                  "line": 120,
                   "column": 13
                 }
               },
@@ -51630,11 +51630,11 @@
               "description": "Total number of pages.",
               "sourceRange": {
                 "start": {
-                  "line": 124,
+                  "line": 125,
                   "column": 12
                 },
                 "end": {
-                  "line": 127,
+                  "line": 128,
                   "column": 13
                 }
               },
@@ -51646,11 +51646,11 @@
               "description": "Total number of items in table.",
               "sourceRange": {
                 "start": {
-                  "line": 132,
+                  "line": 133,
                   "column": 12
                 },
                 "end": {
-                  "line": 135,
+                  "line": 136,
                   "column": 13
                 }
               },
@@ -51662,11 +51662,11 @@
               "description": "If true, the page numbers list is not shown.",
               "sourceRange": {
                 "start": {
-                  "line": 140,
+                  "line": 141,
                   "column": 12
                 },
                 "end": {
-                  "line": 143,
+                  "line": 144,
                   "column": 13
                 }
               },
@@ -52279,7 +52279,7 @@
                   "column": 4
                 },
                 "end": {
-                  "line": 161,
+                  "line": 173,
                   "column": 5
                 }
               },
@@ -52287,6 +52287,9 @@
               "params": [
                 {
                   "name": "items"
+                },
+                {
+                  "name": "columns"
                 },
                 {
                   "name": "filters"
@@ -52299,11 +52302,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 163,
+                  "line": 175,
                   "column": 4
                 },
                 "end": {
-                  "line": 186,
+                  "line": 198,
                   "column": 5
                 }
               },
@@ -52311,6 +52314,9 @@
               "params": [
                 {
                   "name": "appliableFilters"
+                },
+                {
+                  "name": "columns"
                 }
               ]
             },
@@ -52320,11 +52326,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 188,
+                  "line": 200,
                   "column": 4
                 },
                 "end": {
-                  "line": 209,
+                  "line": 221,
                   "column": 5
                 }
               },
@@ -52341,11 +52347,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 263,
+                  "line": 275,
                   "column": 4
                 },
                 "end": {
-                  "line": 266,
+                  "line": 278,
                   "column": 5
                 }
               },
@@ -52366,7 +52372,7 @@
               "column": 2
             },
             "end": {
-              "line": 268,
+              "line": 280,
               "column": 3
             }
           },
@@ -56288,7 +56294,7 @@
         }
       },
       "privacy": "public",
-      "superclass": "HTMLElement",
+      "superclass": "Polymer.Element",
       "name": "DataGridHeaderCellElement",
       "attributes": [
         {
@@ -60410,7 +60416,7 @@
         }
       },
       "privacy": "public",
-      "superclass": "HTMLElement",
+      "superclass": "Polymer.Element",
       "name": "DataGridEditButtonsElement",
       "attributes": [
         {
@@ -61536,7 +61542,7 @@
               "column": 4
             },
             "end": {
-              "line": 161,
+              "line": 173,
               "column": 5
             }
           },
@@ -61544,6 +61550,9 @@
           "params": [
             {
               "name": "items"
+            },
+            {
+              "name": "columns"
             },
             {
               "name": "filters"
@@ -61558,11 +61567,11 @@
           "sourceRange": {
             "file": "px-data-grid-filterable-mixin.html",
             "start": {
-              "line": 163,
+              "line": 175,
               "column": 4
             },
             "end": {
-              "line": 186,
+              "line": 198,
               "column": 5
             }
           },
@@ -61570,6 +61579,9 @@
           "params": [
             {
               "name": "appliableFilters"
+            },
+            {
+              "name": "columns"
             }
           ],
           "inheritedFrom": "Predix.DataGridFilterableMixin"
@@ -61581,11 +61593,11 @@
           "sourceRange": {
             "file": "px-data-grid-filterable-mixin.html",
             "start": {
-              "line": 188,
+              "line": 200,
               "column": 4
             },
             "end": {
-              "line": 209,
+              "line": 221,
               "column": 5
             }
           },
@@ -61604,11 +61616,11 @@
           "sourceRange": {
             "file": "px-data-grid-filterable-mixin.html",
             "start": {
-              "line": 263,
+              "line": 275,
               "column": 4
             },
             "end": {
-              "line": 266,
+              "line": 278,
               "column": 5
             }
           },
@@ -62174,9 +62186,9 @@
           ]
         },
         {
-          "name": "_resolveColumnHeader",
+          "name": "resolveColumnHeader",
           "description": "Helper method to check if header is defined, if not use name",
-          "privacy": "protected",
+          "privacy": "public",
           "sourceRange": {
             "start": {
               "line": 1085,
@@ -62634,16 +62646,16 @@
           "params": []
         },
         {
-          "name": "_getVisibleColumns",
-          "description": "",
-          "privacy": "protected",
+          "name": "getVisibleColumns",
+          "description": "Get current visible columns in grid",
+          "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1361,
+              "line": 1364,
               "column": 8
             },
             "end": {
-              "line": 1368,
+              "line": 1371,
               "column": 9
             }
           },
@@ -62656,11 +62668,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1373,
+              "line": 1376,
               "column": 8
             },
             "end": {
-              "line": 1408,
+              "line": 1411,
               "column": 9
             }
           },
@@ -62677,11 +62689,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1413,
+              "line": 1416,
               "column": 8
             },
             "end": {
-              "line": 1418,
+              "line": 1421,
               "column": 9
             }
           },
@@ -62698,11 +62710,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1423,
+              "line": 1426,
               "column": 8
             },
             "end": {
-              "line": 1426,
+              "line": 1429,
               "column": 9
             }
           },
@@ -62719,11 +62731,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1428,
+              "line": 1431,
               "column": 8
             },
             "end": {
-              "line": 1445,
+              "line": 1448,
               "column": 9
             }
           },
@@ -62740,11 +62752,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1450,
+              "line": 1453,
               "column": 8
             },
             "end": {
-              "line": 1458,
+              "line": 1461,
               "column": 9
             }
           },
@@ -62757,11 +62769,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1460,
+              "line": 1463,
               "column": 8
             },
             "end": {
-              "line": 1466,
+              "line": 1469,
               "column": 9
             }
           },
@@ -62778,11 +62790,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1472,
+              "line": 1475,
               "column": 8
             },
             "end": {
-              "line": 1478,
+              "line": 1481,
               "column": 9
             }
           },
@@ -62799,11 +62811,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1480,
+              "line": 1483,
               "column": 8
             },
             "end": {
-              "line": 1482,
+              "line": 1485,
               "column": 9
             }
           },
@@ -62820,11 +62832,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1484,
+              "line": 1487,
               "column": 8
             },
             "end": {
-              "line": 1486,
+              "line": 1489,
               "column": 9
             }
           },
@@ -62841,11 +62853,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1488,
+              "line": 1491,
               "column": 8
             },
             "end": {
-              "line": 1490,
+              "line": 1493,
               "column": 9
             }
           },
@@ -62865,11 +62877,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1492,
+              "line": 1495,
               "column": 8
             },
             "end": {
-              "line": 1494,
+              "line": 1497,
               "column": 9
             }
           },
@@ -62889,11 +62901,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1496,
+              "line": 1499,
               "column": 8
             },
             "end": {
-              "line": 1503,
+              "line": 1506,
               "column": 9
             }
           },
@@ -62906,11 +62918,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1505,
+              "line": 1508,
               "column": 8
             },
             "end": {
-              "line": 1515,
+              "line": 1518,
               "column": 9
             }
           },
@@ -62931,7 +62943,7 @@
           "column": 6
         },
         "end": {
-          "line": 1516,
+          "line": 1519,
           "column": 7
         }
       },
@@ -63448,11 +63460,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 70,
+              "line": 72,
               "column": 12
             },
             "end": {
-              "line": 74,
+              "line": 76,
               "column": 13
             }
           },
@@ -63470,11 +63482,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 79,
+              "line": 81,
               "column": 12
             },
             "end": {
-              "line": 82,
+              "line": 84,
               "column": 13
             }
           },
@@ -63490,11 +63502,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 87,
+              "line": 89,
               "column": 12
             },
             "end": {
-              "line": 90,
+              "line": 92,
               "column": 13
             }
           },
@@ -63510,11 +63522,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 95,
+              "line": 97,
               "column": 12
             },
             "end": {
-              "line": 99,
+              "line": 101,
               "column": 13
             }
           },
@@ -63532,11 +63544,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 104,
+              "line": 106,
               "column": 12
             },
             "end": {
-              "line": 108,
+              "line": 110,
               "column": 13
             }
           },
@@ -63553,11 +63565,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 113,
+              "line": 115,
               "column": 12
             },
             "end": {
-              "line": 117,
+              "line": 119,
               "column": 13
             }
           },
@@ -63575,11 +63587,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 122,
+              "line": 124,
               "column": 12
             },
             "end": {
-              "line": 125,
+              "line": 127,
               "column": 13
             }
           },
@@ -63595,11 +63607,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 130,
+              "line": 132,
               "column": 12
             },
             "end": {
-              "line": 134,
+              "line": 136,
               "column": 13
             }
           },
@@ -63617,11 +63629,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 139,
+              "line": 141,
               "column": 12
             },
             "end": {
-              "line": 142,
+              "line": 144,
               "column": 13
             }
           },
@@ -63637,11 +63649,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 148,
+              "line": 150,
               "column": 12
             },
             "end": {
-              "line": 152,
+              "line": 154,
               "column": 13
             }
           },
@@ -63659,11 +63671,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 157,
+              "line": 159,
               "column": 12
             },
             "end": {
-              "line": 160,
+              "line": 162,
               "column": 13
             }
           },
@@ -63679,11 +63691,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 165,
+              "line": 167,
               "column": 12
             },
             "end": {
-              "line": 168,
+              "line": 170,
               "column": 13
             }
           },
@@ -63699,11 +63711,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 173,
+              "line": 175,
               "column": 12
             },
             "end": {
-              "line": 176,
+              "line": 178,
               "column": 13
             }
           },
@@ -63719,11 +63731,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 181,
+              "line": 183,
               "column": 12
             },
             "end": {
-              "line": 184,
+              "line": 186,
               "column": 13
             }
           },
@@ -63739,11 +63751,11 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 208,
+              "line": 210,
               "column": 12
             },
             "end": {
-              "line": 210,
+              "line": 212,
               "column": 13
             }
           },
@@ -63758,11 +63770,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 219,
+              "line": 221,
               "column": 12
             },
             "end": {
-              "line": 222,
+              "line": 224,
               "column": 13
             }
           },
@@ -63778,11 +63790,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 228,
+              "line": 230,
               "column": 12
             },
             "end": {
-              "line": 231,
+              "line": 233,
               "column": 13
             }
           },
@@ -63798,11 +63810,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 237,
+              "line": 239,
               "column": 12
             },
             "end": {
-              "line": 255,
+              "line": 257,
               "column": 13
             }
           },
@@ -63818,18 +63830,17 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 260,
+              "line": 262,
               "column": 12
             },
             "end": {
-              "line": 263,
+              "line": 264,
               "column": 13
             }
           },
           "metadata": {
             "polymer": {}
-          },
-          "defaultValue": "[]"
+          }
         },
         {
           "name": "remoteDataProvider",
@@ -63838,11 +63849,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 268,
+              "line": 269,
               "column": 12
             },
             "end": {
-              "line": 271,
+              "line": 272,
               "column": 13
             }
           },
@@ -63859,11 +63870,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 273,
+              "line": 274,
               "column": 12
             },
             "end": {
-              "line": 275,
+              "line": 276,
               "column": 13
             }
           },
@@ -63878,11 +63889,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 280,
+              "line": 281,
               "column": 12
             },
             "end": {
-              "line": 283,
+              "line": 284,
               "column": 13
             }
           },
@@ -63898,11 +63909,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 289,
+              "line": 290,
               "column": 12
             },
             "end": {
-              "line": 292,
+              "line": 293,
               "column": 13
             }
           },
@@ -63918,11 +63929,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 297,
+              "line": 298,
               "column": 12
             },
             "end": {
-              "line": 300,
+              "line": 301,
               "column": 13
             }
           },
@@ -63938,11 +63949,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 322,
+              "line": 323,
               "column": 12
             },
             "end": {
-              "line": 325,
+              "line": 326,
               "column": 13
             }
           },
@@ -63958,11 +63969,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 331,
+              "line": 332,
               "column": 12
             },
             "end": {
-              "line": 333,
+              "line": 334,
               "column": 13
             }
           },
@@ -63977,11 +63988,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 338,
+              "line": 339,
               "column": 12
             },
             "end": {
-              "line": 341,
+              "line": 342,
               "column": 13
             }
           },
@@ -63997,11 +64008,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 346,
+              "line": 347,
               "column": 12
             },
             "end": {
-              "line": 349,
+              "line": 350,
               "column": 13
             }
           },
@@ -64017,11 +64028,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 354,
+              "line": 355,
               "column": 12
             },
             "end": {
-              "line": 357,
+              "line": 358,
               "column": 13
             }
           },
@@ -64037,11 +64048,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 362,
+              "line": 363,
               "column": 12
             },
             "end": {
-              "line": 365,
+              "line": 366,
               "column": 13
             }
           },
@@ -64057,11 +64068,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 371,
+              "line": 372,
               "column": 12
             },
             "end": {
-              "line": 374,
+              "line": 375,
               "column": 13
             }
           },
@@ -64078,11 +64089,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 379,
+              "line": 380,
               "column": 8
             },
             "end": {
-              "line": 382,
+              "line": 383,
               "column": 9
             }
           },
@@ -64095,11 +64106,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 384,
+              "line": 385,
               "column": 8
             },
             "end": {
-              "line": 389,
+              "line": 390,
               "column": 9
             }
           },
@@ -64112,11 +64123,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 391,
+              "line": 392,
               "column": 8
             },
             "end": {
-              "line": 396,
+              "line": 397,
               "column": 9
             }
           },
@@ -64133,11 +64144,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 398,
+              "line": 399,
               "column": 8
             },
             "end": {
-              "line": 401,
+              "line": 402,
               "column": 9
             }
           },
@@ -64154,11 +64165,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 407,
+              "line": 408,
               "column": 8
             },
             "end": {
-              "line": 428,
+              "line": 429,
               "column": 9
             }
           },
@@ -64175,11 +64186,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 430,
+              "line": 431,
               "column": 8
             },
             "end": {
-              "line": 434,
+              "line": 435,
               "column": 9
             }
           },
@@ -64199,11 +64210,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 436,
+              "line": 437,
               "column": 8
             },
             "end": {
-              "line": 477,
+              "line": 478,
               "column": 9
             }
           },
@@ -64223,11 +64234,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 482,
+              "line": 483,
               "column": 8
             },
             "end": {
-              "line": 492,
+              "line": 493,
               "column": 9
             }
           },
@@ -64240,11 +64251,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 497,
+              "line": 498,
               "column": 8
             },
             "end": {
-              "line": 506,
+              "line": 507,
               "column": 9
             }
           },
@@ -64261,11 +64272,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 508,
+              "line": 509,
               "column": 8
             },
             "end": {
-              "line": 512,
+              "line": 513,
               "column": 9
             }
           },
@@ -64282,11 +64293,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 514,
+              "line": 515,
               "column": 8
             },
             "end": {
-              "line": 517,
+              "line": 518,
               "column": 9
             }
           },
@@ -64303,11 +64314,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 522,
+              "line": 523,
               "column": 8
             },
             "end": {
-              "line": 527,
+              "line": 528,
               "column": 9
             }
           },
@@ -64320,11 +64331,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 534,
+              "line": 535,
               "column": 8
             },
             "end": {
-              "line": 540,
+              "line": 541,
               "column": 9
             }
           },
@@ -64337,11 +64348,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 546,
+              "line": 547,
               "column": 8
             },
             "end": {
-              "line": 548,
+              "line": 549,
               "column": 9
             }
           },
@@ -64354,11 +64365,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 553,
+              "line": 554,
               "column": 8
             },
             "end": {
-              "line": 559,
+              "line": 560,
               "column": 9
             }
           },
@@ -64378,11 +64389,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 561,
+              "line": 562,
               "column": 8
             },
             "end": {
-              "line": 563,
+              "line": 564,
               "column": 9
             }
           },
@@ -64398,6 +64409,86 @@
               "name": "pageSize"
             }
           ]
+        },
+        {
+          "name": "_tableActionListener",
+          "description": "Reemit event from px-data-grid",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 567,
+              "column": 8
+            },
+            "end": {
+              "line": 574,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "event"
+            }
+          ]
+        },
+        {
+          "name": "getData",
+          "description": "Get data current shown on grid",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 579,
+              "column": 8
+            },
+            "end": {
+              "line": 581,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "visibleOnly"
+            }
+          ]
+        },
+        {
+          "name": "getVisibleColumns",
+          "description": "Get current visible columns in grid",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 586,
+              "column": 8
+            },
+            "end": {
+              "line": 588,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "resolveColumnHeader",
+          "description": "Helper method to check if header is defined, if not use name",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 593,
+              "column": 8
+            },
+            "end": {
+              "line": 595,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "column"
+            }
+          ]
         }
       ],
       "staticMethods": [],
@@ -64405,11 +64496,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 53,
+          "line": 55,
           "column": 6
         },
         "end": {
-          "line": 564,
+          "line": 596,
           "column": 7
         }
       },
@@ -64422,11 +64513,11 @@
           "description": "Data for the table to display.\n\nExpected data format is a JSON array of objects. Each object in the array represents a row in the table.\n\nEach item in an object will be displayed as a separate column, unless px-data-table-columns are\ndefined to limit which columns are displayed.",
           "sourceRange": {
             "start": {
-              "line": 70,
+              "line": 72,
               "column": 12
             },
             "end": {
-              "line": 74,
+              "line": 76,
               "column": 13
             }
           },
@@ -64438,11 +64529,11 @@
           "description": "Current selection mode of grid. Accepts values 'none', 'single' and 'multi'.",
           "sourceRange": {
             "start": {
-              "line": 79,
+              "line": 81,
               "column": 12
             },
             "end": {
-              "line": 82,
+              "line": 84,
               "column": 13
             }
           },
@@ -64454,11 +64545,11 @@
           "description": "If true, hides the column with checkboxes.",
           "sourceRange": {
             "start": {
-              "line": 87,
+              "line": 89,
               "column": 12
             },
             "end": {
-              "line": 90,
+              "line": 92,
               "column": 13
             }
           },
@@ -64470,11 +64561,11 @@
           "description": "An array that contains the selected items.",
           "sourceRange": {
             "start": {
-              "line": 95,
+              "line": 97,
               "column": 12
             },
             "end": {
-              "line": 99,
+              "line": 101,
               "column": 13
             }
           },
@@ -64486,11 +64577,11 @@
           "description": "The total number of items",
           "sourceRange": {
             "start": {
-              "line": 104,
+              "line": 106,
               "column": 12
             },
             "end": {
-              "line": 108,
+              "line": 110,
               "column": 13
             }
           },
@@ -64502,11 +64593,11 @@
           "description": "Number of items fetched at a time from the dataprovider.",
           "sourceRange": {
             "start": {
-              "line": 113,
+              "line": 115,
               "column": 12
             },
             "end": {
-              "line": 117,
+              "line": 119,
               "column": 13
             }
           },
@@ -64518,11 +64609,11 @@
           "description": "Array of selectable page sizes offered to the user.",
           "sourceRange": {
             "start": {
-              "line": 122,
+              "line": 124,
               "column": 12
             },
             "end": {
-              "line": 125,
+              "line": 127,
               "column": 13
             }
           },
@@ -64534,11 +64625,11 @@
           "description": "Current page number of displayed items. Page 1 should be the minimum value.",
           "sourceRange": {
             "start": {
-              "line": 130,
+              "line": 132,
               "column": 12
             },
             "end": {
-              "line": 134,
+              "line": 136,
               "column": 13
             }
           },
@@ -64550,11 +64641,11 @@
           "description": "When `true`, user can sort by multiple columns",
           "sourceRange": {
             "start": {
-              "line": 139,
+              "line": 141,
               "column": 12
             },
             "end": {
-              "line": 142,
+              "line": 144,
               "column": 13
             }
           },
@@ -64566,11 +64657,11 @@
           "description": "The item user has last interacted with. Turns to `null` after user deactivates\nthe item by re-interacting with the currently active item.",
           "sourceRange": {
             "start": {
-              "line": 148,
+              "line": 150,
               "column": 12
             },
             "end": {
-              "line": 152,
+              "line": 154,
               "column": 13
             }
           },
@@ -64582,11 +64673,11 @@
           "description": "When `true`, user can resize columns",
           "sourceRange": {
             "start": {
-              "line": 157,
+              "line": 159,
               "column": 12
             },
             "end": {
-              "line": 160,
+              "line": 162,
               "column": 13
             }
           },
@@ -64598,11 +64689,11 @@
           "description": "Set to true to allow column reordering.",
           "sourceRange": {
             "start": {
-              "line": 165,
+              "line": 167,
               "column": 12
             },
             "end": {
-              "line": 168,
+              "line": 170,
               "column": 13
             }
           },
@@ -64614,11 +64705,11 @@
           "description": "An array containing references to expanded items.",
           "sourceRange": {
             "start": {
-              "line": 173,
+              "line": 175,
               "column": 12
             },
             "end": {
-              "line": 176,
+              "line": 178,
               "column": 13
             }
           },
@@ -64630,11 +64721,11 @@
           "description": "Define if table action menu should be hidden.",
           "sourceRange": {
             "start": {
-              "line": 181,
+              "line": 183,
               "column": 12
             },
             "end": {
-              "line": 184,
+              "line": 186,
               "column": 13
             }
           },
@@ -64646,11 +64737,11 @@
           "description": "A valid IETF language tag as a string that `app-localize-behavior` will\nuse to localize this component.\n\nSee https://github.com/PolymerElements/app-localize-behavior for API\ndocumentation and more information.",
           "sourceRange": {
             "start": {
-              "line": 219,
+              "line": 221,
               "column": 12
             },
             "end": {
-              "line": 222,
+              "line": 224,
               "column": 13
             }
           },
@@ -64662,11 +64753,11 @@
           "description": "Use the key for localization if value for that language is missing.\nShould always be true for Predix components.",
           "sourceRange": {
             "start": {
-              "line": 228,
+              "line": 230,
               "column": 12
             },
             "end": {
-              "line": 231,
+              "line": 233,
               "column": 13
             }
           },
@@ -64678,11 +64769,11 @@
           "description": "Library object of hardcoded strings used in this application.\nUsed by `app-localize-behavior` in conjunction with `language`.",
           "sourceRange": {
             "start": {
-              "line": 237,
+              "line": 239,
               "column": 12
             },
             "end": {
-              "line": 255,
+              "line": 257,
               "column": 13
             }
           },
@@ -64694,11 +64785,11 @@
           "description": "All custom table actions. Should return array of objects with 'name' (String) and 'action' (function).",
           "sourceRange": {
             "start": {
-              "line": 260,
+              "line": 262,
               "column": 12
             },
             "end": {
-              "line": 263,
+              "line": 264,
               "column": 13
             }
           },
@@ -64710,11 +64801,11 @@
           "description": "Function that provides items lazily. Receives arguments params, callback",
           "sourceRange": {
             "start": {
-              "line": 268,
+              "line": 269,
               "column": 12
             },
             "end": {
-              "line": 271,
+              "line": 272,
               "column": 13
             }
           },
@@ -64726,11 +64817,11 @@
           "description": "If true, every other row in the table will appear with a background color to improve visual scanning.",
           "sourceRange": {
             "start": {
-              "line": 280,
+              "line": 281,
               "column": 12
             },
             "end": {
-              "line": 283,
+              "line": 284,
               "column": 13
             }
           },
@@ -64742,11 +64833,11 @@
           "description": "How many milliseconds before loading spinner will be shown",
           "sourceRange": {
             "start": {
-              "line": 289,
+              "line": 290,
               "column": 12
             },
             "end": {
-              "line": 292,
+              "line": 293,
               "column": 13
             }
           },
@@ -64758,11 +64849,11 @@
           "description": "To enable automatic filtering change property to true",
           "sourceRange": {
             "start": {
-              "line": 297,
+              "line": 298,
               "column": 12
             },
             "end": {
-              "line": 300,
+              "line": 301,
               "column": 13
             }
           },
@@ -64774,11 +64865,11 @@
           "description": "Array of objects of conditions used to highlight specific columns.\nFormat:\n```javascript\n{\n  type: 'cell',\n  condition: (cellContent, column, item) => { return cellContent == 'John Doe' },\n},\n{\n  type: 'row',\n  condition: (cellContent, item) => { return cellContent[0] == 'a' },\n  color: '#a8a8a8'\n},\n{\n  type: 'column',\n  condition (column, item) => { return column.name == 'age' },\n  color: 'pink'\n}\n```",
           "sourceRange": {
             "start": {
-              "line": 322,
+              "line": 323,
               "column": 12
             },
             "end": {
-              "line": 325,
+              "line": 326,
               "column": 13
             }
           },
@@ -64790,11 +64881,11 @@
           "description": "Default column width if not defined, eg. '100px'",
           "sourceRange": {
             "start": {
-              "line": 338,
+              "line": 339,
               "column": 12
             },
             "end": {
-              "line": 341,
+              "line": 342,
               "column": 13
             }
           },
@@ -64806,11 +64897,11 @@
           "description": "Default column flex if not defined, eg. 1",
           "sourceRange": {
             "start": {
-              "line": 346,
+              "line": 347,
               "column": 12
             },
             "end": {
-              "line": 349,
+              "line": 350,
               "column": 13
             }
           },
@@ -64822,11 +64913,11 @@
           "description": "Grid auto resize height to match number of rows.",
           "sourceRange": {
             "start": {
-              "line": 354,
+              "line": 355,
               "column": 12
             },
             "end": {
-              "line": 357,
+              "line": 358,
               "column": 13
             }
           },
@@ -64838,11 +64929,11 @@
           "description": "Path to an item sub-property that identifies the item.",
           "sourceRange": {
             "start": {
-              "line": 362,
+              "line": 363,
               "column": 12
             },
             "end": {
-              "line": 365,
+              "line": 366,
               "column": 13
             }
           },
@@ -64854,11 +64945,11 @@
           "description": "If true, automatically hides the page numbers list when there is only\n1 page available.",
           "sourceRange": {
             "start": {
-              "line": 371,
+              "line": 372,
               "column": 12
             },
             "end": {
-              "line": 374,
+              "line": 375,
               "column": 13
             }
           },
