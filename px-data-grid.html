@@ -838,7 +838,7 @@
 
           // TODO: these values should be in params!
           if (this._filters && this._filters.length != 0) {
-            items = this._applyCustomFilter(items, this._filters);
+            items = this._applyCustomFilter(items, this.columns, this._filters);
           }
 
           if (params.sortOrders && params.sortOrders.length && this._vaadinGrid._checkPaths(this._sorters, 'sorting', items)) {
