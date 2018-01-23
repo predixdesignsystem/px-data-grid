@@ -72,7 +72,9 @@
         }
 
         _valueObserver(value) {
-          this.momentObj = window.moment(value, 'YYYY-MM-DD');
+          if (typeof value === 'string' && value.length > 0) {
+            this.momentObj = window.moment(value, 'YYYY-MM-DD');
+          }
         }
 
         _momentObjChanged(momentObj) {
