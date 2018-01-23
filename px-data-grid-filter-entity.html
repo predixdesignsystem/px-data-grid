@@ -264,18 +264,30 @@
           }
         }
 
+        _resolveColumnName(column) {
+          return column.header ? column.header : (column.name ? column.name : column.path);
+        }
+
         _setMappedColumns(columns, columnsSplices) {
           if (!columns && !columnsSplices) {
             return;
           }
 
-          this.set('_mappedColumns', []);
+          const optionList = [];
 
-          this.push('_mappedColumns', {key: '-any-', val: 'Any column'});
+          optionList.push({
+            key: '-any-',
+            val: 'Any column'
+          });
 
           columns.forEach((col) => {
-            this.push('_mappedColumns', {key: col.id, val: col.path});
+            optionList.push({
+              key: col.id,
+              val: this._resolveColumnName(col)
+            });
           });
+
+          this.set('_mappedColumns', optionList);
         }
 
         _columnTypeIsString(columnId) {

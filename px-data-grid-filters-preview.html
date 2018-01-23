@@ -112,6 +112,7 @@
             return {
               id: '-any-',
               type: 'string',
+              header: this.localize('Any'),
               path: 'any'
             };
           }
@@ -129,20 +130,22 @@
         _getTooltipMessage(entity, section) {
           const column = this._getColumnById(entity.columnId);
 
+          const name = column.header ? column.header : (column.name ? column.name : column.path);
+
           switch (column.type) {
             case 'number':
               if (entity.leftBound !== undefined && entity.rightBound === undefined) {
-                return `${section.action} ${section.operationType} / ${column.path} / ${this.localize('Greater Than')}`;
+                return `${section.action} ${section.operationType} / ${name} / ${this.localize('Greater Than')}`;
               } else if (entity.leftBound === undefined && entity.rightBound !== undefined) {
-                return `${section.action} ${section.operationType} / ${column.path} / ${this.localize('Less Than')}`;
+                return `${section.action} ${section.operationType} / ${name} / ${this.localize('Less Than')}`;
               } else if (entity.leftBound !== undefined && entity.rightBound !== undefined) {
-                return `${section.action} ${section.operationType} / ${column.path} / ${this.localize('Between')}`;
+                return `${section.action} ${section.operationType} / ${name} / ${this.localize('Between')}`;
               }
               break;
             case 'date':
-              return `${section.action} ${section.operationType} / ${column.path} / ${this.localize('Between')}`;
+              return `${section.action} ${section.operationType} / ${name} / ${this.localize('Between')}`;
             default:
-              return `${section.action} ${section.operationType} / ${column.path} / ${entity.pattern}`;
+              return `${section.action} ${section.operationType} / ${name} / ${entity.pattern}`;
           }
         }
 
