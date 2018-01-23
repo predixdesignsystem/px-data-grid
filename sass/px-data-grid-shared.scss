@@ -16,7 +16,9 @@ $inuit-enable-input--regular : true;
 $inuit-enable-validation-states : true;
 @import "px-forms-design/_base.forms.scss";
 
+$inuit-enable-btn--bare : true;
 @import 'px-buttons-design/_objects.buttons.scss';
+
 @import "px-actionable-design/_objects.actionable.scss";
 
 .text-input {
