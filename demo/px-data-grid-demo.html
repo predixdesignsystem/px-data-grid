@@ -132,10 +132,10 @@
     exportToCsv: function() {
       const grid = this.shadowRoot.querySelector('px-data-grid');
       const data = grid.getData();
-      const columns = grid._getVisibleColumns();
+      const columns = grid.getVisibleColumns();
       let csvContent = 'data:text/csv;charset=utf-8,';
 
-      csvContent += columns.map((column) => grid._resolveColumnHeader(column)).join(',') + '\r\n';
+      csvContent += columns.map((column) => grid.resolveColumnHeader(column)).join(',') + '\r\n';
       data.forEach((item) => {
         csvContent += Object.keys(item).map((key) => item[key]).join(',') + '\r\n';
       });
