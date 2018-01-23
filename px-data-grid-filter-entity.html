@@ -64,7 +64,7 @@
           <label for="number-value-input">
             [[localize('Value')]]
           </label>
-          <input id="number-value-input" type="number" class="text-input" value="{{_numberValue::input}}">
+          <input id="number-value-input" type="text" class="text-input" value="{{_numberValue::input}}">
         </div>
       </template>
 
@@ -172,7 +172,7 @@
             },
 
             _numberValue: {
-              type: Number
+              type: String
             }
           };
         }
@@ -230,10 +230,10 @@
 
           if (entity.leftBound !== undefined) {
             this._numberCondition = 'greater_than';
-            this._nubmerValue = entity.leftBound;
+            this.set('_numberValue', entity.leftBound);
           } else if (entity.rightBound !== undefined) {
             this._numberCondition = 'less_than';
-            this._nubmerValue = entity.rightBound;
+            this.set('_numberValue', entity.rightBound);
           }
         }
 
@@ -281,7 +281,7 @@
         _columnTypeIsString(columnId) {
           const column = this._getColumnById(columnId);
 
-          return column && !['date', 'number'].includes(column.type);
+          return column && ['date', 'number'].indexOf(column.type) === -1;
         }
 
         _columnTypeIsDate(columnId) {
