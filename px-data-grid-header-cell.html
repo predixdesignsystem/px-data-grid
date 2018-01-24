@@ -6,7 +6,14 @@
 <dom-module id="px-data-grid-header-cell">
   <template>
     <style include="px-data-grid-header-cell-styles"></style>
-    <px-dropdown button-style="icon" icon="px-nav:menu" items="{{_dropdownItems}}" opened="{{dropdownOpened}}" hidden$="[[_dropdownHidden]]" on-px-dropdown-click="_dropdownClick">
+    <px-dropdown
+        button-style="icon"
+        icon="px-nav:menu"
+        items="{{_dropdownItems}}"
+        opened="{{dropdownOpened}}"
+        hidden$="[[_dropdownHidden]]"
+        on-px-dropdown-click="_dropdownItemClick"
+        on-click="_dropdownClick">
       <px-icon slot="trigger" icon="px-nav:menu"></px-icon>
     </px-dropdown>
     <slot></slot>
@@ -69,6 +76,10 @@
             if (!this.dropdownOpened) {
               this._dropdownHidden = true;
             }
+          });
+
+          this.addEventListener('click', (e) => {
+            this.querySelector('px-data-grid-sorter').click();
           });
         }
 
@@ -215,7 +226,7 @@
           }
         }
 
-        _dropdownClick(e) {
+        _dropdownItemClick(e) {
           const item = e.detail.detail.item;
 
           if (item && item.key) {
@@ -223,6 +234,10 @@
           }
         }
 
+        _dropdownClick(e) {
+          e.stopPropagation();
+          e.preventDefault();
+        }
       }
 
       customElements.define(DataGridHeaderCellElement.is, DataGridHeaderCellElement);
