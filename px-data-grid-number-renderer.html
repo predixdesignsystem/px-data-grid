@@ -57,9 +57,20 @@
         }
 
         validate() {
+          let isValid = true;
+          let message = '';
+
+          if (this.column.required && this.value.toString().length == 0) {
+            isValid = false;
+            message = this.localize('Value is required');
+          } else if (isNaN(parseInt(this.value))) {
+            isValid = false;
+            message = this.localize('Invalid number');
+          }
+
           return {
-            valid: !this.column.required || this.value.toString().length > 0,
-            message: this.localize('Value is required')
+            valid: isValid,
+            message: message
           };
         }
 
