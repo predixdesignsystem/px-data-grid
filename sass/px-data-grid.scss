@@ -78,3 +78,23 @@ px-icon {
   --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted);
   cursor: pointer;
 }
+
+// Toggle expandable rows
+.toggle-details {
+  color: var(--px-base-text-color, #000);
+  margin: -10px;
+  cursor: pointer;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-details:focus {
+  outline: none;
+}
+
+.toggle-details > px-icon {
+  padding: 0;
+  margin: 0;
+}
