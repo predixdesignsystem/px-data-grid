@@ -57,14 +57,14 @@
           <label for="range-input">
             [[localize('Condition')]]
           </label>
-          <px-dropdown id="number-condition-dropdown" items="[[_numberConditions]]" selected="{{_numberCondition}}"></px-dropdown>
+          <px-dropdown id="number-condition-dropdown" items="[[_numberConditions]]" selected="{{entity.condition}}"></px-dropdown>
         </div>
 
         <div class="labeled-text">
           <label for="number-value-input">
             [[localize('Value')]]
           </label>
-          <input id="number-value-input" type="text" class="text-input" value="{{_numberValue::input}}">
+          <input id="number-value-input" type="text" class="text-input" value="{{entity.value::input}}">
         </div>
       </template>
 
@@ -140,11 +140,27 @@
               value: [
                 {
                   key: 'less_than',
-                  val: 'Less Than'
+                  val: 'Less than'
+                },
+                {
+                  key: 'equals',
+                  val: 'Equals'
+                },
+                {
+                  key: 'not_equal',
+                  val: 'Not equal'
+                },
+                {
+                  key: 'equal_or_greater_than',
+                  val: 'Equal or greater than'
+                },
+                {
+                  key: 'equal_or_less_than',
+                  val: 'Equal or less than'
                 },
                 {
                   key: 'greater_than',
-                  val: 'Greater Than'
+                  val: 'Greater than'
                 }
               ]
             },
@@ -161,19 +177,7 @@
               type: Object
             },
 
-            _selectedColumnId: {
-              type: String
-            },
-
-            localize: Function,
-
-            _numberCondition: {
-              type: String
-            },
-
-            _numberValue: {
-              type: String
-            }
+            localize: Function
           };
         }
 
@@ -183,12 +187,9 @@
             '_filterActiveObservable(entity, entity.*)',
             '_momentDatesObserver(_dateFrom, _dateTo, _dateFrom.*, _dateTo.*)',
             '_entityDatesObserver(entity, entity.dateFrom, entity.dateTo)',
-            '_selectedColumnChanged(_selectedColumnId)',
             '_localizeChanged(localize)',
             '_entityObserver(entity, entity.*)',
-            '_columnNumberBoundsObserver(entity, entity.columnId, columns.*)',
-            '_numberFilterChanged(_numberCondition, _numberValue)',
-            '_initNumberFilter(entity, entity.leftBound, entity.rightBound)'
+            '_columnNumberBoundsObserver(entity, entity.columnId, columns.*)'
           ];
         }
 
@@ -204,37 +205,6 @@
           this._numberConditions.forEach((condition, index) => {
             this.set(`_numberConditions.${index}.val`, localize(condition.val));
           });
-        }
-
-        _numberFilterChanged(condition, value) {
-          if (!condition || value === undefined) {
-            return;
-          }
-
-          const intValue = parseInt(value);
-          if (condition === 'less_than' && this.entity.rightBound != intValue) {
-            this.set('entity.rightBound', intValue);
-            delete this.entity.leftBound;
-            this.notifyPath('entity.leftBound');
-          } else if (condition == 'greater_than' && this.entity.leftBound != intValue) {
-            this.set('entity.leftBound', intValue);
-            delete this.entity.rightBound;
-            this.notifyPath('entity.rightBound');
-          }
-        }
-
-        _initNumberFilter(entity) {
-          if (entity.leftBound === undefined || entity.rightBound === undefined) {
-            return;
-          }
-
-          if (entity.leftBound !== undefined) {
-            this._numberCondition = 'greater_than';
-            this.set('_numberValue', entity.leftBound);
-          } else if (entity.rightBound !== undefined) {
-            this._numberCondition = 'less_than';
-            this.set('_numberValue', entity.rightBound);
-          }
         }
 
         _columnNumberBoundsObserver(entity) {
@@ -257,10 +227,12 @@
         _entityObserver(entity) {
           if (!entity.columnId) {
             this.set('entity.columnId', '-any-');
+          }
 
-            if (this._columnTypeIsString(this.entity.columnId)) {
-              this.set('entity.pattern', this._regexPatterns[0].key);
-            }
+          if (this._columnTypeIsString(this.entity.columnId) && this.entity.pattern === undefined) {
+            this.set('entity.pattern', this._regexPatterns[0].key);
+          } else if (this._columnTypeIsNumber(this.entity.columnId) && this.entity.condition === undefined) {
+            this.set('entity.condition', this._numberConditions[0].key);
           }
         }
 
@@ -324,13 +296,16 @@
         }
 
         _filterActiveObservable(entity) {
-          if (entity.columnId) {
+          if (entity.columnId !== undefined) {
             if (this._columnTypeIsString(entity.columnId)) {
-              this.set('entity.active', !!entity.pattern && !!entity.query && !!entity.columnId);
+              this.set('entity.active', entity.pattern !== undefined && !!entity.query);
             } else if (this._columnTypeIsDate(entity.columnId)) {
-              this.set('entity.active', !!entity.columnId && (!!entity.dateFrom || !!entity.dateTo));
+              this.set('entity.active', entity.dateFrom !== undefined || entity.dateTo !== undefined);
             } else if (this._columnTypeIsNumber(entity.columnId)) {
-              this.set('entity.active', !!entity.columnId && (!!entity.leftBound || !!entity.rightBound));
+              this.set('entity.active',
+                (entity.leftBound !== undefined || entity.rightBound !== undefined) ||
+                (entity.condition !== undefined && entity.value !== undefined)
+              );
             }
           }
         }

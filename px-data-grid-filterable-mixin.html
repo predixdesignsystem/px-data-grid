@@ -97,16 +97,39 @@
     }
 
     _isNumberMatches(filter, value) {
-      let result = true;
-      const comparingNumber = window.parseInt(value);
-      if (filter.leftBound) {
+      let result = false;
+      const comparingNumber = parseInt(value);
+
+      if (filter.leftBound !== undefined && filter.rightBound !== undefined) {
         const leftBound = window.parseInt(filter.leftBound);
-        result = result && leftBound < comparingNumber;
-      }
-      if (filter.rightBound) {
         const rightBound = window.parseInt(filter.rightBound);
-        result = result && rightBound > comparingNumber;
+
+        result = leftBound < comparingNumber && comparingNumber < rightBound;
+      } else {
+        const filterValue = parseInt(filter.value);
+
+        switch (filter.condition) {
+          case 'equals':
+            result = comparingNumber === filterValue;
+            break;
+          case 'not_equal':
+            result = comparingNumber !== filterValue;
+            break;
+          case 'equal_or_greater_than':
+            result = comparingNumber >= filterValue;
+            break;
+          case 'equal_or_less_than':
+            result = comparingNumber <= filterValue;
+            break;
+          case 'greater_than':
+            result = comparingNumber > filterValue;
+            break;
+          case 'less_than':
+            result = comparingNumber < filterValue;
+            break;
+        }
       }
+
       return result;
     }
 
@@ -266,8 +289,27 @@
      *     {
      *        columnId: 'age[number]',
      *        active: true,
+     *        condition: 'equals',
+     *        value: 1
+     *     }
+     *   ]
+     * }]
+     * ```
+     *
+     * Condition can be one of `['equals', 'not_equal', 'greater_than', 'less_than', 'equals_or_greater_than', 'equals_or_less_than']`.
+     * Also, `leftBound` and `rightBound` properties can be used instead of `condition` and `value` in order to filter by number range.
+     *
+     * Format:
+     * ```
+     * [{
+     *   action: 'show',
+     *   operationType: 'all',
+     *   entities: [
+     *     {
+     *        columnId: 'age[number]',
+     *        active: true,
      *        leftBound: 1,
-     *        rightBound: 3
+     *        rightBound: 2
      *     }
      *   ]
      * }]

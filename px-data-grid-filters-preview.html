@@ -127,6 +127,14 @@
             .filter((entity) => entity.active);
         }
 
+        _capitalizeString(str) {
+          return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        _underscoreToHumanReadable(str) {
+          return this._capitalizeString(str.split('_').join(' '));
+        }
+
         _getTooltipMessage(entity, section) {
           const column = this._getColumnById(entity.columnId);
 
@@ -134,12 +142,11 @@
 
           switch (column.type) {
             case 'number':
-              if (entity.leftBound !== undefined && entity.rightBound === undefined) {
-                return `${section.action} ${section.operationType} / ${name} / ${this.localize('Greater Than')}`;
-              } else if (entity.leftBound === undefined && entity.rightBound !== undefined) {
-                return `${section.action} ${section.operationType} / ${name} / ${this.localize('Less Than')}`;
-              } else if (entity.leftBound !== undefined && entity.rightBound !== undefined) {
+              if (entity.leftBound !== undefined && entity.rightBound !== undefined) {
                 return `${section.action} ${section.operationType} / ${name} / ${this.localize('Between')}`;
+              } else if (entity.condition !== undefined && entity.value !== undefined) {
+                return `${section.action} ${section.operationType} / ${name} / ` +
+                  `${this.localize(this._underscoreToHumanReadable(entity.condition))}`;
               }
               break;
             case 'date':
@@ -154,12 +161,10 @@
 
           switch (column.type) {
             case 'number':
-              if (entity.leftBound !== undefined && entity.rightBound === undefined) {
-                return `${entity.leftBound}`;
-              } else if (entity.leftBound === undefined && entity.rightBound !== undefined) {
-                return `${entity.rightBound}`;
-              } else if (entity.leftBound !== undefined && entity.rightBound !== undefined) {
+              if (entity.leftBound !== undefined && entity.rightBound !== undefined) {
                 return `${entity.leftBound}, ${entity.rightBound}`;
+              } else if (entity.value !== undefined) {
+                return entity.value;
               }
               break;
             case 'date':
