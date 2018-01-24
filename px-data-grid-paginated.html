@@ -455,9 +455,9 @@
             const multiSort = (a, b) => {
               return params.sortOrders.map(sort => {
                 if (sort.direction === 'asc') {
-                  return this._pxDataGrid._vaadinGrid._compare(Polymer.Base.get(sort.path, a), Polymer.Base.get(sort.path, b));
+                  return this._pxDataGrid._compare(Polymer.Base.get(sort.path, a), Polymer.Base.get(sort.path, b));
                 } else if (sort.direction === 'desc') {
-                  return this._pxDataGrid._vaadinGrid._compare(Polymer.Base.get(sort.path, b), Polymer.Base.get(sort.path, a));
+                  return this._pxDataGrid._compare(Polymer.Base.get(sort.path, b), Polymer.Base.get(sort.path, a));
                 }
                 return 0;
               }).reduce((p, n) => {
