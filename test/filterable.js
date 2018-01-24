@@ -44,11 +44,23 @@ document.addEventListener('WebComponentsReady', () => {
     });
 
     it('should check number properly', () => {
-      expect(grid._isNumberMatches({leftBound: 1}, 12)).to.be.true;
-      expect(grid._isNumberMatches({leftBound: 13}, 12)).to.be.false;
+      expect(grid._isNumberMatches({condition: 'less_than', value: 13}, 12)).to.be.true;
+      expect(grid._isNumberMatches({condition: 'less_than', value: 11}, 12)).to.be.false;
 
-      expect(grid._isNumberMatches({rightBound: 1}, 12)).to.be.false;
-      expect(grid._isNumberMatches({rightBound: 13}, 12)).to.be.true;
+      expect(grid._isNumberMatches({condition: 'greater_than', value: 11}, 12)).to.be.true;
+      expect(grid._isNumberMatches({condition: 'greater_than', value: 13}, 12)).to.be.false;
+
+      expect(grid._isNumberMatches({condition: 'equals', value: 12}, 12)).to.be.true;
+      expect(grid._isNumberMatches({condition: 'equals', value: 11}, 12)).to.be.false;
+
+      expect(grid._isNumberMatches({condition: 'not_equal', value: 13}, 12)).to.be.true;
+      expect(grid._isNumberMatches({condition: 'not_equal', value: 12}, 12)).to.be.false;
+
+      expect(grid._isNumberMatches({condition: 'equal_or_greater_than', value: 12}, 12)).to.be.true;
+      expect(grid._isNumberMatches({condition: 'equal_or_greater_than', value: 13}, 12)).to.be.false;
+
+      expect(grid._isNumberMatches({condition: 'equal_or_less_than', value: 13}, 12)).to.be.true;
+      expect(grid._isNumberMatches({condition: 'equal_or_less_than', value: 11}, 12)).to.be.false;
 
       expect(grid._isNumberMatches({leftBound: 1, rightBound: 13}, 12)).to.be.true;
       expect(grid._isNumberMatches({leftBound: 1, rightBound: 10}, 12)).to.be.false;
