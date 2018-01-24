@@ -1,7 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid-column.html">
 <link rel="import" href="../vaadin-checkbox/vaadin-checkbox.html">
-<link rel="import" href="css/px-data-grid-toggle-details-column-styles.html">
 
 <dom-module id="px-data-grid-toggle-details-column">
   <template>
@@ -10,7 +9,6 @@
     </template>
 
     <template id="defaultBodyTemplate">
-      <style include="px-data-grid-toggle-details-columns-styles"></style>
       <div class="toggle-details" on-click="_onToggleClick">
         <px-icon icon="[[_getChevronIcon(detailsOpened)]]"></px-icon>
       </div>
