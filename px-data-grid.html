@@ -833,15 +833,21 @@
          * Do not drop item for page sizing here, or it will break things
          */
         _localDataResolver(params, items) {
-          if (params.filters && params.filters.length && this._vaadinGrid._checkPaths(params.filters, 'filtering', items)) {
-            items = this._applyAutoFilter(items, params.filters);
-          }
+          if (params.filters) {
+            const autoFilters = params.filters.filter(filter => filter.value.isAutoFilter);
 
-          // TODO: these values should be in params!
-          if (this._filters && this._filters.length != 0) {
-            items = this._applyCustomFilter(items, this.columns, this._filters);
-          }
+            if (autoFilters.length && this._vaadinGrid._checkPaths(autoFilters, 'filtering', items)) {
+              items = this._applyAutoFilter(items, autoFilters);
+            }
 
+            const advancedFilters = params.filters
+              .filter(filter => filter.value.isAdvancedFilter)
+              .map(filter => filter.value.filter);
+
+            if (advancedFilters && advancedFilters.length != 0) {
+              items = this._applyCustomFilter(items, this.columns, advancedFilters);
+            }
+          }
           if (params.sortOrders && params.sortOrders.length && this._vaadinGrid._checkPaths(this._sorters, 'sorting', items)) {
             const multiSort = (a, b) => {
               return params.sortOrders.map(sort => {
@@ -1096,7 +1102,7 @@
         _applyAutoFilter(items, filters) {
           return items.filter((item, index) => {
             return filters.filter(filter => {
-              const filterValueLowercase = this._vaadinGrid._normalizeEmptyValue(filter.value).toString().toLowerCase();
+              const filterValueLowercase = this._vaadinGrid._normalizeEmptyValue(filter.value.query).toString().toLowerCase();
               if (item && filter.path === undefined) {
                 for (const key in item) {
                   const value = this._vaadinGrid._normalizeEmptyValue(Polymer.Base.get(key, item));
@@ -1121,11 +1127,15 @@
           if (!this.autoFilter) {
             return;
           } else {
-            const filters = [
-              {
-                value: event.detail.value
+            const filters = this._vaadinGrid._filters
+              .filter(filter => !filter.value.isAutoFilter);
+
+            filters.push({
+              value: {
+                query: event.detail.value,
+                isAutoFilter: true
               }
-            ];
+            });
 
             this._vaadinGrid._filters = filters;
             this._vaadinGrid.clearCache();
