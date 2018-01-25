@@ -52,6 +52,16 @@
         const sectionIndex = this._filters.indexOf(section);
         this.splice(`_filters.${sectionIndex}.entities`, section.entities.indexOf(entity), 1);
       });
+
+      this.addEventListener('clear-filters', (event) => {
+        this.set('_filters', [
+          {
+            action: 'show',
+            operationType: 'all',
+            entities: []
+          }
+        ]);
+      });
     }
 
     _escapeRegExp(str) {
