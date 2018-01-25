@@ -33,9 +33,6 @@
 
     <template is="dom-if" if="{{_columnTypeIsDate(entity.columnId)}}">
       <div class="labeled-text" extended>
-        <label for="date-rangepicker">
-          [[localize('Date Range')]]
-        </label>
         <px-rangepicker
           id="date-rangepicker"
           hide-time
@@ -45,6 +42,7 @@
           time-format="HH:mm:ss"
           time-zone="UTC"
           show-time-zone="abbreviatedText"
+          show-field-titles
           from-moment="{{_dateFrom}}"
           to-moment="{{_dateTo}}">
         </px-rangepicker>
