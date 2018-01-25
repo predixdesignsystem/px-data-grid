@@ -19,6 +19,8 @@ $inuit-enable-validation-states : true;
 
 $inuit-enable-btn--bare : true;
 $inuit-enable-btn--primary : true;
+$inuit-enable-btn--bare--primary : true;
+$inuit-enable-btn--small : true;
 @import 'px-buttons-design/_objects.buttons.scss';
 
 @import "px-actionable-design/_objects.actionable.scss";

@@ -46,6 +46,8 @@
         not-selectable
         content="[[flattenFilterEntities.length]] [[localize('filters applied')]]">
       </px-chip>
+
+      <button class="btn btn--small btn--bare--primary" on-click="_dispatchClearFilters">[[localize('Clear all filters')]]</button>
     </template>
   </template>
 
@@ -105,6 +107,15 @@
           this.addEventListener('trigger-filters-modal', (event) => {
             this.shadowRoot.querySelector('#filtersPreviewPopover').hide();
           });
+        }
+
+        _dispatchClearFilters() {
+          this.dispatchEvent(new CustomEvent('clear-filters',
+            {
+              bubbles: true,
+              composed: true
+            }
+          ));
         }
 
         _getColumnById(columnId) {
