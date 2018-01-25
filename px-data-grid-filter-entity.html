@@ -12,7 +12,12 @@
       <label for="column-dropdown">
         [[localize('Attribute')]]
       </label>
-      <px-dropdown id="column-dropdown" items="[[_mappedColumns]]" selected="{{entity.columnId}}"></px-dropdown>
+      <px-dropdown
+        id="column-dropdown"
+        items="[[_mappedColumns]]"
+        disable-clear
+        selected="{{entity.columnId}}">
+      </px-dropdown>
     </div>
 
     <template is="dom-if" if="{{_columnTypeIsString(entity.columnId)}}">
@@ -20,7 +25,12 @@
         <label for="condition-dropdown">
           [[localize('Condition')]]
         </label>
-        <px-dropdown id="condition-dropdown" items="[[_regexPatterns]]" selected="{{entity.pattern}}"></px-dropdown>
+        <px-dropdown
+          id="condition-dropdown"
+          items="[[_regexPatterns]]"
+          disable-clear
+          selected="{{entity.pattern}}">
+        </px-dropdown>
       </div>
 
       <div class="labeled-text">
@@ -56,7 +66,12 @@
           <label for="range-input">
             [[localize('Condition')]]
           </label>
-          <px-dropdown id="number-condition-dropdown" items="[[_numberConditions]]" selected="{{entity.condition}}"></px-dropdown>
+          <px-dropdown
+            id="number-condition-dropdown"
+            items="[[_numberConditions]]"
+            disable-clear
+            selected="{{entity.condition}}">
+          </px-dropdown>
         </div>
 
         <div class="labeled-text">
