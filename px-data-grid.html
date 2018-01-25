@@ -30,14 +30,12 @@
   <template>
     <style include="px-data-grid-styles"></style>
 
-    <px-data-grid-filters-preview filters="[[_filters]]" columns="[[columns]]" localize="[[_boundedLocalize]]"></px-data-grid-filters-preview>
-
     <template is="dom-if" if="{{_showActionBar(autoFilter, hideActionMenu, filterable)}}">
 
       <div class="action-bar">
         <template is="dom-if" if="[[autoFilter]]">
           <px-auto-filter-field
-            placeholder="[[localize('Filter')]]"
+            placeholder="[[localize('Search Table')]]"
             on-filter-change="_autoFilterChanged"
             value="{{_autoFilterValue}}"
           >
@@ -62,6 +60,9 @@
 
       </div>
     </template>
+
+    <px-data-grid-filters-preview filters="[[_filters]]" columns="[[columns]]" localize="[[_boundedLocalize]]"></px-data-grid-filters-preview>
+
     <vaadin-grid size="[[size]]"
                  data-provider="[[_currentDataProvider]]"
                  active-item="[[activeItem]]"
