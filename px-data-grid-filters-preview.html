@@ -170,7 +170,11 @@
             case 'date':
               return `${window.moment(entity.dateFrom).format('YYYY/MM/DD')}, ${window.moment(entity.dateTo).format('YYYY/MM/DD')}`;
             default:
-              return entity.query;
+              if (entity.query.length <= 15) {
+                return entity.query;
+              } else {
+                return entity.query.slice(0, 11) + '…' + entity.query.slice(-4);
+              }
           }
         }
 
