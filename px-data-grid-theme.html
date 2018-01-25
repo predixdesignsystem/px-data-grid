@@ -6,6 +6,11 @@
         --px-data-grid-padding-bottom: 12px;
         --px-data-grid-padding-left: 12px;
         --px-data-grid-padding-right: 12px;
+        --px-data-grid-cell-focus-outline-width: 2px;
+        --px-data-grid-focused-padding-top: 10px;
+        --px-data-grid-focused-padding-bottom: 10px;
+        --px-data-grid-focused-padding-left: 10px;
+        --px-data-grid-focused-padding-right: 10px;
         --px-data-grid-header-text-color: #677e8c;
         --px-data-grid-cell-focused-color: #72b9dd;
         --px-data-grid-header-text-color--hover: rgb(6, 87, 105);
@@ -94,7 +99,15 @@
       }
 
       :host([navigating]) [part~="cell"]:focus {
-        box-shadow: inset 0 0 0 2px var(--px-data-grid-cell-focused-color, transparent);
+        box-shadow: inset 0 0 0 var(--px-data-grid-cell-focus-outline-width) var(--px-data-grid-cell-focused-color, transparent);
+      }
+
+      :host([navigating]) [part~="cell"]:not([part~="header-cell"]):not([part~="details-cell"]):focus ::slotted(vaadin-grid-cell-content) {
+        padding-top: var(--px-data-grid-focused-padding-top);
+        padding-bottom: var(--px-data-grid-focused-padding-bottom);
+        padding-left: var(--px-data-grid-focused-padding-left);
+        padding-right: var(--px-data-grid-focused-padding-right);
+        border: var(--px-data-grid-cell-focus-outline-width) solid var(--px-data-grid-cell-focused-color, transparent);
       }
 
       /* Row stripes */
