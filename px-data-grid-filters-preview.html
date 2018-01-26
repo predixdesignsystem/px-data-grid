@@ -46,7 +46,9 @@
         not-selectable
         content="[[flattenFilterEntities.length]] [[localize('filters applied')]]">
       </px-chip>
+    </template>
 
+    <template is="dom-if" if="[[_hasMultipleFilters(flattenFilterEntities)]]">
       <button class="btn btn--small btn--bare--primary" on-click="_dispatchClearFilters">[[localize('Clear all filters')]]</button>
     </template>
   </template>
@@ -191,6 +193,10 @@
 
         _filtersGrouped(flattenFilterEntities) {
           return flattenFilterEntities.length > this.filtersLimit;
+        }
+
+        _hasMultipleFilters(flattenFilterEntities) {
+          return flattenFilterEntities.length > 1;
         }
       }
 
