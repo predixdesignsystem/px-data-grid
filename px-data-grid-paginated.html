@@ -586,6 +586,8 @@
 
         // Reemit event from px-data-grid
         _saveFiltersListener(event) {
+          event.stopPropagation();
+
           this.dispatchEvent(new CustomEvent('save-filters', {
             detail: {
               filters: event.detail.filters
