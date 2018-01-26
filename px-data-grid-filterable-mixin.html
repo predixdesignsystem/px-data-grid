@@ -85,7 +85,7 @@
           regex = new RegExp(`${this._escapeRegExp(filter.query)}$`, 'i');
           break;
         case 'wildcard':
-          if(filter.query === undefined || filter.query === '*') {
+          if (!filter.query || filter.query === '*') {
             regex = new RegExp('.*', 'i');
           } else {
             regex = new RegExp(`^${filter.query.split('*').map(this._escapeRegExp).join('.*')}$`, 'i');
