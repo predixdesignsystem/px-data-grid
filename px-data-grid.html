@@ -302,8 +302,45 @@
             },
 
             /**
-             * Grid columns. If no columns are passed, grid generates columns from passed data.
-             * Format:
+             * Sets the columns the grid should render. If no columns are passed, the grid
+             * generates columns from the `tableData` passed in. Columns are rendered
+             * in the same order as the array.
+             *
+             * Each column can have the following configurations. Only name and path
+             * are required, all others are optional:
+             *
+             *   * `{string} id='column.path[column.type]'` - Unique identificator of the column.
+             *     By default, px-data-grid will automatically generate it from `column.path` and `column.type`.
+             *     There can't be 2 columns with the same id.
+             *     Also, note, that `-any-` is reserved keyword for `id`, you should not use it.
+             *
+             *   * `{string} name` - Name, that is displayed in column header.
+             *
+             *   * `{string} path` - Column's path indicates a key, which is used to get data from data object.
+             *
+             *   * `{string} type=('string'|'number'|'date')` - Type of column.
+             *     Influences on advanced filter's UI. Different selectors will be displayed for different types.
+             *
+             *   * `{string} renderer` - You can define your own renderer element to display and edit cell data in your own way.
+             *     For more information, please check sample renderers, e.g. `px-data-grid-number-renderer`, `px-data-grid-date-renderer`.
+             *
+             *   * `{number} minBound` - Used to define minimum bound of a number in advanced filter's slider.
+             *     Note, that this property works with `column.type === 'number'` only.
+             *
+             *   * `{number} maxBound` - Used to define maximum bound of a number in advanced filter's slider.
+             *     Note, that this property works with `column.type === 'number'` only.
+             *     If both minBound and maxBound properties are defined, advanced filter will display slider instead of dropdown.
+             *
+             *   * `{boolean} hidden=false` - Indicates whether a column is hidden.
+             *
+             *   * `{boolean} frozen=false` - Indicates whether a column is frozen.
+             *
+             *   * `{boolean} required=false` - This property is used in renderers to validate data when user edits it.
+             *
+             *   * `{number} flexGrow=1` - Indicates whether a column should grow, equialent to the CSS flex-grow property.
+             *
+             * Example format for a single column with all configurations used:
+             *
              * ```javascript
              * {
              *   id: 'first[string]',
@@ -319,59 +356,6 @@
              *   flexGrow: 1
              * }
              * ```
-             *
-             * ** column.id **
-             *
-             * Note, that if `column.id` is not manually passed, the grid will automatically generate it
-             * from `column.path` and `column.type`. In that case `column.id` will be equal `column.path[column.type]`.
-             * There can't be 2 columns with the same id.
-             * Also, note, that `-any-` is reserved keyword for `column.id`, you should not use it.
-             *
-             * ** column.name **
-             *
-             * Name, that is displayed in column header.
-             *
-             * ** column.path **
-             *
-             * Column's path indicates a key, which is used to get data from data object.
-             *
-             * ** column.type **
-             *
-             * Type of column influences on advanced filter's UI. Different selectors will be displayed for different types.
-             *
-             * ** column.renderer **
-             *
-             * You can define your own renderer element to display and edit cell data in your own way.
-             * For more information, please check sample renderers, e.g. `px-data-grid-number-renderer`, `px-data-grid-date-renderer`.
-             *
-             * ** column.minBound **
-             *
-             * Used to define minimum bound of a number in advanced filter's slider.
-             * Note, that this property works with `column.type === 'number'` only.
-             *
-             * ** column.maxBound **
-             *
-             * Used to define maximum bound of a number in advanced filter's slider.
-             * Note, that this property works with `column.type === 'number'` only.
-             *
-             * If both minBound and maxBound properties are defined, advanced filter will display slider instead of dropdown.
-             *
-             * ** column.hidden **
-             *
-             * Indicates whether a column is hidden.
-             *
-             * ** column.frozen **
-             *
-             * Indicates whether a column is frozen.
-             *
-             * ** column.required **
-             *
-             * This property is used in renderers to validate data when user edits it.
-             *
-             * ** column.flexGrow **
-             *
-             * Indicates whether a column should grow.
-             *
              */
             columns: {
               type: Array,
