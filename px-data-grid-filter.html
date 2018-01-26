@@ -7,7 +7,7 @@
   <template>
     <style include="px-data-grid-filter-styles"></style>
 
-    <template is="dom-repeat" items="{{_tempFilters}}" as="section">
+    <template is="dom-repeat" items="{{tempFilters}}" as="section">
       <px-data-grid-filter-section section="{{section}}" columns="[[columns]]" localize="[[localize]]"></px-data-grid-filter-section>
     </template>
 
@@ -39,8 +39,9 @@
               notify: true
             },
 
-            _tempFilters: {
-              type: Array
+            tempFilters: {
+              type: Array,
+              notify: true
             },
 
             localize: Function
@@ -66,7 +67,7 @@
         }
 
         applyFilters() {
-          this.set('filters', this._tempFilters);
+          this.set('filters', this.tempFilters);
         }
 
         cancelChanges() {
@@ -74,11 +75,11 @@
         }
 
         resetFilters() {
-          this.filters = [{entities: [{}], action: 'show', operationType: 'all'}];
+          this.set('filters' [{entities: [{}], action: 'show', operationType: 'all'}]);
         }
 
         _restoreTempFilters() {
-          this._tempFilters = JSON.parse(JSON.stringify(this.filters));
+          this.set('tempFilters', JSON.parse(JSON.stringify(this.filters)));
         }
       }
 

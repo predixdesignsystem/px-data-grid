@@ -15,3 +15,8 @@ input[type="checkbox"] {
   margin-top: 40px;
   margin-left: $inuit-base-spacing-unit--large;
 }
+
+label.label--inline {
+  text-transform: none;
+  font-size: 15px;
+}

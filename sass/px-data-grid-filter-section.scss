@@ -4,6 +4,7 @@
   display: block;
   width: 800px;
   max-width: 100%;
+  --px-btn-min-width: 0;
 }
 
 px-dropdown {
@@ -23,4 +24,12 @@ px-dropdown {
   display: flex;
   align-items: center;
   margin-top: 7px;
+}
+
+button.btn.btn--icon.btn--bare--primary {
+  margin-left: 20px;
+}
+
+.no-filters {
+  margin-bottom: 20px;
 }

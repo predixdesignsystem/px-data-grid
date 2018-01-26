@@ -18,16 +18,19 @@
           id="filters"
           columns="[[columns]]"
           filters="{{filters}}"
+          temp-filters="{{_tempFilters}}"
           localize="[[localize]]">
         </px-data-grid-filter>
 
-        <template is="dom-if" if="[[offerFilterSaving]]" restamp>
+        <template is="dom-if" if="[[_showSaveCheckbox(offerFilterSaving, _tempFilters, _tempFilters.*)]]" restamp>
           <input id="saveFilterSet" type="checkbox">
           <label class="label--inline" for="saveFilterSet">[[localize('Save this filter set')]]</label>
         </template>
 
         <div class="filter-modal-buttons-container">
-          <button class="btn" on-click="_reset">[[localize('Reset')]]</button>
+          <template is="dom-if" if="[[_hasAnyEntity(_tempFilters, _tempFilters.*)]]">
+            <button class="btn" on-click="_reset">[[localize('Reset')]]</button>
+          </template>
           <div class="filter-modal-buttons-container__right">
             <button class="btn" on-click="_cancel">[[localize('Cancel')]]</button>
             <button class="btn btn--primary" on-click="_apply">[[localize('Apply')]]</button>
@@ -74,6 +77,10 @@
               value: false
             },
 
+            _tempFilters: {
+              type: Array
+            },
+
             localize: Function
           };
         }
@@ -116,6 +123,14 @@
         _reset() {
           this.$.filters.resetFilters();
           this.set('filters', this.initialFilterState);
+        }
+
+        _hasAnyEntity(filters) {
+          return filters.filter(filter => filter.entities && filter.entities.length > 0).length > 0;
+        }
+
+        _showSaveCheckbox(offerFilterSaving, filters) {
+          return offerFilterSaving && filters && this._hasAnyEntity(filters);
         }
       }
 
