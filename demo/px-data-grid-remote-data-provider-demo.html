@@ -161,8 +161,10 @@
             '_limit=' + encodeURIComponent(params.pageSize);
 
           // Add free text filtering
-          if (params.filters.length == 1 && params.filters[0].path == undefined) {
-            url += '&q=' + encodeURIComponent(params.filters[0].value);
+          const autoFilters = params.filters.filter(filter => filter.value.isAutoFilter);
+
+          if (autoFilters.length == 1 && autoFilters[0].path == undefined) {
+            url += '&q=' + encodeURIComponent(autoFilters[0].value.query);
           }
 
           // Add sorting to URL if defined
