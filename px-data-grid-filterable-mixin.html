@@ -240,21 +240,39 @@
         return;
       }
 
-      const appliableFilters = filters
+      const appliableFilterHighlights = filters
         .filter((section) => section.action === 'highlight' && section.entities.filter((entity) => entity.active).length > 0);
 
-      if (appliableFilters.length > 0) {
+      const appliableFilters = filters
+        .filter((section) => section.action !== 'highlight' && section.entities.filter((entity) => entity.active).length > 0);
+
+      if (appliableFilterHighlights.length > 0) {
 
         this.set('_filterHighlights', [
           {
             type: 'row',
-            condition: this._constructHighilightCondition(appliableFilters, this.columns)
+            condition: this._constructHighilightCondition(appliableFilterHighlights, this.columns)
           }
         ]);
       } else {
         this.set('_filterHighlights', []);
       }
 
+      const gridFilters = this._vaadinGrid._filters
+        .filter(filter => !filter.value.isAdvancedFilter);
+
+      appliableFilters.map((filter) => {
+        return {
+          value: {
+            isAdvancedFilter: true,
+            filter: filter
+          }
+        };
+      }).forEach((filter) => {
+        gridFilters.push(filter);
+      });
+
+      this._vaadinGrid._filters = gridFilters;
       this._vaadinGrid.clearCache();
     }
 
