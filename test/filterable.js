@@ -28,8 +28,34 @@ document.addEventListener('WebComponentsReady', () => {
       expect(grid._isStringMatches({pattern: 'ends_with', query: 'eth'}, 'Elizabeth')).to.be.true;
       expect(grid._isStringMatches({pattern: 'ends_with', query: 'ath'}, 'Elizabeth')).to.be.false;
 
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '*'}, 'Elizabeth')).to.be.true;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: 'E*'}, 'Elizabeth')).to.be.true;
       expect(grid._isStringMatches({pattern: 'wildcard', query: 'E*th'}, 'Elizabeth')).to.be.true;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '*th'}, 'Elizabeth')).to.be.true;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: 'a*'}, 'Elizabeth')).to.be.false;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: 'be*'}, 'Elizabeth')).to.be.false;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: 'Be*'}, 'Elizabeth')).to.be.false;
       expect(grid._isStringMatches({pattern: 'wildcard', query: 'P*th'}, 'Elizabeth')).to.be.false;
+
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '+*'}, '+foo+')).to.be.true;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '+*+'}, '+foo+')).to.be.true;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '*foo*'}, '+foo+')).to.be.true;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '*foo*'}, 'foo')).to.be.true;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '*foo*'}, '+')).to.be.false;
+
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '/*'}, '/test')).to.be.true;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '{*'}, '{test')).to.be.true;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '*}'}, 'test}')).to.be.true;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '(*)'}, '(test)')).to.be.true;
+
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '*/'}, '/test')).to.be.false;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '*{'}, '{test')).to.be.false;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '}*'}, 'test}')).to.be.false;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '*()*'}, '(test)')).to.be.false;
+
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '+*'}, '+foo+')).to.be.true;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '+*+'}, '+foo+')).to.be.true;
+      expect(grid._isStringMatches({pattern: 'wildcard', query: '*foo*'}, '+foo+')).to.be.true;
     });
 
     it('should check date properly', () => {
