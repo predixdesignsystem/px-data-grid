@@ -35,7 +35,9 @@
       grid-height="{{gridHeight}}"
       item-id-path="{{itemIdPath}}"
       table-actions="{{tableActions}}"
-      on-table-action="_tableActionListener">
+      offer-filter-saving="{{offerFilterSaving}}"
+      on-table-action="_tableActionListener"
+      on-save-filters="_saveFiltersListener">
     </px-data-grid>
 
     <px-data-grid-navigation
@@ -373,6 +375,14 @@
             autoHidePageList: {
               type: Boolean,
               value: true
+            },
+
+            /**
+             * If filter saving options should offered to end user. If save is
+             * selected it will emit save-filters event.
+             */
+            offerFilterSaving: {
+              type: Boolean
             }
 
           };
@@ -569,6 +579,18 @@
           this.dispatchEvent(new CustomEvent('table-action', {
             detail: {
               id: event.detail.id
+            },
+            bubbles: true
+          }));
+        }
+
+        // Reemit event from px-data-grid
+        _saveFiltersListener(event) {
+          event.stopPropagation();
+
+          this.dispatchEvent(new CustomEvent('save-filters', {
+            detail: {
+              filters: event.detail.filters
             },
             bubbles: true
           }));

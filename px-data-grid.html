@@ -44,7 +44,13 @@
 
         <div class="action-bar__right">
           <template is="dom-if" if="[[filterable]]">
-            <px-data-grid-filters-modal filters="{{_filters}}" columns="[[columns]]" localize="[[_boundedLocalize]]" initial-filter-state="[[_initialFilterState]]"></px-data-grid-filters-modal>
+            <px-data-grid-filters-modal
+              filters="{{_filters}}"
+              columns="[[columns]]"
+              localize="[[_boundedLocalize]]"
+              offer-filter-saving="[[offerFilterSaving]]"
+              initial-filter-state="[[_initialFilterState]]">
+            </px-data-grid-filters-modal>
           </template>
 
           <template is="dom-if" if="[[!hideActionMenu]]">
@@ -586,6 +592,15 @@
             itemIdPath: {
               type: String,
               value: null
+            },
+
+            /**
+             * If filter saving options should offered to end user. If save is
+             * selected it will emit save-filters event.
+             */
+            offerFilterSaving: {
+              type: Boolean,
+              value: false
             },
 
             /**
