@@ -71,7 +71,9 @@
             on-cell-hover="cellHoverListener"
             on-cell-unhover="cellUnhoverListener"
             grid-height="{{props.gridHeight.value}}"
-            on-table-action="tableActionListener">
+            offer-filter-saving="{{props.offerFilterSaving.value}}"
+            on-table-action="tableActionListener"
+            on-save-filters="saveFilterListener">
         </px-data-grid>
 
         <div class="button-row">
@@ -153,6 +155,10 @@
       if (evt.detail.id === 'CSV') {
         this.exportToCsv();
       }
+    },
+
+    saveFilterListener: function(evt) {
+      window.alert('Filters should be saved now');
     },
 
     properties: {
@@ -582,6 +588,12 @@
         ],
         inputType: 'code:JSON',
         _visibleForConfig: false
+      },
+
+      offerFilterSaving: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
       }
     },
 

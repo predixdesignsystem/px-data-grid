@@ -14,7 +14,13 @@
       header-text="[[localize('Filter Columns')]]"
       open-trigger="[[filtersModalTrigger]]">
       <div slot="body">
-        <px-data-grid-filter id="filters" columns="[[columns]]" filters="{{filters}}" localize="[[localize]]"></px-data-grid-filter>
+        <px-data-grid-filter
+          id="filters"
+          columns="[[columns]]"
+          filters="{{filters}}"
+          offer-filter-saving="[[offerFilterSaving]]"
+          localize="[[localize]]">
+        </px-data-grid-filter>
 
         <div class="filter-modal-buttons-container">
           <button class="btn" on-click="_reset">[[localize('Reset')]]</button>
@@ -57,6 +63,11 @@
 
             initialFilterState: {
               type: Array,
+            },
+
+            offerFilterSaving: {
+              type: Boolean,
+              value: false
             },
 
             localize: Function
