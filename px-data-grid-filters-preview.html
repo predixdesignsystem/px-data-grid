@@ -92,12 +92,13 @@
           super.ready();
 
           this.addEventListener('px-chip-tapped', (ev) => {
-            if (ev.path[0].entity) {
+            const chip = ev.composedPath()[0];
+            if (chip.entity) {
               this.dispatchEvent(new CustomEvent('remove-filter',
                 {
                   detail: {
-                    section: ev.path[0].section,
-                    entity: ev.path[0].entity
+                    section: chip.section,
+                    entity: chip.entity
                   },
                   bubbles: true,
                   composed: true
