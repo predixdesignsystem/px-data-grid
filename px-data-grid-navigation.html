@@ -34,30 +34,36 @@
           <!-- page selection list -->
           <div class="page-selection">
             <!-- back arrow -->
-            <div class="page-button arrow back" on-click="_onBackClick"
+            <button
+                class="page-button arrow back"
+                on-click="_onBackClick"
                 disabled$="[[!_isBackArrowEnabled(currentPage, numberOfPages)]]">
               <px-icon icon="px-nav:back"></px-icon>
-            </div>
+            </button>
             <!-- page number list -->
             <div class="page-list">
               <template is="dom-repeat" items="[[_getPagesList(currentPage, numberOfPages)]]">
                 <template is="dom-if" if="[[_isCurrentPage(item, currentPage)]]" restamp>
-                  <div class="page-button page-number selected">
+                  <button class="page-button page-number selected">
                     [[item]]
-                  </div>
+                  </button>
                 </template>
                 <template is="dom-if" if="[[!_isCurrentPage(item, currentPage)]]" restamp>
-                  <div class="page-button page-number" on-click="_onPageClick">
+                  <button
+                      class="page-button page-number"
+                      on-click="_onPageClick">
                     [[item]]
-                  </div>
+                  </button>
                 </template>
               </template>
             </div>
             <!-- next arrow -->
-            <div class="page-button arrow next" on-click="_onNextClick"
+            <button
+                class="page-button arrow next"
+                on-click="_onNextClick"
                 disabled$="[[!_isNextArrowEnabled(currentPage, numberOfPages)]]">
               <px-icon icon="px-nav:next"></px-icon>
-            </div>
+            </button>
           </div>
         </div>
       </template>
@@ -254,8 +260,6 @@
          * Gets an array of page numbers based on the numberOfPages property.
          */
         _getPagesList() {
-          // TODO: change ellipsis to use &hellip;
-
           const pageList = [];
 
           if (this.numberOfPages <= this._pageListMaxCount) {
@@ -271,22 +275,22 @@
               for (let i = 0; i < this._pageListMaxCount; i++) {
                 pageList.push(firstPage + i);
               }
-              pageList[pageList.length - 2] = '...';
+              pageList[pageList.length - 2] = '…';
             } else if (this.numberOfPages - this.currentPage < 5) {
               // only set ellipsis on right
               const firstPage = this.numberOfPages - this._pageListMaxCount + 1;
               for (let i = 0; i < this._pageListMaxCount; i++) {
                 pageList.push(firstPage + i);
               }
-              pageList[1] = '...';
+              pageList[1] = '…';
             } else {
               // set ellipsis on both left and right
               const firstPage = this.currentPage - 4;
               for (let i = 0; i < this._pageListMaxCount; i++) {
                 pageList.push(firstPage + i);
               }
-              pageList[1] = '...';
-              pageList[pageList.length - 2] = '...';
+              pageList[1] = '…';
+              pageList[pageList.length - 2] = '…';
             }
 
             // always show max and min pages
