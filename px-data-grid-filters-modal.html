@@ -18,9 +18,13 @@
           id="filters"
           columns="[[columns]]"
           filters="{{filters}}"
-          offer-filter-saving="[[offerFilterSaving]]"
           localize="[[localize]]">
         </px-data-grid-filter>
+
+        <template is="dom-if" if="[[offerFilterSaving]]" restamp>
+          <input id="saveFilterSet" type="checkbox">
+          <label class="label--inline" for="saveFilterSet">[[localize('Save this filter set')]]</label>
+        </template>
 
         <div class="filter-modal-buttons-container">
           <button class="btn" on-click="_reset">[[localize('Reset')]]</button>
@@ -84,6 +88,23 @@
 
         _apply() {
           this.$.filters.applyFilters();
+
+          const checkbox = this.shadowRoot.querySelector('#saveFilterSet');
+
+          if (checkbox && checkbox.checked) {
+            this.dispatchEvent(
+              new CustomEvent('save-filters',
+                {
+                  bubbles: true,
+                  composed: true,
+                  detail: {
+                    filters: this.filters
+                  }
+                }
+              )
+            );
+          }
+
           this.$.filtersModal.opened = false;
         }
 

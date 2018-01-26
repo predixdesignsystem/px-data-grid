@@ -11,11 +11,6 @@
       <px-data-grid-filter-section section="{{section}}" columns="[[columns]]" localize="[[localize]]"></px-data-grid-filter-section>
     </template>
 
-    <template is="dom-if" if="[[offerFilterSaving]]" restamp>
-      <input id="saveFilterSet" type="checkbox">
-      <label class="label--inline" for="saveFilterSet">[[localize('Save this filter set')]]</label>
-    </template>
-
     <!--
     <button class="btn btn--bare--primary" on-click="_addGroup">
       <px-icon style="--iron-icon-height:16px" icon="px-utl:add"></px-icon> Add filter section
@@ -42,11 +37,6 @@
             filters: {
               type: Array,
               notify: true
-            },
-
-            offerFilterSaving: {
-              type: Boolean,
-              notify: false
             },
 
             _tempFilters: {
@@ -76,23 +66,7 @@
         }
 
         applyFilters() {
-          const checkbox = this.shadowRoot.querySelector('#saveFilterSet');
-
-          this.filters = this._tempFilters;
-
-          if (checkbox && checkbox.checked) {
-            this.dispatchEvent(
-              new CustomEvent('save-filters',
-                {
-                  bubbles: true,
-                  composed: true,
-                  detail: {
-                    filters: this.filters
-                  }
-                }
-              )
-            );
-          }
+          this.set('filters', this._tempFilters);
         }
 
         cancelChanges() {
