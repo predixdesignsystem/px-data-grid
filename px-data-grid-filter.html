@@ -76,12 +76,11 @@
         }
 
         applyFilters() {
-
           const checkbox = this.shadowRoot.querySelector('#saveFilterSet');
 
-          if (checkbox && checkbox.checked) {
-            this.filters = this._tempFilters;
+          this.filters = this._tempFilters;
 
+          if (checkbox && checkbox.checked) {
             this.dispatchEvent(
               new CustomEvent('save-filters',
                 {
