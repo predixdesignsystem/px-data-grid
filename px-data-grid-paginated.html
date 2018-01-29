@@ -35,7 +35,8 @@
       grid-height="{{gridHeight}}"
       item-id-path="{{itemIdPath}}"
       table-actions="{{tableActions}}"
-      offer-filter-saving="{{offerFilterSaving}}">
+      offer-filter-saving="{{offerFilterSaving}}"
+      editable="{{editable}}">
     </px-data-grid>
 
     <px-data-grid-navigation
@@ -187,26 +188,7 @@
             },
 
             /**
-             * Grid columns. If no columns are passed, grid generates columns from passed data.
-             * Format:
-             * ```javascript
-             * {
-             *   name: 'first',
-             *   hidden: false,
-             *   header: 'First name',
-             *   value: (item) => {
-             *     return item.first;
-             *   }
-             * },
-             * ```
-             * In case px-data-table-columns aren't provided, table columns will be generated automatically.
-             * They will be stamped via
-             *
-             * <template is="dom-repeat" items="[[_generatedColumns]]">
-             *   ...
-             * </template>
-             *
-             * @private
+             * Grid columns. See columns property in px-data-grid.
              */
             columns: {
               type: Array
@@ -381,7 +363,14 @@
              */
             offerFilterSaving: {
               type: Boolean
-            }
+            },
+
+            /**
+             * When `true`, user can edit data
+             */
+            editable: {
+              type: Boolean
+            },
 
           };
         }
