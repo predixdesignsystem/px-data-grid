@@ -19,6 +19,7 @@
           columns="[[columns]]"
           filters="{{filters}}"
           temp-filters="{{_tempFilters}}"
+          compact-mode="[[compactMode]]"
           localize="[[localize]]">
         </px-data-grid-filter>
 
@@ -73,6 +74,11 @@
             },
 
             offerFilterSaving: {
+              type: Boolean,
+              value: false
+            },
+
+            compactMode: {
               type: Boolean,
               value: false
             },

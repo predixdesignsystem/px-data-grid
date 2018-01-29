@@ -31,7 +31,12 @@
 
     <template is="dom-repeat" items="{{section.entities}}" as="entity">
       <div class="filter-entity">
-        <px-data-grid-filter-entity entity="{{entity}}" columns="[[columns]]" localize="[[localize]]"></px-data-grid-filter-entity>
+        <px-data-grid-filter-entity
+          entity="{{entity}}"
+          columns="[[columns]]"
+          compact-mode="[[_isEntityCompact(_compactModeEnabled, index)]]"
+          localize="[[localize]]">
+        </px-data-grid-filter-entity>
         <div class="actionable" on-click="_removeEntity">
           <px-icon style="--iron-icon-height:20px; margin-bottom: 5px;" icon="px-nav:close"></px-icon>
         </div>
@@ -96,13 +101,24 @@
               type: Array
             },
 
+            compactMode: {
+              type: Boolean,
+              value: false
+            },
+
+            _compactModeEnabled: {
+              type: Boolean,
+              value: false
+            },
+
             localize: Function
           };
         }
 
         static get observers() {
           return [
-            '_localizeChanged(localize)'
+            '_localizeChanged(localize)',
+            '_checkCompactMode(compactMode, section, section.entities, section.entities.*)'
           ];
         }
 
@@ -135,6 +151,35 @@
 
         _hasAnyEntity(section) {
           return section.entities.length > 0;
+        }
+
+        _hasEntityWithCustomPresentation(entity) {
+          // TODO This needs to resolve actual header values, now it it's checking any of
+          // entities is not a string, number (no range) or any column.
+          if (!entity || !entity.columnId || entity.columnId === '-any-') {
+            return false;
+          } else {
+            const column = this.columns.filter((column) => column.id === entity.columnId)[0];
+            if (!column) {
+              return true;
+            } else {
+              return column.type === 'date' || (column.type === 'number' && column.minBound && column.maxBound);
+            }
+          }
+        }
+
+        _isEntityCompact(compactModeEnabled, index) {
+          return compactModeEnabled && index > 0;
+        }
+
+        _checkCompactMode(compactMode) {
+          if (!this.compactMode) {
+            this._compactModeEnabled = false;
+            return;
+          }
+
+          this._compactModeEnabled = this.section && this.section.entities &&
+            this.section.entities.filter(e => this._hasEntityWithCustomPresentation(e)).length == 0;
         }
       }
 

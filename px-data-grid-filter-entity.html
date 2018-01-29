@@ -9,7 +9,7 @@
     <style include="px-data-grid-filter-entity-styles"></style>
 
     <div class="labeled-text">
-      <label for="column-dropdown">
+      <label for="column-dropdown" hidden="[[compactMode]]">
         [[localize('Attribute')]]
       </label>
       <px-dropdown
@@ -20,9 +20,9 @@
       </px-dropdown>
     </div>
 
-    <template is="dom-if" if="{{_columnTypeIsString(entity.columnId)}}">
+    <template is="dom-if" if="{{_columnTypeIsString(entity.columnId)}}" restamp>
       <div class="labeled-text">
-        <label for="condition-dropdown">
+        <label for="condition-dropdown" hidden="[[compactMode]]">
           [[localize('Condition')]]
         </label>
         <px-dropdown
@@ -34,14 +34,14 @@
       </div>
 
       <div class="labeled-text">
-        <label for="value-input">
+        <label for="value-input" hidden="[[compactMode]]">
           [[localize('Value')]]
         </label>
         <input id="value-input" type="text" class="text-input" value="{{entity.query::input}}">
       </div>
     </template>
 
-    <template is="dom-if" if="{{_columnTypeIsDate(entity.columnId)}}">
+    <template is="dom-if" if="{{_columnTypeIsDate(entity.columnId)}}" restamp>
       <div class="labeled-text" extended>
         <px-rangepicker
           id="date-rangepicker"
@@ -58,10 +58,10 @@
       </div>
     </template>
 
-    <template is="dom-if" if="{{_columnTypeIsNumber(entity.columnId)}}">
-      <template is="dom-if" if="{{!_showSlider(_minNumberBound, _maxNumberBound, columns.*)}}">
+    <template is="dom-if" if="{{_columnTypeIsNumber(entity.columnId)}}" restamp>
+      <template is="dom-if" if="{{!_showSlider(_minNumberBound, _maxNumberBound, columns.*)}}" restamp>
         <div class="labeled-text">
-          <label for="range-input">
+          <label for="range-input" hidden="[[compactMode]]">
             [[localize('Condition')]]
           </label>
           <px-dropdown
@@ -73,16 +73,16 @@
         </div>
 
         <div class="labeled-text">
-          <label for="number-value-input">
+          <label for="number-value-input" hidden="[[compactMode]]">
             [[localize('Value')]]
           </label>
           <input id="number-value-input" type="text" class="text-input" value="{{entity.value::input}}">
         </div>
       </template>
 
-      <template is="dom-if" if="{{_showSlider(_minNumberBound, _maxNumberBound, columns.*)}}">
+      <template is="dom-if" if="{{_showSlider(_minNumberBound, _maxNumberBound, columns.*)}}" restamp>
         <div class="labeled-text" extended>
-          <label for="range-input">
+          <label for="range-input" hidden="[[compactMode]]">
             [[localize('Range')]]
           </label>
           <px-slider
@@ -117,6 +117,11 @@
 
             entity: {
               type: Object
+            },
+
+            compactMode: {
+              type: Boolean,
+              value: false
             },
 
             _mappedColumns: Array,

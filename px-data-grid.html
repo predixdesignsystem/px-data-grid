@@ -49,7 +49,8 @@
               columns="[[columns]]"
               localize="[[_boundedLocalize]]"
               offer-filter-saving="[[offerFilterSaving]]"
-              initial-filter-state="[[_initialFilterState]]">
+              initial-filter-state="[[_initialFilterState]]"
+              compact-mode="[[compactAdvancedFilterDialog]]">
             </px-data-grid-filters-modal>
           </template>
 
@@ -645,6 +646,14 @@
              * changes to selection will cause instant resort
              */
             instantSortWhenSelection: {
+              type: Boolean,
+              value: true
+            },
+
+            /* If true advanced filter dialog will be rendered in space saving
+             * mode (eg. reuseable headers).
+             */
+            compactAdvancedFilterDialog: {
               type: Boolean,
               value: true
             },
