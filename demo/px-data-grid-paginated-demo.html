@@ -70,6 +70,7 @@
             grid-height="{{props.gridHeight.value}}"
             table-actions="{{props.tableActions.value}}"
             editable="{{props.editable.value}}"
+            filterable="{{props.filterable.value}}"
             on-table-action="tableActionListener">
         </px-data-grid-paginated>
 
@@ -444,6 +445,12 @@
         value: 'none',
         inputType: 'dropdown',
         inputChoices: ['none', 'single', 'multi']
+      },
+
+      filterable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
       },
 
       autoHidePageList: {

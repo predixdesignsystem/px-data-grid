@@ -36,6 +36,7 @@
       item-id-path="{{itemIdPath}}"
       table-actions="{{tableActions}}"
       offer-filter-saving="{{offerFilterSaving}}"
+      filterable="{{filterable}}"
       editable="{{editable}}">
     </px-data-grid>
 
@@ -372,6 +373,13 @@
               type: Boolean
             },
 
+            /**
+             * If true, turns on advanced filtering.
+             */
+            filterable: {
+              type: Boolean,
+              value: false
+            }
           };
         }
 
@@ -437,13 +445,20 @@
           // Just to make sure _pxDataGrid has been resolved
           this._resolvePxDataGrid();
 
-          if (params.filters && params.filters.length && this._pxDataGrid._vaadinGrid._checkPaths(params.filters, 'filtering', items)) {
-            items = this._pxDataGrid._applyAutoFilter(items, params.filters);
-          }
+          if (params.filters) {
+            const autoFilters = params.filters.filter(filter => filter.value.isAutoFilter);
 
-          // TODO: these values should be in params!
-          if (this._pxDataGrid.filters && this._pxDataGrid.filters.length != 0) {
-            items = this._pxDataGrid._applyCustomFilter(items, this._pxDataGrid.filters);
+            if (autoFilters.length && this._pxDataGrid._vaadinGrid._checkPaths(autoFilters, 'filtering', items)) {
+              items = this._pxDataGrid._applyAutoFilter(items, params.filters);
+            }
+
+            const advancedFilters = params.filters
+              .filter(filter => filter.value.isAdvancedFilter)
+              .map(filter => filter.value.filter);
+
+            if (advancedFilters && advancedFilters.length != 0) {
+              items = this._pxDataGrid._applyCustomFilter(items, this._pxDataGrid.columns, advancedFilters);
+            }
           }
 
           if (params.sortOrders
