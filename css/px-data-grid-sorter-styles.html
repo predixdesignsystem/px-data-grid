@@ -1,7 +1,7 @@
 <dom-module id="px-data-grid-sorter-styles">
 <template>
 <style>
-:host{align-items:center;position:relative;display:inline-flex;flex:1;cursor:pointer}:host([direction]) [part=content]{color:var(--px-data-grid-cell-text-color--sorted,#818181)}[part=content]{overflow:hidden;text-overflow:ellipsis;pointer-events:none}[part=indicators]{white-space:nowrap;flex:0;color:var(--px-data-grid-cell-text-color--sorted,#818181)}[part=indicators]:hover{color:var(--px-data-grid-text-color--hover,#5c5c5c)}.order-icon{--iron-icon-height:8.5px;--iron-icon-width:8.5px;stroke-width:2.25;padding-bottom:1.5px;margin-left:5.5px}
+:host{align-items:center;position:relative;display:inline-flex;flex:1;cursor:pointer;color:inherit;stroke:inherit}:host([direction]){color:var(--px-data-grid-cell-text-color--sorted,inherit);stroke:var(--px-data-grid-cell-text-color--sorted,inherit)}:host(:hover),:host([direction]:hover){color:inherit;stroke:inherit}:host(:active),:host([direction]:active){color:var(--px-data-grid-header-text-color--active,inherit);stroke:var(--px-data-grid-header-text-color--active,inherit)}[part=content]{overflow:hidden;text-overflow:ellipsis;pointer-events:none}[part=indicators]{white-space:nowrap;flex:0;color:inherit}.order-icon{--iron-icon-height:8.5px;--iron-icon-width:8.5px;stroke-width:2.25;padding-bottom:1.5px;margin-left:5.5px}
 </style>
 </template>
 </dom-module>
