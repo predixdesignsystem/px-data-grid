@@ -15,7 +15,9 @@ html {
   // Data Grid
   --px-data-grid-border-color                             :  $gray10;
   --px-data-grid-separator-color                          :  $gray15;
-  --px-data-grid-header-text-color                        :  inherit;
+  --px-data-grid-header-text-color                        :  $gray10;
+  --px-data-grid-header-text-color--hover                 :  $select-hover;
+  --px-data-grid-header-text-color--active                :  $select-pressed;
   --px-data-grid-header-background-color                  :  $gray16;
   --px-data-grid-background-color-striped--odd            :  $gray15;
   --px-data-grid-background-color-striped--selected       :  $gray13;
