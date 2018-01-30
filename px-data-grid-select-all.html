@@ -1,0 +1,97 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="css/px-data-grid-select-all-styles.html">
+<link rel="import" href="px-data-grid-sorter.html">
+
+<dom-module id="px-data-grid-select-all">
+  <template>
+    <style include="px-data-grid-select-all-styles"></style>
+
+    <vaadin-checkbox
+      aria-label="Select All"
+      on-checked-changed="_onSelectAllCheckedChanged"
+      checked="[[checked]]"
+      indeterminate="[[indeterminate]]"></vaadin-checkbox>
+    <template is="dom-if" if="[[allowSortBySelection]]">
+      <px-data-grid-sorter path="--selection--">
+        ([[count]])
+      </px-date-grid-sorter>
+    </template>
+    <template is="dom-if" if="[[!allowSortBySelection]]">
+        ([[count]])
+    </template>
+  </template>
+
+  <script>
+    {
+      /**
+       * `<px-data-grid-select-all>` is a helper element for the `<px-data-grid>`
+       * to be used to offer master select all and sorting functionality in
+       * multiselect mode.
+       * @memberof Predix
+       * @mixes Polymer.Element
+       */
+      class DataGridSelectAllElement extends Polymer.Element {
+        static get is() {
+          return 'px-data-grid-select-all';
+        }
+
+        static get properties() {
+          return {
+
+            /**
+             * If checkbox is in indeterminate mode
+             */
+            indeterminate: {
+              type: Boolean,
+              value: false
+            },
+
+            /**
+             * If checkbox is currently checked
+             */
+            checked: {
+              type: Boolean,
+              value: false
+            },
+
+            /**
+             * Count of selected items
+             */
+            count: {
+              type: Number,
+              value: 0
+            },
+
+            /**
+             * If user is allowed to sort by selection
+             */
+            allowSortBySelection: {
+              type: Boolean,
+              value: false
+            },
+
+            checkListener: {
+              type: Function
+            }
+          };
+        }
+
+        _onSelectAllCheckedChanged(e) {
+          if (this.checkListener) {
+            this.checkListener(e);
+          }
+        }
+      }
+
+      customElements.define(DataGridSelectAllElement.is, DataGridSelectAllElement);
+
+      /**
+       * @namespace Predix
+       */
+      window.Predix = window.Predix || {};
+      Predix.DataGridSelectAllElement = DataGridSelectAllElement;
+    }
+  </script>
+
+
+</dom-module>

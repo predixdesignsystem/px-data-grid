@@ -20,7 +20,7 @@
 <link rel="import" href="px-data-grid-filters-modal.html">
 <link rel="import" href="px-data-grid-filters-preview.html">
 <link rel="import" href="px-data-grid-sorter.html">
-<link rel="import" href="px-data-grid-edit-buttons.html">
+<link rel="import" href="px-data-grid-action-column.html">
 
 <link rel="import" href="px-data-grid-filterable-mixin.html">
 
@@ -83,7 +83,14 @@
                  loading="{{_loading}}">
 
       <template is="dom-if" if="[[_isSelectable(selectionMode)]]" restamp>
-        <px-data-grid-selection-column frozen auto-select hidden="[[hideSelectionColumn]]" multi-select="[[_isMultiSelect(selectionMode)]]" tree-grid="[[_groupByColumn]]">
+        <px-data-grid-selection-column
+          frozen
+          auto-select
+          hidden="[[hideSelectionColumn]]"
+          multi-select="[[_isMultiSelect(selectionMode)]]"
+          tree-grid="[[_groupByColumn]]"
+          allow-sort-by-selection="[[allowSortBySelection]]"
+        >
         </px-data-grid-selection-column>
       </template>
 
@@ -140,21 +147,14 @@
         </px-data-grid-column>
       </template>
 
-      <template is="dom-if" if="[[editable]]" restamp>
-        <px-data-grid-column
-          flex-grow="0">
-          <template>
-            <dom-if if="[[!_isAnyItemEditing(_editingItem)]]">
-              <template>
-                <px-icon icon="px-utl:edit" on-click="_setEditingItem"></px-icon>
-              </template>
-            </dom-if>
-            <dom-if if="[[_isItemEditing(item, _editingItem)]]">
-              <template>
-                <px-data-grid-edit-buttons save="[[_boundedSaveItem]]" cancel="[[_boundedCancelEdit]]"></px-data-grid-edit-buttons>
-              </template>
-            </dom-if>
-          </template>
+      <template is="dom-if" if="[[_offerActionColumn(editable, itemActions)]]" restamp>
+        <px-data-grid-action-column
+          item-actions="[[itemActions]]"
+          editted-item="[[_editingItem]]"
+          edit-mode="[[editable]]"
+          edit="[[_boundedEditItem]]"
+          save="[[_boundedSaveItem]]"
+          cancel="[[_boundedCancelEdit]]">
         </px-data-grid-column>
       </template>
     </vaadin-grid>
@@ -430,12 +430,47 @@
             },
 
             /**
-             * All custom table actions shown before columns. Arrays should contain objects
+             * All custom table actions shown before columns. Array should contain objects
              * with name (String, shown to user) and id (String, given back in event).
              * When user selects these actions table-action event will be emitted, with id of
              * action at event.detail.id
+             * ```
+             * [
+             *   {
+             *     name: 'Export CSV',
+             *     id: 'CSV'
+             *   }
+             *   {
+             *     name: 'Export Excel',
+             *     id: 'Excel'
+             *   }
+             * ]
+             * ```
              */
             tableActions: {
+              type: Array,
+              value: []
+            },
+
+            /**
+             * All custom item actions shown on the data rows. Array should contain objects
+             * with name (String, shown to user) and id (String, given back in event).
+             * When user selects these actions item-action event will be emitted, with id of
+             * action at event.detail.id
+             * ```
+             * [
+             *   {
+             *     name: 'Add Row',
+             *     id: 'add'
+             *   }
+             *   {
+             *     name: 'Delete Row',
+             *     id: 'delete'
+             *   }
+             * ]
+             * ```
+             */
+            itemActions: {
               type: Array,
               value: []
             },
@@ -588,6 +623,23 @@
             },
 
             /**
+             * If user is allowed to sort by selection
+             */
+            allowSortBySelection: {
+              type: Boolean,
+              value: false
+            },
+
+            /**
+             * If enabled in multi selection and sort by selection mode any
+             * changes to selection will cause instant resort
+             */
+            instantSortWhenSelection: {
+              type: Boolean,
+              value: true
+            },
+
+            /**
              * Stores item, that is currently in edit mode.
              */
             _editingItem: {
@@ -617,7 +669,8 @@
             '_highlightsObserver(highlight, _filterHighlights, highlight.*, _filterHightlights.*)',
             '_localizeChanged(localize)',
             '_tableDataChanged(tableData, isAttached)',
-            '_setColumnId(columns, columns.*)'
+            '_setColumnId(columns, columns.*)',
+            '_selectedItemsChanged(selectedItems.*)'
           ];
         }
 
@@ -699,6 +752,7 @@
 
           this._boundedCancelEdit = this._cancelEdit.bind(this);
           this._boundedSaveItem = this._saveItem.bind(this);
+          this._boundedEditItem = this._setEditingItem.bind(this);
 
           document.addEventListener('renderer-editing-changed', (event) => {
             const renderer = event.detail.renderer;
@@ -722,6 +776,20 @@
           if (dataColumns.length) {
             this._vaadinGrid.insertBefore(event.detail.column, dataColumns[0]);
             Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._vaadinGrid.notifyResize());
+          }
+        }
+
+        _doInstantSortAfterSelect() {
+          return this.instantSortWhenSelection
+            && this.allowSortBySelection
+            && Array.from(this._vaadinGrid._sorters)
+              .map(s => s.path)
+              .filter(p => p === '--selection--').length > 0;
+        }
+
+        _selectedItemsChanged(selectedItems) {
+          if (this._doInstantSortAfterSelect()) {
+            this._vaadinGrid.clearCache();
           }
         }
 
@@ -828,6 +896,20 @@
           this._editingItem = null;
         }
 
+        _compareValues(a, b, path, direction) {
+          // Selection is inverted to make selected smaller than not selected
+          const valueA = path === '--selection--' ? !this._vaadinGrid._isSelected(a) : Polymer.Base.get(path, a);
+          const valueB = path === '--selection--' ? !this._vaadinGrid._isSelected(b) : Polymer.Base.get(path, b);
+
+          if (direction === 'asc') {
+            return this._compare(valueA, valueB);
+          } else if (direction === 'desc') {
+            return this._compare(valueB, valueA);
+          } else {
+            return 0;
+          }
+        }
+
         /**
          * Do not drop item for page sizing here, or it will break things
          */
@@ -847,15 +929,15 @@
               items = this._applyCustomFilter(items, this.columns, advancedFilters);
             }
           }
+
           if (params.sortOrders && params.sortOrders.length && this._vaadinGrid._checkPaths(this._sorters, 'sorting', items)) {
             const multiSort = (a, b) => {
               return params.sortOrders.map(sort => {
-                if (sort.direction === 'asc') {
-                  return this._compare(Polymer.Base.get(sort.path, a), Polymer.Base.get(sort.path, b));
-                } else if (sort.direction === 'desc') {
-                  return this._compare(Polymer.Base.get(sort.path, b), Polymer.Base.get(sort.path, a));
+                if (sort.direction === 'asc' || sort.direction === 'desc') {
+                  return this._compareValues(a, b, sort.path, sort.direction);
+                } else {
+                  return 0;
                 }
-                return 0;
               }).reduce((p, n) => {
                 return p ? p : n;
               }, 0);
@@ -1266,7 +1348,7 @@
         _setEditingItem(event) {
           // To prevent selections
           event.stopPropagation();
-          this._editingItem = event.model.item;
+          this._editingItem = event.details.item;
         }
 
         _cancelEdit(event) {
@@ -1327,7 +1409,7 @@
 
           this._pxDataGrid._editingItem = null;
 
-          const sorter = e.target;
+          const sorter = e.detail.sorter;
 
           this._removeArrayItem(this._sorters, sorter);
           sorter._order = null;
@@ -1530,6 +1612,10 @@
             return 1;
           }
           return 0;
+        }
+
+        _offerActionColumn(editable, itemActions) {
+          return editable || (itemActions && itemActions.length > 0);
         }
 
         getState() {

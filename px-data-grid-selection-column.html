@@ -2,6 +2,7 @@
 <link rel="import" href="../vaadin-grid/vaadin-grid-column.html">
 <link rel="import" href="../vaadin-checkbox/vaadin-checkbox.html">
 <link rel="import" href="../vaadin-radio-button/vaadin-radio-button.html">
+<link rel="import" href="px-data-grid-select-all.html">
 <link rel="import" href="css/px-data-grid-selection-column-styles.html">
 
 <dom-module id="vaadin-checkbox-styles" theme-for="vaadin-checkbox">
@@ -20,10 +21,15 @@
   <template>
     <template class="header" id="defaultHeaderTemplate">
       <template is="dom-if" if="[[multiSelect]]">
-        <vaadin-checkbox class="select-all-checkbox" aria-label="Select All" hidden$="[[_selectAllHidden]]" on-checked-changed="_onSelectAllCheckedChanged"
-          checked="[[_isChecked(selectAll, _indeterminate)]]" indeterminate="[[_indeterminate]]">
-          ([[_selectionCount]])
-        </vaadin-checkbox>
+        <px-data-grid-select-all
+          hidden$="[[_selectAllHidden]]"
+          on-select-all-checked="_onSelectAllCheckedChanged"
+          checked="[[_isChecked(selectAll, _indeterminate)]]"
+          indeterminate="[[_indeterminate]]"
+          count="[[_selectionCount]]"
+          allow-sort-by-selection="[[allowSortBySelection]]"
+          check-listener="[[_boundedSelectAllCheckListener]]"
+        ></px-data-grid-select-all>
       </template>
     </template>
     <template id="defaultBodyTemplate">
@@ -105,6 +111,14 @@
           },
 
           /**
+           * If user is allowed to sort by selection
+           */
+          allowSortBySelection: {
+            type: Boolean,
+            value: false
+          },
+
+          /**
           * @private
           */
           headerTemplate: Object,
@@ -114,7 +128,10 @@
           */
           template: Object,
 
-          _indeterminate: Boolean,
+          _indeterminate: {
+            type: Boolean,
+            value: false
+          },
 
           /*
            * The previous state of activeItem. When activeItem turns to `null`,
@@ -142,14 +159,20 @@
           _selectionCount: {
             type: Number,
             value: 0
-          }
+          },
         };
       }
 
       static get observers() {
         return [
-          '_onSelectAllChanged(selectAll)'
+          '_onSelectAllChanged(selectAll)',
+          '_onMultiSelectOrAllowSortBySelectionChanged(multiSelect,allowSortBySelection)'
         ];
+      }
+
+      ready() {
+        super.ready();
+        this._boundedSelectAllCheckListener = this._onSelectAllCheckedChanged.bind(this);
       }
 
       _prepareHeaderTemplate() {
@@ -249,6 +272,11 @@
 
       _onSelectAllCheckedChanged(e) {
         this.selectAll = this._indeterminate || e.target.checked;
+
+        // Events get out of sync when toggling from indeterminate to determinate
+        if (e.target.checked !== this.selectAll) {
+          e.target.checked = this.selectAll;
+        }
       }
 
       // iOS needs indeterminated + checked at the same time
@@ -289,6 +317,19 @@
 
       _onDataProviderChanged(e) {
         this._selectAllHidden = !this._grid._pxDataGrid._hasLocalDataProvider;
+      }
+
+      /**
+       * Function that makes sure there is enough space for all content
+       */
+      _onMultiSelectOrAllowSortBySelectionChanged(multiSelect, allowSortBySelection) {
+        if (!multiSelect) {
+          this.width = '40px';
+        } else if (!allowSortBySelection) {
+          this.width = '55px';
+        } else {
+          this.width = '90px';
+        }
       }
     }
 

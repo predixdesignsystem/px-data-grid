@@ -1,5 +1,5 @@
 [part=wrapper] {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   outline: none;
 }
@@ -9,5 +9,8 @@
 }
 
 [part=label] {
+  display: none !important;
   margin-left: 5px;
 }
+
+

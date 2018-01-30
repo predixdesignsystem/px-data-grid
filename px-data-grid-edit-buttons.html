@@ -1,13 +1,17 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../px-icon-set/px-icon.html">
-<link rel="import" href="css/px-data-grid-edit-buttons-styles.html">
+<link rel="import" href="css/px-data-grid-action-column-buttons-styles.html">
 
 <dom-module id="px-data-grid-edit-buttons">
   <template>
-    <style include="px-data-grid-edit-buttons-styles"></style>
+    <style include="px-data-grid-action-column-buttons-styles"></style>
 
-    <px-icon icon="px-utl:close" on-click="_handleCancel">Cancel</px-icon>
-    <px-icon icon="px-utl:check" on-click="_handleSave">Save</px-icon>
+    <button class="btn btn--bare btn--icon" on-click="_handleCancel">
+        <px-icon icon="px-utl:close" class="rounded">Cancel</px-icon>
+      </button>
+      <button class="btn btn--bare btn--icon" on-click="_handleSave">
+        <px-icon icon="px-utl:check" class="rounded">Save</px-icon>
+      </button>
   </template>
 
   <script>

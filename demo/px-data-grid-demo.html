@@ -62,10 +62,12 @@
             hide-selection-column="{{props.hideSelectionColumn.value}}"
             resizable="{{props.resizable.value}}"
             striped="{{props.striped.value}}"
+            allow-sort-by-selection="{{props.allowSortBySelection.value}}"
             multi-sort="{{props.multiSort.value}}"
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
             hide-action-menu="{{props.hideActionMenu.value}}"
             table-actions="{{props.tableActions.value}}"
+            item-actions="{{props.itemActions.value}}"
             language="{{props.language.value}}"
             auto-filter="{{props.autoFilter.value}}"
             on-cell-hover="cellHoverListener"
@@ -73,7 +75,8 @@
             grid-height="{{props.gridHeight.value}}"
             offer-filter-saving="{{props.offerFilterSaving.value}}"
             on-table-action="tableActionListener"
-            on-save-filters="saveFilterListener">
+            on-save-filters="saveFilterListener"
+            on-item-action="_itemActionListener">
         </px-data-grid>
 
         <div class="button-row">
@@ -159,6 +162,10 @@
 
     saveFilterListener: function(evt) {
       window.alert('Filters should be saved now');
+    },
+
+    _itemActionListener: function(evt) {
+      window.alert('Action ' + evt.detail.action + ' asked for ' + evt.detail.item.first);
     },
 
     properties: {
@@ -534,6 +541,12 @@
         inputType: 'toggle'
       },
 
+      allowSortBySelection: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
       columnReorderingAllowed: {
         type: Boolean,
         defaultValue: false,
@@ -586,8 +599,22 @@
             id: 'CSV'
           }
         ],
-        inputType: 'code:JSON',
-        _visibleForConfig: false
+        inputType: 'code:JSON'
+      },
+
+      itemActions: {
+        type: Object,
+        defaultValue: [
+          {
+            name: 'Add Row',
+            id: 'add'
+          },
+          {
+            name: 'Delete Row',
+            id: 'delete'
+          }
+        ],
+        inputType: 'code:JSON'
       },
 
       offerFilterSaving: {

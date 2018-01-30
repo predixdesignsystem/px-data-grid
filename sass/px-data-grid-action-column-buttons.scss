@@ -1,0 +1,29 @@
+@import 'px-data-grid-shared';
+
+:host {
+  display: flex;
+}
+
+.btn {
+  --px-btn-width: 18px;
+  --px-btn-height: 18px;
+  display: inline-block;
+}
+
+px-icon {
+  --iron-icon-width: 15px;
+  --iron-icon-height: 15px;
+  --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted, rgb(129,129,129));
+}
+
+px-icon.rounded {
+  --iron-icon-width: 12px;
+  --iron-icon-height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--px-data-grid-cell-text-color--sorted, rgb(129,129,129));
+  padding: 2px;
+}
+
+.btn + .btn {
+  margin-left: 5px;
+}
