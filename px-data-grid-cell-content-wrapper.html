@@ -74,6 +74,13 @@
           });
         }
 
+        focus() {
+          const input = this._valueElement.shadowRoot.querySelector('#editingTemplateInput');
+          if (input && input.focus) {
+            input.focus();
+          }
+        }
+
         _fireCellHoverEvent(event) {
           this.dispatchEvent(
             new CustomEvent('cell-hover', {
