@@ -7,11 +7,11 @@
 }
 
 .labeled-text {
-  display: inline-flex;
-  flex-direction: column;
+  display: inline-block;
   width: 33%;
   padding: 0px 2px;
   box-sizing: border-box;
+  vertical-align: bottom
 }
 
 .labeled-text[extended] {
