@@ -163,7 +163,8 @@
             if (!column) {
               return true;
             } else {
-              return column.type === 'date' || (column.type === 'number' && column.minBound && column.maxBound);
+              return column.type === 'date' ||
+                (column.type === 'number' && column.minBound !== undefined && column.maxBound !== undefined);
             }
           }
         }
