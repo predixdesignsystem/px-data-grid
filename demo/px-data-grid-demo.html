@@ -58,6 +58,7 @@
             table-data="{{props.tableData.value}}"
             selection-mode="{{props.selectionMode.value}}"
             filterable="{{props.filterable.value}}"
+            compact-advanced-filter-dialog="{{props.compactAdvancedFilterDialog.value}}"
             selected-items="{{selectedItems}}"
             hide-selection-column="{{props.hideSelectionColumn.value}}"
             resizable="{{props.resizable.value}}"
@@ -524,6 +525,12 @@
       },
 
       filterable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      compactAdvancedFilterDialog: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'

@@ -55,6 +55,7 @@
           highlight="{{props.highlight.value}}"
           auto-filter="{{props.autoFilter.value}}"
           filterable="{{props.filterable.value}}"
+          compact-advanced-filter-dialog="{{props.compactAdvancedFilterDialog.value}}"
           on-table-action="tableActionListener"
           on-cell-hover="cellHoverListener"
           on-cell-unhover="cellUnhoverListener">
@@ -600,6 +601,12 @@
       },
 
       filterable: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      compactAdvancedFilterDialog: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'

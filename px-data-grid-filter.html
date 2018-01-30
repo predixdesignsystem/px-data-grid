@@ -8,7 +8,12 @@
     <style include="px-data-grid-filter-styles"></style>
 
     <template is="dom-repeat" items="{{tempFilters}}" as="section">
-      <px-data-grid-filter-section section="{{section}}" columns="[[columns]]" localize="[[localize]]"></px-data-grid-filter-section>
+      <px-data-grid-filter-section
+        section="{{section}}"
+        columns="[[columns]]"
+        compact-mode="[[compactMode]]"
+        localize="[[localize]]">
+      </px-data-grid-filter-section>
     </template>
 
     <!--
@@ -42,6 +47,11 @@
             tempFilters: {
               type: Array,
               notify: true
+            },
+
+            compactMode: {
+              type: Boolean,
+              value: false
             },
 
             localize: Function
