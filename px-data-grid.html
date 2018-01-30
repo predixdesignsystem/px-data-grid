@@ -131,7 +131,12 @@
                       <px-icon icon="px-utl:chevron"></px-icon>
                     </template>
                   </template>
-                  <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column, _highlightEntities.*)]]" item="{{item}}" column="[[column]]" localize="[[_boundedLocalize]]">
+                  <px-data-grid-cell-content-wrapper
+                    focus-target
+                    cell-color="[[_resolveCellColor(item, column, _highlightEntities.*)]]"
+                    item="{{item}}"
+                    column="[[column]]"
+                    localize="[[_boundedLocalize]]">
                   </px-data-grid-cell-content-wrapper>
                 </vaadin-grid-tree-toggle>
               </template>
@@ -139,7 +144,12 @@
 
             <dom-if if="[[!_isGroupedByColumn(column, _groupByColumn)]]">
               <template>
-                <px-data-grid-cell-content-wrapper cell-color="[[_resolveCellColor(item, column, _highlightEntities.*, _editingItem)]]" item="{{item}}" column="[[column]]" localize="[[_boundedLocalize]]">
+                <px-data-grid-cell-content-wrapper
+                  focus-target
+                  cell-color="[[_resolveCellColor(item, column, _highlightEntities.*, _editingItem)]]"
+                  item="{{item}}"
+                  column="[[column]]"
+                  localize="[[_boundedLocalize]]">
                 </px-data-grid-cell-content-wrapper>
               </template>
             </dom-if>
