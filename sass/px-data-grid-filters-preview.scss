@@ -1,5 +1,11 @@
 @import 'px-data-grid-shared';
 
+:host {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 1px 0;
+}
+
 px-popover {
   --px-popover-max-width: none;
 }
