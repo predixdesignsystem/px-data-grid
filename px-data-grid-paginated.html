@@ -74,7 +74,6 @@
              */
             tableData: {
               type: Array,
-              observer: '_tableDataChanged',
               notify: true
             },
 
@@ -383,6 +382,12 @@
           };
         }
 
+        static get observers() {
+          return [
+            '_tableDataChanged(tableData, isAttached)'
+          ];
+        }
+
         ready() {
           super.ready();
           this._resolvePxDataGrid();
@@ -395,7 +400,11 @@
           return this._pxDataGrid;
         }
 
-        _tableDataChanged(tableData) {
+        _tableDataChanged(tableData, isAttached) {
+          if (!isAttached) {
+            return;
+          }
+
           if (tableData) {
             this._hasLocalDataProvider = true;
             this._currentDataProvider = this._wrapDataProvider(this._localDataProvider);
