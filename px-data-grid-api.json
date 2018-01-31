@@ -1226,7 +1226,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Vaadin.GridColumnElement",
           "name": "Predix.DataGridColumnElement",
           "attributes": [
             {
@@ -5151,7 +5151,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.AutoFilterFieldElement",
           "attributes": [
             {
@@ -8971,7 +8971,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridSelectAllElement",
           "attributes": [
             {
@@ -10344,7 +10344,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Vaadin.GridColumnElement",
           "name": "Predix.DataGridSelectionColumnElement",
           "attributes": [
             {
@@ -11500,7 +11500,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Vaadin.GridColumnElement",
           "name": "Predix.DataGridToggleDetailsColumnElement",
           "attributes": [
             {
@@ -15545,7 +15545,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridStringRenderer",
           "attributes": [
             {
@@ -19639,7 +19639,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridDateRenderer",
           "attributes": [
             {
@@ -23705,7 +23705,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridNumberRenderer",
           "attributes": [
             {
@@ -27684,7 +27684,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridCellContentWrapperElement",
           "attributes": [
             {
@@ -31906,7 +31906,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFilterEntityElement",
           "attributes": [
             {
@@ -35909,7 +35909,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFilterSectionElement",
           "attributes": [
             {
@@ -39824,7 +39824,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFilterElement",
           "attributes": [
             {
@@ -43790,7 +43790,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFiltersModalElement",
           "attributes": [
             {
@@ -47822,7 +47822,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFiltersPreviewTooltipElement",
           "attributes": [
             {
@@ -51828,7 +51828,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Polymer.Element",
           "name": "Predix.DataGridFiltersPreviewElement",
           "attributes": [
             {
@@ -52997,7 +52997,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "HTMLElement",
+          "superclass": "Vaadin.GridColumnElement",
           "name": "Predix.DataGridActionColumnElement",
           "attributes": [
             {
@@ -57866,7 +57866,7 @@
         }
       },
       "privacy": "public",
-      "superclass": "HTMLElement",
+      "superclass": "Polymer.Element",
       "name": "DataGridHeaderCellElement",
       "attributes": [
         {
@@ -62109,7 +62109,7 @@
         }
       },
       "privacy": "public",
-      "superclass": "HTMLElement",
+      "superclass": "Polymer.Element",
       "name": "DataGridActionButtonsElement",
       "attributes": [
         {
@@ -65914,7 +65914,7 @@
         }
       },
       "privacy": "public",
-      "superclass": "HTMLElement",
+      "superclass": "Polymer.Element",
       "name": "DataGridEditButtonsElement",
       "attributes": [
         {
