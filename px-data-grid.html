@@ -113,7 +113,7 @@
           width="[[_getColumnWidth(column)]]"
           flex-grow="[[_getColumnFlexGrow(column)]]"
           on-column-change="_onColumnUpdate"
-          is-remote-data-provider="[[!_hasLocalDataProvider]]"
+          group-by-column-allowed="[[_groupByColumnAllowed(_hasLocalDataProvider, _expandableRows)]]"
           is-data-column="true">
           <template class="header">
             <px-data-grid-sorter path="[[_resolveColumnPath(column)]]">[[resolveColumnHeader(column)]]</px-data-grid-sorter>
@@ -499,6 +499,14 @@
             },
 
             /**
+             * If true, row-details template is provided and rows are expandable
+             */
+            _expandableRows: {
+              type: Boolean,
+              value: false
+            },
+
+            /**
              * If true, every other row in the table will appear with a background color to improve visual scanning.
              * When grouped by column striping will be disabled.
              */
@@ -716,6 +724,7 @@
             return node.localName && node.localName === 'template' && node.className && node.className.indexOf('row-details') !== -1;
           });
           if (rowDetailsTemplate.length) {
+            this._expandableRows = true;
             this._vaadinGrid._rowDetailsTemplate = rowDetailsTemplate[0];
 
             const templatizer = new Vaadin.Grid.Templatizer();
@@ -810,6 +819,10 @@
           if (this._doInstantSortAfterSelect()) {
             this._vaadinGrid.clearCache();
           }
+        }
+
+        _groupByColumnAllowed(hasLocalDataProvider, expandableRows) {
+          return hasLocalDataProvider && !expandableRows;
         }
 
         /**

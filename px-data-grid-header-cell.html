@@ -35,6 +35,11 @@
               observer: '_dropdownOpenedChanged'
             },
 
+            groupByColumnAllowed: {
+              type: Boolean,
+              value: true
+            },
+
             _dropdownHidden: {
               type: Boolean,
               value: true
@@ -182,7 +187,7 @@
               }
             );
 
-            if (!this.isRemoteDataProvider) {
+            if (this.groupByColumnAllowed) {
               if (this._column.grouped) {
                 newItems.push(
                   {
