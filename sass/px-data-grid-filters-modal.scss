@@ -1,14 +1,7 @@
 @import 'px-data-grid-shared';
 
-.filter-modal-buttons-container {
-  padding: $inuit-base-spacing-unit--large;
-  padding-bottom: 0;
-  margin-bottom: calc(0px - #{$inuit-base-spacing-unit--large});
-  display: flex;
-}
-
-.filter-modal-buttons-container__right {
-  margin-left: auto;
+.action-buttons {
+  width: 100%;
 }
 
 input[type="checkbox"] {
