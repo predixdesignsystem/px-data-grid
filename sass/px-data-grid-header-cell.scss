@@ -7,7 +7,7 @@
   margin-left: calc(0px - var(--px-dropdown-toggle-icon-size));
   --iron-icon-stroke-color: inherit;
   color: var(--px-data-grid-header-text-color, inherit);
-  stroke: var(--px-data-grid-header-text-color, inherit);
+  stroke: var(--px-data-grid-header-text-color, rgb(44,64,76));
 }
 
 px-icon {
@@ -34,7 +34,6 @@ px-dropdown[hidden] {
   align-items: center;
 }
 
-:host,
 :host px-icon{
   color: inherit;
   stroke: inherit;
@@ -43,13 +42,15 @@ px-dropdown[hidden] {
 :host(:hover),
 :host(:hover) px-icon{
   color: var(--px-data-grid-header-text-color--hover, inherit);
-  stroke: var(--px-data-grid-header-text-color--hover, inherit);
+  fill: var(--px-data-grid-header-text-color--hover, rgb(44,64,76));
+  stroke: var(--px-data-grid-header-text-color--hover, rgb(44,64,76));
 }
 
 :host(:active),
 :host(:active) px-icon{
   color: var(--px-data-grid-header-text-color--active, inherit);
-  stroke: var(--px-data-grid-header-text-color--active, inherit);
+  fill: var(--px-data-grid-header-text-color--active, rgb(44,64,76));
+  stroke: var(--px-data-grid-header-text-color--active, rgb(44,64,76));
 }
 
 
