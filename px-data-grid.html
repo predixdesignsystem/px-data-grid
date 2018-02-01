@@ -798,13 +798,27 @@
           this._vaadinGrid.removeAttribute('tree-grid');
         }
 
+        // put frozen column to the beginning (in the place of the first data column)
         _handleColumnFroze(event) {
-          const columnsRow = this._vaadinGrid._columnTree[this._vaadinGrid._columnTree.length - 1].slice(0);
-          const dataColumns = columnsRow.filter(c => c.isDataColumn);
-          if (dataColumns.length) {
-            this._vaadinGrid.insertBefore(event.detail.column, dataColumns[0]);
-            Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._vaadinGrid.notifyResize());
+          const columns = this._vaadinGrid._columnTree[0];
+
+          let firstDataColumnIndex = 0;
+          for (let i = 1; i < columns.length; i++) {
+            if (columns[i].isDataColumn) {
+              firstDataColumnIndex = i;
+              break;
+            }
           }
+
+          let targetColumnIndex = 0;
+          for (let i = 1; i < columns.length; i++) {
+            if (columns[i] === event.detail.column) {
+              targetColumnIndex = i;
+              break;
+            }
+          }
+          columns.splice(firstDataColumnIndex, 0, columns.splice(targetColumnIndex, 1)[0]); // https://stackoverflow.com/a/2440723/1331425
+          this._vaadinGrid._updateOrders(this._vaadinGrid._columnTree, true);
         }
 
         _doInstantSortAfterSelect() {
