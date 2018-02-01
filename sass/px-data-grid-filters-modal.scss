@@ -13,3 +13,18 @@ label.label--inline {
   text-transform: none;
   font-size: 15px;
 }
+
+px-modal-triggers {
+  height: var(--px-btn-height,2em);
+}
+
+px-modal-triggers, .btn {
+  padding-left: .66667rem;
+  padding-right: .66667rem;
+}
+
+.table-filters px-icon {
+  margin-right: 4px;
+  margin-top: -2px;
+  --iron-icon-height: 16px;
+}
