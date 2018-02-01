@@ -695,7 +695,7 @@
           return [
             '_highlightsObserver(highlight, _filterHighlights, highlight.*, _filterHightlights.*)',
             '_localizeChanged(localize)',
-            '_tableDataChanged(tableData, isAttached)',
+            '_tableDataChanged(tableData, tableData.*, isAttached)',
             '_setColumnId(columns, columns.*)',
             '_selectedItemsChanged(selectedItems.*)'
           ];
@@ -984,7 +984,7 @@
         }
 
         _localDataProvider(params, callback) {
-          let items = Array.isArray(this.tableData) ? this.tableData : [];
+          let items = this._copyArray(Array.isArray(this.tableData) ? this.tableData : []);
           if (this._groupByColumn) {
             const columnPath = this._groupByColumn.path;
             if (!params.parentItem) {
