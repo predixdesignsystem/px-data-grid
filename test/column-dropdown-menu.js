@@ -20,21 +20,44 @@ document.addEventListener('WebComponentsReady', () => {
 
     it('should move the first frozen column to the left side of the grid', () => {
       expect(getHeaderCell(grid, 0)).to.equal(firstNameHeaderCell);
+      expect(getHeaderCell(grid, 1)).to.equal(lastNameHeaderCell);
+
+      let visibleColumns = grid.getVisibleColumns();
+      expect(visibleColumns.length).to.be.equal(3);
+      expect(visibleColumns[0].name).to.be.equal('first');
+      expect(visibleColumns[1].name).to.be.equal('last');
+      expect(visibleColumns[2].name).to.be.equal('email');
+
       getHeaderCellContent(lastNameHeaderCell)._freezeColumn();
       flushVaadinGrid(grid);
-      expect(getHeaderCell(grid, 0)).to.equal(lastNameHeaderCell);
-      expect(getHeaderCell(grid, 1)).to.equal(firstNameHeaderCell);
+
+      visibleColumns = grid.getVisibleColumns();
+      expect(visibleColumns.length).to.be.equal(3);
+      expect(visibleColumns[0].name).to.be.equal('last');
+      expect(visibleColumns[1].name).to.be.equal('first');
+      expect(visibleColumns[2].name).to.be.equal('email');
     });
 
     it('should move the second frozen column to the left side of the grid, before the first frozen', () => {
       expect(getHeaderCell(grid, 0)).to.equal(firstNameHeaderCell);
       expect(getHeaderCell(grid, 1)).to.equal(lastNameHeaderCell);
+
+      let visibleColumns = grid.getVisibleColumns();
+      expect(visibleColumns.length).to.be.equal(3);
+      expect(visibleColumns[0].name).to.be.equal('first');
+      expect(visibleColumns[1].name).to.be.equal('last');
+      expect(visibleColumns[2].name).to.be.equal('email');
+
       getHeaderCellContent(lastNameHeaderCell)._freezeColumn();
       flushVaadinGrid(grid);
       getHeaderCellContent(firstNameHeaderCell)._freezeColumn();
       flushVaadinGrid(grid);
-      expect(getHeaderCell(grid, 0)).to.equal(firstNameHeaderCell);
-      expect(getHeaderCell(grid, 1)).to.equal(lastNameHeaderCell);
+
+      visibleColumns = grid.getVisibleColumns();
+      expect(visibleColumns.length).to.be.equal(3);
+      expect(visibleColumns[0].name).to.be.equal('first');
+      expect(visibleColumns[1].name).to.be.equal('last');
+      expect(visibleColumns[2].name).to.be.equal('email');
     });
 
     it('should not move the frozen column before selection column', () => {
@@ -42,20 +65,18 @@ document.addEventListener('WebComponentsReady', () => {
       grid.selectionMode = 'multi';
       grid.hideSelectionColumn = false;
       flushVaadinGrid(grid);
-      expect(getHeaderCell(grid, 1)).to.equal(firstNameHeaderCell);
-      expect(getHeaderCell(grid, 2)).to.equal(lastNameHeaderCell);
+      expect(getHeaderCell(grid, 0)).to.not.equal(firstNameHeaderCell);
+      const selectionColumn = getHeaderCell(grid, 0);
 
       // Free second data column, and check it's first after selection column
       getHeaderCellContent(lastNameHeaderCell)._freezeColumn();
       flushVaadinGrid(grid);
-      expect(getHeaderCell(grid, 1)).to.equal(lastNameHeaderCell);
-      expect(getHeaderCell(grid, 2)).to.equal(firstNameHeaderCell);
+      expect(getHeaderCell(grid, 0)).to.be.equal(selectionColumn);
 
       // Make unselectable, and check position of data columns
       grid.selectionMode = 'none';
       flushVaadinGrid(grid);
-      expect(getHeaderCell(grid, 0)).to.equal(lastNameHeaderCell);
-      expect(getHeaderCell(grid, 1)).to.equal(firstNameHeaderCell);
+      expect(getHeaderCell(grid, 0)).to.not.equal(selectionColumn);
     });
 
     // TODO: @limonte investigate why 2 tests below don't work
