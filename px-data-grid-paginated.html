@@ -341,11 +341,13 @@
             },
 
             /**
-             * Path to an item sub-property that identifies the item.
+             * Path to an item sub-property that identifies the item. This should be
+             * defined in case of any editing, to allow grid to pair new version of
+             * item with new. Path must point to unique identifier in data objects
+             * that does not change (eg. 'id')
              */
             itemIdPath: {
-              type: String,
-              value: null
+              type: String
             },
 
             /**
@@ -447,7 +449,7 @@
           // Just to make sure _pxDataGrid has been resolved
           this._resolvePxDataGrid();
 
-          const items = this._pxDataGrid._copyArray(Array.isArray(this.tableData) ? this.tableData : []);
+          const items = Array.isArray(this.tableData) ? this.tableData : [];
           const response = this._localDataResolver(params, items);
           callback(response.items, response.total);
         }
