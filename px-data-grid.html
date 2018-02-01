@@ -78,7 +78,7 @@
                  striped$="[[_isStriped(striped,_groupByColumn)]]"
                  selected-items="{{selectedItems}}"
                  multi-sort="[[multiSort]]"
-                 item-id-path="[[itemIdPath]]"
+                 item-id-path="{{itemIdPath}}"
                  page-size="{{pageSize}}"
                  auto-height$="[[_isAutoHeight(gridHeight)]]"
                  loading="{{_loading}}">
@@ -625,11 +625,13 @@
             },
 
             /**
-             * Path to an item sub-property that identifies the item.
+             * Path to an item sub-property that identifies the item. This should be
+             * defined in case of any editing, to allow grid to pair new version of
+             * item with new. Path must point to unique identifier in data objects
+             * that does not change (eg. 'id')
              */
             itemIdPath: {
-              type: String,
-              value: null
+              type: String
             },
 
             /**
@@ -1008,7 +1010,7 @@
         }
 
         _localDataProvider(params, callback) {
-          let items = this._copyArray(Array.isArray(this.tableData) ? this.tableData : []);
+          let items = (Array.isArray(this.tableData) ? this.tableData : []).slice(0);
           if (this._groupByColumn) {
             const columnPath = this._groupByColumn.path;
             if (!params.parentItem) {
