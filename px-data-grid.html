@@ -801,9 +801,15 @@
         // put frozen column to the beginning (in the place of the first data column)
         _handleColumnFroze(event) {
           const columns = this._vaadinGrid._columnTree[0];
+          const frozenColumnId = event.detail.column.mappedObject ? event.detail.column.mappedObject.id : undefined;
+
+          if (frozenColumnId === undefined) {
+            console.warn('Failed to resolve column ID of frozen column');
+            return;
+          }
 
           let firstDataColumnIndex = 0;
-          for (let i = 1; i < columns.length; i++) {
+          for (let i = 0; i < columns.length; i++) {
             if (columns[i].isDataColumn) {
               firstDataColumnIndex = i;
               break;
@@ -811,12 +817,16 @@
           }
 
           let targetColumnIndex = 0;
-          for (let i = 1; i < columns.length; i++) {
-            if (columns[i] === event.detail.column) {
-              targetColumnIndex = i;
-              break;
+          for (let i = 0; i < columns.length; i++) {
+            if (columns[i].isDataColumn) {
+              const columnObj = columns[i].mappedObject;
+              if (columnObj && columnObj.id === frozenColumnId) {
+                targetColumnIndex = i;
+                break;
+              }
             }
           }
+
           columns.splice(firstDataColumnIndex, 0, columns.splice(targetColumnIndex, 1)[0]); // https://stackoverflow.com/a/2440723/1331425
           this._vaadinGrid._updateOrders(this._vaadinGrid._columnTree, true);
         }
