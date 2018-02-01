@@ -36,8 +36,13 @@ px-data-grid-header-cell.scss */
 
 [part="content"] {
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: var(--px-data-grid-header-text-overflow, ellipsis);
   pointer-events: none;
+  white-space: var(--px-data-grid-header-text-white-space, nowrap);
+
+  //Have to give a width in order for ellipsis to work inside a flexbox.
+  width: 0px;
+  flex-grow: 1;
 }
 
 [part="indicators"] {
