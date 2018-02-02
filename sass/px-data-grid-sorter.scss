@@ -6,12 +6,15 @@
   cursor: pointer;
   color: inherit;
   stroke: inherit;
+  text-overflow: var(--px-data-grid-header-text-overflow, ellipsis);
+  overflow: hidden;
 }
 
 /* When a column is sorted we use a differnet color */
 :host([direction]){
   color: var(--px-data-grid-cell-text-color--sorted, inherit);
   stroke: var(--px-data-grid-cell-text-color--sorted, inherit);
+
 }
 
 /* When hovering revert back to parent's color, only needed because "sorted" has
@@ -41,14 +44,16 @@ px-data-grid-header-cell.scss */
   white-space: var(--px-data-grid-header-text-white-space, nowrap);
 
   //Have to give a width in order for ellipsis to work inside a flexbox.
-  width: 0px;
-  flex-grow: 1;
+  width: auto;
+  flex-shrink: 1;
+  flex-grow: 0;
 }
 
 [part="indicators"] {
   white-space: nowrap;
-  flex: 0;
   color: inherit;
+  flex-grow: 1;
+  width: auto;
 }
 
 .order-icon {
