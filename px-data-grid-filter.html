@@ -65,7 +65,7 @@
         }
 
         _addGroup() {
-          this.push('filters', {entities: [{}], action: 'show', operationType: 'all'});
+          this.push('filters', {entities: [], action: 'show', operationType: 'all'});
         }
 
         _filtersObserver(filters) {
@@ -85,7 +85,7 @@
         }
 
         resetFilters() {
-          this.set('filters', [{entities: [{}], action: 'show', operationType: 'all'}]);
+          this.set('filters', [{entities: [], action: 'show', operationType: 'all'}]);
         }
 
         _restoreTempFilters() {
