@@ -587,7 +587,9 @@
             },
 
             /**
-             * Default column width if not defined, eg. '100px'
+             * Default column width if not defined, eg. '100px'. Notice that with not
+             * zero flex values this value behaves more as minimum width. See
+             * defaultColumnFlexGrow property.
              */
             defaultColumnWidth: {
               type: String,
@@ -595,9 +597,10 @@
             },
 
             /**
-             * Default column flex if not defined, eg. 1
+             * Default column flex if not defined, eg. 1. Equialent to the CSS flex-grow
+             * property.
              */
-            defaultColumnFlex: {
+            defaultColumnFlexGrow: {
               type: Number,
               value: 1
             },
@@ -876,7 +879,7 @@
         }
 
         _getColumnFlexGrow(column) {
-          return column.flexGrow === undefined ? this.defaultColumnFlex : column.flexGrow;
+          return column.flexGrow === undefined ? this.defaultColumnFlexGrow : column.flexGrow;
         }
 
         _resolveCellColor(item, column) {
