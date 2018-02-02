@@ -1,8 +1,4 @@
-document.addEventListener('WebComponentsReady', function() {
-  runTests();
-});
-
-function runTests() {
+document.addEventListener('WebComponentsReady', () => {
 
   describe('px-data-grid-paginated component tests', () => {
 
@@ -111,4 +107,4 @@ function runTests() {
 
   });
 
-}
+});

@@ -1,9 +1,4 @@
-document.addEventListener('WebComponentsReady', function() {
-  runTests();
-});
-
-function runTests() {
-
+document.addEventListener('WebComponentsReady', () => {
   describe('navigation (paging) component tests', () => {
 
     let navigation;
@@ -213,4 +208,4 @@ function runTests() {
 
   });
 
-}
+});
