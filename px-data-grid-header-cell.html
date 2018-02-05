@@ -169,15 +169,17 @@
               );
             }
 
-            newItems.push(
-              {
-                key: {
-                  action: () => this._hideColumn()
-                },
-                val: this.localize('Hide column'),
-                disableSelect: true
-              }
-            );
+            if (this._canBeHidden()) {
+              newItems.push(
+                {
+                  key: {
+                    action: () => this._hideColumn()
+                  },
+                  val: this.localize('Hide column'),
+                  disableSelect: true
+                }
+              );
+            }
 
             if (this.groupByColumnAllowed) {
               if (this._column.grouped) {
@@ -239,6 +241,17 @@
         _dropdownClick(e) {
           e.stopPropagation();
           e.preventDefault();
+        }
+
+        _canBeHidden() {
+          if (this._column && this._column._grid && this._column._grid._pxDataGrid) {
+            const pxDataGrid = this._column._grid._pxDataGrid;
+            const groupedByThis = pxDataGrid._groupByColumn == this._column;
+            return !groupedByThis && pxDataGrid.getVisibleColumns().length > 1;
+          } else {
+            console.warn('Failed to resolve if column can be hidden');
+            return true;
+          }
         }
       }
 

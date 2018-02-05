@@ -1222,6 +1222,7 @@
           const defaultName = this.localize('Column #');
           let counter = 0;
           const selected = [];
+          const oneVisibleColumn = this.getVisibleColumns().length <= 1;
 
           this._getColumns().forEach((columnElement) => {
             const index = ++counter;
@@ -1229,10 +1230,12 @@
             const name = columnElement.name ? columnElement.name : (defaultName + index);
             // -column- is temporary work around to limitations of px-dropdown
             const key = '-column-' + name;
+            const groupedByThis = this._groupByColumn === columnElement;
 
             const item = {
               key: key,
-              val: name
+              val: name,
+              disabled: groupedByThis || (oneVisibleColumn && !hidden)
             };
 
             if (!hidden) {
@@ -1583,12 +1586,17 @@
          * Get current visible columns in grid
          */
         getVisibleColumns() {
+          // Do not break if called too early
+          if (this._vaadinGrid == undefined || this._vaadinGrid._columnTree === undefined) {
+            return [];
+          }
+
           return this._vaadinGrid
             ._columnTree[this._vaadinGrid._columnTree.length - 1]
             .slice(0)
             .sort((a, b) => a._order - b._order)
             .map((col) => col.mappedObject)
-            .filter((col) => !col.hidden);
+            .filter((col) => col !== undefined && !col.hidden);
         }
 
         /**
