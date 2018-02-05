@@ -60,9 +60,10 @@
       }));
 
       if (editing) {
+        this.classList.add('editing');
         this._performValidation();
-        this.style.height = window.getComputedStyle(this).height;
       } else {
+        this.classList.remove('editing');
         this._showValidationError = false;
       }
     }

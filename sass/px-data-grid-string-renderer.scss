@@ -1,9 +1,19 @@
 @import 'px-data-grid-shared';
 
 :host {
+  display: block;
+  overflow: var(--px-data-grid-cell-string-column-overflow, hidden);
+  white-space: var(--px-data-grid-cell-string-column-white-space, normal);
+  word-wrap: var(--px-data-grid-cell-string-column-word-wrap, break-word);
+  word-break: var(--px-data-grid-cell-string-column-word-break, break-word);
+  text-overflow: var(--px-data-grid-cell-string-column-text-overflow, clip);
+}
+
+:host(.editing){
   display: flex;
-  align-items: center;
+  align-items: var(--px-data-grid-cell-string-column-editor-align-items, flex-start);
   flex-grow: 1;
+  overflow: visible;
 }
 
 .input-container {

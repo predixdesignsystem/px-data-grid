@@ -8,6 +8,63 @@
   --px-data-grid-padding-bottom: 12px;
   --px-data-grid-padding-left: 12px;
   --px-data-grid-padding-right: 12px;
+
+}
+
+
+/* Default behavior, pre- ellipsis and intentional wrapping:
+{
+  // Make all wrap
+  //Defalut columns (without custom renderers)
+  --px-data-grid-deault-content-wrapper-display: flex;
+  --px-data-grid-cell-default-column-overflow: visible;
+  --px-data-grid-cell-default-column-white-space: normal;
+  --px-data-grid-cell-default-column-word-wrap:  normal;
+  --px-data-grid-cell-default-column-word-break: normal;
+  --px-data-grid-cell-default-column-text-overflow: clip;
+
+  // Specific column generator types
+  --px-data-grid-cell-string-column-word-wrap: normal;
+  --px-data-grid-cell-string-column-overflow: visible;
+  --px-data-grid-cell-string-column-white-space: normal;
+  --px-data-grid-cell-string-column-word-break: normal;
+  --px-data-grid-cell-string-column-text-overflow: clip;
+
+  --px-data-grid-cell-number-column-word-wrap: normal;
+  --px-data-grid-cell-number-column-overflow: visible;
+  --px-data-grid-cell-number-column-white-space: normal;
+  --px-data-grid-cell-number-column-word-break: normal;
+  --px-data-grid-cell-number-column-text-overflow: clip;
+
+  --px-data-grid-cell-date-column-word-wrap: normal;
+  --px-data-grid-cell-date-column-overflow: visible;
+  --px-data-grid-cell-date-column-white-space: normal;
+  --px-data-grid-cell-date-column-word-break: normal;
+  --px-data-grid-cell-date-column-text-overflow: clip;
+} */
+
+
+:host(.ellipsis){
+  // Make all columns use ellipsis
+
+  // Default columns (without custom renderers)
+  --px-data-grid-cell-default-column-overflow: hidden;
+  --px-data-grid-cell-default-column-white-space: nowrap;
+  --px-data-grid-cell-default-column-text-overflow: ellipsis;
+  --px-data-grid-deault-content-wrapper-display: block;
+
+  // Specific column generator types
+  --px-data-grid-cell-string-column-text-overflow: ellipsis;
+  --px-data-grid-cell-string-column-white-space: nowrap;
+  --px-data-grid-cell-string-column-overflow: hidden;
+
+  --px-data-grid-cell-number-column-text-overflow: ellipsis;
+  --px-data-grid-cell-number-column-white-space: nowrap;
+  --px-data-grid-cell-number-column-overflow: hidden;
+
+  --px-data-grid-cell-date-column-text-overflow: ellipsis;
+  --px-data-grid-cell-date-column-white-space: nowrap;
+  --px-data-grid-cell-date-column-overflow: hidden;
 }
 
 px-data-grid-cell-content-wrapper {
@@ -20,10 +77,16 @@ px-data-grid-cell-content-wrapper {
   padding-left: var(--px-data-grid-padding-left);
   padding-right: var(--px-data-grid-padding-right);
   min-height: 100%;
-  display: flex;
+  display: var(--px-data-grid-default-content-wrapper-display, block);
   align-items: flex-start;
   background-color: var(--px-data-grid-cell-dragging-color, var(--px-data-grid-highlight-background-color, transparent));
   line-height: 16px;
+
+  overflow: var(--px-data-grid-cell-default-column-overflow, hidden);
+  white-space: var(--px-data-grid-cell-default-column-white-space, normal);
+  word-wrap: var(--px-data-grid-cell-default-column-word-wrap, break-word);
+  text-overflow: var(--px-data-grid-cell-default-column-text-overflow, clip);
+  word-break: var(--px-data-grid-cell-default-column-word-break, break-word);
 }
 
 vaadin-grid-tree-toggle[leaf] > px-data-grid-cell-content-wrapper {

@@ -49,6 +49,7 @@
           hide-action-menu="{{props.hideActionMenu.value}}"
           language="{{props.language.value}}"
           striped="{{props.striped.value}}"
+          ellipsis="{{props.ellipsis.value}}"
           grid-height="{{props.gridHeight.value}}"
           table-actions="{{props.tableActions.value}}"
           columns="{{props.columns.value}}"
@@ -632,6 +633,12 @@
       },
 
       striped: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      ellipsis: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'

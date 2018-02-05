@@ -5,6 +5,30 @@
 <link rel="import" href="px-data-grid-theme.html">
 <link rel="import" href="css/px-data-grid-date-renderer-styles.html">
 
+<!--
+
+### Styling
+The following custom properties are available for styling of the date-renderer content.
+
+Custom property | Description
+'--px-data-grid-cell-date-column-overflow' | controls the overflow behavior, visible, hidden
+'--px-data-grid-cell-date-column-white-space' | controls how white-spaces are handled, normal, nowrap
+'--px-data-grid-cell-date-column-word-wrap' | controls how word-wrapping is handled normal, break-word
+'--px-data-grid-cell-date-column-text-overflow' | controls how text-overflow is handled, clip, ellipsis
+'--px-data-grid-cell-date-column-editor-align-items | control editor alignment when in edit mode, center, flex-end, flex-start'
+
+Examples:
+Make date-renderer columns wrap the content:
+--px-data-grid-cell-date-column-overflow: hidden;
+--px-data-grid-cell-date-column-word-wrap: break-word;
+
+Make date-renderer columns use ellipsis overflow:
+--px-data-grid-cell-date-column-text-overflow: ellipsis;
+--px-data-grid-cell-date-column-white-space: nowrap;
+--px-data-grid-cell-date-column-overflow: hidden;
+
+-->
+
 <dom-module id="px-data-grid-date-renderer">
   <template>
     <style include="px-data-grid-date-renderer-styles"></style>

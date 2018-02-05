@@ -516,6 +516,16 @@
             },
 
             /**
+             * If true sets all columns to use ellipsis when text overflows the column,
+             * enabling wrap mode while ellisis mode is enabled is an undefined state.
+             */
+            ellipsis: {
+              type: Boolean,
+              value: false,
+              observer: '_ellipsisModeChanged'
+            },
+
+            /**
              * Shows if there is any pending request for remote data.
              */
             _loading: {
@@ -1459,11 +1469,16 @@
           // To prevent selections
           event.stopPropagation();
           this._editingItem = event.details.item;
+
+          // To refresh row height after edit...
+          this._vaadinGrid.notifyResize();
         }
 
         _cancelEdit(event) {
           this._editingRenderers.forEach((renderer) => renderer.restoreInitial());
           this._editingItem = null;
+          // To refresh row height after edit...
+          this._vaadinGrid.notifyResize();
         }
 
         _isItemEditing(item, editingItem) {
@@ -1494,6 +1509,8 @@
             }
 
             this._editingItem = null;
+            // To refresh row height after edit...
+            this._vaadinGrid.notifyResize();
           }
         }
 
@@ -1698,6 +1715,17 @@
 
         _isStriped(striped, groupByColumn) {
           return striped && !groupByColumn;
+        }
+
+        _ellipsisModeChanged(ellipsisMode) {
+          if (ellipsisMode) {
+            this.classList.add('ellipsis');
+          } else {
+            this.classList.remove('ellipsis');
+          }
+          if (this._vaadinGrid) {
+            this._vaadinGrid.notifyResize();
+          }
         }
 
         /**
