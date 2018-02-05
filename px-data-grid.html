@@ -1212,7 +1212,7 @@
           const defaultName = this.localize('Column #');
           let counter = 0;
           const selected = [];
-          const disableSelected = this.getVisibleColumns().length <= 1;
+          const oneVisibleColumn = this.getVisibleColumns().length <= 1;
 
           this._getColumns().forEach((columnElement) => {
             const index = ++counter;
@@ -1220,11 +1220,12 @@
             const name = columnElement.name ? columnElement.name : (defaultName + index);
             // -column- is temporary work around to limitations of px-dropdown
             const key = '-column-' + name;
+            const groupedByThis = this._groupByColumn === columnElement;
 
             const item = {
               key: key,
               val: name,
-              disabled: disableSelected && !hidden
+              disabled: groupedByThis || (oneVisibleColumn && !hidden)
             };
 
             if (!hidden) {

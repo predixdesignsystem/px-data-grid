@@ -245,7 +245,9 @@
 
         _canBeHidden() {
           if (this._column && this._column._grid && this._column._grid._pxDataGrid) {
-            return this._column._grid._pxDataGrid.getVisibleColumns().length > 1;
+            const pxDataGrid = this._column._grid._pxDataGrid;
+            const groupedByThis = pxDataGrid._groupByColumn == this._column;
+            return !groupedByThis && pxDataGrid.getVisibleColumns().length > 1;
           } else {
             console.warn('Failed to resolve if column can be hidden');
             return true;
