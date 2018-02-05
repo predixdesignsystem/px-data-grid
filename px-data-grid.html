@@ -1212,6 +1212,7 @@
           const defaultName = this.localize('Column #');
           let counter = 0;
           const selected = [];
+          const disableSelected = this.getVisibleColumns().length <= 1;
 
           this._getColumns().forEach((columnElement) => {
             const index = ++counter;
@@ -1222,7 +1223,8 @@
 
             const item = {
               key: key,
-              val: name
+              val: name,
+              disabled: disableSelected && !hidden
             };
 
             if (!hidden) {
@@ -1566,12 +1568,17 @@
          * Get current visible columns in grid
          */
         getVisibleColumns() {
+          // Do not break if called too early
+          if (this._vaadinGrid == undefined || this._vaadinGrid._columnTree === undefined) {
+            return [];
+          }
+
           return this._vaadinGrid
             ._columnTree[this._vaadinGrid._columnTree.length - 1]
             .slice(0)
             .sort((a, b) => a._order - b._order)
             .map((col) => col.mappedObject)
-            .filter((col) => !col.hidden);
+            .filter((col) => col !== undefined && !col.hidden);
         }
 
         /**
