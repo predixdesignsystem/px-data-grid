@@ -800,6 +800,43 @@
           this._vaadinGrid.removeAttribute('tree-grid');
         }
 
+        _resolveLastFrozenColumnIndex() {
+          let lastColumnFrozen = undefined;
+
+          const columns = this._getColumns();
+
+          for (let i = 0; i < columns.length; ++i) {
+            if (columns[i].frozen) {
+              lastColumnFrozen = i;
+            }
+          }
+
+          return lastColumnFrozen;
+        }
+
+        _columnSanityCheck() {
+          const lastColumnFrozen = this._resolveLastFrozenColumnIndex();
+
+          if (lastColumnFrozen !== undefined) {
+            const columns = this._getColumns();
+            const lastFrozenColumn = columns[lastColumnFrozen];
+
+            if (lastColumnFrozen > 0) {
+
+              for (let i = 0; i < lastColumnFrozen; ++i) {
+                if (!columns[i].frozen) {
+                  columns[i].frozen = true;
+                  if (columns[i].mappedObject) {
+                    columns[i].mappedObject.frozen = true;
+                  }
+                }
+              }
+            }
+
+            columns.forEach(c => c._lastFrozenChanged(c === lastFrozenColumn));
+          }
+        }
+
         // put frozen column to the beginning (in the place of the first data column)
         _handleColumnFroze(event) {
           const columns = this._vaadinGrid._columnTree[0];
@@ -1204,9 +1241,21 @@
           return this.columns.filter((column) => column.id === columnId)[0];
         }
 
+        _scheduleColumnSanityCheck() {
+          this._columnSanityCheckDebouncer = Polymer.Debouncer.debounce(
+            this._columnSanityCheckDebouncer,
+            Polymer.Async.idlePeriod,
+            () => {
+              this._columnSanityCheck();
+            }
+          );
+        }
+
         _onColumnUpdate(event) {
           if (event.detail.type == 'hidden') {
             this._updateActionMenu();
+          } else if (event.detail.type == 'frozen') {
+            this._scheduleColumnSanityCheck();
           }
         }
 

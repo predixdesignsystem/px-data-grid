@@ -64,7 +64,7 @@
 
         static get observers() {
           return [
-            '_setDropdownItems(localize)'
+            '_setDropdownItems(localize, _column.*)'
           ];
         }
 
@@ -98,8 +98,6 @@
               column: this._column
             }
           }));
-
-          this._setDropdownItems();
         }
 
         _unfreezeColumn() {
@@ -112,8 +110,6 @@
               column: this._column
             }
           }));
-
-          this._setDropdownItems();
         }
 
         _hideColumn() {
@@ -130,8 +126,6 @@
               column: this._column
             }
           }));
-
-          this._setDropdownItems();
         }
 
         _ungroup() {
@@ -144,8 +138,6 @@
               column: this._column
             }
           }));
-
-          this._setDropdownItems();
         }
 
         _setDropdownItems() {
@@ -228,6 +220,11 @@
             rowStyle.zIndex = '3';
           } else {
             rowStyle.zIndex = '';
+          }
+
+          // Just make sure menu is up to date
+          if (dropdownOpened) {
+            this._setDropdownItems();
           }
         }
 

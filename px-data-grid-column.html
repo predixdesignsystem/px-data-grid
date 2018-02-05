@@ -146,9 +146,13 @@
         }
 
         _checkIfValueChanged(value, propertyName) {
-          if (this.mappedObject && this.mappedObject[propertyName] != value) {
-            this.mappedObject[propertyName] = value;
-            this._fireStatusChange(this.mappedObject, propertyName);
+          if (this.mappedObject) {
+            if (this.mappedObject[propertyName] != value) {
+              this.mappedObject[propertyName] = value;
+              this._fireStatusChange(this.mappedObject, propertyName, value, true);
+            } else {
+              this._fireStatusChange(this.mappedObject, propertyName, value, false);
+            }
           }
         }
 
@@ -160,14 +164,16 @@
           this._checkIfValueChanged(frozen, 'frozen');
         }
 
-        _fireStatusChange(mappedObject, value) {
+        _fireStatusChange(mappedObject, propertyName, value, updatedModel) {
           this._renderDebouncer = Polymer.Debouncer.debounce(
             this._renderDebouncer,
             Polymer.Async.timeOut.after(this.timeout), () => {
               this.dispatchEvent(new CustomEvent('column-change', {
                 detail: {
                   column: mappedObject,
-                  type: value
+                  type: propertyName,
+                  value: value,
+                  updatedModel: updatedModel
                 },
                 bubbles: true
               }));
