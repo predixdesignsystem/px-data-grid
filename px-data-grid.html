@@ -773,15 +773,13 @@
           // Override selectItem method to allow easy single select handling
           this._vaadinGrid.selectItem = (item) => this._handleSelectItem(item);
 
+          // Override getItemId to allow group by
+          this._boundedGetItemId = this._gridGetItemId.bind(this);
+          this._vaadinGrid.getItemId = this._boundedGetItemId;
+
           this.addEventListener('column-froze', (event) => this._handleColumnFroze(event));
 
-          this.addEventListener('column-unfroze', (event) => {
-            const columnsRow = this._vaadinGrid._columnTree[this._vaadinGrid._columnTree.length - 1].slice(0);
-            const lastFrozen = columnsRow.filter((column) => column._lastFrozen)[0];
-            if (lastFrozen) {
-              this._vaadinGrid.insertBefore(event.detail.column, lastFrozen.nextSibling);
-            }
-          });
+          this.addEventListener('column-unfroze', (event) => this._handleColumnUnFreeze(event));
 
           this.addEventListener('group-by-column', (event) => {
             this._groupByColumn = event.detail.column;
@@ -835,11 +833,11 @@
             const lastFrozenColumn = columns[lastColumnFrozen];
 
             if (lastColumnFrozen > 0) {
-
               for (let i = 0; i < lastColumnFrozen; ++i) {
                 if (!columns[i].frozen) {
                   columns[i].frozen = true;
                   if (columns[i].mappedObject) {
+
                     columns[i].mappedObject.frozen = true;
                   }
                 }
@@ -881,6 +879,15 @@
 
           columns.splice(firstDataColumnIndex, 0, columns.splice(targetColumnIndex, 1)[0]); // https://stackoverflow.com/a/2440723/1331425
           this._vaadinGrid._updateOrders(this._vaadinGrid._columnTree, true);
+        }
+
+        _handleColumnUnFreeze(event) {
+          // TODO doesn't work, last-frozen is not updated correctly
+          const columnsRow = this._vaadinGrid._columnTree[this._vaadinGrid._columnTree.length - 1].slice(0);
+          const lastFrozen = columnsRow.filter((column) => column._lastFrozen)[0];
+          if (lastFrozen) {
+            this._vaadinGrid.insertBefore(event.detail.column, lastFrozen.nextSibling);
+          }
         }
 
         _doInstantSortAfterSelect() {
@@ -1057,6 +1064,18 @@
           // Do not apply pageSize slice here, it will break sizing
 
           return items;
+        }
+
+        /**
+         * Overridden version of vaadin-grid getItemId, to allow grouping
+         * Always use instance compare in case of hasChildren
+         */
+        _gridGetItemId(item) {
+          if (this._groupByColumn && item && item.hasChildren) {
+            return item;
+          } else {
+            return this.itemIdPath ? this._vaadinGrid.get(this.itemIdPath, item) : item;
+          }
         }
 
         _localDataProvider(params, callback) {
