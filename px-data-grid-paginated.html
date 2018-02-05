@@ -37,7 +37,9 @@
       table-actions="{{tableActions}}"
       offer-filter-saving="{{offerFilterSaving}}"
       filterable="{{filterable}}"
-      editable="{{editable}}">
+      editable="{{editable}}"
+      default-column-width="{{defaultColumnWidth}}"
+      default-column-flex-grow="{{defaultColumnFlexGrow}}">
     </px-data-grid>
 
     <px-data-grid-navigation
@@ -317,19 +319,20 @@
             },
 
             /**
-             * Default column width if not defined, eg. '100px'
+             * Default column width if not defined, eg. '100px'. Notice that with not
+             * zero flex values this value behaves more as minimum width. See
+             * defaultColumnFlexGrow property.
              */
             defaultColumnWidth: {
-              type: String,
-              value: '100px'
+              type: String
             },
 
             /**
-             * Default column flex if not defined, eg. 1
+             * Default column flex if not defined, eg. 1. Equialent to the CSS flex-grow
+             * property.
              */
-            defaultColumnFlex: {
-              type: Number,
-              value: 1
+            defaultColumnFlexGrow: {
+              type: Number
             },
 
             /**
