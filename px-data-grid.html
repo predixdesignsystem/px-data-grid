@@ -638,11 +638,15 @@
               observer: '_gridHeightChanged'
             },
 
-            /* Sets the px-grid to a mode where it will follow the parent
-            container height. */
-            heightByParent: {
+            /**
+             * Sets the px-grid to a mode where it and its content will flex to size.
+             * By default the  px-data-grid will take 100% of the available height, this
+             * can be changed by defining the css variable: --px-data-grid-height
+             */
+            flexToSize: {
               type: Boolean,
-              value: false
+              value: false,
+              reflectToAttribute: true
             },
 
             /**

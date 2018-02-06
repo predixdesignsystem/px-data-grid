@@ -163,13 +163,13 @@ px-icon {
   margin: 0;
 }
 
-:host([height-by-parent]) {
+:host([flex-to-size]) {
   display: flex;
   flex-direction: column;
   height: var(--px-data-grid-height, 100%);
 }
 
-:host([height-by-parent]) vaadin-grid {
+:host([flex-to-size]) vaadin-grid {
   display: flex;
   height: 100%;
   flex-grow: 1;
