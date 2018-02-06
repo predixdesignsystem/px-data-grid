@@ -674,11 +674,11 @@
 
             /**
              * If enabled in multi selection and sort by selection mode any
-             * changes to selection will cause instant resort
+             * changes to selection will cause instant re-sort.
              */
             instantSortWhenSelection: {
               type: Boolean,
-              value: true
+              value: false
             },
 
             /* If true advanced filter dialog will be rendered in space saving
@@ -907,7 +907,8 @@
         }
 
         _selectedItemsChanged(selectedItems) {
-          if (this._doInstantSortAfterSelect()) {
+          // Cause resort if ready and asked to instantly re-sort
+          if (this._vaadinGrid && this._doInstantSortAfterSelect()) {
             this._vaadinGrid.clearCache();
           }
         }

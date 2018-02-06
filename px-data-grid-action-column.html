@@ -14,7 +14,7 @@
         item="[[item]]"
         edit="[[edit]]"
         offer-edit="[[_offerEditButtonFor(edittedItem, item, editMode)]]"
-        offer-actions="[[_offerItemActions(edittedItem)]]"
+        offer-actions="[[_offerItemActions(edittedItem, item)]]"
         on-checked-changed="_onSelectAllCheckedChanged"
         item-actions="[[itemActions]]">
       </px-data-grid-action-buttons>
@@ -161,11 +161,11 @@
         }
 
         _offerEditButtonFor(editingItem, item, editMode) {
-          return editingItem == null && editMode;
+          return item && item._groupId === undefined && editingItem == null && editMode;
         }
 
-        _offerItemActions(editingItem) {
-          return this.itemActions && this.itemActions.length > 0;
+        _offerItemActions(editingItem, item) {
+          return item && item._groupId === undefined && this.itemActions && this.itemActions.length > 0;
         }
 
         _isItemEditing(item, editingItem) {
