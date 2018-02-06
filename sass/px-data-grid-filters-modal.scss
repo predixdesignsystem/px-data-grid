@@ -23,6 +23,14 @@ px-modal-triggers, .btn {
   padding-right: .66667rem;
 }
 
+.action-btn+.action-btn {
+  margin-left: 0px;
+}
+
+.action-btn:last-child {
+  margin-left: -7px;
+}
+
 .table-filters px-icon {
   margin-right: 4px;
   margin-top: -2px;
