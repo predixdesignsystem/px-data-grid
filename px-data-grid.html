@@ -1071,8 +1071,8 @@
          * Always use instance compare in case of hasChildren
          */
         _gridGetItemId(item) {
-          if (this._groupByColumn && item && item.hasChildren) {
-            return item;
+          if (this._groupByColumn && item && item._groupId) {
+            return item._groupId;
           } else {
             return this.itemIdPath ? this._vaadinGrid.get(this.itemIdPath, item) : item;
           }
@@ -1090,6 +1090,9 @@
                   if (i !== columnPath) {
                     groupItem[i] = '';
                   }
+                }
+                if (this._groupByColumn.mappedObject) {
+                  groupItem._groupId = '--group--' + this._groupByColumn.mappedObject.id + '-' + value;
                 }
                 groupItem.hasChildren = true;
                 map.set(value, groupItem);
