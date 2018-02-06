@@ -41,6 +41,8 @@ html {
   --px-data-grid-text-color--hover                        :  $primary-hover;
   --px-data-grid-spinner-background-color                 :  rgba($gray16, 0.9);
   --px-data-grid-cell-focused-color                       :  transparent;
+  --px-data-grid-action-button-color                      :  $primary-default;
+  --px-data-grid-action-button-color--pressed             :  $primary-pressed;
 
   // Navigation
   --px-data-grid-navigation-background-color              :  $gray16;

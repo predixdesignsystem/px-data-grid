@@ -40,6 +40,8 @@ html {
   --px-data-grid-text-color--dragged                      :  $primary-default;
   --px-data-grid-text-color--hover                        :  $primary-hover;
   --px-data-grid-spinner-background-color                 :  rgba($white, 0.9);
+  --px-data-grid-action-button-color                      :  $primary-default;
+  --px-data-grid-action-button-color--pressed             :  $primary-pressed;
 
   // Navigation
   --px-data-grid-navigation-background-color              :  $white;

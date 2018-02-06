@@ -13,15 +13,23 @@
 px-icon {
   --iron-icon-width: 15px;
   --iron-icon-height: 15px;
-  --iron-icon-stroke-color: var(--px-data-grid-cell-text-color--sorted, rgb(129,129,129));
+  --iron-icon-stroke-color: var(--px-data-grid-action-button-color, rgb(129,129,129));
 }
 
 px-icon.rounded {
   --iron-icon-width: 12px;
   --iron-icon-height: 12px;
   border-radius: 50%;
-  border: 1px solid var(--px-data-grid-cell-text-color--sorted, rgb(129,129,129));
+  border: 1px solid var(--px-data-grid-action-button-color, rgb(129,129,129));
   padding: 2px;
+}
+
+.btn:active px-icon {
+  --iron-icon-stroke-color: var(--px-data-grid-action-button-color--pressed, rgb(64,64,64));
+}
+
+.btn:active px-icon.rounded {
+  border: 1px solid var(--px-data-grid-action-button-color--pressed, rgb(64,64,64));
 }
 
 .btn + .btn {

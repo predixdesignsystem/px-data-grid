@@ -181,6 +181,16 @@
         padding-right: var(--px-data-grid-padding-right);
         white-space: normal;
       }
+
+      [part~="row"] [part~="body-cell"][hidden-unless-hover] ::slotted(vaadin-grid-cell-content) {
+        visibility: hidden;
+      }
+
+      [part~="row"]:hover [part~="body-cell"][hidden-unless-hover] ::slotted(vaadin-grid-cell-content),
+      [part~="row"] [part~="body-cell"][hidden-unless-hover]:focus ::slotted(vaadin-grid-cell-content),
+      [part~="row"] [part~="body-cell"][hidden-unless-hover]:active ::slotted(vaadin-grid-cell-content) {
+        visibility: visible;
+      }
     </style>
   </template>
 </dom-module>
