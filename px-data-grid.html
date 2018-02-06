@@ -638,6 +638,13 @@
               observer: '_gridHeightChanged'
             },
 
+            /* Sets the px-grid to a mode where it will follow the parent
+            container height. */
+            heightByParent: {
+              type: Boolean,
+              value: false
+            },
+
             /**
              * Path to an item sub-property that identifies the item. This should be
              * defined in case of any editing, to allow grid to pair new version of

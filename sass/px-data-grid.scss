@@ -3,6 +3,7 @@
 :host {
   position: relative;
   display: block;
+  height: var(--px-data-grid-height, auto);
   background: var(--px-base-background-color, white);
   --px-data-grid-padding-top: 12px;
   --px-data-grid-padding-bottom: 12px;
@@ -160,4 +161,17 @@ px-icon {
 .toggle-details > px-icon {
   padding: 0;
   margin: 0;
+}
+
+:host([height-by-parent]) {
+  display: flex;
+  flex-direction: column;
+  height: var(--px-data-grid-height, 100%);
+}
+
+:host([height-by-parent]) vaadin-grid {
+  display: flex;
+  height: 100%;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
