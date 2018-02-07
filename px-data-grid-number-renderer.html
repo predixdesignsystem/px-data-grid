@@ -34,7 +34,15 @@ Make number-renderer columns use ellipsis overflow:
     <template is="dom-if" if="[[!_editing]]">[[value]]</template>
     <template is="dom-if" if="[[_editing]]" restamp>
       <div id="editingTemplate" class="input-container">
-        <input id="editingTemplateInput" class$="{{getClasses(validationResult)}}" type="number" value="{{value::change}}">
+
+        <!-- In IE11 input[type=number] does not work properly. -->
+        <template is="dom-if" if="[[_ie]]">
+          <input id="editingTemplateInput" class$="{{getClasses(validationResult)}}" type="text" value="{{value::change}}">
+        </template>
+        <template is="dom-if" if="[[!_ie]]">
+          <input id="editingTemplateInput" class$="{{getClasses(validationResult)}}" type="number" value="{{value::change}}">
+        </template>
+
         <px-tooltip
           for="editingTemplateInput"
           orientation="top"
@@ -70,6 +78,11 @@ Make number-renderer columns use ellipsis overflow:
 
             initialValue: {
               type: Number
+            },
+
+            _ie: {
+              type: Boolean,
+              value: !!(navigator.userAgent.match(/Trident/) && !navigator.userAgent.match(/MSIE/))
             }
           };
         }
