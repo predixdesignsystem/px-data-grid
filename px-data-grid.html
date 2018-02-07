@@ -68,7 +68,12 @@
       </div>
     </template>
 
-    <px-data-grid-filters-preview filters="[[_filters]]" columns="[[columns]]" localize="[[_boundedLocalize]]"></px-data-grid-filters-preview>
+    <px-data-grid-filters-preview
+      filters="[[_filters]]"
+      columns="[[columns]]"
+      localize="[[_boundedLocalize]]"
+      on-trigger-filters-modal="_openAdvancedFilter">
+    </px-data-grid-filters-preview>
 
     <vaadin-grid size="[[size]]"
                  data-provider="[[_currentDataProvider]]"
@@ -1801,6 +1806,10 @@
 
         _isColumnReorderingAllowed(columnReordingAllowed, groupByColumn) {
           return columnReordingAllowed && !groupByColumn;
+        }
+
+        _openAdvancedFilter(event) {
+          this.shadowRoot.querySelector('px-data-grid-filters-modal').open();
         }
 
         getState() {
