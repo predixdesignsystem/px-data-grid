@@ -157,6 +157,10 @@
             callback(JSON.parse(xhr.responseText), size);
           };
 
+          // In case of network issues, pass an empty array
+          // When network is good, px-data-grid will try to get the same chunk of data again
+          xhr.onerror = () => callback(Array(params.pageSize));
+
           let url = 'https://px-data-grid-dummy-backend.herokuapp.com/contacts?' +
             '_page=' + encodeURIComponent(params.page + 1) + '&' +
             '_limit=' + encodeURIComponent(params.pageSize);
