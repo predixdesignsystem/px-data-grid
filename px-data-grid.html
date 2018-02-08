@@ -1202,10 +1202,13 @@
           if (key && typeof key == 'string') {
             // -column- is temporary work around to limitations of px-dropdown
             if (key.indexOf('-column-') === 0) {
-              const columnName = key.substr('-column-'.length);
-              this._getColumnsWithName(columnName).forEach((c) => {
-                c.hidden = c.hidden === undefined ? true : !c.hidden;
-              });
+              const columnId = key.substr('-column-'.length);
+              const column = this._getColumnElementById(columnId);
+              if (column) {
+                column.hidden = column.hidden === undefined ? true : !column.hidden;
+              } else {
+                console.warn('Failed to find column with ID ' + columnId);
+              }
             } else if (key.indexOf('-action-') === 0) {
               const actionId = key.substr('-action-'.length);
               this.dispatchEvent(new CustomEvent('table-action', {
@@ -1274,11 +1277,18 @@
           const oneVisibleColumn = this.getVisibleColumns().length == 1;
 
           this._getColumns().forEach((columnElement) => {
+            const columnId = columnElement.mappedObject ? columnElement.mappedObject.id : undefined;
+            // If this method gets called before column IDs are generated,
+            // just ignore those columns.
+            if (columnId === undefined) {
+              return;
+            }
+
             const index = ++counter;
             const hidden = columnElement.hidden ? columnElement.hidden : false;
             const name = columnElement.name ? columnElement.name : (defaultName + index);
             // -column- is temporary work around to limitations of px-dropdown
-            const key = '-column-' + name;
+            const key = '-column-' + columnId;
             const groupedByThis = this._groupByColumn === columnElement;
 
             const item = {
@@ -1304,6 +1314,11 @@
 
         _getColumnById(columnId) {
           return this.columns.filter((column) => column.id === columnId)[0];
+        }
+
+        _getColumnElementById(columnId) {
+          return this._vaadinGrid._columnTree[0]
+            .filter(element => element.mappedObject && element.mappedObject.id == columnId)[0];
         }
 
         _scheduleColumnSanityCheck() {
