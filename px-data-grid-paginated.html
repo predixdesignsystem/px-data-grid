@@ -35,6 +35,7 @@
       grid-height="{{gridHeight}}"
       item-id-path="{{itemIdPath}}"
       table-actions="{{tableActions}}"
+      item-actions="{{itemActions}}"
       offer-filter-saving="{{offerFilterSaving}}"
       filterable="{{filterable}}"
       editable="{{editable}}"
@@ -247,6 +248,13 @@
              */
             tableActions: {
               type: Array,
+            },
+
+            /**
+             * Item actions, see px-data-grid.
+             */
+            itemActions: {
+              type: Array
             },
 
             /**
