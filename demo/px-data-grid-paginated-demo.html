@@ -186,6 +186,11 @@
             {
               configName: 'Default',
               configReset: true,
+            },
+            {
+              configName: 'More rows (250 generated)',
+              configReset: true,
+              tableData: this._generateData(250)
             }
           ];
         }
@@ -586,6 +591,18 @@
 
     _clearColumns(event) {
       this.props.columns.value = this._getDefaultColumns();
+    },
+
+    _generateData(amount) {
+      const data = [];
+      for (let i = 0; i < amount; ++i) {
+        data.push({
+          first: 'First ' + (i + 1),
+          last: 'Last ' + (i + 1),
+          email: 'user' + (i + 1) + '@example.com'
+        });
+      }
+      return data;
     },
 
     tableActionListener: function(evt) {
