@@ -1262,7 +1262,8 @@
           const defaultName = this.localize('Column #');
           let counter = 0;
           const selected = [];
-          const oneVisibleColumn = this.getVisibleColumns().length <= 1;
+          // Allow 0, as that happens if this gets called before columns are ready
+          const oneVisibleColumn = this.getVisibleColumns().length == 1;
 
           this._getColumns().forEach((columnElement) => {
             const index = ++counter;
