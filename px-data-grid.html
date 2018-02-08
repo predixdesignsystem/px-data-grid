@@ -21,6 +21,7 @@
 <link rel="import" href="px-data-grid-filters-preview.html">
 <link rel="import" href="px-data-grid-sorter.html">
 <link rel="import" href="px-data-grid-action-column.html">
+<link rel="import" href="px-data-grid-edit-column.html">
 
 <link rel="import" href="px-data-grid-filterable-mixin.html">
 
@@ -163,14 +164,21 @@
         </px-data-grid-column>
       </template>
 
-      <template is="dom-if" if="[[_offerActionColumn(editable, itemActions)]]" restamp>
+      <template is="dom-if" if="[[_offerEditColumn(editable)]]" restamp>
+        <px-data-grid-edit-column
+          editted-item="[[_editingItem]]"
+          edit-mode="[[editable]]"
+          edit="[[_boundedEditItem]]"
+          cancel="[[_boundedCancelEdit]]">
+        </px-data-grid-column>
+      </template>
+
+      <template is="dom-if" if="[[_offerActionColumn(editable, itemActions, _editingItem)]]" restamp>
         <px-data-grid-action-column
           item-actions="[[itemActions]]"
           editted-item="[[_editingItem]]"
           edit-mode="[[editable]]"
-          edit="[[_boundedEditItem]]"
-          save="[[_boundedSaveItem]]"
-          cancel="[[_boundedCancelEdit]]">
+          save="[[_boundedSaveItem]]">
         </px-data-grid-column>
       </template>
     </vaadin-grid>
@@ -1801,8 +1809,13 @@
           return 0;
         }
 
-        _offerActionColumn(editable, itemActions) {
-          return editable || (itemActions && itemActions.length > 0);
+        _offerEditColumn(editable) {
+          return editable;
+        }
+
+        _offerActionColumn(editable, itemActions, editingItem) {
+
+          return (editable) || (itemActions && itemActions.length > 0);
         }
 
         _isColumnReorderingAllowed(columnReordingAllowed, groupByColumn) {

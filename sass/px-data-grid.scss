@@ -175,3 +175,35 @@ px-icon {
   flex-grow: 1;
   flex-shrink: 1;
 }
+
+.action-column-button {
+  height: 19px;
+  flex-grow: 0;
+  flex-shrink: 1;
+  display: block;
+  align-self: center;
+}
+
+.action-column-button px-icon {
+  pointer-events: none;
+  --iron-icon-width: 15px;
+  --iron-icon-height: 15px;
+  --iron-icon-stroke-color: var(--px-data-grid-action-button-color, rgb(129,129,129));
+}
+
+.action-column-button px-icon.rounded {
+  --iron-icon-width: 12px;
+  --iron-icon-height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--px-data-grid-action-button-color, rgb(129,129,129));
+  padding: 2px;
+}
+
+.item-action-dropdown {
+  align-self: center;
+}
+
+.item-action-dropdown px-icon {
+  --iron-icon-height: 16px;
+  --iron-icon-width: 16px;
+}

@@ -1,8 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid-column.html">
 <link rel="import" href="../px-icon-set/px-icon.html">
-<link rel="import" href="px-data-grid-action-buttons.html">
-<link rel="import" href="px-data-grid-edit-buttons.html">
 
 <dom-module id="px-data-grid-action-column">
   <template>
@@ -10,16 +8,30 @@
     </template>
 
     <template id="defaultBodyTemplate">
-      <px-data-grid-action-buttons
-        item="[[item]]"
-        edit="[[edit]]"
-        offer-edit="[[_offerEditButtonFor(edittedItem, item, editMode)]]"
-        offer-actions="[[_offerItemActions(edittedItem, item)]]"
-        on-checked-changed="_onSelectAllCheckedChanged"
-        item-actions="[[itemActions]]">
-      </px-data-grid-action-buttons>
-      <template is="dom-if" if="[[_isItemEditing(item, edittedItem)]]">
-        <px-data-grid-edit-buttons item="[[item]]" save="[[save]]" cancel="[[cancel]]"></px-data-grid-edit-buttons>
+
+      <!-- vaadin-grid needs button at start to handle keyboard navigation, this hidden element will
+           catch the keyboard events and re-direct those correctly -->
+      <button class='hidden-keyboard-focus-handler' on-click="_figureOutWhichOneToClick" style="display: none;">
+      </button>
+
+      <template is="dom-if" if="[[_showSaveButton(item, editMode, edittedItem)]]" restamp>
+        <button class="btn btn--bare btn--icon item-edit-save-button action-column-button" on-click="_handleSave" data-item="[[item]]">
+          <px-icon icon="px-utl:check" class="rounded">Save</px-icon>
+        </button>
+      </template>
+      <template is="dom-if" if="[[_showActionDropdown(item, editMode, edittedItem)]]" restamp>
+        <px-dropdown
+            button-style="icon"
+            icon="px-nav:menu"
+            items="[[_convertActions(itemActions)]]"
+            disable-clear
+            data-item="[[item]]"
+            class="item-action-dropdown"
+            tabindex="0"
+            on-px-dropdown-click="_dropdownItemClick"
+            on-click="_dropdownClick">
+          <px-icon slot="trigger" icon="px-nav:menu"></px-icon>
+        </px-dropdown>
       </template>
     </template>
   </template>
@@ -28,7 +40,7 @@
     {
       /**
        * `<px-data-grid-action-column>` is a helper element for the `<px-data-grid>`
-       * to be used to offer action column behavior with action and edit functionality.
+       * to be used to offer action dropdown or apply button
        * @memberof Predix
        * @mixes Vaadin.GridColumnElement
        */
@@ -41,8 +53,6 @@
         static get properties() {
           return {
             save: Function,
-            cancel: Function,
-            edit: Function,
 
             /**
              * Just to help to identify columns without data
@@ -58,7 +68,7 @@
              */
             width: {
               type: String,
-              value: '80px'
+              value: '30px'
             },
 
             /**
@@ -142,7 +152,9 @@
               cell._content.appendChild(inst.root);
               cell._instance = inst;
 
-              cell.setAttribute('hidden-unless-hover', '1');
+              if (!this.edittedItem) {
+                cell.setAttribute('hidden-unless-hover', '1');
+              }
 
               inst.index = cell.parentElement.index; // TODO: _index
               inst.item = cell.parentElement._item;
@@ -160,16 +172,88 @@
           }
         }
 
-        _offerEditButtonFor(editingItem, item, editMode) {
-          return item && item._groupId === undefined && editingItem == null && editMode;
+        _handleSave(e) {
+          // To prevent selections
+          e.stopPropagation();
+          this.save(e);
         }
 
-        _offerItemActions(editingItem, item) {
-          return item && item._groupId === undefined && this.itemActions && this.itemActions.length > 0;
+        _figureOutWhichOneToClick(e) {
+          const item = e.model.item;
+          if (this.edittedItem == item) {
+            this._handleSave(e);
+          } else {
+            const dropdown = e.target.parentElement.querySelector('px-dropdown');
+            if (dropdown) {
+              dropdown.toggle();
+            } else {
+              return;
+            }
+          }
+          e.preventDefault();
+          e.stopPropagation();
         }
 
-        _isItemEditing(item, editingItem) {
-          return item === editingItem;
+        _showSaveButton(item, editMode, edittedItem) {
+          return editMode && item && item === edittedItem;
+        }
+
+        _showActionDropdown(item, editMode, edittedItem) {
+          return !this._showSaveButton(item, editMode, edittedItem)
+            && item && item._groupId === undefined
+            && this.itemActions && this.itemActions.length > 0;
+        }
+
+        _convertActions(actions) {
+          const dropdownItems = [];
+          if (actions) {
+            for (let i = 0; i < actions.length; ++i) {
+              const input = actions[i];
+              dropdownItems.push({
+                key: '-action-' + input.id,
+                val: input.name,
+                selected: false,
+                disableSelect: true
+              });
+            }
+          }
+          return dropdownItems;
+        }
+
+        _dropdownItemClick(e) {
+          const actionItem = e.target.dataItem;
+
+          if (actionItem === undefined) {
+            console.warn('No item mapping for actions');
+            return;
+          }
+
+          const clickedItem = e.detail.detail.item;
+          if (clickedItem && clickedItem.key && typeof clickedItem.key == 'string') {
+
+            if (clickedItem.key.indexOf('-action-') === 0) {
+
+              const actionId = clickedItem.key.substr('-action-'.length);
+
+              this.dispatchEvent(new CustomEvent('item-action', {
+                bubbles: true,
+                composed: true,
+                detail: {
+                  item: actionItem,
+                  action: actionId
+                }
+              }));
+            } else {
+              console.warn('Unknown action: ' + clickedItem.key);
+            }
+          } else {
+            console.warn('Unknown action');
+          }
+        }
+
+        _dropdownClick(e) {
+          e.stopPropagation();
+          e.preventDefault();
         }
       }
 
