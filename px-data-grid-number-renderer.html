@@ -100,7 +100,7 @@ Make number-renderer columns use ellipsis overflow:
           if (this.column.required && this.value.toString().length == 0) {
             isValid = false;
             message = this.localize('Value is required');
-          } else if (isNaN(parseInt(this.value))) {
+          } else if (this.value && isNaN(parseInt(this.value))) {
             isValid = false;
             message = this.localize('Invalid number');
           }
