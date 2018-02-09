@@ -188,7 +188,8 @@
 
       [part~="row"]:hover [part~="body-cell"][hidden-unless-hover] ::slotted(vaadin-grid-cell-content),
       [part~="row"] [part~="body-cell"][hidden-unless-hover]:focus ::slotted(vaadin-grid-cell-content),
-      [part~="row"] [part~="body-cell"][hidden-unless-hover]:active ::slotted(vaadin-grid-cell-content) {
+      [part~="row"] [part~="body-cell"][hidden-unless-hover]:active ::slotted(vaadin-grid-cell-content),
+      .safari-hover [part~="body-cell"][hidden-unless-hover] ::slotted(vaadin-grid-cell-content) {
         visibility: visible;
       }
     </style>

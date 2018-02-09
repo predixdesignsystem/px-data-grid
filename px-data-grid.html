@@ -835,6 +835,31 @@
               this._editingRenderers.splice(this._editingRenderers.indexOf(renderer), 1);
             }
           });
+
+          // Safari needs a little help with showing the edit and action buttons on hover.
+          if (this._vaadinGrid._safari) {
+            const tbodyelement = this._vaadinGrid.$.table.querySelector('#items');
+            tbodyelement.addEventListener('mouseover', this._onRowHoverEvent.bind(this));
+            tbodyelement.addEventListener('mouseout', this._onRowUnhoverEvent.bind(this));
+          }
+        }
+
+        _onRowHoverEvent(event) {
+          let searchElement = event.target.offsetParent;
+          while (searchElement) {
+            if (searchElement.tagName && searchElement.tagName.toLowerCase() == 'tr') {
+              searchElement.classList.add('safari-hover');
+              this.lastColumnWithSafariStyleForHover = searchElement;
+              break;
+            }
+            searchElement = searchElement.offsetParent;
+          }
+        }
+
+        _onRowUnhoverEvent(event) {
+          if (this.lastColumnWithSafariStyleForHover) {
+            this.lastColumnWithSafariStyleForHover.classList.remove('safari-hover');
+          }
         }
 
         _ungroup() {
