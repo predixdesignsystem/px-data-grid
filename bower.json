@@ -29,7 +29,8 @@
     "px-actionable-design": "^2.0.5",
     "px-popover": "^2.1.2",
     "px-slider": "^2.1.1",
-    "px-rangepicker": "^3.2.0"
+    "px-rangepicker": "^3.2.0",
+    "px-moment-imports": "^1.0.0"
   },
   "devDependencies": {
     "px-theme": "^3.1.4",

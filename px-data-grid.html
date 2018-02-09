@@ -11,6 +11,7 @@
 <link rel="import" href="px-data-grid-selection-column.html">
 <link rel="import" href="px-data-grid-toggle-details-column.html">
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
+<link rel="import" href="../px-moment-imports/px-moment-imports.html"/>
 
 <link rel="import" href="px-data-grid-string-renderer.html">
 <link rel="import" href="px-data-grid-date-renderer.html">
@@ -349,6 +350,8 @@
              *   * `{string} renderer` - You can define your own renderer element to display and edit cell data in your own way.
              *     For more information, please check sample renderers, e.g. `px-data-grid-number-renderer`, `px-data-grid-date-renderer`.
              *
+             *   * `{object} rendererConfig` - An arbitrary object that can be used to pass down options to the chosen renderer.
+             *      See `px-data-grid-date-renderer` for an example of a renderer using this object for its four configurable properties
              *   * `{number} minBound` - Used to define minimum bound of a number in advanced filter's slider.
              *     Note, that this property works with `column.type === 'number'` only.
              *
@@ -373,6 +376,10 @@
              *   path: 'first',
              *   type: 'string',
              *   renderer: 'px-data-grid-string-renderer',
+             *   rendererConfig: {
+             *     customInfo: 'some info',
+             *     customInfo2: 42
+             *   },
              *   minBound: 1,
              *   maxBound: 10,
              *   hidden: false,

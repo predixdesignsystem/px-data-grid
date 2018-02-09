@@ -174,7 +174,7 @@
               }
               break;
             case 'date':
-              return `${window.moment(entity.dateFrom).format('YYYY/MM/DD')}, ${window.moment(entity.dateTo).format('YYYY/MM/DD')}`;
+              return `${window.Px.moment(entity.dateFrom).format('YYYY/MM/DD')}, ${window.Px.moment(entity.dateTo).format('YYYY/MM/DD')}`;
             default:
               if (entity.query.length <= 15) {
                 return entity.query;

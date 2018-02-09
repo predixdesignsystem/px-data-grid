@@ -32,13 +32,14 @@ Make date-renderer columns use ellipsis overflow:
 <dom-module id="px-data-grid-date-renderer">
   <template>
     <style include="px-data-grid-date-renderer-styles"></style>
-    <template is="dom-if" if="[[!_editing]]">[[_getFormattedDate(value)]]</template>
+    <template is="dom-if" if="[[!_editing]]">[[_getFormattedDate(value, displayFormat)]]</template>
     <template is="dom-if" if="[[_editing]]" restamp>
       <div class="input-container">
         <px-datetime-picker
           id="editingTemplateInput"
           moment-obj="{{momentObj}}"
-          hide-time
+          hide-time="[[hideTime]]"
+          hide-date="[[hideDate]]"
           >
         </px-datetime-picker>
         <px-tooltip
@@ -73,6 +74,39 @@ Make date-renderer columns use ellipsis overflow:
           return {
             momentObj: {
               type: Object
+            },
+            /**
+             * Format to be displayed in the cell
+             * A moment.js string formatter or 'ISO'
+             */
+            displayFormat: {
+              type: String,
+              value: 'YYYY-MM-DD HH:mm:ss'
+            },
+            /**
+             * Format for reading the data
+             * A moment.js string formatter or 'ISO'
+             */
+            dataFormat: {
+              type: String,
+              value: 'DD-MM-YYY'
+            },
+            /**
+             * Hides the date part of the datetime picker when the cell is in edit mode
+             */
+            hideDate: {
+              type: Boolean,
+              value: false
+            },
+            /**
+             * Hides the time part of the datetime picker when the cell is in edit mode
+             */
+            hideTime: {
+              type: Boolean,
+              value: false
+            },
+            _initialType: {
+              type: String
             }
           };
         }
@@ -80,24 +114,42 @@ Make date-renderer columns use ellipsis overflow:
         static get observers() {
           return [
             '_valueObserver(value)',
-            '_momentObjChanged(momentObj, momentObj.*)'
+            '_momentObjChanged(momentObj, momentObj.*)',
+            '_rendererConfigChanged(column.rendererConfig.*)'
           ];
         }
 
         _getFormattedDate(value) {
-          return (this.value && this.value.length > 0) ? value : '';
+
+          var result;
+          if (this.value) {
+            if (this.displayFormat === 'ISO') {
+              result = window.Px.moment(value, this.dataFormat).toISOString();
+            } else {
+              result = window.Px.moment(value, this.dataFormat).format(this.displayFormat);
+            }
+          } else {
+            result = '';
+          }
+
+          return result;
         }
 
         validate() {
           return {
-            valid: (!this.column.required && this.value && this.value.length == 0) || !!Date.parse(this.value),
+            valid: (!this.column.required && this.value) || window.Px.moment(this.value, this.dataFormat).isValid(),
             message: this.localize('Date is invalid')
           };
         }
 
         _valueObserver(value) {
-          if (typeof value === 'string' && value.length > 0) {
-            this.momentObj = window.moment(value, 'YYYY-MM-DD');
+
+          if (!this._initialType) {
+            this._initialType = typeof value;
+          }
+
+          if (value || value === 0) {
+            this.momentObj = window.Px.moment(value, this.dataFormat);
           }
         }
 
@@ -105,9 +157,32 @@ Make date-renderer columns use ellipsis overflow:
           if (!momentObj) {
             return;
           }
-          const newDate = momentObj.format('YYYY-MM-DD');
-          if (newDate !== this.value) {
-            this.value = newDate;
+
+          if (window.Px.moment(this.value, this.dataFormat).toISOString() !== momentObj.toISOString()) {
+
+            // for timestamp-like data try to preserve the type
+            if (this._initialType === 'number' && (this.dataFormat === 'X' || this.dataFormat === 'x')) {
+              this.value = Number(momentObj.format(this.dataFormat));
+            } else if (this.dataFormat === 'ISO') {
+              this.value = momentObj.toISOString();
+            } else {
+              this.value = momentObj.format(this.dataFormat);
+            }
+          }
+        }
+
+        _rendererConfigChanged() {
+          if (this.column.rendererConfig.hasOwnProperty('hideDate')) {
+            this.hideDate = this.column.rendererConfig.hideDate;
+          }
+          if (this.column.rendererConfig.hasOwnProperty('hideTime')) {
+            this.hideTime = this.column.rendererConfig.hideTime;
+          }
+          if (this.column.rendererConfig.hasOwnProperty('displayFormat')) {
+            this.displayFormat = this.column.rendererConfig.displayFormat;
+          }
+          if (this.column.rendererConfig.hasOwnProperty('dataFormat')) {
+            this.dataFormat = this.column.rendererConfig.dataFormat;
           }
         }
       }

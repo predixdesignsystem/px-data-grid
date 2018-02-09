@@ -589,7 +589,12 @@
             path: 'birth_date',
             type: 'date',
             editable: true,
-            renderer: 'px-data-grid-date-renderer'
+            renderer: 'px-data-grid-date-renderer',
+            rendererConfig: {
+              hideTime: true,
+              displayFormat: 'DD-MM-YY',
+              dataFormat: 'YYYY-MM-DD'
+            }
           }
         ],
         inputType: 'code:JSON'

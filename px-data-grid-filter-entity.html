@@ -328,20 +328,20 @@
         }
 
         _momentDatesObserver(dateFrom, dateTo) {
-          if (dateFrom && window.moment(this.entity.dateFrom).format() !== dateFrom.format()) {
+          if (dateFrom && window.Px.moment(this.entity.dateFrom).format() !== dateFrom.format()) {
             this.set('entity.dateFrom', dateFrom.format());
           }
-          if (dateTo && window.moment(this.entity.dateTo).format() !== dateTo.format()) {
+          if (dateTo && window.Px.moment(this.entity.dateTo).format() !== dateTo.format()) {
             this.set('entity.dateTo', dateTo.format());
           }
         }
 
         _entityDatesObserver(entity) {
-          if (entity.dateFrom && (!this._dateFrom || window.moment(this.entity.dateFrom).format() !== this._dateFrom.format())) {
-            this.set('_dateFrom', window.moment(this.entity.dateFrom));
+          if (entity.dateFrom && (!this._dateFrom || window.Px.moment(this.entity.dateFrom).format() !== this._dateFrom.format())) {
+            this.set('_dateFrom', window.Px.moment(this.entity.dateFrom));
           }
-          if (entity.dateTo && (!this._dateTo || window.moment(this.entity.dateTo).format() !== this._dateTo.format())) {
-            this.set('_dateTo', window.moment(this.entity.dateTo));
+          if (entity.dateTo && (!this._dateTo || window.Px.moment(this.entity.dateTo).format() !== this._dateTo.format())) {
+            this.set('_dateTo', window.Px.moment(this.entity.dateTo));
           }
         }
 
