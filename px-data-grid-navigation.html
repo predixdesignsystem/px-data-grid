@@ -13,6 +13,7 @@
     <div class="page-size-select">
       [[localize('Rows per page')]]
       <px-dropdown
+        allow-outside-scroll
         display-value="[[_numToStr(pageSize)]]"
         items="[[_numArrayToStrArray(selectablePageSizes)]]"
         on-selected-changed="_pageSizeChange"

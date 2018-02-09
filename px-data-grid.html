@@ -57,7 +57,10 @@
           </template>
 
           <template is="dom-if" if="[[!hideActionMenu]]">
-            <px-dropdown multi hide-selected
+            <px-dropdown
+              multi
+              hide-selected
+              allow-outside-scroll
               display-value="[[localize('Actions')]]"
               items="[[_actionMenuContent]]"
               selected-values="[[_selectedActionItems]]"
