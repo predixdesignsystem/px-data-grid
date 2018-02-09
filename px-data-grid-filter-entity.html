@@ -44,20 +44,34 @@
     </template>
 
     <template is="dom-if" if="{{_columnTypeIsDate(entity.columnId)}}" restamp>
-      <div class="labeled-text" extended>
-        <px-rangepicker
-          id="date-rangepicker"
-          hide-time
-          hide-presets
-          date-format="YYYY/MM/DD"
-          time-format="HH:mm:ss"
-          time-zone="UTC"
-          show-time-zone="abbreviatedText"
-          show-field-titles
-          from-moment="{{_dateFrom}}"
-          to-moment="{{_dateTo}}">
-        </px-rangepicker>
+      <div class="labeled-text">
+        <label for="date-range-dropdown" hidden="[[compactMode]]">
+          [[localize('Time range')]]
+        </label>
+        <px-dropdown
+          id="date-range-dropdown"
+          items="[[_dateRanges]]"
+          disable-clear
+          selected="{{entity.selectedDateRangeName}}">
+        </px-dropdown>
       </div>
+
+      <template is="dom-if" if="{{_showRangePicker(entity, entity.selectedDateRangeName)}}">
+        <div class="labeled-text">
+          <px-rangepicker
+            id="date-rangepicker"
+            hide-time
+            hide-presets
+            date-format="YYYY/MM/DD"
+            time-format="HH:mm:ss"
+            time-zone="UTC"
+            show-time-zone="abbreviatedText"
+            show-field-titles
+            from-moment="{{_dateFrom}}"
+            to-moment="{{_dateTo}}">
+          </px-rangepicker>
+        </div>
+        </template>
     </template>
 
     <template is="dom-if" if="{{_columnTypeIsNumber(entity.columnId)}}" restamp>
@@ -189,6 +203,11 @@
 
             _maxNumberBound: Number,
 
+            _dateRanges: {
+              type: Array,
+              value: []
+            },
+
             _dateFrom: {
               type: Object
             },
@@ -206,10 +225,12 @@
             '_setMappedColumns(columns, columns.*)',
             '_filterActiveObservable(entity, entity.*)',
             '_momentDatesObserver(_dateFrom, _dateTo, _dateFrom.*, _dateTo.*)',
-            '_entityDatesObserver(entity, entity.dateFrom, entity.dateTo)',
+            // '_entityDatesObserver(entity, entity.dateFrom, entity.dateTo)',
             '_localizeChanged(localize)',
             '_entityObserver(entity, entity.*)',
-            '_columnNumberBoundsObserver(entity, entity.columnId, columns.*)'
+            '_columnNumberBoundsObserver(entity, entity.columnId, columns.*)',
+            '_setDateRanges(entity, columns, entity.columnId, columns.*)',
+            '_selectedDateRangeObserver(entity, entity.selectedDateRangeName)'
           ];
         }
 
@@ -225,6 +246,51 @@
           this._numberConditions.forEach((condition, index) => {
             this.set(`_numberConditions.${index}.val`, localize(condition.val));
           });
+        }
+
+        _setDateRanges(entity, columns) {
+          const selectedColumn = this._getColumnById(entity.columnId);
+          if (!selectedColumn || selectedColumn.type !== 'date') {
+            return;
+          }
+
+          const dateRanges = [];
+
+          if (selectedColumn.dateRanges) {
+            selectedColumn.dateRanges.forEach((dateRange) => {
+              dateRanges.push({
+                key: dateRange.name,
+                val: this.localize(dateRange.name)
+              });
+            });
+          }
+
+          dateRanges.push({
+            key: 'custom',
+            val: this.localize('Custom')
+          });
+
+          this.set('_dateRanges', dateRanges);
+          if (!entity.selectedDateRangeName) {
+            this.set('entity.selectedDateRangeName', dateRanges[0].key);
+          }
+        }
+
+        _getRangeByName(columnId, name) {
+          const selectedColumn = this._getColumnById(columnId);
+          return selectedColumn.dateRanges.filter((dateRange) => dateRange.name === name)[0];
+        }
+
+        _selectedDateRangeObserver(entity) {
+          if (!entity.selectedDateRangeName || entity.selectedDateRangeName === 'custom') {
+            return;
+          }
+
+          const rangeObject = this._getRangeByName(this.entity.columnId, entity.selectedDateRangeName);
+          const dateRange = rangeObject.range ? rangeObject.range : rangeObject.getRange();
+
+          this.set('entity.dateFrom', dateRange.dateFrom);
+          this.set('entity.dateTo', dateRange.dateTo);
         }
 
         _columnNumberBoundsObserver(entity) {
@@ -339,17 +405,23 @@
           }
         }
 
-        _entityDatesObserver(entity) {
-          if (entity.dateFrom && (!this._dateFrom || window.Px.moment(this.entity.dateFrom).format() !== this._dateFrom.format())) {
-            this.set('_dateFrom', window.Px.moment(this.entity.dateFrom));
-          }
-          if (entity.dateTo && (!this._dateTo || window.Px.moment(this.entity.dateTo).format() !== this._dateTo.format())) {
-            this.set('_dateTo', window.Px.moment(this.entity.dateTo));
-          }
-        }
+        // Commented due to the issue in px-rangepicker, which makes impossible to set from and to moments.
+        //
+        // _entityDatesObserver(entity) {
+        //   if (entity.dateFrom && (!this._dateFrom || window.Px.moment(this.entity.dateFrom).format() !== this._dateFrom.format())) {
+        //     this.set('_dateFrom', window.Px.moment(this.entity.dateFrom));
+        //   }
+        //   if (entity.dateTo && (!this._dateTo || window.Px.moment(this.entity.dateTo).format() !== this._dateTo.format())) {
+        //     this.set('_dateTo', window.Px.moment(this.entity.dateTo));
+        //   }
+        // }
 
         _showSlider(minBound, maxBound) {
           return minBound !== undefined && maxBound !== undefined;
+        }
+
+        _showRangePicker(entity) {
+          return entity.selectedDateRangeName === 'custom';
         }
       }
 

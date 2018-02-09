@@ -594,7 +594,52 @@
               hideTime: true,
               displayFormat: 'DD-MM-YY',
               dataFormat: 'YYYY-MM-DD'
-            }
+            },
+            dateRanges: [
+              {
+                name: 'Last 7 days',
+                getRange: () => {
+                  return {
+                    dateTo: window.moment().format(),
+                    dateFrom: window.moment().subtract(7, 'd').format()
+                  };
+                }
+              },
+              {
+                name: 'Last 14 days',
+                getRange: () => {
+                  return {
+                    dateTo: window.moment().format(),
+                    dateFrom: window.moment().subtract(14, 'd').format()
+                  };
+                }
+              },
+              {
+                name: 'This month',
+                getRange: () => {
+                  return {
+                    dateTo: window.moment().format(),
+                    dateFrom: window.moment().subtract(31, 'd').format()
+                  };
+                }
+              },
+              {
+                name: 'Last month',
+                getRange: () => {
+                  return {
+                    dateTo: window.moment().subtract(1, 'M').format(),
+                    dateFrom: window.moment().subtract(2, 'M').format()
+                  };
+                }
+              },
+              {
+                name: 'Fixed range',
+                range: {
+                  dateTo: '1996-11-10',
+                  dateFrom: '1985-12-19'
+                }
+              }
+            ]
           }
         ],
         inputType: 'code:JSON'

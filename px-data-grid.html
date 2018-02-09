@@ -355,6 +355,10 @@
              *
              *   * `{object} rendererConfig` - An arbitrary object that can be used to pass down options to the chosen renderer.
              *      See `px-data-grid-date-renderer` for an example of a renderer using this object for its four configurable properties
+             *
+             *   * `{array} dateRanges` - list of pre-defined date ranges, that will appear in advanced filter's
+             *      dropdown when column.type is date. See format in `px-data-grid-column-demo`.
+             *
              *   * `{number} minBound` - Used to define minimum bound of a number in advanced filter's slider.
              *     Note, that this property works with `column.type === 'number'` only.
              *
@@ -383,6 +387,24 @@
              *     customInfo: 'some info',
              *     customInfo2: 42
              *   },
+             *   dateRanges: [
+             *     {
+             *       name: 'Last 7 days',
+             *       getRange: () => {
+             *         return {
+             *           dateTo: window.moment().format(),
+             *           dateFrom: window.moment().subtract(7, 'd').format()
+             *         };
+             *       }
+             *     },
+             *     {
+             *       name: 'Fixed range',
+             *       range: {
+             *         dateTo: '1996-11-10',
+             *         dateFrom: '1985-12-19'
+             *       }
+             *     }
+             *   ],
              *   minBound: 1,
              *   maxBound: 10,
              *   hidden: false,
