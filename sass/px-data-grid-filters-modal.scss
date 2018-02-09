@@ -35,4 +35,5 @@ px-modal-triggers, .btn {
   margin-right: 4px;
   margin-top: -2px;
   --iron-icon-height: 16px;
+  display: var(--layout-inline_-_display, inline-flex);
 }

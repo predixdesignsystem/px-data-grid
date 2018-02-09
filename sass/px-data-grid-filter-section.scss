@@ -43,4 +43,9 @@ button.btn.btn--icon.btn--bare--primary {
 .add-filter px-icon {
   margin-top: -3px;
   --iron-icon-height: 16px;
+  display: var(--layout-inline_-_display, inline-flex);
+}
+
+.actionable px-icon{
+  display: var(--layout-inline_-_display, inline-flex);
 }
