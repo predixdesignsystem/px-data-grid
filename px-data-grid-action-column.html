@@ -21,6 +21,7 @@
       </template>
       <template is="dom-if" if="[[_showActionDropdown(item, editMode, edittedItem)]]" restamp>
         <px-dropdown
+            allow-outside-scroll
             button-style="icon"
             icon="px-nav:menu"
             items="[[_convertActions(itemActions)]]"

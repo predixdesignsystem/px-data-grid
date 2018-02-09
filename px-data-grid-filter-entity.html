@@ -14,6 +14,7 @@
       </label>
       <px-dropdown
         id="column-dropdown"
+        allow-outside-scroll
         items="[[_mappedColumns]]"
         disable-clear
         selected="{{entity.columnId}}">
@@ -27,6 +28,7 @@
         </label>
         <px-dropdown
           id="condition-dropdown"
+          allow-outside-scroll
           items="[[_regexPatterns]]"
           disable-clear
           selected="{{entity.pattern}}">
@@ -66,6 +68,7 @@
           </label>
           <px-dropdown
             id="number-condition-dropdown"
+            allow-outside-scroll
             items="[[_numberConditions]]"
             disable-clear
             selected="{{entity.condition}}">
