@@ -41,7 +41,9 @@
       editable="{{editable}}"
       highlight="{{highlight}}"
       default-column-width="{{defaultColumnWidth}}"
-      default-column-flex-grow="{{defaultColumnFlexGrow}}">
+      default-column-flex-grow="{{defaultColumnFlexGrow}}"
+      string-comparators="{{stringComparators}}"
+      number-comparators="{{numberComparators}}">
     </px-data-grid>
 
     <px-data-grid-navigation
@@ -391,7 +393,25 @@
             filterable: {
               type: Boolean,
               value: false
-            }
+            },
+
+            /**
+             * What string comparators will be offered in advanced filtering. Valid options are
+             * 'equals', 'contains', 'starts_with', 'ends_with' and 'wildcard'. If array is
+             * undefined or empty, all options will be offered.
+             */
+             stringComparators: {
+              type: Array
+            },
+
+            /**
+             * What number comparators will be offered in advanced filtering. Valid options are
+             * 'less_than', 'equals', 'not_equal',  'equal_or_greater_than',  'equal_or_less_than'
+             * and 'greater_than'. If array is undefined or empty, all options will be offered.
+             */
+            numberComparators: {
+              type: Array
+            },
           };
         }
 

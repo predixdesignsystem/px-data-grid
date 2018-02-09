@@ -37,6 +37,8 @@
           entity="{{entity}}"
           columns="[[columns]]"
           compact-mode="[[_isEntityCompact(_compactModeEnabled, index)]]"
+          string-comparators="[[stringComparators]]"
+          number-comparators="[[numberComparators]]"
           localize="[[localize]]">
         </px-data-grid-filter-entity>
         <div class="actionable" on-click="_removeEntity">
@@ -106,6 +108,14 @@
             compactMode: {
               type: Boolean,
               value: false
+            },
+
+            stringComparators: {
+              type: Array
+            },
+
+            numberComparators: {
+              type: Array
             },
 
             _compactModeEnabled: {
