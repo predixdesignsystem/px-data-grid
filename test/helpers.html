@@ -34,7 +34,12 @@
   }
 
   function getRows(grid) {
-    return grid._vaadinGrid.$.items.querySelectorAll('tr');
+    const vaadinGrid = grid._vaadinGrid || grid._pxDataGrid._vaadinGrid;
+    return vaadinGrid.$.items.querySelectorAll('tr');
+  }
+
+  function getRowsPaginatedGrid(grid) {
+    return grid._pxDataGrid._vaadinGrid.$.items.querySelectorAll('tr');
   }
 
   function getVisibleRows(grid) {
@@ -69,6 +74,7 @@
   }
 
   function getCell(grid, cell) {
+    grid = grid._pxDataGrid || grid;
     const slot = cell.querySelector('slot');
     const slotName = slot.getAttribute('name');
     return grid.shadowRoot.querySelector('[slot="' + slotName + '"]');

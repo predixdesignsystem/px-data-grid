@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/mixins/mutable-data.html">
 
 <dom-module id="px-data-grid-cell-content-wrapper">
   <template>
@@ -12,7 +13,7 @@
        * @memberof Predix
        * @extends Polymer.Element
        */
-      class DataGridCellContentWrapperElement extends Polymer.Element {
+      class DataGridCellContentWrapperElement extends Polymer.MutableData(Polymer.Element) {
         static get is() {
           return 'px-data-grid-cell-content-wrapper';
         }
