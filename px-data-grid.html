@@ -52,7 +52,9 @@
               localize="[[_boundedLocalize]]"
               offer-filter-saving="[[offerFilterSaving]]"
               initial-filter-state="[[_initialFilterState]]"
-              compact-mode="[[compactAdvancedFilterDialog]]">
+              compact-mode="[[compactAdvancedFilterDialog]]"
+              string-comparators="[[stringComparators]]"
+              number-comparators="[[numberComparators]]">
             </px-data-grid-filters-modal>
           </template>
 
@@ -736,6 +738,24 @@
             compactAdvancedFilterDialog: {
               type: Boolean,
               value: true
+            },
+
+            /**
+             * What string comparators will be offered in advanced filtering. Valid options are
+             * 'equals', 'contains', 'starts_with', 'ends_with' and 'wildcard'. If array is
+             * undefined or empty, all options will be offered.
+             */
+            stringComparators: {
+              type: Array
+            },
+
+            /**
+             * What number comparators will be offered in advanced filtering. Valid options are
+             * 'less_than', 'equals', 'not_equal',  'equal_or_greater_than',  'equal_or_less_than'
+             * and 'greater_than'. If array is undefined or empty, all options will be offered.
+             */
+            numberComparators: {
+              type: Array
             },
 
             /**

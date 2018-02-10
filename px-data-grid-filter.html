@@ -12,6 +12,8 @@
         section="{{section}}"
         columns="[[columns]]"
         compact-mode="[[compactMode]]"
+        string-comparators="[[stringComparators]]"
+        number-comparators="[[numberComparators]]"
         localize="[[localize]]">
       </px-data-grid-filter-section>
     </template>
@@ -52,6 +54,14 @@
             compactMode: {
               type: Boolean,
               value: false
+            },
+
+            stringComparators: {
+              type: Array
+            },
+
+            numberComparators: {
+              type: Array
             },
 
             localize: Function

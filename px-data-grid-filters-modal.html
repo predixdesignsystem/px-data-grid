@@ -20,6 +20,8 @@
           filters="{{filters}}"
           temp-filters="{{_tempFilters}}"
           compact-mode="[[compactMode]]"
+          string-comparators="[[stringComparators]]"
+          number-comparators="[[numberComparators]]"
           localize="[[localize]]">
         </px-data-grid-filter>
 
@@ -77,6 +79,14 @@
             compactMode: {
               type: Boolean,
               value: false
+            },
+
+            stringComparators: {
+              type: Array
+            },
+
+            numberComparators: {
+              type: Array
             },
 
             _tempFilters: {

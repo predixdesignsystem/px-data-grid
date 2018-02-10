@@ -58,6 +58,8 @@
           filterable="{{props.filterable.value}}"
           compact-advanced-filter-dialog="{{props.compactAdvancedFilterDialog.value}}"
           item-id-path="email"
+          string-comparators="{{props.stringComparators.value}}"
+          number-comparators="{{props.numberComparators.value}}"
           on-table-action="tableActionListener"
           on-cell-hover="cellHoverListener"
           on-cell-unhover="cellUnhoverListener">
@@ -755,7 +757,19 @@
         ],
         inputType: 'code:JSON',
         _visibleForConfig: false
-      }
+      },
+
+      stringComparators: {
+        type: Array,
+        defaultValue: ['equals', 'contains', 'starts_with', 'ends_with', 'wildcard'],
+        inputType: 'code:JSON',
+      },
+
+      numberComparators: {
+        type: Array,
+        defaultValue: ['less_than', 'equals', 'not_equal', 'equal_or_greater_than', 'equal_or_less_than', 'greater_than'],
+        inputType: 'code:JSON',
+      },
     },
 
     _fullNameChanged() {
