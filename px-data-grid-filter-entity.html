@@ -43,7 +43,24 @@
       </div>
     </template>
 
-    <template is="dom-if" if="{{_columnTypeIsDate(entity.columnId)}}" restamp>
+    <template is="dom-if" if="{{_columnTypeIsDateAndRangesNotAvailable(entity.columnId, _dateRanges)}}" restamp>
+        <div class="labeled-text" extended>
+          <px-rangepicker
+            id="date-rangepicker"
+            hide-time
+            hide-presets
+            date-format="YYYY/MM/DD"
+            time-format="HH:mm:ss"
+            time-zone="UTC"
+            show-time-zone="abbreviatedText"
+            show-field-titles
+            from-moment="{{_dateFrom}}"
+            to-moment="{{_dateTo}}">
+          </px-rangepicker>
+        </div>
+      </template>
+
+    <template is="dom-if" if="{{_columnTypeIsDateAndRangesAvailable(entity.columnId, _dateRanges)}}" restamp>
       <div class="labeled-text">
         <label for="date-range-dropdown" hidden="[[compactMode]]">
           [[localize('Time range')]]
@@ -57,7 +74,7 @@
       </div>
 
       <template is="dom-if" if="{{_showRangePicker(entity, entity.selectedDateRangeName)}}">
-        <div class="labeled-text">
+        <div class="labeled-text own-row" extended>
           <px-rangepicker
             id="date-rangepicker"
             hide-time
@@ -265,14 +282,16 @@
             });
           }
 
-          dateRanges.push({
-            key: 'custom',
-            val: this.localize('Custom')
-          });
+          if (dateRanges.length > 0) {
+            dateRanges.push({
+              key: 'custom',
+              val: this.localize('Custom')
+            });
 
-          this.set('_dateRanges', dateRanges);
-          if (!entity.selectedDateRangeName) {
-            this.set('entity.selectedDateRangeName', dateRanges[0].key);
+            this.set('_dateRanges', dateRanges);
+            if (!entity.selectedDateRangeName) {
+              this.set('entity.selectedDateRangeName', dateRanges[0].key);
+            }
           }
         }
 
@@ -360,6 +379,20 @@
           return column && column.type === 'date';
         }
 
+        _columnTypeIsDateAndRangesAvailable(columnId, ranges) {
+          if (this._columnTypeIsDate(columnId)) {
+            return ranges !== undefined && ranges.length > 0;
+          }
+          return false;
+        }
+
+        _columnTypeIsDateAndRangesNotAvailable(columnId, ranges) {
+          if (this._columnTypeIsDate(columnId)) {
+            return ranges === undefined || ranges.length < 1;
+          }
+          return false;
+        }
+
         _columnTypeIsNumber(columnId) {
           const column = this._getColumnById(columnId);
 
@@ -421,7 +454,7 @@
         }
 
         _showRangePicker(entity) {
-          return entity.selectedDateRangeName === 'custom';
+          return this._dateRanges && entity.selectedDateRangeName === 'custom';
         }
       }
 

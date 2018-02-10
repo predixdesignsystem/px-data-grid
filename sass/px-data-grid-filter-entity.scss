@@ -1,19 +1,31 @@
 @import 'px-data-grid-shared';
 
 :host {
-  display: flex;
+  display: block;
   width: 100%;
-  align-items: flex-end;
+  white-space: nowrap;
 }
 
 .labeled-text {
-  flex-basis: 33%;
+  display: inline-block;
+  width: 33%;
   padding: 0px 2px;
   box-sizing: border-box;
+  vertical-align: bottom;
+  margin-top: 7px;
 }
 
 .labeled-text[extended] {
-  flex-basis: 66%;
+  width: 66%;
+  vertical-align: top;
+}
+
+.labeled-text.own-row{
+  display: block;
+}
+
+.labeled-text[extended].own-row{
+  vertical-align: bottom;
 }
 
 .labeled-text > * {

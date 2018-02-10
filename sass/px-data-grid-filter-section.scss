@@ -25,7 +25,6 @@ px-dropdown {
 .filter-entity {
   display: flex;
   align-items: flex-end;
-  margin-top: 7px;
 }
 
 button.btn.btn--icon.btn--bare--primary {
@@ -49,3 +48,20 @@ button.btn.btn--icon.btn--bare--primary {
 .actionable px-icon{
   display: var(--layout-inline_-_display, inline-flex);
 }
+
+:host(:not([_compact-mode-enabled])) .actionable{
+  align-self: flex-start;
+
+ /* Since the X needs to be in the center of the bottom half of the first row, we don't really have
+  * a good way of doing it if we have multi-row filters (like date range).
+  * Hence, for the non-compact mode filters, we cannot align to flex-start as the caption will
+  * push the center of the dropdowns down... This is not pretty but...
+  * 1em for caption text height, 0.2667 for margin between caption and dropdown,
+  * 7px is for the margin on labeled-text and finally
+  * 5px from half the diff between dropdown height and actionable height (30px vs 20px)
+  * in order to center the actionable.
+  */
+  margin-top: calc(1em + 0.26667em + 7px + 5px);
+  margin-bottom: 0;
+}
+
