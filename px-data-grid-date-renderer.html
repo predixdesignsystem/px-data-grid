@@ -171,19 +171,32 @@ Make date-renderer columns use ellipsis overflow:
           }
         }
 
-        _rendererConfigChanged() {
-          if (this.column.rendererConfig.hasOwnProperty('hideDate')) {
-            this.hideDate = this.column.rendererConfig.hideDate;
+        _rendererConfigChanged(rendererConfig) {
+
+          if (rendererConfig && rendererConfig.hasOwnProperty('hideDate')) {
+            this.hideDate = rendererConfig.hideDate;
+          } else {
+            this.hideDate = false;
           }
-          if (this.column.rendererConfig.hasOwnProperty('hideTime')) {
-            this.hideTime = this.column.rendererConfig.hideTime;
+
+          if (rendererConfig && rendererConfig.hasOwnProperty('hideTime')) {
+            this.hideTime = rendererConfig.hideTime;
+          } else {
+            this.hideTime = false;
           }
-          if (this.column.rendererConfig.hasOwnProperty('displayFormat')) {
-            this.displayFormat = this.column.rendererConfig.displayFormat;
+
+          if (rendererConfig && rendererConfig.hasOwnProperty('displayFormat')) {
+            this.displayFormat = rendererConfig.displayFormat;
+          } else {
+            this.displayFormat = 'YYYY-MM-DD HH:mm:ss';
           }
-          if (this.column.rendererConfig.hasOwnProperty('dataFormat')) {
-            this.dataFormat = this.column.rendererConfig.dataFormat;
+
+          if (rendererConfig && rendererConfig.hasOwnProperty('dataFormat')) {
+            this.dataFormat = rendererConfig.dataFormat;
+          } else {
+            this.dataFormat = 'DD-MM-YYY';
           }
+
         }
       }
 
