@@ -81,7 +81,7 @@ Make date-renderer columns use ellipsis overflow:
              */
             displayFormat: {
               type: String,
-              value: 'YYYY-MM-DD HH:mm:ss'
+              value: 'YYYY-MM-DD'
             },
             /**
              * Format for reading the data
@@ -89,7 +89,7 @@ Make date-renderer columns use ellipsis overflow:
              */
             dataFormat: {
               type: String,
-              value: 'DD-MM-YYY'
+              value: 'ISO'
             },
             /**
              * Hides the date part of the datetime picker when the cell is in edit mode
@@ -188,13 +188,13 @@ Make date-renderer columns use ellipsis overflow:
           if (rendererConfig && rendererConfig.hasOwnProperty('displayFormat')) {
             this.displayFormat = rendererConfig.displayFormat;
           } else {
-            this.displayFormat = 'YYYY-MM-DD HH:mm:ss';
+            this.displayFormat = 'YYYY-MM-DD';
           }
 
           if (rendererConfig && rendererConfig.hasOwnProperty('dataFormat')) {
             this.dataFormat = rendererConfig.dataFormat;
           } else {
-            this.dataFormat = 'DD-MM-YYY';
+            this.dataFormat = 'ISO';
           }
 
         }
