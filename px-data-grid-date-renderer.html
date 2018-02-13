@@ -89,7 +89,7 @@ Make date-renderer columns use ellipsis overflow:
              */
             dataFormat: {
               type: String,
-              value: 'ISO'
+              value: 'YYYY-MM-DD'
             },
             /**
              * Hides the date part of the datetime picker when the cell is in edit mode
@@ -103,8 +103,9 @@ Make date-renderer columns use ellipsis overflow:
              */
             hideTime: {
               type: Boolean,
-              value: false
+              value: true
             },
+
             _initialType: {
               type: String
             }
@@ -122,11 +123,11 @@ Make date-renderer columns use ellipsis overflow:
         _getFormattedDate(value) {
 
           var result;
-          if (this.value) {
+          if (value) {
             if (this.displayFormat === 'ISO') {
               result = window.Px.moment(value, this.dataFormat).toISOString();
             } else {
-              result = window.Px.moment(value, this.dataFormat).format(this.displayFormat);
+              result = window.Px.moment(value, this.dataFormat, true).format(this.displayFormat);
             }
           } else {
             result = '';
@@ -182,7 +183,7 @@ Make date-renderer columns use ellipsis overflow:
           if (rendererConfig && rendererConfig.hasOwnProperty('hideTime')) {
             this.hideTime = rendererConfig.hideTime;
           } else {
-            this.hideTime = false;
+            this.hideTime = true;
           }
 
           if (rendererConfig && rendererConfig.hasOwnProperty('displayFormat')) {
@@ -194,7 +195,7 @@ Make date-renderer columns use ellipsis overflow:
           if (rendererConfig && rendererConfig.hasOwnProperty('dataFormat')) {
             this.dataFormat = rendererConfig.dataFormat;
           } else {
-            this.dataFormat = 'ISO';
+            this.dataFormat = 'YYYY-MM-DD';
           }
 
         }
