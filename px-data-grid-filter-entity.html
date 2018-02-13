@@ -478,7 +478,7 @@
         }
 
         _resolveNumberConditions(numberComparators, numberConditions) {
-          if (!numberComparators === undefined || numberComparators.length === 0) {
+          if (numberComparators === undefined || numberComparators.length === 0) {
             return numberConditions;
           } else {
             return numberConditions.filter(c => this._arrayHas(numberComparators, c.key).length > 0);
