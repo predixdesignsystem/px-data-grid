@@ -73,7 +73,7 @@
         </px-dropdown>
       </div>
 
-      <template is="dom-if" if="{{_showRangePicker(entity, entity.selectedDateRangeName)}}">
+      <template is="dom-if" if="{{_showRangePicker(entity, entity.selectedDateRangeName, entity.columnId)}}">
         <div class="labeled-text own-row" extended>
           <px-rangepicker
             id="date-rangepicker"
@@ -255,7 +255,7 @@
             '_entityObserver(entity, entity.*)',
             '_columnNumberBoundsObserver(entity, entity.columnId, columns.*)',
             '_setDateRanges(entity, columns, entity.columnId, columns.*)',
-            '_selectedDateRangeObserver(entity, entity.selectedDateRangeName)'
+            '_selectedDateRangeObserver(entity, entity.selectedDateRangeName, entity.columnId)'
           ];
         }
 
@@ -300,12 +300,17 @@
             if (!entity.selectedDateRangeName) {
               this.set('entity.selectedDateRangeName', dateRanges[0].key);
             }
+          } else {
+            this.set('_dateRanges', undefined);
+            this.set('entity.selectedDateRangeName', undefined);
           }
         }
 
         _getRangeByName(columnId, name) {
           const selectedColumn = this._getColumnById(columnId);
-          return selectedColumn.dateRanges.filter((dateRange) => dateRange.name === name)[0];
+          if (selectedColumn.dateRanges) {
+            return selectedColumn.dateRanges.filter((dateRange) => dateRange.name === name)[0];
+          }
         }
 
         _selectedDateRangeObserver(entity) {
@@ -314,10 +319,16 @@
           }
 
           const rangeObject = this._getRangeByName(this.entity.columnId, entity.selectedDateRangeName);
-          const dateRange = rangeObject.range ? rangeObject.range : rangeObject.getRange();
 
-          this.set('entity.dateFrom', dateRange.dateFrom);
-          this.set('entity.dateTo', dateRange.dateTo);
+          if (rangeObject && (typeof rangeObject.range === 'object' || typeof rangeObject.getRange == 'function')) {
+            const dateRange = rangeObject.range ? rangeObject.range : rangeObject.getRange();
+
+            this.set('entity.dateFrom', dateRange.dateFrom);
+            this.set('entity.dateTo', dateRange.dateTo);
+          } else {
+            this.set('entity.dateFrom', undefined);
+            this.set('entity.dateTo', undefined);
+          }
         }
 
         _columnNumberBoundsObserver(entity) {
@@ -461,7 +472,7 @@
           return minBound !== undefined && maxBound !== undefined;
         }
 
-        _showRangePicker(entity) {
+        _showRangePicker(entity, selectedDateRangeName) {
           return this._dateRanges && entity.selectedDateRangeName === 'custom';
         }
 
