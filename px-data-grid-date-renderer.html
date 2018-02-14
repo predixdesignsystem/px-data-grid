@@ -124,10 +124,22 @@ Make date-renderer columns use ellipsis overflow:
 
           var result;
           if (value) {
-            if (this.displayFormat === 'ISO') {
-              result = window.Px.moment(value, this.dataFormat).toISOString();
+            let momentValue;
+            if (this.dataFormat === 'ISO') {
+              momentValue = window.Px.moment(value);
             } else {
-              result = window.Px.moment(value, this.dataFormat, true).format(this.displayFormat);
+              momentValue = window.Px.moment(value, this.dataFormat, true);
+            }
+
+            if (momentValue) {
+              if (this.displayFormat === 'ISO') {
+                result = momentValue.toISOString();
+              } else {
+                result = momentValue.format(this.displayFormat);
+              }
+            } else {
+              console.warn('Unknown date value: "' + value + '"');
+              result = '';
             }
           } else {
             result = '';
@@ -174,26 +186,26 @@ Make date-renderer columns use ellipsis overflow:
 
         _rendererConfigChanged(rendererConfig) {
 
-          if (rendererConfig && rendererConfig.hasOwnProperty('hideDate')) {
-            this.hideDate = rendererConfig.hideDate;
+          if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('hideDate')) {
+            this.hideDate = rendererConfig.value.hideDate;
           } else {
             this.hideDate = false;
           }
 
-          if (rendererConfig && rendererConfig.hasOwnProperty('hideTime')) {
-            this.hideTime = rendererConfig.hideTime;
+          if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('hideTime')) {
+            this.hideTime = rendererConfig.value.hideTime;
           } else {
             this.hideTime = true;
           }
 
-          if (rendererConfig && rendererConfig.hasOwnProperty('displayFormat')) {
-            this.displayFormat = rendererConfig.displayFormat;
+          if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('displayFormat')) {
+            this.displayFormat = rendererConfig.value.displayFormat;
           } else {
             this.displayFormat = 'YYYY-MM-DD';
           }
 
-          if (rendererConfig && rendererConfig.hasOwnProperty('dataFormat')) {
-            this.dataFormat = rendererConfig.dataFormat;
+          if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('dataFormat')) {
+            this.dataFormat = rendererConfig.value.dataFormat;
           } else {
             this.dataFormat = 'YYYY-MM-DD';
           }

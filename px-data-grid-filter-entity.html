@@ -47,7 +47,7 @@
         <div class="labeled-text" extended>
           <px-rangepicker
             id="date-rangepicker"
-            hide-time
+            hide-time="[[_hideTime]]"
             hide-presets
             date-format="YYYY/MM/DD"
             time-format="HH:mm:ss"
@@ -77,7 +77,7 @@
         <div class="labeled-text own-row" extended>
           <px-rangepicker
             id="date-rangepicker"
-            hide-time
+            hide-time="[[_hideTime]]"
             hide-presets
             date-format="YYYY/MM/DD"
             time-format="HH:mm:ss"
@@ -233,6 +233,11 @@
               value: []
             },
 
+            _hideTime: {
+              type: Boolean,
+              value: true
+            },
+
             _dateFrom: {
               type: Object
             },
@@ -303,6 +308,12 @@
           } else {
             this.set('_dateRanges', undefined);
             this.set('entity.selectedDateRangeName', undefined);
+          }
+
+          if (selectedColumn.filterByTime) {
+            this.set('_hideTime', false);
+          } else {
+            this.set('_hideTime', true);
           }
         }
 
