@@ -172,7 +172,8 @@
             name: 'Index',
             path: 'index',
             type: 'number',
-            renderer: 'px-data-grid-number-renderer'
+            renderer: 'px-data-grid-number-renderer',
+            flexGrow: 0
           },
           {
             name: 'Date',
@@ -183,7 +184,8 @@
             rendererConfig: {
               hideTime: true,
               displayFormat: 'DD-MM-YY',
-              dataFormat: 'YYYY-MM-DD'
+              dataFormat: 'YYYY-MM-DD',
+              datePickerDateFormat: 'DD-MM-YY',
             },
           },
           {
@@ -196,7 +198,9 @@
             rendererConfig: {
               hideTime: false,
               displayFormat: 'DD-MM-YY HH:MM',
-              dataFormat: 'ISO'
+              dataFormat: 'ISO',
+              datePickerDateFormat: 'DD-MM-YY',
+              datePickerTimeFormat: 'HH:MM'
             },
           }
         ],
@@ -225,6 +229,12 @@
           date: this._randomTime().format('YYYY-MM-DD'),
           dateTime: this._randomTime().toISOString()
         };
+        if ((i + 1) % 5 === 0) {
+          obj.dateTime = undefined;
+        }
+        if ((i + 1) % 4 === 0) {
+          obj.date = undefined;
+        }
         data.push(obj);
       }
       return data;
