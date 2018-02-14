@@ -16469,11 +16469,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 74,
+                  "line": 76,
                   "column": 12
                 },
                 "end": {
-                  "line": 76,
+                  "line": 78,
                   "column": 13
                 }
               },
@@ -16488,11 +16488,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 81,
+                  "line": 83,
                   "column": 12
                 },
                 "end": {
-                  "line": 84,
+                  "line": 86,
                   "column": 13
                 }
               },
@@ -16508,11 +16508,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 89,
+                  "line": 91,
                   "column": 12
                 },
                 "end": {
-                  "line": 92,
+                  "line": 94,
                   "column": 13
                 }
               },
@@ -16522,17 +16522,57 @@
               "defaultValue": "\"YYYY-MM-DD\""
             },
             {
+              "name": "datePickerDateFormat",
+              "type": "string",
+              "description": "Format for px-datepicker's dateFormat\nSee documentation of px-datepicker",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 99,
+                  "column": 12
+                },
+                "end": {
+                  "line": 102,
+                  "column": 13
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "\"YYYY-MM-DD\""
+            },
+            {
+              "name": "datePickerTimeFormat",
+              "type": "string",
+              "description": "Format for px-datepicker's timeFormat\nSee documentation of px-datepicker",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 107,
+                  "column": 12
+                },
+                "end": {
+                  "line": 110,
+                  "column": 13
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "\"HH:MM:SS\""
+            },
+            {
               "name": "hideDate",
               "type": "boolean",
               "description": "Hides the date part of the datetime picker when the cell is in edit mode",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 96,
+                  "line": 114,
                   "column": 12
                 },
                 "end": {
-                  "line": 99,
+                  "line": 117,
                   "column": 13
                 }
               },
@@ -16548,11 +16588,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 103,
+                  "line": 121,
                   "column": 12
                 },
                 "end": {
-                  "line": 106,
+                  "line": 124,
                   "column": 13
                 }
               },
@@ -16568,11 +16608,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 108,
+                  "line": 126,
                   "column": 12
                 },
                 "end": {
-                  "line": 110,
+                  "line": 128,
                   "column": 13
                 }
               },
@@ -18802,11 +18842,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 150,
+                  "line": 168,
                   "column": 8
                 },
                 "end": {
-                  "line": 155,
+                  "line": 173,
                   "column": 9
                 }
               },
@@ -18838,11 +18878,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 122,
+                  "line": 140,
                   "column": 8
                 },
                 "end": {
-                  "line": 148,
+                  "line": 166,
                   "column": 9
                 }
               },
@@ -18859,11 +18899,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 157,
+                  "line": 175,
                   "column": 8
                 },
                 "end": {
-                  "line": 172,
+                  "line": 190,
                   "column": 9
                 }
               },
@@ -18880,11 +18920,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 174,
+                  "line": 192,
                   "column": 8
                 },
                 "end": {
-                  "line": 190,
+                  "line": 208,
                   "column": 9
                 }
               },
@@ -18901,11 +18941,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 192,
+                  "line": 210,
                   "column": 8
                 },
                 "end": {
-                  "line": 218,
+                  "line": 248,
                   "column": 9
                 }
               },
@@ -19856,11 +19896,11 @@
           "metadata": {},
           "sourceRange": {
             "start": {
-              "line": 67,
+              "line": 69,
               "column": 6
             },
             "end": {
-              "line": 219,
+              "line": 249,
               "column": 7
             }
           },
@@ -19963,11 +20003,11 @@
               "description": "",
               "sourceRange": {
                 "start": {
-                  "line": 74,
+                  "line": 76,
                   "column": 12
                 },
                 "end": {
-                  "line": 76,
+                  "line": 78,
                   "column": 13
                 }
               },
@@ -19979,11 +20019,11 @@
               "description": "Format to be displayed in the cell\nA moment.js string formatter or 'ISO'",
               "sourceRange": {
                 "start": {
-                  "line": 81,
+                  "line": 83,
                   "column": 12
                 },
                 "end": {
-                  "line": 84,
+                  "line": 86,
                   "column": 13
                 }
               },
@@ -19995,11 +20035,43 @@
               "description": "Format for reading the data\nA moment.js string formatter or 'ISO'",
               "sourceRange": {
                 "start": {
-                  "line": 89,
+                  "line": 91,
                   "column": 12
                 },
                 "end": {
-                  "line": 92,
+                  "line": 94,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "type": "string"
+            },
+            {
+              "name": "date-picker-date-format",
+              "description": "Format for px-datepicker's dateFormat\nSee documentation of px-datepicker",
+              "sourceRange": {
+                "start": {
+                  "line": 99,
+                  "column": 12
+                },
+                "end": {
+                  "line": 102,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "type": "string"
+            },
+            {
+              "name": "date-picker-time-format",
+              "description": "Format for px-datepicker's timeFormat\nSee documentation of px-datepicker",
+              "sourceRange": {
+                "start": {
+                  "line": 107,
+                  "column": 12
+                },
+                "end": {
+                  "line": 110,
                   "column": 13
                 }
               },
@@ -20011,11 +20083,11 @@
               "description": "Hides the date part of the datetime picker when the cell is in edit mode",
               "sourceRange": {
                 "start": {
-                  "line": 96,
+                  "line": 114,
                   "column": 12
                 },
                 "end": {
-                  "line": 99,
+                  "line": 117,
                   "column": 13
                 }
               },
@@ -20027,11 +20099,11 @@
               "description": "Hides the time part of the datetime picker when the cell is in edit mode",
               "sourceRange": {
                 "start": {
-                  "line": 103,
+                  "line": 121,
                   "column": 12
                 },
                 "end": {
-                  "line": 106,
+                  "line": 124,
                   "column": 13
                 }
               },
