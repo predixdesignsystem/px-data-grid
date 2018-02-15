@@ -163,20 +163,14 @@
           });
         }
 
-        /** @private */
-        connectedCallback() {
-          super.connectedCallback();
-          if (this._grid) {
-            // const _grid = this._grid;
-
-            // TODO
-          }
-        }
-
         _handleSave(e) {
           // To prevent selections
           e.stopPropagation();
           this.save(e);
+          this.dispatchEvent(new CustomEvent('item-save', {
+            bubbles: true,
+            composed: true
+          }));
         }
 
         _figureOutWhichOneToClick(e) {

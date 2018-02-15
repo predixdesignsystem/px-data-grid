@@ -10,9 +10,11 @@
     </template>
 
     <template id="defaultBodyTemplate">
-      <button class$="[[_resolveButtonClass(item, edittedItem)]]" style$="[[_resolveHiddenStyle(item, edittedItem)]]" on-click="_handleButtonClick" data-item="[[item]]">
-        <px-icon icon="[[_resolveIcon(item, edittedItem)]]" class$="[[_resolveIconClass(item, edittedItem)]]"></px-icon>
-      </button>
+      <template is="dom-if" if="[[!item.hasChildren]]">
+        <button class$="[[_resolveButtonClass(item, edittedItem)]]" style$="[[_resolveHiddenStyle(item, edittedItem)]]" on-click="_handleButtonClick" data-item="[[item]]">
+          <px-icon icon="[[_resolveIcon(item, edittedItem)]]" class$="[[_resolveIconClass(item, edittedItem)]]"></px-icon>
+        </button>
+      </template>
     </template>
   </template>
 

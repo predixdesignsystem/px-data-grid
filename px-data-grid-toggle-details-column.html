@@ -9,9 +9,11 @@
     </template>
 
     <template id="defaultBodyTemplate">
-      <div class="toggle-details" on-click="_onToggleClick">
-        <px-icon icon="[[_getChevronIcon(detailsOpened)]]"></px-icon>
-      </div>
+      <template is="dom-if" if="[[!item.hasChildren]]">
+        <div class="toggle-details" on-click="_onToggleClick">
+          <px-icon icon="[[_getChevronIcon(detailsOpened)]]"></px-icon>
+        </div>
+      </template>
     </template>
 
   </template>

@@ -23,8 +23,7 @@ document.addEventListener('WebComponentsReady', () => {
     });
 
     it('should remove email from result', () => {
-      grid.columns.filter((col) => col.path === 'email')[0].hidden = true;
-
+      grid._getColumns().filter((col) => col.path === 'email')[0].hidden = true;
       expect(grid.getData()[0].email).to.be.undefined;
     });
 
@@ -47,7 +46,7 @@ document.addEventListener('WebComponentsReady', () => {
     });
 
     it('should return reordered data', () => {
-      grid._vaadinGrid._columnTree[0][2]._order = 0;
+      grid._moveColumnToLeft(grid._getColumns()[2]);
       flushVaadinGrid(grid);
       expect(Object.keys(grid.getData()[0])[0]).to.eq('email');
     });

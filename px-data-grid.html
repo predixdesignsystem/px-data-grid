@@ -112,7 +112,7 @@
         </px-data-grid-toggle-details-column>
       </template>
 
-      <template is="dom-repeat" items="[[columns]]" as="column">
+      <template is="dom-repeat" items="[[columns]]" as="column" restamp>
         <px-data-grid-column
           name="[[column.name]]"
           path="[[column.path]]"
@@ -824,15 +824,6 @@
             templatizer.dataHost = this._vaadinGrid.dataHost;
             templatizer.template = this._vaadinGrid._rowDetailsTemplate;
             this._vaadinGrid._rowDetailsTemplate.templatizer = templatizer;
-
-            Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => {
-              Array.from(this._vaadinGrid.$.items.children).forEach(row => {
-                this._vaadinGrid._updateRow(
-                  row,
-                  this._vaadinGrid._columnTree[this._vaadinGrid._columnTree.length - 1]
-                );
-              });
-            });
           }
         }
 
@@ -854,11 +845,15 @@
           this._boundedGetItemId = this._gridGetItemId.bind(this);
           this._vaadinGrid.getItemId = this._boundedGetItemId;
 
-          this.addEventListener('column-froze', (event) => this._handleColumnFroze(event));
+          this.addEventListener('column-froze', (event) => this._handleColumnFreeze(event));
 
-          this.addEventListener('column-unfroze', (event) => this._handleColumnUnFreeze(event));
+          this.addEventListener('column-unfroze', (event) => this._handleColumnUnfreeze(event));
 
           this.addEventListener('group-by-column', (event) => {
+            if (this._groupByColumn) {
+              this._ungroup();
+            }
+            this._moveColumnToLeft(event.detail.column);
             this._groupByColumn = event.detail.column;
             this._vaadinGrid.clearCache();
             this._vaadinGrid.setAttribute('tree-grid', true);
@@ -866,6 +861,12 @@
 
           this.addEventListener('ungroup', (event) => {
             this._ungroup();
+          });
+
+          this.addEventListener('item-save', () => {
+            if (this._groupByColumn) {
+              this._vaadinGrid.clearCache();
+            }
           });
 
           this._boundedCancelEdit = this._cancelEdit.bind(this);
@@ -951,18 +952,23 @@
         }
 
         // put frozen column to the beginning (in the place of the first data column)
-        _handleColumnFroze(event) {
-          const columns = this._vaadinGrid._columnTree[0];
-          const frozenColumnId = event.detail.column.mappedObject ? event.detail.column.mappedObject.id : undefined;
+        _handleColumnFreeze(event) {
+          const column = event.detail.column;
+          this._moveColumnToLeft(column);
+        }
 
-          if (frozenColumnId === undefined) {
+        _moveColumnToLeft(column) {
+          const columns = this._getColumns();
+          const columnId = column.mappedObject ? column.mappedObject.id : undefined;
+
+          if (columnId === undefined) {
             console.warn('Failed to resolve column ID of frozen column');
             return;
           }
 
           let firstDataColumnIndex = 0;
           for (let i = 0; i < columns.length; i++) {
-            if (columns[i].isDataColumn) {
+            if (columns[i].isDataColumn && columns[i] !== this._groupByColumn) {
               firstDataColumnIndex = i;
               break;
             }
@@ -972,21 +978,18 @@
           for (let i = 0; i < columns.length; i++) {
             if (columns[i].isDataColumn) {
               const columnObj = columns[i].mappedObject;
-              if (columnObj && columnObj.id === frozenColumnId) {
+              if (columnObj && columnObj.id === columnId) {
                 targetColumnIndex = i;
                 break;
               }
             }
           }
 
-          columns.splice(firstDataColumnIndex, 0, columns.splice(targetColumnIndex, 1)[0]); // https://stackoverflow.com/a/2440723/1331425
-          this._vaadinGrid._updateOrders(this._vaadinGrid._columnTree, true);
+          this._vaadinGrid.insertBefore(columns[targetColumnIndex], columns[firstDataColumnIndex]);
         }
 
-        _handleColumnUnFreeze(event) {
-          // TODO doesn't work, last-frozen is not updated correctly
-          const columnsRow = this._vaadinGrid._columnTree[this._vaadinGrid._columnTree.length - 1].slice(0);
-          const lastFrozen = columnsRow.filter((column) => column._lastFrozen)[0];
+        _handleColumnUnfreeze(event) {
+          const lastFrozen = this._getColumns().filter((column) => column._lastFrozen)[0];
           if (lastFrozen) {
             this._vaadinGrid.insertBefore(event.detail.column, lastFrozen.nextSibling);
           }
@@ -1305,15 +1308,7 @@
          * Function to resolve (data) columns on grid
          */
         _getColumns() {
-          if (this._vaadinGrid && this._vaadinGrid._columnTree) {
-            return this._vaadinGrid._columnTree[0].filter(c => c.isDataColumn);
-          } else if (this.columns && this.columns.length) {
-            return this.columns.map((c) => {
-              return c._element ? c._element : c;
-            });
-          } else {
-            return [];
-          }
+          return this._vaadinGrid ? Array.from(this._vaadinGrid.querySelectorAll('px-data-grid-column')) : [];
         }
 
         /**
@@ -1394,8 +1389,8 @@
         }
 
         _getColumnElementById(columnId) {
-          return this._vaadinGrid._columnTree[0]
-            .filter(element => element.mappedObject && element.mappedObject.id == columnId)[0];
+          return this._getColumns()
+            .filter(column => column.mappedObject && column.mappedObject.id == columnId)[0];
         }
 
         _scheduleColumnSanityCheck() {
@@ -1496,7 +1491,7 @@
          * Method forcing column order rules. To be run after any column order change
          */
         _columnOrderCleaner() {
-          const columnsRow = this._vaadinGrid._columnTree[this._vaadinGrid._columnTree.length - 1].slice(0);
+          const columnsRow = this._getColumns();
           const leftColumns = columnsRow.filter(c => !c.isDataColumn && c.frozen);
           const rightColumns = columnsRow.filter(c => c.isDataColumn || !c.frozen);
 
@@ -1715,29 +1710,11 @@
           this._previousSorters = this._mapSorters();
         }
 
-        _getOrderedColumns() {
-          return this._vaadinGrid
-            ._columnTree[this._vaadinGrid._columnTree.length - 1]
-            .slice(0)
-            .sort((a, b) => a._order - b._order)
-            .map((col) => col.mappedObject);
-        }
-
         /**
          * Get current visible columns in grid
          */
         getVisibleColumns() {
-          // Do not break if called too early
-          if (this._vaadinGrid == undefined || this._vaadinGrid._columnTree === undefined) {
-            return [];
-          }
-
-          return this._vaadinGrid
-            ._columnTree[this._vaadinGrid._columnTree.length - 1]
-            .slice(0)
-            .sort((a, b) => a._order - b._order)
-            .map((col) => col.mappedObject)
-            .filter((col) => col !== undefined && !col.hidden);
+          return this._getColumns().filter((col) => !col.hidden).sort((a, b) => a._order - b._order);
         }
 
         /**
@@ -1796,6 +1773,7 @@
         _columnsChanged(columns) {
           // Store cleaned version of current columns
           this._lastColumnsReceived = this._cleanColumns(columns);
+          Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._updateActionMenu());
         }
 
         _setColumnId(columns) {
@@ -1826,7 +1804,7 @@
             return;
           }
           // Store last columns received before clearing columns
-          const revertTo = this._copyArray(this._lastColumnsReceived);
+          const revertTo = this._lastColumnsReceived;
           this._revertColumns(revertTo);
         }
 
@@ -1920,7 +1898,7 @@
 
         getState() {
           return {
-            columns: this._copyArray(this._getOrderedColumns()),
+            columns: this.getVisibleColumns(),
             highlight: this.highlight.map(entity => Object.assign({}, entity)),
             filters: this._copyArray(this._filters),
             autoFilter: this._autoFilterValue
@@ -1931,7 +1909,7 @@
           this.columns = [];
 
           Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => {
-            this.columns = this._copyArray(state.columns);
+            this.columns = state.columns;
 
             this._filters = state.filters;
             this._autoFilterValue = state.autoFilter;
