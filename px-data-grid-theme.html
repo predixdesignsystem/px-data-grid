@@ -42,6 +42,11 @@
         font-size: var(--px-data-grid-header-font-size, 12px);
       }
 
+      [part~="resize-handle"]::before {
+        width: 15px;
+        transform: translateX(-10px);
+      }
+
       /* Header and footer divider between body rows */
 
       [part~="row"]:last-child [part~="header-cell"] {
