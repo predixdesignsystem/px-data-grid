@@ -61,6 +61,15 @@
   </template>
   <script>
     {
+      /**
+       * `<px-data-grid-paginated>` - Predix UI component which defines a paginated data grid.
+       *
+       * Due to incompatibility of paginated grid with features in the list below, these won't
+       * be available for px-data-grid-paginated:
+       *
+       * - Group By Column
+       * - Select All checkbox in `<px-data-grid-selection-column>`
+       */
       class DataGridPaginatedElement extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element) {
 
         static get is() {
