@@ -567,19 +567,19 @@
             renderer: 'px-data-grid-number-renderer'
           },
           {
-            name: 'Full Name',
+            name: 'Full name',
             path: 'full',
             hidden: true
           },
           {
-            name: 'First Name',
+            name: 'First name',
             path: 'first',
             editable: true,
             required: true,
             renderer: 'px-data-grid-string-renderer'
           },
           {
-            name: 'Last Name',
+            name: 'Last name',
             path: 'last'
           },
           {
@@ -587,7 +587,7 @@
             path: 'email'
           },
           {
-            name: 'Birth Date',
+            name: 'Birth date',
             path: 'birth_date',
             type: 'date',
             editable: true,
@@ -778,7 +778,7 @@
       const frozen = this.shadowRoot.querySelector('#freeze-fullname').checked;
 
       if (grid && grid.columns) {
-        grid.columns.filter(c => c.name == 'Full Name').forEach(c => {
+        grid.columns.filter(c => c.name == 'Full name').forEach(c => {
           c.hidden = hidden;
           c.frozen = frozen;
         });
