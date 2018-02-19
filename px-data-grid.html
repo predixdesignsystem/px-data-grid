@@ -1251,6 +1251,8 @@
 
         _localDataProvider(params, callback) {
           let items = (Array.isArray(this.tableData) ? this.tableData : []).slice(0);
+          items = this._localDataResolver(params, items);
+
           if (this._groupByColumn) {
             const columnPath = this._groupByColumn.path;
             if (!params.parentItem) {
@@ -1275,7 +1277,6 @@
               items = items.filter((item) => item[columnPath] === params.parentItem[columnPath]);
             }
           }
-          items = this._localDataResolver(params, items);
 
           const totalSize = items.length;
 
