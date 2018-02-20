@@ -195,10 +195,13 @@ px-icon {
 }
 
 .action-column-button px-icon.rounded {
+  width: 12px;
+  height: 12px;
   --iron-icon-width: 12px;
   --iron-icon-height: 12px;
   border-radius: 50%;
   border: 1px solid var(--px-data-grid-action-button-color, rgb(129,129,129));
+  stroke: var(--px-data-grid-action-button-color, rgb(129,129,129));
   padding: 2px;
 }
 
