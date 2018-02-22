@@ -107,7 +107,7 @@
         </px-data-grid-selection-column>
       </template>
 
-      <template is="dom-if" if="[[rowDetails]]" restamp>
+      <template is="dom-if" if="[[_rowDetails]]" restamp>
         <px-data-grid-toggle-details-column frozen>
         </px-data-grid-toggle-details-column>
       </template>
@@ -316,14 +316,12 @@
             },
 
             /**
-             * Set to true to enable a togglable row details container. This container
-             * is hidden by default, but can be opened by clicking the chevron icon to left
-             * of the row.
+             * True when <template class="row-details"> was provided and px-data-grid is in
+             * expandable mode (each row has the chevron icon to left of the row).
              */
-            rowDetails: {
+            _rowDetails: {
               type: Boolean,
-              value: false,
-              observer: '_onRowDetailsChange'
+              value: false
             },
 
             /**
@@ -880,7 +878,8 @@
           const rowDetailsTemplate = nodes.filter(node => {
             return node.localName && node.localName === 'template' && node.className && node.className.indexOf('row-details') !== -1;
           });
-          if (rowDetailsTemplate.length) {
+          this._rowDetails = rowDetailsTemplate.length;
+          if (this._rowDetails) {
             this._expandableRows = true;
             this._vaadinGrid._rowDetailsTemplate = rowDetailsTemplate[0];
 
@@ -1631,12 +1630,6 @@
           }
 
           Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._vaadinGrid.notifyResize());
-        }
-
-        _onRowDetailsChange(rowDetails) {
-          if (this._vaadinGrid && !rowDetails) {
-            this._vaadinGrid.detailsOpenedItems = [];
-          }
         }
 
         /**

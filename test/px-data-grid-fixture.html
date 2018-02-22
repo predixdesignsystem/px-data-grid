@@ -22,6 +22,16 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="px-data-grid-row-details-fixture">
+      <template>
+        <px-data-grid>
+          <template class="row-details">
+            Hi! My name is [[item.first]]
+          </template>
+        </px-data-grid>
+      </template>
+    </test-fixture>
+
     <test-fixture id="simple-navigation">
       <template>
         <px-data-grid-navigation
@@ -49,6 +59,7 @@
     <script src="highlighting.js"></script>
     <script src="auto-filter.js"></script>
     <script src="filterable.js"></script>
+    <script src="row-details.js"></script>
     <script src="columns-api.js"></script>
     <script src="column-dropdown-menu.js"></script>
     <script src="sorting.js"></script>

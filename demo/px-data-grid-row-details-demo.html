@@ -68,8 +68,7 @@
             on-cell-hover="cellHoverListener"
             on-cell-unhover="cellUnhoverListener"
             grid-height="{{props.gridHeight.value}}"
-            on-table-action="tableActionListener"
-            row-details="{{props.rowDetails.value}}">
+            on-table-action="tableActionListener">
 
           <template class="row-details">
             Hi! My name is [[item.first]]
@@ -233,12 +232,6 @@
           }
         ],
         inputType: 'code:JSON'
-      },
-
-      rowDetails: {
-        type: Boolean,
-        defaultValue: true,
-        inputType: 'toggle'
       },
 
       selectionMode: {
