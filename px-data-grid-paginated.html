@@ -26,6 +26,7 @@
       hide-selection-column="{{hideSelectionColumn}}"
       resizable="{{resizable}}"
       striped="{{striped}}"
+      ellipsis="{{ellipsis}}"
       multi-sort="{{multiSort}}"
       columns="{{columns}}"
       column-reordering-allowed="{{columnReorderingAllowed}}"
@@ -288,6 +289,14 @@
               value: false
             },
 
+            /**
+             * If true sets all columns to use ellipsis when text overflows the column,
+             * enabling wrap mode while ellisis mode is enabled is an undefined state.
+             */
+            ellipsis: {
+              type: Boolean,
+              value: false
+            },
 
             /**
              * How many milliseconds before loading spinner will be shown

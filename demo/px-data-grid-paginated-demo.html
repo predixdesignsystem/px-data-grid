@@ -58,6 +58,7 @@
             hide-selection-column="{{props.hideSelectionColumn.value}}"
             resizable="{{props.resizable.value}}"
             striped="{{props.striped.value}}"
+            ellipsis="{{props.ellipsis.value}}"
             multi-sort="{{props.multiSort.value}}"
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
             hide-action-menu="{{props.hideActionMenu.value}}"
@@ -509,6 +510,12 @@
       },
 
       striped: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      ellipsis: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'
