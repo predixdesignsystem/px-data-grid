@@ -45,8 +45,10 @@ button.btn.btn--icon.btn--bare--primary {
   display: var(--layout-inline_-_display, inline-flex);
 }
 
-.actionable px-icon{
+.actionable px-icon {
+  --iron-icon-height: 20px;
   display: var(--layout-inline_-_display, inline-flex);
+  margin: 5px 0 0 12px;
 }
 
 :host(:not([_compact-mode-enabled])) .actionable{
