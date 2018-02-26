@@ -14,16 +14,16 @@ document.addEventListener('WebComponentsReady', () => {
     });
 
     function getSelectedPageSize() {
-      return parseInt(
-        navigation.shadowRoot.querySelector('.page-size-select px-dropdown')
-          .shadowRoot.querySelector('#label').innerText);
+      return parseInt(navigation.shadowRoot.querySelector('.page-size-select px-dropdown').displayValue);
     }
 
     function getAvailablePageSizes() {
+      const options = navigation
+        .shadowRoot.querySelector('px-dropdown')
+        .shadowRoot.querySelector('px-dropdown-content').items;
+
       // wrap return in array since querySelectorAll returns node list not an arrays
-      const options = [...navigation.shadowRoot.querySelector('px-dropdown')
-        .shadowRoot.querySelectorAll('.dropdown-option__item')];
-      return options.map((el) => parseInt(el.innerText));
+      return options.map(i => parseInt(i));
     }
 
     function getDisplayedRowRange() {
