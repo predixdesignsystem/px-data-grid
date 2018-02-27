@@ -17,7 +17,8 @@
         allow-outside-scroll
         items="[[_mappedColumns]]"
         disable-clear
-        selected="{{entity.columnId}}">
+        selected="{{entity.columnId}}"
+        hoist>
       </px-dropdown>
     </div>
 
@@ -31,7 +32,8 @@
           allow-outside-scroll
           items="[[_resolveRegexPatterns(stringComparators, _regexPatterns)]]"
           disable-clear
-          selected="{{entity.pattern}}">
+          selected="{{entity.pattern}}"
+          hoist>
         </px-dropdown>
       </div>
 
@@ -69,7 +71,8 @@
           id="date-range-dropdown"
           items="[[_dateRanges]]"
           disable-clear
-          selected="{{entity.selectedDateRangeName}}">
+          selected="{{entity.selectedDateRangeName}}"
+          hoist>
         </px-dropdown>
       </div>
 
@@ -102,7 +105,8 @@
             allow-outside-scroll
             items="[[_resolveNumberConditions(numberComparators, _numberConditions)]]"
             disable-clear
-            selected="{{entity.condition}}">
+            selected="{{entity.condition}}"
+            hoist>
           </px-dropdown>
         </div>
 

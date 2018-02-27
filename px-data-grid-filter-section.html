@@ -15,7 +15,8 @@
           items='[[_actions]]'
           button-style="bare--primary"
           disable-clear
-          selected="{{section.action}}">
+          selected="{{section.action}}"
+          hoist>
         </px-dropdown>
         <span>[[localize('items that match')]]</span>
         <px-dropdown
@@ -23,7 +24,8 @@
           items='[[_operationTypes]]'
           button-style="bare--primary"
           disable-clear
-          selected="{{section.operationType}}">
+          selected="{{section.operationType}}"
+          hoist>
         </px-dropdown>
       </div>
     </template>
