@@ -76,7 +76,8 @@
         </px-dropdown>
       </div>
 
-      <template is="dom-if" if="{{_showRangePicker(entity, entity.selectedDateRangeName, entity.columnId)}}">
+      <!-- Disabled in px-data-grid/pull/696 -->
+      <!-- <template is="dom-if" if="{{_showRangePicker(entity, entity.selectedDateRangeName, entity.columnId)}}">
         <div class="labeled-text own-row" extended>
           <px-rangepicker
             id="date-rangepicker"
@@ -91,7 +92,7 @@
             to-moment="{{_dateTo}}">
           </px-rangepicker>
         </div>
-        </template>
+      </template> -->
     </template>
 
     <template is="dom-if" if="{{_columnTypeIsNumber(entity.columnId)}}" restamp>
@@ -300,11 +301,6 @@
           }
 
           if (dateRanges.length > 0) {
-            dateRanges.push({
-              key: 'custom',
-              val: this.localize('Custom')
-            });
-
             this.set('_dateRanges', dateRanges);
             if (!entity.selectedDateRangeName) {
               this.set('entity.selectedDateRangeName', dateRanges[0].key);
@@ -329,7 +325,7 @@
         }
 
         _selectedDateRangeObserver(entity) {
-          if (!entity.selectedDateRangeName || entity.selectedDateRangeName === 'custom') {
+          if (!entity.selectedDateRangeName) {
             return;
           }
 
@@ -485,10 +481,6 @@
 
         _showSlider(minBound, maxBound) {
           return minBound !== undefined && maxBound !== undefined;
-        }
-
-        _showRangePicker(entity, selectedDateRangeName) {
-          return this._dateRanges && entity.selectedDateRangeName === 'custom';
         }
 
         _arrayHas(array, value) {
