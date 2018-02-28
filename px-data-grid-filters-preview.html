@@ -179,9 +179,9 @@
               if (column.rendererConfig && column.rendererConfig.displayFormat) {
                 format = column.rendererConfig.displayFormat;
               } else {
-                format = 'YYYY-MM-DD';
+                format = 'YYYY/MM/DD';
               }
-              return `${window.Px.moment(entity.dateFrom).format(format)}, ${window.Px.moment(entity.dateTo).format(format)}`;
+              return `${window.Px.moment(entity.dateFrom).format(format)}-${window.Px.moment(entity.dateTo).format(format)}`;
             }
             default:
               if (entity.query.length <= 15) {
