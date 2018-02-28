@@ -112,15 +112,15 @@
 
     _isNumberMatches(filter, value) {
       let result = false;
-      const comparingNumber = parseInt(value);
+      const comparingNumber = Number(value);
 
       if (filter.leftBound !== undefined && filter.rightBound !== undefined) {
-        const leftBound = window.parseInt(filter.leftBound);
-        const rightBound = window.parseInt(filter.rightBound);
+        const leftBound = Number(filter.leftBound);
+        const rightBound = Number(filter.rightBound);
 
         result = leftBound < comparingNumber && comparingNumber < rightBound;
       } else {
-        const filterValue = parseInt(filter.value);
+        const filterValue = Number(filter.value);
 
         switch (filter.condition) {
           case 'equals':

@@ -31,7 +31,7 @@ Make number-renderer columns use ellipsis overflow:
 <dom-module id="px-data-grid-number-renderer">
   <template>
     <style include="px-data-grid-number-renderer-styles"></style>
-    <template is="dom-if" if="[[!_editing]]">[[value]]</template>
+    <template is="dom-if" if="[[!_editing]]">[[_getFormattedNumber(value)]]</template>
     <template is="dom-if" if="[[_editing]]" restamp>
       <div id="editingTemplate" class="input-container">
 
@@ -95,7 +95,7 @@ Make number-renderer columns use ellipsis overflow:
           if (this.column.required && this.value.toString().length == 0) {
             isValid = false;
             message = this.localize('Value is required');
-          } else if (this.value && isNaN(parseInt(this.value))) {
+          } else if (this.value && isNaN(Number(this.value))) {
             isValid = false;
             message = this.localize('Invalid number');
           }
@@ -104,6 +104,10 @@ Make number-renderer columns use ellipsis overflow:
             valid: isValid,
             message: message
           };
+        }
+
+        _getFormattedNumber(value) {
+          return value.toLocaleString();
         }
 
         _getInputFieldType(ie) {
@@ -116,7 +120,7 @@ Make number-renderer columns use ellipsis overflow:
 
         _valueObserver(value) {
           if (typeof value === 'string' && value.length > 0) {
-            this.value = parseInt(value);
+            this.value = Number(value);
           }
         }
 
