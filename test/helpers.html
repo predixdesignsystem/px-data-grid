@@ -99,6 +99,27 @@
       .value;
   }
 
+  /**
+   * Gets the `innerText` of a cell renderer. Useful for testing simple renderers
+   * that print out some formatted text.
+   *
+   * Compare with `getBodyCellContent()`, which gets the actual `value`
+   * property for a renderer, which is the data passed to it that may
+   * or may not be transformed to display to the user.
+   */
+  function getBodyCellText(grid, row, col) {
+    const rows = getRows(grid);
+    const cells = getRowCells(rows[row]);
+    const cell = cells[col];
+    return cell
+      .querySelector('slot')
+      .assignedNodes()[0]
+      .querySelector('px-data-grid-cell-content-wrapper')
+      .shadowRoot
+      .firstElementChild
+      .innerText;
+  }
+
   function getHeaderCell(grid, index) {
     return grid._vaadinGrid.$.header.querySelectorAll('[part~="cell"]')[index];
   }

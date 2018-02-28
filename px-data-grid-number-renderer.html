@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../px-tooltip/px-tooltip.html">
+<link rel="import" href="../px-number-formatter/px-number-formatter-no-display.html">
 <link rel="import" href="px-data-grid-renderer-mixin.html">
 <link rel="import" href="px-data-grid-theme.html">
 <link rel="import" href="css/px-data-grid-number-renderer-styles.html">
@@ -31,12 +32,20 @@ Make number-renderer columns use ellipsis overflow:
 <dom-module id="px-data-grid-number-renderer">
   <template>
     <style include="px-data-grid-number-renderer-styles"></style>
-    <template is="dom-if" if="[[!_editing]]">[[_getFormattedNumber(value)]]</template>
+    <px-number-formatter-no-display
+        value="[[value]]"
+        format="[[_getDisplayFormat(displayFormat)]]"
+        currency="[[displayIsCurrency]]"
+        culture="[[displayCulture]]"
+        zero-format="[[displayZeroFormat]]"
+        formatted-value="{{_formattedValue}}">
+    </px-number-formatter-no-display>
+    <template is="dom-if" if="[[!_editing]]">[[_formattedValue]]</template>
     <template is="dom-if" if="[[_editing]]" restamp>
       <div id="editingTemplate" class="input-container">
 
         <!-- In IE11 input[type=number] does not work properly. -->
-        <input id="editingTemplateInput" class$="{{getClasses(validationResult)}}" type$="[[_getInputFieldType(_ie)]]" value="{{value::change}}">
+        <input id="editingTemplateInput" class$="{{getClasses(validationResult)}}" type$="[[_getInputFieldType(_ie)]]"  value="[[value]]" on-input="_onInputChange">
 
         <px-tooltip
           for="editingTemplateInput"
@@ -67,6 +76,43 @@ Make number-renderer columns use ellipsis overflow:
 
         static get properties() {
           return {
+            /**
+             * Format used to display the number in the cell. Use a valid
+             * [numbro.js format string](http://numbrojs.com/format.html),
+             * or set to `null` to display the number exactly as it was passed
+             * by casing it to string.
+             */
+            displayFormat: {
+              type: String,
+              value: null
+            },
+
+            /**
+             * Changes how the number is displayed during localization.
+             * For valid formats and features, see: http://numbrojs.com/languages.html
+             */
+            displayCulture: {
+              type: String
+            },
+
+            /**
+             * Set to `true` if the number should be formatted as currency.
+             * Will use the `displayFormat` put parse the number as currency.
+             */
+            displayIsCurrency: {
+              type: String
+            },
+
+            /**
+             * Defines how to display 0 values.
+             * For valid formats and features, see: http://numbrojs.com/format.html
+             */
+            displayZeroFormat: {
+              type: String
+            },
+
+            _formattedValue: String,
+
             value: {
               type: Number
             },
@@ -84,7 +130,8 @@ Make number-renderer columns use ellipsis overflow:
 
         static get observers() {
           return [
-            '_valueObserver(value)'
+            '_valueObserver(value)',
+            '_rendererConfigChanged(column.rendererConfig, column.rendererConfig.*)'
           ];
         }
 
@@ -106,10 +153,6 @@ Make number-renderer columns use ellipsis overflow:
           };
         }
 
-        _getFormattedNumber(value) {
-          return value.toLocaleString();
-        }
-
         _getInputFieldType(ie) {
           if (ie) {
             return 'text';
@@ -119,9 +162,53 @@ Make number-renderer columns use ellipsis overflow:
         }
 
         _valueObserver(value) {
+          if (isNaN(Number(value))) {
+            // Can't be parsed to number, throw an error
+            console.error(`
+[px-data-grid-number-renderer]
+Expected a value that could be parsed to a number, but received a value that cannot be parsed.
+Column path: ${this.column.path}
+Unexpected value: ${value}
+            `.trim());
+            return;
+          }
           if (typeof value === 'string' && value.length > 0) {
             this.value = Number(value);
           }
+        }
+
+        _onInputChange(e) {
+          this.value = e.target.value;
+        }
+
+        _rendererConfigChanged(rendererConfig) {
+          if (rendererConfig) {
+            const updates = {};
+
+            if (rendererConfig.hasOwnProperty('displayFormat') && this.displayFormat !== rendererConfig.displayFormat) {
+              updates.displayFormat = rendererConfig.displayFormat;
+            }
+
+            if (rendererConfig.hasOwnProperty('displayCurrency') && this.displayCurrency !== rendererConfig.displayCurrency) {
+              updates.displayCurrency = rendererConfig.displayCurrency;
+            }
+
+            if (rendererConfig.hasOwnProperty('displayCulture') && this.displayCulture !== rendererConfig.displayCulture) {
+              updates.displayCulture = rendererConfig.displayCulture;
+            }
+
+            if (rendererConfig.hasOwnProperty('displayZeroFormat') && this.displayZeroFormat !== rendererConfig.displayZeroFormat) {
+              updates.displayZeroFormat = rendererConfig.displayZeroFormat;
+            }
+
+            if (Object.keys(updates).length) {
+              this.setProperties(updates);
+            }
+          }
+        }
+
+        _getDisplayFormat(format) {
+          return format === null ? 'NONE' : format;
         }
 
         getClasses(result) {

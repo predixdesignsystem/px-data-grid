@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Number Renderer Configurations | px-data-grid examples</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../polymer/polymer.html"/>
+  <link rel="import" href="../../px-theme/px-theme-styles.html"/>
+  <link rel="import" href="../css/px-data-grid-light-theme-styles.html"/>
+  <link rel="import" href="../px-data-grid.html"/>
+
+  <style>
+    html, body {
+      font-size: 15px;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <custom-style>
+    <style is="custom-style" include="px-theme-styles"></style>
+  </custom-style>
+  <custom-style>
+    <style include="px-data-grid-light-theme-styles"></style>
+  </custom-style>
+
+  <px-data-grid editable></px-data-grid>
+
+  <script>
+    const grid = document.querySelector('px-data-grid');
+
+    grid.columns = [
+      {
+        name: 'Name',
+        path: 'name'
+      },
+      // Height column is rendered without any formatting
+      {
+        name: 'Height',
+        path: 'height',
+        renderer: 'px-data-grid-number-renderer',
+        editable: true
+      },
+      // Weight column is formatted to use commas and strip decimals
+      {
+        name: 'Weight',
+        path: 'weight',
+        renderer: 'px-data-grid-number-renderer',
+        editable: true,
+        rendererConfig: {
+          displayFormat: '0,0'
+        }
+      },
+      // Model column contains data formatted as a number but stored as a string
+      // Some of the data can be parsed to a number, but some data can't be
+      // parsed. Check the console to see errors for non-numeric values.
+      {
+        name: 'Model',
+        path: 'model',
+        renderer: 'px-data-grid-number-renderer',
+        editable: true
+      }
+    ];
+
+    grid.tableData = [
+      {
+        name: 'GENERATOR 001',
+        height: 60.224,
+        weight: 190378.487,
+        model: '1934'
+      },
+      {
+        name: 'GENERATOR 002',
+        height: -63.13,
+        weight: 238712.03,
+        model: '1934.29'
+      },
+      {
+        name: 'GENERATOR 003',
+        height: 59.49,
+        weight: 0,
+        model: '099A'
+      },
+      {
+        name: 'GENERATOR 004',
+        height: 68,
+        weight: 478209.22,
+        model: ''
+       }
+    ];
+  </script>
+</body>
+</html>
