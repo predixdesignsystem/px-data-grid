@@ -156,8 +156,10 @@
                   `${this.localize(this._underscoreToHumanReadable(entity.condition))}`;
               }
               break;
-            case 'date':
-              return `${section.action} ${section.operationType} / ${name} / ${this.localize('Between')}`;
+            case 'date': {
+              const format = this._getTimeStampFormat(column);
+              return `Range \/ ${window.Px.moment(entity.dateFrom).format(format)} - ${window.Px.moment(entity.dateTo).format(format)}`;
+            }
             default:
               return `${section.action} ${section.operationType} / ${name} / ${entity.pattern}`;
           }
@@ -175,12 +177,7 @@
               }
               break;
             case 'date': {
-              let format;
-              if (column.rendererConfig && column.rendererConfig.displayFormat) {
-                format = column.rendererConfig.displayFormat;
-              } else {
-                format = 'YYYY/MM/DD';
-              }
+              const format = this._getDateFormat(column);
               return `${window.Px.moment(entity.dateFrom).format(format)}-${window.Px.moment(entity.dateTo).format(format)}`;
             }
             default:
@@ -198,6 +195,20 @@
 
         _hasMultipleFilters(flattenFilterEntities) {
           return flattenFilterEntities.length > 1;
+        }
+
+        _getDateFormat(column) {
+          if (column.rendererConfig && column.rendererConfig.displayFormat) {
+            return column.rendererConfig.displayFormat;
+          } else {
+            return 'YYYY/MM/DD';
+          }
+        }
+
+        _getTimeStampFormat(column) {
+          // TODO: add timezone to end of format
+          // TODO: read time format from renderConfig?
+          return 'YYYY/MM/DD, hh:mm:ss A';
         }
       }
 
