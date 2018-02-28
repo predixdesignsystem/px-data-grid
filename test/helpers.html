@@ -111,13 +111,44 @@
     const rows = getRows(grid);
     const cells = getRowCells(rows[row]);
     const cell = cells[col];
-    return cell
+    const renderer = cell
       .querySelector('slot')
       .assignedNodes()[0]
       .querySelector('px-data-grid-cell-content-wrapper')
       .shadowRoot
-      .firstElementChild
-      .innerText;
+      .firstElementChild;
+    return getShadowRootShallowInnerText(renderer);
+  }
+
+  /**
+   * Goal: Get the visible, rendered text in a given custom element's shadow root
+   *
+   * Naive approach: Just call `elem.innerText`
+   *
+   * The problem: In polyfilled browsers we can use `elem.innerText` to get the
+   * rendered text, but in browsers with real shadow roots we cannot. The
+   * innerText property returns an empty string because no children are
+   * distributed in the custom element's light DOM.
+   *
+   * This function normalizes the difference and tries to return just what is
+   * visible to the user within a given custom element's shadow root. It is
+   * not recursive so it can only get text content that is not hidden another
+   * level deep in a different shadow DOM.
+   *
+   * Thanks to https://github.com/duckinator/innerText-polyfill/blob/master/innertext.js
+   * for the right direction on solving this problem.
+   */
+  function getShadowRootShallowInnerText(elem) {
+    const hasNativeShadow = window.Polymer.Settings.useShadow;
+    if (!hasNativeShadow) {
+      return elem.innerText;
+    }
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.selectAllChildren(elem.shadowRoot);
+    const text = selection.toString();
+    selection.removeAllRanges();
+    return text;
   }
 
   function getHeaderCell(grid, index) {
