@@ -2,7 +2,6 @@
 <link rel="import" href="../px-chip/px-chip.html">
 <link rel="import" href="../px-icon-set/px-icon.html">
 <link rel="import" href="../px-tooltip/px-tooltip.html">
-<link rel="import" href="../px-popover/px-popover.html">
 <link rel="import" href="css/px-data-grid-filters-preview-styles.html">
 
 
@@ -156,8 +155,10 @@
                   `${this.localize(this._underscoreToHumanReadable(entity.condition))}`;
               }
               break;
-            case 'date':
-              return `${section.action} ${section.operationType} / ${name} / ${this.localize('Between')}`;
+            case 'date': {
+              const format = this._getTimeStampFormat(column);
+              return `Range \/ ${window.Px.moment(entity.dateFrom).format(format)} - ${window.Px.moment(entity.dateTo).format(format)}`;
+            }
             default:
               return `${section.action} ${section.operationType} / ${name} / ${entity.pattern}`;
           }
@@ -175,13 +176,8 @@
               }
               break;
             case 'date': {
-              let format;
-              if (column.rendererConfig && column.rendererConfig.displayFormat) {
-                format = column.rendererConfig.displayFormat;
-              } else {
-                format = 'YYYY-MM-DD';
-              }
-              return `${window.Px.moment(entity.dateFrom).format(format)}, ${window.Px.moment(entity.dateTo).format(format)}`;
+              const format = this._getDateFormat(column);
+              return `${window.Px.moment(entity.dateFrom).format(format)}-${window.Px.moment(entity.dateTo).format(format)}`;
             }
             default:
               if (entity.query.length <= 15) {
@@ -198,6 +194,20 @@
 
         _hasMultipleFilters(flattenFilterEntities) {
           return flattenFilterEntities.length > 1;
+        }
+
+        _getDateFormat(column) {
+          if (column.rendererConfig && column.rendererConfig.displayFormat) {
+            return column.rendererConfig.displayFormat;
+          } else {
+            return 'YYYY/MM/DD';
+          }
+        }
+
+        _getTimeStampFormat(column) {
+          // TODO: add timezone to end of format
+          // TODO: read time format from renderConfig?
+          return 'YYYY/MM/DD, hh:mm:ss A';
         }
       }
 
