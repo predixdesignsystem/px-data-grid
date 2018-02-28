@@ -31,3 +31,7 @@
 .labeled-text > * {
   width: 100%;
 }
+
+px-rangepicker {
+  --px-datetime-range-field-column-min-width: 0;
+}
