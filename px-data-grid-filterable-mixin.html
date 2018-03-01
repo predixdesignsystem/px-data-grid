@@ -9,7 +9,16 @@
     static get properties() {
       return {
         /**
-         * If true, turns on advanced filtering.
+         * Set to enable advanced filtering. When enabled, a filter
+         * button will be shown at the top of the grid. When the user clicks
+         * on the filter button, a modal will be shown and the user can
+         * filter visible items using different UI patterns.
+         *
+         * Columns should have the right `columns.type` set to ensure the
+         * advanced filtering works as expected. See the `columns` property
+         * for more information on setting the type, and for more advanced
+         * filtering options that can be customized for `number` and `date`
+         * type columns.
          */
         filterable: {
           type: Boolean,

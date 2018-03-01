@@ -207,14 +207,40 @@
 
         static get properties() {
           return {
-
             /**
              * Data for the table to display.
              *
-             * Expected data format is a JSON array of objects. Each object in the array represents a row in the table.
+             * Pass an array of objects. Each object will be rendered as a row
+             * in the grid. The objects should share many of the same keys.
+             * Each key will be used to group data into columns.
              *
-             * Each item in an object will be displayed as a separate column, unless px-data-table-columns are
-             * defined to limit which columns are displayed.
+             * Use the `columns` property to control which keys are displayed
+             * to the user and which are not, and to control how the grid
+             * handles the data for each column. By default if no `columns` are
+             * defined the grid will automatically create columns from all of
+             * the keys found in the first object.
+             *
+             * Example data:
+             *
+             * ```
+             * [
+             *   {
+             *     first: 'Elizabeth',
+             *     last: 'Wong',
+             *     email: 'sika@iknulber.cl'
+             *   },
+             *   {
+             *     first: 'Jeffrey',
+             *     last: 'Hamilton',
+             *     email: 'cofok@rac.be'
+             *   },
+             *   {
+             *     first: 'Alma',
+             *     last: 'Martin',
+             *     email: 'dotta@behtam.la'
+             *   }
+             * ]
+             * ```
              */
             tableData: {
               type: Array,
@@ -222,7 +248,13 @@
             },
 
             /**
-             * If true, hides the column with checkboxes.
+             * Set to hide the selection checkbox for each row.
+             *
+             * By default, if the `selectionMode` property is set to `'single'`
+             * or `'multi'` the grid shows a checkbox/radio button the user
+             * can click to select or deselect a row. When this property is
+             * enabled, the checkbox is hidden and the user can click directly
+             * on row contents to select or deselect a row.
              */
             hideSelectionColumn: {
               type: Boolean,
@@ -230,7 +262,12 @@
             },
 
             /**
-             * An array that contains the selected items.
+             * Array of selected items. Automatically updated by the grid when
+             * the user selects items. Each item will be a reference to the
+             * `tableData` item that was passed to render the row.
+             *
+             * Add references to `tableData` items to programmatically select
+             * items from your application.
              */
             selectedItems: {
               type: Array,
@@ -238,6 +275,7 @@
               notify: true
             },
 
+            // @TODO: Improve docs for size
             /**
              * The total number of items
              */
@@ -247,7 +285,9 @@
             },
 
             /**
-             * Number of items fetched at a time from the dataprovider.
+             * The number of items fetched during each request to the
+             * `remoteDataProvider`. See the `remoteDataProvider` property
+             * for more information.
              */
             pageSize: {
               type: Number,
@@ -255,7 +295,8 @@
             },
 
             /**
-             * When `true`, user can sort by multiple columns
+             * Set to `true` to allow the user to sort by multiple columns at
+             * the same time.
              */
             multiSort: {
               type: Boolean,
@@ -263,7 +304,11 @@
             },
 
             /**
-             * Current selection mode of grid. Accepts values 'none', 'single' and 'multi'.
+             * Sets the current selection mode for the grid. Valid modes are:
+             *
+             *   * `'none'` - User can't select any rows
+             *   * `'single'` - User can select one row at a time
+             *   * `'multi'` - User can select multiple rows at the same time
              */
             selectionMode: {
               type: String,
@@ -271,6 +316,7 @@
               observer: '_selectionModeChanged'
             },
 
+            // @TODO: Improve docs for activeItem
             /**
              * The item user has last interacted with. Turns to `null` after user deactivates
              * the item by re-interacting with the currently active item.
@@ -282,7 +328,7 @@
             },
 
             /**
-             * When `true`, user can resize columns
+             * Set to `true` to allow the user to resize columns.
              */
             resizable: {
               type: Boolean,
@@ -290,7 +336,17 @@
             },
 
             /**
-             * When `true`, user can edit data
+             * Set to allow users to edit data in the grid. You must also
+             * explicitly set the `columns.editable` property to true for each
+             * column the user can edit in the grid.
+             *
+             * When the user starts or stops editing a row the
+             * `editing-item-changed` event will be fired. `event.detail.item`
+             * will contain a reference to the row being edited.
+             *
+             * After a user finishes editing a row the `item-edited` event
+             * will be fired. `event.detail` will contain information about
+             * what the user changed.
              */
             editable: {
               type: Boolean,
@@ -298,8 +354,9 @@
             },
 
             /**
-             * Set to true to allow column reordering. Notice that some states will disable
-             * reordering (eg. grouped by value).
+             * Set to `true` to allow the user to re-order columns by dragging
+             * and dropping them. Can't be combined with some other states like
+             * group-by-value.
              */
             columnReorderingAllowed: {
               type: Boolean,
@@ -307,16 +364,45 @@
             },
 
             /**
-             * An array containing references to expanded items.
+             * An array containing references to the expanded rows.
+             *
+             * Automatically updated by the grid in the following cases:
+             *
+             *   * When a `row-details` template is provided to create expandable
+             *     rows the grid will add rows to this list when they are
+             *     expanded by the user, and remove rows when they are collapsed
+             *     by the user.
+             *   * When the user groups rows by column the grid will add rows
+             *     that the user expands and remove rows the user collapses.
+             *
+             * Set this value to references to rows to expand or collapse
+             * the rows programmatically.
              */
             expandedItems: {
               type: Array,
-              value: []
+              value: [],
+              notify: true
             },
 
             /**
-             * True when <template class="row-details"> was provided and px-data-grid is in
-             * expandable mode (each row has the chevron icon to left of the row).
+             * Automatically set to truthy value when `<template class="row-details">`
+             * is distributed in the data grid. Passing a row-details template
+             * makes all rows expandable (by adding a chevron icon to the left
+             * of the row).
+             *
+             * When the user expands the row the grid stamps out a new instance
+             * of the row-details template and sets `item` in the template's
+             * scope to the expanded row.
+             *
+             * Example of using row-details:
+             *
+             * ```
+             * <px-data-grid table-data='[{ "name": "Elliot" }]'>
+             *   <template class="row-details">
+             *     <p>This user's name is [[item.name]], in case you were wondering.</p>
+             *   </template>
+             * </px-data-grid>
+             * ```
              */
             _rowDetails: {
               type: Boolean,
@@ -324,7 +410,11 @@
             },
 
             /**
-             * Define if table action menu should be hidden.
+             * Set to hide the action menu button displayed at the top right of
+             * the grid.
+             *
+             * If the action menu is hidden, the user will not be able to unhide
+             * any hidden columns.
              */
             hideActionMenu: {
               type: Boolean,
@@ -332,48 +422,134 @@
             },
 
             /**
-             * Sets the columns the grid should render. If no columns are passed, the grid
-             * generates columns from the `tableData` passed in. Columns are rendered
-             * in the same order as the array.
+             * Defines the columns the grid should render. If no columns are
+             * passed, the grid generates columns from the `tableData` passed
+             * in. Columns are rendered in the same order as the array.
              *
-             * Each column can have the following configurations. Only name and path
-             * are required, all others are optional:
+             * ## `column` options
              *
-             *   * `{string} id='column.path[column.type]'` - Unique identificator of the column.
-             *     By default, px-data-grid will automatically generate it from `column.path` and `column.type`.
-             *     There can't be 2 columns with the same id.
-             *     Also, note, that `-any-` is reserved keyword for `id`, you should not use it.
+             * The following options are available for all column types. Only
+             * `name` and `path` are required, all others are optional:
              *
-             *   * `{string} name` - Name, that is displayed in column header.
+             *   * `{string} name` - Human-readable name displayed in the column
+             *     header
              *
-             *   * `{string} path` - Column's path indicates a key, which is used to get data from data object.
+             *   * `{string} path` - Key used to get the column data from each
+             *     of the `tableData` objects
              *
-             *   * `{string} type=('string'|'number'|'date')` - Type of column.
-             *     Influences on advanced filter's UI. Different selectors will be displayed for different types.
+             *   * `{string} id='column.path[column.type]'` - Unique identifier
+             *     of the column. By default, px-data-grid will automatically
+             *     generate it from `column.path` and `column.type`. There can't
+             *     be 2 columns with the same id. The value `-any-` is a
+             *     reserved keyword that you cannot use for any column `id`.
              *
-             *   * `{string} renderer` - You can define your own renderer element to display and edit cell data in your own way.
-             *     For more information, please check sample renderers, e.g. `px-data-grid-number-renderer`, `px-data-grid-date-renderer`.
+             *   * `{string} type=('string'|'number'|'date')` - Type of data
+             *     in the column. Used in the advanced filter UI to show
+             *     different filter options for each data type. Does not change
+             *     the renderer or impact sorting.
              *
-             *   * `{object} rendererConfig` - An arbitrary object that can be used to pass down options to the chosen renderer.
-             *      See `px-data-grid-date-renderer` for an example of a renderer using this object for its four configurable properties
+             *   * `{string} renderer` - The name of the web component used to
+             *     render each cell in the column. There are three built-in
+             *     renderers available: `'px-data-grid-string-renderer'` (the
+             *     default renderer), `'px-data-grid-number-renderer'`, and
+             *     `'px-data-grid-date-renderer'`. You can also create a custom
+             *     renderer and use its name here. If no renderer is specified,
+             *     the column cannot be edited by the user.
              *
-             *   * `{array} dateRanges` - list of pre-defined date ranges, that will appear in advanced filter's
-             *      dropdown when column.type is date. See format in `px-data-grid-column-demo`.
+             *   * `{object} rendererConfig` - Settings to pass to the renderer
+             *     that change how data is displayed to the user. See the
+             *     examples below for information on which options are available
+             *     for each built-in renderer.
              *
-             *   * `{number} minBound` - Used to define minimum bound of a number in advanced filter's slider.
-             *     Note, that this property works with `column.type === 'number'` only.
+             * The following options are available for columns of type `date`:
              *
-             *   * `{number} maxBound` - Used to define maximum bound of a number in advanced filter's slider.
-             *     Note, that this property works with `column.type === 'number'` only.
-             *     If both minBound and maxBound properties are defined, advanced filter will display slider instead of dropdown.
+             *   * `{array} dateRanges` - List of pre-defined date ranges that
+             *     will appear in advanced filter dropdown for this column.
+             *     See the examples below for examples on how to format
+             *     each date range.
              *
-             *   * `{boolean} hidden=false` - Indicates whether a column is hidden.
+             * The following options are available for columns of type `number`:
              *
-             *   * `{boolean} frozen=false` - Indicates whether a column is frozen.
+             *   * `{number} minBound` - Defines a minimum bound of a number in
+             *     the advanced filter field for this column. If both minBound
+             *     and maxBound properties are defined, the advanced filter will
+             *     display a slider instead of a condition dropdown.
              *
-             *   * `{boolean} required=false` - This property is used in renderers to validate data when user edits it.
+             *   * `{number} maxBound` - Defines a maximum bound of a number in
+             *     the advanced filter field for this column.
              *
-             *   * `{number} flexGrow=1` - Indicates whether a column should grow, equialent to the CSS flex-grow property.
+             *   * `{boolean} hidden=false` - Hides the column from the user
+             *     when the grid is rendered. Automatically updated when the
+             *     user shows/hides columns using action menu(s).
+             *
+             *   * `{boolean} frozen=false` - Freezes the column. When the user
+             *     scrolls the grid horizontally frozen columns will not move.
+             *     Automatically updated when the user freezes/unfreezes columns
+             *     using action menu(s).
+             *
+             *   * `{boolean} required=false` - Used in renderers during editing.
+             *     If the column is required, the user will not be allowed to
+             *     enter a blank value.
+             *
+             *   * `{number} flexGrow=1` - Sets the relative size of the column
+             *     compared to other columns in the grid. Equivalent to the CSS
+             *     `flex-grow` property.
+             *
+             * ## `column.rendererConfig` options
+             *
+             * The following options can be set in the `rendererConfig` for
+             * columns of type `date`. All formats should be set to a valid
+             * [moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)
+             * or to 'ISO':
+             *
+             *   * `{string} rendererConfig.displayFormat='YYYY-MM-DD'` -
+             *     Format used to display the date for the user.
+             *
+             *   * `{string} rendererConfig.dataFormat='YYYY-MM-DD'` - Format
+             *     the grid expects data in when reading it from `tableData`.
+             *
+             *   * `{string} rendererConfig.datePickerDateFormat='YYYY-MM-DD'` -
+             *     Format used for the px-datetime-picker date when the user
+             *     edits cells in the column.
+             *
+             *   * `{string} rendererConfig.datePickerTimeFormat='HH:MM:SS'` -
+             *     Format used for the px-datetime-picker time when the user
+             *     edits cells in the column.
+             *
+             *   * `{boolean} rendererConfig.hideDate=false` - Hides the date
+             *     section of the px-datetime-picker when the user edits cells
+             *     in the column.
+             *
+             *   * `{boolean} rendererConfig.hideTime=true` - Hides the time
+             *     section of the px-datetime-picker when the user edits cells
+             *     in the column.
+             *
+             * The following options can be set in the `rendererConfig` for
+             * columns of type `number`:
+             *
+             *   * `{?string} rendererConfig.displayFormat=null` - Format used to
+             *     display numbers in this column. Set to a valid
+             *     [numbro.js format string](http://numbrojs.com/format.html).
+             *     Set to `null` to display the number exactly as it appears
+             *     in the `tableData` by coercing it to string.
+             *
+             *   * `{string} rendererConfig.displayCulture='en-US'` - Changes the
+             *     way numbers in this column are displayed to the user by
+             *     localizing to get the correct format for commas, decimals,
+             *     etc. See [numbro.js languages](http://numbrojs.com/languages.html)
+             *     for a list of valid options.
+             *
+             *   * `{boolean} rendererConfig.displayIsCurrency=false` - Set to
+             *     `true` if the data in this column should be formatted as
+             *     currency. Will use `rendererConfig.displayFormat` to figure
+             *     out how to display the currency, or fall back to a localized
+             *     default based on `rendererConfig.displayCulture`.
+             *
+             *   * `{string} displayZeroFormat` - Used to format numbers equal
+             *     to `0` in this column. See [numbro.js docs](http://numbrojs.com/format.html)
+             *     for a list of valid options.
+             *
+             * ## Examples
              *
              * Example format for a single column with all configurations used:
              *
@@ -414,6 +590,68 @@
              *   flexGrow: 1
              * }
              * ```
+             *
+             * Example format for column of type `date` with custom `dateRanges`:
+             *
+             * ```javascript
+             * {
+             *   name: 'Birth date',
+             *   path: 'birth_date',
+             *   type: 'date',
+             *   editable: true,
+             *   renderer: 'px-data-grid-date-renderer',
+             *   rendererConfig: {
+             *     hideTime: true,
+             *     displayFormat: 'YYYY/MM/DD',
+             *     dataFormat: 'YYYY-MM-DD'
+             *   },
+             *   dateRanges: [
+             *     {
+             *       name: 'Last 7 days',
+             *       getRange: () => {
+             *         return {
+             *           dateTo: window.moment().format(),
+             *           dateFrom: window.moment().subtract(7, 'd').format()
+             *         };
+             *       }
+             *     },
+             *     {
+             *       name: 'Last 14 days',
+             *       getRange: () => {
+             *         return {
+             *           dateTo: window.moment().format(),
+             *           dateFrom: window.moment().subtract(14, 'd').format()
+             *         };
+             *       }
+             *     },
+             *     {
+             *       name: 'This month',
+             *       getRange: () => {
+             *         return {
+             *           dateTo: window.moment().format(),
+             *           dateFrom: window.moment().subtract(31, 'd').format()
+             *         };
+             *       }
+             *     },
+             *     {
+             *       name: 'Last month',
+             *       getRange: () => {
+             *         return {
+             *           dateTo: window.moment().subtract(1, 'M').format(),
+             *           dateFrom: window.moment().subtract(2, 'M').format()
+             *         };
+             *       }
+             *     },
+             *     {
+             *       name: 'Fixed range',
+             *       range: {
+             *         dateTo: '1996-11-10',
+             *         dateFrom: '1985-12-19'
+             *       }
+             *     }
+             *   ]
+             * }
+             * ```
              */
             columns: {
               type: Array,
@@ -437,11 +675,11 @@
             },
 
             /**
-             * A valid IETF language tag as a string that `app-localize-behavior` will
-             * use to localize this component.
+             * A valid IETF language tag as a string that `app-localize-behavior`
+             * will use to localize this component.
              *
-             * See https://github.com/PolymerElements/app-localize-behavior for API
-             * documentation and more information.
+             * See https://github.com/PolymerElements/app-localize-behavior for
+             * API documentation and more information.
              */
             language: {
               type: String,
@@ -488,11 +726,24 @@
             },
 
             /**
-             * All custom table actions shown before columns. Array should contain objects
-             * with name (String, shown to user) and id (String, given back in event).
-             * When user selects these actions table-action event will be emitted, with id of
-             * action at event.detail.id
-             * ```
+             * A list of custom actions that are shown when the user taps the
+             * action menu button at the top right of the grid. If the
+             * `hideActionMenu` property is enabled the action menu won't be
+             * shown to the user.
+             *
+             * Each array entry should be an object with the following properties:
+             *
+             *   * `{string} name` - Label shown in the action menu, should
+             *     prompt the user to do something (e.g. "Export CSV")
+             *   * `{string} id` - Unique identifier that will be included in the
+             *     event fired when the user taps an action in the menu
+             *
+             * When the user taps an action in the menu the grid will fire the
+             * `table-action` event. `event.detail.id` will be the action ID.
+             *
+             * Example actions:
+             *
+             * ```javascript
              * [
              *   {
              *     name: 'Export CSV',
@@ -511,15 +762,29 @@
             },
 
             /**
-             * All custom item actions shown on the data rows. Array should contain objects
-             * with name (String, shown to user) and id (String, given back in event).
-             * When user selects these actions item-action event will be emitted, with id of
-             * action at event.detail.id
-             * ```
+             * A list of custom actions that are shown in the actions menu
+             * for each data row. The action menu button appears to the right
+             * of each row when the user hovers over the row.
+             *
+             * Each array entry should be an object with the following properties:
+             *
+             *   * `{string} name` - Label shown in the action menu, should
+             *     prompt the user to do something (e.g. "Add Row After")
+             *   * `{string} id` - Unique identifier that will be included in the
+             *     event fired when the user taps an action in the menu
+             *
+             * When the user taps an action in the menu the grid will fire the
+             * `item-action` event. `event.detail.id` will be the action ID and
+             * `event.detail.item` will be a reference to the row the user
+             * took action on (from `tableData`).
+             *
+             * Example actions:
+             *
+             * ```javascript
              * [
              *   {
-             *     name: 'Add Row',
-             *     id: 'add'
+             *     name: 'Add Row After',
+             *     id: 'add-after'
              *   }
              *   {
              *     name: 'Delete Row',
@@ -550,14 +815,10 @@
              *
              * `callback(items, size)` Callback function with arguments:
              *   - `items` Current page of items
-             *   - `size` Total number of items. When tree sublevel items
-             *     are requested, total number of items in the requested sublevel.
-             *     Optional when tree is not used, required for tree.
+             *   - `size` Total number of items.
              *
              * `<px-data-grid>` calls this function lazily, only when it needs more data
              * to be displayed.
-             *
-             * __Note that expanding the tree grid's item will trigger a call to `remoteDataProvider`.__
              *
              * __Also, note that when using function data providers, the total number of items
              * needs to be set manually. The total number of items can be returned
@@ -609,7 +870,8 @@
             },
 
             /**
-             * If true, row-details template is provided and rows are expandable
+             * Automatically set to `true` when a row-details template is
+             * found and rows are expandable.
              */
             _expandableRows: {
               type: Boolean,
@@ -617,8 +879,9 @@
             },
 
             /**
-             * If true, every other row in the table will appear with a background color to improve visual scanning.
-             * When grouped by column striping will be disabled.
+             * Set to add a background color to every other row in the grid.
+             * Can make it easier for users to scan across long rows. Striping
+             * is disabled in group-by-column mode.
              */
             striped: {
               type: Boolean,
@@ -626,8 +889,10 @@
             },
 
             /**
-             * If true sets all columns to use ellipsis when text overflows the column,
-             * enabling wrap mode while ellisis mode is enabled is an undefined state.
+             * Set to show an ellipsis and truncate text for columns where the
+             * text doesn't fit in the column.
+             *
+             * Do not enable wrap mode while ellipsis mode is enabled.
              */
             ellipsis: {
               type: Boolean,
@@ -650,7 +915,8 @@
             },
 
             /**
-             * How many milliseconds before loading spinner will be shown
+             * Number of milliseconds to wait before showing the loading spinner
+             * when requesting new data from the `remoteDataProvider`.
              */
             loadingSpinnerDebounce: {
               type: Number,
@@ -658,7 +924,13 @@
             },
 
             /**
-             * To enable automatic filtering change property to true
+             * Set to `true` to enable simple filtering. When enabled, a search
+             * box will be shown at the top of the grid. The user can type
+             * in the search box to hide rows that don't include the stringified
+             * value they're looking for. The grid will search all columns and
+             * treat all column types as strings for matching purposes.
+             *
+             * See `filterable` property for a more advanced filter option.
              */
             autoFilter: {
               type: Boolean,
@@ -666,23 +938,49 @@
             },
 
             /**
-             * Array of objects of conditions used to highlight specific columns.
-             * Format:
+             * List of rules used to highligh specific columns, rows, or cells.
+             *
+             * Pass an array of objects. Each object should have the following
+             * properties:
+             *
+             *   * `{string} type` - If the highlight condition returns `true`,
+             *     the type determines what the grid will highlight. Set to
+             *     `'cell'` to highlight only the cell that passed the highlight
+             *     rule, `'row'` to highlight the row that holds the matching
+             *     cell, or `'column'` to highlight the column that holds the
+             *     matching cell.
+             *   * `{Function} condition` - Function that will be called by the
+             *     grid for each cell. If the function returns `true`, the
+             *     highlight rule will be triggered. If the function returns a
+             *     falsey value, the highlight rule will not be used. The function
+             *     will be passed three arguments: `cellContent` containing
+             *     the text of the cell, `column` containing a reference to the
+             *     `columns` object for the cell's column, and `item` as a reference
+             *     to the `tableData` item used to create the cell's row.
+             *   * `{string} color` - A valid CSS color (e.g. hex code or color
+             *     name). If the highlight condition returns `true`, the color
+             *     will be used to set the background color of the matching
+             *     cell, column, or row.
+             *
+             * Example highlight rules:
+             *
              * ```javascript
-             * {
-             *   type: 'cell',
-             *   condition: (cellContent, column, item) => { return cellContent == 'John Doe' },
-             * },
-             * {
-             *   type: 'row',
-             *   condition: (cellContent, item) => { return cellContent[0] == 'a' },
-             *   color: '#a8a8a8'
-             * },
-             * {
-             *   type: 'column',
-             *   condition (column, item) => { return column.name == 'age' },
-             *   color: 'pink'
-             * }
+             * [
+             *   {
+             *     type: 'cell',
+             *     condition: (cellContent, column, item) => { return cellContent == 'John Doe' },
+             *   },
+             *   {
+             *     type: 'row',
+             *     condition: (cellContent, item) => { return cellContent[0] == 'a' },
+             *     color: '#a8a8a8'
+             *   },
+             *   {
+             *     type: 'column',
+             *     condition (column, item) => { return column.name == 'age' },
+             *     color: 'pink'
+             *   }
+             * ]
              * ```
              */
             highlight: {
@@ -707,9 +1005,15 @@
             },
 
             /**
-             * Default column width if not defined, eg. '100px'. Notice that with not
-             * zero flex values this value behaves more as minimum width. See
-             * defaultColumnFlexGrow property.
+             * Default width for columns. Defaults to `100px` if undefined.
+             *
+             * Column sizes should also be configured using the
+             * `defaultColumnFlexGrow` and `columns.flexGrow` properties to
+             * change how each column sizes itself relative to other columns in
+             * the grid.
+             *
+             * When column flex-grow properties are set to non-zero values,
+             * this size behaves as a minimum width for the column.
              */
             defaultColumnWidth: {
               type: String,
@@ -717,8 +1021,8 @@
             },
 
             /**
-             * Default column flex if not defined, eg. 1. Equialent to the CSS flex-grow
-             * property.
+             * Default flex-grow value for columns if none is defined in
+             * `columns.flexGrow`. Equivalent to the CSS flex-grow property.
              */
             defaultColumnFlexGrow: {
               type: Number,
@@ -736,10 +1040,17 @@
             },
 
             /**
-             * Define height of grid. If 'auto' the height of grid will match with
-             * match with number of rows in grid. Undefined value and 'default'
-             * will use default height. Any other value (eg. '400px') is given as
-             * CSS height value to the actual grid component inside px-data-grid.
+             * Defines the height of grid.
+             *
+             *   * Set to `'auto'` if the grid should grow to fit all of its rows
+             *   * Set to `'default'` or undefined to use the default height
+             *   * Set to any other valid CSS height valid (e.g. `400px`) to
+             *     define a static height for the grid area inside the
+             *     px-data-grid. This height will not include the table action
+             *     menu and other elements of the grid.
+             *
+             * See the `flexToSize` property for a different strategy that sizes
+             * the grid based on its parent element's height.
              */
             gridHeight: {
               type: String,
@@ -748,9 +1059,11 @@
             },
 
             /**
-             * Sets the px-grid to a mode where it and its content will flex to size.
-             * By default the  px-data-grid will take 100% of the available height, this
-             * can be changed by defining the css variable: --px-data-grid-height
+             * Set to `true` to instruct the grid to fill its parent element's
+             * height and width using flexbox. When enabled the px-data-grid
+             * element will fill 100% of the available height of its parent.
+             * To constrain the grid's height, set the CSS variable
+             * `--px-data-grid-height` to a different value.
              */
             flexToSize: {
               type: Boolean,
@@ -759,18 +1072,22 @@
             },
 
             /**
-             * Path to an item sub-property that identifies the item. This should be
-             * defined in case of any editing, to allow grid to pair new version of
-             * item with new. Path must point to unique identifier in data objects
-             * that does not change (eg. 'id')
+             * Path to a `tableData` item sub-property that serves as a unique
+             * identifier for the item. Should be defined if the grid allows
+             * user editing so the grid can pair new versions of each item
+             * with the original data.
+             *
+             * Path must be unique for each item, must exist for every item,
+             * and should not be changed or be user editable.
              */
             itemIdPath: {
               type: String
             },
 
             /**
-             * If filter saving options should offered to end user. If save is
-             * selected it will emit save-filters event.
+             * Set to allow users to save filters created in the advanced filter
+             * dialog. If enabled, the grid will fire `save-filters` events when
+             * the user taps the save filter button.
              */
             offerFilterSaving: {
               type: Boolean,
@@ -778,7 +1095,9 @@
             },
 
             /**
-             * If user is allowed to sort by selection
+             * Set to `true` to allow the user to sort by selected items.
+             * When enabled the user can click on the selected item count
+             * at the top left of the grid to sort by selection.
              */
             allowSortBySelection: {
               type: Boolean,
@@ -786,16 +1105,17 @@
             },
 
             /**
-             * If enabled in multi selection and sort by selection mode any
-             * changes to selection will cause instant re-sort.
+             * Set to `true` to instantly re-sort all rows when any changes
+             * are made in multi-selection and sort-by-selection modes.
              */
             instantSortWhenSelection: {
               type: Boolean,
               value: false
             },
 
-            /* If true advanced filter dialog will be rendered in space saving
-             * mode (eg. reuseable headers).
+            /**
+             * Set to `true` to render the advanced filtering UI modal in space
+             * saving mode (e.g. with reuseable headers).
              */
             compactAdvancedFilterDialog: {
               type: Boolean,
@@ -803,18 +1123,33 @@
             },
 
             /**
-             * What string comparators will be offered in advanced filtering. Valid options are
-             * 'equals', 'contains', 'starts_with', 'ends_with' and 'wildcard'. If array is
-             * undefined or empty, all options will be offered.
+             * Comparison options shown in the advanced filtering UI for columns
+             * of type `string`. Valid options are:
+             *
+             *   * `'equals'`
+             *   * `'contains'`
+             *   * `'starts_with'`
+             *   * `'ends_with'`
+             *   * `'wildcard'`
+             *
+             * If this array is undefined or empty, all options will be shown.
              */
             stringComparators: {
               type: Array
             },
 
             /**
-             * What number comparators will be offered in advanced filtering. Valid options are
-             * 'less_than', 'equals', 'not_equal',  'equal_or_greater_than',  'equal_or_less_than'
-             * and 'greater_than'. If array is undefined or empty, all options will be offered.
+             * Comparison options shown in the advanced filtering UI for columns
+             * of type `number`. Valid options are:
+             *
+             *   * `'less_than'`
+             *   * `'equals'`
+             *   * `'not_equal'`
+             *   * `'equal_or_greater_than'`
+             *   * `'equal_or_less_than'`
+             *   * `'greater_than'`
+             *
+             * If this array is undefined or empty, all options will be shown.
              */
             numberComparators: {
               type: Array
@@ -855,6 +1190,13 @@
           ];
         }
 
+        /**
+         * Forces the grid to read each of the `columns` objects and update
+         * each column based on any changed configurations.
+         *
+         * Use this if you mutate your `columns` property in your app and
+         * want the data grid to update to reflect the new configurations.
+         */
         updateColumns() {
           const probs = ['hidden', 'name', 'frozen', 'width', 'flexGrow', 'path'];
           for (let i = 0; i < this.columns.length; ++i) {
@@ -1769,14 +2111,20 @@
         }
 
         /**
-         * Get current visible columns in grid
+         * Returns a list of currently visible columns in the grid.
+         *
+         * @return {Array<Object>} - Array of references to `columns` objects
          */
         getVisibleColumns() {
           return this._getColumns().filter((col) => !col.hidden).sort((a, b) => a._order - b._order);
         }
 
         /**
-         * Returns currently visible data if `true` parameter is passed or all cached data if no parameter is passed.
+         * Returns currently visible data if called with `true`.
+         * Returns all cached data if called with `undefined`.
+         *
+         * @param {?boolean} visibleOnly
+         * @return Array
          */
         getData(visibleOnly) {
           let items = [];
@@ -1954,6 +2302,19 @@
           this.shadowRoot.querySelector('px-data-grid-filters-modal').open();
         }
 
+        /**
+         * Gets the current configurations set by the user on the data grid,
+         * including a list of visible columns, a list of highlight rules,
+         * a list of filters, and the current auto filter search value.
+         *
+         * Save the result to some persistant storage (e.g. your app database or
+         * localStorage) to save the user's preferences after they configure
+         * the data grid. When the user revisits the grid page, fetch the
+         * saved state and call `setState()` to set the grid up with the
+         * same set of preferences.
+         *
+         * @return {Object}
+         */
         getState() {
           return {
             columns: this.getVisibleColumns(),
@@ -1963,6 +2324,15 @@
           };
         }
 
+        /**
+         * Sets the state of the grid based on a past state created by
+         * calling `getState()`.
+         *
+         * Configures the visible columns, highlight rules, active filters,
+         * and auto-filter value.
+         *
+         * @param {Object} state - State object created by `getState()`
+         */
         setState(state) {
           this.columns = [];
 
