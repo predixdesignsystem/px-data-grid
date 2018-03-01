@@ -20,6 +20,8 @@
     "getCellContent": false,
     "getBodyCellContent": false,
     "getHeaderCell": false,
-    "getHeaderCellContent": false
+    "getHeaderCellContent": false,
+    "getBodyCellText": false,
+    "afterEach": false
   }
 }

@@ -67,7 +67,7 @@ document.addEventListener('WebComponentsReady', () => {
           height: 68,
           weight: 478209.22,
           model: ''
-         }
+        }
       ];
 
 
