@@ -1,12 +1,12 @@
 {
   "name": "px-data-grid",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Polymer 2 element that defines a data grid (data table)",
   "main": "px-data-grid.html",
-  "repository": "vaadin/px-data-grid",
+  "repository": "predixdesignsystem/px-data-grid",
   "author": "Vaadin Ltd",
   "bugs": {
-    "url": "https://github.com/vaadin/px-data-grid/issues"
+    "url": "https://github.com/predixdesignsystem/px-data-grid/issues"
   },
   "homepage": "http://predix.io/",
   "devDependencies": {

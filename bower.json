@@ -1,8 +1,9 @@
 {
   "name": "px-data-grid",
-  "homepage": "https://github.com/vaadin/px-data-grid",
+  "version": "1.0.0",
+  "homepage": "https://github.com/predixdesignsystem/px-data-grid",
   "main": "px-data-grid.html",
-  "description": "Polymer 2 element that defines a data grid (data table)",
+  "description": "Polymer 2 element that displays tabular data",
   "ignore": [
     "**/.*",
     "node_modules",
