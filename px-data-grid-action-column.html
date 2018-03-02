@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid-column.html">
 <link rel="import" href="../px-icon-set/px-icon.html">
 
@@ -31,6 +32,7 @@
             tabindex="0"
             on-px-dropdown-click="_dropdownItemClick"
             on-click="_dropdownClick"
+            on-tap="_dropdownClick"
             hoist>
           <px-icon slot="trigger" icon="px-nav:menu"></px-icon>
         </px-dropdown>
@@ -46,7 +48,7 @@
        * @memberof Predix
        * @mixes Vaadin.GridColumnElement
        */
-      class DataGridActionColumnElement extends Vaadin.GridColumnElement {
+      class DataGridActionColumnElement extends Polymer.GestureEventListeners(Vaadin.GridColumnElement) {
 
         static get is() {
           return 'px-data-grid-action-column';
