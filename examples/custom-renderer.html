@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Custom Renderer | px-data-grid examples</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../polymer/polymer.html"/>
+  <link rel="import" href="../../px-theme/px-theme-styles.html"/>
+  <link rel="import" href="../px-data-grid.html"/>
+
+  <!-- Load custom renderer mixin and px-toggle to use inside the renderer -->
+  <link rel="import" href="../px-data-grid-renderer-mixin.html"/>
+  <link rel="import" href="../../px-toggle/px-toggle.html"/>
+
+  <style>
+    html {
+      font-size: 15px;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      margin: 2rem;
+      padding: 0;
+    }
+    px-data-grid {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <custom-style>
+    <style is="custom-style" include="px-theme-styles"></style>
+  </custom-style>
+
+  <px-data-grid editable></px-data-grid>
+
+  <script>
+    {
+      const grid = document.querySelector('px-data-grid');
+
+      /* Define the grid columns */
+      grid.columns = [
+        {
+          name: 'Registered',
+          path: 'registered',
+          // tells the grid to use the custom renderer
+          renderer: 'bool-custom-renderer',
+          editable: true,
+          flexGrow: 1
+        },
+        {
+          name: 'Name',
+          path: 'name',
+          renderer: 'px-data-grid-string-renderer',
+          editable: true,
+          flexGrow: 3
+        },
+        {
+          name: 'Email',
+          path: 'email',
+          flexGrow: 3
+        }
+      ];
+
+      /* Add data to the grid */
+      grid.tableData = [
+        {
+          name: 'Emilie du Chatelet',
+          email: 'emilie@example.com',
+          registered: true
+        },
+        {
+          name: 'Caroline Herschel',
+          email: 'caroline@example.com',
+          registered: false
+        },
+        {
+          name: 'Mary Anning',
+          email: 'marya@example.com',
+          registered: false
+        },
+        {
+          name: 'Mary Somerville',
+          email: 'marys@example.com',
+          registered: false
+        },
+        {
+          name: 'Maria Mitchell',
+          email: 'maria@example.com',
+          registered: true
+        },
+        {
+          name: 'Lise Meitner',
+          email: 'lise@example.com',
+          registered: true
+        },
+        {
+          name: 'Irène Curie-Joliot',
+          email: 'irene@example.com',
+          registered: false
+        },
+        {
+          name: 'Barbara McClintock',
+          email: 'barbara@example.com',
+          registered: true
+        },
+        {
+          name: 'Dorothy Hodgkin',
+          email: 'dorothy@example.com',
+          registered: true
+        },
+        {
+          name: 'Rosalind Franklin',
+          email: 'rosalind@example.com',
+          registered: true
+        }
+      ];
+
+      /* Create a custom renderer to display and edit booleans */
+      class BoolCustomRenderer extends Predix.DataGridRendererMixin(Polymer.Element) {
+        static get is() { return 'bool-custom-renderer'; }
+
+        static get properties() {
+          return {};
+        }
+
+        static get template() {
+          return `
+            <template is="dom-if" if="[[!_editing]]">
+              [[_getSymbol(value)]]
+            </template>
+
+            <template is="dom-if" if="[[_editing]]">
+              <px-toggle checked="{{value}}"></px-toggle>
+            </template>
+          `;
+        }
+
+        _getSymbol(value) {
+          if (value) {
+            return '✅';
+          }
+          else {
+            return '❌';
+          }
+        }
+      }
+      window.customElements.define(BoolCustomRenderer.is, BoolCustomRenderer);
+    }
+  </script>
+</body>
+</html>
