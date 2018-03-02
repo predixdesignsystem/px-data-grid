@@ -4,13 +4,17 @@
 
 <!-- Import peer demo pages -->
 <link rel="import" href="px-data-grid-demo.html">
-<link rel="import" href="px-data-grid-column-demo.html">
-<link rel="import" href="px-data-grid-highlight-demo.html">
-<link rel="import" href="px-data-grid-remote-data-provider-demo.html">
 <link rel="import" href="px-data-grid-paginated-demo.html">
-<link rel="import" href="px-data-grid-row-details-demo.html">
-<link rel="import" href="px-data-grid-custom-renderer-demo.html">
-<link rel="import" href="px-data-grid-date-and-time-demo.html">
+<!--
+  NOTE: Keeping these demos here but no longer linking to them. We'll fold
+  the examples in the demos into our docs or examples/ folder and delete them.
+  <link rel="import" href="px-data-grid-column-demo.html">
+  <link rel="import" href="px-data-grid-highlight-demo.html">
+  <link rel="import" href="px-data-grid-remote-data-provider-demo.html">
+  <link rel="import" href="px-data-grid-row-details-demo.html">
+  <link rel="import" href="px-data-grid-custom-renderer-demo.html">
+  <link rel="import" href="px-data-grid-date-and-time-demo.html">
+-->
 
 <!-- Demo DOM module -->
 <dom-module id="local-element-demo">
@@ -37,36 +41,12 @@
             value: function() {
               return [
                 {
-                  name: 'Basic examples',
+                  name: 'px-data-grid',
                   tagName: 'px-data-grid-demo'
                 },
                 {
-                  name: 'Custom columns',
-                  tagName: 'px-data-grid-column-demo'
-                },
-                {
-                  name: 'Highlighting rows, columns, cells',
-                  tagName: 'px-data-grid-highlight-demo'
-                },
-                {
-                  name: 'Remote data provider',
-                  tagName: 'px-data-grid-remote-data-provider-demo'
-                },
-                {
-                  name: 'Pagination examples',
+                  name: 'px-data-grid-paginated',
                   tagName: 'px-data-grid-paginated-demo'
-                },
-                {
-                  name: 'Expandable rows',
-                  tagName: 'px-data-grid-row-details-demo'
-                },
-                {
-                  name: 'Custom renderer demo',
-                  tagName: 'px-data-grid-custom-renderer-demo'
-                },
-                {
-                  name: 'Date and Time',
-                  tagName: 'px-data-grid-date-and-time-demo'
                 }
               ];
             }
