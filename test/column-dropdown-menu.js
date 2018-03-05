@@ -127,4 +127,51 @@ document.addEventListener('WebComponentsReady', () => {
       });
     });
   });
+
+  describe('column dropdown menu: group by column', () => {
+    let grid;
+
+    beforeEach((done) => {
+      grid = fixture('px-data-grid-fixture');
+
+      Polymer.RenderStatus.afterNextRender(grid, () => {
+        setTimeout(() => { // IE11
+          done();
+        });
+      });
+    });
+
+    it('shows the "Group by column" menu option when table data is added later', (done) => {
+      grid.columns = [
+        {
+          name: 'first',
+          header: 'First Name',
+          path: 'first'
+        },
+        {
+          name: 'last',
+          header: 'Last Name',
+          path: 'last',
+          type: 'custom'
+        },
+        {
+          header: 'Hidden column',
+          hidden: true,
+          path: ''
+        }
+      ];
+
+      Polymer.RenderStatus.afterNextRender(grid, () => {
+        grid.tableData = tableData;
+
+        Polymer.RenderStatus.afterNextRender(grid, () => {
+          const firstNameHeaderCell = getHeaderCell(grid, 0);
+          const columnDropdownMenu = getHeaderCellContent(firstNameHeaderCell).shadowRoot.querySelector('px-dropdown');
+          expect(columnDropdownMenu.items.length).to.equal(3);
+          expect(columnDropdownMenu.items[2].val).to.equal('Group by Column');
+          done();
+        });
+      });
+    });
+  });
 });

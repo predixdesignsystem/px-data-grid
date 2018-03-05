@@ -87,7 +87,8 @@
              * If false, 'Group by Column' will be disallowed (e.g. in cases of remote data provider or expandable rows)
              */
             groupByColumnAllowed: {
-              type: Boolean
+              type: Boolean,
+              observer: '_updateGroupByColumnAllowed'
             },
 
             localize: Function
@@ -119,6 +120,18 @@
           headerCell.parentElement.hidden = false;
 
           this._headerCellContentWrapper = headerCellContentWrapper;
+        }
+
+        /*
+         * If `groupByColumnAllowed` is updated after the `_headerCellContentWrapper`
+         * element is created, update the wrapper element.
+         */
+        _updateGroupByColumnAllowed(newVal) {
+          if (typeof newVal === 'boolean'
+                && this._headerCellContentWrapper instanceof HTMLElement
+                && this._headerCellContentWrapper.groupByColumnAllowed !== newVal) {
+            this._headerCellContentWrapper.groupByColumnAllowed = newVal;
+          }
         }
 
         _updateI18n(localize, _headerCellContentWrapper) {
