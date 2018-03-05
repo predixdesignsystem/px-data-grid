@@ -1,4 +1,9 @@
 document.addEventListener('WebComponentsReady', () => {
+  function getBodyCellTextAsString(grid, row, cell) {
+    const value = getBodyCellText(grid, row, cell);
+    return (value + '').trim();
+  }
+
   describe('number renderer', () => {
     let grid;
     let _consoleErrorOriginal = null;
@@ -86,30 +91,30 @@ document.addEventListener('WebComponentsReady', () => {
     });
 
     it('displays numbers out without changing anything when rendererConfig.displayFormat is not defined', () => {
-      expect(getBodyCellText(grid, 0, 1) + '').to.equal('60.224');
-      expect(getBodyCellText(grid, 1, 1) + '').to.equal('-63.13');
-      expect(getBodyCellText(grid, 2, 1) + '').to.equal('59.49');
-      expect(getBodyCellText(grid, 3, 1) + '').to.equal('68');
+      expect(getBodyCellTextAsString(grid, 0, 1)).to.equal('60.224');
+      expect(getBodyCellTextAsString(grid, 1, 1)).to.equal('-63.13');
+      expect(getBodyCellTextAsString(grid, 2, 1)).to.equal('59.49');
+      expect(getBodyCellTextAsString(grid, 3, 1)).to.equal('68');
     });
 
     it('formats numbers when rendererConfig.displayFormat is defined', () => {
-      expect(getBodyCellText(grid, 0, 2) + '').to.equal('190,378');
-      expect(getBodyCellText(grid, 1, 2) + '').to.equal('238,712');
-      expect(getBodyCellText(grid, 2, 2) + '').to.equal('0');
-      expect(getBodyCellText(grid, 3, 2) + '').to.equal('478,209');
+      expect(getBodyCellTextAsString(grid, 0, 2)).to.equal('190,378');
+      expect(getBodyCellTextAsString(grid, 1, 2)).to.equal('238,712');
+      expect(getBodyCellTextAsString(grid, 2, 2)).to.equal('0');
+      expect(getBodyCellTextAsString(grid, 3, 2)).to.equal('478,209');
     });
 
     it('displays strings that can be parsed to numbers', () => {
-      expect(getBodyCellText(grid, 0, 3) + '').to.equal('1934');
-      expect(getBodyCellText(grid, 1, 3) + '').to.equal('1934.29');
+      expect(getBodyCellTextAsString(grid, 0, 3)).to.equal('1934');
+      expect(getBodyCellTextAsString(grid, 1, 3)).to.equal('1934.29');
     });
 
     it('displays strings that cannot be parsed to numbers', () => {
-      expect(getBodyCellText(grid, 2, 3) + '').to.equal('099A');
+      expect(getBodyCellTextAsString(grid, 2, 3)).to.equal('099A');
     });
 
     it('does not coerce empty strings to `0`', () => {
-      expect(getBodyCellText(grid, 3, 3) + '').to.equal('');
+      expect(getBodyCellTextAsString(grid, 3, 3)).to.equal('');
     });
 
     it('throws an error but still displays values that cannot be parsed to a number', () => {
