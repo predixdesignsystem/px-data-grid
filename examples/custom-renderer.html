@@ -63,59 +63,61 @@
         }
       ];
 
-      /* Add data to the grid */
-      grid.tableData = [
-        {
-          name: 'Emilie du Chatelet',
-          email: 'emilie@example.com',
-          registered: true
-        },
-        {
-          name: 'Caroline Herschel',
-          email: 'caroline@example.com',
-          registered: false
-        },
-        {
-          name: 'Mary Anning',
-          email: 'marya@example.com',
-          registered: false
-        },
-        {
-          name: 'Mary Somerville',
-          email: 'marys@example.com',
-          registered: false
-        },
-        {
-          name: 'Maria Mitchell',
-          email: 'maria@example.com',
-          registered: true
-        },
-        {
-          name: 'Lise Meitner',
-          email: 'lise@example.com',
-          registered: true
-        },
-        {
-          name: 'Irène Curie-Joliot',
-          email: 'irene@example.com',
-          registered: false
-        },
-        {
-          name: 'Barbara McClintock',
-          email: 'barbara@example.com',
-          registered: true
-        },
-        {
-          name: 'Dorothy Hodgkin',
-          email: 'dorothy@example.com',
-          registered: true
-        },
-        {
-          name: 'Rosalind Franklin',
-          email: 'rosalind@example.com',
-          registered: true
-        }
-      ];
+      setTimeout(() => {
+        /* Add data to the grid */
+        grid.tableData = [
+          {
+            name: 'Emilie du Chatelet',
+            email: 'emilie@example.com',
+            registered: true
+          },
+          {
+            name: 'Caroline Herschel',
+            email: 'caroline@example.com',
+            registered: false
+          },
+          {
+            name: 'Mary Anning',
+            email: 'marya@example.com',
+            registered: false
+          },
+          {
+            name: 'Mary Somerville',
+            email: 'marys@example.com',
+            registered: false
+          },
+          {
+            name: 'Maria Mitchell',
+            email: 'maria@example.com',
+            registered: true
+          },
+          {
+            name: 'Lise Meitner',
+            email: 'lise@example.com',
+            registered: true
+          },
+          {
+            name: 'Irène Curie-Joliot',
+            email: 'irene@example.com',
+            registered: false
+          },
+          {
+            name: 'Barbara McClintock',
+            email: 'barbara@example.com',
+            registered: true
+          },
+          {
+            name: 'Dorothy Hodgkin',
+            email: 'dorothy@example.com',
+            registered: true
+          },
+          {
+            name: 'Rosalind Franklin',
+            email: 'rosalind@example.com',
+            registered: true
+          }
+        ];
+      }, 500);
 
       /* Create a custom renderer to display and edit booleans */
       class BoolCustomRenderer extends Predix.DataGridRendererMixin(Polymer.Element) {
