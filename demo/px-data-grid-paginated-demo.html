@@ -53,7 +53,7 @@
     <!-- Header -->
     <px-demo-header
         module-name="px-data-grid-paginated"
-        description="Paginated version of the data grid. The data grid displays tabular data with rich interactions to help users find, manage, and update important information. The px-data-grid component replaces the legacy px-data-table component and offers a wide range of new behaviors. The grid is complete rewrite with a new API and more features that targets Polymer 2+ runtime."
+        description="Paginated version of the data grid. The data grid displays tabular data with rich interactions to help users find, manage, and update important information. The px-data-grid component replaces the legacy px-data-table component and offers a wide range of new behaviors. The grid is a complete rewrite with a new API and more features that targets Polymer 2+ runtime."
         github-org="predixdesignsystem"
         mobile desktop tablet>
     </px-demo-header>
@@ -83,7 +83,6 @@
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
             hide-selection-column="{{props.hideSelectionColumn.value}}"
             selection-mode="{{props.selectionMode.value}}"
-            allow-sort-by-selection="{{props.allowSortBySelection.value}}"
             hide-action-menu="{{props.hideActionMenu.value}}"
             table-actions="{{props.tableActions.value}}"
             item-actions="{{props.itemActions.value}}"
@@ -627,12 +626,6 @@
       defaultValue: false
     };
 
-    const allowSortBySelection = {
-      type: Boolean,
-      inputType: 'toggle',
-      defaultValue: false
-    };
-
     const selectionMode = {
       type: String,
       inputType: 'dropdown',
@@ -736,7 +729,6 @@
       autoFilter,
       columnReorderingAllowed,
       hideSelectionColumn,
-      allowSortBySelection,
       selectionMode,
       hideActionMenu,
       tableActions,
