@@ -8,7 +8,7 @@ document.addEventListener('WebComponentsReady', () => {
 
       Polymer.RenderStatus.afterNextRender(grid, () => {
         setTimeout(() => { // IE11
-          done();
+          window.flush(done);
         });
       });
     });
