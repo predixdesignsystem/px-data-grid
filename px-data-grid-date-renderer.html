@@ -86,12 +86,13 @@ Make date-renderer columns use ellipsis overflow:
               value: 'YYYY-MM-DD'
             },
             /**
-             * Format for reading the data
-             * A moment.js string formatter or 'ISO'
+             * Timezone to be used for displaying the date.
+             * The original date value will be converted to this
+             * timezone if needed.
              */
-            dataFormat: {
+            timezone: {
               type: String,
-              value: 'YYYY-MM-DD'
+              value: 'UTC'
             },
             /**
              * Format for px-datepicker's dateFormat
@@ -134,26 +135,28 @@ Make date-renderer columns use ellipsis overflow:
           return [
             '_valueObserver(value)',
             '_momentObjChanged(momentObj, momentObj.*)',
-            '_rendererConfigChanged(column.rendererConfig.*)'
+            '_rendererConfigChanged(column.rendererConfig.*)',
+            '_dateFormatConfigChanged(column.dateFormat.*)'
           ];
         }
 
         _getFormattedDate(value) {
-
+          window.format = this;
           var result;
           if (value) {
             let momentValue;
-            if (this.dataFormat === 'ISO') {
+            // read timestamp data
+            if (this.dateFormat === 'ISO') {
               momentValue = window.Px.moment(value);
             } else {
-              momentValue = window.Px.moment(value, this.dataFormat, true);
+              momentValue = window.Px.moment.tz(value, this.dateFormat, this.timezone);
             }
-
+            // format for display
             if (momentValue) {
               if (this.displayFormat === 'ISO') {
                 result = momentValue.toISOString();
               } else {
-                result = momentValue.format(this.displayFormat);
+                result = momentValue.tz(this.displayTimezone).format(this.displayFormat);
               }
             } else {
               console.warn('Unknown date value: "' + value + '"');
@@ -208,6 +211,20 @@ Make date-renderer columns use ellipsis overflow:
           }
         }
 
+        _dateFormatConfigChanged(dateFormat) {
+          if (dateFormat && dateFormat.value && dateFormat.value.hasOwnProperty('format')) {
+            this.dateFormat = dateFormat.value.format;
+          } else {
+            this.dateFormat = 'YYYY-MM-DD';
+          }
+
+          if (dateFormat && dateFormat.value && dateFormat.value.hasOwnProperty('timezone')) {
+            this.timezone = dateFormat.value.timezone;
+          } else {
+            this.timezone = 'UTC';
+          }
+        }
+
         _rendererConfigChanged(rendererConfig) {
 
           if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('hideDate')) {
@@ -228,10 +245,10 @@ Make date-renderer columns use ellipsis overflow:
             this.displayFormat = 'YYYY-MM-DD';
           }
 
-          if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('dataFormat')) {
-            this.dataFormat = rendererConfig.value.dataFormat;
+          if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('timezone')) {
+            this.displayTimezone = rendererConfig.value.timezone;
           } else {
-            this.dataFormat = 'YYYY-MM-DD';
+            this.displayTimezone = 'UTC';
           }
 
           if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('datePickerDateFormat')) {
