@@ -45,7 +45,7 @@ document.addEventListener('WebComponentsReady', () => {
       grid.selectionMode = 'multi';
       flushVaadinGrid(grid);
 
-      const selectAllCell = grid._vaadinGrid.$.header.querySelectorAll('[part~="header-cell"]')[0];
+      const selectAllCell = grid._vaadinGrid.$.header.querySelectorAll('tr:nth-child(2) [part~="header-cell"]')[0];
       const selectAllContent = selectAllCell.querySelector('slot').assignedNodes()[0];
       const selectAllElement = selectAllContent.querySelectorAll('px-data-grid-select-all')[0];
       const selectAllCheckBox = selectAllElement.shadowRoot.querySelectorAll('vaadin-checkbox')[0];
