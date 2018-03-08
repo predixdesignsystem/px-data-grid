@@ -156,10 +156,9 @@
               }
               break;
             case 'date': {
-              const format = this._getTooltipDateFormat(column);
               return `Date Range \/
-                ${window.Px.moment(entity.dateFrom).format(format)} ${this._getTimezone(column)} -
-                ${window.Px.moment(entity.dateTo).format(format)} ${this._getTimezone(column)}
+                ${this._getFormattedDate(entity.dateFrom, column)} ${this._getDisplayTimezone(column)} -
+                ${this._getFormattedDate(entity.dateTo, column)} ${this._getDisplayTimezone(column)}
               `;
             }
             default:
@@ -179,10 +178,9 @@
               }
               break;
             case 'date': {
-              const format = this._getTitleDateFormat(column);
               return `
-                ${window.Px.moment(entity.dateFrom).format(format)} -
-                ${window.Px.moment(entity.dateTo).format(format)}
+                ${this._getFormattedDate(entity.dateFrom, column)} -
+                ${this._getFormattedDate(entity.dateTo, column)}
               `;
             }
             default:
@@ -202,15 +200,47 @@
           return flattenFilterEntities.length > 1;
         }
 
-        _getTitleDateFormat(column) {
-          if (column.rendererConfig && column.rendererConfig.displayFormat) {
-            return column.rendererConfig.displayFormat;
+        _getFormattedDate(value, column) {
+          var result;
+          if (value) {
+            let momentValue;
+            // read timestamp data
+            if (this.dateFormat === 'ISO') {
+              momentValue = window.Px.moment(value);
+            } else {
+              const sourceTimezone = this._getSourceTimezone(column);
+              const sourceFormat = this._getSourceFormat(column);
+              momentValue = window.Px.moment.tz(value, sourceFormat, sourceTimezone);
+            }
+            // format for display
+            if (momentValue) {
+              if (this.displayFormat === 'ISO') {
+                result = momentValue.toISOString();
+              } else {
+                const displayTimezone = this._getDisplayTimezone(column);
+                const displayFormat = this._getDisplayFormat(column);
+                result = momentValue.tz(displayTimezone).format(displayFormat);
+              }
+            } else {
+              console.warn('Unknown date value: "' + value + '"');
+              result = '';
+            }
           } else {
-            return 'YYYY/MM/DD';
+            result = '';
+          }
+
+          return result;
+        }
+
+        _getSourceTimezone(column) {
+          if (column.dateFormat && column.dateFormat.timezone) {
+            return column.dateFormat.timezone;
+          } else {
+            return 'UTC';
           }
         }
 
-        _getTimezone(column) {
+        _getDisplayTimezone(column) {
           if (column.rendererConfig && column.rendererConfig.timezone) {
             return column.rendererConfig.timezone;
           } else {
@@ -218,7 +248,23 @@
           }
         }
 
-        _getTooltipDateFormat(column) {
+        _getSourceFormat(column) {
+          if (column.dateFormat && column.dateFormat.format) {
+            return column.dateFormat.format;
+          } else {
+            return 'ISO';
+          }
+        }
+
+        _getDateFormat(column) {
+          if (column.rendererConfig && column.rendererConfig.displayFormat) {
+            return column.rendererConfig.displayFormat;
+          } else {
+            return 'YYYY/MM/DD';
+          }
+        }
+
+        _getDisplayFormat(column) {
           if (column.rendererConfig && column.rendererConfig.displayFormat) {
             return column.rendererConfig.displayFormat;
           } else {
