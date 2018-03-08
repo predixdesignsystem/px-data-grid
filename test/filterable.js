@@ -67,6 +67,10 @@ document.addEventListener('WebComponentsReady', () => {
 
       expect(grid._isDateMatches({dateFrom: '1994-12-01', dateTo: '1994-12-03'}, '1994-12-02')).to.be.true;
       expect(grid._isDateMatches({dateFrom: '1994-12-01', dateTo: '1994-12-03'}, '1994-12-04')).to.be.false;
+
+      expect(grid._isDateMatches({dateFrom: '2018-02-23T11:00:45Z', dateTo: '2018-02-23T15:35:00Z'}, '2018-02-23 11:16:49')).to.be.true;
+      expect(grid._isDateMatches({dateFrom: '2018-02-23T11:00:45Z', dateTo: '2018-02-23T15:35:00Z'}, '2018-02-23 10:37:18')).to.be.false;
+      expect(grid._isDateMatches({dateFrom: '2018-02-23T11:00:45Z', dateTo: '2018-02-23T15:35:00Z'}, '2018-02-23 15:37:18')).to.be.false;
     });
 
     it('should check number properly', () => {
