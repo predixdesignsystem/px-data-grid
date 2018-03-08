@@ -157,7 +157,10 @@
               break;
             case 'date': {
               const format = this._getTooltipDateFormat(column);
-              return `Date Range \/ ${window.Px.moment(entity.dateFrom).format(format)} - ${window.Px.moment(entity.dateTo).format(format)}`;
+              return `Date Range \/
+                ${window.Px.moment(entity.dateFrom).format(format)} ${this._getTimezone(column)} -
+                ${window.Px.moment(entity.dateTo).format(format)} ${this._getTimezone(column)}
+              `;
             }
             default:
               return `${section.action} ${section.operationType} / ${name} / ${entity.pattern}`;
@@ -177,7 +180,10 @@
               break;
             case 'date': {
               const format = this._getTitleDateFormat(column);
-              return `${window.Px.moment(entity.dateFrom).format(format)}-${window.Px.moment(entity.dateTo).format(format)}`;
+              return `
+                ${window.Px.moment(entity.dateFrom).format(format)} ${this._getTimezone(column)} -
+                ${window.Px.moment(entity.dateTo).format(format)} ${this._getTimezone(column)}
+              `;
             }
             default:
               if (entity.query.length <= 15) {
@@ -204,11 +210,19 @@
           }
         }
 
+        _getTimezone(column) {
+          if (column.rendererConfig && column.rendererConfig.timezone) {
+            return column.rendererConfig.timezone;
+          } else {
+            return 'UTC';
+          }
+        }
+
         _getTooltipDateFormat(column) {
           if (column.rendererConfig && column.rendererConfig.displayFormat) {
-            return column.rendererConfig.displayFormat + ' z'; // append timezone
+            return column.rendererConfig.displayFormat;
           } else {
-            return 'YYYY/MM/DD HH:mm:ss z';
+            return 'YYYY/MM/DD HH:mm:ss';
           }
         }
       }
