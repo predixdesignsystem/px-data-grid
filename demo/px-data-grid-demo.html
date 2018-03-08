@@ -592,10 +592,14 @@
           format: 'YYYY-MM-DD HH:mm:ss',
           timezone: 'UTC'
         },
+        filterByTime: true,
         renderer: 'px-data-grid-date-renderer',
         rendererConfig: {
-          displayFormat: 'MM/DD/YYYY HH:mm:ss',
-          timezone: 'America/Los_Angeles'
+          hideTime: false,
+          displayFormat: 'MM/DD/YYYY HH:mm',
+          timezone: 'America/Los_Angeles',
+          datePickerDateFormat: 'MM/DD/YYYY',
+          datePickerTimeFormat: 'HH:mm'
         },
         editable: true,
         type: 'date'

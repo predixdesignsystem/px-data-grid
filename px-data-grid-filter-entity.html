@@ -86,6 +86,7 @@
             hide-time="[[_hideTime]]"
             hide-presets
             date-format="[[_displayDateFormat]]"
+            time-format="[[_displayTimeFormat]]"
             time-zone="[[_displayTimezone]]"
             show-time-zone="abbreviatedText"
             show-field-titles
@@ -346,7 +347,6 @@
           } else {
             this.set('_hideTime', true);
           }
-          this.set('_hideTime', true);
 
           // source data format
           if (selectedColumn.dateFormat) {
@@ -356,7 +356,8 @@
 
           // display data format
           if (selectedColumn.rendererConfig) {
-            this.set('_displayDateFormat', selectedColumn.rendererConfig.displayFormat || 'YYYY/MM/DD HH:mm:ss');
+            this.set('_displayDateFormat', selectedColumn.rendererConfig.datePickerDateFormat || 'YYYY/MM/DD');
+            this.set('_displayTimeFormat', selectedColumn.rendererConfig.datePickerTimeFormat || 'HH:mm');
             this.set('_displayTimezone', selectedColumn.rendererConfig.timezone || 'UTC');
           }
         }
