@@ -77,14 +77,13 @@
   }
 
   function generateTimestamp() {
-    let year,
-      month,
+    let month,
       day,
       hour,
       minute,
       second;
     // generate date
-    year = Math.floor(Math.random() * 120) + 1900 + '';
+    const year = Math.floor(Math.random() * 120) + 1900 + '';
     month = Math.floor(Math.random() * 12) + '';
     month = month.length < 2 ? '0' + month : month;
     day = Math.floor(Math.random() * 31) + '';
