@@ -85,9 +85,8 @@
             id="date-rangepicker"
             hide-time="[[_hideTime]]"
             hide-presets
-            date-format="YYYY/MM/DD"
-            time-format="HH:mm:ss"
-            time-zone="UTC"
+            date-format="[[_displayDateFormat]]"
+            time-zone="[[_displayTimezone]]"
             show-time-zone="abbreviatedText"
             show-field-titles
             from-moment="{{_dateFrom}}"
@@ -262,6 +261,22 @@
               type: Object
             },
 
+            _sourceDateFormat: {
+              type: String
+            },
+
+            _sourceTimezone: {
+              type: String
+            },
+
+            _displayDateFormat: {
+              type: String
+            },
+
+            _displayTimezone: {
+              type: String
+            },
+
             localize: Function
           };
         }
@@ -330,6 +345,19 @@
             this.set('_hideTime', false);
           } else {
             this.set('_hideTime', true);
+          }
+          this.set('_hideTime', true);
+
+          // source data format
+          if (selectedColumn.dateFormat) {
+            this.set('_sourceDateFormat', selectedColumn.dateFormat.format || 'YYYY/MM/DDD HH:mm:ss');
+            this.set('_sourceTimezone', selectedColumn.dateFormat.timezone || 'UTC');
+          }
+
+          // display data format
+          if (selectedColumn.rendererConfig) {
+            this.set('_displayDateFormat', selectedColumn.rendererConfig.displayFormat || 'YYYY/MM/DD HH:mm:ss');
+            this.set('_displayTimezone', selectedColumn.rendererConfig.timezone || 'UTC');
           }
         }
 
@@ -477,10 +505,10 @@
 
         _momentDatesObserver(dateFrom, dateTo) {
           if (dateFrom && window.Px.moment(this.entity.dateFrom).format() !== dateFrom.format()) {
-            this.set('entity.dateFrom', dateFrom.format());
+            this.set('entity.dateFrom', dateFrom.tz(this._sourceTimezone).format(this._sourceDateFormat));
           }
           if (dateTo && window.Px.moment(this.entity.dateTo).format() !== dateTo.format()) {
-            this.set('entity.dateTo', dateTo.format());
+            this.set('entity.dateTo', dateTo.tz(this._sourceTimezone).format(this._sourceDateFormat));
           }
         }
 
