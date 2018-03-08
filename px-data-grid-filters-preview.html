@@ -181,8 +181,8 @@
             case 'date': {
               const format = this._getTitleDateFormat(column);
               return `
-                ${window.Px.moment(entity.dateFrom).format(format)} ${this._getTimezone(column)} -
-                ${window.Px.moment(entity.dateTo).format(format)} ${this._getTimezone(column)}
+                ${window.Px.moment(entity.dateFrom).format(format)} -
+                ${window.Px.moment(entity.dateTo).format(format)}
               `;
             }
             default:
