@@ -146,7 +146,7 @@ Make date-renderer columns use ellipsis overflow:
             if (this.dateFormat === 'ISO') {
               momentValue = window.Px.moment(value);
             } else {
-              momentValue = window.Px.moment.tz(value, this.dateFormat, true, this.timezone);
+              momentValue = window.Px.moment.tz(value, this.dateFormat, this.timezone);
             }
             // format for display
             if (momentValue) {
