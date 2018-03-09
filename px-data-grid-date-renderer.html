@@ -146,7 +146,7 @@ Make date-renderer columns use ellipsis overflow:
             if (this.dateFormat === 'ISO') {
               momentValue = window.Px.moment(value);
             } else {
-              momentValue = window.Px.moment.tz(value, this.dateFormat, this.timezone);
+              momentValue = window.Px.moment.tz(value, this.dateFormat, true, this.timezone);
             }
             // format for display
             if (momentValue) {
@@ -189,15 +189,13 @@ Make date-renderer columns use ellipsis overflow:
           if (!momentObj) {
             return undefined;
           }
-
-
           // for timestamp-like data try to preserve the type
           if (this._initialType === 'number' && (this.dataFormat === 'X' || this.dataFormat === 'x')) {
             return Number(momentObj.tz(this.timezone).format(this.dataFormat));
           } else if (this.dataFormat === 'ISO') {
             return momentObj.toISOString();
           } else {
-            return momentObj.tz(this.timezone).format(this.dataFormat);
+            return momentObj.tz(this.timezone).format(this.dateFormat);
           }
         }
 
@@ -222,13 +220,17 @@ Make date-renderer columns use ellipsis overflow:
             if (this.dataFormat === 'ISO') {
               newMomentObj = window.Px.moment(value);
             } else {
-              newMomentObj = window.Px.moment.tz(value, this.dateFormat, this.timezone);
+              newMomentObj = window.Px.moment.tz(value, this.dateFormat, true, this.timezone);
             }
           } else {
             newMomentObj = undefined;
           }
 
-          return newMomentObj;
+          if (newMomentObj && newMomentObj.isValid()) {
+            return newMomentObj;
+          } else {
+            return undefined;
+          }
         }
 
         _rendererConfigChanged(rendererConfig) {
