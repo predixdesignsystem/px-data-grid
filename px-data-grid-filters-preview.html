@@ -157,8 +157,8 @@
               break;
             case 'date': {
               return `Date Range \/
-                ${this._getFormattedDate(entity.dateFrom, column)} ${this._getDisplayTimezone(column)} -
-                ${this._getFormattedDate(entity.dateTo, column)} ${this._getDisplayTimezone(column)}
+                ${this._formatDateForTooltip(entity.dateFrom, column)} ${this._getDisplayTimezone(column)} -
+                ${this._formatDateForTooltip(entity.dateTo, column)} ${this._getDisplayTimezone(column)}
               `;
             }
             default:
@@ -179,8 +179,8 @@
               break;
             case 'date': {
               return `
-                ${this._getFormattedDate(entity.dateFrom, column)} -
-                ${this._getFormattedDate(entity.dateTo, column)}
+                ${this._formatDateForChip(entity.dateFrom, column)} -
+                ${this._formatDateForChip(entity.dateTo, column)}
               `;
             }
             default:
@@ -200,7 +200,19 @@
           return flattenFilterEntities.length > 1;
         }
 
-        _getFormattedDate(value, column) {
+        _formatDateForTooltip(value, column) {
+          return this._getFormattedDate(value, column,
+            this._getSourceTimezone(column), this._getSourceFormat(column),
+            this._getDisplayTimezone(column), this._getDisplayFormat(column));
+        }
+
+        _formatDateForChip(value, column) {
+          return this._getFormattedDate(value, column,
+            this._getSourceTimezone(column), this._getSourceFormat(column),
+            this._getDisplayTimezone(column), 'YYYY/MM/DD'); // GE requirement to force this format
+        }
+
+        _getFormattedDate(value, column, sourceTimezone, sourceFormat, displayTimezone, displayFormat) {
           var result;
           if (value) {
             let momentValue;
@@ -208,8 +220,6 @@
             if (this.dateFormat === 'ISO') {
               momentValue = window.Px.moment(value);
             } else {
-              const sourceTimezone = this._getSourceTimezone(column);
-              const sourceFormat = this._getSourceFormat(column);
               momentValue = window.Px.moment.tz(value, sourceFormat, sourceTimezone);
             }
             // format for display
@@ -217,8 +227,6 @@
               if (this.displayFormat === 'ISO') {
                 result = momentValue.toISOString();
               } else {
-                const displayTimezone = this._getDisplayTimezone(column);
-                const displayFormat = this._getDisplayFormat(column);
                 result = momentValue.tz(displayTimezone).format(displayFormat);
               }
             } else {
