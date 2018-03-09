@@ -1,9 +1,4 @@
 document.addEventListener('WebComponentsReady', () => {
-  function getBodyCellTextAsString(grid, row, cell) {
-    const value = getBodyCellText(grid, row, cell);
-    return (value + '').trim();
-  }
-
   describe('number renderer', () => {
     let grid;
     let _consoleErrorOriginal = null;

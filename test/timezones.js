@@ -24,8 +24,8 @@ document.addEventListener('WebComponentsReady', () => {
     it('should convert to defined timezone', () => {
       // format: YYYY-MM-DD HH:mm:ss -> MM/DD/YYYY HH:mm:ss
       // timezone: UTC -> PST
-      expect(getBodyCellText(grid, 0, 3)).to.equal('05/19/2005 17:00:00'); // -7 (daylights savings)
-      expect(getBodyCellText(grid, 4, 3)).to.equal('12/20/2010 02:30:00'); // -8
+      expect(getBodyCellTextAsString(grid, 0, 3)).to.equal('05/19/2005 17:00:00'); // -7 (daylights savings)
+      expect(getBodyCellTextAsString(grid, 4, 3)).to.equal('12/20/2010 02:30:00'); // -8
     });
 
     it('should sort by timestamp ASC', () => {

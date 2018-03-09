@@ -185,6 +185,11 @@
     return getShadowRootShallowInnerText(renderer);
   }
 
+  function getBodyCellTextAsString(grid, row, cell) {
+    const value = getBodyCellText(grid, row, cell);
+    return (value + '').trim();
+  }
+
   /**
    * Goal: Get the visible, rendered text in a given custom element's shadow root
    *
