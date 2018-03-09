@@ -37,7 +37,7 @@ Make date-renderer columns use ellipsis overflow:
       <div class="input-container">
         <px-datetime-picker
           id="editingTemplateInput"
-          moment-obj="{{momentObj}}"
+          moment-obj="[[_generateMomentObj(value)]]"
           hide-time="[[hideTime]]"
           hide-date="[[hideDate]]"
           time-zone="[[displayTimezone]]"
@@ -76,9 +76,6 @@ Make date-renderer columns use ellipsis overflow:
 
         static get properties() {
           return {
-            momentObj: {
-              type: Object
-            },
             /**
              * Format to be displayed in the cell
              * A moment.js string formatter or 'ISO'
@@ -136,7 +133,6 @@ Make date-renderer columns use ellipsis overflow:
         static get observers() {
           return [
             '_valueObserver(value)',
-            '_momentObjChanged(momentObj, momentObj.*)',
             '_rendererConfigChanged(column.rendererConfig.*)',
             '_dateFormatConfigChanged(column.dateFormat.*)'
           ];
@@ -171,6 +167,10 @@ Make date-renderer columns use ellipsis overflow:
         }
 
         validate() {
+          const field = this.shadowRoot.querySelector('px-datetime-picker');
+          if (field) {
+            this.value = this._convertToValue(field.momentObj);
+          }
           return {
             valid: (!this.column.required && this.value) || (!this.value || window.Px.moment(this.value, this.dataFormat).isValid()),
             message: this.localize('Date is invalid')
@@ -183,32 +183,21 @@ Make date-renderer columns use ellipsis overflow:
             this._initialType = typeof value;
           }
 
-          if (value || value === 0) {
-            if (this.dataFormat === 'ISO') {
-              this.momentObj = window.Px.moment(value);
-            } else {
-              this.momentObj = window.Px.moment(value, this.dataFormat, true);
-            }
-          } else {
-            this.momentObj = undefined;
-          }
         }
 
-        _momentObjChanged(momentObj) {
+        _convertToValue(momentObj) {
           if (!momentObj) {
-            return;
+            return undefined;
           }
 
-          if (window.Px.moment(this.value, this.dataFormat).toISOString() !== momentObj.toISOString()) {
 
-            // for timestamp-like data try to preserve the type
-            if (this._initialType === 'number' && (this.dataFormat === 'X' || this.dataFormat === 'x')) {
-              this.value = Number(momentObj.format(this.dataFormat));
-            } else if (this.dataFormat === 'ISO') {
-              this.value = momentObj.toISOString();
-            } else {
-              this.value = momentObj.format(this.dataFormat);
-            }
+          // for timestamp-like data try to preserve the type
+          if (this._initialType === 'number' && (this.dataFormat === 'X' || this.dataFormat === 'x')) {
+            return Number(momentObj.tz(this.timezone).format(this.dataFormat));
+          } else if (this.dataFormat === 'ISO') {
+            return momentObj.toISOString();
+          } else {
+            return momentObj.tz(this.timezone).format(this.dataFormat);
           }
         }
 
@@ -224,6 +213,22 @@ Make date-renderer columns use ellipsis overflow:
           } else {
             this.timezone = 'UTC';
           }
+        }
+
+        _generateMomentObj(value) {
+          let newMomentObj;
+
+          if (value || value === 0) {
+            if (this.dataFormat === 'ISO') {
+              newMomentObj = window.Px.moment(value);
+            } else {
+              newMomentObj = window.Px.moment.tz(value, this.dateFormat, this.timezone);
+            }
+          } else {
+            newMomentObj = undefined;
+          }
+
+          return newMomentObj;
         }
 
         _rendererConfigChanged(rendererConfig) {
