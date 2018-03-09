@@ -4,6 +4,7 @@ document.addEventListener('WebComponentsReady', () => {
 
     beforeEach((done) => {
       grid = fixture('px-data-grid-fixture');
+      grid.columns = getColumnConfig();
       grid.tableData = tableData;
 
       flushVaadinGrid(grid);
@@ -12,6 +13,26 @@ document.addEventListener('WebComponentsReady', () => {
         setTimeout(() => { // IE11
           window.flush(done);
         });
+      });
+    });
+
+    it('should show chips properly', (done) => {
+      grid.applyFilters([{
+        action: 'show',
+        entities: [{
+          columnId: 'timestamp[date]',
+          active: true,
+          pattern: 'equals',
+          dateFrom: '2010-10-10 11:11',
+          dateTo: '2011-11-11 19:11'
+        }]
+      }]);
+      Polymer.RenderStatus.afterNextRender(grid, () => {
+        const filtersPreview = grid.shadowRoot.querySelector('px-data-grid-filters-preview');
+        const chips = filtersPreview.shadowRoot.querySelectorAll('px-chip');
+        expect(chips.length).to.equal(1);
+        expect(chips[0].content.trim().replace(/\s+/g, ' ')).to.equal('2010/10/10 - 2011/11/11');
+        done();
       });
     });
 
