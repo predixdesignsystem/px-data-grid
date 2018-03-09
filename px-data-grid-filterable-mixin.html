@@ -108,6 +108,9 @@
     _isDateMatches(filter, value) {
       let result = true;
       const comparingDate = window.Px.moment.utc(value);
+      if (!comparingDate) {
+        result = false;
+      }
       if (filter.dateFrom) {
         const dateFrom = window.Px.moment.utc(filter.dateFrom);
         result = result && dateFrom < comparingDate;
