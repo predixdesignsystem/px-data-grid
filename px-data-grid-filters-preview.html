@@ -157,8 +157,8 @@
               break;
             case 'date': {
               return `Date Range \/
-                ${this._formatDateForTooltip(entity.dateFrom, column)} ${this._getDisplayTimezone(column)} -
-                ${this._formatDateForTooltip(entity.dateTo, column)} ${this._getDisplayTimezone(column)}
+                ${this._formatDateForTooltip(entity.dateFrom, column)} -
+                ${this._formatDateForTooltip(entity.dateTo, column)}
               `;
             }
             default:
