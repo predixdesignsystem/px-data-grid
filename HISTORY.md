@@ -1,3 +1,14 @@
+v1.0.0-beta.3
+==========================
+* Update date/time rendering and filtering functionality to correctly use
+  source data timezones when displaying bits of UI to the user (#753, #759, #762)
+* Expand date/time APIs available in `columns` to support complete configuration
+  of date/time UI by the developer. See the docs for more info.
+* Fixes bug that caused px-data-grid to throw error when column objects were
+  re-mapped and a non-configurable property was set (#761)
+* Fixes bug that caused the page size select dropdown in px-data-grid-paginated
+  to show an ellipsis when there was enough room to show the page numbers (#758)
+
 v1.0.0-beta.2
 ==========================
 Demo updates:
