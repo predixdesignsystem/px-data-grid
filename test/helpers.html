@@ -2,24 +2,66 @@
   const tableData = [{
     'first': 'Elizabeth',
     'last': 'Wong',
-    'email': 'sika@iknulber.cl'
+    'email': 'sika@iknulber.cl',
+    'timestamp': '2005-05-20 0:00:00'
   }, {
     'first': 'Jeffrey',
     'last': 'Hamilton',
-    'email': 'cofok@rac.be'
+    'email': 'cofok@rac.be',
+    'timestamp': '2005-04-20 10:30:00'
   }, {
     'first': 'Alma',
     'last': 'Martin',
-    'email': 'dotta@behtam.la'
+    'email': 'dotta@behtam.la',
+    'timestamp': '2003-05-20 10:30:00'
   }, {
     'first': 'Elizabeth',
     'last': 'Saunders',
-    'email': 'seh@bibapu.gy'
+    'email': 'seh@bibapu.gy',
+    'timestamp': '2003-05-20 10:20:00'
   }, {
     'first': 'Willie',
     'last': 'Dennis',
-    'email': 'izko@dahokwej.ci'
+    'email': 'izko@dahokwej.ci',
+    'timestamp': '2010-12-20 10:30:00'
   }];
+
+
+  function getColumnConfig() {
+    return [{
+      name: 'First',
+      path: 'first',
+      renderer: 'px-data-grid-string-renderer',
+      editable: true,
+      type: 'string'
+    }, {
+      name: 'Last',
+      path: 'last',
+      renderer: 'px-data-grid-string-renderer',
+      editable: true,
+      type: 'string'
+    }, {
+      name: 'Email',
+      path: 'email',
+      renderer: 'px-data-grid-string-renderer',
+      editable: true,
+      type: 'string'
+    }, {
+      name: 'Timestamp',
+      path: 'timestamp',
+      dateFormat: {
+        format: 'YYYY-MM-DD HH:mm:ss',
+        timezone: 'UTC'
+      },
+      renderer: 'px-data-grid-date-renderer',
+      rendererConfig: {
+        displayFormat: 'MM/DD/YYYY HH:mm:ss',
+        timezone: 'America/Los_Angeles'
+      },
+      editable: true,
+      type: 'date'
+    }];
+  }
 
   function generateTableData(numRows) {
     const data = [];
@@ -27,10 +69,33 @@
       data.push({
         first: 'first-' + i,
         last: 'last-' + i,
-        email: 'email-' + i + '@stuff.com'
+        email: 'email-' + i + '@stuff.com',
+        timestamp: generateTimestamp()
       });
     }
     return data;
+  }
+
+  function generateTimestamp() {
+    let month,
+      day,
+      hour,
+      minute,
+      second;
+    // generate date
+    const year = Math.floor(Math.random() * 120) + 1900 + '';
+    month = Math.floor(Math.random() * 12) + '';
+    month = month.length < 2 ? '0' + month : month;
+    day = Math.floor(Math.random() * 31) + '';
+    day = day.length < 2 ? '0' + day : day;
+    // generate time
+    hour = Math.floor(Math.random() * 24) + '';
+    hour = hour.length < 2 ? '0' + hour : hour;
+    minute = Math.floor(Math.random() * 60) + '';
+    minute = minute.length < 2 ? '0' + minute : minute;
+    second = Math.floor(Math.random() * 60) + '';
+    second = second.length < 2 ? '0' + second : second;
+    return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
   }
 
   function getRows(grid) {
@@ -118,6 +183,11 @@
       .shadowRoot
       .firstElementChild;
     return getShadowRootShallowInnerText(renderer);
+  }
+
+  function getBodyCellTextAsString(grid, row, cell) {
+    const value = getBodyCellText(grid, row, cell);
+    return (value + '').trim();
   }
 
   /**

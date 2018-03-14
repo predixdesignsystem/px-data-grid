@@ -15,6 +15,7 @@ document.addEventListener('WebComponentsReady', () => {
 
     it('should open and close row with setRowDetailsVisible(item)', (done) => {
       grid.setRowDetailsVisible(grid.tableData[0], true);
+
       setTimeout(() => {
         const rowDetails = getRows(grid)[0].querySelector('td:last-child');
         expect(rowDetails.hasAttribute('aria-expanded')).to.be.true;
@@ -25,8 +26,8 @@ document.addEventListener('WebComponentsReady', () => {
           const rowDetails = getRows(grid)[0].querySelector('td:last-child');
           expect(rowDetails.hidden).to.be.true;
           done();
-        }, 50);
-      }, 50);
+        }, 100);
+      }, 100);
     });
 
   });

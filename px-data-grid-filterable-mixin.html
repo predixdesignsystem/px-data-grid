@@ -107,13 +107,16 @@
 
     _isDateMatches(filter, value) {
       let result = true;
-      const comparingDate = new Date(value);
+      const comparingDate = window.Px.moment.utc(value);
+      if (!comparingDate) {
+        result = false;
+      }
       if (filter.dateFrom) {
-        const dateFrom = new Date(filter.dateFrom);
+        const dateFrom = window.Px.moment.utc(filter.dateFrom);
         result = result && dateFrom < comparingDate;
       }
       if (filter.dateTo) {
-        const dateTo = new Date(filter.dateTo);
+        const dateTo = window.Px.moment.utc(filter.dateTo);
         result = result && dateTo > comparingDate;
       }
       return result;

@@ -23,19 +23,21 @@ document.addEventListener('WebComponentsReady', () => {
       expect(getHeaderCell(grid, 1)).to.equal(lastNameHeaderCell);
 
       let visibleColumns = grid.getVisibleColumns();
-      expect(visibleColumns.length).to.be.equal(3);
+      expect(visibleColumns.length).to.be.equal(4);
       expect(visibleColumns[0].name).to.be.equal('first');
       expect(visibleColumns[1].name).to.be.equal('last');
       expect(visibleColumns[2].name).to.be.equal('email');
+      expect(visibleColumns[3].name).to.be.equal('timestamp');
 
       getHeaderCellContent(lastNameHeaderCell)._freezeColumn();
       flushVaadinGrid(grid);
 
       visibleColumns = grid.getVisibleColumns();
-      expect(visibleColumns.length).to.be.equal(3);
+      expect(visibleColumns.length).to.be.equal(4);
       expect(visibleColumns[0].name).to.be.equal('last');
       expect(visibleColumns[1].name).to.be.equal('first');
       expect(visibleColumns[2].name).to.be.equal('email');
+      expect(visibleColumns[3].name).to.be.equal('timestamp');
     });
 
     it('should move the second frozen column to the left side of the grid, before the first frozen', () => {
@@ -43,10 +45,11 @@ document.addEventListener('WebComponentsReady', () => {
       expect(getHeaderCell(grid, 1)).to.equal(lastNameHeaderCell);
 
       let visibleColumns = grid.getVisibleColumns();
-      expect(visibleColumns.length).to.be.equal(3);
+      expect(visibleColumns.length).to.be.equal(4);
       expect(visibleColumns[0].name).to.be.equal('first');
       expect(visibleColumns[1].name).to.be.equal('last');
       expect(visibleColumns[2].name).to.be.equal('email');
+      expect(visibleColumns[3].name).to.be.equal('timestamp');
 
       getHeaderCellContent(lastNameHeaderCell)._freezeColumn();
       flushVaadinGrid(grid);
@@ -54,10 +57,11 @@ document.addEventListener('WebComponentsReady', () => {
       flushVaadinGrid(grid);
 
       visibleColumns = grid.getVisibleColumns();
-      expect(visibleColumns.length).to.be.equal(3);
+      expect(visibleColumns.length).to.be.equal(4);
       expect(visibleColumns[0].name).to.be.equal('first');
       expect(visibleColumns[1].name).to.be.equal('last');
       expect(visibleColumns[2].name).to.be.equal('email');
+      expect(visibleColumns[3].name).to.be.equal('timestamp');
     });
 
     it('should not move the frozen column before selection column', () => {

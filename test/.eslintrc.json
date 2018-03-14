@@ -22,6 +22,8 @@
     "getHeaderCell": false,
     "getHeaderCellContent": false,
     "getBodyCellText": false,
-    "afterEach": false
+    "getBodyCellTextAsString": false,
+    "afterEach": false,
+    "getColumnConfig": false
   }
 }

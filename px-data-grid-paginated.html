@@ -448,8 +448,9 @@
              *       name: 'Last 7 days',
              *       getRange: () => {
              *         return {
-             *           dateTo: window.moment().format(),
-             *           dateFrom: window.moment().subtract(7, 'd').format()
+             *           // use timezone of source data
+             *           dateTo: window.moment().tz('UTC').format(),
+             *           dateFrom: window.moment().tz('UTC').subtract(7, 'd').format()
              *         };
              *       }
              *     },
@@ -489,8 +490,9 @@
              *       name: 'Last 7 days',
              *       getRange: () => {
              *         return {
-             *           dateTo: window.moment().format(),
-             *           dateFrom: window.moment().subtract(7, 'd').format()
+             *           // use timezone of source data
+             *           dateTo: window.moment().tz('UTC').format(),
+             *           dateFrom: window.moment().tz('UTC').subtract(7, 'd').format()
              *         };
              *       }
              *     },
@@ -498,8 +500,9 @@
              *       name: 'Last 14 days',
              *       getRange: () => {
              *         return {
-             *           dateTo: window.moment().format(),
-             *           dateFrom: window.moment().subtract(14, 'd').format()
+             *           // use timezone of source data
+             *           dateTo: window.moment().tz('UTC').format(),
+             *           dateFrom: window.moment().tz('UTC').subtract(14, 'd').format()
              *         };
              *       }
              *     },
@@ -507,8 +510,9 @@
              *       name: 'This month',
              *       getRange: () => {
              *         return {
-             *           dateTo: window.moment().format(),
-             *           dateFrom: window.moment().subtract(31, 'd').format()
+             *           // use timezone of source data
+             *           dateTo: window.moment().tz('UTC').format(),
+             *           dateFrom: window.moment().tz('UTC').subtract(31, 'd').format()
              *         };
              *       }
              *     },
@@ -516,8 +520,9 @@
              *       name: 'Last month',
              *       getRange: () => {
              *         return {
-             *           dateTo: window.moment().subtract(1, 'M').format(),
-             *           dateFrom: window.moment().subtract(2, 'M').format()
+             *           // use timezone of source data
+             *           dateTo: window.moment().tz('UTC').subtract(1, 'M').format(),
+             *           dateFrom: window.moment().tz('UTC').subtract(2, 'M').format()
              *         };
              *       }
              *     },

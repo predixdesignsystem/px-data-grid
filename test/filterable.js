@@ -4,6 +4,7 @@ document.addEventListener('WebComponentsReady', () => {
 
     beforeEach((done) => {
       grid = fixture('px-data-grid-fixture');
+      grid.columns = getColumnConfig();
       grid.tableData = tableData;
 
       flushVaadinGrid(grid);
@@ -12,6 +13,26 @@ document.addEventListener('WebComponentsReady', () => {
         setTimeout(() => { // IE11
           window.flush(done);
         });
+      });
+    });
+
+    it('should show chips properly', (done) => {
+      grid.applyFilters([{
+        action: 'show',
+        entities: [{
+          columnId: 'timestamp[date]',
+          active: true,
+          pattern: 'equals',
+          dateFrom: '2010-10-10 11:11',
+          dateTo: '2011-11-11 19:11'
+        }]
+      }]);
+      Polymer.RenderStatus.afterNextRender(grid, () => {
+        const filtersPreview = grid.shadowRoot.querySelector('px-data-grid-filters-preview');
+        const chips = filtersPreview.shadowRoot.querySelectorAll('px-chip');
+        expect(chips.length).to.equal(1);
+        expect(chips[0].content.trim().replace(/\s+/g, ' ')).to.equal('2010/10/10 - 2011/11/11');
+        done();
       });
     });
 
@@ -67,6 +88,10 @@ document.addEventListener('WebComponentsReady', () => {
 
       expect(grid._isDateMatches({dateFrom: '1994-12-01', dateTo: '1994-12-03'}, '1994-12-02')).to.be.true;
       expect(grid._isDateMatches({dateFrom: '1994-12-01', dateTo: '1994-12-03'}, '1994-12-04')).to.be.false;
+
+      expect(grid._isDateMatches({dateFrom: '2018-02-23T11:00:45Z', dateTo: '2018-02-23T15:35:00Z'}, '2018-02-23 11:16:49')).to.be.true;
+      expect(grid._isDateMatches({dateFrom: '2018-02-23T11:00:45Z', dateTo: '2018-02-23T15:35:00Z'}, '2018-02-23 10:37:18')).to.be.false;
+      expect(grid._isDateMatches({dateFrom: '2018-02-23T11:00:45Z', dateTo: '2018-02-23T15:35:00Z'}, '2018-02-23 15:37:18')).to.be.false;
     });
 
     it('should check number properly', () => {

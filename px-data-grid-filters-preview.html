@@ -156,8 +156,10 @@
               }
               break;
             case 'date': {
-              const format = this._getTimeStampFormat(column);
-              return `Range \/ ${window.Px.moment(entity.dateFrom).format(format)} - ${window.Px.moment(entity.dateTo).format(format)}`;
+              return `Date Range \/
+                ${this._formatDateForTooltip(entity.dateFrom, column)} -
+                ${this._formatDateForTooltip(entity.dateTo, column)}
+              `;
             }
             default:
               return `${section.action} ${section.operationType} / ${name} / ${entity.pattern}`;
@@ -176,8 +178,10 @@
               }
               break;
             case 'date': {
-              const format = this._getDateFormat(column);
-              return `${window.Px.moment(entity.dateFrom).format(format)}-${window.Px.moment(entity.dateTo).format(format)}`;
+              return `
+                ${this._formatDateForChip(entity.dateFrom, column)} -
+                ${this._formatDateForChip(entity.dateTo, column)}
+              `;
             }
             default:
               if (entity.query.length <= 15) {
@@ -196,6 +200,70 @@
           return flattenFilterEntities.length > 1;
         }
 
+        _formatDateForTooltip(value, column) {
+          return this._getFormattedDate(value, column,
+            this._getSourceTimezone(column), this._getSourceFormat(column),
+            this._getDisplayTimezone(column), this._getDisplayFormat(column));
+        }
+
+        _formatDateForChip(value, column) {
+          return this._getFormattedDate(value, column,
+            this._getSourceTimezone(column), this._getSourceFormat(column),
+            this._getDisplayTimezone(column), 'YYYY/MM/DD'); // GE requirement to force this format
+        }
+
+        _getFormattedDate(value, column, sourceTimezone, sourceFormat, displayTimezone, displayFormat) {
+          var result;
+          if (value) {
+            let momentValue;
+            // read timestamp data
+            if (this.dateFormat === 'ISO') {
+              momentValue = window.Px.moment(value);
+            } else {
+              momentValue = window.Px.moment.tz(value, sourceFormat, sourceTimezone);
+            }
+            // format for display
+            if (momentValue) {
+              if (this.displayFormat === 'ISO') {
+                result = momentValue.toISOString();
+              } else {
+                result = momentValue.tz(displayTimezone).format(displayFormat);
+              }
+            } else {
+              console.warn('Unknown date value: "' + value + '"');
+              result = '';
+            }
+          } else {
+            result = '';
+          }
+
+          return result;
+        }
+
+        _getSourceTimezone(column) {
+          if (column.dateFormat && column.dateFormat.timezone) {
+            return column.dateFormat.timezone;
+          } else {
+            return 'UTC';
+          }
+        }
+
+        _getDisplayTimezone(column) {
+          if (column.rendererConfig && column.rendererConfig.timezone) {
+            return column.rendererConfig.timezone;
+          } else {
+            return 'UTC';
+          }
+        }
+
+        _getSourceFormat(column) {
+          if (column.dateFormat && column.dateFormat.format) {
+            return column.dateFormat.format;
+          } else {
+            return 'ISO';
+          }
+        }
+
         _getDateFormat(column) {
           if (column.rendererConfig && column.rendererConfig.displayFormat) {
             return column.rendererConfig.displayFormat;
@@ -204,10 +272,12 @@
           }
         }
 
-        _getTimeStampFormat(column) {
-          // TODO: add timezone to end of format
-          // TODO: read time format from renderConfig?
-          return 'YYYY/MM/DD, hh:mm:ss A';
+        _getDisplayFormat(column) {
+          if (column.rendererConfig && column.rendererConfig.displayFormat) {
+            return column.rendererConfig.displayFormat;
+          } else {
+            return 'YYYY/MM/DD HH:mm:ss';
+          }
         }
       }
 
