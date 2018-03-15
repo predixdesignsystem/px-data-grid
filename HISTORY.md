@@ -1,3 +1,10 @@
+v1.0.0-beta.4
+==========================
+* Passes `item` object to the renderer to allow the renderer to read its "row
+  data" to use at render time or in passing data up to the app through events
+Demo updates:
+* Adds demo for px-data-grid-paginated
+
 v1.0.0-beta.3
 ==========================
 * Update date/time rendering and filtering functionality to correctly use
