@@ -36,5 +36,6 @@
     "stylelint-config-vaadin": "^0.1.1",
     "web-component-tester": "^6.0.0",
     "yargs": "^5.0.0"
-  }
+  },
+  "license": "BSD-3-Clause"
 }
