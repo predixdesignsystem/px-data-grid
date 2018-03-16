@@ -54,8 +54,7 @@
               initial-filter-state="[[_initialFilterState]]"
               compact-mode="[[compactAdvancedFilterDialog]]"
               string-comparators="[[stringComparators]]"
-              number-comparators="[[numberComparators]]"
-              use-timezones="[[useTimezones]]">
+              number-comparators="[[numberComparators]]">
             </px-data-grid-filters-modal>
           </template>
 
@@ -1142,14 +1141,6 @@
              */
             stringComparators: {
               type: Array
-            },
-
-            /**
-             * Set to `true` to be able to change timezones in the advanced filtering modal.
-             */
-            useTimezones: {
-              type: Boolean,
-              value: true
             },
 
             /**

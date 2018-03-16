@@ -41,7 +41,6 @@
           compact-mode="[[_isEntityCompact(_compactModeEnabled, index)]]"
           string-comparators="[[stringComparators]]"
           number-comparators="[[numberComparators]]"
-          use-timezones="[[useTimezones]]"
           localize="[[localize]]">
         </px-data-grid-filter-entity>
         <div class="actionable" on-click="_removeEntity">
@@ -119,10 +118,6 @@
 
             numberComparators: {
               type: Array
-            },
-
-            useTimezones: {
-              type: Boolean
             },
 
             _compactModeEnabled: {
