@@ -1,4 +1,4 @@
-# px-data-grid [![Build Status](https://travis-ci.org/vaadin/px-data-grid.svg?branch=master)](https://travis-ci.org/vaadin/px-data-grid)
+# px-data-grid [![Build Status](https://travis-ci.org/predixdesignsystem/px-data-grid.svg?branch=master)](https://travis-ci.org/predixdesignsystem/px-data-grid)
 
 ## Overview
 
