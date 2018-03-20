@@ -26,8 +26,8 @@ document.addEventListener('WebComponentsReady', () => {
           const rowDetails = getRows(grid)[0].querySelector('td:last-child');
           expect(rowDetails.hidden).to.be.true;
           done();
-        }, 100);
-      }, 100);
+        }, 200);
+      }, 200);
     });
 
   });
