@@ -250,7 +250,7 @@ Make date-renderer columns use ellipsis overflow:
           if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('displayFormat')) {
             this.displayFormat = rendererConfig.value.displayFormat;
           } else {
-            this.displayFormat = 'YYYY-MM-DD';
+            this.displayFormat = 'YYYY-MM-DD z';
           }
 
           if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('timezone')) {
