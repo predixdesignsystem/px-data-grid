@@ -1797,7 +1797,9 @@
           });
 
           this._actionMenuContent = content;
-          this._selectedActionItems = selected;
+          setTimeout(() => {
+            this._selectedActionItems = selected;
+          });
         }
 
         _getColumnsWithName(name) {
