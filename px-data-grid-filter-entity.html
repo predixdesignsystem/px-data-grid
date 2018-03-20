@@ -51,8 +51,8 @@
             id="date-rangepicker"
             hide-time="[[_hideTime]]"
             hide-presets
-            date-format="YYYY/MM/DD"
-            time-format="HH:mm:ss"
+            date-format="[[_datePickerDateFormat]]"
+            time-format="[[_datePickerTimeFormat]]"
             time-zone="[[_displayTimezone]]"
             show-time-zone="abbreviatedText"
             show-field-titles
@@ -269,6 +269,14 @@
               type: String
             },
 
+            _datePickerDateFormat: {
+              type: String
+            },
+
+            _datePickerTimeFormat: {
+              type: String
+            },
+
             localize: Function
           };
         }
@@ -345,6 +353,8 @@
             this.set('_displayDateFormat', selectedColumn.rendererConfig.datePickerDateFormat || 'YYYY/MM/DD');
             this.set('_displayTimeFormat', selectedColumn.rendererConfig.datePickerTimeFormat || 'HH:mm');
             this.set('_displayTimezone', selectedColumn.rendererConfig.timezone || 'UTC');
+            this.set('_datePickerDateFormat', selectedColumn.rendererConfig.datePickerDateFormat || 'YYYY/MM/DD');
+            this.set('_datePickerTimeFormat', selectedColumn.rendererConfig.datePickerTimeFormat || 'HH:mm');
           }
         }
 
