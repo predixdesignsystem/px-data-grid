@@ -44,9 +44,9 @@
           use-timezones="[[useTimezones]]"
           localize="[[localize]]">
         </px-data-grid-filter-entity>
-        <div class="actionable" on-click="_removeEntity">
+        <button class="actionable" on-click="_removeEntity">
           <px-icon icon="px-nav:close"></px-icon>
-        </div>
+        </button>
       </div>
     </template>
 
@@ -163,6 +163,13 @@
 
         _addEntity() {
           this.push('section.entities', {});
+
+          Polymer.RenderStatus.afterNextRender(this, () => {
+            this.dispatchEvent(new CustomEvent('update-modal-focusable-elements', {
+              bubbles: true,
+              composed: true
+            }));
+          });
         }
 
         _removeEntity(event) {
