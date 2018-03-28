@@ -97,6 +97,14 @@
           };
         }
 
+        ready() {
+          super.ready();
+
+          this.addEventListener('update-modal-focusable-elements', (event) => {
+            this.$.filtersModal.findFocusableElements();
+          });
+        }
+
         open() {
           this.$.filtersModal.opened = true;
         }
