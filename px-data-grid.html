@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="../vaadin-grid/vaadin-grid-column-group.html">
 <link rel="import" href="../vaadin-grid/vaadin-grid-tree-toggle.html">
 <link rel="import" href="../px-spinner/px-spinner.html">
 <link rel="import" href="../px-modal/px-modal.html">
@@ -169,23 +170,25 @@
         </px-data-grid-column>
       </template>
 
-      <template is="dom-if" if="[[_offerEditColumn(editable)]]" restamp>
-        <px-data-grid-edit-column
-          editted-item="[[_editingItem]]"
-          edit-mode="[[editable]]"
-          edit="[[_boundedEditItem]]"
-          cancel="[[_boundedCancelEdit]]">
-        </px-data-grid-column>
-      </template>
+      <vaadin-grid-column-group frozen>
+        <template is="dom-if" if="[[_offerEditColumn(editable)]]" restamp>
+          <px-data-grid-edit-column
+            editted-item="[[_editingItem]]"
+            edit-mode="[[editable]]"
+            edit="[[_boundedEditItem]]"
+            cancel="[[_boundedCancelEdit]]">
+          </px-data-grid-column>
+        </template>
 
-      <template is="dom-if" if="[[_offerActionColumn(editable, itemActions, _editingItem)]]" restamp>
-        <px-data-grid-action-column
-          item-actions="[[itemActions]]"
-          editted-item="[[_editingItem]]"
-          edit-mode="[[editable]]"
-          save="[[_boundedSaveItem]]">
-        </px-data-grid-column>
-      </template>
+        <template is="dom-if" if="[[_offerActionColumn(editable, itemActions, _editingItem)]]" restamp>
+          <px-data-grid-action-column
+            item-actions="[[itemActions]]"
+            editted-item="[[_editingItem]]"
+            edit-mode="[[editable]]"
+            save="[[_boundedSaveItem]]">
+          </px-data-grid-column>
+        </template>
+      </vaadin-grid-column-group>
     </vaadin-grid>
 
     <px-spinner size="40" hidden$="[[_spinnerHidden]]"></px-spinner>

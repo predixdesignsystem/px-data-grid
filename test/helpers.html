@@ -222,7 +222,7 @@
   }
 
   function getHeaderCell(grid, index) {
-    return grid._vaadinGrid.$.header.querySelectorAll('[part~="cell"]')[index];
+    return grid._vaadinGrid.$.header.querySelectorAll('tr:nth-child(2) [part~="cell"]')[index];
   }
 
   function getHeaderCellContent(cell) {
