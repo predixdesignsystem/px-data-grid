@@ -498,6 +498,21 @@
              *     compared to other columns in the grid. Equivalent to the CSS
              *     `flex-grow` property.
              *
+             *
+             * ## `column.dateFormat` options
+             *
+             * The following options can be set in the `rendererConfig` for
+             * columns of type `date`. All formats should be set to a valid
+             * [moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)
+             * or to 'ISO':
+             *
+             *   * `{string} dateFormat.format='YYYY-MM-DD HH:mm:ss'` -
+             *     Format used to read the date/timestamp data.
+             *
+             *   * `{string} dateFormat.timezone='UTC'` -
+             *     Timezone used to read the date/timestamp data.
+             *
+             *
              * ## `column.rendererConfig` options
              *
              * The following options can be set in the `rendererConfig` for
@@ -505,11 +520,11 @@
              * [moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)
              * or to 'ISO':
              *
-             *   * `{string} rendererConfig.displayFormat='YYYY-MM-DD'` -
-             *     Format used to display the date for the user.
+             *   * `{string} rendererConfig.displayFormat='YYYY-MM-DD HH:mm:ss'` -
+             *     Format used to display the date/timestamp for the user.
              *
-             *   * `{string} rendererConfig.dataFormat='YYYY-MM-DD'` - Format
-             *     the grid expects data in when reading it from `tableData`.
+             *   * `{string} rendererConfig.timezone='UTC'` -
+             *     Timezone used to display the date/timestamp for the user.
              *
              *   * `{string} rendererConfig.datePickerDateFormat='YYYY-MM-DD'` -
              *     Format used for the px-datetime-picker date when the user
@@ -604,10 +619,15 @@
              *   type: 'date',
              *   editable: true,
              *   renderer: 'px-data-grid-date-renderer',
+             *   dateFormat: {
+             *     format: 'YYYY-MM-DD HH:mm:ss',
+             *     timezone: 'UTC'
+             *   },
              *   rendererConfig: {
-             *     hideTime: true,
-             *     displayFormat: 'YYYY/MM/DD',
-             *     dataFormat: 'YYYY-MM-DD'
+             *     displayFormat: 'MM/DD/YYYY HH:mm',
+             *     timezone: 'America/Los_Angeles',
+             *     datePickerDateFormat: 'MM/DD/YYYY',
+             *     datePickerTimeFormat: 'HH:mm'
              *   },
              *   dateRanges: [
              *     {
