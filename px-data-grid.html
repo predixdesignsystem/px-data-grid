@@ -1531,10 +1531,20 @@
         }
 
         _compareValues(a, b, path, direction) {
+          const column = this._getColumnByPath(path);
           // Selection is inverted to make selected smaller than not selected
           const valueA = path === '--selection--' ? !this._vaadinGrid._isSelected(a) : Polymer.Base.get(path, a);
           const valueB = path === '--selection--' ? !this._vaadinGrid._isSelected(b) : Polymer.Base.get(path, b);
-
+          // need to properly compare dates if column type is date
+          if (column.type === 'date') {
+            const momentA = this._getMomentObj(valueA, path);
+            const momentB = this._getMomentObj(valueB, path);
+            const compareVal = this._compareMomentObj(momentA, momentB, direction);
+            if (compareVal !== undefined) {
+              return compareVal;
+            }
+          }
+          // compare as plain value
           if (direction === 'asc') {
             return this._compare(valueA, valueB);
           } else if (direction === 'desc') {
@@ -1542,6 +1552,42 @@
           } else {
             return 0;
           }
+        }
+
+        _compareMomentObj(momentA, momentB, direction) {
+          if (!momentA || !momentB) {
+            return;
+          }
+          if (momentA.isBefore(momentB)) {
+            return direction === 'asc' ? -1 : 1;
+          }
+          if (momentA.isSame(momentB)) {
+            return 0;
+          }
+          if (momentA.isAfter(momentB)) {
+            return direction === 'asc' ? 1 : -1;
+          }
+        }
+
+        _getMomentObj(value, path) {
+          const column = this._getColumnByPath(path);
+          const dateFormat = column.dateFormat || {};
+          const timezone = dateFormat.timezone || 'utc';
+          const format = dateFormat.format;
+          if (format) {
+            if (format === 'ISO') {
+              return window.Px.moment(value);
+            } else {
+              return window.Px.moment.tz(value, format, timezone);
+            }
+          }
+        }
+
+        _getColumnByPath(columnPath) {
+          if (!this.columns) {
+            return;
+          }
+          return this.columns.filter((column) => column.path === columnPath)[0];
         }
 
         /**
