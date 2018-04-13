@@ -1,3 +1,7 @@
+v1.0.0
+==========================
+* First general availability release of px-data-grid
+
 v1.0.0-beta.4
 ==========================
 * Passes `item` object to the renderer to allow the renderer to read its "row
