@@ -1,3 +1,7 @@
+v1.0.1
+==========================
+* [DEMO ONLY] Remove beta banner from the top of demo pages
+
 v1.0.0
 ==========================
 * First general availability release of px-data-grid
