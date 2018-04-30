@@ -55,5 +55,5 @@
     "webcomponentsjs": "^1.0.0",
     "px-demo-snippet": "master"
   },
-  "license": "BSD-3-Clause"
+  "license": "Apache-2.0"
 }
