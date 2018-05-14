@@ -12,6 +12,7 @@
   "devDependencies": {
     "bower": "^1.8.2",
     "browser-sync": "^2.13.0",
+    "ensure-px-license": "^1.0.0",
     "eslint": "^4.0.0",
     "eslint-config-vaadin": "^0.2.5",
     "eslint-plugin-html": "^3.0.0",
