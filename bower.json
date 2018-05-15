@@ -1,6 +1,6 @@
 {
   "name": "px-data-grid",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/predixdesignsystem/px-data-grid",
   "main": "px-data-grid.html",
   "description": "Polymer 2 element that displays tabular data",

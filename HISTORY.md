@@ -1,3 +1,10 @@
+v1.0.2
+==========================
+Bug fixes:
+* #792 - Change px-data-grid-paginated page buttons to use outline instead of
+  border to make it less likely long numbers will overlay. This fix will only
+  work for some numbers and will not work for numbers over 1000.
+
 v1.0.1
 ==========================
 * [DEMO ONLY] Remove beta banner from the top of demo pages

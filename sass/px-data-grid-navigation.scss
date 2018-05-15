@@ -85,9 +85,17 @@
 
 .page-button.selected {
   cursor: auto;
-  border: solid 1px var(--px-data-grid-navigation-page-number-border-color, #CCC);
   border-radius: 0;
   color: var(--px-data-grid-navigation-text-color--selected, #000);
+  &:not(:focus) {
+    // We use outline instead of border to give a bit more room for wide numbers
+    // (e.g. 888) so they're less likely to overlap the border (see #792).
+    // We can't make the page button container wider because the display logic
+    // depends on each button being a fixed 20px wide. We only change the
+    // outline for non-focus state so the native browser focus ring shows up
+    // when the user tabs through.
+    outline: solid 1px var(--px-data-grid-navigation-page-number-border-color, #CCC);
+  }
 }
 
 .page-button px-icon {
