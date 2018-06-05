@@ -1,3 +1,8 @@
+v1.0.3
+==========================
+Bug fixes:
+* #794 - Make data-grid table actions reactive to property change
+
 v1.0.2
 ==========================
 Bug fixes:

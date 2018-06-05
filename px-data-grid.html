@@ -802,7 +802,8 @@ limitations under the License.
              */
             tableActions: {
               type: Array,
-              value: []
+              value: [],
+              observer: '_updateActionMenu'
             },
 
             /**
@@ -1765,7 +1766,7 @@ limitations under the License.
             }
           }
 
-          this._updateActionMenu();
+          this._updateActionMenu(this.tableActions);
         }
 
         /**
@@ -1810,14 +1811,14 @@ limitations under the License.
         /**
          * Function called when action menu content needs to be updated
          */
-        _updateActionMenu() {
+        _updateActionMenu(tableActions) {
           const content = [];
           this._selectedActionItems = [];
 
           // Application specific options
 
-          if (this.tableActions) {
-            this.tableActions.forEach((item) => {
+          if (tableActions) {
+            tableActions.forEach((item) => {
               content.push({
                 key: '-action-' + item.id,
                 val: item.name,
@@ -1903,7 +1904,7 @@ limitations under the License.
 
         _onColumnUpdate(event) {
           if (event.detail.type == 'hidden') {
-            this._updateActionMenu();
+            this._updateActionMenu(this.tableActions);
           } else if (event.detail.type == 'frozen') {
             this._scheduleColumnSanityCheck();
           }
@@ -2271,7 +2272,7 @@ limitations under the License.
         _columnsChanged(columns) {
           // Store cleaned version of current columns
           this._lastColumnsReceived = this._cleanColumns(columns);
-          Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._updateActionMenu());
+          Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._updateActionMenu(this.tableActions));
         }
 
         _setColumnId(columns) {

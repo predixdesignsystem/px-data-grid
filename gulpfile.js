@@ -34,7 +34,7 @@ const htmlExtract = require('gulp-html-extract');
 const stylelint = require('gulp-stylelint');
 const cache = require('gulp-cached');
 const exec = require('child_process').exec;
-const { ensureLicense } = require('ensure-px-license');
+const {ensureLicense} = require('ensure-px-license');
 
 const sassOptions = {
   importer: importOnce,
