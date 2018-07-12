@@ -806,6 +806,16 @@ limitations under the License.
               observer: '_updateActionMenu'
             },
 
+             /**
+             * Set to `true` to allow the user to hide column filters in
+             * the action menu.
+             */
+
+            hideColumnFilter: {
+              type: Boolean,
+              value: false
+            },
+
             /**
              * A list of custom actions that are shown in the actions menu
              * for each data row. The action menu button appears to the right
@@ -1871,7 +1881,9 @@ limitations under the License.
               selected.push(key);
             }
 
-            content.push(item);
+            if (!this.hideColumnFilter) {
+              content.push(item);
+            }
           });
 
           this._actionMenuContent = content;
