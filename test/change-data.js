@@ -31,7 +31,7 @@ document.addEventListener('WebComponentsReady', () => {
       });
     });
 
-    it.only('should update all cells in the first column', () => {
+    it('should update all cells in the first column', () => {
       expect(grid.selectedItems.length).to.eq(2);
       for (let i = 0; i < grid.getData(true).length; i++) {
         grid.tableData[i].first = 'New Name ' + i;
