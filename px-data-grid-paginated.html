@@ -984,6 +984,10 @@ limitations under the License.
             return;
           }
 
+          if (this.selectedItems.length > 0) {
+            this.selectedItems = [];
+          }
+
           if (tableData) {
             this._hasLocalDataProvider = true;
             this._currentDataProvider = this._wrapDataProvider(this._localDataProvider);

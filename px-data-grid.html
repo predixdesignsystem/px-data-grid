@@ -1565,6 +1565,10 @@ limitations under the License.
             return;
           }
 
+          if (this.selectedItems.length > 0) {
+            this.selectedItems = [];
+          }
+
           if (tableData) {
             this._currentDataProvider = (params, callback) => {
               this._localDataProvider(params, (items, size) => {
