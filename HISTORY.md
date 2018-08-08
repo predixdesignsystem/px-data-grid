@@ -1,3 +1,15 @@
+v1.0.5
+==========================
+Enhancement:
+* #799 - Adding Disable for TableActions
+* #799 - Add Property to show/hide column filters
+
+v1.0.4
+==========================
+Bug fixes:
+* #801 - Unfroze row action column
+
+
 v1.0.3
 ==========================
 Bug fixes:
