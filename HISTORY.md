@@ -1,3 +1,8 @@
+v1.0.6
+==========================
+Enhancement:
+* #803 - Clear selected items when table data changes
+
 v1.0.5
 ==========================
 Enhancement:
