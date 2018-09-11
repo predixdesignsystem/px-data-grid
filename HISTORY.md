@@ -1,3 +1,8 @@
+v1.0.7
+==========================
+Bug fixes:
+* #808 - selected-items-changed event behaves consistently
+
 v1.0.6
 ==========================
 Enhancement:

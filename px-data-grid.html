@@ -1480,7 +1480,7 @@ limitations under the License.
         _handleSelectItem(item) {
           if (!this._vaadinGrid._isSelected(item)) {
             if (!this._isMultiSelect()) {
-              this._vaadinGrid.selectedItems = [];
+              this._vaadinGrid.pop('selectedItems');
             }
             this._vaadinGrid.push('selectedItems', item);
           }

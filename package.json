@@ -1,6 +1,6 @@
 {
   "name": "px-data-grid",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Polymer 2 element that defines a data grid (data table)",
   "main": "px-data-grid.html",
   "repository": "predixdesignsystem/px-data-grid",
