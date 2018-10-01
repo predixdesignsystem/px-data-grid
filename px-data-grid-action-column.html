@@ -186,9 +186,18 @@ limitations under the License.
           // To prevent selections
           e.stopPropagation();
           this.save(e);
+
+          /**
+           * @event item-save
+           *
+           * Fired when the current edited item is saved by the user.
+           * `evt.detail` contains a reference to the updated `tableData` item
+           *
+           */
           this.dispatchEvent(new CustomEvent('item-save', {
             bubbles: true,
-            composed: true
+            composed: true,
+            detail: e.model.item
           }));
         }
 

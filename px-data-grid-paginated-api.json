@@ -51219,7 +51219,7 @@
                   "column": 8
                 },
                 "end": {
-                  "line": 192,
+                  "line": 201,
                   "column": 9
                 }
               },
@@ -51236,11 +51236,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 194,
+                  "line": 203,
                   "column": 8
                 },
                 "end": {
-                  "line": 208,
+                  "line": 217,
                   "column": 9
                 }
               },
@@ -51257,11 +51257,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 210,
+                  "line": 219,
                   "column": 8
                 },
                 "end": {
-                  "line": 212,
+                  "line": 221,
                   "column": 9
                 }
               },
@@ -51284,11 +51284,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 214,
+                  "line": 223,
                   "column": 8
                 },
                 "end": {
-                  "line": 218,
+                  "line": 227,
                   "column": 9
                 }
               },
@@ -51311,11 +51311,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 220,
+                  "line": 229,
                   "column": 8
                 },
                 "end": {
-                  "line": 234,
+                  "line": 243,
                   "column": 9
                 }
               },
@@ -51332,11 +51332,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 236,
+                  "line": 245,
                   "column": 8
                 },
                 "end": {
-                  "line": 265,
+                  "line": 274,
                   "column": 9
                 }
               },
@@ -51353,11 +51353,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 267,
+                  "line": 276,
                   "column": 8
                 },
                 "end": {
-                  "line": 270,
+                  "line": 279,
                   "column": 9
                 }
               },
@@ -51378,7 +51378,7 @@
               "column": 6
             },
             "end": {
-              "line": 271,
+              "line": 280,
               "column": 7
             }
           },
@@ -51553,7 +51553,14 @@
               "type": "Array"
             }
           ],
-          "events": [],
+          "events": [
+            {
+              "type": "CustomEvent",
+              "name": "item-save",
+              "description": "item-save\n\nFired when the current edited item is saved by the user.\n`evt.detail` contains a reference to the updated `tableData` item",
+              "metadata": {}
+            }
+          ],
           "styling": {
             "cssVariables": [],
             "selectors": []
