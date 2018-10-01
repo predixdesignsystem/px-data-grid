@@ -1,3 +1,8 @@
+v1.0.8
+==========================
+Bug Fixes:
+* #809 - add a reference to the saved item in item-saved event
+
 v1.0.7
 ==========================
 Bug fixes:
