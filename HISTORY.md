@@ -1,3 +1,8 @@
+v1.0.9
+==========================
+Bug fixes:
+* #805 - item-action and item-save events should now propagate to px-data-grid/px-data-grid-paginated elements on polyfilled browsers 
+
 v1.0.8
 ==========================
 Bug Fixes:
@@ -23,7 +28,6 @@ v1.0.4
 ==========================
 Bug fixes:
 * #801 - Unfroze row action column
-
 
 v1.0.3
 ==========================
