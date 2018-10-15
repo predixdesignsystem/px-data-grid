@@ -1274,7 +1274,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Vaadin.GridColumnElement",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridColumnElement",
           "attributes": [
             {
@@ -2024,7 +2024,7 @@
             },
             {
               "name": "root",
-              "type": "(StampedTemplate | HTMLElement | ShadowRoot)",
+              "type": "(StampedTemplate|HTMLElement|ShadowRoot)",
               "description": "",
               "privacy": "public",
               "sourceRange": {
@@ -2907,7 +2907,7 @@
                 }
               ],
               "return": {
-                "type": "(string | undefined)",
+                "type": "(string|undefined)",
                 "desc": "String serialized from the provided\nproperty  value."
               },
               "inheritedFrom": "Polymer.PropertiesChanged"
@@ -3310,7 +3310,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(number | string)>)",
+                  "type": "(string|!Array.<(number|string)>)",
                   "description": "Path to set"
                 },
                 {
@@ -3554,12 +3554,12 @@
               "params": [
                 {
                   "name": "to",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to link."
                 },
                 {
                   "name": "from",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Source path to link."
                 }
               ],
@@ -3587,7 +3587,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to unlink."
                 }
               ],
@@ -3648,7 +3648,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to read.  The path may be specified as a string (e.g. `foo.bar.baz`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `users.12.name` or `['users', 12, 'name']`)."
                 },
                 {
@@ -3682,7 +3682,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `'users.12.name'` or `['users', 12, 'name']`)."
                 },
                 {
@@ -3720,7 +3720,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -3755,7 +3755,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -3784,7 +3784,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -3829,7 +3829,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -3858,7 +3858,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -3964,7 +3964,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -4002,7 +4002,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -4096,7 +4096,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -4785,7 +4785,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -4823,7 +4823,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating"
                 }
               ],
@@ -4951,7 +4951,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating whether\n  method names should be included as a dependency to the effect."
                 }
               ],
@@ -5268,7 +5268,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Polymer.Element",
+          "superclass": "HTMLElement",
           "name": "Predix.AutoFilterFieldElement",
           "attributes": [
             {
@@ -5871,7 +5871,7 @@
             },
             {
               "name": "root",
-              "type": "(StampedTemplate | HTMLElement | ShadowRoot)",
+              "type": "(StampedTemplate|HTMLElement|ShadowRoot)",
               "description": "",
               "privacy": "public",
               "sourceRange": {
@@ -6792,7 +6792,7 @@
                 }
               ],
               "return": {
-                "type": "(string | undefined)",
+                "type": "(string|undefined)",
                 "desc": "String serialized from the provided\nproperty  value."
               },
               "inheritedFrom": "Polymer.PropertiesChanged"
@@ -7195,7 +7195,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(number | string)>)",
+                  "type": "(string|!Array.<(number|string)>)",
                   "description": "Path to set"
                 },
                 {
@@ -7439,12 +7439,12 @@
               "params": [
                 {
                   "name": "to",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to link."
                 },
                 {
                   "name": "from",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Source path to link."
                 }
               ],
@@ -7472,7 +7472,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to unlink."
                 }
               ],
@@ -7533,7 +7533,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to read.  The path may be specified as a string (e.g. `foo.bar.baz`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `users.12.name` or `['users', 12, 'name']`)."
                 },
                 {
@@ -7567,7 +7567,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `'users.12.name'` or `['users', 12, 'name']`)."
                 },
                 {
@@ -7605,7 +7605,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -7640,7 +7640,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -7669,7 +7669,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -7714,7 +7714,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -7743,7 +7743,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -7849,7 +7849,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -7887,7 +7887,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -7981,7 +7981,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -8674,7 +8674,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -8712,7 +8712,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating"
                 }
               ],
@@ -8840,7 +8840,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating whether\n  method names should be included as a dependency to the effect."
                 }
               ],
@@ -9157,7 +9157,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Polymer.Element",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridSelectAllElement",
           "attributes": [
             {
@@ -10549,7 +10549,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Vaadin.GridColumnElement",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridSelectionColumnElement",
           "attributes": [
             {
@@ -11724,7 +11724,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Vaadin.GridColumnElement",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridToggleDetailsColumnElement",
           "attributes": [
             {
@@ -12377,7 +12377,7 @@
             },
             {
               "name": "root",
-              "type": "(StampedTemplate | HTMLElement | ShadowRoot)",
+              "type": "(StampedTemplate|HTMLElement|ShadowRoot)",
               "description": "",
               "privacy": "public",
               "sourceRange": {
@@ -13371,7 +13371,7 @@
                 }
               ],
               "return": {
-                "type": "(string | undefined)",
+                "type": "(string|undefined)",
                 "desc": "String serialized from the provided\nproperty  value."
               },
               "inheritedFrom": "Polymer.PropertiesChanged"
@@ -13774,7 +13774,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(number | string)>)",
+                  "type": "(string|!Array.<(number|string)>)",
                   "description": "Path to set"
                 },
                 {
@@ -14018,12 +14018,12 @@
               "params": [
                 {
                   "name": "to",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to link."
                 },
                 {
                   "name": "from",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Source path to link."
                 }
               ],
@@ -14051,7 +14051,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to unlink."
                 }
               ],
@@ -14112,7 +14112,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to read.  The path may be specified as a string (e.g. `foo.bar.baz`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `users.12.name` or `['users', 12, 'name']`)."
                 },
                 {
@@ -14146,7 +14146,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `'users.12.name'` or `['users', 12, 'name']`)."
                 },
                 {
@@ -14184,7 +14184,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -14219,7 +14219,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -14248,7 +14248,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -14293,7 +14293,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -14322,7 +14322,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -14428,7 +14428,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -14466,7 +14466,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -14560,7 +14560,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -15376,7 +15376,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -15414,7 +15414,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating"
                 }
               ],
@@ -15542,7 +15542,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating whether\n  method names should be included as a dependency to the effect."
                 }
               ],
@@ -15859,7 +15859,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Polymer.Element",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridStringRenderer",
           "attributes": [
             {
@@ -16518,7 +16518,7 @@
             },
             {
               "name": "root",
-              "type": "(StampedTemplate | HTMLElement | ShadowRoot)",
+              "type": "(StampedTemplate|HTMLElement|ShadowRoot)",
               "description": "",
               "privacy": "public",
               "sourceRange": {
@@ -17651,7 +17651,7 @@
                 }
               ],
               "return": {
-                "type": "(string | undefined)",
+                "type": "(string|undefined)",
                 "desc": "String serialized from the provided\nproperty  value."
               },
               "inheritedFrom": "Polymer.PropertiesChanged"
@@ -18054,7 +18054,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(number | string)>)",
+                  "type": "(string|!Array.<(number|string)>)",
                   "description": "Path to set"
                 },
                 {
@@ -18298,12 +18298,12 @@
               "params": [
                 {
                   "name": "to",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to link."
                 },
                 {
                   "name": "from",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Source path to link."
                 }
               ],
@@ -18331,7 +18331,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to unlink."
                 }
               ],
@@ -18392,7 +18392,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to read.  The path may be specified as a string (e.g. `foo.bar.baz`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `users.12.name` or `['users', 12, 'name']`)."
                 },
                 {
@@ -18426,7 +18426,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `'users.12.name'` or `['users', 12, 'name']`)."
                 },
                 {
@@ -18464,7 +18464,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -18499,7 +18499,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -18528,7 +18528,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -18573,7 +18573,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -18602,7 +18602,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -18708,7 +18708,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -18746,7 +18746,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -18840,7 +18840,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -19761,7 +19761,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -19799,7 +19799,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating"
                 }
               ],
@@ -19927,7 +19927,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating whether\n  method names should be included as a dependency to the effect."
                 }
               ],
@@ -20244,7 +20244,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Polymer.Element",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridDateRenderer",
           "attributes": [
             {
@@ -20999,7 +20999,7 @@
             },
             {
               "name": "root",
-              "type": "(StampedTemplate | HTMLElement | ShadowRoot)",
+              "type": "(StampedTemplate|HTMLElement|ShadowRoot)",
               "description": "",
               "privacy": "public",
               "sourceRange": {
@@ -22105,7 +22105,7 @@
                 }
               ],
               "return": {
-                "type": "(string | undefined)",
+                "type": "(string|undefined)",
                 "desc": "String serialized from the provided\nproperty  value."
               },
               "inheritedFrom": "Polymer.PropertiesChanged"
@@ -22508,7 +22508,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(number | string)>)",
+                  "type": "(string|!Array.<(number|string)>)",
                   "description": "Path to set"
                 },
                 {
@@ -22752,12 +22752,12 @@
               "params": [
                 {
                   "name": "to",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to link."
                 },
                 {
                   "name": "from",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Source path to link."
                 }
               ],
@@ -22785,7 +22785,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to unlink."
                 }
               ],
@@ -22846,7 +22846,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to read.  The path may be specified as a string (e.g. `foo.bar.baz`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `users.12.name` or `['users', 12, 'name']`)."
                 },
                 {
@@ -22880,7 +22880,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `'users.12.name'` or `['users', 12, 'name']`)."
                 },
                 {
@@ -22918,7 +22918,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -22953,7 +22953,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -22982,7 +22982,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -23027,7 +23027,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -23056,7 +23056,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -23162,7 +23162,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -23200,7 +23200,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -23294,7 +23294,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -24215,7 +24215,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -24253,7 +24253,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating"
                 }
               ],
@@ -24381,7 +24381,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating whether\n  method names should be included as a dependency to the effect."
                 }
               ],
@@ -24698,7 +24698,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Polymer.Element",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridNumberRenderer",
           "attributes": [
             {
@@ -25417,7 +25417,7 @@
             },
             {
               "name": "root",
-              "type": "(StampedTemplate | HTMLElement | ShadowRoot)",
+              "type": "(StampedTemplate|HTMLElement|ShadowRoot)",
               "description": "",
               "privacy": "public",
               "sourceRange": {
@@ -26352,7 +26352,7 @@
                 }
               ],
               "return": {
-                "type": "(string | undefined)",
+                "type": "(string|undefined)",
                 "desc": "String serialized from the provided\nproperty  value."
               },
               "inheritedFrom": "Polymer.PropertiesChanged"
@@ -26755,7 +26755,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(number | string)>)",
+                  "type": "(string|!Array.<(number|string)>)",
                   "description": "Path to set"
                 },
                 {
@@ -26999,12 +26999,12 @@
               "params": [
                 {
                   "name": "to",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to link."
                 },
                 {
                   "name": "from",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Source path to link."
                 }
               ],
@@ -27032,7 +27032,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to unlink."
                 }
               ],
@@ -27093,7 +27093,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to read.  The path may be specified as a string (e.g. `foo.bar.baz`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `users.12.name` or `['users', 12, 'name']`)."
                 },
                 {
@@ -27127,7 +27127,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `'users.12.name'` or `['users', 12, 'name']`)."
                 },
                 {
@@ -27165,7 +27165,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -27200,7 +27200,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -27229,7 +27229,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -27274,7 +27274,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -27303,7 +27303,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -27409,7 +27409,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -27447,7 +27447,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -27541,7 +27541,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -28347,7 +28347,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -28385,7 +28385,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating"
                 }
               ],
@@ -28513,7 +28513,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating whether\n  method names should be included as a dependency to the effect."
                 }
               ],
@@ -28830,7 +28830,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Polymer.Element",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridCellContentWrapperElement",
           "attributes": [
             {
@@ -29449,7 +29449,7 @@
             },
             {
               "name": "root",
-              "type": "(StampedTemplate | HTMLElement | ShadowRoot)",
+              "type": "(StampedTemplate|HTMLElement|ShadowRoot)",
               "description": "",
               "privacy": "public",
               "sourceRange": {
@@ -30694,7 +30694,7 @@
                 }
               ],
               "return": {
-                "type": "(string | undefined)",
+                "type": "(string|undefined)",
                 "desc": "String serialized from the provided\nproperty  value."
               },
               "inheritedFrom": "Polymer.PropertiesChanged"
@@ -31097,7 +31097,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(number | string)>)",
+                  "type": "(string|!Array.<(number|string)>)",
                   "description": "Path to set"
                 },
                 {
@@ -31341,12 +31341,12 @@
               "params": [
                 {
                   "name": "to",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to link."
                 },
                 {
                   "name": "from",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Source path to link."
                 }
               ],
@@ -31374,7 +31374,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to unlink."
                 }
               ],
@@ -31435,7 +31435,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to read.  The path may be specified as a string (e.g. `foo.bar.baz`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `users.12.name` or `['users', 12, 'name']`)."
                 },
                 {
@@ -31469,7 +31469,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `'users.12.name'` or `['users', 12, 'name']`)."
                 },
                 {
@@ -31507,7 +31507,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -31542,7 +31542,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -31571,7 +31571,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -31616,7 +31616,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -31645,7 +31645,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -31751,7 +31751,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -31789,7 +31789,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -31883,7 +31883,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -33005,7 +33005,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -33043,7 +33043,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating"
                 }
               ],
@@ -33171,7 +33171,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating whether\n  method names should be included as a dependency to the effect."
                 }
               ],
@@ -33488,7 +33488,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Polymer.Element",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridFilterEntityElement",
           "attributes": [
             {
@@ -34148,7 +34148,7 @@
             },
             {
               "name": "root",
-              "type": "(StampedTemplate | HTMLElement | ShadowRoot)",
+              "type": "(StampedTemplate|HTMLElement|ShadowRoot)",
               "description": "",
               "privacy": "public",
               "sourceRange": {
@@ -35140,7 +35140,7 @@
                 }
               ],
               "return": {
-                "type": "(string | undefined)",
+                "type": "(string|undefined)",
                 "desc": "String serialized from the provided\nproperty  value."
               },
               "inheritedFrom": "Polymer.PropertiesChanged"
@@ -35543,7 +35543,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(number | string)>)",
+                  "type": "(string|!Array.<(number|string)>)",
                   "description": "Path to set"
                 },
                 {
@@ -35787,12 +35787,12 @@
               "params": [
                 {
                   "name": "to",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to link."
                 },
                 {
                   "name": "from",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Source path to link."
                 }
               ],
@@ -35820,7 +35820,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to unlink."
                 }
               ],
@@ -35881,7 +35881,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to read.  The path may be specified as a string (e.g. `foo.bar.baz`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `users.12.name` or `['users', 12, 'name']`)."
                 },
                 {
@@ -35915,7 +35915,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `'users.12.name'` or `['users', 12, 'name']`)."
                 },
                 {
@@ -35953,7 +35953,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -35988,7 +35988,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -36017,7 +36017,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -36062,7 +36062,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -36091,7 +36091,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -36197,7 +36197,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -36235,7 +36235,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -36329,7 +36329,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -37147,7 +37147,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -37185,7 +37185,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating"
                 }
               ],
@@ -37313,7 +37313,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating whether\n  method names should be included as a dependency to the effect."
                 }
               ],
@@ -37630,7 +37630,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Polymer.Element",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridFilterSectionElement",
           "attributes": [
             {
@@ -38274,7 +38274,7 @@
             },
             {
               "name": "root",
-              "type": "(StampedTemplate | HTMLElement | ShadowRoot)",
+              "type": "(StampedTemplate|HTMLElement|ShadowRoot)",
               "description": "",
               "privacy": "public",
               "sourceRange": {
@@ -39234,7 +39234,7 @@
                 }
               ],
               "return": {
-                "type": "(string | undefined)",
+                "type": "(string|undefined)",
                 "desc": "String serialized from the provided\nproperty  value."
               },
               "inheritedFrom": "Polymer.PropertiesChanged"
@@ -39637,7 +39637,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(number | string)>)",
+                  "type": "(string|!Array.<(number|string)>)",
                   "description": "Path to set"
                 },
                 {
@@ -39881,12 +39881,12 @@
               "params": [
                 {
                   "name": "to",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to link."
                 },
                 {
                   "name": "from",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Source path to link."
                 }
               ],
@@ -39914,7 +39914,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to unlink."
                 }
               ],
@@ -39975,7 +39975,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to read.  The path may be specified as a string (e.g. `foo.bar.baz`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `users.12.name` or `['users', 12, 'name']`)."
                 },
                 {
@@ -40009,7 +40009,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `'users.12.name'` or `['users', 12, 'name']`)."
                 },
                 {
@@ -40047,7 +40047,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -40082,7 +40082,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -40111,7 +40111,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -40156,7 +40156,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -40185,7 +40185,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -40291,7 +40291,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -40329,7 +40329,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -40423,7 +40423,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -41201,7 +41201,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -41239,7 +41239,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating"
                 }
               ],
@@ -41367,7 +41367,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating whether\n  method names should be included as a dependency to the effect."
                 }
               ],
@@ -41684,7 +41684,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Polymer.Element",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridFilterElement",
           "attributes": [
             {
@@ -42357,7 +42357,7 @@
             },
             {
               "name": "root",
-              "type": "(StampedTemplate | HTMLElement | ShadowRoot)",
+              "type": "(StampedTemplate|HTMLElement|ShadowRoot)",
               "description": "",
               "privacy": "public",
               "sourceRange": {
@@ -43349,7 +43349,7 @@
                 }
               ],
               "return": {
-                "type": "(string | undefined)",
+                "type": "(string|undefined)",
                 "desc": "String serialized from the provided\nproperty  value."
               },
               "inheritedFrom": "Polymer.PropertiesChanged"
@@ -43752,7 +43752,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(number | string)>)",
+                  "type": "(string|!Array.<(number|string)>)",
                   "description": "Path to set"
                 },
                 {
@@ -43996,12 +43996,12 @@
               "params": [
                 {
                   "name": "to",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to link."
                 },
                 {
                   "name": "from",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Source path to link."
                 }
               ],
@@ -44029,7 +44029,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to unlink."
                 }
               ],
@@ -44090,7 +44090,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to read.  The path may be specified as a string (e.g. `foo.bar.baz`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `users.12.name` or `['users', 12, 'name']`)."
                 },
                 {
@@ -44124,7 +44124,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `'users.12.name'` or `['users', 12, 'name']`)."
                 },
                 {
@@ -44162,7 +44162,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -44197,7 +44197,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -44226,7 +44226,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -44271,7 +44271,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -44300,7 +44300,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -44406,7 +44406,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -44444,7 +44444,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -44538,7 +44538,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -45323,7 +45323,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -45361,7 +45361,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating"
                 }
               ],
@@ -45489,7 +45489,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating whether\n  method names should be included as a dependency to the effect."
                 }
               ],
@@ -45806,7 +45806,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Polymer.Element",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridFiltersModalElement",
           "attributes": [
             {
@@ -46489,7 +46489,7 @@
             },
             {
               "name": "root",
-              "type": "(StampedTemplate | HTMLElement | ShadowRoot)",
+              "type": "(StampedTemplate|HTMLElement|ShadowRoot)",
               "description": "",
               "privacy": "public",
               "sourceRange": {
@@ -47404,7 +47404,7 @@
                 }
               ],
               "return": {
-                "type": "(string | undefined)",
+                "type": "(string|undefined)",
                 "desc": "String serialized from the provided\nproperty  value."
               },
               "inheritedFrom": "Polymer.PropertiesChanged"
@@ -47807,7 +47807,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(number | string)>)",
+                  "type": "(string|!Array.<(number|string)>)",
                   "description": "Path to set"
                 },
                 {
@@ -48051,12 +48051,12 @@
               "params": [
                 {
                   "name": "to",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to link."
                 },
                 {
                   "name": "from",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Source path to link."
                 }
               ],
@@ -48084,7 +48084,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to unlink."
                 }
               ],
@@ -48145,7 +48145,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to read.  The path may be specified as a string (e.g. `foo.bar.baz`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `users.12.name` or `['users', 12, 'name']`)."
                 },
                 {
@@ -48179,7 +48179,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `'users.12.name'` or `['users', 12, 'name']`)."
                 },
                 {
@@ -48217,7 +48217,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -48252,7 +48252,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -48281,7 +48281,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -48326,7 +48326,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -48355,7 +48355,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -48461,7 +48461,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -48499,7 +48499,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -48593,7 +48593,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -49642,7 +49642,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -49680,7 +49680,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating"
                 }
               ],
@@ -49808,7 +49808,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating whether\n  method names should be included as a dependency to the effect."
                 }
               ],
@@ -50125,7 +50125,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Polymer.Element",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridFiltersPreviewElement",
           "attributes": [
             {
@@ -51336,7 +51336,7 @@
                   "column": 8
                 },
                 "end": {
-                  "line": 274,
+                  "line": 275,
                   "column": 9
                 }
               },
@@ -51353,11 +51353,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 276,
+                  "line": 277,
                   "column": 8
                 },
                 "end": {
-                  "line": 279,
+                  "line": 280,
                   "column": 9
                 }
               },
@@ -51378,7 +51378,7 @@
               "column": 6
             },
             "end": {
-              "line": 280,
+              "line": 281,
               "column": 7
             }
           },
@@ -52734,7 +52734,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Vaadin.GridColumnElement",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridEditColumnElement",
           "attributes": [
             {
@@ -53451,7 +53451,7 @@
             },
             {
               "name": "root",
-              "type": "(StampedTemplate | HTMLElement | ShadowRoot)",
+              "type": "(StampedTemplate|HTMLElement|ShadowRoot)",
               "description": "",
               "privacy": "public",
               "sourceRange": {
@@ -54413,7 +54413,7 @@
                 }
               ],
               "return": {
-                "type": "(string | undefined)",
+                "type": "(string|undefined)",
                 "desc": "String serialized from the provided\nproperty  value."
               },
               "inheritedFrom": "Polymer.PropertiesChanged"
@@ -54816,7 +54816,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(number | string)>)",
+                  "type": "(string|!Array.<(number|string)>)",
                   "description": "Path to set"
                 },
                 {
@@ -55060,12 +55060,12 @@
               "params": [
                 {
                   "name": "to",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to link."
                 },
                 {
                   "name": "from",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Source path to link."
                 }
               ],
@@ -55093,7 +55093,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Target path to unlink."
                 }
               ],
@@ -55154,7 +55154,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to read.  The path may be specified as a string (e.g. `foo.bar.baz`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `users.12.name` or `['users', 12, 'name']`)."
                 },
                 {
@@ -55188,7 +55188,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to the value\n  to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)\n  or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that\n  bracketed expressions are not supported; string-based path parts\n  *must* be separated by dots.  Note that when dereferencing array\n  indices, the index may be used as a dotted part directly\n  (e.g. `'users.12.name'` or `['users', 12, 'name']`)."
                 },
                 {
@@ -55226,7 +55226,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -55261,7 +55261,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -55290,7 +55290,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -55335,7 +55335,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 }
               ],
@@ -55364,7 +55364,7 @@
               "params": [
                 {
                   "name": "path",
-                  "type": "(string | !Array.<(string | number)>)",
+                  "type": "(string|!Array.<(string|number)>)",
                   "description": "Path to array."
                 },
                 {
@@ -55470,7 +55470,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -55508,7 +55508,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -55602,7 +55602,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating\n  whether method names should be included as a dependency to the effect."
                 }
               ],
@@ -56549,7 +56549,7 @@
                 },
                 {
                   "name": "method",
-                  "type": "(string | function (*, *))",
+                  "type": "(string|function (*, *))",
                   "description": "Function or name of observer method to call"
                 },
                 {
@@ -56587,7 +56587,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating"
                 }
               ],
@@ -56715,7 +56715,7 @@
                 },
                 {
                   "name": "dynamicFn",
-                  "type": "(boolean | Object)=",
+                  "type": "(boolean|Object)=",
                   "description": "Boolean or object map indicating whether\n  method names should be included as a dependency to the effect."
                 }
               ],
@@ -57032,7 +57032,7 @@
             }
           },
           "privacy": "public",
-          "superclass": "Polymer.Element",
+          "superclass": "HTMLElement",
           "name": "Predix.DataGridNavigationElement",
           "attributes": [
             {

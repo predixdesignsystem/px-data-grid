@@ -9,7 +9,7 @@ cache:
     - node_modules
 
 addons:
-  firefox: 60.0
+  firefox: 60
   google-chrome: latest
 
 install:

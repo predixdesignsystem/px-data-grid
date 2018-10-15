@@ -194,7 +194,7 @@ limitations under the License.
            * `evt.detail` contains a reference to the updated `tableData` item
            *
            */
-          this.dispatchEvent(new CustomEvent('item-save', {
+          this._gridValue.dispatchEvent(new CustomEvent('item-save', {
             bubbles: true,
             composed: true,
             detail: e.model.item
@@ -258,7 +258,8 @@ limitations under the License.
 
               const actionId = clickedItem.key.substr('-action-'.length);
 
-              this.dispatchEvent(new CustomEvent('item-action', {
+              // Dispatch event from vaadin-grid el (_gridValue) to workaround shady DOM issue where composed events don't always propogate
+              this._gridValue.dispatchEvent(new CustomEvent('item-action', {
                 bubbles: true,
                 composed: true,
                 detail: {

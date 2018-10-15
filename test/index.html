@@ -24,6 +24,10 @@ limitations under the License.
   <body>
     <script>
       WCT._config.environmentScripts.push('webcomponentsjs/webcomponents-lite.js');
+      WCT._config.mochaOptions = {
+        // IE11 needs just a little more than the 10s default timeout
+        timeout: 20000
+      };
 
       WCT.loadSuites([
         'px-data-grid-fixture.html'
