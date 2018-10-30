@@ -1,3 +1,12 @@
+v1.1.0
+==========================
+Enhancement:
+* #813 - Added support for `icon` attribute for table and item action menus.
+* #813 - The table action menu and column selector are now separated into individual dropdowns.
+
+Bug fixes:
+* #814 - Added missing bindings for i18n
+
 v1.0.9
 ==========================
 Bug fixes:
