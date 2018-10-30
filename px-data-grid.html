@@ -75,14 +75,26 @@ limitations under the License.
             </px-data-grid-filters-modal>
           </template>
 
-          <template is="dom-if" if="[[!hideActionMenu]]">
+          <template is="dom-if" if="[[!hideColumnFilter]]">
             <px-dropdown
+              class="px-data-grid-column-selector"
               multi
+              allow-outside-scroll
+              display-value="[[_columnSelectorLabel]]"
+              items="[[_columnSelectorContent]]"
+              selected-values="[[_selectedActionItems]]"
+              disable-clear
               hide-selected
+              on-px-dropdown-click="_actionClicked">
+            </px-dropdown>
+          </template>
+
+          <template is="dom-if" if="[[_actionMenuShown]]">
+            <px-dropdown
+              class="px-data-grid-action-menu"
               allow-outside-scroll
               display-value="[[localize('Actions')]]"
               items="[[_actionMenuContent]]"
-              selected-values="[[_selectedActionItems]]"
               disable-clear
               on-px-dropdown-click="_actionClicked">
             </px-dropdown>
@@ -441,6 +453,16 @@ limitations under the License.
             },
 
             /**
+             * Computed property that shows the action menu if:
+             * - hideActionMenu is false AND
+             * - _actionMenuContent has one or more defined actions
+             */
+            _actionMenuShown: {
+              type: Boolean,
+              computed: '_showActionMenu(hideActionMenu, _actionMenuContent)'
+            },
+
+            /**
              * Defines the columns the grid should render. If no columns are
              * passed, the grid generates columns from the `tableData` passed
              * in. Columns are rendered in the same order as the array.
@@ -719,6 +741,21 @@ limitations under the License.
             },
 
             /**
+             * Content of column selector menu
+             */
+            _columnSelectorContent: {
+              type: Array
+            },
+
+            /**
+             * Label of column selector menu
+             */
+            _columnSelectorLabel: {
+              type: String,
+              computed: '_computeColumnSelectorLabel(_selectedActionItems)'
+            },
+
+            /**
              * A valid IETF language tag as a string that `app-localize-behavior`
              * will use to localize this component.
              *
@@ -751,6 +788,8 @@ limitations under the License.
                 return {
                   'en': {
                     'Actions': 'Actions',
+                    'column selected': 'column selected',
+                    'columns selected': 'columns selected',
                     'Freeze column': 'Freeze Column',
                     'Unfreeze column': 'Unfreeze Column',
                     'Group by column': 'Group by Column',
@@ -781,6 +820,8 @@ limitations under the License.
              *     prompt the user to do something (e.g. "Export CSV")
              *   * `{string} id` - Unique identifier that will be included in the
              *     event fired when the user taps an action in the menu
+             *   * `{string} icon` - Optional icon to show in the dropdown menu.
+             *     Refer to px-icon-set for list of available icons.
              *
              * When the user taps an action in the menu the grid will fire the
              * `table-action` event. `event.detail.id` will be the action ID.
@@ -791,11 +832,13 @@ limitations under the License.
              * [
              *   {
              *     name: 'Export CSV',
-             *     id: 'CSV'
+             *     id: 'CSV',
+             *     icon: 'px-doc:document-csv'
              *   }
              *   {
              *     name: 'Export Excel',
-             *     id: 'Excel'
+             *     id: 'Excel',
+             *     icons: 'px-doc:document-xls'
              *   }
              * ]
              * ```
@@ -827,6 +870,8 @@ limitations under the License.
              *     prompt the user to do something (e.g. "Add Row After")
              *   * `{string} id` - Unique identifier that will be included in the
              *     event fired when the user taps an action in the menu
+             *   * `{string} icon` - Optional icon to show in the dropdown menu.
+             *     Refer to px-icon-set for list of available icons.
              *
              * When the user taps an action in the menu the grid will fire the
              * `item-action` event. `event.detail.id` will be the action ID and
@@ -839,11 +884,13 @@ limitations under the License.
              * [
              *   {
              *     name: 'Add Row After',
-             *     id: 'add-after'
+             *     id: 'add-after',
+             *     icon: 'px-nav:add-row-below'
              *   }
              *   {
              *     name: 'Delete Row',
-             *     id: 'delete'
+             *     id: 'delete',
+             *     icon: 'px-nav:delete-row'
              *   }
              * ]
              * ```
@@ -1781,6 +1828,7 @@ limitations under the License.
           }
 
           this._updateActionMenu(this.tableActions);
+          this._updateColumnSelector();
         }
 
         /**
@@ -1823,36 +1871,11 @@ limitations under the License.
         }
 
         /**
-         * Function called when action menu content needs to be updated
+         * Function called when column selector menu needs to be updated
          */
-        _updateActionMenu(tableActions) {
+        _updateColumnSelector() {
           const content = [];
           this._selectedActionItems = [];
-
-          // Application specific options
-
-          if (tableActions) {
-            tableActions.forEach((item) => {
-              content.push({
-                key: '-action-' + item.id,
-                val: item.name,
-                selected: false,
-                disabled: item.disabled || false,
-                disableSelect: true
-              });
-            });
-          }
-
-          if (this._groupByColumn) {
-            content.push({
-              key: '-internal-ungroup-',
-              val: this.localize('Clear Grouping'),
-              selected: false,
-              disableSelect: true
-            });
-          }
-
-          // Add column hide/show selection
 
           const defaultName = this.localize('Column #');
           let counter = 0;
@@ -1885,15 +1908,56 @@ limitations under the License.
               selected.push(key);
             }
 
-            if (!this.hideColumnFilter) {
-              content.push(item);
-            }
+            content.push(item);
           });
 
-          this._actionMenuContent = content;
+          this._columnSelectorContent = content;
           setTimeout(() => {
             this._selectedActionItems = selected;
           });
+        }
+
+        /**
+         * Returns a label for the column selector, updated when column selections change.
+         */
+        _computeColumnSelectorLabel(selectedItems) {
+          const columnsSelected = selectedItems.length;
+          const selectionText = columnsSelected > 1 ? 'columns selected' : 'column selected';
+
+          return `${columnsSelected} ${this.localize(selectionText)}`;
+        }
+
+        /**
+         * Function called when action menu content needs to be updated
+         */
+        _updateActionMenu(tableActions) {
+          const content = [];
+
+          // Application specific options
+          if (tableActions) {
+            tableActions.forEach((item) => {
+              content.push({
+                key: '-action-' + item.id,
+                val: item.name,
+                selected: false,
+                icon: item.icon,
+                disabled: item.disabled || false,
+                disableSelect: true
+              });
+            });
+          }
+
+          if (this._groupByColumn) {
+            content.push({
+              key: '-internal-ungroup-',
+              val: this.localize('Clear Grouping'),
+              icon: 'px-nav:reload',
+              selected: false,
+              disableSelect: true
+            });
+          }
+
+          this._actionMenuContent = content;          
         }
 
         _getColumnsWithName(name) {
@@ -1921,7 +1985,7 @@ limitations under the License.
 
         _onColumnUpdate(event) {
           if (event.detail.type == 'hidden') {
-            this._updateActionMenu(this.tableActions);
+            this._updateColumnSelector();
           } else if (event.detail.type == 'frozen') {
             this._scheduleColumnSanityCheck();
           }
@@ -1942,6 +2006,13 @@ limitations under the License.
          */
         _showActionBar(filterField, hideActionMenu, filterable) {
           return filterField || !hideActionMenu || filterable;
+        }
+
+        /**
+         * Determines whether the action menu should be shown
+         */
+        _showActionMenu(hide = false, tableActions = []) {
+          return !hide && tableActions.length > 0;
         }
 
         /**
@@ -2289,7 +2360,7 @@ limitations under the License.
         _columnsChanged(columns) {
           // Store cleaned version of current columns
           this._lastColumnsReceived = this._cleanColumns(columns);
-          Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._updateActionMenu(this.tableActions));
+          Polymer.RenderStatus.afterNextRender(this._vaadinGrid, () => this._updateColumnSelector());
         }
 
         _setColumnId(columns) {

@@ -11,6 +11,7 @@
     "expect": false,
     "sinon": false,
     "tableData": false,
+    "tableActions": false,
     "itemActions": false,
     "getRows": false,
     "getVisibleRows": false,
