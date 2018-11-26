@@ -1,16 +1,16 @@
 sudo: true
 dist: trusty
 language: node_js
-node_js: 8.1
-
+node_js:
+  - stable
 cache:
   yarn: true
   directories:
     - node_modules
 
 addons:
-  firefox: 60
-  google-chrome: latest
+  firefox: latest
+  chrome: stable
 
 install:
   - yarn

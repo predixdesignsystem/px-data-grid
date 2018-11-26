@@ -38,5 +38,8 @@
     "web-component-tester": "^6.0.0",
     "yargs": "^5.0.0"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "natives": "1.1.6"
+  }
 }
