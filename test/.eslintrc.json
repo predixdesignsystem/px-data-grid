@@ -5,10 +5,12 @@
   "globals": {
     "WCT": false,
     "fixture": false,
+    "chai": false,
     "describe": false,
     "beforeEach": false,
     "it": false,
     "expect": false,
+    "flush": false,
     "sinon": false,
     "tableData": false,
     "tableActions": false,

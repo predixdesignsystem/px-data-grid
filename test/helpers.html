@@ -252,4 +252,21 @@ limitations under the License.
   function getHeaderCellContent(cell) {
     return cell ? cell.querySelector('slot').assignedNodes()[0].querySelector('px-data-grid-header-cell') : null;
   }
+
+  /**
+   * Add a custom chai property that allows us to detect whether a given element is visible.
+   * Visible is defined as having a display property that isn't none or null.
+   */
+  const getDisplayProp = el => window.getComputedStyle(el).display || 'none';
+  const isElement = el => el instanceof HTMLElement;
+  const isVisible = el => getDisplayProp(el) !== 'none';
+
+  chai.Assertion.addProperty('visible', function() {
+    const el = this._obj;
+    this.assert(
+      isElement(el) && isVisible(el),
+      'expected #{this} to be visible',
+      'expected #{this} not to be visible'
+    );
+  });
 </script>

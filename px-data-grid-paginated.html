@@ -46,6 +46,7 @@ limitations under the License.
       multi-sort="{{multiSort}}"
       columns="{{columns}}"
       column-reordering-allowed="{{columnReorderingAllowed}}"
+      hide-column-filter="{{hideColumnFilter}}"
       hide-action-menu="{{hideActionMenu}}"
       language="{{language}}"
       resources="{{resources}}"
@@ -636,6 +637,15 @@ limitations under the License.
              */
             tableActions: {
               type: Array,
+            },
+
+            /**
+             * Set to `true` to allow the user to hide the column filter/selector in
+             * the action menu.
+             */
+            hideColumnFilter: {
+              type: Boolean,
+              value: false
             },
 
             /**

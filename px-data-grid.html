@@ -49,7 +49,7 @@ limitations under the License.
   <template>
     <style include="px-data-grid-styles"></style>
 
-    <template is="dom-if" if="{{_showActionBar(autoFilter, hideActionMenu, filterable)}}">
+    <template is="dom-if" if="{{_showActionBar(autoFilter, hideActionMenu, hideColumnFilter, filterable)}}">
 
       <div class="action-bar">
         <template is="dom-if" if="[[autoFilter]]">
@@ -850,10 +850,9 @@ limitations under the License.
             },
 
             /**
-             * Set to `true` to allow the user to hide column filters in
+             * Set to `true` to allow the user to hide the column filter/selector in
              * the action menu.
              */
-
             hideColumnFilter: {
               type: Boolean,
               value: false
@@ -2004,8 +2003,8 @@ limitations under the License.
         /**
          * Simple method to check if action bar should be shown
          */
-        _showActionBar(filterField, hideActionMenu, filterable) {
-          return filterField || !hideActionMenu || filterable;
+        _showActionBar(filterField, hideActionMenu, hideColumnFilter, filterable) {
+          return filterField || !hideActionMenu || !hideColumnFilter || filterable;
         }
 
         /**

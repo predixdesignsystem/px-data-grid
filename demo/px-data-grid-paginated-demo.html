@@ -69,6 +69,7 @@ limitations under the License.
             hide-selection-column="{{props.hideSelectionColumn.value}}"
             selection-mode="{{props.selectionMode.value}}"
             hide-action-menu="{{props.hideActionMenu.value}}"
+            hide-column-filter="{{props.hideColumnFilter.value}}"
             table-actions="{{props.tableActions.value}}"
             item-actions="{{props.itemActions.value}}"
             highlight="{{props.highlight.value}}"
@@ -628,6 +629,12 @@ limitations under the License.
       defaultValue: false
     };
 
+    const hideColumnFilter = {
+      type: Boolean,
+      inputType: 'toggle',
+      defaultValue: false
+    };
+
     const tableActions = {
       type: Object,
       inputType: 'code:JSON',
@@ -719,6 +726,7 @@ limitations under the License.
       hideSelectionColumn,
       selectionMode,
       hideActionMenu,
+      hideColumnFilter,
       tableActions,
       itemActions,
       highlight,

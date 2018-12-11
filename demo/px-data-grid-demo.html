@@ -70,6 +70,7 @@ limitations under the License.
             selection-mode="{{props.selectionMode.value}}"
             allow-sort-by-selection="{{props.allowSortBySelection.value}}"
             hide-action-menu="{{props.hideActionMenu.value}}"
+            hide-column-filter="{{props.hideColumnFilter.value}}"
             table-actions="{{props.tableActions.value}}"
             item-actions="{{props.itemActions.value}}"
             highlight="{{props.highlight.value}}"
@@ -707,6 +708,12 @@ limitations under the License.
       defaultValue: false
     };
 
+    const hideColumnFilter = {
+      type: Boolean,
+      inputType: 'toggle',
+      defaultValue: false
+    };
+
     const tableActions = {
       type: Object,
       inputType: 'code:JSON',
@@ -792,6 +799,7 @@ limitations under the License.
       allowSortBySelection,
       selectionMode,
       hideActionMenu,
+      hideColumnFilter,
       tableActions,
       itemActions,
       highlight

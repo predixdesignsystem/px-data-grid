@@ -24,8 +24,8 @@ module.exports = {
       'macOS 10.12/ipad@11.0',
       'Windows 10/microsoftedge@latest',
       'Windows 10/internet explorer@11',
-      // Tests on Safari 11+ timeout over SauceLabs (tests pass locally). Until this is resolved, I've switched it back to Safari@10.
-      'macOS 10.12/safari@10'
+      'macOS 10.13/safari@11',
+      'macOS 10.13/safari@12'
     ];
 
     var cronPlatforms = ['Android/chrome', 'Windows 10/chrome@latest', 'Windows 10/firefox@60'];
