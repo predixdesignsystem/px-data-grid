@@ -1,3 +1,9 @@
+v1.1.1
+==========================
+Bug fixes:
+* Fixed `hide-column-filter` property having no effect on px-data-grid-paginated
+* Added `hide-column-filter` property to component demo
+
 v1.1.0
 ==========================
 Enhancement:
