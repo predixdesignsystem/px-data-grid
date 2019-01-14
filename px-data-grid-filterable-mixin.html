@@ -97,9 +97,11 @@ limitations under the License.
       let regex;
 
       switch (filter.pattern) {
+        case 'not_equal':
         case 'equals':
           regex = new RegExp(`^${this._escapeRegExp(filter.query)}$`, 'i');
           break;
+        case 'not_contains':
         case 'contains':
           regex = new RegExp(`${this._escapeRegExp(filter.query)}`, 'i');
           break;
@@ -118,7 +120,8 @@ limitations under the License.
           break;
       }
 
-      return regex.test(value);
+      // Flip bool if we're using a negation filter (`not_*`)
+      return regex.test(value) !== (filter.pattern.indexOf('not_') === 0);
     }
 
     _isDateMatches(filter, value) {
@@ -322,7 +325,7 @@ limitations under the License.
      *   ]
      * }]
      * ```
-     * Pattern can be one of `['equals', 'contains', 'starts_with', 'ends_with', 'wildcard']`.
+     * Pattern can be one of `['equals', 'not_equal', 'contains', 'not_contains', 'starts_with', 'ends_with', 'wildcard']`.
      *
      * Format for column.type === 'date':
      * ```

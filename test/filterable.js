@@ -57,8 +57,14 @@ document.addEventListener('WebComponentsReady', () => {
       expect(grid._isStringMatches({pattern: 'equals', query: 'Elizabeth'}, 'Elizabeth')).to.be.true;
       expect(grid._isStringMatches({pattern: 'equals', query: 'Elizabet'}, 'Elizabeth')).to.be.false;
 
+      expect(grid._isStringMatches({pattern: 'not_equal', query: 'Elizabeth'}, 'Elizabet')).to.be.true;
+      expect(grid._isStringMatches({pattern: 'not_equal', query: 'Elizabeth'}, 'Elizabeth')).to.be.false;
+
       expect(grid._isStringMatches({pattern: 'contains', query: 'th'}, 'Elizabeth')).to.be.true;
       expect(grid._isStringMatches({pattern: 'contains', query: 'ea'}, 'Elizabeth')).to.be.false;
+
+      expect(grid._isStringMatches({pattern: 'not_contains', query: 'th'}, 'Elizabeth')).to.be.false;
+      expect(grid._isStringMatches({pattern: 'not_contains', query: 'ea'}, 'Elizabeth')).to.be.true;
 
       expect(grid._isStringMatches({pattern: 'starts_with', query: 'Eli'}, 'Elizabeth')).to.be.true;
       expect(grid._isStringMatches({pattern: 'starts_with', query: 'Bli'}, 'Elizabeth')).to.be.false;
