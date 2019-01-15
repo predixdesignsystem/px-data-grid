@@ -198,6 +198,68 @@ document.addEventListener('WebComponentsReady', () => {
       expect(grid._applyCustomFilter(tableData, grid.columns, filters).length).to.be.eq(3);
     });
 
+    it('should show "Any Column" column in filter modal by default', done => {
+      grid.filterable = true;
+
+      flush(() => {
+        const filterModal = grid.root.querySelector('px-data-grid-filters-modal');
+        const modal = filterModal.root.querySelector('px-modal');
+        const modalTrigger = filterModal.root.querySelector('px-modal-trigger');
+        // Open modal
+        modalTrigger.click();
+
+        flush(() => {
+          const filterSection = modal.querySelector('px-data-grid-filter').root.querySelector('px-data-grid-filter-section');
+          const addFilterBtn = filterSection.root.querySelector('.add-filter');
+
+          // Add a filter
+          addFilterBtn.click();
+
+          flush(() => {
+            const columnDropdown = filterSection.root
+              .querySelector('px-data-grid-filter-entity')
+              .root.querySelector('px-dropdown#column-dropdown');
+            const firstItem = columnDropdown.items[0]['key'];
+
+            expect(firstItem).to.equal('-any-');
+            done();
+          });
+        });
+      });
+    });
+
+    it('should hide "Any Column" column in filter modal if disable-all-columns-filter prop set', done => {
+      grid.filterable = true;
+      grid.disableAllColumnsFilter = true;
+
+      flush(() => {
+        const filterModal = grid.root.querySelector('px-data-grid-filters-modal');
+        const modal = filterModal.root.querySelector('px-modal');
+        const modalTrigger = filterModal.root.querySelector('px-modal-trigger');
+        // Open modal
+        modalTrigger.click();
+
+        flush(() => {
+          const filterSection = modal.querySelector('px-data-grid-filter').root.querySelector('px-data-grid-filter-section');
+          const addFilterBtn = filterSection.root.querySelector('.add-filter');
+
+          // Add a filter
+          addFilterBtn.click();
+
+          flush(() => {
+            const columnDropdown = filterSection.root
+              .querySelector('px-data-grid-filter-entity')
+              .root.querySelector('px-dropdown#column-dropdown');
+            const firstItem = columnDropdown.items[0]['key'];
+            const firstColumn = grid.columns[0].id;
+
+            expect(firstItem).to.equal(firstColumn);
+            done();
+          });
+        });
+      });
+    });
+
     it('should conjugate conditions', () => {
       let filters = [
         {

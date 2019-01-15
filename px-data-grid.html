@@ -70,6 +70,7 @@ limitations under the License.
               offer-filter-saving="[[offerFilterSaving]]"
               initial-filter-state="[[_initialFilterState]]"
               compact-mode="[[compactAdvancedFilterDialog]]"
+              disable-all-columns-filter=[[disableAllColumnsFilter]]
               string-comparators="[[stringComparators]]"
               number-comparators="[[numberComparators]]">
             </px-data-grid-filters-modal>
@@ -413,6 +414,14 @@ limitations under the License.
               type: Array,
               value: [],
               notify: true
+            },
+
+            /**
+             * If set, will remove the "Any column" filter from the Advanced Filter dialog.
+             */
+            disableAllColumnsFilter: {
+              type: Boolean,
+              value: false
             },
 
             /**

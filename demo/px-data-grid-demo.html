@@ -66,6 +66,7 @@ limitations under the License.
             filterable="{{props.filterable.value}}"
             auto-filter="{{props.autoFilter.value}}"
             column-reordering-allowed="{{props.columnReorderingAllowed.value}}"
+            disable-all-columns-filter="{{props.disableAllColumnsFilter.value}}"
             hide-selection-column="{{props.hideSelectionColumn.value}}"
             selection-mode="{{props.selectionMode.value}}"
             allow-sort-by-selection="{{props.allowSortBySelection.value}}"
@@ -667,6 +668,13 @@ limitations under the License.
       _visibleForConfig: false
     };
 
+    const disableAllColumnsFilter = {
+      type: Boolean,
+      inputType: 'toggle',
+      defaultValue: false,
+      _visibleForConfig: false
+    };
+
     const autoFilter = {
       type: Boolean,
       inputType: 'toggle',
@@ -793,6 +801,7 @@ limitations under the License.
       resizable,
       editable,
       filterable,
+      disableAllColumnsFilter,
       autoFilter,
       columnReorderingAllowed,
       hideSelectionColumn,
@@ -812,14 +821,14 @@ limitations under the License.
     const defaultConfig = {
       configName: 'Default',
       configReset: true,
-      configHideProps: ['highlight, filterable']
+      configHideProps: ['highlight, filterable, disableAllColumnsFilter']
     };
 
     const moreDataConfig = {
       configName: 'More data',
       configReset: true,
       tableData: demoTableDataNamesLarge,
-      configHideProps: ['highlight, filterable']
+      configHideProps: ['highlight, filterable, disableAllColumnsFilter']
     };
 
     const highlightConfig = {
@@ -827,7 +836,7 @@ limitations under the License.
       configReset: true,
       tableData: demoTableDataNamesSmall,
       highlight: demoHighlight,
-      configHideProps: ['filterable']
+      configHideProps: ['filterable, disableAllColumnsFilter']
     };
 
     const moreColumnTypesConfig = {
@@ -835,7 +844,7 @@ limitations under the License.
       configReset: true,
       tableData: demoTableDataNamesLarge,
       columns: demoColumnsMoreTypes,
-      configHideProps: ['highlight, filterable']
+      configHideProps: ['highlight, filterable, disableAllColumnsFilter']
     };
 
     const advancedFilterConfig = {

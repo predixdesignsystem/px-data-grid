@@ -28,6 +28,7 @@ limitations under the License.
         section="{{section}}"
         columns="[[columns]]"
         compact-mode="[[compactMode]]"
+        disable-all-columns-filter="[[disableAllColumnsFilter]]"
         string-comparators="[[stringComparators]]"
         number-comparators="[[numberComparators]]"
         localize="[[localize]]">
@@ -68,6 +69,11 @@ limitations under the License.
             },
 
             compactMode: {
+              type: Boolean,
+              value: false
+            },
+
+            disableAllColumnsFilter: {
               type: Boolean,
               value: false
             },

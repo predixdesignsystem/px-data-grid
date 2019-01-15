@@ -181,6 +181,11 @@ limitations under the License.
               value: false
             },
 
+            disableAllColumnsFilter: {
+              type: Boolean,
+              value: false
+            },
+
             stringComparators: {
               type: Array
             },
@@ -426,7 +431,8 @@ limitations under the License.
 
         _entityObserver(entity) {
           if (!entity.columnId) {
-            this.set('entity.columnId', '-any-');
+            const columnId = this.disableAllColumnsFilter ? this.columns[0].id : '-any-';
+            this.set('entity.columnId', columnId);
           }
 
           if (this._columnTypeIsString(this.entity.columnId) && this.entity.pattern === undefined) {
@@ -447,10 +453,12 @@ limitations under the License.
 
           const optionList = [];
 
-          optionList.push({
-            key: '-any-',
-            val: 'Any column'
-          });
+          if (!this.disableAllColumnsFilter) {
+            optionList.push({
+              key: '-any-',
+              val: 'Any column'
+            });
+          }
 
           columns.forEach((col) => {
             optionList.push({

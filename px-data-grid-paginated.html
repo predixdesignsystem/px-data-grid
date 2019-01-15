@@ -61,6 +61,7 @@ limitations under the License.
       highlight="{{highlight}}"
       default-column-width="{{defaultColumnWidth}}"
       default-column-flex-grow="{{defaultColumnFlexGrow}}"
+      disable-all-columns-filter={{disableAllColumnsFilter}}
       string-comparators="{{stringComparators}}"
       number-comparators="{{numberComparators}}">
     </px-data-grid>
@@ -304,6 +305,14 @@ limitations under the License.
             expandedItems: {
               type: Array,
               value: []
+            },
+
+            /**
+             * If set, will remove the "Any column" filter from the Advanced Filter dialog.
+             */
+            disableAllColumnsFilter: {
+              type: Boolean,
+              value: false
             },
 
             /**

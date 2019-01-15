@@ -55,6 +55,7 @@ limitations under the License.
           entity="{{entity}}"
           columns="[[columns]]"
           compact-mode="[[_isEntityCompact(_compactModeEnabled, index)]]"
+          disable-all-columns-filter="[[disableAllColumnsFilter]]"
           string-comparators="[[stringComparators]]"
           number-comparators="[[numberComparators]]"
           localize="[[localize]]">
@@ -124,6 +125,11 @@ limitations under the License.
             },
 
             compactMode: {
+              type: Boolean,
+              value: false
+            },
+
+            disableAllColumnsFilter: {
               type: Boolean,
               value: false
             },

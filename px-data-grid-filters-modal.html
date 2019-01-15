@@ -36,6 +36,7 @@ limitations under the License.
           filters="{{filters}}"
           temp-filters="{{_tempFilters}}"
           compact-mode="[[compactMode]]"
+          disable-all-columns-filter="[[disableAllColumnsFilter]]"
           string-comparators="[[stringComparators]]"
           number-comparators="[[numberComparators]]"
           localize="[[localize]]">
@@ -93,6 +94,11 @@ limitations under the License.
             },
 
             compactMode: {
+              type: Boolean,
+              value: false
+            },
+
+            disableAllColumnsFilter: {
               type: Boolean,
               value: false
             },
