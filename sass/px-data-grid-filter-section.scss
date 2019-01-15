@@ -41,6 +41,7 @@ px-dropdown {
 .filter-entity {
   display: flex;
   align-items: flex-end;
+  --px-dropdown-flex-grow: 1;
 }
 
 button.btn.btn--icon.btn--bare--primary {
