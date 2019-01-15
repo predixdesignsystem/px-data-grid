@@ -1,3 +1,9 @@
+v1.2.0
+==========================
+Enhancement:
+* Added `disable-all-columns-filter` property, for disabling the "All columns" option in the filter modal
+* Added `not-equal` and `not-contains` string comparators
+
 v1.1.1
 ==========================
 Bug fixes:
