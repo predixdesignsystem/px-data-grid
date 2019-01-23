@@ -233,14 +233,14 @@ limitations under the License.
           if (value) {
             let momentValue;
             // read timestamp data
-            if (this.dateFormat === 'ISO') {
+            if (this.dateFormat === 'ISO' || sourceFormat === 'ISO') {
               momentValue = window.Px.moment(value);
             } else {
               momentValue = window.Px.moment.tz(value, sourceFormat, sourceTimezone);
             }
             // format for display
             if (momentValue) {
-              if (this.displayFormat === 'ISO') {
+              if (this.displayFormat === 'ISO' || displayFormat === 'ISO') {
                 result = momentValue.toISOString();
               } else {
                 result = momentValue.tz(displayTimezone).format(displayFormat);

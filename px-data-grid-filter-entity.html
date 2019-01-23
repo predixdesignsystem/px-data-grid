@@ -283,11 +283,13 @@ limitations under the License.
             },
 
             _sourceDateFormat: {
-              type: String
+              type: String,
+              value: 'YYYY-MM-DDTHH:mm:ss.SSS'
             },
 
             _sourceTimezone: {
-              type: String
+              type: String,
+              value: 'UTC'
             },
 
             _displayDateFormat: {
@@ -373,7 +375,7 @@ limitations under the License.
 
           // source data format
           if (selectedColumn.dateFormat) {
-            this.set('_sourceDateFormat', selectedColumn.dateFormat.format || 'YYYY/MM/DDD HH:mm:ss');
+            this.set('_sourceDateFormat', selectedColumn.dateFormat.format || 'YYYY-MM-DDTHH:mm:ss.SSS');
             this.set('_sourceTimezone', selectedColumn.dateFormat.timezone || 'UTC');
           }
 

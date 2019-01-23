@@ -548,17 +548,21 @@ limitations under the License.
              *
              * ## `column.dateFormat` options
              *
-             * The following options can be set in the `rendererConfig` for
+             * The following options can be set in the `dateFormat` for
              * columns of type `date`. All formats should be set to a valid
              * [moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)
              * or to 'ISO':
              *
-             *   * `{string} dateFormat.format='YYYY-MM-DD HH:mm:ss'` -
+             *   * `{string} dateFormat.format='YYYY-MM-DD"T"HH:mm:ss.SSSS'` -
              *     Format used to read the date/timestamp data.
              *
              *   * `{string} dateFormat.timezone='UTC'` -
              *     Timezone used to read the date/timestamp data.
              *
+             * Date parsing uses moment's [forgiving mode](https://momentjs.com/guides/#/parsing/forgiving-mode/), which can produce
+             * silent but highly undesirable parsing errors if the date format does not match the source data.
+             * If your source data is formatted differently to ISO8601, it is critical that you
+             * configure the `format` property correctly.
              *
              * ## `column.rendererConfig` options
              *

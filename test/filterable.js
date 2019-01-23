@@ -18,19 +18,30 @@
 document.addEventListener('WebComponentsReady', () => {
   describe('filterable', () => {
     let grid;
+    let originalTz;
 
-    beforeEach((done) => {
+    beforeEach(done => {
       grid = fixture('px-data-grid-fixture');
       grid.columns = getColumnConfig();
       grid.tableData = tableData;
 
       flushVaadinGrid(grid);
 
+      // Store detected timezone, then force UTC to keep testing results consistent
+      originalTz = window.moment.tz.guess();
+      window.moment.tz.setDefault('UTC');
+
       Polymer.RenderStatus.afterNextRender(grid, () => {
-        setTimeout(() => { // IE11
+        setTimeout(() => {
+          // IE11
           window.flush(done);
         });
       });
+    });
+
+    afterEach(() => {
+      // Restore originally detected timezone
+      window.moment.tz.setDefault(originalTz);
     });
 
     it('should show chips properly', (done) => {
@@ -502,6 +513,149 @@ document.addEventListener('WebComponentsReady', () => {
       ];
 
       expect(grid._applyCustomFilter(items, grid.columns, filters).length).to.be.eq(4);
+    });
+
+    it('should fallback to default date format and timezone when evaluating grid filter', done => {
+      const columnConfig = getColumnConfig();
+      columnConfig[3] = {
+        name: 'Timestamp',
+        path: 'timestamp',
+        renderer: 'px-data-grid-date-renderer',
+        type: 'date'
+      };
+      grid.columns = columnConfig;
+
+      flush(() => {
+        // Apply filter with ISO8601 formatted dates
+        grid.applyFilters([
+          {
+            action: 'show',
+            entities: [
+              {
+                columnId: 'timestamp[date]',
+                active: true,
+                pattern: 'equals',
+                dateFrom: '2010-01-01',
+                dateTo: '2019-01-22'
+              }
+            ]
+          }
+        ]);
+        Polymer.RenderStatus.afterNextRender(grid, () => {
+          const filtersPreview = grid.shadowRoot.querySelector('px-data-grid-filters-preview');
+          const chips = filtersPreview.shadowRoot.querySelectorAll('px-chip');
+
+          // Check that filter was applied with the dates correctly parsed
+          expect(chips.length).to.equal(1);
+          expect(chips[0].content.trim().replace(/\s+/g, ' ')).to.equal('2010/01/01 - 2019/01/22');
+          done();
+        });
+      });
+    });
+
+    it('should respect configured source date format and timezone when evaluating grid filter', done => {
+      const columnConfig = getColumnConfig();
+      columnConfig[3] = {
+        name: 'Timestamp',
+        path: 'timestamp',
+        renderer: 'px-data-grid-date-renderer',
+        type: 'date',
+        // Set a non-standard source format and TZ.
+        dateFormat: {
+          format: 'DD/MM/YYYY',
+          timezone: 'Australia/Melbourne'
+        }
+      };
+      grid.columns = columnConfig;
+
+      flush(() => {
+        // Apply filter with DD/MM/YYYY dates, matching the column configured date format.
+        grid.applyFilters([
+          {
+            action: 'show',
+            entities: [
+              {
+                columnId: 'timestamp[date]',
+                active: true,
+                pattern: 'equals',
+                dateFrom: '02/03/2004',
+                dateTo: '04/05/2005'
+              }
+            ]
+          }
+        ]);
+        Polymer.RenderStatus.afterNextRender(grid, () => {
+          const filtersPreview = grid.shadowRoot.querySelector('px-data-grid-filters-preview');
+          const chips = filtersPreview.shadowRoot.querySelectorAll('px-chip');
+
+          // Check that filter was applied with the dates correctly parsed
+          expect(chips.length).to.equal(1);
+          /*
+           * Because the source timezone is Melbourne (+11:00) and the output timezone is UTC (+0:00),
+           * the dates reported should appear to be offset by -1 day.
+           */
+          expect(chips[0].content.trim().replace(/\s+/g, ' ')).to.equal('2004/03/01 - 2005/05/03');
+          done();
+        });
+      });
+    });
+
+    it('should respect configured output date format and timezone when evaluating grid filter', done => {
+      const columnConfig = getColumnConfig();
+      columnConfig[3] = {
+        name: 'Timestamp',
+        path: 'timestamp',
+        renderer: 'px-data-grid-date-renderer',
+        type: 'date',
+        dateFormat: {
+          format: 'DD/MM/YYYY HH:mm'
+        },
+        rendererConfig: {
+          displayFormat: 'YYYY/MM/DD HH:mm:ss',
+          timezone: 'Pacific/Honolulu'
+        }
+      };
+      grid.columns = columnConfig;
+
+      flush(() => {
+        // Apply filter with ISO8601 formatted dates
+        grid.applyFilters([
+          {
+            action: 'show',
+            entities: [
+              {
+                columnId: 'timestamp[date]',
+                active: true,
+                pattern: 'equals',
+                dateFrom: '24/12/2018 02:01:00',
+                dateTo: '26/12/2018 04:02:00'
+              }
+            ]
+          }
+        ]);
+        Polymer.RenderStatus.afterNextRender(grid, () => {
+          const filtersPreview = grid.shadowRoot.querySelector('px-data-grid-filters-preview');
+          const chips = filtersPreview.shadowRoot.querySelectorAll('px-chip');
+          const tooltip = filtersPreview.shadowRoot.querySelector('px-tooltip');
+
+          // Check that filter was applied with the dates correctly parsed
+          expect(chips.length).to.equal(1);
+          /*
+           * Because the source timezone is UTC (+0:00) and the output timezone is Hawaii Time (-10:00),
+           * the dates reported should appear to be offset by -1 day.
+           */
+          expect(chips[0].content.trim().replace(/\s+/g, ' ')).to.equal('2018/12/23 - 2018/12/25');
+          // Check the tooltip for the full formatted datetime
+          const dates = tooltip.tooltipMessage
+            .replace(/\s+/g, ' ')
+            .replace('Date Range / ', '')
+            .split('-');
+          expect(dates[0].trim()).to.equal('2018/12/23 16:01:00');
+          expect(dates[1].trim()).to.equal('2018/12/25 18:02:00');
+
+          done();
+        });
+      });
     });
   });
 });
