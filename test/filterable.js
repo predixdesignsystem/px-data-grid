@@ -541,7 +541,7 @@ document.addEventListener('WebComponentsReady', () => {
             ]
           }
         ]);
-        Polymer.RenderStatus.afterNextRender(grid, () => {
+        flush(() => {
           const filtersPreview = grid.shadowRoot.querySelector('px-data-grid-filters-preview');
           const chips = filtersPreview.shadowRoot.querySelectorAll('px-chip');
 
@@ -584,7 +584,7 @@ document.addEventListener('WebComponentsReady', () => {
             ]
           }
         ]);
-        Polymer.RenderStatus.afterNextRender(grid, () => {
+        flush(() => {
           const filtersPreview = grid.shadowRoot.querySelector('px-data-grid-filters-preview');
           const chips = filtersPreview.shadowRoot.querySelectorAll('px-chip');
 
@@ -633,7 +633,7 @@ document.addEventListener('WebComponentsReady', () => {
             ]
           }
         ]);
-        Polymer.RenderStatus.afterNextRender(grid, () => {
+        flush(() => {
           const filtersPreview = grid.shadowRoot.querySelector('px-data-grid-filters-preview');
           const chips = filtersPreview.shadowRoot.querySelectorAll('px-chip');
           const tooltip = filtersPreview.shadowRoot.querySelector('px-tooltip');
