@@ -8,11 +8,11 @@
       "sourceRange": {
         "file": "px-data-grid.html",
         "start": {
-          "line": 2543,
+          "line": 2547,
           "column": 6
         },
         "end": {
-          "line": 2543,
+          "line": 2547,
           "column": 42
         }
       },
@@ -30952,7 +30952,7 @@
                   "column": 12
                 },
                 "end": {
-                  "line": 286,
+                  "line": 287,
                   "column": 13
                 }
               },
@@ -30960,7 +30960,8 @@
                 "polymer": {
                   "attributeType": "String"
                 }
-              }
+              },
+              "defaultValue": "\"YYYY-MM-DDTHH:mm:ss.SSS\""
             },
             {
               "name": "_sourceTimezone",
@@ -30969,11 +30970,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 288,
+                  "line": 289,
                   "column": 12
                 },
                 "end": {
-                  "line": 290,
+                  "line": 292,
                   "column": 13
                 }
               },
@@ -30981,7 +30982,8 @@
                 "polymer": {
                   "attributeType": "String"
                 }
-              }
+              },
+              "defaultValue": "\"UTC\""
             },
             {
               "name": "_displayDateFormat",
@@ -30990,11 +30992,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 292,
+                  "line": 294,
                   "column": 12
                 },
                 "end": {
-                  "line": 294,
+                  "line": 296,
                   "column": 13
                 }
               },
@@ -31011,11 +31013,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 296,
+                  "line": 298,
                   "column": 12
                 },
                 "end": {
-                  "line": 298,
+                  "line": 300,
                   "column": 13
                 }
               },
@@ -31032,11 +31034,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 300,
+                  "line": 302,
                   "column": 12
                 },
                 "end": {
-                  "line": 302,
+                  "line": 304,
                   "column": 13
                 }
               },
@@ -31053,11 +31055,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 304,
+                  "line": 306,
                   "column": 12
                 },
                 "end": {
-                  "line": 306,
+                  "line": 308,
                   "column": 13
                 }
               },
@@ -31074,11 +31076,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 308,
+                  "line": 310,
                   "column": 12
                 },
                 "end": {
-                  "line": 308,
+                  "line": 310,
                   "column": 30
                 }
               },
@@ -33312,11 +33314,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 326,
+                  "line": 328,
                   "column": 8
                 },
                 "end": {
-                  "line": 338,
+                  "line": 340,
                   "column": 9
                 }
               },
@@ -33336,11 +33338,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 340,
+                  "line": 342,
                   "column": 8
                 },
                 "end": {
-                  "line": 387,
+                  "line": 389,
                   "column": 9
                 }
               },
@@ -33363,11 +33365,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 389,
+                  "line": 391,
                   "column": 8
                 },
                 "end": {
-                  "line": 394,
+                  "line": 396,
                   "column": 9
                 }
               },
@@ -33387,11 +33389,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 396,
+                  "line": 398,
                   "column": 8
                 },
                 "end": {
-                  "line": 412,
+                  "line": 414,
                   "column": 9
                 }
               },
@@ -33411,11 +33413,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 414,
+                  "line": 416,
                   "column": 8
                 },
                 "end": {
-                  "line": 429,
+                  "line": 431,
                   "column": 9
                 }
               },
@@ -33435,11 +33437,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 431,
+                  "line": 433,
                   "column": 8
                 },
                 "end": {
-                  "line": 442,
+                  "line": 444,
                   "column": 9
                 }
               },
@@ -33459,11 +33461,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 444,
+                  "line": 446,
                   "column": 8
                 },
                 "end": {
-                  "line": 446,
+                  "line": 448,
                   "column": 9
                 }
               },
@@ -33480,11 +33482,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 448,
+                  "line": 450,
                   "column": 8
                 },
                 "end": {
-                  "line": 470,
+                  "line": 472,
                   "column": 9
                 }
               },
@@ -33507,11 +33509,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 472,
+                  "line": 474,
                   "column": 8
                 },
                 "end": {
-                  "line": 476,
+                  "line": 478,
                   "column": 9
                 }
               },
@@ -33528,11 +33530,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 478,
+                  "line": 480,
                   "column": 8
                 },
                 "end": {
-                  "line": 482,
+                  "line": 484,
                   "column": 9
                 }
               },
@@ -33549,11 +33551,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 484,
+                  "line": 486,
                   "column": 8
                 },
                 "end": {
-                  "line": 489,
+                  "line": 491,
                   "column": 9
                 }
               },
@@ -33573,11 +33575,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 491,
+                  "line": 493,
                   "column": 8
                 },
                 "end": {
-                  "line": 496,
+                  "line": 498,
                   "column": 9
                 }
               },
@@ -33597,11 +33599,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 498,
+                  "line": 500,
                   "column": 8
                 },
                 "end": {
-                  "line": 502,
+                  "line": 504,
                   "column": 9
                 }
               },
@@ -33618,11 +33620,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 504,
+                  "line": 506,
                   "column": 8
                 },
                 "end": {
-                  "line": 517,
+                  "line": 519,
                   "column": 9
                 }
               },
@@ -33639,11 +33641,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 519,
+                  "line": 521,
                   "column": 8
                 },
                 "end": {
-                  "line": 532,
+                  "line": 534,
                   "column": 9
                 }
               },
@@ -33663,11 +33665,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 534,
+                  "line": 536,
                   "column": 8
                 },
                 "end": {
-                  "line": 541,
+                  "line": 543,
                   "column": 9
                 }
               },
@@ -33690,11 +33692,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 554,
+                  "line": 556,
                   "column": 8
                 },
                 "end": {
-                  "line": 556,
+                  "line": 558,
                   "column": 9
                 }
               },
@@ -33714,11 +33716,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 558,
+                  "line": 560,
                   "column": 8
                 },
                 "end": {
-                  "line": 560,
+                  "line": 562,
                   "column": 9
                 }
               },
@@ -33738,11 +33740,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 562,
+                  "line": 564,
                   "column": 8
                 },
                 "end": {
-                  "line": 568,
+                  "line": 570,
                   "column": 9
                 }
               },
@@ -33762,11 +33764,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 570,
+                  "line": 572,
                   "column": 8
                 },
                 "end": {
-                  "line": 576,
+                  "line": 578,
                   "column": 9
                 }
               },
@@ -34746,7 +34748,7 @@
               "column": 6
             },
             "end": {
-              "line": 577,
+              "line": 579,
               "column": 7
             }
           },
@@ -34871,11 +34873,11 @@
               "description": "",
               "sourceRange": {
                 "start": {
-                  "line": 308,
+                  "line": 310,
                   "column": 12
                 },
                 "end": {
-                  "line": 308,
+                  "line": 310,
                   "column": 30
                 }
               },
@@ -56218,15 +56220,15 @@
         {
           "name": "columns",
           "type": "Array | null | undefined",
-          "description": "Defines the columns the grid should render. If no columns are\npassed, the grid generates columns from the `tableData` passed\nin. Columns are rendered in the same order as the array.\n\n## `column` options\n\nThe following options are available for all column types. Only\n`name` and `path` are required, all others are optional:\n\n  * `{string} name` - Human-readable name displayed in the column\n    header\n\n  * `{string} path` - Key used to get the column data from each\n    of the `tableData` objects\n\n  * `{string} id='column.path[column.type]'` - Unique identifier\n    of the column. By default, px-data-grid will automatically\n    generate it from `column.path` and `column.type`. There can't\n    be 2 columns with the same id. The value `-any-` is a\n    reserved keyword that you cannot use for any column `id`.\n\n  * `{string} type=('string'|'number'|'date')` - Type of data\n    in the column. Used in the advanced filter UI to show\n    different filter options for each data type. Does not change\n    the renderer or impact sorting.\n\n  * `{string} renderer` - The name of the web component used to\n    render each cell in the column. There are three built-in\n    renderers available: `'px-data-grid-string-renderer'` (the\n    default renderer), `'px-data-grid-number-renderer'`, and\n    `'px-data-grid-date-renderer'`. You can also create a custom\n    renderer and use its name here. If no renderer is specified,\n    the column cannot be edited by the user.\n\n  * `{object} rendererConfig` - Settings to pass to the renderer\n    that change how data is displayed to the user. See the\n    examples below for information on which options are available\n    for each built-in renderer.\n\nThe following options are available for columns of type `date`:\n\n  * `{array} dateRanges` - List of pre-defined date ranges that\n    will appear in advanced filter dropdown for this column.\n    See the examples below for examples on how to format\n    each date range.\n\nThe following options are available for columns of type `number`:\n\n  * `{number} minBound` - Defines a minimum bound of a number in\n    the advanced filter field for this column. If both minBound\n    and maxBound properties are defined, the advanced filter will\n    display a slider instead of a condition dropdown.\n\n  * `{number} maxBound` - Defines a maximum bound of a number in\n    the advanced filter field for this column.\n\n  * `{boolean} hidden=false` - Hides the column from the user\n    when the grid is rendered. Automatically updated when the\n    user shows/hides columns using action menu(s).\n\n  * `{boolean} frozen=false` - Freezes the column. When the user\n    scrolls the grid horizontally frozen columns will not move.\n    Automatically updated when the user freezes/unfreezes columns\n    using action menu(s).\n\n  * `{boolean} required=false` - Used in renderers during editing.\n    If the column is required, the user will not be allowed to\n    enter a blank value.\n\n  * `{number} flexGrow=1` - Sets the relative size of the column\n    compared to other columns in the grid. Equivalent to the CSS\n    `flex-grow` property.\n\n\n## `column.dateFormat` options\n\nThe following options can be set in the `rendererConfig` for\ncolumns of type `date`. All formats should be set to a valid\n[moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)\nor to 'ISO':\n\n  * `{string} dateFormat.format='YYYY-MM-DD HH:mm:ss'` -\n    Format used to read the date/timestamp data.\n\n  * `{string} dateFormat.timezone='UTC'` -\n    Timezone used to read the date/timestamp data.\n\n\n## `column.rendererConfig` options\n\nThe following options can be set in the `rendererConfig` for\ncolumns of type `date`. All formats should be set to a valid\n[moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)\nor to 'ISO':\n\n  * `{string} rendererConfig.displayFormat='YYYY-MM-DD HH:mm:ss'` -\n    Format used to display the date/timestamp for the user.\n\n  * `{string} rendererConfig.timezone='UTC'` -\n    Timezone used to display the date/timestamp for the user.\n\n  * `{string} rendererConfig.datePickerDateFormat='YYYY-MM-DD'` -\n    Format used for the px-datetime-picker date when the user\n    edits cells in the column.\n\n  * `{string} rendererConfig.datePickerTimeFormat='HH:MM:SS'` -\n    Format used for the px-datetime-picker time when the user\n    edits cells in the column.\n\n  * `{boolean} rendererConfig.hideDate=false` - Hides the date\n    section of the px-datetime-picker when the user edits cells\n    in the column.\n\n  * `{boolean} rendererConfig.hideTime=true` - Hides the time\n    section of the px-datetime-picker when the user edits cells\n    in the column.\n\nThe following options can be set in the `rendererConfig` for\ncolumns of type `number`:\n\n  * `{?string} rendererConfig.displayFormat=null` - Format used to\n    display numbers in this column. Set to a valid\n    [numbro.js format string](http://numbrojs.com/format.html).\n    Set to `null` to display the number exactly as it appears\n    in the `tableData` by coercing it to string.\n\n  * `{string} rendererConfig.displayCulture='en-US'` - Changes the\n    way numbers in this column are displayed to the user by\n    localizing to get the correct format for commas, decimals,\n    etc. See [numbro.js languages](http://numbrojs.com/languages.html)\n    for a list of valid options.\n\n  * `{boolean} rendererConfig.displayIsCurrency=false` - Set to\n    `true` if the data in this column should be formatted as\n    currency. Will use `rendererConfig.displayFormat` to figure\n    out how to display the currency, or fall back to a localized\n    default based on `rendererConfig.displayCulture`.\n\n  * `{string} displayZeroFormat` - Used to format numbers equal\n    to `0` in this column. See [numbro.js docs](http://numbrojs.com/format.html)\n    for a list of valid options.\n\n## Examples\n\nExample format for a single column with all configurations used:\n\n```javascript\n{\n  id: 'first[string]',\n  name: 'First Name',\n  path: 'first',\n  type: 'string',\n  renderer: 'px-data-grid-string-renderer',\n  rendererConfig: {\n    customInfo: 'some info',\n    customInfo2: 42\n  },\n  dateRanges: [\n    {\n      name: 'Last 7 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(7, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Fixed range',\n      range: {\n        dateTo: '1996-11-10',\n        dateFrom: '1985-12-19'\n      }\n    }\n  ],\n  minBound: 1,\n  maxBound: 10,\n  hidden: false,\n  frozen: false,\n  required: false,\n  flexGrow: 1\n}\n```\n\nExample format for column of type `date` with custom `dateRanges`:\n\n```javascript\n{\n  name: 'Birth date',\n  path: 'birth_date',\n  type: 'date',\n  editable: true,\n  renderer: 'px-data-grid-date-renderer',\n  dateFormat: {\n    format: 'YYYY-MM-DD HH:mm:ss',\n    timezone: 'UTC'\n  },\n  rendererConfig: {\n    displayFormat: 'MM/DD/YYYY HH:mm',\n    timezone: 'America/Los_Angeles',\n    datePickerDateFormat: 'MM/DD/YYYY',\n    datePickerTimeFormat: 'HH:mm'\n  },\n  dateRanges: [\n    {\n      name: 'Last 7 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(7, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Last 14 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(14, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'This month',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(31, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Last month',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').subtract(1, 'M').format(),\n          dateFrom: window.moment().tz('UTC').subtract(2, 'M').format()\n        };\n      }\n    },\n    {\n      name: 'Fixed range',\n      range: {\n        dateTo: '1996-11-10',\n        dateFrom: '1985-12-19'\n      }\n    }\n  ]\n}\n```",
+          "description": "Defines the columns the grid should render. If no columns are\npassed, the grid generates columns from the `tableData` passed\nin. Columns are rendered in the same order as the array.\n\n## `column` options\n\nThe following options are available for all column types. Only\n`name` and `path` are required, all others are optional:\n\n  * `{string} name` - Human-readable name displayed in the column\n    header\n\n  * `{string} path` - Key used to get the column data from each\n    of the `tableData` objects\n\n  * `{string} id='column.path[column.type]'` - Unique identifier\n    of the column. By default, px-data-grid will automatically\n    generate it from `column.path` and `column.type`. There can't\n    be 2 columns with the same id. The value `-any-` is a\n    reserved keyword that you cannot use for any column `id`.\n\n  * `{string} type=('string'|'number'|'date')` - Type of data\n    in the column. Used in the advanced filter UI to show\n    different filter options for each data type. Does not change\n    the renderer or impact sorting.\n\n  * `{string} renderer` - The name of the web component used to\n    render each cell in the column. There are three built-in\n    renderers available: `'px-data-grid-string-renderer'` (the\n    default renderer), `'px-data-grid-number-renderer'`, and\n    `'px-data-grid-date-renderer'`. You can also create a custom\n    renderer and use its name here. If no renderer is specified,\n    the column cannot be edited by the user.\n\n  * `{object} rendererConfig` - Settings to pass to the renderer\n    that change how data is displayed to the user. See the\n    examples below for information on which options are available\n    for each built-in renderer.\n\nThe following options are available for columns of type `date`:\n\n  * `{array} dateRanges` - List of pre-defined date ranges that\n    will appear in advanced filter dropdown for this column.\n    See the examples below for examples on how to format\n    each date range.\n\nThe following options are available for columns of type `number`:\n\n  * `{number} minBound` - Defines a minimum bound of a number in\n    the advanced filter field for this column. If both minBound\n    and maxBound properties are defined, the advanced filter will\n    display a slider instead of a condition dropdown.\n\n  * `{number} maxBound` - Defines a maximum bound of a number in\n    the advanced filter field for this column.\n\n  * `{boolean} hidden=false` - Hides the column from the user\n    when the grid is rendered. Automatically updated when the\n    user shows/hides columns using action menu(s).\n\n  * `{boolean} frozen=false` - Freezes the column. When the user\n    scrolls the grid horizontally frozen columns will not move.\n    Automatically updated when the user freezes/unfreezes columns\n    using action menu(s).\n\n  * `{boolean} required=false` - Used in renderers during editing.\n    If the column is required, the user will not be allowed to\n    enter a blank value.\n\n  * `{number} flexGrow=1` - Sets the relative size of the column\n    compared to other columns in the grid. Equivalent to the CSS\n    `flex-grow` property.\n\n\n## `column.dateFormat` options\n\nThe following options can be set in the `dateFormat` for\ncolumns of type `date`. All formats should be set to a valid\n[moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)\nor to 'ISO':\n\n  * `{string} dateFormat.format='YYYY-MM-DD\"T\"HH:mm:ss.SSSS'` -\n    Format used to read the date/timestamp data.\n\n  * `{string} dateFormat.timezone='UTC'` -\n    Timezone used to read the date/timestamp data.\n\nDate parsing uses moment's [forgiving mode](https://momentjs.com/guides/#/parsing/forgiving-mode/), which can produce\nsilent but highly undesirable parsing errors if the date format does not match the source data.\nIf your source data is formatted differently to ISO8601, it is critical that you\nconfigure the `format` property correctly.\n\n## `column.rendererConfig` options\n\nThe following options can be set in the `rendererConfig` for\ncolumns of type `date`. All formats should be set to a valid\n[moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)\nor to 'ISO':\n\n  * `{string} rendererConfig.displayFormat='YYYY-MM-DD HH:mm:ss'` -\n    Format used to display the date/timestamp for the user.\n\n  * `{string} rendererConfig.timezone='UTC'` -\n    Timezone used to display the date/timestamp for the user.\n\n  * `{string} rendererConfig.datePickerDateFormat='YYYY-MM-DD'` -\n    Format used for the px-datetime-picker date when the user\n    edits cells in the column.\n\n  * `{string} rendererConfig.datePickerTimeFormat='HH:MM:SS'` -\n    Format used for the px-datetime-picker time when the user\n    edits cells in the column.\n\n  * `{boolean} rendererConfig.hideDate=false` - Hides the date\n    section of the px-datetime-picker when the user edits cells\n    in the column.\n\n  * `{boolean} rendererConfig.hideTime=true` - Hides the time\n    section of the px-datetime-picker when the user edits cells\n    in the column.\n\nThe following options can be set in the `rendererConfig` for\ncolumns of type `number`:\n\n  * `{?string} rendererConfig.displayFormat=null` - Format used to\n    display numbers in this column. Set to a valid\n    [numbro.js format string](http://numbrojs.com/format.html).\n    Set to `null` to display the number exactly as it appears\n    in the `tableData` by coercing it to string.\n\n  * `{string} rendererConfig.displayCulture='en-US'` - Changes the\n    way numbers in this column are displayed to the user by\n    localizing to get the correct format for commas, decimals,\n    etc. See [numbro.js languages](http://numbrojs.com/languages.html)\n    for a list of valid options.\n\n  * `{boolean} rendererConfig.displayIsCurrency=false` - Set to\n    `true` if the data in this column should be formatted as\n    currency. Will use `rendererConfig.displayFormat` to figure\n    out how to display the currency, or fall back to a localized\n    default based on `rendererConfig.displayCulture`.\n\n  * `{string} displayZeroFormat` - Used to format numbers equal\n    to `0` in this column. See [numbro.js docs](http://numbrojs.com/format.html)\n    for a list of valid options.\n\n## Examples\n\nExample format for a single column with all configurations used:\n\n```javascript\n{\n  id: 'first[string]',\n  name: 'First Name',\n  path: 'first',\n  type: 'string',\n  renderer: 'px-data-grid-string-renderer',\n  rendererConfig: {\n    customInfo: 'some info',\n    customInfo2: 42\n  },\n  dateRanges: [\n    {\n      name: 'Last 7 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(7, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Fixed range',\n      range: {\n        dateTo: '1996-11-10',\n        dateFrom: '1985-12-19'\n      }\n    }\n  ],\n  minBound: 1,\n  maxBound: 10,\n  hidden: false,\n  frozen: false,\n  required: false,\n  flexGrow: 1\n}\n```\n\nExample format for column of type `date` with custom `dateRanges`:\n\n```javascript\n{\n  name: 'Birth date',\n  path: 'birth_date',\n  type: 'date',\n  editable: true,\n  renderer: 'px-data-grid-date-renderer',\n  dateFormat: {\n    format: 'YYYY-MM-DD HH:mm:ss',\n    timezone: 'UTC'\n  },\n  rendererConfig: {\n    displayFormat: 'MM/DD/YYYY HH:mm',\n    timezone: 'America/Los_Angeles',\n    datePickerDateFormat: 'MM/DD/YYYY',\n    datePickerTimeFormat: 'HH:mm'\n  },\n  dateRanges: [\n    {\n      name: 'Last 7 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(7, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Last 14 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(14, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'This month',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(31, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Last month',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').subtract(1, 'M').format(),\n          dateFrom: window.moment().tz('UTC').subtract(2, 'M').format()\n        };\n      }\n    },\n    {\n      name: 'Fixed range',\n      range: {\n        dateTo: '1996-11-10',\n        dateFrom: '1985-12-19'\n      }\n    }\n  ]\n}\n```",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 730,
+              "line": 734,
               "column": 12
             },
             "end": {
-              "line": 734,
+              "line": 738,
               "column": 13
             }
           },
@@ -56245,11 +56247,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 739,
+              "line": 743,
               "column": 12
             },
             "end": {
-              "line": 742,
+              "line": 746,
               "column": 13
             }
           },
@@ -56267,11 +56269,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 747,
+              "line": 751,
               "column": 12
             },
             "end": {
-              "line": 749,
+              "line": 753,
               "column": 13
             }
           },
@@ -56288,11 +56290,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 754,
+              "line": 758,
               "column": 12
             },
             "end": {
-              "line": 756,
+              "line": 760,
               "column": 13
             }
           },
@@ -56309,11 +56311,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 761,
+              "line": 765,
               "column": 12
             },
             "end": {
-              "line": 764,
+              "line": 768,
               "column": 13
             }
           },
@@ -56331,11 +56333,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 773,
+              "line": 777,
               "column": 12
             },
             "end": {
-              "line": 776,
+              "line": 780,
               "column": 13
             }
           },
@@ -56353,11 +56355,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 782,
+              "line": 786,
               "column": 12
             },
             "end": {
-              "line": 785,
+              "line": 789,
               "column": 13
             }
           },
@@ -56375,11 +56377,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 791,
+              "line": 795,
               "column": 12
             },
             "end": {
-              "line": 817,
+              "line": 821,
               "column": 13
             }
           },
@@ -56397,11 +56399,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 854,
+              "line": 858,
               "column": 12
             },
             "end": {
-              "line": 858,
+              "line": 862,
               "column": 13
             }
           },
@@ -56420,11 +56422,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 864,
+              "line": 868,
               "column": 12
             },
             "end": {
-              "line": 867,
+              "line": 871,
               "column": 13
             }
           },
@@ -56442,11 +56444,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 905,
+              "line": 909,
               "column": 12
             },
             "end": {
-              "line": 908,
+              "line": 912,
               "column": 13
             }
           },
@@ -56464,11 +56466,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 972,
+              "line": 976,
               "column": 12
             },
             "end": {
-              "line": 975,
+              "line": 979,
               "column": 13
             }
           },
@@ -56486,11 +56488,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 977,
+              "line": 981,
               "column": 12
             },
             "end": {
-              "line": 979,
+              "line": 983,
               "column": 13
             }
           },
@@ -56507,11 +56509,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 985,
+              "line": 989,
               "column": 12
             },
             "end": {
-              "line": 988,
+              "line": 992,
               "column": 13
             }
           },
@@ -56529,11 +56531,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 995,
+              "line": 999,
               "column": 12
             },
             "end": {
-              "line": 998,
+              "line": 1002,
               "column": 13
             }
           },
@@ -56551,11 +56553,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1006,
+              "line": 1010,
               "column": 12
             },
             "end": {
-              "line": 1010,
+              "line": 1014,
               "column": 13
             }
           },
@@ -56574,11 +56576,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1015,
+              "line": 1019,
               "column": 12
             },
             "end": {
-              "line": 1019,
+              "line": 1023,
               "column": 13
             }
           },
@@ -56597,11 +56599,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1021,
+              "line": 1025,
               "column": 12
             },
             "end": {
-              "line": 1024,
+              "line": 1028,
               "column": 13
             }
           },
@@ -56619,11 +56621,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1030,
+              "line": 1034,
               "column": 12
             },
             "end": {
-              "line": 1033,
+              "line": 1037,
               "column": 13
             }
           },
@@ -56641,11 +56643,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1044,
+              "line": 1048,
               "column": 12
             },
             "end": {
-              "line": 1047,
+              "line": 1051,
               "column": 13
             }
           },
@@ -56663,11 +56665,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1095,
+              "line": 1099,
               "column": 12
             },
             "end": {
-              "line": 1098,
+              "line": 1102,
               "column": 13
             }
           },
@@ -56685,11 +56687,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1103,
+              "line": 1107,
               "column": 12
             },
             "end": {
-              "line": 1106,
+              "line": 1110,
               "column": 13
             }
           },
@@ -56707,11 +56709,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1112,
+              "line": 1116,
               "column": 12
             },
             "end": {
-              "line": 1114,
+              "line": 1118,
               "column": 13
             }
           },
@@ -56728,11 +56730,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1127,
+              "line": 1131,
               "column": 12
             },
             "end": {
-              "line": 1130,
+              "line": 1134,
               "column": 13
             }
           },
@@ -56750,11 +56752,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1136,
+              "line": 1140,
               "column": 12
             },
             "end": {
-              "line": 1139,
+              "line": 1143,
               "column": 13
             }
           },
@@ -56772,11 +56774,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1141,
+              "line": 1145,
               "column": 12
             },
             "end": {
-              "line": 1144,
+              "line": 1148,
               "column": 13
             }
           },
@@ -56794,11 +56796,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1146,
+              "line": 1150,
               "column": 12
             },
             "end": {
-              "line": 1149,
+              "line": 1153,
               "column": 13
             }
           },
@@ -56816,11 +56818,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1164,
+              "line": 1168,
               "column": 12
             },
             "end": {
-              "line": 1168,
+              "line": 1172,
               "column": 13
             }
           },
@@ -56838,11 +56840,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1177,
+              "line": 1181,
               "column": 12
             },
             "end": {
-              "line": 1181,
+              "line": 1185,
               "column": 13
             }
           },
@@ -56860,11 +56862,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1192,
+              "line": 1196,
               "column": 12
             },
             "end": {
-              "line": 1194,
+              "line": 1198,
               "column": 13
             }
           },
@@ -56881,11 +56883,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1201,
+              "line": 1205,
               "column": 12
             },
             "end": {
-              "line": 1204,
+              "line": 1208,
               "column": 13
             }
           },
@@ -56903,11 +56905,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1211,
+              "line": 1215,
               "column": 12
             },
             "end": {
-              "line": 1214,
+              "line": 1218,
               "column": 13
             }
           },
@@ -56925,11 +56927,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1220,
+              "line": 1224,
               "column": 12
             },
             "end": {
-              "line": 1223,
+              "line": 1227,
               "column": 13
             }
           },
@@ -56947,11 +56949,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1229,
+              "line": 1233,
               "column": 12
             },
             "end": {
-              "line": 1232,
+              "line": 1236,
               "column": 13
             }
           },
@@ -56969,11 +56971,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1248,
+              "line": 1252,
               "column": 12
             },
             "end": {
-              "line": 1250,
+              "line": 1254,
               "column": 13
             }
           },
@@ -56990,11 +56992,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1265,
+              "line": 1269,
               "column": 12
             },
             "end": {
-              "line": 1267,
+              "line": 1271,
               "column": 13
             }
           },
@@ -57011,11 +57013,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1272,
+              "line": 1276,
               "column": 12
             },
             "end": {
-              "line": 1276,
+              "line": 1280,
               "column": 13
             }
           },
@@ -57034,11 +57036,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1281,
+              "line": 1285,
               "column": 12
             },
             "end": {
-              "line": 1284,
+              "line": 1288,
               "column": 13
             }
           },
@@ -57056,11 +57058,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1286,
+              "line": 1290,
               "column": 12
             },
             "end": {
-              "line": 1286,
+              "line": 1290,
               "column": 38
             }
           },
@@ -57077,11 +57079,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1288,
+              "line": 1292,
               "column": 12
             },
             "end": {
-              "line": 1290,
+              "line": 1294,
               "column": 13
             }
           },
@@ -57099,11 +57101,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1346,
+              "line": 1350,
               "column": 8
             },
             "end": {
-              "line": 1407,
+              "line": 1411,
               "column": 9
             }
           },
@@ -57356,11 +57358,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1311,
+              "line": 1315,
               "column": 8
             },
             "end": {
-              "line": 1320,
+              "line": 1324,
               "column": 9
             }
           },
@@ -57376,11 +57378,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1329,
+              "line": 1333,
               "column": 8
             },
             "end": {
-              "line": 1344,
+              "line": 1348,
               "column": 9
             }
           },
@@ -57400,11 +57402,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1409,
+              "line": 1413,
               "column": 8
             },
             "end": {
-              "line": 1419,
+              "line": 1423,
               "column": 9
             }
           },
@@ -57424,11 +57426,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1421,
+              "line": 1425,
               "column": 8
             },
             "end": {
-              "line": 1425,
+              "line": 1429,
               "column": 9
             }
           },
@@ -57448,11 +57450,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1427,
+              "line": 1431,
               "column": 8
             },
             "end": {
-              "line": 1431,
+              "line": 1435,
               "column": 9
             }
           },
@@ -57468,11 +57470,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1433,
+              "line": 1437,
               "column": 8
             },
             "end": {
-              "line": 1445,
+              "line": 1449,
               "column": 9
             }
           },
@@ -57485,11 +57487,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1447,
+              "line": 1451,
               "column": 8
             },
             "end": {
-              "line": 1468,
+              "line": 1472,
               "column": 9
             }
           },
@@ -57505,11 +57507,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1471,
+              "line": 1475,
               "column": 8
             },
             "end": {
-              "line": 1474,
+              "line": 1478,
               "column": 9
             }
           },
@@ -57529,11 +57531,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1476,
+              "line": 1480,
               "column": 8
             },
             "end": {
-              "line": 1505,
+              "line": 1509,
               "column": 9
             }
           },
@@ -57553,11 +57555,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1507,
+              "line": 1511,
               "column": 8
             },
             "end": {
-              "line": 1512,
+              "line": 1516,
               "column": 9
             }
           },
@@ -57577,11 +57579,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1514,
+              "line": 1518,
               "column": 8
             },
             "end": {
-              "line": 1520,
+              "line": 1524,
               "column": 9
             }
           },
@@ -57594,11 +57596,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1522,
+              "line": 1526,
               "column": 8
             },
             "end": {
-              "line": 1527,
+              "line": 1531,
               "column": 9
             }
           },
@@ -57618,11 +57620,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1529,
+              "line": 1533,
               "column": 8
             },
             "end": {
-              "line": 1531,
+              "line": 1535,
               "column": 9
             }
           },
@@ -57642,11 +57644,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1536,
+              "line": 1540,
               "column": 8
             },
             "end": {
-              "line": 1543,
+              "line": 1547,
               "column": 9
             }
           },
@@ -57666,11 +57668,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1545,
+              "line": 1549,
               "column": 8
             },
             "end": {
-              "line": 1551,
+              "line": 1555,
               "column": 9
             }
           },
@@ -57686,27 +57688,6 @@
         },
         {
           "name": "_getColumnWidth",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 1553,
-              "column": 8
-            },
-            "end": {
-              "line": 1555,
-              "column": 9
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "column"
-            }
-          ]
-        },
-        {
-          "name": "_getColumnFlexGrow",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -57727,7 +57708,7 @@
           ]
         },
         {
-          "name": "_resolveCellColor",
+          "name": "_getColumnFlexGrow",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -57736,7 +57717,28 @@
               "column": 8
             },
             "end": {
-              "line": 1601,
+              "line": 1563,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "column"
+            }
+          ]
+        },
+        {
+          "name": "_resolveCellColor",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1565,
+              "column": 8
+            },
+            "end": {
+              "line": 1605,
               "column": 9
             }
           },
@@ -57756,11 +57758,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1603,
+              "line": 1607,
               "column": 8
             },
             "end": {
-              "line": 1608,
+              "line": 1612,
               "column": 9
             }
           },
@@ -57780,11 +57782,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1610,
+              "line": 1614,
               "column": 8
             },
             "end": {
-              "line": 1617,
+              "line": 1621,
               "column": 9
             }
           },
@@ -57804,11 +57806,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1619,
+              "line": 1623,
               "column": 8
             },
             "end": {
-              "line": 1638,
+              "line": 1642,
               "column": 9
             }
           },
@@ -57834,11 +57836,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1640,
+              "line": 1644,
               "column": 8
             },
             "end": {
-              "line": 1662,
+              "line": 1666,
               "column": 9
             }
           },
@@ -57864,11 +57866,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1664,
+              "line": 1668,
               "column": 8
             },
             "end": {
-              "line": 1677,
+              "line": 1681,
               "column": 9
             }
           },
@@ -57891,11 +57893,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1679,
+              "line": 1683,
               "column": 8
             },
             "end": {
-              "line": 1691,
+              "line": 1695,
               "column": 9
             }
           },
@@ -57915,11 +57917,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1693,
+              "line": 1697,
               "column": 8
             },
             "end": {
-              "line": 1698,
+              "line": 1702,
               "column": 9
             }
           },
@@ -57936,11 +57938,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1703,
+              "line": 1707,
               "column": 8
             },
             "end": {
-              "line": 1739,
+              "line": 1743,
               "column": 9
             }
           },
@@ -57960,11 +57962,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1745,
+              "line": 1749,
               "column": 8
             },
             "end": {
-              "line": 1751,
+              "line": 1755,
               "column": 9
             }
           },
@@ -57981,11 +57983,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1753,
+              "line": 1757,
               "column": 8
             },
             "end": {
-              "line": 1789,
+              "line": 1793,
               "column": 9
             }
           },
@@ -58008,11 +58010,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1794,
+              "line": 1798,
               "column": 8
             },
             "end": {
-              "line": 1804,
+              "line": 1808,
               "column": 9
             }
           },
@@ -58025,11 +58027,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1806,
+              "line": 1810,
               "column": 8
             },
             "end": {
-              "line": 1814,
+              "line": 1818,
               "column": 9
             }
           },
@@ -58049,11 +58051,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1816,
+              "line": 1820,
               "column": 8
             },
             "end": {
-              "line": 1821,
+              "line": 1825,
               "column": 9
             }
           },
@@ -58070,11 +58072,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1823,
+              "line": 1827,
               "column": 8
             },
             "end": {
-              "line": 1841,
+              "line": 1845,
               "column": 9
             }
           },
@@ -58094,11 +58096,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1846,
+              "line": 1850,
               "column": 8
             },
             "end": {
-              "line": 1873,
+              "line": 1877,
               "column": 9
             }
           },
@@ -58118,11 +58120,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1878,
+              "line": 1882,
               "column": 8
             },
             "end": {
-              "line": 1880,
+              "line": 1884,
               "column": 9
             }
           },
@@ -58135,11 +58137,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1885,
+              "line": 1889,
               "column": 8
             },
             "end": {
-              "line": 1927,
+              "line": 1931,
               "column": 9
             }
           },
@@ -58155,11 +58157,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1932,
+              "line": 1936,
               "column": 8
             },
             "end": {
-              "line": 1937,
+              "line": 1941,
               "column": 9
             }
           },
@@ -58176,11 +58178,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1942,
+              "line": 1946,
               "column": 8
             },
             "end": {
-              "line": 1970,
+              "line": 1974,
               "column": 9
             }
           },
@@ -58200,11 +58202,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1972,
+              "line": 1976,
               "column": 8
             },
             "end": {
-              "line": 1974,
+              "line": 1978,
               "column": 9
             }
           },
@@ -58221,11 +58223,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1976,
+              "line": 1980,
               "column": 8
             },
             "end": {
-              "line": 1978,
+              "line": 1982,
               "column": 9
             }
           },
@@ -58242,11 +58244,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1980,
+              "line": 1984,
               "column": 8
             },
             "end": {
-              "line": 1983,
+              "line": 1987,
               "column": 9
             }
           },
@@ -58263,11 +58265,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1985,
+              "line": 1989,
               "column": 8
             },
             "end": {
-              "line": 1993,
+              "line": 1997,
               "column": 9
             }
           },
@@ -58283,11 +58285,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1995,
+              "line": 1999,
               "column": 8
             },
             "end": {
-              "line": 2001,
+              "line": 2005,
               "column": 9
             }
           },
@@ -58307,11 +58309,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2003,
+              "line": 2007,
               "column": 8
             },
             "end": {
-              "line": 2011,
+              "line": 2015,
               "column": 9
             }
           },
@@ -58331,11 +58333,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2016,
+              "line": 2020,
               "column": 8
             },
             "end": {
-              "line": 2018,
+              "line": 2022,
               "column": 9
             }
           },
@@ -58361,11 +58363,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2023,
+              "line": 2027,
               "column": 8
             },
             "end": {
-              "line": 2025,
+              "line": 2029,
               "column": 9
             }
           },
@@ -58387,11 +58389,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 2030,
+              "line": 2034,
               "column": 8
             },
             "end": {
-              "line": 2032,
+              "line": 2036,
               "column": 9
             }
           },
@@ -58408,11 +58410,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2039,
+              "line": 2043,
               "column": 8
             },
             "end": {
-              "line": 2057,
+              "line": 2061,
               "column": 9
             }
           },
@@ -58432,11 +58434,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2062,
+              "line": 2066,
               "column": 8
             },
             "end": {
-              "line": 2080,
+              "line": 2084,
               "column": 9
             }
           },
@@ -58456,11 +58458,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2082,
+              "line": 2086,
               "column": 8
             },
             "end": {
-              "line": 2084,
+              "line": 2088,
               "column": 9
             }
           },
@@ -58480,11 +58482,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2089,
+              "line": 2093,
               "column": 8
             },
             "end": {
-              "line": 2100,
+              "line": 2104,
               "column": 9
             }
           },
@@ -58500,11 +58502,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2105,
+              "line": 2109,
               "column": 8
             },
             "end": {
-              "line": 2107,
+              "line": 2111,
               "column": 9
             }
           },
@@ -58517,11 +58519,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2112,
+              "line": 2116,
               "column": 8
             },
             "end": {
-              "line": 2114,
+              "line": 2118,
               "column": 9
             }
           },
@@ -58534,11 +58536,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2116,
+              "line": 2120,
               "column": 8
             },
             "end": {
-              "line": 2143,
+              "line": 2147,
               "column": 9
             }
           },
@@ -58558,11 +58560,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2145,
+              "line": 2149,
               "column": 8
             },
             "end": {
-              "line": 2147,
+              "line": 2151,
               "column": 9
             }
           },
@@ -58585,11 +58587,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2149,
+              "line": 2153,
               "column": 8
             },
             "end": {
-              "line": 2164,
+              "line": 2168,
               "column": 9
             }
           },
@@ -58609,11 +58611,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 2169,
+              "line": 2173,
               "column": 8
             },
             "end": {
-              "line": 2181,
+              "line": 2185,
               "column": 9
             }
           },
@@ -58636,11 +58638,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2183,
+              "line": 2187,
               "column": 8
             },
             "end": {
-              "line": 2195,
+              "line": 2199,
               "column": 9
             }
           },
@@ -58663,11 +58665,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2197,
+              "line": 2201,
               "column": 8
             },
             "end": {
-              "line": 2204,
+              "line": 2208,
               "column": 9
             }
           },
@@ -58687,11 +58689,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2206,
+              "line": 2210,
               "column": 8
             },
             "end": {
-              "line": 2211,
+              "line": 2215,
               "column": 9
             }
           },
@@ -58711,11 +58713,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2213,
+              "line": 2217,
               "column": 8
             },
             "end": {
-              "line": 2215,
+              "line": 2219,
               "column": 9
             }
           },
@@ -58735,11 +58737,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2217,
+              "line": 2221,
               "column": 8
             },
             "end": {
-              "line": 2219,
+              "line": 2223,
               "column": 9
             }
           },
@@ -58756,11 +58758,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2221,
+              "line": 2225,
               "column": 8
             },
             "end": {
-              "line": 2244,
+              "line": 2248,
               "column": 9
             }
           },
@@ -58776,11 +58778,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2246,
+              "line": 2250,
               "column": 8
             },
             "end": {
-              "line": 2248,
+              "line": 2252,
               "column": 9
             }
           },
@@ -58800,11 +58802,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2250,
+              "line": 2254,
               "column": 8
             },
             "end": {
-              "line": 2256,
+              "line": 2260,
               "column": 9
             }
           },
@@ -58824,11 +58826,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2264,
+              "line": 2268,
               "column": 8
             },
             "end": {
-              "line": 2301,
+              "line": 2305,
               "column": 9
             }
           },
@@ -58848,11 +58850,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 2308,
+              "line": 2312,
               "column": 8
             },
             "end": {
-              "line": 2310,
+              "line": 2314,
               "column": 9
             }
           },
@@ -58869,11 +58871,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 2319,
+              "line": 2323,
               "column": 8
             },
             "end": {
-              "line": 2354,
+              "line": 2358,
               "column": 9
             }
           },
@@ -58894,11 +58896,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2359,
+              "line": 2363,
               "column": 8
             },
             "end": {
-              "line": 2364,
+              "line": 2368,
               "column": 9
             }
           },
@@ -58915,11 +58917,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2369,
+              "line": 2373,
               "column": 8
             },
             "end": {
-              "line": 2373,
+              "line": 2377,
               "column": 9
             }
           },
@@ -58939,11 +58941,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2375,
+              "line": 2379,
               "column": 8
             },
             "end": {
-              "line": 2392,
+              "line": 2396,
               "column": 9
             }
           },
@@ -58963,11 +58965,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 2397,
+              "line": 2401,
               "column": 8
             },
             "end": {
-              "line": 2405,
+              "line": 2409,
               "column": 9
             }
           },
@@ -58983,11 +58985,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2407,
+              "line": 2411,
               "column": 8
             },
             "end": {
-              "line": 2413,
+              "line": 2417,
               "column": 9
             }
           },
@@ -59007,11 +59009,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2419,
+              "line": 2423,
               "column": 8
             },
             "end": {
-              "line": 2425,
+              "line": 2429,
               "column": 9
             }
           },
@@ -59028,11 +59030,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2427,
+              "line": 2431,
               "column": 8
             },
             "end": {
-              "line": 2429,
+              "line": 2433,
               "column": 9
             }
           },
@@ -59049,11 +59051,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2431,
+              "line": 2435,
               "column": 8
             },
             "end": {
-              "line": 2433,
+              "line": 2437,
               "column": 9
             }
           },
@@ -59070,11 +59072,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2435,
+              "line": 2439,
               "column": 8
             },
             "end": {
-              "line": 2437,
+              "line": 2441,
               "column": 9
             }
           },
@@ -59094,11 +59096,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2439,
+              "line": 2443,
               "column": 8
             },
             "end": {
-              "line": 2441,
+              "line": 2445,
               "column": 9
             }
           },
@@ -59118,11 +59120,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2443,
+              "line": 2447,
               "column": 8
             },
             "end": {
-              "line": 2452,
+              "line": 2456,
               "column": 9
             }
           },
@@ -59142,11 +59144,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2457,
+              "line": 2461,
               "column": 8
             },
             "end": {
-              "line": 2476,
+              "line": 2480,
               "column": 9
             }
           },
@@ -59166,11 +59168,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2478,
+              "line": 2482,
               "column": 8
             },
             "end": {
-              "line": 2480,
+              "line": 2484,
               "column": 9
             }
           },
@@ -59187,11 +59189,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2482,
+              "line": 2486,
               "column": 8
             },
             "end": {
-              "line": 2485,
+              "line": 2489,
               "column": 9
             }
           },
@@ -59214,11 +59216,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2487,
+              "line": 2491,
               "column": 8
             },
             "end": {
-              "line": 2489,
+              "line": 2493,
               "column": 9
             }
           },
@@ -59238,11 +59240,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 2491,
+              "line": 2495,
               "column": 8
             },
             "end": {
-              "line": 2493,
+              "line": 2497,
               "column": 9
             }
           },
@@ -59262,11 +59264,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 2508,
+              "line": 2512,
               "column": 8
             },
             "end": {
-              "line": 2515,
+              "line": 2519,
               "column": 9
             }
           },
@@ -59282,11 +59284,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 2526,
+              "line": 2530,
               "column": 8
             },
             "end": {
-              "line": 2536,
+              "line": 2540,
               "column": 9
             }
           },
@@ -59312,7 +59314,7 @@
           "column": 6
         },
         "end": {
-          "line": 2537,
+          "line": 2541,
           "column": 7
         }
       },
@@ -59564,14 +59566,14 @@
         },
         {
           "name": "columns",
-          "description": "Defines the columns the grid should render. If no columns are\npassed, the grid generates columns from the `tableData` passed\nin. Columns are rendered in the same order as the array.\n\n## `column` options\n\nThe following options are available for all column types. Only\n`name` and `path` are required, all others are optional:\n\n  * `{string} name` - Human-readable name displayed in the column\n    header\n\n  * `{string} path` - Key used to get the column data from each\n    of the `tableData` objects\n\n  * `{string} id='column.path[column.type]'` - Unique identifier\n    of the column. By default, px-data-grid will automatically\n    generate it from `column.path` and `column.type`. There can't\n    be 2 columns with the same id. The value `-any-` is a\n    reserved keyword that you cannot use for any column `id`.\n\n  * `{string} type=('string'|'number'|'date')` - Type of data\n    in the column. Used in the advanced filter UI to show\n    different filter options for each data type. Does not change\n    the renderer or impact sorting.\n\n  * `{string} renderer` - The name of the web component used to\n    render each cell in the column. There are three built-in\n    renderers available: `'px-data-grid-string-renderer'` (the\n    default renderer), `'px-data-grid-number-renderer'`, and\n    `'px-data-grid-date-renderer'`. You can also create a custom\n    renderer and use its name here. If no renderer is specified,\n    the column cannot be edited by the user.\n\n  * `{object} rendererConfig` - Settings to pass to the renderer\n    that change how data is displayed to the user. See the\n    examples below for information on which options are available\n    for each built-in renderer.\n\nThe following options are available for columns of type `date`:\n\n  * `{array} dateRanges` - List of pre-defined date ranges that\n    will appear in advanced filter dropdown for this column.\n    See the examples below for examples on how to format\n    each date range.\n\nThe following options are available for columns of type `number`:\n\n  * `{number} minBound` - Defines a minimum bound of a number in\n    the advanced filter field for this column. If both minBound\n    and maxBound properties are defined, the advanced filter will\n    display a slider instead of a condition dropdown.\n\n  * `{number} maxBound` - Defines a maximum bound of a number in\n    the advanced filter field for this column.\n\n  * `{boolean} hidden=false` - Hides the column from the user\n    when the grid is rendered. Automatically updated when the\n    user shows/hides columns using action menu(s).\n\n  * `{boolean} frozen=false` - Freezes the column. When the user\n    scrolls the grid horizontally frozen columns will not move.\n    Automatically updated when the user freezes/unfreezes columns\n    using action menu(s).\n\n  * `{boolean} required=false` - Used in renderers during editing.\n    If the column is required, the user will not be allowed to\n    enter a blank value.\n\n  * `{number} flexGrow=1` - Sets the relative size of the column\n    compared to other columns in the grid. Equivalent to the CSS\n    `flex-grow` property.\n\n\n## `column.dateFormat` options\n\nThe following options can be set in the `rendererConfig` for\ncolumns of type `date`. All formats should be set to a valid\n[moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)\nor to 'ISO':\n\n  * `{string} dateFormat.format='YYYY-MM-DD HH:mm:ss'` -\n    Format used to read the date/timestamp data.\n\n  * `{string} dateFormat.timezone='UTC'` -\n    Timezone used to read the date/timestamp data.\n\n\n## `column.rendererConfig` options\n\nThe following options can be set in the `rendererConfig` for\ncolumns of type `date`. All formats should be set to a valid\n[moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)\nor to 'ISO':\n\n  * `{string} rendererConfig.displayFormat='YYYY-MM-DD HH:mm:ss'` -\n    Format used to display the date/timestamp for the user.\n\n  * `{string} rendererConfig.timezone='UTC'` -\n    Timezone used to display the date/timestamp for the user.\n\n  * `{string} rendererConfig.datePickerDateFormat='YYYY-MM-DD'` -\n    Format used for the px-datetime-picker date when the user\n    edits cells in the column.\n\n  * `{string} rendererConfig.datePickerTimeFormat='HH:MM:SS'` -\n    Format used for the px-datetime-picker time when the user\n    edits cells in the column.\n\n  * `{boolean} rendererConfig.hideDate=false` - Hides the date\n    section of the px-datetime-picker when the user edits cells\n    in the column.\n\n  * `{boolean} rendererConfig.hideTime=true` - Hides the time\n    section of the px-datetime-picker when the user edits cells\n    in the column.\n\nThe following options can be set in the `rendererConfig` for\ncolumns of type `number`:\n\n  * `{?string} rendererConfig.displayFormat=null` - Format used to\n    display numbers in this column. Set to a valid\n    [numbro.js format string](http://numbrojs.com/format.html).\n    Set to `null` to display the number exactly as it appears\n    in the `tableData` by coercing it to string.\n\n  * `{string} rendererConfig.displayCulture='en-US'` - Changes the\n    way numbers in this column are displayed to the user by\n    localizing to get the correct format for commas, decimals,\n    etc. See [numbro.js languages](http://numbrojs.com/languages.html)\n    for a list of valid options.\n\n  * `{boolean} rendererConfig.displayIsCurrency=false` - Set to\n    `true` if the data in this column should be formatted as\n    currency. Will use `rendererConfig.displayFormat` to figure\n    out how to display the currency, or fall back to a localized\n    default based on `rendererConfig.displayCulture`.\n\n  * `{string} displayZeroFormat` - Used to format numbers equal\n    to `0` in this column. See [numbro.js docs](http://numbrojs.com/format.html)\n    for a list of valid options.\n\n## Examples\n\nExample format for a single column with all configurations used:\n\n```javascript\n{\n  id: 'first[string]',\n  name: 'First Name',\n  path: 'first',\n  type: 'string',\n  renderer: 'px-data-grid-string-renderer',\n  rendererConfig: {\n    customInfo: 'some info',\n    customInfo2: 42\n  },\n  dateRanges: [\n    {\n      name: 'Last 7 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(7, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Fixed range',\n      range: {\n        dateTo: '1996-11-10',\n        dateFrom: '1985-12-19'\n      }\n    }\n  ],\n  minBound: 1,\n  maxBound: 10,\n  hidden: false,\n  frozen: false,\n  required: false,\n  flexGrow: 1\n}\n```\n\nExample format for column of type `date` with custom `dateRanges`:\n\n```javascript\n{\n  name: 'Birth date',\n  path: 'birth_date',\n  type: 'date',\n  editable: true,\n  renderer: 'px-data-grid-date-renderer',\n  dateFormat: {\n    format: 'YYYY-MM-DD HH:mm:ss',\n    timezone: 'UTC'\n  },\n  rendererConfig: {\n    displayFormat: 'MM/DD/YYYY HH:mm',\n    timezone: 'America/Los_Angeles',\n    datePickerDateFormat: 'MM/DD/YYYY',\n    datePickerTimeFormat: 'HH:mm'\n  },\n  dateRanges: [\n    {\n      name: 'Last 7 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(7, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Last 14 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(14, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'This month',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(31, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Last month',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').subtract(1, 'M').format(),\n          dateFrom: window.moment().tz('UTC').subtract(2, 'M').format()\n        };\n      }\n    },\n    {\n      name: 'Fixed range',\n      range: {\n        dateTo: '1996-11-10',\n        dateFrom: '1985-12-19'\n      }\n    }\n  ]\n}\n```",
+          "description": "Defines the columns the grid should render. If no columns are\npassed, the grid generates columns from the `tableData` passed\nin. Columns are rendered in the same order as the array.\n\n## `column` options\n\nThe following options are available for all column types. Only\n`name` and `path` are required, all others are optional:\n\n  * `{string} name` - Human-readable name displayed in the column\n    header\n\n  * `{string} path` - Key used to get the column data from each\n    of the `tableData` objects\n\n  * `{string} id='column.path[column.type]'` - Unique identifier\n    of the column. By default, px-data-grid will automatically\n    generate it from `column.path` and `column.type`. There can't\n    be 2 columns with the same id. The value `-any-` is a\n    reserved keyword that you cannot use for any column `id`.\n\n  * `{string} type=('string'|'number'|'date')` - Type of data\n    in the column. Used in the advanced filter UI to show\n    different filter options for each data type. Does not change\n    the renderer or impact sorting.\n\n  * `{string} renderer` - The name of the web component used to\n    render each cell in the column. There are three built-in\n    renderers available: `'px-data-grid-string-renderer'` (the\n    default renderer), `'px-data-grid-number-renderer'`, and\n    `'px-data-grid-date-renderer'`. You can also create a custom\n    renderer and use its name here. If no renderer is specified,\n    the column cannot be edited by the user.\n\n  * `{object} rendererConfig` - Settings to pass to the renderer\n    that change how data is displayed to the user. See the\n    examples below for information on which options are available\n    for each built-in renderer.\n\nThe following options are available for columns of type `date`:\n\n  * `{array} dateRanges` - List of pre-defined date ranges that\n    will appear in advanced filter dropdown for this column.\n    See the examples below for examples on how to format\n    each date range.\n\nThe following options are available for columns of type `number`:\n\n  * `{number} minBound` - Defines a minimum bound of a number in\n    the advanced filter field for this column. If both minBound\n    and maxBound properties are defined, the advanced filter will\n    display a slider instead of a condition dropdown.\n\n  * `{number} maxBound` - Defines a maximum bound of a number in\n    the advanced filter field for this column.\n\n  * `{boolean} hidden=false` - Hides the column from the user\n    when the grid is rendered. Automatically updated when the\n    user shows/hides columns using action menu(s).\n\n  * `{boolean} frozen=false` - Freezes the column. When the user\n    scrolls the grid horizontally frozen columns will not move.\n    Automatically updated when the user freezes/unfreezes columns\n    using action menu(s).\n\n  * `{boolean} required=false` - Used in renderers during editing.\n    If the column is required, the user will not be allowed to\n    enter a blank value.\n\n  * `{number} flexGrow=1` - Sets the relative size of the column\n    compared to other columns in the grid. Equivalent to the CSS\n    `flex-grow` property.\n\n\n## `column.dateFormat` options\n\nThe following options can be set in the `dateFormat` for\ncolumns of type `date`. All formats should be set to a valid\n[moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)\nor to 'ISO':\n\n  * `{string} dateFormat.format='YYYY-MM-DD\"T\"HH:mm:ss.SSSS'` -\n    Format used to read the date/timestamp data.\n\n  * `{string} dateFormat.timezone='UTC'` -\n    Timezone used to read the date/timestamp data.\n\nDate parsing uses moment's [forgiving mode](https://momentjs.com/guides/#/parsing/forgiving-mode/), which can produce\nsilent but highly undesirable parsing errors if the date format does not match the source data.\nIf your source data is formatted differently to ISO8601, it is critical that you\nconfigure the `format` property correctly.\n\n## `column.rendererConfig` options\n\nThe following options can be set in the `rendererConfig` for\ncolumns of type `date`. All formats should be set to a valid\n[moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)\nor to 'ISO':\n\n  * `{string} rendererConfig.displayFormat='YYYY-MM-DD HH:mm:ss'` -\n    Format used to display the date/timestamp for the user.\n\n  * `{string} rendererConfig.timezone='UTC'` -\n    Timezone used to display the date/timestamp for the user.\n\n  * `{string} rendererConfig.datePickerDateFormat='YYYY-MM-DD'` -\n    Format used for the px-datetime-picker date when the user\n    edits cells in the column.\n\n  * `{string} rendererConfig.datePickerTimeFormat='HH:MM:SS'` -\n    Format used for the px-datetime-picker time when the user\n    edits cells in the column.\n\n  * `{boolean} rendererConfig.hideDate=false` - Hides the date\n    section of the px-datetime-picker when the user edits cells\n    in the column.\n\n  * `{boolean} rendererConfig.hideTime=true` - Hides the time\n    section of the px-datetime-picker when the user edits cells\n    in the column.\n\nThe following options can be set in the `rendererConfig` for\ncolumns of type `number`:\n\n  * `{?string} rendererConfig.displayFormat=null` - Format used to\n    display numbers in this column. Set to a valid\n    [numbro.js format string](http://numbrojs.com/format.html).\n    Set to `null` to display the number exactly as it appears\n    in the `tableData` by coercing it to string.\n\n  * `{string} rendererConfig.displayCulture='en-US'` - Changes the\n    way numbers in this column are displayed to the user by\n    localizing to get the correct format for commas, decimals,\n    etc. See [numbro.js languages](http://numbrojs.com/languages.html)\n    for a list of valid options.\n\n  * `{boolean} rendererConfig.displayIsCurrency=false` - Set to\n    `true` if the data in this column should be formatted as\n    currency. Will use `rendererConfig.displayFormat` to figure\n    out how to display the currency, or fall back to a localized\n    default based on `rendererConfig.displayCulture`.\n\n  * `{string} displayZeroFormat` - Used to format numbers equal\n    to `0` in this column. See [numbro.js docs](http://numbrojs.com/format.html)\n    for a list of valid options.\n\n## Examples\n\nExample format for a single column with all configurations used:\n\n```javascript\n{\n  id: 'first[string]',\n  name: 'First Name',\n  path: 'first',\n  type: 'string',\n  renderer: 'px-data-grid-string-renderer',\n  rendererConfig: {\n    customInfo: 'some info',\n    customInfo2: 42\n  },\n  dateRanges: [\n    {\n      name: 'Last 7 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(7, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Fixed range',\n      range: {\n        dateTo: '1996-11-10',\n        dateFrom: '1985-12-19'\n      }\n    }\n  ],\n  minBound: 1,\n  maxBound: 10,\n  hidden: false,\n  frozen: false,\n  required: false,\n  flexGrow: 1\n}\n```\n\nExample format for column of type `date` with custom `dateRanges`:\n\n```javascript\n{\n  name: 'Birth date',\n  path: 'birth_date',\n  type: 'date',\n  editable: true,\n  renderer: 'px-data-grid-date-renderer',\n  dateFormat: {\n    format: 'YYYY-MM-DD HH:mm:ss',\n    timezone: 'UTC'\n  },\n  rendererConfig: {\n    displayFormat: 'MM/DD/YYYY HH:mm',\n    timezone: 'America/Los_Angeles',\n    datePickerDateFormat: 'MM/DD/YYYY',\n    datePickerTimeFormat: 'HH:mm'\n  },\n  dateRanges: [\n    {\n      name: 'Last 7 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(7, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Last 14 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(14, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'This month',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(31, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Last month',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').subtract(1, 'M').format(),\n          dateFrom: window.moment().tz('UTC').subtract(2, 'M').format()\n        };\n      }\n    },\n    {\n      name: 'Fixed range',\n      range: {\n        dateTo: '1996-11-10',\n        dateFrom: '1985-12-19'\n      }\n    }\n  ]\n}\n```",
           "sourceRange": {
             "start": {
-              "line": 730,
+              "line": 734,
               "column": 12
             },
             "end": {
-              "line": 734,
+              "line": 738,
               "column": 13
             }
           },
@@ -59583,11 +59585,11 @@
           "description": "A valid IETF language tag as a string that `app-localize-behavior`\nwill use to localize this component.\n\nSee https://github.com/PolymerElements/app-localize-behavior for\nAPI documentation and more information.",
           "sourceRange": {
             "start": {
-              "line": 773,
+              "line": 777,
               "column": 12
             },
             "end": {
-              "line": 776,
+              "line": 780,
               "column": 13
             }
           },
@@ -59599,11 +59601,11 @@
           "description": "Use the key for localization if value for that language is missing.\nShould always be true for Predix components.",
           "sourceRange": {
             "start": {
-              "line": 782,
+              "line": 786,
               "column": 12
             },
             "end": {
-              "line": 785,
+              "line": 789,
               "column": 13
             }
           },
@@ -59615,11 +59617,11 @@
           "description": "Library object of hardcoded strings used in this application.\nUsed by `app-localize-behavior` in conjunction with `language`.",
           "sourceRange": {
             "start": {
-              "line": 791,
+              "line": 795,
               "column": 12
             },
             "end": {
-              "line": 817,
+              "line": 821,
               "column": 13
             }
           },
@@ -59631,11 +59633,11 @@
           "description": "A list of custom actions that are shown when the user taps the\naction menu button at the top right of the grid. If the\n`hideActionMenu` property is enabled the action menu won't be\nshown to the user.\n\nEach array entry should be an object with the following properties:\n\n  * `{string} name` - Label shown in the action menu, should\n    prompt the user to do something (e.g. \"Export CSV\")\n  * `{string} id` - Unique identifier that will be included in the\n    event fired when the user taps an action in the menu\n  * `{string} icon` - Optional icon to show in the dropdown menu.\n    Refer to px-icon-set for list of available icons.\n\nWhen the user taps an action in the menu the grid will fire the\n`table-action` event. `event.detail.id` will be the action ID.\n\nExample actions:\n\n```javascript\n[\n  {\n    name: 'Export CSV',\n    id: 'CSV',\n    icon: 'px-doc:document-csv'\n  }\n  {\n    name: 'Export Excel',\n    id: 'Excel',\n    icons: 'px-doc:document-xls'\n  }\n]\n```",
           "sourceRange": {
             "start": {
-              "line": 854,
+              "line": 858,
               "column": 12
             },
             "end": {
-              "line": 858,
+              "line": 862,
               "column": 13
             }
           },
@@ -59647,11 +59649,11 @@
           "description": "Set to `true` to allow the user to hide the column filter/selector in\nthe action menu.",
           "sourceRange": {
             "start": {
-              "line": 864,
+              "line": 868,
               "column": 12
             },
             "end": {
-              "line": 867,
+              "line": 871,
               "column": 13
             }
           },
@@ -59663,11 +59665,11 @@
           "description": "A list of custom actions that are shown in the actions menu\nfor each data row. The action menu button appears to the right\nof each row when the user hovers over the row.\n\nEach array entry should be an object with the following properties:\n\n  * `{string} name` - Label shown in the action menu, should\n    prompt the user to do something (e.g. \"Add Row After\")\n  * `{string} id` - Unique identifier that will be included in the\n    event fired when the user taps an action in the menu\n  * `{string} icon` - Optional icon to show in the dropdown menu.\n    Refer to px-icon-set for list of available icons.\n\nWhen the user taps an action in the menu the grid will fire the\n`item-action` event. `event.detail.id` will be the action ID and\n`event.detail.item` will be a reference to the row the user\ntook action on (from `tableData`).\n\nExample actions:\n\n```javascript\n[\n  {\n    name: 'Add Row After',\n    id: 'add-after',\n    icon: 'px-nav:add-row-below'\n  }\n  {\n    name: 'Delete Row',\n    id: 'delete',\n    icon: 'px-nav:delete-row'\n  }\n]\n```",
           "sourceRange": {
             "start": {
-              "line": 905,
+              "line": 909,
               "column": 12
             },
             "end": {
-              "line": 908,
+              "line": 912,
               "column": 13
             }
           },
@@ -59679,11 +59681,11 @@
           "description": "Function that provides items lazily. Receives arguments `params`, `callback`:\n\n`params.page` Requested page index\n\n`params.pageSize` Current page size\n\n`params.filters` Currently applied filters\n\n`params.sortOrders` Currently applied sorting orders\n\n`params.parentItem` When expandable table is used, and sublevel items\nare requested, reference to parent item of the requested sublevel.\nOtherwise `undefined`.\n\n`callback(items, size)` Callback function with arguments:\n  - `items` Current page of items\n  - `size` Total number of items.\n\n`<px-data-grid>` calls this function lazily, only when it needs more data\nto be displayed.\n\n__Also, note that when using function data providers, the total number of items\nneeds to be set manually. The total number of items can be returned\nin the second argument of the data provider callback:__\n\n```javascript\npxDataGrid.dataProvider = function(params, callback) {\n  var url = 'https://api.example/data' +\n      '?page=' + params.page +        // the requested page index\n      '&per_page=' + params.pageSize; // number of items on the page\n  var xhr = new XMLHttpRequest();\n  xhr.onload = function() {\n    var response = JSON.parse(xhr.responseText);\n    callback(\n      response.employees, // requested page of items\n      response.totalSize  // total number of items\n    );\n  };\n  xhr.open('GET', url, true);\n  xhr.send();\n};\n```\n\n__Alternatively, you can use the `size` property to set the total number of items:__\n\n```javascript\npxDataGrid.size = 200; // The total number of items\npxDataGrid.dataProvider = function(params, callback) {\n  var url = 'https://api.example/data' +\n      '?page=' + params.page +        // the requested page index\n      '&per_page=' + params.pageSize; // number of items on the page\n  var xhr = new XMLHttpRequest();\n  xhr.onload = function() {\n    var response = JSON.parse(xhr.responseText);\n    callback(response.employees);\n  };\n  xhr.open('GET', url, true);\n  xhr.send();\n};\n```",
           "sourceRange": {
             "start": {
-              "line": 972,
+              "line": 976,
               "column": 12
             },
             "end": {
-              "line": 975,
+              "line": 979,
               "column": 13
             }
           },
@@ -59695,11 +59697,11 @@
           "description": "Set to add a background color to every other row in the grid.\nCan make it easier for users to scan across long rows. Striping\nis disabled in group-by-column mode.",
           "sourceRange": {
             "start": {
-              "line": 995,
+              "line": 999,
               "column": 12
             },
             "end": {
-              "line": 998,
+              "line": 1002,
               "column": 13
             }
           },
@@ -59711,11 +59713,11 @@
           "description": "Set to show an ellipsis and truncate text for columns where the\ntext doesn't fit in the column.\n\nDo not enable wrap mode while ellipsis mode is enabled.",
           "sourceRange": {
             "start": {
-              "line": 1006,
+              "line": 1010,
               "column": 12
             },
             "end": {
-              "line": 1010,
+              "line": 1014,
               "column": 13
             }
           },
@@ -59727,11 +59729,11 @@
           "description": "Number of milliseconds to wait before showing the loading spinner\nwhen requesting new data from the `remoteDataProvider`.",
           "sourceRange": {
             "start": {
-              "line": 1030,
+              "line": 1034,
               "column": 12
             },
             "end": {
-              "line": 1033,
+              "line": 1037,
               "column": 13
             }
           },
@@ -59743,11 +59745,11 @@
           "description": "Set to `true` to enable simple filtering. When enabled, a search\nbox will be shown at the top of the grid. The user can type\nin the search box to hide rows that don't include the stringified\nvalue they're looking for. The grid will search all columns and\ntreat all column types as strings for matching purposes.\n\nSee `filterable` property for a more advanced filter option.",
           "sourceRange": {
             "start": {
-              "line": 1044,
+              "line": 1048,
               "column": 12
             },
             "end": {
-              "line": 1047,
+              "line": 1051,
               "column": 13
             }
           },
@@ -59759,11 +59761,11 @@
           "description": "List of rules used to highligh specific columns, rows, or cells.\n\nPass an array of objects. Each object should have the following\nproperties:\n\n  * `{string} type` - If the highlight condition returns `true`,\n    the type determines what the grid will highlight. Set to\n    `'cell'` to highlight only the cell that passed the highlight\n    rule, `'row'` to highlight the row that holds the matching\n    cell, or `'column'` to highlight the column that holds the\n    matching cell.\n  * `{Function} condition` - Function that will be called by the\n    grid for each cell. If the function returns `true`, the\n    highlight rule will be triggered. If the function returns a\n    falsey value, the highlight rule will not be used. The function\n    will be passed three arguments: `cellContent` containing\n    the text of the cell, `column` containing a reference to the\n    `columns` object for the cell's column, and `item` as a reference\n    to the `tableData` item used to create the cell's row.\n  * `{string} color` - A valid CSS color (e.g. hex code or color\n    name). If the highlight condition returns `true`, the color\n    will be used to set the background color of the matching\n    cell, column, or row.\n\nExample highlight rules:\n\n```javascript\n[\n  {\n    type: 'cell',\n    condition: (cellContent, column, item) => { return cellContent == 'John Doe' },\n  },\n  {\n    type: 'row',\n    condition: (cellContent, item) => { return cellContent[0] == 'a' },\n    color: '#a8a8a8'\n  },\n  {\n    type: 'column',\n    condition (column, item) => { return column.name == 'age' },\n    color: 'pink'\n  }\n]\n```",
           "sourceRange": {
             "start": {
-              "line": 1095,
+              "line": 1099,
               "column": 12
             },
             "end": {
-              "line": 1098,
+              "line": 1102,
               "column": 13
             }
           },
@@ -59775,11 +59777,11 @@
           "description": "Default width for columns. Defaults to `100px` if undefined.\n\nColumn sizes should also be configured using the\n`defaultColumnFlexGrow` and `columns.flexGrow` properties to\nchange how each column sizes itself relative to other columns in\nthe grid.\n\nWhen column flex-grow properties are set to non-zero values,\nthis size behaves as a minimum width for the column.",
           "sourceRange": {
             "start": {
-              "line": 1127,
+              "line": 1131,
               "column": 12
             },
             "end": {
-              "line": 1130,
+              "line": 1134,
               "column": 13
             }
           },
@@ -59791,11 +59793,11 @@
           "description": "Default flex-grow value for columns if none is defined in\n`columns.flexGrow`. Equivalent to the CSS flex-grow property.",
           "sourceRange": {
             "start": {
-              "line": 1136,
+              "line": 1140,
               "column": 12
             },
             "end": {
-              "line": 1139,
+              "line": 1143,
               "column": 13
             }
           },
@@ -59807,11 +59809,11 @@
           "description": "Defines the height of grid.\n\n  * Set to `'auto'` if the grid should grow to fit all of its rows\n  * Set to `'default'` or undefined to use the default height\n  * Set to any other valid CSS height valid (e.g. `400px`) to\n    define a static height for the grid area inside the\n    px-data-grid. This height will not include the table action\n    menu and other elements of the grid.\n\nSee the `flexToSize` property for a different strategy that sizes\nthe grid based on its parent element's height.",
           "sourceRange": {
             "start": {
-              "line": 1164,
+              "line": 1168,
               "column": 12
             },
             "end": {
-              "line": 1168,
+              "line": 1172,
               "column": 13
             }
           },
@@ -59823,11 +59825,11 @@
           "description": "Set to `true` to instruct the grid to fill its parent element's\nheight and width using flexbox. When enabled the px-data-grid\nelement will fill 100% of the available height of its parent.\nTo constrain the grid's height, set the CSS variable\n`--px-data-grid-height` to a different value.",
           "sourceRange": {
             "start": {
-              "line": 1177,
+              "line": 1181,
               "column": 12
             },
             "end": {
-              "line": 1181,
+              "line": 1185,
               "column": 13
             }
           },
@@ -59839,11 +59841,11 @@
           "description": "Path to a `tableData` item sub-property that serves as a unique\nidentifier for the item. Should be defined if the grid allows\nuser editing so the grid can pair new versions of each item\nwith the original data.\n\nPath must be unique for each item, must exist for every item,\nand should not be changed or be user editable.",
           "sourceRange": {
             "start": {
-              "line": 1192,
+              "line": 1196,
               "column": 12
             },
             "end": {
-              "line": 1194,
+              "line": 1198,
               "column": 13
             }
           },
@@ -59855,11 +59857,11 @@
           "description": "Set to allow users to save filters created in the advanced filter\ndialog. If enabled, the grid will fire `save-filters` events when\nthe user taps the save filter button.",
           "sourceRange": {
             "start": {
-              "line": 1201,
+              "line": 1205,
               "column": 12
             },
             "end": {
-              "line": 1204,
+              "line": 1208,
               "column": 13
             }
           },
@@ -59871,11 +59873,11 @@
           "description": "Set to `true` to allow the user to sort by selected items.\nWhen enabled the user can click on the selected item count\nat the top left of the grid to sort by selection.",
           "sourceRange": {
             "start": {
-              "line": 1211,
+              "line": 1215,
               "column": 12
             },
             "end": {
-              "line": 1214,
+              "line": 1218,
               "column": 13
             }
           },
@@ -59887,11 +59889,11 @@
           "description": "Set to `true` to instantly re-sort all rows when any changes\nare made in multi-selection and sort-by-selection modes.",
           "sourceRange": {
             "start": {
-              "line": 1220,
+              "line": 1224,
               "column": 12
             },
             "end": {
-              "line": 1223,
+              "line": 1227,
               "column": 13
             }
           },
@@ -59903,11 +59905,11 @@
           "description": "Set to `true` to render the advanced filtering UI modal in space\nsaving mode (e.g. with reuseable headers).",
           "sourceRange": {
             "start": {
-              "line": 1229,
+              "line": 1233,
               "column": 12
             },
             "end": {
-              "line": 1232,
+              "line": 1236,
               "column": 13
             }
           },
@@ -59919,11 +59921,11 @@
           "description": "Comparison options shown in the advanced filtering UI for columns\nof type `string`. Valid options are:\n\n  * `'equals'`\n  * `'not_equal'`\n  * `'contains'`\n  * `'not_contains'`\n  * `'starts_with'`\n  * `'ends_with'`\n  * `'wildcard'`\n\nIf this array is undefined or empty, all options will be shown.",
           "sourceRange": {
             "start": {
-              "line": 1248,
+              "line": 1252,
               "column": 12
             },
             "end": {
-              "line": 1250,
+              "line": 1254,
               "column": 13
             }
           },
@@ -59935,11 +59937,11 @@
           "description": "Comparison options shown in the advanced filtering UI for columns\nof type `number`. Valid options are:\n\n  * `'less_than'`\n  * `'equals'`\n  * `'not_equal'`\n  * `'equal_or_greater_than'`\n  * `'equal_or_less_than'`\n  * `'greater_than'`\n\nIf this array is undefined or empty, all options will be shown.",
           "sourceRange": {
             "start": {
-              "line": 1265,
+              "line": 1269,
               "column": 12
             },
             "end": {
-              "line": 1267,
+              "line": 1271,
               "column": 13
             }
           },

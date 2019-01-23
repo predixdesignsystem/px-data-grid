@@ -1,3 +1,9 @@
+v1.2.1
+==========================
+Bug fixes:
+* Fixed regression in dropdown widths on filter modal
+* Fixed default `dateFormat` configuration not being applied when no `format` or `timezone` properties are set
+
 v1.2.0
 ==========================
 Enhancement:
