@@ -26,18 +26,22 @@ limitations under the License.
     <style include="px-data-grid-navigation-styles"></style>
 
     <!-- page size select -->
-    <div class="page-size-select">
-      [[localize('Rows per page')]]
-      <px-dropdown
-        allow-outside-scroll
-        display-value="[[_numToStr(pageSize)]]"
-        items="[[_numArrayToStrArray(selectablePageSizes)]]"
-        on-selected-changed="_pageSizeChange"
-        button-style="bare--primary"
-        disable-truncate
-        disable-clear>
-      </px-dropdown>
-    </div>
+    <dom-if if="[[!hidePageSizeSelect]]">
+      <template>
+        <div class="page-size-select">
+          [[localize('Rows per page')]]
+          <px-dropdown
+            allow-outside-scroll
+            display-value="[[_numToStr(pageSize)]]"
+            items="[[_numArrayToStrArray(selectablePageSizes)]]"
+            on-selected-changed="_pageSizeChange"
+            button-style="bare--primary"
+            disable-truncate
+            disable-clear>
+          </px-dropdown>
+        </div>
+      </template>
+    </dom-if>
 
     <dom-if if="[[!hidePageList]]">
       <template>
@@ -174,6 +178,14 @@ limitations under the License.
             _pageListMaxCount: {
               type: Number,
               value: 9
+            },
+
+            /**
+             * If true, the page size select drop-down is not shown.
+             */
+            hidePageSizeSelect: {
+              type: Boolean,
+              value: false
             }
 
           };

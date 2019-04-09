@@ -72,6 +72,10 @@ document.addEventListener('WebComponentsReady', () => {
       return parseInt(navigation.shadowRoot.querySelector('.page-number.selected').innerText);
     }
 
+    function getPageSizeSelector() {
+      return navigation.shadowRoot.querySelector('.page-size-select');
+    }
+
     it('should display proper page size', (done) => {
       // check init page size
       expect(navigation.pageSize).to.be.eql(getSelectedPageSize());
@@ -79,6 +83,7 @@ document.addEventListener('WebComponentsReady', () => {
       navigation.pageSize = 20;
       Polymer.flush();
       expect(navigation.pageSize).to.be.eql(getSelectedPageSize());
+      expect(getPageSizeSelector()).to.be.visible;
       done();
     });
 
@@ -89,8 +94,11 @@ document.addEventListener('WebComponentsReady', () => {
       const pageSizes2 = [100, 200, 300];
       navigation.selectablePageSizes = pageSizes2;
       Polymer.flush();
-      setTimeout(() => expect(getAvailablePageSizes()).to.be.eql(pageSizes2));
-      done();
+      setTimeout(() => {
+        expect(getAvailablePageSizes()).to.be.eql(pageSizes2);
+        expect(getPageSizeSelector()).to.be.visible;
+        done();
+      });
     });
 
     it('should display proper row ranges', (done) => {

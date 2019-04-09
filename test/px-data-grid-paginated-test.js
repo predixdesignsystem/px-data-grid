@@ -21,7 +21,8 @@ document.addEventListener('WebComponentsReady', () => {
 
     let
       grid,
-      navigation;
+      navigation,
+      pageSizeSelector;
 
     const
       defaultPageSize = 10,
@@ -32,6 +33,7 @@ document.addEventListener('WebComponentsReady', () => {
       grid = fixture('px-data-grid-paginated-fixture');
       grid.tableData = largeTableData;
       navigation = grid.shadowRoot.querySelector('px-data-grid-navigation');
+      pageSizeSelector = navigation.shadowRoot.querySelector('.page-size-select');
 
       Polymer.RenderStatus.afterNextRender(grid, () => {
         setTimeout(() => { // IE11
@@ -46,6 +48,7 @@ document.addEventListener('WebComponentsReady', () => {
       grid.tableData = tableData;
       Polymer.flush();
       expect(getVisibleRows(grid._pxDataGrid).length).to.be.eql(5);
+      expect(pageSizeSelector).to.be.visible;
       done();
     });
 
@@ -54,18 +57,22 @@ document.addEventListener('WebComponentsReady', () => {
       grid.pageSize = 2;
       Polymer.flush();
       expect(getVisibleRows(grid._pxDataGrid).length).to.be.eql(2);
+      expect(pageSizeSelector).to.be.visible;
       // page size 4
       grid.pageSize = 4;
       Polymer.flush();
       expect(getVisibleRows(grid._pxDataGrid).length).to.be.eql(4);
+      expect(pageSizeSelector).to.be.visible;
       // page size 0
       grid.pageSize = 0;
       Polymer.flush();
       expect(getVisibleRows(grid._pxDataGrid).length).to.be.eql(defaultPageSize);
+      expect(pageSizeSelector).to.be.visible;
       // page size -10
       grid.pageSize = -10;
       Polymer.flush();
       expect(getVisibleRows(grid._pxDataGrid).length).to.be.eql(defaultPageSize);
+      expect(pageSizeSelector).to.be.visible;
       done();
     });
 
@@ -131,6 +138,25 @@ document.addEventListener('WebComponentsReady', () => {
       }
     });
 
+    it('should hide page size selector if auto-hide enabled and not enough rows for multiple pages', (done) => {
+      grid.tableData = tableData; // 5 rows
+      grid.autoHidePageSizeSelect = true;
+      const pageSizes = [5, 10, 20];
+      grid.selectablePageSizes = pageSizes;
+      Polymer.flush();
+      expect(pageSizeSelector).to.not.be.visible;
+      done();
+    });
+
+    it('should display page size selector if auto-hide enabled but multiple pages needed', (done) => {
+      grid.tableData = tableData; // 5 rows
+      grid.autoHidePageSizeSelect = true;
+      const pageSizes = [2, 4, 8];
+      grid.selectablePageSizes = pageSizes;
+      Polymer.flush();
+      expect(pageSizeSelector).to.be.visible;
+      done();
+    });
   });
 
 });

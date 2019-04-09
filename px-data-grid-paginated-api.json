@@ -64402,6 +64402,28 @@
           "defaultValue": "false"
         },
         {
+          "name": "autoHidePageSizeSelect",
+          "type": "boolean | null | undefined",
+          "description": "Set to automatically hide the page size select when there is only\n1 page available and it's smaller or equal to the smallest of the selectable page sizes.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 123,
+              "column": 12
+            },
+            "end": {
+              "line": 126,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
           "name": "tableData",
           "type": "Array | null | undefined",
           "description": "Data for the table to display.\n\nPass an array of objects. Each object will be rendered as a row\nin the grid. The objects should share many of the same keys.\nEach key will be used to group data into columns.\n\nUse the `columns` property to control which keys are displayed\nto the user and which are not, and to control how the grid\nhandles the data for each column. By default if no `columns` are\ndefined the grid will automatically create columns from all of\nthe keys found in the first object.\n\nExample data:\n\n```\n[\n  {\n    first: 'Elizabeth',\n    last: 'Wong',\n    email: 'sika@iknulber.cl'\n  },\n  {\n    first: 'Jeffrey',\n    last: 'Hamilton',\n    email: 'cofok@rac.be'\n  },\n  {\n    first: 'Alma',\n    last: 'Martin',\n    email: 'dotta@behtam.la'\n  }\n]\n```",

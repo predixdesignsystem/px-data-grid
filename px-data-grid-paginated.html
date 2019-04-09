@@ -74,6 +74,7 @@ limitations under the License.
       current-page="[[page]]"
       number-of-pages="[[_calcNumPages(size, pageSize)]]"
       hide-page-list="[[_hidePageList(autoHidePageList, size, pageSize)]]"
+      hide-page-size-select="[[_hidePageSizeSelect(autoHidePageSizeSelect, size, selectablePageSizes)]]"
       language="[[language]]"
       resources="[[resources]]">
     </px-data-grid-navigation>
@@ -125,6 +126,16 @@ limitations under the License.
               type: Boolean,
               value: false
             },
+
+            /**
+             * Set to automatically hide the page size select when there is only
+             * 1 page available and it's smaller or equal to the smallest of the selectable page sizes.
+             */
+            autoHidePageSizeSelect: {
+              type: Boolean,
+              value: false
+            },
+
 
             // PROPERTIES SHARED WITH PX-DATA-GRID
 
@@ -1204,6 +1215,11 @@ limitations under the License.
 
         _hidePageList(autoHidePageList, size, pageSize) {
           return autoHidePageList && this._calcNumPages(size, pageSize) === 1;
+        }
+
+        _hidePageSizeSelect(autoHidePageSizeSelect, size, selectablePageSizes) {
+          return autoHidePageSizeSelect &&
+            this._calcNumPages(size, Math.min.apply(null, selectablePageSizes)) === 1;
         }
 
         /**
