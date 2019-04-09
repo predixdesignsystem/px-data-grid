@@ -1,3 +1,8 @@
+v1.3.0
+==========================
+Enhancement:
+* Added `auto-hide-page-size-select` property to automatically hide the page size selector when only one page is visible (#821, @ipechorin)
+
 v1.2.1
 ==========================
 Bug fixes:

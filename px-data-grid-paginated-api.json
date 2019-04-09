@@ -8,11 +8,11 @@
       "sourceRange": {
         "file": "px-data-grid-paginated.html",
         "start": {
-          "line": 1234,
+          "line": 1250,
           "column": 6
         },
         "end": {
-          "line": 1234,
+          "line": 1250,
           "column": 42
         }
       },
@@ -54719,11 +54719,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 121,
+                  "line": 125,
                   "column": 12
                 },
                 "end": {
-                  "line": 128,
+                  "line": 132,
                   "column": 13
                 }
               },
@@ -54741,11 +54741,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 133,
+                  "line": 137,
                   "column": 12
                 },
                 "end": {
-                  "line": 136,
+                  "line": 140,
                   "column": 13
                 }
               },
@@ -54763,11 +54763,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 141,
+                  "line": 145,
                   "column": 12
                 },
                 "end": {
-                  "line": 144,
+                  "line": 148,
                   "column": 13
                 }
               },
@@ -54785,11 +54785,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 149,
+                  "line": 153,
                   "column": 12
                 },
                 "end": {
-                  "line": 152,
+                  "line": 156,
                   "column": 13
                 }
               },
@@ -54807,11 +54807,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 157,
+                  "line": 161,
                   "column": 12
                 },
                 "end": {
-                  "line": 160,
+                  "line": 164,
                   "column": 13
                 }
               },
@@ -54829,11 +54829,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 165,
+                  "line": 169,
                   "column": 12
                 },
                 "end": {
-                  "line": 168,
+                  "line": 172,
                   "column": 13
                 }
               },
@@ -54851,11 +54851,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 173,
+                  "line": 177,
                   "column": 12
                 },
                 "end": {
-                  "line": 176,
+                  "line": 180,
                   "column": 13
                 }
               },
@@ -54865,6 +54865,28 @@
                 }
               },
               "defaultValue": "9"
+            },
+            {
+              "name": "hidePageSizeSelect",
+              "type": "boolean | null | undefined",
+              "description": "If true, the page size select drop-down is not shown.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 185,
+                  "column": 12
+                },
+                "end": {
+                  "line": 188,
+                  "column": 13
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "attributeType": "Boolean"
+                }
+              },
+              "defaultValue": "false"
             }
           ],
           "methods": [
@@ -57090,11 +57112,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 184,
+                  "line": 196,
                   "column": 8
                 },
                 "end": {
-                  "line": 196,
+                  "line": 208,
                   "column": 9
                 }
               },
@@ -57114,11 +57136,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 201,
+                  "line": 213,
                   "column": 8
                 },
                 "end": {
-                  "line": 209,
+                  "line": 221,
                   "column": 9
                 }
               },
@@ -57138,11 +57160,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 211,
+                  "line": 223,
                   "column": 8
                 },
                 "end": {
-                  "line": 219,
+                  "line": 231,
                   "column": 9
                 }
               },
@@ -57162,11 +57184,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 221,
+                  "line": 233,
                   "column": 8
                 },
                 "end": {
-                  "line": 229,
+                  "line": 241,
                   "column": 9
                 }
               },
@@ -57186,11 +57208,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 235,
+                  "line": 247,
                   "column": 8
                 },
                 "end": {
-                  "line": 240,
+                  "line": 252,
                   "column": 9
                 }
               },
@@ -57210,11 +57232,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 245,
+                  "line": 257,
                   "column": 8
                 },
                 "end": {
-                  "line": 249,
+                  "line": 261,
                   "column": 9
                 }
               },
@@ -57231,11 +57253,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 254,
+                  "line": 266,
                   "column": 8
                 },
                 "end": {
-                  "line": 256,
+                  "line": 268,
                   "column": 9
                 }
               },
@@ -57252,11 +57274,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 262,
+                  "line": 274,
                   "column": 8
                 },
                 "end": {
-                  "line": 270,
+                  "line": 282,
                   "column": 9
                 }
               },
@@ -57279,11 +57301,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 272,
+                  "line": 284,
                   "column": 8
                 },
                 "end": {
-                  "line": 274,
+                  "line": 286,
                   "column": 9
                 }
               },
@@ -57300,11 +57322,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 279,
+                  "line": 291,
                   "column": 8
                 },
                 "end": {
-                  "line": 319,
+                  "line": 331,
                   "column": 9
                 }
               },
@@ -57317,11 +57339,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 324,
+                  "line": 336,
                   "column": 8
                 },
                 "end": {
-                  "line": 326,
+                  "line": 338,
                   "column": 9
                 }
               },
@@ -57338,11 +57360,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 328,
+                  "line": 340,
                   "column": 8
                 },
                 "end": {
-                  "line": 330,
+                  "line": 342,
                   "column": 9
                 }
               },
@@ -57359,11 +57381,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 332,
+                  "line": 344,
                   "column": 8
                 },
                 "end": {
-                  "line": 334,
+                  "line": 346,
                   "column": 9
                 }
               },
@@ -58336,11 +58358,11 @@
           "metadata": {},
           "sourceRange": {
             "start": {
-              "line": 110,
+              "line": 114,
               "column": 6
             },
             "end": {
-              "line": 336,
+              "line": 348,
               "column": 7
             }
           },
@@ -58353,11 +58375,11 @@
               "description": "Values selectable by user that dicatate how many items to show per page.",
               "sourceRange": {
                 "start": {
-                  "line": 121,
+                  "line": 125,
                   "column": 12
                 },
                 "end": {
-                  "line": 128,
+                  "line": 132,
                   "column": 13
                 }
               },
@@ -58369,11 +58391,11 @@
               "description": "Current number of items/rows per page.",
               "sourceRange": {
                 "start": {
-                  "line": 133,
+                  "line": 137,
                   "column": 12
                 },
                 "end": {
-                  "line": 136,
+                  "line": 140,
                   "column": 13
                 }
               },
@@ -58385,11 +58407,11 @@
               "description": "Currently displayed page number.",
               "sourceRange": {
                 "start": {
-                  "line": 141,
+                  "line": 145,
                   "column": 12
                 },
                 "end": {
-                  "line": 144,
+                  "line": 148,
                   "column": 13
                 }
               },
@@ -58401,11 +58423,11 @@
               "description": "Total number of pages.",
               "sourceRange": {
                 "start": {
-                  "line": 149,
+                  "line": 153,
                   "column": 12
                 },
                 "end": {
-                  "line": 152,
+                  "line": 156,
                   "column": 13
                 }
               },
@@ -58417,11 +58439,11 @@
               "description": "Total number of items in table.",
               "sourceRange": {
                 "start": {
-                  "line": 157,
+                  "line": 161,
                   "column": 12
                 },
                 "end": {
-                  "line": 160,
+                  "line": 164,
                   "column": 13
                 }
               },
@@ -58433,11 +58455,27 @@
               "description": "If true, the page numbers list is not shown.",
               "sourceRange": {
                 "start": {
-                  "line": 165,
+                  "line": 169,
                   "column": 12
                 },
                 "end": {
-                  "line": 168,
+                  "line": 172,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "type": "boolean | null | undefined"
+            },
+            {
+              "name": "hide-page-size-select",
+              "description": "If true, the page size select drop-down is not shown.",
+              "sourceRange": {
+                "start": {
+                  "line": 185,
+                  "column": 12
+                },
+                "end": {
+                  "line": 188,
                   "column": 13
                 }
               },
@@ -64341,11 +64379,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 105,
+              "line": 106,
               "column": 12
             },
             "end": {
-              "line": 108,
+              "line": 109,
               "column": 13
             }
           },
@@ -64363,11 +64401,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 113,
+              "line": 114,
               "column": 12
             },
             "end": {
-              "line": 117,
+              "line": 118,
               "column": 13
             }
           },
@@ -64386,11 +64424,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 123,
+              "line": 124,
               "column": 12
             },
             "end": {
-              "line": 126,
+              "line": 127,
               "column": 13
             }
           },
@@ -64408,11 +64446,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 123,
+              "line": 133,
               "column": 12
             },
             "end": {
-              "line": 126,
+              "line": 136,
               "column": 13
             }
           },
@@ -64430,11 +64468,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 165,
+              "line": 176,
               "column": 12
             },
             "end": {
-              "line": 168,
+              "line": 179,
               "column": 13
             }
           },
@@ -64452,11 +64490,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 179,
+              "line": 190,
               "column": 12
             },
             "end": {
-              "line": 182,
+              "line": 193,
               "column": 13
             }
           },
@@ -64474,11 +64512,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 192,
+              "line": 203,
               "column": 12
             },
             "end": {
-              "line": 196,
+              "line": 207,
               "column": 13
             }
           },
@@ -64497,11 +64535,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 202,
+              "line": 213,
               "column": 12
             },
             "end": {
-              "line": 206,
+              "line": 217,
               "column": 13
             }
           },
@@ -64519,11 +64557,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 216,
+              "line": 227,
               "column": 12
             },
             "end": {
-              "line": 220,
+              "line": 231,
               "column": 13
             }
           },
@@ -64542,11 +64580,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 225,
+              "line": 236,
               "column": 12
             },
             "end": {
-              "line": 228,
+              "line": 239,
               "column": 13
             }
           },
@@ -64564,11 +64602,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 237,
+              "line": 248,
               "column": 12
             },
             "end": {
-              "line": 240,
+              "line": 251,
               "column": 13
             }
           },
@@ -64586,11 +64624,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 247,
+              "line": 258,
               "column": 12
             },
             "end": {
-              "line": 251,
+              "line": 262,
               "column": 13
             }
           },
@@ -64609,11 +64647,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 256,
+              "line": 267,
               "column": 12
             },
             "end": {
-              "line": 259,
+              "line": 270,
               "column": 13
             }
           },
@@ -64631,11 +64669,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 274,
+              "line": 285,
               "column": 12
             },
             "end": {
-              "line": 277,
+              "line": 288,
               "column": 13
             }
           },
@@ -64653,11 +64691,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 284,
+              "line": 295,
               "column": 12
             },
             "end": {
-              "line": 287,
+              "line": 298,
               "column": 13
             }
           },
@@ -64675,11 +64713,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 304,
+              "line": 315,
               "column": 12
             },
             "end": {
-              "line": 307,
+              "line": 318,
               "column": 13
             }
           },
@@ -64697,11 +64735,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 312,
+              "line": 323,
               "column": 12
             },
             "end": {
-              "line": 315,
+              "line": 326,
               "column": 13
             }
           },
@@ -64719,11 +64757,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 324,
+              "line": 335,
               "column": 12
             },
             "end": {
-              "line": 327,
+              "line": 338,
               "column": 13
             }
           },
@@ -64741,11 +64779,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 585,
+              "line": 596,
               "column": 12
             },
             "end": {
-              "line": 587,
+              "line": 598,
               "column": 13
             }
           },
@@ -64762,11 +64800,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 596,
+              "line": 607,
               "column": 12
             },
             "end": {
-              "line": 599,
+              "line": 610,
               "column": 13
             }
           },
@@ -64784,11 +64822,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 605,
+              "line": 616,
               "column": 12
             },
             "end": {
-              "line": 608,
+              "line": 619,
               "column": 13
             }
           },
@@ -64806,11 +64844,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 614,
+              "line": 625,
               "column": 12
             },
             "end": {
-              "line": 632,
+              "line": 643,
               "column": 13
             }
           },
@@ -64828,11 +64866,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 665,
+              "line": 676,
               "column": 12
             },
             "end": {
-              "line": 667,
+              "line": 678,
               "column": 13
             }
           },
@@ -64849,11 +64887,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 673,
+              "line": 684,
               "column": 12
             },
             "end": {
-              "line": 676,
+              "line": 687,
               "column": 13
             }
           },
@@ -64871,11 +64909,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 710,
+              "line": 721,
               "column": 12
             },
             "end": {
-              "line": 712,
+              "line": 723,
               "column": 13
             }
           },
@@ -64892,11 +64930,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 776,
+              "line": 787,
               "column": 12
             },
             "end": {
-              "line": 779,
+              "line": 790,
               "column": 13
             }
           },
@@ -64914,11 +64952,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 781,
+              "line": 792,
               "column": 12
             },
             "end": {
-              "line": 783,
+              "line": 794,
               "column": 13
             }
           },
@@ -64932,28 +64970,6 @@
           "name": "striped",
           "type": "boolean | null | undefined",
           "description": "Set to add a background color to every other row in the grid.\nCan make it easier for users to scan across long rows. Striping\nis disabled in group-by-column mode.",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 790,
-              "column": 12
-            },
-            "end": {
-              "line": 793,
-              "column": 13
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "attributeType": "Boolean"
-            }
-          },
-          "defaultValue": "false"
-        },
-        {
-          "name": "ellipsis",
-          "type": "boolean | null | undefined",
-          "description": "Set to show an ellipsis and truncate text for columns where the\ntext doesn't fit in the column.\n\nDo not enable wrap mode while ellipsis mode is enabled.",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -64973,17 +64989,39 @@
           "defaultValue": "false"
         },
         {
+          "name": "ellipsis",
+          "type": "boolean | null | undefined",
+          "description": "Set to show an ellipsis and truncate text for columns where the\ntext doesn't fit in the column.\n\nDo not enable wrap mode while ellipsis mode is enabled.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 812,
+              "column": 12
+            },
+            "end": {
+              "line": 815,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
           "name": "loadingSpinnerDebounce",
           "type": "number | null | undefined",
           "description": "Number of milliseconds to wait before showing the loading spinner\nwhen requesting new data from the `remoteDataProvider`.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 810,
+              "line": 821,
               "column": 12
             },
             "end": {
-              "line": 813,
+              "line": 824,
               "column": 13
             }
           },
@@ -65001,11 +65039,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 824,
+              "line": 835,
               "column": 12
             },
             "end": {
-              "line": 827,
+              "line": 838,
               "column": 13
             }
           },
@@ -65023,11 +65061,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 875,
+              "line": 886,
               "column": 12
             },
             "end": {
-              "line": 877,
+              "line": 888,
               "column": 13
             }
           },
@@ -65044,11 +65082,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 883,
+              "line": 894,
               "column": 12
             },
             "end": {
-              "line": 885,
+              "line": 896,
               "column": 13
             }
           },
@@ -65065,11 +65103,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 898,
+              "line": 909,
               "column": 12
             },
             "end": {
-              "line": 900,
+              "line": 911,
               "column": 13
             }
           },
@@ -65086,11 +65124,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 906,
+              "line": 917,
               "column": 12
             },
             "end": {
-              "line": 908,
+              "line": 919,
               "column": 13
             }
           },
@@ -65107,11 +65145,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 923,
+              "line": 934,
               "column": 12
             },
             "end": {
-              "line": 926,
+              "line": 937,
               "column": 13
             }
           },
@@ -65129,11 +65167,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 937,
+              "line": 948,
               "column": 12
             },
             "end": {
-              "line": 939,
+              "line": 950,
               "column": 13
             }
           },
@@ -65150,11 +65188,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 946,
+              "line": 957,
               "column": 12
             },
             "end": {
-              "line": 948,
+              "line": 959,
               "column": 13
             }
           },
@@ -65171,11 +65209,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 962,
+              "line": 973,
               "column": 12
             },
             "end": {
-              "line": 965,
+              "line": 976,
               "column": 13
             }
           },
@@ -65193,11 +65231,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 979,
+              "line": 990,
               "column": 12
             },
             "end": {
-              "line": 981,
+              "line": 992,
               "column": 13
             }
           },
@@ -65214,11 +65252,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 996,
+              "line": 1007,
               "column": 12
             },
             "end": {
-              "line": 998,
+              "line": 1009,
               "column": 13
             }
           },
@@ -65236,11 +65274,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1008,
+              "line": 1019,
               "column": 8
             },
             "end": {
-              "line": 1011,
+              "line": 1022,
               "column": 9
             }
           },
@@ -65256,11 +65294,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1013,
+              "line": 1024,
               "column": 8
             },
             "end": {
-              "line": 1018,
+              "line": 1029,
               "column": 9
             }
           },
@@ -65273,11 +65311,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1020,
+              "line": 1031,
               "column": 8
             },
             "end": {
-              "line": 1033,
+              "line": 1044,
               "column": 9
             }
           },
@@ -65303,11 +65341,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1035,
+              "line": 1046,
               "column": 8
             },
             "end": {
-              "line": 1038,
+              "line": 1049,
               "column": 9
             }
           },
@@ -65327,11 +65365,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1044,
+              "line": 1055,
               "column": 8
             },
             "end": {
-              "line": 1065,
+              "line": 1076,
               "column": 9
             }
           },
@@ -65348,11 +65386,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1067,
+              "line": 1078,
               "column": 8
             },
             "end": {
-              "line": 1074,
+              "line": 1085,
               "column": 9
             }
           },
@@ -65375,11 +65413,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1076,
+              "line": 1087,
               "column": 8
             },
             "end": {
-              "line": 1120,
+              "line": 1131,
               "column": 9
             }
           },
@@ -65399,11 +65437,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1125,
+              "line": 1136,
               "column": 8
             },
             "end": {
-              "line": 1135,
+              "line": 1146,
               "column": 9
             }
           },
@@ -65416,11 +65454,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1140,
+              "line": 1151,
               "column": 8
             },
             "end": {
-              "line": 1149,
+              "line": 1160,
               "column": 9
             }
           },
@@ -65440,11 +65478,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1151,
+              "line": 1162,
               "column": 8
             },
             "end": {
-              "line": 1155,
+              "line": 1166,
               "column": 9
             }
           },
@@ -65464,11 +65502,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1157,
+              "line": 1168,
               "column": 8
             },
             "end": {
-              "line": 1160,
+              "line": 1171,
               "column": 9
             }
           },
@@ -65488,11 +65526,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1165,
+              "line": 1176,
               "column": 8
             },
             "end": {
-              "line": 1170,
+              "line": 1181,
               "column": 9
             }
           },
@@ -65508,11 +65546,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1177,
+              "line": 1188,
               "column": 8
             },
             "end": {
-              "line": 1183,
+              "line": 1194,
               "column": 9
             }
           },
@@ -65528,11 +65566,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1189,
+              "line": 1200,
               "column": 8
             },
             "end": {
-              "line": 1191,
+              "line": 1202,
               "column": 9
             }
           },
@@ -65548,11 +65586,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1196,
+              "line": 1207,
               "column": 8
             },
             "end": {
-              "line": 1202,
+              "line": 1213,
               "column": 9
             }
           },
@@ -65572,11 +65610,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 1204,
+              "line": 1215,
               "column": 8
             },
             "end": {
-              "line": 1206,
+              "line": 1217,
               "column": 9
             }
           },
@@ -65594,16 +65632,43 @@
           ]
         },
         {
+          "name": "_hidePageSizeSelect",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 1219,
+              "column": 8
+            },
+            "end": {
+              "line": 1222,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "autoHidePageSizeSelect"
+            },
+            {
+              "name": "size"
+            },
+            {
+              "name": "selectablePageSizes"
+            }
+          ]
+        },
+        {
           "name": "getData",
           "description": "Get data current shown on grid",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1211,
+              "line": 1227,
               "column": 8
             },
             "end": {
-              "line": 1213,
+              "line": 1229,
               "column": 9
             }
           },
@@ -65620,11 +65685,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1218,
+              "line": 1234,
               "column": 8
             },
             "end": {
-              "line": 1220,
+              "line": 1236,
               "column": 9
             }
           },
@@ -65637,11 +65702,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 1225,
+              "line": 1241,
               "column": 8
             },
             "end": {
-              "line": 1227,
+              "line": 1243,
               "column": 9
             }
           },
@@ -65658,11 +65723,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 92,
+          "line": 93,
           "column": 6
         },
         "end": {
-          "line": 1228,
+          "line": 1244,
           "column": 7
         }
       },
@@ -65675,11 +65740,11 @@
           "description": "Array of selectable page sizes offered to the user.",
           "sourceRange": {
             "start": {
-              "line": 105,
+              "line": 106,
               "column": 12
             },
             "end": {
-              "line": 108,
+              "line": 109,
               "column": 13
             }
           },
@@ -65691,11 +65756,11 @@
           "description": "Current page number of displayed items. Page 1 should be the minimum value.",
           "sourceRange": {
             "start": {
-              "line": 113,
+              "line": 114,
               "column": 12
             },
             "end": {
-              "line": 117,
+              "line": 118,
               "column": 13
             }
           },
@@ -65707,11 +65772,27 @@
           "description": "Set to automatically hide the page numbers when there is only\n1 page available.",
           "sourceRange": {
             "start": {
-              "line": 123,
+              "line": 124,
               "column": 12
             },
             "end": {
-              "line": 126,
+              "line": 127,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "auto-hide-page-size-select",
+          "description": "Set to automatically hide the page size select when there is only\n1 page available and it's smaller or equal to the smallest of the selectable page sizes.",
+          "sourceRange": {
+            "start": {
+              "line": 133,
+              "column": 12
+            },
+            "end": {
+              "line": 136,
               "column": 13
             }
           },
@@ -65723,11 +65804,11 @@
           "description": "Data for the table to display.\n\nPass an array of objects. Each object will be rendered as a row\nin the grid. The objects should share many of the same keys.\nEach key will be used to group data into columns.\n\nUse the `columns` property to control which keys are displayed\nto the user and which are not, and to control how the grid\nhandles the data for each column. By default if no `columns` are\ndefined the grid will automatically create columns from all of\nthe keys found in the first object.\n\nExample data:\n\n```\n[\n  {\n    first: 'Elizabeth',\n    last: 'Wong',\n    email: 'sika@iknulber.cl'\n  },\n  {\n    first: 'Jeffrey',\n    last: 'Hamilton',\n    email: 'cofok@rac.be'\n  },\n  {\n    first: 'Alma',\n    last: 'Martin',\n    email: 'dotta@behtam.la'\n  }\n]\n```",
           "sourceRange": {
             "start": {
-              "line": 165,
+              "line": 176,
               "column": 12
             },
             "end": {
-              "line": 168,
+              "line": 179,
               "column": 13
             }
           },
@@ -65739,11 +65820,11 @@
           "description": "Set to hide the selection checkbox for each row.\n\nBy default, if the `selectionMode` property is set to `'single'`\nor `'multi'` the grid shows a checkbox/radio button the user\ncan click to select or deselect a row. When this property is\nenabled, the checkbox is hidden and the user can click directly\non row contents to select or deselect a row.",
           "sourceRange": {
             "start": {
-              "line": 179,
+              "line": 190,
               "column": 12
             },
             "end": {
-              "line": 182,
+              "line": 193,
               "column": 13
             }
           },
@@ -65755,11 +65836,11 @@
           "description": "Array of selected items. Automatically updated by the grid when\nthe user selects items. Each item will be a reference to the\n`tableData` item that was passed to render the row.\n\nAdd references to `tableData` items to programmatically select\nitems from your application.",
           "sourceRange": {
             "start": {
-              "line": 192,
+              "line": 203,
               "column": 12
             },
             "end": {
-              "line": 196,
+              "line": 207,
               "column": 13
             }
           },
@@ -65771,11 +65852,11 @@
           "description": "The total number of items",
           "sourceRange": {
             "start": {
-              "line": 202,
+              "line": 213,
               "column": 12
             },
             "end": {
-              "line": 206,
+              "line": 217,
               "column": 13
             }
           },
@@ -65787,11 +65868,11 @@
           "description": "For paginated grid, the number of items visible in a single\npage. Set to a higher number to show more items.\n\n`pageSize` is also used to set the number of items fetched\nduring each request to the `remoteDataProvider` if one is used.\nSee the `remoteDataProvider` property for more information.",
           "sourceRange": {
             "start": {
-              "line": 216,
+              "line": 227,
               "column": 12
             },
             "end": {
-              "line": 220,
+              "line": 231,
               "column": 13
             }
           },
@@ -65803,11 +65884,11 @@
           "description": "When `true`, user can sort by multiple columns",
           "sourceRange": {
             "start": {
-              "line": 225,
+              "line": 236,
               "column": 12
             },
             "end": {
-              "line": 228,
+              "line": 239,
               "column": 13
             }
           },
@@ -65819,11 +65900,11 @@
           "description": "Sets the current selection mode for the grid. Valid modes are:\n\n  * `'none'` - User can't select any rows\n  * `'single'` - User can select one row at a time\n  * `'multi'` - User can select multiple rows at the same time",
           "sourceRange": {
             "start": {
-              "line": 237,
+              "line": 248,
               "column": 12
             },
             "end": {
-              "line": 240,
+              "line": 251,
               "column": 13
             }
           },
@@ -65835,11 +65916,11 @@
           "description": "The item user has last interacted with. Turns to `null` after user deactivates\nthe item by re-interacting with the currently active item.",
           "sourceRange": {
             "start": {
-              "line": 247,
+              "line": 258,
               "column": 12
             },
             "end": {
-              "line": 251,
+              "line": 262,
               "column": 13
             }
           },
@@ -65851,11 +65932,11 @@
           "description": "Set to `true` to allow the user to resize columns.",
           "sourceRange": {
             "start": {
-              "line": 256,
+              "line": 267,
               "column": 12
             },
             "end": {
-              "line": 259,
+              "line": 270,
               "column": 13
             }
           },
@@ -65867,11 +65948,11 @@
           "description": "Set to allow users to edit data in the grid. You must also\nexplicitly set the `columns.editable` property to true for each\ncolumn the user can edit in the grid.\n\nWhen the user starts or stops editing a row the\n`editing-item-changed` event will be fired. `event.detail.item`\nwill contain a reference to the row being edited.\n\nAfter a user finishes editing a row the `item-edited` event\nwill be fired. `event.detail` will contain information about\nwhat the user changed.",
           "sourceRange": {
             "start": {
-              "line": 274,
+              "line": 285,
               "column": 12
             },
             "end": {
-              "line": 277,
+              "line": 288,
               "column": 13
             }
           },
@@ -65883,11 +65964,11 @@
           "description": "Set to `true` to allow the user to re-order columns by dragging\nand dropping them. Can't be combined with some other states like\ngroup-by-value.",
           "sourceRange": {
             "start": {
-              "line": 284,
+              "line": 295,
               "column": 12
             },
             "end": {
-              "line": 287,
+              "line": 298,
               "column": 13
             }
           },
@@ -65899,11 +65980,11 @@
           "description": "An array containing references to the expanded rows.\n\nAutomatically updated by the grid in the following cases:\n\n  * When a `row-details` template is provided to create expandable\n    rows the grid will add rows to this list when they are\n    expanded by the user, and remove rows when they are collapsed\n    by the user.\n  * When the user groups rows by column the grid will add rows\n    that the user expands and remove rows the user collapses.\n\nSet this value to references to rows to expand or collapse\nthe rows programmatically.",
           "sourceRange": {
             "start": {
-              "line": 304,
+              "line": 315,
               "column": 12
             },
             "end": {
-              "line": 307,
+              "line": 318,
               "column": 13
             }
           },
@@ -65915,11 +65996,11 @@
           "description": "If set, will remove the \"Any column\" filter from the Advanced Filter dialog.",
           "sourceRange": {
             "start": {
-              "line": 312,
+              "line": 323,
               "column": 12
             },
             "end": {
-              "line": 315,
+              "line": 326,
               "column": 13
             }
           },
@@ -65931,11 +66012,11 @@
           "description": "Set to hide the action menu button displayed at the top right of\nthe grid.\n\nIf the action menu is hidden, the user will not be able to unhide\nany hidden columns.",
           "sourceRange": {
             "start": {
-              "line": 324,
+              "line": 335,
               "column": 12
             },
             "end": {
-              "line": 327,
+              "line": 338,
               "column": 13
             }
           },
@@ -65947,11 +66028,11 @@
           "description": "Defines the columns the grid should render. If no columns are\npassed, the grid generates columns from the `tableData` passed\nin. Columns are rendered in the same order as the array.\n\n## `column` options\n\nThe following options are available for all column types. Only\n`name` and `path` are required, all others are optional:\n\n  * `{string} name` - Human-readable name displayed in the column\n    header\n\n  * `{string} path` - Key used to get the column data from each\n    of the `tableData` objects\n\n  * `{string} id='column.path[column.type]'` - Unique identifier\n    of the column. By default, px-data-grid will automatically\n    generate it from `column.path` and `column.type`. There can't\n    be 2 columns with the same id. The value `-any-` is a\n    reserved keyword that you cannot use for any column `id`.\n\n  * `{string} type=('string'|'number'|'date')` - Type of data\n    in the column. Used in the advanced filter UI to show\n    different filter options for each data type. Does not change\n    the renderer or impact sorting.\n\n  * `{string} renderer` - The name of the web component used to\n    render each cell in the column. There are three built-in\n    renderers available: `'px-data-grid-string-renderer'` (the\n    default renderer), `'px-data-grid-number-renderer'`, and\n    `'px-data-grid-date-renderer'`. You can also create a custom\n    renderer and use its name here. If no renderer is specified,\n    the column cannot be edited by the user.\n\n  * `{object} rendererConfig` - Settings to pass to the renderer\n    that change how data is displayed to the user. See the\n    examples below for information on which options are available\n    for each built-in renderer.\n\nThe following options are available for columns of type `date`:\n\n  * `{array} dateRanges` - List of pre-defined date ranges that\n    will appear in advanced filter dropdown for this column.\n    See the examples below for examples on how to format\n    each date range.\n\nThe following options are available for columns of type `number`:\n\n  * `{number} minBound` - Defines a minimum bound of a number in\n    the advanced filter field for this column. If both minBound\n    and maxBound properties are defined, the advanced filter will\n    display a slider instead of a condition dropdown.\n\n  * `{number} maxBound` - Defines a maximum bound of a number in\n    the advanced filter field for this column.\n\n  * `{boolean} hidden=false` - Hides the column from the user\n    when the grid is rendered. Automatically updated when the\n    user shows/hides columns using action menu(s).\n\n  * `{boolean} frozen=false` - Freezes the column. When the user\n    scrolls the grid horizontally frozen columns will not move.\n    Automatically updated when the user freezes/unfreezes columns\n    using action menu(s).\n\n  * `{boolean} required=false` - Used in renderers during editing.\n    If the column is required, the user will not be allowed to\n    enter a blank value.\n\n  * `{number} flexGrow=1` - Sets the relative size of the column\n    compared to other columns in the grid. Equivalent to the CSS\n    `flex-grow` property.\n\n\n## `column.dateFormat` options\n\nThe following options can be set in the `dateFormat` for\ncolumns of type `date`. All formats should be set to a valid\n[moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)\nor to 'ISO':\n\n  * `{string} dateFormat.format='YYYY-MM-DD\"T\"HH:mm:ss.SSSS'` -\n    Format used to read the date/timestamp data.\n\n  * `{string} dateFormat.timezone='UTC'` -\n    Timezone used to read the date/timestamp data.\n\nDate parsing uses moment's [forgiving mode](https://momentjs.com/guides/#/parsing/forgiving-mode/), which can produce\nsilent but highly undesirable parsing errors if the date format does not match the source data.\nIf your source data is formatted differently to ISO8601, it is critical that you\nconfigure the `format` property correctly.\n\n## `column.rendererConfig` options\n\nThe following options can be set in the `rendererConfig` for\ncolumns of type `date`. All formats should be set to a valid\n[moment.js format string](https://momentjs.com/docs/#/parsing/string-format/)\nor to 'ISO':\n\n  * `{string} rendererConfig.displayFormat='YYYY-MM-DD'` -\n    Format used to display the date for the user.\n\n  * `{string} rendererConfig.dataFormat='YYYY-MM-DD'` - Format\n    the grid expects data in when reading it from `tableData`.\n\n  * `{string} rendererConfig.datePickerDateFormat='YYYY-MM-DD'` -\n    Format used for the px-datetime-picker date when the user\n    edits cells in the column.\n\n  * `{string} rendererConfig.datePickerTimeFormat='HH:MM:SS'` -\n    Format used for the px-datetime-picker time when the user\n    edits cells in the column.\n\n  * `{boolean} rendererConfig.hideDate=false` - Hides the date\n    section of the px-datetime-picker when the user edits cells\n    in the column.\n\n  * `{boolean} rendererConfig.hideTime=true` - Hides the time\n    section of the px-datetime-picker when the user edits cells\n    in the column.\n\nThe following options can be set in the `rendererConfig` for\ncolumns of type `number`:\n\n  * `{?string} rendererConfig.displayFormat=null` - Format used to\n    display numbers in this column. Set to a valid\n    [numbro.js format string](http://numbrojs.com/format.html).\n    Set to `null` to display the number exactly as it appears\n    in the `tableData` by coercing it to string.\n\n  * `{string} rendererConfig.displayCulture='en-US'` - Changes the\n    way numbers in this column are displayed to the user by\n    localizing to get the correct format for commas, decimals,\n    etc. See [numbro.js languages](http://numbrojs.com/languages.html)\n    for a list of valid options.\n\n  * `{boolean} rendererConfig.displayIsCurrency=false` - Set to\n    `true` if the data in this column should be formatted as\n    currency. Will use `rendererConfig.displayFormat` to figure\n    out how to display the currency, or fall back to a localized\n    default based on `rendererConfig.displayCulture`.\n\n  * `{string} displayZeroFormat` - Used to format numbers equal\n    to `0` in this column. See [numbro.js docs](http://numbrojs.com/format.html)\n    for a list of valid options.\n\n## Examples\n\nExample format for a single column with all configurations used:\n\n```javascript\n{\n  id: 'first[string]',\n  name: 'First Name',\n  path: 'first',\n  type: 'string',\n  renderer: 'px-data-grid-string-renderer',\n  rendererConfig: {\n    customInfo: 'some info',\n    customInfo2: 42\n  },\n  dateRanges: [\n    {\n      name: 'Last 7 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(7, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Fixed range',\n      range: {\n        dateTo: '1996-11-10',\n        dateFrom: '1985-12-19'\n      }\n    }\n  ],\n  minBound: 1,\n  maxBound: 10,\n  hidden: false,\n  frozen: false,\n  required: false,\n  flexGrow: 1\n}\n```\n\nExample format for column of type `date` with custom `dateRanges`:\n\n```javascript\n{\n  name: 'Birth date',\n  path: 'birth_date',\n  type: 'date',\n  editable: true,\n  renderer: 'px-data-grid-date-renderer',\n  rendererConfig: {\n    hideTime: true,\n    displayFormat: 'YYYY/MM/DD',\n    dataFormat: 'YYYY-MM-DD'\n  },\n  dateRanges: [\n    {\n      name: 'Last 7 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(7, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Last 14 days',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(14, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'This month',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').format(),\n          dateFrom: window.moment().tz('UTC').subtract(31, 'd').format()\n        };\n      }\n    },\n    {\n      name: 'Last month',\n      getRange: () => {\n        return {\n          // use timezone of source data\n          dateTo: window.moment().tz('UTC').subtract(1, 'M').format(),\n          dateFrom: window.moment().tz('UTC').subtract(2, 'M').format()\n        };\n      }\n    },\n    {\n      name: 'Fixed range',\n      range: {\n        dateTo: '1996-11-10',\n        dateFrom: '1985-12-19'\n      }\n    }\n  ]\n}\n```",
           "sourceRange": {
             "start": {
-              "line": 585,
+              "line": 596,
               "column": 12
             },
             "end": {
-              "line": 587,
+              "line": 598,
               "column": 13
             }
           },
@@ -65963,11 +66044,11 @@
           "description": "A valid IETF language tag as a string that `app-localize-behavior`\nwill use to localize this component.\n\nSee https://github.com/PolymerElements/app-localize-behavior for\nAPI documentation and more information.",
           "sourceRange": {
             "start": {
-              "line": 596,
+              "line": 607,
               "column": 12
             },
             "end": {
-              "line": 599,
+              "line": 610,
               "column": 13
             }
           },
@@ -65979,11 +66060,11 @@
           "description": "Use the key for localization if value for that language is missing.\nShould always be true for Predix components.",
           "sourceRange": {
             "start": {
-              "line": 605,
+              "line": 616,
               "column": 12
             },
             "end": {
-              "line": 608,
+              "line": 619,
               "column": 13
             }
           },
@@ -65995,11 +66076,11 @@
           "description": "Library object of hardcoded strings used in this application.\nUsed by `app-localize-behavior` in conjunction with `language`.",
           "sourceRange": {
             "start": {
-              "line": 614,
+              "line": 625,
               "column": 12
             },
             "end": {
-              "line": 632,
+              "line": 643,
               "column": 13
             }
           },
@@ -66011,11 +66092,11 @@
           "description": "A list of custom actions that are shown when the user taps the\naction menu button at the top right of the grid. If the\n`hideActionMenu` property is enabled the action menu won't be\nshown to the user.\n\nEach array entry should be an object with the following properties:\n\n  * `{string} name` - Label shown in the action menu, should\n    prompt the user to do something (e.g. \"Export CSV\")\n  * `{string} id` - Unique identifier that will be included in the\n    event fired when the user taps an action in the menu\n\nWhen the user taps an action in the menu the grid will fire the\n`table-action` event. `event.detail.id` will be the action ID.\n\nExample actions:\n\n```javascript\n[\n  {\n    name: 'Export CSV',\n    id: 'CSV'\n  }\n  {\n    name: 'Export Excel',\n    id: 'Excel'\n  }\n]\n```",
           "sourceRange": {
             "start": {
-              "line": 665,
+              "line": 676,
               "column": 12
             },
             "end": {
-              "line": 667,
+              "line": 678,
               "column": 13
             }
           },
@@ -66027,11 +66108,11 @@
           "description": "Set to `true` to allow the user to hide the column filter/selector in\nthe action menu.",
           "sourceRange": {
             "start": {
-              "line": 673,
+              "line": 684,
               "column": 12
             },
             "end": {
-              "line": 676,
+              "line": 687,
               "column": 13
             }
           },
@@ -66043,11 +66124,11 @@
           "description": "A list of custom actions that are shown in the actions menu\nfor each data row. The action menu button appears to the right\nof each row when the user hovers over the row.\n\nEach array entry should be an object with the following properties:\n\n  * `{string} name` - Label shown in the action menu, should\n    prompt the user to do something (e.g. \"Add Row After\")\n  * `{string} id` - Unique identifier that will be included in the\n    event fired when the user taps an action in the menu\n\nWhen the user taps an action in the menu the grid will fire the\n`item-action` event. `event.detail.id` will be the action ID and\n`event.detail.item` will be a reference to the row the user\ntook action on (from `tableData`).\n\nExample actions:\n\n```javascript\n[\n  {\n    name: 'Add Row After',\n    id: 'add-after'\n  }\n  {\n    name: 'Delete Row',\n    id: 'delete'\n  }\n]\n```",
           "sourceRange": {
             "start": {
-              "line": 710,
+              "line": 721,
               "column": 12
             },
             "end": {
-              "line": 712,
+              "line": 723,
               "column": 13
             }
           },
@@ -66059,11 +66140,11 @@
           "description": "Function that provides items lazily. Receives arguments `params`, `callback`:\n\n`params.page` Requested page index\n\n`params.pageSize` Current page size\n\n`params.filters` Currently applied filters\n\n`params.sortOrders` Currently applied sorting orders\n\n`params.parentItem` When expandable table is used, and sublevel items\nare requested, reference to parent item of the requested sublevel.\nOtherwise `undefined`.\n\n`callback(items, size)` Callback function with arguments:\n  - `items` Current page of items\n  - `size` Total number of items.\n\n`<px-data-grid>` calls this function lazily, only when it needs more data\nto be displayed.\n\n__Also, note that when using function data providers, the total number of items\nneeds to be set manually. The total number of items can be returned\nin the second argument of the data provider callback:__\n\n```javascript\npxDataGrid.dataProvider = function(params, callback) {\n  var url = 'https://api.example/data' +\n      '?page=' + params.page +        // the requested page index\n      '&per_page=' + params.pageSize; // number of items on the page\n  var xhr = new XMLHttpRequest();\n  xhr.onload = function() {\n    var response = JSON.parse(xhr.responseText);\n    callback(\n      response.employees, // requested page of items\n      response.totalSize  // total number of items\n    );\n  };\n  xhr.open('GET', url, true);\n  xhr.send();\n};\n```\n\n__Alternatively, you can use the `size` property to set the total number of items:__\n\n```javascript\npxDataGrid.size = 200; // The total number of items\npxDataGrid.dataProvider = function(params, callback) {\n  var url = 'https://api.example/data' +\n      '?page=' + params.page +        // the requested page index\n      '&per_page=' + params.pageSize; // number of items on the page\n  var xhr = new XMLHttpRequest();\n  xhr.onload = function() {\n    var response = JSON.parse(xhr.responseText);\n    callback(response.employees);\n  };\n  xhr.open('GET', url, true);\n  xhr.send();\n};\n```",
           "sourceRange": {
             "start": {
-              "line": 776,
+              "line": 787,
               "column": 12
             },
             "end": {
-              "line": 779,
+              "line": 790,
               "column": 13
             }
           },
@@ -66073,22 +66154,6 @@
         {
           "name": "striped",
           "description": "Set to add a background color to every other row in the grid.\nCan make it easier for users to scan across long rows. Striping\nis disabled in group-by-column mode.",
-          "sourceRange": {
-            "start": {
-              "line": 790,
-              "column": 12
-            },
-            "end": {
-              "line": 793,
-              "column": 13
-            }
-          },
-          "metadata": {},
-          "type": "boolean | null | undefined"
-        },
-        {
-          "name": "ellipsis",
-          "description": "Set to show an ellipsis and truncate text for columns where the\ntext doesn't fit in the column.\n\nDo not enable wrap mode while ellipsis mode is enabled.",
           "sourceRange": {
             "start": {
               "line": 801,
@@ -66103,15 +66168,31 @@
           "type": "boolean | null | undefined"
         },
         {
+          "name": "ellipsis",
+          "description": "Set to show an ellipsis and truncate text for columns where the\ntext doesn't fit in the column.\n\nDo not enable wrap mode while ellipsis mode is enabled.",
+          "sourceRange": {
+            "start": {
+              "line": 812,
+              "column": 12
+            },
+            "end": {
+              "line": 815,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
           "name": "loading-spinner-debounce",
           "description": "Number of milliseconds to wait before showing the loading spinner\nwhen requesting new data from the `remoteDataProvider`.",
           "sourceRange": {
             "start": {
-              "line": 810,
+              "line": 821,
               "column": 12
             },
             "end": {
-              "line": 813,
+              "line": 824,
               "column": 13
             }
           },
@@ -66123,11 +66204,11 @@
           "description": "Set to `true` to enable simple filtering. When enabled, a search\nbox will be shown at the top of the grid. The user can type\nin the search box to hide rows that don't include the stringified\nvalue they're looking for. The grid will search all columns and\ntreat all column types as strings for matching purposes.\n\nSee `filterable` property for a more advanced filter option.",
           "sourceRange": {
             "start": {
-              "line": 824,
+              "line": 835,
               "column": 12
             },
             "end": {
-              "line": 827,
+              "line": 838,
               "column": 13
             }
           },
@@ -66139,11 +66220,11 @@
           "description": "List of rules used to highligh specific columns, rows, or cells.\n\nPass an array of objects. Each object should have the following\nproperties:\n\n  * `{string} type` - If the highlight condition returns `true`,\n    the type determines what the grid will highlight. Set to\n    `'cell'` to highlight only the cell that passed the highlight\n    rule, `'row'` to highlight the row that holds the matching\n    cell, or `'column'` to highlight the column that holds the\n    matching cell.\n  * `{Function} condition` - Function that will be called by the\n    grid for each cell. If the function returns `true`, the\n    highlight rule will be triggered. If the function returns a\n    falsey value, the highlight rule will not be used. The function\n    will be passed three arguments: `cellContent` containing\n    the text of the cell, `column` containing a reference to the\n    `columns` object for the cell's column, and `item` as a reference\n    to the `tableData` item used to create the cell's row.\n  * `{string} color` - A valid CSS color (e.g. hex code or color\n    name). If the highlight condition returns `true`, the color\n    will be used to set the background color of the matching\n    cell, column, or row.\n\nExample highlight rules:\n\n```javascript\n[\n  {\n    type: 'cell',\n    condition: (cellContent, column, item) => { return cellContent == 'John Doe' },\n  },\n  {\n    type: 'row',\n    condition: (cellContent, item) => { return cellContent[0] == 'a' },\n    color: '#a8a8a8'\n  },\n  {\n    type: 'column',\n    condition (column, item) => { return column.name == 'age' },\n    color: 'pink'\n  }\n]\n```",
           "sourceRange": {
             "start": {
-              "line": 875,
+              "line": 886,
               "column": 12
             },
             "end": {
-              "line": 877,
+              "line": 888,
               "column": 13
             }
           },
@@ -66155,11 +66236,11 @@
           "description": "Default width for columns. Defaults to `100px` if undefined.\n\nColumn sizes should also be configured using the\n`defaultColumnFlexGrow` and `columns.flexGrow` properties to\nchange how each column sizes itself relative to other columns in\nthe grid.\n\nWhen column flex-grow properties are set to non-zero values,\nthis size behaves as a minimum width for the column.",
           "sourceRange": {
             "start": {
-              "line": 898,
+              "line": 909,
               "column": 12
             },
             "end": {
-              "line": 900,
+              "line": 911,
               "column": 13
             }
           },
@@ -66171,11 +66252,11 @@
           "description": "Default flex-grow value for columns if none is defined in\n`columns.flexGrow`. Equivalent to the CSS flex-grow property.",
           "sourceRange": {
             "start": {
-              "line": 906,
+              "line": 917,
               "column": 12
             },
             "end": {
-              "line": 908,
+              "line": 919,
               "column": 13
             }
           },
@@ -66187,11 +66268,11 @@
           "description": "Defines the height of grid.\n\n  * Set to `'auto'` if the grid should grow to fit all of its rows\n  * Set to `'default'` or undefined to use the default height\n  * Set to any other valid CSS height valid (e.g. `400px`) to\n    define a static height for the grid area inside the\n    px-data-grid. This height will not include the table action\n    menu and other elements of the grid.\n\nSee the `flexToSize` property for a different strategy that sizes\nthe grid based on its parent element's height.",
           "sourceRange": {
             "start": {
-              "line": 923,
+              "line": 934,
               "column": 12
             },
             "end": {
-              "line": 926,
+              "line": 937,
               "column": 13
             }
           },
@@ -66203,11 +66284,11 @@
           "description": "Path to a `tableData` item sub-property that serves as a unique\nidentifier for the item. Should be defined if the grid allows\nuser editing so the grid can pair new versions of each item\nwith the original data.\n\nPath must be unique for each item, must exist for every item,\nand should not be changed or be user editable.",
           "sourceRange": {
             "start": {
-              "line": 937,
+              "line": 948,
               "column": 12
             },
             "end": {
-              "line": 939,
+              "line": 950,
               "column": 13
             }
           },
@@ -66219,11 +66300,11 @@
           "description": "Set to allow users to save filters created in the advanced filter\ndialog. If enabled, the grid will fire `save-filters` events when\nthe user taps the save filter button.",
           "sourceRange": {
             "start": {
-              "line": 946,
+              "line": 957,
               "column": 12
             },
             "end": {
-              "line": 948,
+              "line": 959,
               "column": 13
             }
           },
@@ -66235,11 +66316,11 @@
           "description": "Set to enable advanced filtering. When enabled, a filter\nbutton will be shown at the top of the grid. When the user clicks\non the filter button, a modal will be shown and the user can\nfilter visible items using different UI patterns.\n\nColumns should have the right `columns.type` set to ensure the\nadvanced filtering works as expected. See the `columns` property\nfor more information on setting the type, and for more advanced\nfiltering options that can be customized for `number` and `date`\ntype columns.",
           "sourceRange": {
             "start": {
-              "line": 962,
+              "line": 973,
               "column": 12
             },
             "end": {
-              "line": 965,
+              "line": 976,
               "column": 13
             }
           },
@@ -66251,11 +66332,11 @@
           "description": "Comparison options shown in the advanced filtering UI for columns\nof type `string`. Valid options are:\n\n  * `'equals'`\n  * `'contains'`\n  * `'starts_with'`\n  * `'ends_with'`\n  * `'wildcard'`\n\nIf this array is undefined or empty, all options will be shown.",
           "sourceRange": {
             "start": {
-              "line": 979,
+              "line": 990,
               "column": 12
             },
             "end": {
-              "line": 981,
+              "line": 992,
               "column": 13
             }
           },
@@ -66267,11 +66348,11 @@
           "description": "Comparison options shown in the advanced filtering UI for columns\nof type `number`. Valid options are:\n\n  * `'less_than'`\n  * `'equals'`\n  * `'not_equal'`\n  * `'equal_or_greater_than'`\n  * `'equal_or_less_than'`\n  * `'greater_than'`\n\nIf this array is undefined or empty, all options will be shown.",
           "sourceRange": {
             "start": {
-              "line": 996,
+              "line": 1007,
               "column": 12
             },
             "end": {
-              "line": 998,
+              "line": 1009,
               "column": 13
             }
           },
