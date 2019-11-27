@@ -1,0 +1,353 @@
+/*
+Copyright (c) 2018, General Electric
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
+
+import 'vaadin-grid/vaadin-grid-column.js';
+import 'vaadin-checkbox/vaadin-checkbox.js';
+import 'vaadin-radio-button/vaadin-radio-button.js';
+import './px-data-grid-select-all.js';
+import './css/px-data-grid-selection-column-styles.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { afterNextRender } from '@polymer/polymer/lib/utils/render-status.js';
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<dom-module id="vaadin-checkbox-styles" theme-for="vaadin-checkbox">
+  <template>
+    <style include="px-data-grid-selection-column-styles"></style>
+  </template>
+</dom-module><dom-module id="vaadin-radio-button-styles" theme-for="vaadin-radio-button">
+  <template>
+    <style include="px-data-grid-selection-column-styles"></style>
+  </template>
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);
+{
+  /**
+   * `<px-data-grid-selection-column>` is a helper element for the `<px-data-grid>`
+   * to be used to offer selection column behavior with multi and single select.
+   * @memberof Predix
+   * @mixes Vaadin.GridColumnElement
+   */
+  class DataGridSelectionColumnElement extends Vaadin.GridColumnElement {
+    static get template() {
+      return html`
+    <template class="header" id="defaultHeaderTemplate">
+      <template is="dom-if" if="[[multiSelect]]">
+        <px-data-grid-select-all hidden\$="[[_selectAllHidden]]" on-select-all-checked="_onSelectAllCheckedChanged" checked="[[_isChecked(selectAll, _indeterminate)]]" indeterminate="[[_indeterminate]]" count="[[_selectionCount]]" allow-sort-by-selection="[[allowSortBySelection]]" check-listener="[[_boundedSelectAllCheckListener]]"></px-data-grid-select-all>
+      </template>
+    </template>
+    <template id="defaultBodyTemplate">
+      <template is="dom-if" if="[[!_isGroupItem(item)]]">
+        <template is="dom-if" if="[[multiSelect]]">
+          <vaadin-checkbox aria-label="Select Row" checked="{{selected}}">
+          </vaadin-checkbox>
+        </template>
+        <template is="dom-if" if="[[!multiSelect]]">
+          <vaadin-radio-button aria-label="Select Row" checked="{{selected}}">
+          </vaadin-radio-button>
+        </template>
+      </template>
+    </template>
+`;
+    }
+
+    static get is() {
+      return 'px-data-grid-selection-column';
+    }
+
+    static get properties() {
+      return {
+        /**
+         * Width of the cells for this column.
+         */
+        width: {
+          type: String,
+          value: '56px'
+        },
+
+        /**
+         * Flex grow ratio for the cell widths. When set to 0, cell width is fixed.
+         */
+        flexGrow: {
+          type: Number,
+          value: 0
+        },
+
+        /**
+         * When true, all the items are selected.
+         */
+        selectAll: {
+          type: Boolean,
+          value: false,
+          notify: true
+        },
+
+        /**
+         * When true, the active gets automatically selected.
+         */
+        autoSelect: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * When true, user is allowed to multiselect
+         */
+        multiSelect: {
+          type: Boolean,
+          value: true
+        },
+
+        /**
+         * When true, the grid is in tree-grid mode (group by column/value)
+         */
+        treeGrid: {
+          type: Boolean
+        },
+
+        /**
+         * If user is allowed to sort by selection
+         */
+        allowSortBySelection: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+        * @private
+        */
+        headerTemplate: Object,
+
+        /**
+        * @private
+        */
+        template: Object,
+
+        _indeterminate: {
+          type: Boolean,
+          value: false
+        },
+
+        /*
+         * The previous state of activeItem. When activeItem turns to `null`,
+         * previousActiveItem will have an Object with just unselected activeItem
+         */
+        _previousActiveItem: Object,
+
+        _selectAllHidden: {
+          type: Boolean,
+          value: true
+        },
+
+        /**
+         * Just to help to identify columns without data
+         */
+        isDataColumn: {
+          type: Boolean,
+          value: false,
+          readOnly: true
+        },
+
+        /**
+         * Current selection count
+         */
+        _selectionCount: {
+          type: Number,
+          value: 0
+        },
+      };
+    }
+
+    static get observers() {
+      return [
+        '_onSelectAllChanged(selectAll)',
+        '_onMultiSelectOrAllowSortBySelectionChanged(multiSelect,allowSortBySelection)'
+      ];
+    }
+
+    ready() {
+      super.ready();
+      this._boundedSelectAllCheckListener = this._onSelectAllCheckedChanged.bind(this);
+    }
+
+    _prepareHeaderTemplate() {
+      const headerTemplate = this._prepareTemplatizer(this._findTemplate('template.header') || this.$.defaultHeaderTemplate);
+      // needed to override the dataHost correctly in case internal template is used.
+      headerTemplate.templatizer.dataHost = headerTemplate === this.$.defaultHeaderTemplate ? this : this.dataHost;
+
+      return headerTemplate;
+    }
+
+    _prepareBodyTemplate() {
+      const template = this._prepareTemplatizer(this._findTemplate('template:not(.header):not(.footer)') || this.$.defaultBodyTemplate);
+      // needed to override the dataHost correctly in case internal template is used.
+      template.templatizer.dataHost = template === this.$.defaultBodyTemplate ? this : this.dataHost;
+
+      return template;
+    }
+
+    constructor() {
+      super();
+
+      this._boundOnActiveItemChanged = this._onActiveItemChanged.bind(this);
+      this._boundOnDataProviderChanged = this._onDataProviderChanged.bind(this);
+      this._boundOnSelectedItemsChanged = this._onSelectedItemsChanged.bind(this);
+    }
+
+    /** @private */
+    disconnectedCallback() {
+      if (this._grid) {
+        this._grid.removeEventListener('active-item-changed', this._boundOnActiveItemChanged);
+        this._grid.removeEventListener('data-provider-changed', this._boundOnDataProviderChanged);
+        this._grid.removeEventListener('filter-changed', this._boundOnSelectedItemsChanged);
+        this._grid._pxDataGrid.removeEventListener('selected-items-changed', this._boundOnSelectedItemsChanged);
+
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        if (isSafari && window.ShadyDOM && this.parentElement) {
+          // Detach might have beem caused by order change.
+          // Shady on safari doesn't restore isAttached so we'll need to do it manually.
+          const parent = this.parentElement;
+          const nextSibling = this.nextElementSibling;
+          parent.removeChild(this);
+          if (nextSibling) {
+            parent.insertBefore(this, nextSibling);
+          } else {
+            parent.appendChild(this);
+          }
+        }
+
+      }
+
+      super.disconnectedCallback();
+    }
+
+    /** @private */
+    connectedCallback() {
+      super.connectedCallback();
+      if (this._grid) {
+        const _grid = this._grid;
+
+        _grid.addEventListener('active-item-changed', this._boundOnActiveItemChanged);
+        _grid.addEventListener('data-provider-changed', this._boundOnDataProviderChanged);
+        _grid.addEventListener('filter-changed', this._boundOnSelectedItemsChanged);
+
+        afterNextRender(_grid, () => {
+          _grid._pxDataGrid.addEventListener('selected-items-changed', this._boundOnSelectedItemsChanged);
+          this._selectAllHidden = !_grid._pxDataGrid._hasLocalDataProvider;
+        });
+      }
+    }
+
+    _isGroupItem(item) {
+      return this.treeGrid && item.hasChildren;
+    }
+
+    _onSelectAllChanged(selectAll) {
+      if (selectAll === undefined || !this._grid) {
+        return;
+      }
+
+      if (this._selectAllChangeLock) {
+        return;
+      }
+
+      if (selectAll && this._grid._pxDataGrid) {
+        this._grid.selectedItems = this._grid._pxDataGrid._getAllLocalItems();
+      } else {
+        this._grid.selectedItems = [];
+      }
+    }
+
+    // Return true if array `a` contains all the items in `b`
+    // We need this when sorting or to preserve selection after filtering.
+    _arrayContains(a, b) {
+      for (var i = 0; a && b && b[i] && a.indexOf(b[i]) >= 0; i++); // eslint-disable-line
+      return i == b.length;
+    }
+
+    _onSelectAllCheckedChanged(e) {
+      this.selectAll = this._indeterminate || e.target.checked;
+
+      // Events get out of sync when toggling from indeterminate to determinate
+      if (e.target.checked !== this.selectAll) {
+        e.target.checked = this.selectAll;
+      }
+    }
+
+    // iOS needs indeterminated + checked at the same time
+    _isChecked(selectAll, indeterminate) {
+      return indeterminate || selectAll;
+    }
+
+    _onActiveItemChanged(e) {
+      const activeItem = e.detail.value;
+      if (this.autoSelect) {
+        const item = activeItem || this._previousActiveItem;
+        if (item && !item.hasChildren) {
+          this._grid._toggleItem(item);
+        }
+      }
+      this._previousActiveItem = activeItem;
+    }
+
+    _onSelectedItemsChanged(e) {
+      this._selectAllChangeLock = true;
+      const allItems = this._grid._pxDataGrid._getAllLocalItems();
+      if (Array.isArray(allItems)) {
+        if (!this._grid.selectedItems.length) {
+          this.selectAll = false;
+          this._indeterminate = false;
+        } else if (this._arrayContains(this._grid.selectedItems, allItems)) {
+          this.selectAll = true;
+          this._indeterminate = false;
+        } else {
+          this.selectAll = false;
+          this._indeterminate = true;
+        }
+      }
+      this._selectAllChangeLock = false;
+
+      this._selectionCount = this._grid.selectedItems.length;
+    }
+
+    _onDataProviderChanged(e) {
+      this._selectAllHidden = !this._grid._pxDataGrid._hasLocalDataProvider;
+    }
+
+    /**
+     * Function that makes sure there is enough space for all content
+     */
+    _onMultiSelectOrAllowSortBySelectionChanged(multiSelect, allowSortBySelection) {
+      if (!multiSelect) {
+        this.width = '40px';
+      } else if (!allowSortBySelection) {
+        this.width = '55px';
+      } else {
+        this.width = '90px';
+      }
+    }
+  }
+
+  customElements.define(DataGridSelectionColumnElement.is, DataGridSelectionColumnElement);
+
+  Predix.DataGridSelectionColumnElement = DataGridSelectionColumnElement;
+}

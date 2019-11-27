@@ -22,11 +22,11 @@ limitations under the License.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-    <script src="../bower_components/web-component-tester/browser.js"></script>
-    <link rel="import" href="../px-data-grid.html">
-    <link rel="import" href="../px-data-grid-paginated.html">
-    <link rel="import" href="../px-data-grid-navigation.html">
-    <link rel="import" href="helpers.html">
+    <script src="../../wct-browser-legacy/browser.js"></script>
+    <script type="module" src="../px-data-grid.js"></script>
+    <script type="module" src="../px-data-grid-paginated.js"></script>
+    <script type="module" src="../px-data-grid-navigation.js"></script>
+    <script type="module" src="./helpers.js"></script>
   </head>
 
   <body>
@@ -68,29 +68,29 @@ limitations under the License.
     </test-fixture>
 
 
-    <script src="generated-columns.js"></script>
-    <script src="local-data-provider.js"></script>
-    <script src="selection.js"></script>
-    <script src="remote-data-provider.js"></script>
-    <script src="highlighting.js"></script>
-    <script src="auto-filter.js"></script>
-    <script src="filterable.js"></script>
-    <script src="row-details.js"></script>
-    <script src="row-actions.js"></script>
-    <script src="table-actions-column-selector.js"></script>
-    <script src="columns-api.js"></script>
-    <script src="column-dropdown-menu.js"></script>
-    <script src="sorting.js"></script>
-    <script src="timezones.js"></script>
+    <script src="./generated-columns.js"></script>
+    <script src="./local-data-provider.js"></script>
+    <script src="./selection.js"></script>
+    <script src="./remote-data-provider.js"></script>
+    <script src="./highlighting.js"></script>
+    <script src="./auto-filter.js"></script>
+    <script src="./filterable.js"></script>
+    <script src="./row-details.js"></script>
+    <script src="./row-actions.js"></script>
+    <script src="./table-actions-column-selector.js"></script>
+    <script src="./columns-api.js"></script>
+    <script src="./column-dropdown-menu.js"></script>
+    <script src="./sorting.js"></script>
+    <script src="./timezones.js"></script>
     <!-- Keep this order of pagination tests for now, or tests fail -->
-    <script src="px-data-grid-paginated-test.js"></script>
-    <script src="px-data-grid-navigation-test.js"></script>
-    <script src="get-data.js"></script>
-    <script src="save-data.js"></script>
-    <script src="change-data.js"></script>
-    <script src="restore-layout.js"></script>
-    <script src="items-without-ids.js"></script>
-    <script src="renderers.js"></script>
+    <script src="./px-data-grid-paginated-test.js"></script>
+    <script src="./px-data-grid-navigation-test.js"></script>
+    <script src="./get-data.js"></script>
+    <script src="./save-data.js"></script>
+    <script src="./change-data.js"></script>
+    <script src="./restore-layout.js"></script>
+    <script src="./items-without-ids.js"></script>
+    <script src="./renderers.js"></script>
 
   </body>
 </html>

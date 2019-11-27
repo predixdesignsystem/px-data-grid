@@ -15,18 +15,18 @@ limitations under the License.
 -->
 
 <!-- Common demo imports -->
-<link rel="import" href="../../px-demo/px-demo-header.html" />
-<link rel="import" href="../../px-demo/px-demo-api-viewer.html" />
-<link rel="import" href="../../px-demo/px-demo-footer.html" />
-<link rel="import" href="../../px-demo/px-demo-configs.html" />
-<link rel="import" href="../../px-demo/px-demo-props.html" />
-<link rel="import" href="../../px-demo/px-demo-interactive.html" />
-<link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
-<link rel="import" href="../../px-demo/px-demo-code-editor.html" />
+<script type="module" src="../../px-demo/px-demo-header.js"></script>
+<script type="module" src="../../px-demo/px-demo-api-viewer.js"></script>
+<script type="module" src="../../px-demo/px-demo-footer.js"></script>
+<script type="module" src="../../px-demo/px-demo-configs.js"></script>
+<script type="module" src="../../px-demo/px-demo-props.js"></script>
+<script type="module" src="../../px-demo/px-demo-interactive.js"></script>
+<script type="module" src="../../px-demo/px-demo-component-snippet.js"></script>
+<script type="module" src="../../px-demo/px-demo-code-editor.js"></script>
 
 <!-- Imports for this component -->
-<link rel="import" href="../../px-demo/css/px-demo-styles.html" />
-<link rel="import" href="../px-data-grid.html" />
+<script type="module" src="../../px-demo/css/px-demo-styles.js"></script>
+<script type="module" src="../px-data-grid.js"></script>
 
 <!-- Demo DOM module -->
 <dom-module id="px-data-grid-column-demo">
@@ -127,718 +127,729 @@ limitations under the License.
   </template>
 
 </dom-module>
-<script>
-  Polymer({
-    is: 'px-data-grid-column-demo',
-    properties: {
-      /**
-       * Note: The actual data/values for `props` are placed in `this.demoProps`
-       * to create a static reference that Polymer shouldn't overwrite.
-       *
-       * On object containing all the properties the user can configure for this
-       * demo. Usually a pretty similar copy of the component's `properties` block
-       * with some additional sugar added to describe what kind of input the
-       * user will be shown and how that input should be configured.
-       *
-       * Note that `value` for each property is the default that will be set
-       * unless a config from `configs` is applied by default.
-       *
-       * @property props
-       * @type {Object}
-       */
-      props: {
-        type: Object,
-        value: function() {
-          return this.demoProps;
-        }
-      },
-
-      /**
-       * An array of pre-configured `props` that can be used to provide the user
-       * with a set of common examples. These configs will be made available
-       * as a set of tabs the user can click that will automatically change
-       * the `props` to specific values.
-       *
-       * @example
-       *
-       * Each config is an object. Its keys should be the names of the configurable
-       * properties defined in your `demoProps` above. Each key's value should
-       * be the new prop value for the configuration. You can also include these
-       * optional keys:
-       *
-       * - `configName` - a String value that will be used for the title of the tab
-       * - `configReset` - a Boolean, if `true` resets all props. Defaults to `false`.
-       *
-       * @property configs
-       * @type {Array}
-       */
-      configs: {
-        type: Array,
-        value: function() {
-          return [
-            {
-              configName: 'Default',
-              configReset: true
-            },
-            {
-              configName: 'More rows (scrollable)',
-              configReset: true,
-              tableData: [
-                {
-                  first: 'Elizabeth',
-                  last: 'Wong',
-                  full: 'Elizabeth Wong',
-                  email: 'sika@iknulber.cl',
-                  birth_date: '1985-04-12',
-                  age: 32
-                },
-                {
-                  first: 'Jeffrey',
-                  last: 'Hamilton',
-                  email: 'cofok@rac.be',
-                  birth_date: '1995-04-12',
-                  age: 23
-                },
-                {
-                  first: 'Alma',
-                  last: 'Martin',
-                  email: 'dotta@behtam.la',
-                  birth_date: '1975-04-12',
-                  age: 42
-                },
-                {
-                  first: 'Carl',
-                  last: 'Saunders',
-                  email: 'seh@bibapu.gy',
-                  birth_date: '2002-04-12',
-                  age: 12
-                },
-                {
-                  first: 'Willie',
-                  last: 'Dennis',
-                  email: 'izko@dahokwej.ci',
-                  birth_date: '1973-04-12',
-                  age: 44
-                },
-                {
-                  first: 'Angel',
-                  last: 'Lewis',
-                  email: 'ma@et.nz',
-                  birth_date: '1932-04-12',
-                  age: 89
-                },
-                {
-                  first: 'Jessie',
-                  last: 'Sherman',
-                  email: 'hunocnas@mosuraj.gi',
-                  birth_date: '1990-04-12',
-                  age: 27
-                },
-                {
-                  first: 'Eric',
-                  last: 'Brewer',
-                  email: 'tu@coajoul.de',
-                  birth_date: '1930-04-12',
-                  age: 88
-                },
-                {
-                  first: 'Cory',
-                  last: 'Ramos',
-                  email: 'kilamja@oviafbek.ss',
-                  birth_date: '2006-04-12',
-                  age: 9
-                },
-                {
-                  first: 'Bertie',
-                  last: 'Ross',
-                  email: 'ifuvu@getvi.my',
-                  birth_date: '1990-04-12',
-                  age: 27
-                },
-                {
-                  first: 'Oscar',
-                  last: 'Estrada',
-                  email: 'minu@kerireg.gp',
-                  birth_date: '2002-04-12',
-                  age: 15
-                },
-                {
-                  first: 'Estelle',
-                  last: 'Patton',
-                  email: 'hudliami@lijihen.fi',
-                  birth_date: '2006-04-12',
-                  age: 11
-                },
-                {
-                  first: 'Sallie',
-                  last: 'George',
-                  email: 'wo@zof.bf',
-                  birth_date: '1985-04-12',
-                  age: 33
-                },
-                {
-                  first: 'Harriett',
-                  last: 'Wheeler',
-                  email: 'woguw@cibevo.pt',
-                  birth_date: '1968-04-12',
-                  age: 52
-                },
-                {
-                  first: 'Bryan',
-                  last: 'Houston',
-                  email: 'tekkubom@gaahu.ge',
-                  birth_date: '1940-04-12',
-                  age: 77
-                },
-                {
-                  first: 'Leon',
-                  last: 'Craig',
-                  email: 'wo@gurozo.gs',
-                  birth_date: '2015-04-12',
-                  age: 2
-                },
-                {
-                  first: 'Mable',
-                  last: 'Taylor',
-                  email: 'um@fegnocka.pg',
-                  birth_date: '2006-04-12',
-                  age: 11
-                },
-                {
-                  first: 'Ida',
-                  last: 'Hansen',
-                  email: 'lufahu@gewlaskoc.kh',
-                  birth_date: '1973-04-12',
-                  age: 44
-                },
-                {
-                  first: 'Adele',
-                  last: 'Thornton',
-                  email: 'gugugo@nevigi.th',
-                  birth_date: '1973-04-12',
-                  age: 41
-                },
-                {
-                  first: 'Jerry',
-                  last: 'Kelley',
-                  email: 'solef@zoose.as',
-                  birth_date: '1950-04-12',
-                  age: 67
-                },
-                {
-                  first: 'Clara',
-                  last: 'Delgado',
-                  email: 'fivticnuf@upkib.rw',
-                  birth_date: '1951-04-12',
-                  age: 66
-                },
-                {
-                  first: 'Joseph',
-                  last: 'Stevenson',
-                  email: 'be@viijo.lk',
-                  birth_date: '1995-04-12',
-                  age: 22
-                },
-                {
-                  first: 'Ellen',
-                  last: 'Perry',
-                  email: 'ce@jewo.sv',
-                  birth_date: '1996-04-12',
-                  age: 23
-                },
-                {
-                  first: 'Ronnie',
-                  last: 'Cummings',
-                  email: 'iro@wi.vn',
-                  birth_date: '2000-04-12',
-                  age: 17
-                },
-                {
-                  first: 'Olive',
-                  last: 'Santos',
-                  email: 'vo@nees.cn',
-                  birth_date: '1918-04-12',
-                  age: 99
-                },
-                {
-                  first: 'Rena',
-                  last: 'Tucker',
-                  email: 'uharoc@lohpol.gl',
-                  birth_date: '1915-04-12',
-                  age: 102
-                },
-                {
-                  first: 'Nell',
-                  last: 'Hicks',
-                  email: 'felaf@vo.sb',
-                  birth_date: '1940-04-12',
-                  age: 76
-                },
-                {
-                  first: 'Jesus',
-                  last: 'Hawkins',
-                  email: 'wahgab@mu.mk',
-                  birth_date: '1983-04-12',
-                  age: 34
-                },
-                {
-                  first: 'Duane',
-                  last: 'Harris',
-                  email: 'kellanjob@daava.ph',
-                  birth_date: '1996-04-12',
-                  age: 23
-                },
-                {
-                  first: 'Jonathan',
-                  last: 'Holmes',
-                  email: 'jir@bikuf.dj',
-                  birth_date: '1969-04-12',
-                  age: 49
-                },
-                {
-                  first: 'Christine',
-                  last: 'Collier',
-                  email: 'bocago@jerla.ba',
-                  birth_date: '1970-04-12',
-                  age: 48
-                },
-                {
-                  first: 'Brandon',
-                  last: 'Thompson',
-                  email: 'regoh@ji.kn',
-                  birth_date: '1973-04-12',
-                  age: 43
-                },
-                {
-                  first: 'Anne',
-                  last: 'Dunn',
-                  email: 'samhof@are.sc',
-                  birth_date: '1976-04-12',
-                  age: 41
-                },
-                {
-                  first: 'Viola',
-                  last: 'Sherman',
-                  email: 'wep@kezori.lt',
-                  birth_date: '1973-04-12',
-                  age: 44
-                },
-                {
-                  first: 'Kathryn',
-                  last: 'Harper',
-                  email: 'keotoci@je.mr',
-                  birth_date: '1941-04-12',
-                  age: 77
-                },
-                {
-                  first: 'Calvin',
-                  last: 'Bates',
-                  email: 'bomeg@lip.bw',
-                  birth_date: '1979-04-12',
-                  age: 38
-                },
-                {
-                  first: 'Maggie',
-                  last: 'Collins',
-                  email: 'zonefto@ihihij.ke',
-                  birth_date: '1982-04-12',
-                  age: 35
-                },
-                {
-                  first: 'Zachary',
-                  last: 'Mitchell',
-                  email: 'wamez@cilvahbod.mk',
-                  birth_date: '1993-04-12',
-                  age: 26
-                },
-                {
-                  first: 'Raymond',
-                  last: 'Kelley',
-                  email: 'wuz@napujos.tt',
-                  birth_date: '1995-04-12',
-                  age: 21
-                },
-                {
-                  first: 'Augusta',
-                  last: 'Torres',
-                  email: 'bum@ne.lt',
-                  birth_date: '1967-04-12',
-                  age: 54
-                },
-                {
-                  first: 'Charlie',
-                  last: 'Lindsey',
-                  email: 'ruhlu@tuobujen.ao',
-                  birth_date: '2002-04-12',
-                  age: 15
-                },
-                {
-                  first: 'Jeremy',
-                  last: 'Swanson',
-                  email: 'ed@ted.km',
-                  birth_date: '1997-04-12',
-                  age: 21
-                },
-                {
-                  first: 'Joel',
-                  last: 'Gonzalez',
-                  email: 'ej@pot.bz',
-                  birth_date: '1999-04-12',
-                  age: 18
-                },
-                {
-                  first: 'Lillie',
-                  last: 'Hawkins',
-                  email: 'uguiv@mudbuve.pa',
-                  birth_date: '1975-04-12',
-                  age: 43
-                },
-                {
-                  first: 'Joel',
-                  last: 'Watts',
-                  email: 'naafe@oli.bb',
-                  birth_date: '2017-04-12',
-                  age: 1
-                },
-                {
-                  first: 'Isabella',
-                  last: 'Sandoval',
-                  email: 'asobu@wedef.af',
-                  birth_date: '2016-04-12',
-                  age: 3
-                },
-                {
-                  first: 'Roy',
-                  last: 'Lyons',
-                  email: 'rasaogu@tadiri.tc',
-                  birth_date: '1924-04-12',
-                  age: 88
-                }
-              ]
-            }
-          ];
-        }
-      },
+<script type="module">
+import 'px-demo/px-demo-header.js';
+import 'px-demo/px-demo-api-viewer.js';
+import 'px-demo/px-demo-footer.js';
+import 'px-demo/px-demo-configs.js';
+import 'px-demo/px-demo-props.js';
+import 'px-demo/px-demo-interactive.js';
+import 'px-demo/px-demo-component-snippet.js';
+import 'px-demo/px-demo-code-editor.js';
+import 'px-demo/css/px-demo-styles.js';
+import '../px-data-grid.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+Polymer({
+  is: 'px-data-grid-column-demo',
+  properties: {
+    /**
+     * Note: The actual data/values for `props` are placed in `this.demoProps`
+     * to create a static reference that Polymer shouldn't overwrite.
+     *
+     * On object containing all the properties the user can configure for this
+     * demo. Usually a pretty similar copy of the component's `properties` block
+     * with some additional sugar added to describe what kind of input the
+     * user will be shown and how that input should be configured.
+     *
+     * Note that `value` for each property is the default that will be set
+     * unless a config from `configs` is applied by default.
+     *
+     * @property props
+     * @type {Object}
+     */
+    props: {
+      type: Object,
+      value: function() {
+        return this.demoProps;
+      }
     },
 
     /**
-     * A reference for `this.props`. Read the documentation there.
+     * An array of pre-configured `props` that can be used to provide the user
+     * with a set of common examples. These configs will be made available
+     * as a set of tabs the user can click that will automatically change
+     * the `props` to specific values.
+     *
+     * @example
+     *
+     * Each config is an object. Its keys should be the names of the configurable
+     * properties defined in your `demoProps` above. Each key's value should
+     * be the new prop value for the configuration. You can also include these
+     * optional keys:
+     *
+     * - `configName` - a String value that will be used for the title of the tab
+     * - `configReset` - a Boolean, if `true` resets all props. Defaults to `false`.
+     *
+     * @property configs
+     * @type {Array}
      */
-    demoProps: {
-      tableData: {
-        type: Object,
-        defaultValue: [
+    configs: {
+      type: Array,
+      value: function() {
+        return [
           {
-            first: 'Elizabeth',
-            last: 'Wong',
-            full: 'Elizabeth Wong',
-            email: 'sika@iknulber.cl',
-            age: 23,
-            birth_date: '1994-04-12'
+            configName: 'Default',
+            configReset: true
           },
           {
-            first: 'Jeffrey',
-            last: 'Hamilton',
-            email: 'cofok@rac.be',
-            age: 32,
-            birth_date: '1985-03-11'
-          },
-          {
-            first: 'Alma',
-            last: 'Martin',
-            email: 'dotta@behtam.la',
-            age: 44,
-            birth_date: '1973-01-31'
-          },
-          {
-            first: 'Carl',
-            last: 'Saunders',
-            email: 'seh@bibapu.gy',
-            age: 12,
-            birth_date: '2005-05-17'
-          },
-          {
-            first: 'Willie',
-            last: 'Dennis',
-            email: 'izko@dahokwej.ci',
-            age: 56,
-            birth_date: '1961-09-01'
-          }
-        ],
-        inputType: 'code:JSON'
-      },
-
-      columns: {
-        type: Array,
-        defaultValue: [
-          {
-            name: 'Age',
-            path: 'age',
-            type: 'number',
-            width: '150px',
-            flexGrow: 0,
-            hidden: false,
-            editable: true,
-            required: true,
-            renderer: 'px-data-grid-number-renderer'
-          },
-          {
-            name: 'Full name',
-            path: 'full',
-            hidden: true
-          },
-          {
-            name: 'First name',
-            path: 'first',
-            editable: true,
-            required: true,
-            renderer: 'px-data-grid-string-renderer'
-          },
-          {
-            name: 'Last name',
-            path: 'last'
-          },
-          {
-            name: 'Email',
-            path: 'email'
-          },
-          {
-            name: 'Birth date',
-            path: 'birth_date',
-            type: 'date',
-            editable: true,
-            renderer: 'px-data-grid-date-renderer',
-            rendererConfig: {
-              hideTime: true,
-              displayFormat: 'YYYY/MM/DD',
-              dataFormat: 'YYYY-MM-DD'
-            },
-            dateRanges: [
+            configName: 'More rows (scrollable)',
+            configReset: true,
+            tableData: [
               {
-                name: 'Last 7 days',
-                getRange: () => {
-                  return {
-                    dateTo: window.moment().format(),
-                    dateFrom: window.moment().subtract(7, 'd').format()
-                  };
-                }
+                first: 'Elizabeth',
+                last: 'Wong',
+                full: 'Elizabeth Wong',
+                email: 'sika@iknulber.cl',
+                birth_date: '1985-04-12',
+                age: 32
               },
               {
-                name: 'Last 14 days',
-                getRange: () => {
-                  return {
-                    dateTo: window.moment().format(),
-                    dateFrom: window.moment().subtract(14, 'd').format()
-                  };
-                }
+                first: 'Jeffrey',
+                last: 'Hamilton',
+                email: 'cofok@rac.be',
+                birth_date: '1995-04-12',
+                age: 23
               },
               {
-                name: 'This month',
-                getRange: () => {
-                  return {
-                    dateTo: window.moment().format(),
-                    dateFrom: window.moment().subtract(31, 'd').format()
-                  };
-                }
+                first: 'Alma',
+                last: 'Martin',
+                email: 'dotta@behtam.la',
+                birth_date: '1975-04-12',
+                age: 42
               },
               {
-                name: 'Last month',
-                getRange: () => {
-                  return {
-                    dateTo: window.moment().subtract(1, 'M').format(),
-                    dateFrom: window.moment().subtract(2, 'M').format()
-                  };
-                }
+                first: 'Carl',
+                last: 'Saunders',
+                email: 'seh@bibapu.gy',
+                birth_date: '2002-04-12',
+                age: 12
               },
               {
-                name: 'Fixed range',
-                range: {
-                  dateTo: '1996-11-10',
-                  dateFrom: '1985-12-19'
-                }
+                first: 'Willie',
+                last: 'Dennis',
+                email: 'izko@dahokwej.ci',
+                birth_date: '1973-04-12',
+                age: 44
+              },
+              {
+                first: 'Angel',
+                last: 'Lewis',
+                email: 'ma@et.nz',
+                birth_date: '1932-04-12',
+                age: 89
+              },
+              {
+                first: 'Jessie',
+                last: 'Sherman',
+                email: 'hunocnas@mosuraj.gi',
+                birth_date: '1990-04-12',
+                age: 27
+              },
+              {
+                first: 'Eric',
+                last: 'Brewer',
+                email: 'tu@coajoul.de',
+                birth_date: '1930-04-12',
+                age: 88
+              },
+              {
+                first: 'Cory',
+                last: 'Ramos',
+                email: 'kilamja@oviafbek.ss',
+                birth_date: '2006-04-12',
+                age: 9
+              },
+              {
+                first: 'Bertie',
+                last: 'Ross',
+                email: 'ifuvu@getvi.my',
+                birth_date: '1990-04-12',
+                age: 27
+              },
+              {
+                first: 'Oscar',
+                last: 'Estrada',
+                email: 'minu@kerireg.gp',
+                birth_date: '2002-04-12',
+                age: 15
+              },
+              {
+                first: 'Estelle',
+                last: 'Patton',
+                email: 'hudliami@lijihen.fi',
+                birth_date: '2006-04-12',
+                age: 11
+              },
+              {
+                first: 'Sallie',
+                last: 'George',
+                email: 'wo@zof.bf',
+                birth_date: '1985-04-12',
+                age: 33
+              },
+              {
+                first: 'Harriett',
+                last: 'Wheeler',
+                email: 'woguw@cibevo.pt',
+                birth_date: '1968-04-12',
+                age: 52
+              },
+              {
+                first: 'Bryan',
+                last: 'Houston',
+                email: 'tekkubom@gaahu.ge',
+                birth_date: '1940-04-12',
+                age: 77
+              },
+              {
+                first: 'Leon',
+                last: 'Craig',
+                email: 'wo@gurozo.gs',
+                birth_date: '2015-04-12',
+                age: 2
+              },
+              {
+                first: 'Mable',
+                last: 'Taylor',
+                email: 'um@fegnocka.pg',
+                birth_date: '2006-04-12',
+                age: 11
+              },
+              {
+                first: 'Ida',
+                last: 'Hansen',
+                email: 'lufahu@gewlaskoc.kh',
+                birth_date: '1973-04-12',
+                age: 44
+              },
+              {
+                first: 'Adele',
+                last: 'Thornton',
+                email: 'gugugo@nevigi.th',
+                birth_date: '1973-04-12',
+                age: 41
+              },
+              {
+                first: 'Jerry',
+                last: 'Kelley',
+                email: 'solef@zoose.as',
+                birth_date: '1950-04-12',
+                age: 67
+              },
+              {
+                first: 'Clara',
+                last: 'Delgado',
+                email: 'fivticnuf@upkib.rw',
+                birth_date: '1951-04-12',
+                age: 66
+              },
+              {
+                first: 'Joseph',
+                last: 'Stevenson',
+                email: 'be@viijo.lk',
+                birth_date: '1995-04-12',
+                age: 22
+              },
+              {
+                first: 'Ellen',
+                last: 'Perry',
+                email: 'ce@jewo.sv',
+                birth_date: '1996-04-12',
+                age: 23
+              },
+              {
+                first: 'Ronnie',
+                last: 'Cummings',
+                email: 'iro@wi.vn',
+                birth_date: '2000-04-12',
+                age: 17
+              },
+              {
+                first: 'Olive',
+                last: 'Santos',
+                email: 'vo@nees.cn',
+                birth_date: '1918-04-12',
+                age: 99
+              },
+              {
+                first: 'Rena',
+                last: 'Tucker',
+                email: 'uharoc@lohpol.gl',
+                birth_date: '1915-04-12',
+                age: 102
+              },
+              {
+                first: 'Nell',
+                last: 'Hicks',
+                email: 'felaf@vo.sb',
+                birth_date: '1940-04-12',
+                age: 76
+              },
+              {
+                first: 'Jesus',
+                last: 'Hawkins',
+                email: 'wahgab@mu.mk',
+                birth_date: '1983-04-12',
+                age: 34
+              },
+              {
+                first: 'Duane',
+                last: 'Harris',
+                email: 'kellanjob@daava.ph',
+                birth_date: '1996-04-12',
+                age: 23
+              },
+              {
+                first: 'Jonathan',
+                last: 'Holmes',
+                email: 'jir@bikuf.dj',
+                birth_date: '1969-04-12',
+                age: 49
+              },
+              {
+                first: 'Christine',
+                last: 'Collier',
+                email: 'bocago@jerla.ba',
+                birth_date: '1970-04-12',
+                age: 48
+              },
+              {
+                first: 'Brandon',
+                last: 'Thompson',
+                email: 'regoh@ji.kn',
+                birth_date: '1973-04-12',
+                age: 43
+              },
+              {
+                first: 'Anne',
+                last: 'Dunn',
+                email: 'samhof@are.sc',
+                birth_date: '1976-04-12',
+                age: 41
+              },
+              {
+                first: 'Viola',
+                last: 'Sherman',
+                email: 'wep@kezori.lt',
+                birth_date: '1973-04-12',
+                age: 44
+              },
+              {
+                first: 'Kathryn',
+                last: 'Harper',
+                email: 'keotoci@je.mr',
+                birth_date: '1941-04-12',
+                age: 77
+              },
+              {
+                first: 'Calvin',
+                last: 'Bates',
+                email: 'bomeg@lip.bw',
+                birth_date: '1979-04-12',
+                age: 38
+              },
+              {
+                first: 'Maggie',
+                last: 'Collins',
+                email: 'zonefto@ihihij.ke',
+                birth_date: '1982-04-12',
+                age: 35
+              },
+              {
+                first: 'Zachary',
+                last: 'Mitchell',
+                email: 'wamez@cilvahbod.mk',
+                birth_date: '1993-04-12',
+                age: 26
+              },
+              {
+                first: 'Raymond',
+                last: 'Kelley',
+                email: 'wuz@napujos.tt',
+                birth_date: '1995-04-12',
+                age: 21
+              },
+              {
+                first: 'Augusta',
+                last: 'Torres',
+                email: 'bum@ne.lt',
+                birth_date: '1967-04-12',
+                age: 54
+              },
+              {
+                first: 'Charlie',
+                last: 'Lindsey',
+                email: 'ruhlu@tuobujen.ao',
+                birth_date: '2002-04-12',
+                age: 15
+              },
+              {
+                first: 'Jeremy',
+                last: 'Swanson',
+                email: 'ed@ted.km',
+                birth_date: '1997-04-12',
+                age: 21
+              },
+              {
+                first: 'Joel',
+                last: 'Gonzalez',
+                email: 'ej@pot.bz',
+                birth_date: '1999-04-12',
+                age: 18
+              },
+              {
+                first: 'Lillie',
+                last: 'Hawkins',
+                email: 'uguiv@mudbuve.pa',
+                birth_date: '1975-04-12',
+                age: 43
+              },
+              {
+                first: 'Joel',
+                last: 'Watts',
+                email: 'naafe@oli.bb',
+                birth_date: '2017-04-12',
+                age: 1
+              },
+              {
+                first: 'Isabella',
+                last: 'Sandoval',
+                email: 'asobu@wedef.af',
+                birth_date: '2016-04-12',
+                age: 3
+              },
+              {
+                first: 'Roy',
+                last: 'Lyons',
+                email: 'rasaogu@tadiri.tc',
+                birth_date: '1924-04-12',
+                age: 88
               }
             ]
           }
-        ],
-        inputType: 'code:JSON'
-      },
+        ];
+      }
+    },
+  },
 
-      selectionMode: {
-        type: String,
-        value: 'none',
-        inputType: 'dropdown',
-        inputChoices: ['none', 'single', 'multi']
-      },
+  /**
+   * A reference for `this.props`. Read the documentation there.
+   */
+  demoProps: {
+    tableData: {
+      type: Object,
+      defaultValue: [
+        {
+          first: 'Elizabeth',
+          last: 'Wong',
+          full: 'Elizabeth Wong',
+          email: 'sika@iknulber.cl',
+          age: 23,
+          birth_date: '1994-04-12'
+        },
+        {
+          first: 'Jeffrey',
+          last: 'Hamilton',
+          email: 'cofok@rac.be',
+          age: 32,
+          birth_date: '1985-03-11'
+        },
+        {
+          first: 'Alma',
+          last: 'Martin',
+          email: 'dotta@behtam.la',
+          age: 44,
+          birth_date: '1973-01-31'
+        },
+        {
+          first: 'Carl',
+          last: 'Saunders',
+          email: 'seh@bibapu.gy',
+          age: 12,
+          birth_date: '2005-05-17'
+        },
+        {
+          first: 'Willie',
+          last: 'Dennis',
+          email: 'izko@dahokwej.ci',
+          age: 56,
+          birth_date: '1961-09-01'
+        }
+      ],
+      inputType: 'code:JSON'
+    },
 
-      filterable: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      compactAdvancedFilterDialog: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      editable: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      resizable: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      multiSort: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      striped: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      ellipsis: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      gridHeight: {
-        type: String,
-        defaultValue: 'default',
-        inputType: 'dropdown',
-        inputChoices: ['default', 'auto', '300px', '600px', '900px']
-      },
-
-      hideActionMenu: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      autoFilter: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      columnReorderingAllowed: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      language: {
-        type: String,
-        value: 'en',
-        inputType: 'dropdown',
-        inputChoices: ['en', 'fr', 'fi']
-      },
-
-      highlight: {
-        type: Array,
-        value: [
-          {
-            type: 'cell',
-            condition: (cellContent, column, item) => {
-              return cellContent == 'Elizabeth';
-            }
+    columns: {
+      type: Array,
+      defaultValue: [
+        {
+          name: 'Age',
+          path: 'age',
+          type: 'number',
+          width: '150px',
+          flexGrow: 0,
+          hidden: false,
+          editable: true,
+          required: true,
+          renderer: 'px-data-grid-number-renderer'
+        },
+        {
+          name: 'Full name',
+          path: 'full',
+          hidden: true
+        },
+        {
+          name: 'First name',
+          path: 'first',
+          editable: true,
+          required: true,
+          renderer: 'px-data-grid-string-renderer'
+        },
+        {
+          name: 'Last name',
+          path: 'last'
+        },
+        {
+          name: 'Email',
+          path: 'email'
+        },
+        {
+          name: 'Birth date',
+          path: 'birth_date',
+          type: 'date',
+          editable: true,
+          renderer: 'px-data-grid-date-renderer',
+          rendererConfig: {
+            hideTime: true,
+            displayFormat: 'YYYY/MM/DD',
+            dataFormat: 'YYYY-MM-DD'
           },
-          {
-            type: 'cell',
-            color: '#88F',
-            condition: (cellContent, column, item) => {
-              return cellContent == 'Dennis';
+          dateRanges: [
+            {
+              name: 'Last 7 days',
+              getRange: () => {
+                return {
+                  dateTo: window.moment().format(),
+                  dateFrom: window.moment().subtract(7, 'd').format()
+                };
+              }
+            },
+            {
+              name: 'Last 14 days',
+              getRange: () => {
+                return {
+                  dateTo: window.moment().format(),
+                  dateFrom: window.moment().subtract(14, 'd').format()
+                };
+              }
+            },
+            {
+              name: 'This month',
+              getRange: () => {
+                return {
+                  dateTo: window.moment().format(),
+                  dateFrom: window.moment().subtract(31, 'd').format()
+                };
+              }
+            },
+            {
+              name: 'Last month',
+              getRange: () => {
+                return {
+                  dateTo: window.moment().subtract(1, 'M').format(),
+                  dateFrom: window.moment().subtract(2, 'M').format()
+                };
+              }
+            },
+            {
+              name: 'Fixed range',
+              range: {
+                dateTo: '1996-11-10',
+                dateFrom: '1985-12-19'
+              }
             }
+          ]
+        }
+      ],
+      inputType: 'code:JSON'
+    },
+
+    selectionMode: {
+      type: String,
+      value: 'none',
+      inputType: 'dropdown',
+      inputChoices: ['none', 'single', 'multi']
+    },
+
+    filterable: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    compactAdvancedFilterDialog: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    editable: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    resizable: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    multiSort: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    striped: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    ellipsis: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    gridHeight: {
+      type: String,
+      defaultValue: 'default',
+      inputType: 'dropdown',
+      inputChoices: ['default', 'auto', '300px', '600px', '900px']
+    },
+
+    hideActionMenu: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    autoFilter: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    columnReorderingAllowed: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    language: {
+      type: String,
+      value: 'en',
+      inputType: 'dropdown',
+      inputChoices: ['en', 'fr', 'fi']
+    },
+
+    highlight: {
+      type: Array,
+      value: [
+        {
+          type: 'cell',
+          condition: (cellContent, column, item) => {
+            return cellContent == 'Elizabeth';
           }
-        ]
-      },
-
-      tableActions: {
-        type: Object,
-        defaultValue: [
-          {
-            name: 'Export CSV',
-            icon: 'px-doc:document-pdf',
-            id: 'CSV'
+        },
+        {
+          type: 'cell',
+          color: '#88F',
+          condition: (cellContent, column, item) => {
+            return cellContent == 'Dennis';
           }
-        ],
-        inputType: 'code:JSON',
-        _visibleForConfig: false
-      },
-
-      stringComparators: {
-        type: Array,
-        defaultValue: ['equals', 'contains', 'starts_with', 'ends_with', 'wildcard'],
-        inputType: 'code:JSON',
-      },
-
-      numberComparators: {
-        type: Array,
-        defaultValue: ['less_than', 'equals', 'not_equal', 'equal_or_greater_than', 'equal_or_less_than', 'greater_than'],
-        inputType: 'code:JSON',
-      },
+        }
+      ]
     },
 
-    _fullNameChanged() {
-      const grid = this.shadowRoot.querySelector('px-data-grid');
-      const hidden = !this.shadowRoot.querySelector('#show-fullname').checked;
-      const frozen = this.shadowRoot.querySelector('#freeze-fullname').checked;
-
-      if (grid && grid.columns) {
-        grid.columns.filter(c => c.name == 'Full name').forEach(c => {
-          c.hidden = hidden;
-          c.frozen = frozen;
-        });
-        grid.updateColumns();
-      }
+    tableActions: {
+      type: Object,
+      defaultValue: [
+        {
+          name: 'Export CSV',
+          icon: 'px-doc:document-pdf',
+          id: 'CSV'
+        }
+      ],
+      inputType: 'code:JSON',
+      _visibleForConfig: false
     },
 
-    _restoreLayout(e) {
-      const grid = this.shadowRoot.querySelector('px-data-grid');
-      grid.restoreLayout();
+    stringComparators: {
+      type: Array,
+      defaultValue: ['equals', 'contains', 'starts_with', 'ends_with', 'wildcard'],
+      inputType: 'code:JSON',
     },
 
-
-    _saveState(e) {
-      const grid = this.shadowRoot.querySelector('px-data-grid');
-      this._savedState = grid.getState();
+    numberComparators: {
+      type: Array,
+      defaultValue: ['less_than', 'equals', 'not_equal', 'equal_or_greater_than', 'equal_or_less_than', 'greater_than'],
+      inputType: 'code:JSON',
     },
+  },
 
-    _readState(e) {
-      if (!this._savedState) {
-        window.alert('No state saved yet');
-        return;
-      }
-      const grid = this.shadowRoot.querySelector('px-data-grid');
-      grid.setState(this._savedState);
-    },
+  _fullNameChanged() {
+    const grid = this.shadowRoot.querySelector('px-data-grid');
+    const hidden = !this.shadowRoot.querySelector('#show-fullname').checked;
+    const frozen = this.shadowRoot.querySelector('#freeze-fullname').checked;
 
-    tableActionListener: function(evt) {
-      window.alert('Table Action ' + evt.detail.id);
-    },
+    if (grid && grid.columns) {
+      grid.columns.filter(c => c.name == 'Full name').forEach(c => {
+        c.hidden = hidden;
+        c.frozen = frozen;
+      });
+      grid.updateColumns();
+    }
+  },
 
-    cellHoverListener: function(evt) {
-      this.hoveredCellData = evt.detail.cellContent;
-    },
+  _restoreLayout(e) {
+    const grid = this.shadowRoot.querySelector('px-data-grid');
+    grid.restoreLayout();
+  },
 
-    cellUnhoverListener: function(evt) {
-      if (this.hoveredCellData === evt.detail.cellContent) {
-        this.hoveredCellData = '';
-      }
-    },
 
-    observers: [
-      '_fullNameChanged(props.hideFullName.value, props.freezeFullName.value)'
-    ]
-  });
+  _saveState(e) {
+    const grid = this.shadowRoot.querySelector('px-data-grid');
+    this._savedState = grid.getState();
+  },
+
+  _readState(e) {
+    if (!this._savedState) {
+      window.alert('No state saved yet');
+      return;
+    }
+    const grid = this.shadowRoot.querySelector('px-data-grid');
+    grid.setState(this._savedState);
+  },
+
+  tableActionListener: function(evt) {
+    window.alert('Table Action ' + evt.detail.id);
+  },
+
+  cellHoverListener: function(evt) {
+    this.hoveredCellData = evt.detail.cellContent;
+  },
+
+  cellUnhoverListener: function(evt) {
+    if (this.hoveredCellData === evt.detail.cellContent) {
+      this.hoveredCellData = '';
+    }
+  },
+
+  observers: [
+    '_fullNameChanged(props.hideFullName.value, props.freezeFullName.value)'
+  ]
+});
 </script>

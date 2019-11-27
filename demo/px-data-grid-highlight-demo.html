@@ -15,18 +15,18 @@ limitations under the License.
 -->
 
 <!-- Common demo imports -->
-<link rel="import" href="../../px-demo/px-demo-header.html" />
-<link rel="import" href="../../px-demo/px-demo-api-viewer.html" />
-<link rel="import" href="../../px-demo/px-demo-footer.html" />
-<link rel="import" href="../../px-demo/px-demo-configs.html" />
-<link rel="import" href="../../px-demo/px-demo-props.html" />
-<link rel="import" href="../../px-demo/px-demo-interactive.html" />
-<link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
-<link rel="import" href="../../px-demo/px-demo-code-editor.html" />
+<script type="module" src="../../px-demo/px-demo-header.js"></script>
+<script type="module" src="../../px-demo/px-demo-api-viewer.js"></script>
+<script type="module" src="../../px-demo/px-demo-footer.js"></script>
+<script type="module" src="../../px-demo/px-demo-configs.js"></script>
+<script type="module" src="../../px-demo/px-demo-props.js"></script>
+<script type="module" src="../../px-demo/px-demo-interactive.js"></script>
+<script type="module" src="../../px-demo/px-demo-component-snippet.js"></script>
+<script type="module" src="../../px-demo/px-demo-code-editor.js"></script>
 
 <!-- Imports for this component -->
-<link rel="import" href="../../px-demo/css/px-demo-styles.html" />
-<link rel="import" href="../px-data-grid.html" />
+<script type="module" src="../../px-demo/css/px-demo-styles.js"></script>
+<script type="module" src="../px-data-grid.js"></script>
 
 <!-- Demo DOM module -->
 <dom-module id="px-data-grid-highlight-demo">
@@ -85,151 +85,162 @@ limitations under the License.
   </template>
 
 </dom-module>
-<script>
-  Polymer({
-    is: 'px-data-grid-highlight-demo',
-    properties: {
-      /**
-       * Note: The actual data/values for `props` are placed in `this.demoProps`
-       * to create a static reference that Polymer shouldn't overwrite.
-       *
-       * On object containing all the properties the user can configure for this
-       * demo. Usually a pretty similar copy of the component's `properties` block
-       * with some additional sugar added to describe what kind of input the
-       * user will be shown and how that input should be configured.
-       *
-       * Note that `value` for each property is the default that will be set
-       * unless a config from `configs` is applied by default.
-       *
-       * @property props
-       * @type {Object}
-       */
-      props: {
-        type: Object,
-        value: function() {
-          return this.demoProps;
-        }
-      },
-
-      /**
-       * An array of pre-configured `props` that can be used to provide the user
-       * with a set of common examples. These configs will be made available
-       * as a set of tabs the user can click that will automatically change
-       * the `props` to specific values.
-       *
-       * @example
-       *
-       * Each config is an object. Its keys should be the names of the configurable
-       * properties defined in your `demoProps` above. Each key's value should
-       * be the new prop value for the configuration. You can also include these
-       * optional keys:
-       *
-       * - `configName` - a String value that will be used for the title of the tab
-       * - `configReset` - a Boolean, if `true` resets all props. Defaults to `false`.
-       *
-       * @property configs
-       * @type {Array}
-       */
-
-      configs: {
-        type: Array,
-        value: function() {
-          return [
-            {
-              configName: 'Default',
-              configReset: true,
-              remoteDataProvider: null
-            }
-          ];
-        }
+<script type="module">
+import 'px-demo/px-demo-header.js';
+import 'px-demo/px-demo-api-viewer.js';
+import 'px-demo/px-demo-footer.js';
+import 'px-demo/px-demo-configs.js';
+import 'px-demo/px-demo-props.js';
+import 'px-demo/px-demo-interactive.js';
+import 'px-demo/px-demo-component-snippet.js';
+import 'px-demo/px-demo-code-editor.js';
+import 'px-demo/css/px-demo-styles.js';
+import '../px-data-grid.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+Polymer({
+  is: 'px-data-grid-highlight-demo',
+  properties: {
+    /**
+     * Note: The actual data/values for `props` are placed in `this.demoProps`
+     * to create a static reference that Polymer shouldn't overwrite.
+     *
+     * On object containing all the properties the user can configure for this
+     * demo. Usually a pretty similar copy of the component's `properties` block
+     * with some additional sugar added to describe what kind of input the
+     * user will be shown and how that input should be configured.
+     *
+     * Note that `value` for each property is the default that will be set
+     * unless a config from `configs` is applied by default.
+     *
+     * @property props
+     * @type {Object}
+     */
+    props: {
+      type: Object,
+      value: function() {
+        return this.demoProps;
       }
     },
 
     /**
-     * A reference for `this.props`. Read the documentation there.
+     * An array of pre-configured `props` that can be used to provide the user
+     * with a set of common examples. These configs will be made available
+     * as a set of tabs the user can click that will automatically change
+     * the `props` to specific values.
+     *
+     * @example
+     *
+     * Each config is an object. Its keys should be the names of the configurable
+     * properties defined in your `demoProps` above. Each key's value should
+     * be the new prop value for the configuration. You can also include these
+     * optional keys:
+     *
+     * - `configName` - a String value that will be used for the title of the tab
+     * - `configReset` - a Boolean, if `true` resets all props. Defaults to `false`.
+     *
+     * @property configs
+     * @type {Array}
      */
-    demoProps: {
-      tableData: {
-        type: Object,
-        defaultValue: [
+
+    configs: {
+      type: Array,
+      value: function() {
+        return [
           {
-            first: 'Elizabeth',
-            last: 'Wong',
-            email: 'sika@iknulber.cl'
-          },
-          {
-            first: 'Jeffrey',
-            last: 'Hamilton',
-            email: 'cofok@rac.be'
-          },
-          {
-            first: 'Alma',
-            last: 'Martin',
-            email: 'dotta@behtam.la'
-          },
-          {
-            first: 'Carl',
-            last: 'Saunders',
-            email: 'seh@bibapu.gy'
-          },
-          {
-            first: 'Willie',
-            last: 'Dennis',
-            email: 'izko@dahokwej.ci'
+            configName: 'Default',
+            configReset: true,
+            remoteDataProvider: null
           }
-        ],
-        inputType: 'code:JSON'
-      },
-      highlight: {
-        type: Array,
-        value: [
-          {
-            type: 'cell',
-            // use default color
-            // color: 'red',
-            condition: (cellContent, column, item) => {
-              return cellContent == 'Dennis';
-            }
-          },
-          {
-            type: 'column',
-            color: '#FFE070',
-            condition: (column, item) => {
-              return column.name == 'last';
-            }
-          },
-          {
-            type: 'row',
-            color: '#F9A59F',
-            condition: (cellContent, item) => {
-              return item && (item.last == 'Dennis' || item.first == 'Carl');
-            }
-          }
-        ],
-        _visibleForConfig: false
-      },
-      columnReorderingAllowed: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-      striped: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-      gridHeight: {
-        type: String,
-        defaultValue: 'default',
-        inputType: 'dropdown',
-        inputChoices: ['default', 'auto', '300px', '600px', '900px']
-      },
-      selectionMode: {
-        type: String,
-        value: 'none',
-        inputType: 'dropdown',
-        inputChoices: ['none', 'single', 'multi']
-      },
+        ];
+      }
     }
-  });
+  },
+
+  /**
+   * A reference for `this.props`. Read the documentation there.
+   */
+  demoProps: {
+    tableData: {
+      type: Object,
+      defaultValue: [
+        {
+          first: 'Elizabeth',
+          last: 'Wong',
+          email: 'sika@iknulber.cl'
+        },
+        {
+          first: 'Jeffrey',
+          last: 'Hamilton',
+          email: 'cofok@rac.be'
+        },
+        {
+          first: 'Alma',
+          last: 'Martin',
+          email: 'dotta@behtam.la'
+        },
+        {
+          first: 'Carl',
+          last: 'Saunders',
+          email: 'seh@bibapu.gy'
+        },
+        {
+          first: 'Willie',
+          last: 'Dennis',
+          email: 'izko@dahokwej.ci'
+        }
+      ],
+      inputType: 'code:JSON'
+    },
+    highlight: {
+      type: Array,
+      value: [
+        {
+          type: 'cell',
+          // use default color
+          // color: 'red',
+          condition: (cellContent, column, item) => {
+            return cellContent == 'Dennis';
+          }
+        },
+        {
+          type: 'column',
+          color: '#FFE070',
+          condition: (column, item) => {
+            return column.name == 'last';
+          }
+        },
+        {
+          type: 'row',
+          color: '#F9A59F',
+          condition: (cellContent, item) => {
+            return item && (item.last == 'Dennis' || item.first == 'Carl');
+          }
+        }
+      ],
+      _visibleForConfig: false
+    },
+    columnReorderingAllowed: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+    striped: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+    gridHeight: {
+      type: String,
+      defaultValue: 'default',
+      inputType: 'dropdown',
+      inputChoices: ['default', 'auto', '300px', '600px', '900px']
+    },
+    selectionMode: {
+      type: String,
+      value: 'none',
+      inputType: 'dropdown',
+      inputChoices: ['none', 'single', 'multi']
+    },
+  }
+});
 </script>

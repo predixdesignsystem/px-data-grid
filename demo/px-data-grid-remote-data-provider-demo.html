@@ -15,18 +15,18 @@ limitations under the License.
 -->
 
 <!-- Common demo imports -->
-<link rel="import" href="../../px-demo/px-demo-header.html" />
-<link rel="import" href="../../px-demo/px-demo-api-viewer.html" />
-<link rel="import" href="../../px-demo/px-demo-footer.html" />
-<link rel="import" href="../../px-demo/px-demo-configs.html" />
-<link rel="import" href="../../px-demo/px-demo-props.html" />
-<link rel="import" href="../../px-demo/px-demo-interactive.html" />
-<link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
-<link rel="import" href="../../px-demo/px-demo-code-editor.html" />
+<script type="module" src="../../px-demo/px-demo-header.js"></script>
+<script type="module" src="../../px-demo/px-demo-api-viewer.js"></script>
+<script type="module" src="../../px-demo/px-demo-footer.js"></script>
+<script type="module" src="../../px-demo/px-demo-configs.js"></script>
+<script type="module" src="../../px-demo/px-demo-props.js"></script>
+<script type="module" src="../../px-demo/px-demo-interactive.js"></script>
+<script type="module" src="../../px-demo/px-demo-component-snippet.js"></script>
+<script type="module" src="../../px-demo/px-demo-code-editor.js"></script>
 
 <!-- Imports for this component -->
-<link rel="import" href="../../px-demo/css/px-demo-styles.html" />
-<link rel="import" href="../px-data-grid.html" />
+<script type="module" src="../../px-demo/css/px-demo-styles.js"></script>
+<script type="module" src="../px-data-grid.js"></script>
 
 <!-- Demo DOM module -->
 <dom-module id="px-data-grid-remote-data-provider-demo">
@@ -102,182 +102,193 @@ limitations under the License.
   </template>
 
 </dom-module>
-<script>
-  Polymer({
-    is: 'px-data-grid-remote-data-provider-demo',
+<script type="module">
+import 'px-demo/px-demo-header.js';
+import 'px-demo/px-demo-api-viewer.js';
+import 'px-demo/px-demo-footer.js';
+import 'px-demo/px-demo-configs.js';
+import 'px-demo/px-demo-props.js';
+import 'px-demo/px-demo-interactive.js';
+import 'px-demo/px-demo-component-snippet.js';
+import 'px-demo/px-demo-code-editor.js';
+import 'px-demo/css/px-demo-styles.js';
+import '../px-data-grid.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+Polymer({
+  is: 'px-data-grid-remote-data-provider-demo',
 
-    properties: {
-      /**
-       * Note: The actual data/values for `props` are placed in `this.demoProps`
-       * to create a static reference that Polymer shouldn't overwrite.
-       *
-       * On object containing all the properties the user can configure for this
-       * demo. Usually a pretty similar copy of the component's `properties` block
-       * with some additional sugar added to describe what kind of input the
-       * user will be shown and how that input should be configured.
-       *
-       * Note that `value` for each property is the default that will be set
-       * unless a config from `configs` is applied by default.
-       *
-       * @property props
-       * @type {Object}
-       */
-      props: {
-        type: Object,
-        value: function() {
-          return this.demoProps;
-        }
-      },
-
-      /**
-       * An array of pre-configured `props` that can be used to provide the user
-       * with a set of common examples. These configs will be made available
-       * as a set of tabs the user can click that will automatically change
-       * the `props` to specific values.
-       *
-       * @example
-       *
-       * Each config is an object. Its keys should be the names of the configurable
-       * properties defined in your `demoProps` above. Each key's value should
-       * be the new prop value for the configuration. You can also include these
-       * optional keys:
-       *
-       * - `configName` - a String value that will be used for the title of the tab
-       * - `configReset` - a Boolean, if `true` resets all props. Defaults to `false`.
-       *
-       * @property configs
-       * @type {Array}
-       */
-      configs: {
-        type: Array,
-        value: function() {
-          return [
-            {
-              configName: 'Default',
-              configReset: true,
-            }
-          ];
-        }
+  properties: {
+    /**
+     * Note: The actual data/values for `props` are placed in `this.demoProps`
+     * to create a static reference that Polymer shouldn't overwrite.
+     *
+     * On object containing all the properties the user can configure for this
+     * demo. Usually a pretty similar copy of the component's `properties` block
+     * with some additional sugar added to describe what kind of input the
+     * user will be shown and how that input should be configured.
+     *
+     * Note that `value` for each property is the default that will be set
+     * unless a config from `configs` is applied by default.
+     *
+     * @property props
+     * @type {Object}
+     */
+    props: {
+      type: Object,
+      value: function() {
+        return this.demoProps;
       }
     },
+
     /**
-     * A reference for `this.props`. Read the documentation there.
+     * An array of pre-configured `props` that can be used to provide the user
+     * with a set of common examples. These configs will be made available
+     * as a set of tabs the user can click that will automatically change
+     * the `props` to specific values.
+     *
+     * @example
+     *
+     * Each config is an object. Its keys should be the names of the configurable
+     * properties defined in your `demoProps` above. Each key's value should
+     * be the new prop value for the configuration. You can also include these
+     * optional keys:
+     *
+     * - `configName` - a String value that will be used for the title of the tab
+     * - `configReset` - a Boolean, if `true` resets all props. Defaults to `false`.
+     *
+     * @property configs
+     * @type {Array}
      */
-    demoProps: {
-      remoteDataProvider: {
-        type: Function,
-        value: (params, callback) => {
-          const xhr = new XMLHttpRequest();
-          xhr.onload = () => {
-            const size = parseInt(xhr.getAllResponseHeaders().match(/x-total-count: (\d+)/i)[1]);
-            callback(JSON.parse(xhr.responseText), size);
-          };
-
-          // In case of network issues, pass an empty array
-          // When network is good, px-data-grid will try to get the same chunk of data again
-          xhr.onerror = () => callback(Array(params.pageSize));
-
-          let url = 'https://px-data-grid-dummy-backend.herokuapp.com/contacts?' +
-            '_page=' + encodeURIComponent(params.page + 1) + '&' +
-            '_limit=' + encodeURIComponent(params.pageSize);
-
-          // Add free text filtering
-          const autoFilters = params.filters.filter(filter => filter.value.isAutoFilter);
-
-          if (autoFilters.length == 1 && autoFilters[0].path == undefined) {
-            url += '&q=' + encodeURIComponent(autoFilters[0].value.query);
+    configs: {
+      type: Array,
+      value: function() {
+        return [
+          {
+            configName: 'Default',
+            configReset: true,
           }
-
-          // Add sorting to URL if defined
-          if (params.sortOrders.length) {
-            const values = params.sortOrders.map(function(sort) {
-              return encodeURIComponent(sort.path);
-            });
-            const orders = params.sortOrders.map(function(sort) {
-              return encodeURIComponent(sort.direction);
-            });
-            url += '&_sort=' + values.join(',') + '&_order=' + orders.join(',');
-          }
-
-          xhr.open('GET', url, true);
-          xhr.send();
-        }
-      },
-
-      pageSize: {
-        type: Number,
-        value: 50,
-        inputType: 'text'
-      },
-
-      selectionMode: {
-        type: String,
-        value: 'none',
-        inputType: 'dropdown',
-        inputChoices: ['none', 'single', 'multi']
-      },
-
-      hideSelectionColumn: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      multiSort: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      columnReorderingAllowed: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      hideActionMenu: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      autoFilter: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      resizable: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      striped: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      ellipsis: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
-
-      gridHeight: {
-        type: String,
-        defaultValue: 'default',
-        inputType: 'dropdown',
-        inputChoices: ['default', 'auto', '300px', '600px', '900px']
-      },
-
-      language: {
-        type: String,
-        value: 'en',
-        inputType: 'dropdown',
-        inputChoices: ['en', 'fr', 'fi']
+        ];
       }
     }
-  });
+  },
+  /**
+   * A reference for `this.props`. Read the documentation there.
+   */
+  demoProps: {
+    remoteDataProvider: {
+      type: Function,
+      value: (params, callback) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = () => {
+          const size = parseInt(xhr.getAllResponseHeaders().match(/x-total-count: (\d+)/i)[1]);
+          callback(JSON.parse(xhr.responseText), size);
+        };
+
+        // In case of network issues, pass an empty array
+        // When network is good, px-data-grid will try to get the same chunk of data again
+        xhr.onerror = () => callback(Array(params.pageSize));
+
+        let url = 'https://px-data-grid-dummy-backend.herokuapp.com/contacts?' +
+          '_page=' + encodeURIComponent(params.page + 1) + '&' +
+          '_limit=' + encodeURIComponent(params.pageSize);
+
+        // Add free text filtering
+        const autoFilters = params.filters.filter(filter => filter.value.isAutoFilter);
+
+        if (autoFilters.length == 1 && autoFilters[0].path == undefined) {
+          url += '&q=' + encodeURIComponent(autoFilters[0].value.query);
+        }
+
+        // Add sorting to URL if defined
+        if (params.sortOrders.length) {
+          const values = params.sortOrders.map(function(sort) {
+            return encodeURIComponent(sort.path);
+          });
+          const orders = params.sortOrders.map(function(sort) {
+            return encodeURIComponent(sort.direction);
+          });
+          url += '&_sort=' + values.join(',') + '&_order=' + orders.join(',');
+        }
+
+        xhr.open('GET', url, true);
+        xhr.send();
+      }
+    },
+
+    pageSize: {
+      type: Number,
+      value: 50,
+      inputType: 'text'
+    },
+
+    selectionMode: {
+      type: String,
+      value: 'none',
+      inputType: 'dropdown',
+      inputChoices: ['none', 'single', 'multi']
+    },
+
+    hideSelectionColumn: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    multiSort: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    columnReorderingAllowed: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    hideActionMenu: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    autoFilter: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    resizable: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    striped: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    ellipsis: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
+    gridHeight: {
+      type: String,
+      defaultValue: 'default',
+      inputType: 'dropdown',
+      inputChoices: ['default', 'auto', '300px', '600px', '900px']
+    },
+
+    language: {
+      type: String,
+      value: 'en',
+      inputType: 'dropdown',
+      inputChoices: ['en', 'fr', 'fi']
+    }
+  }
+});
 </script>

@@ -1,0 +1,33 @@
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<dom-module id="px-data-grid-dark-theme-styles">
+<template>
+<style>
+html{background-color:#23343f;--px-base-text-color:#b6c3cc;--px-base-background-color:#23343f;--px-data-grid-border-color:#677e8c;--px-data-grid-separator-color:#2c404c;--px-data-grid-header-text-color:#677e8c;--px-data-grid-header-text-color--hover:#065769;--px-data-grid-header-text-color--active:#032c36;--px-data-grid-header-background-color:#23343f;--px-data-grid-background-color-striped--odd:#2c404c;--px-data-grid-background-color-striped--groupby:#364c59;--px-data-grid-background-color-striped--selected:#425866;--px-data-grid-dragged-column-background-color:#065769;--px-data-grid-cell-border-color--edit:#007acc;--px-data-grid-cell-border-color--selected:rgba(103, 126, 140, 0.2);--px-data-grid-cell-border-validation--failed:#f34336;--px-data-grid-cell-background-color--selected:#2c404c;--px-data-grid-cell-background-color--edit:transparent;--px-data-grid-cell-text-color--selected:#b6c3cc;--px-data-grid-cell-text-color-validation--failed:#f34336;--px-data-grid-cell-text-color--sorted:#09819c;--px-data-grid-cell-text-color--editing:#b6c3cc;--px-data-grid-results-text-color--none:#889aa5;--px-data-grid-insertion-indicator-td-background-color:#007acc;--px-data-grid-text-input-background-color--filter:transparent;--px-data-grid-tr--filter:transparent;--px-data-grid-text-color--dragged:#007acc;--px-data-grid-text-color--hover:#005c99;--px-data-grid-spinner-background-color:rgba(35, 52, 63, 0.9);--px-data-grid-cell-focused-color:transparent;--px-data-grid-action-button-color:#007acc;--px-data-grid-action-button-color--pressed:#003d66;--px-data-grid-navigation-background-color:#23343f;--px-data-grid-navigation-text-color:#677e8c;--px-data-grid-navigation-text-color--dark:#677e8c;--px-data-grid-navigation-text-color--selected:#09819c;--px-data-grid-navigation-text-color--disabled:rgba(103, 126, 140, 0.5);--px-data-grid-navigation-page-number-border-color:#4f6472;--px-data-grid-cell-details-background-color:#0c1419}
+</style>
+</template>
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);
+
+/*
+Copyright (c) 2018, General Electric
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+;

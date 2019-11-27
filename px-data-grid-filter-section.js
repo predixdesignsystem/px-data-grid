@@ -1,0 +1,221 @@
+/*
+Copyright (c) 2018, General Electric
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+
+import 'px-icon-set/px-icon.js';
+import 'px-dropdown/px-dropdown.js';
+import './css/px-data-grid-filter-section-styles.js';
+import './px-data-grid-filter-entity.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { afterNextRender } from '@polymer/polymer/lib/utils/render-status.js';
+{
+  /**
+   * @memberof Predix
+   * @extends Polymer.Element
+   */
+  class DataGridFilterSectionElement extends PolymerElement {
+    static get template() {
+      return html`
+    <style include="px-data-grid-filter-section-styles"></style>
+
+    <template is="dom-if" if="[[_hasAnyEntity(section, section.*)]]">
+      <div class="action-select">
+        <px-dropdown allow-outside-scroll="" items="[[_actions]]" button-style="bare--primary" disable-clear="" selected="{{section.action}}" hoist="">
+        </px-dropdown>
+        <span>[[localize('items that match')]]</span>
+        <px-dropdown allow-outside-scroll="" items="[[_operationTypes]]" button-style="bare--primary" disable-clear="" selected="{{section.operationType}}" hoist="">
+        </px-dropdown>
+      </div>
+    </template>
+    <template is="dom-if" if="[[!_hasAnyEntity(section, section.*)]]">
+      <div class="no-filters">[[localize('You have no filters')]].</div>
+    </template>
+
+    <template is="dom-repeat" items="{{section.entities}}" as="entity">
+      <div class="filter-entity">
+        <px-data-grid-filter-entity entity="{{entity}}" columns="[[columns]]" compact-mode="[[_isEntityCompact(_compactModeEnabled, index)]]" disable-all-columns-filter="[[disableAllColumnsFilter]]" string-comparators="[[stringComparators]]" number-comparators="[[numberComparators]]" localize="[[localize]]">
+        </px-data-grid-filter-entity>
+        <button class="actionable" on-click="_removeEntity">
+          <px-icon icon="px-nav:close"></px-icon>
+        </button>
+      </div>
+    </template>
+
+    <button class="btn btn--bare--primary add-filter" on-click="_addEntity">
+      <px-icon icon="px-utl:add"></px-icon> [[localize('Add filter')]]
+    </button>
+`;
+    }
+
+    static get is() {
+      return 'px-data-grid-filter-section';
+    }
+
+    static get properties() {
+      return {
+        section: {
+          type: Object
+        },
+
+        _actions: {
+          type: Array,
+          value: [
+            {
+              key: 'show',
+              val: 'Show'
+            },
+            {
+              key: 'hide',
+              val: 'Hide'
+            },
+            {
+              key: 'highlight',
+              val: 'Highlight'
+            }
+          ]
+        },
+
+        _operationTypes: {
+          type: Array,
+          value: [
+            {
+              key: 'all',
+              val: 'all'
+            },
+            {
+              key: 'any',
+              val: 'any'
+            }
+          ]
+        },
+
+        columns: {
+          type: Array
+        },
+
+        compactMode: {
+          type: Boolean,
+          value: false
+        },
+
+        disableAllColumnsFilter: {
+          type: Boolean,
+          value: false
+        },
+
+        stringComparators: {
+          type: Array
+        },
+
+        numberComparators: {
+          type: Array
+        },
+
+        _compactModeEnabled: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true
+        },
+
+        localize: Function
+      };
+    }
+
+    static get observers() {
+      return [
+        '_localizeChanged(localize)',
+        '_checkCompactMode(compactMode, section, section.entities, section.entities.*)'
+      ];
+    }
+
+    ready() {
+      super.ready();
+      this._boundedRemoveEntity = this._removeEntity.bind(this);
+    }
+
+    _localizeChanged(localize) {
+      if (!localize) {
+        return;
+      }
+
+      this._actions.forEach((action, index) => {
+        this.set(`_actions.${index}.val`, localize(action.val));
+      });
+
+      this._operationTypes.forEach((type, index) => {
+        this.set(`_operationTypes.${index}.val`, localize(type.val));
+      });
+    }
+
+    _addEntity() {
+      this.push('section.entities', {});
+
+      afterNextRender(this, () => {
+        this.dispatchEvent(new CustomEvent('update-modal-focusable-elements', {
+          bubbles: true,
+          composed: true
+        }));
+      });
+    }
+
+    _removeEntity(event) {
+      this.splice('section.entities', this.section.entities.indexOf(event.model.entity), 1);
+    }
+
+    _hasAnyEntity(section) {
+      return section.entities.length > 0;
+    }
+
+    _hasEntityWithCustomPresentation(entity) {
+      // TODO This needs to resolve actual header values, now it it's checking any of
+      // entities is not a string, number (no range) or any column.
+      if (!entity || !entity.columnId || entity.columnId === '-any-') {
+        return false;
+      } else {
+        const column = this.columns.filter((column) => column.id === entity.columnId)[0];
+        if (!column) {
+          return true;
+        } else {
+          return column.type === 'date' ||
+            (column.type === 'number' && column.minBound !== undefined && column.maxBound !== undefined);
+        }
+      }
+    }
+
+    _isEntityCompact(compactModeEnabled, index) {
+      return compactModeEnabled && index > 0;
+    }
+
+    _checkCompactMode(compactMode) {
+      if (!this.compactMode) {
+        this._compactModeEnabled = false;
+        return;
+      }
+
+      this._compactModeEnabled = this.section && this.section.entities &&
+        this.section.entities.filter(e => this._hasEntityWithCustomPresentation(e)).length == 0;
+    }
+  }
+
+  customElements.define(DataGridFilterSectionElement.is, DataGridFilterSectionElement);
+
+  Predix.DataGridFilterSectionElement = DataGridFilterSectionElement;
+}
